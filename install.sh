@@ -127,8 +127,12 @@ echo "Done symlinking files"
 echo "Configuring Vim plugins"
 [[ -d ~/.vim/bundle ]] || mkdir -p ~/.vim/bundle
 
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-vim +PluginClean +qall
-vim +PluginInstall +qall
-vim +PluginUpdate +qall
+if [[ -d ~./vim/bundle/Vundle.vim ]]
+then
+  vim +PluginClean +qall
+  vim +PluginUpdate +qall
+else
+  git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+  vim +PluginInstall +qall
+fi
 echo "Done configuring Vim plugins"
