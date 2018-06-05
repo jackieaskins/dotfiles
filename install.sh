@@ -39,6 +39,10 @@ then
     echo "Upgrading Vim via Homebrew..."
     brew upgrade vim
   fi
+
+  if [ ! $(cat /etc/shells | grep -w /usr/local/bin/zsh) ]; then
+    sudo sh -c "echo /usr/local/bin/zsh >> /etc/shells"
+  fi
 elif [ $(which apt-get) ]
 then
   echo "Installing/updating Vim & Zsh..."
@@ -66,6 +70,11 @@ elif [ ! $(which vim) ]
 then
   echo "Vim is not installed, please install it and re-run the script"
   exit 1
+fi
+
+if [ ! $(echo $SHELL) = $(which zsh) ]
+then
+  chsh -s $(which zsh)
 fi
 
 if [ ! -d ~/.oh-my-zsh ]
