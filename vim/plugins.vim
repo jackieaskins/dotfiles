@@ -54,6 +54,8 @@ Plugin 'NLKNguyen/papercolor-theme'
 Plugin 'tpope/vim-rails'
 " Repeat - Remap . command to do more
 Plugin 'tpope/vim-repeat'
+" SCSS Syntax
+Plugin 'cakebaker/scss-syntax.vim'
 " Snipmate - Language specific snippets
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'

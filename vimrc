@@ -3,6 +3,7 @@ source ~/.vim/plugins.vim
 
 " Colors
 syntax enable " enable syntax processing
+set termguicolors
 set background=dark
 colorscheme PaperColor
 
@@ -31,15 +32,16 @@ set backspace=indent,eol,start " allow backspacing over autoindent, line breaks,
 set ruler " display the cursor position on the last line of the screen
 set autoindent " keep same indent as line you're currently on
 set confirm " raise a dialog asking if you want to save changes when exiting
-set splitright " Make vertical splits open on right
-set splitbelow " Make horizontal splits open on botom
+set splitright " make vertical splits open on right
+set splitbelow " make horizontal splits open on botom
+source ~/.vim/tabline.vim
 
 " Searching
 set incsearch " search as characters are entered
 set ignorecase " use case insensitive search
 set smartcase " don't use insensitive search when using capital letters
 
-" Windows
+" Map Ctrl-J, Ctrl-K, Ctrl-H, Ctrl-L to move windows
 map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
@@ -59,10 +61,11 @@ let g:ale_lint_delay = 1500
 autocmd FileType ocaml setlocal commentstring=(*\ %s\ *)
 
 " CtrlP
+let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git'
 let g:crtlp_match_window = 'bottom,order:ttb'
+let g:ctrlp_show_hidden = 1
 let g:ctrlp_switch_buffer = 0
 let g:ctrlp_working_path_mode = 0
-let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git'
 
 " Emmet
 imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
@@ -79,67 +82,22 @@ noremap <F5> :GundoToggle<CR>
 let g:jsx_ext_required = 0
 
 " Markdown Preview
-let vim_markdown_preview_toggle=1
-let vim_markdown_preview_hotkey='<C-m>'
-let vim_markdown_preview_github=1
-let vim_markdown_preview_browser='Google Chrome'
-let vim_markdown_preview_temp_file=1
+let vim_markdown_preview_toggle = 1
+let vim_markdown_preview_hotkey = '<C-m>'
+let vim_markdown_preview_github = 1
+let vim_markdown_preview_browser = 'Google Chrome'
+let vim_markdown_preview_temp_file = 1
 
 " NerdTree
-let NERDTreeShowHidden=1
+let NERDTreeShowHidden = 1
+let NERDTreeQuitOnOpen = 1
 map <C-n> :NERDTreeToggle<CR>
-autocmd StdinReadPre * let s:std_in=1
-" autocmd VimEnter * if argc() >= 1 | NERDTree | wincmd p | endif
-" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-" Synastic
-" let g:syntastic_javascript_checkers = ['eslint', 'jsxhint']
-" let g:syntastic_ocaml_checkers = ['merlin']
-
-"" Extras
-" Merlin
-let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
-execute 'set rtp+=' . g:opamshare . '/merlin/vim'
-
-" Tabline Configuration
-if exists("+showtabline")
-  function! MyTabLine()
-    let s = '' " Initialize the tabline to an empty string
-    let t = tabpagenr()
-
-    " Loop through each tab page
-    for i in range(tabpagenr('$'))
-      let tab = i + 1
-
-      " Configure the buffer name
-      let winnr = tabpagewinnr(tab)
-      let buflist = tabpagebuflist(tab)
-      let bufnr = buflist[winnr - 1]
-      let bufname = bufname(bufnr)
-      let bufname = bufname != '' ? pathshorten(fnamemodify(bufname, ':~:.')) : bufname
-
-      " Determine if the buffer has been modified
-      let bufmodified = getbufvar(bufnr, "&mod")
-
-      " Configure tab with number, highlighting, and buffer name
-      let s .= '%' . tab . 'T'
-      let s .= (tab == t ? '%#TabLineSel#' : '%#TabLine#')
-      let s .= ' ' . tab . ' '
-      let s .= (bufname != '' ? bufname . ' ' : '[No Name] ')
-
-      " Display [+] if tab has been modified
-      if bufmodified
-        let s .= '[+] '
-      endif
-    endfor
-
-    let s .= '%#TabLineFill#%T'
-    if tabpagenr('$') > 1
-      let s .= '%=%#TabLine#%999XX'
-    endif
-    return s
-  endfunction
-  set showtabline=2 " Always show the tabline
-  set tabline=%!MyTabLine()
-endif
+" PaperColor
+let g:PaperColor_Theme_Options = {
+  \   'theme': {
+  \     'default.dark': {
+  \       'transparent_background': 1
+  \     }
+  \   }
+  \ }

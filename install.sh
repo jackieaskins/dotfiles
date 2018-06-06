@@ -116,18 +116,18 @@ echo "Done backing up files"
 echo ""
 
 echo "Symlinking dotfiles to $dir directory..."
-ln $dir/zshrc ~/.zshrc
-ln $dir/zsh/aliases.zsh ~/.oh-my-zsh/custom/aliases.zsh
-ln $dir/zsh/functions.zsh ~/.oh-my-zsh/custom/functions.zsh
-ln $dir/vimrc ~/.vimrc
-ln $dir/vim/plugins.vim ~/.vim/plugins.vim
-ln $dir/vim/tabline.vim ~/.vim/tabline.vim
+ln -s $dir/zshrc ~/.zshrc
+ln -s $dir/zsh/aliases.zsh ~/.oh-my-zsh/custom/aliases.zsh
+ln -s $dir/zsh/functions.zsh ~/.oh-my-zsh/custom/functions.zsh
+ln -s $dir/vimrc ~/.vimrc
+ln -s $dir/vim/plugins.vim ~/.vim/plugins.vim
+ln -s $dir/vim/tabline.vim ~/.vim/tabline.vim
 echo "Done symlinking files"
 
 echo "Configuring Vim plugins"
 [[ -d ~/.vim/bundle ]] || mkdir -p ~/.vim/bundle
 
-if [[ -d ~./vim/bundle/Vundle.vim ]]
+if [[ -d ~/.vim/bundle/Vundle.vim ]]
 then
   vim +PluginClean +qall
   vim +PluginUpdate +qall
