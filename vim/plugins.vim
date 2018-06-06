@@ -9,6 +9,13 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
+"" Themes
+" Material - Current
+Plugin 'kaicataldo/material.vim'
+" PaperColor
+Plugin 'NLKNguyen/papercolor-theme'
+
+"" Plugins
 " Airline - Customize status/tabline
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
@@ -48,8 +55,6 @@ Plugin 'adelarsq/vim-matchit'
 Plugin 'scrooloose/nerdtree'
 " NerdTree Git Plugin
 Plugin 'Xuyuanp/nerdtree-git-plugin'
-" PaperColor Theme - Vim Theme
-Plugin 'NLKNguyen/papercolor-theme'
 " Rails - Commands for working with Rails
 Plugin 'tpope/vim-rails'
 " Repeat - Remap . command to do more

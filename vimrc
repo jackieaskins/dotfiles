@@ -2,17 +2,36 @@
 source ~/.vim/plugins.vim
 
 " Colors
-syntax enable " enable syntax processing
-set termguicolors
+syntax on " enable syntax processing
+
+" Material Theme
+function! MyHighlights() abort
+  let l:yellow    = '#ffcb6b'
+  let l:cyan      = '#89ddff'
+
+   exec 'hi jsObjectKey guifg=' l:yellow
+   exec 'hi cssProp guifg=' l:cyan
+   exec 'hi cssClassName guifg=' l:yellow
+endfunction
+
+augroup MyColors
+  autocmd!
+  autocmd ColorScheme * call MyHighlights()
+augroup END
+
 set background=dark
-colorscheme PaperColor
+if has('termguicolors')
+  set termguicolors
+endif
+let g:material_theme_style = 'dark'
+colorscheme material
 
 " File specific
 autocmd BufRead,BufNewFile *.md setlocal spell
 
 command! Eroutes e config/routes.rb
-command! Vroutes vs config/routes.rb
 command! Sroutes sp config/routes.rb
+command! Vroutes vs config/routes.rb
 
 " Spaces & Tabs
 set shiftwidth=2
@@ -51,11 +70,21 @@ map <C-l> <C-W>l
 " Airline
 set laststatus=2
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+let g:airline#extensions#tabline#show_buffers = 0
+let g:airline#extensions#tabline#show_close_button = 0
+let g:airline#extensions#tabline#show_splits = 0
+let g:airline#extensions#tabline#show_tab_type = 0
+let g:airline#extensions#tabline#tab_min_count = 0
+let g:airline#extensions#tabline#tab_nr_type = 1 " display tab number in tabs
 
 " ALE
 let g:ale_linters = { 'javascript': ['eslint', 'prettier'] }
 let g:ale_sign_column_always = 1
 let g:ale_lint_delay = 1500
+let g:ale_sign_error = '●'
+let g:ale_sign_warning = '●'
 
 " Commentary
 autocmd FileType ocaml setlocal commentstring=(*\ %s\ *)
@@ -91,13 +120,5 @@ let vim_markdown_preview_temp_file = 1
 " NerdTree
 let NERDTreeShowHidden = 1
 let NERDTreeQuitOnOpen = 1
+let NERDTreeIgnore=['node_modules', '\.git']
 map <C-n> :NERDTreeToggle<CR>
-
-" PaperColor
-let g:PaperColor_Theme_Options = {
-  \   'theme': {
-  \     'default.dark': {
-  \       'transparent_background': 1
-  \     }
-  \   }
-  \ }

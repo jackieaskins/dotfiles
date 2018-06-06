@@ -2,6 +2,8 @@
 
 sys=$(uname -s)
 
+echo "Beginning installation"
+
 ######################### Install Zsh, Oh My Zsh & Vim #########################
 
 # Determine the system & install method
@@ -108,6 +110,7 @@ echo "Backing up any existing dotfiles..."
 mv ~/.zshrc $backupdir/zshrc
 mv ~/.oh-my-zsh/custom/aliases.zsh $backupdir/zsh/aliases.zsh
 mv ~/.oh-my-zsh/custom/functions.zsh $backupdir/zsh/functions.zsh
+mv ~/.oh-my-zsh/custom/themes $backupdir/zsh
 mv ~/.vimrc $backupdir/vimrc
 mv ~/.vim/plugins.vim $backupdir/vim/plugins.vim
 mv ~/.vim/tabline.vim $backupdir/vim/tabline.vim
@@ -119,12 +122,13 @@ echo "Symlinking dotfiles to $dir directory..."
 ln -s $dir/zshrc ~/.zshrc
 ln -s $dir/zsh/aliases.zsh ~/.oh-my-zsh/custom/aliases.zsh
 ln -s $dir/zsh/functions.zsh ~/.oh-my-zsh/custom/functions.zsh
+ln -s $dir/zsh/themes ~/.oh-my-zsh/custom
 ln -s $dir/vimrc ~/.vimrc
 ln -s $dir/vim/plugins.vim ~/.vim/plugins.vim
 ln -s $dir/vim/tabline.vim ~/.vim/tabline.vim
 echo "Done symlinking files"
 
-echo "Configuring Vim plugins"
+echo "Configuring Vim plugins..."
 [[ -d ~/.vim/bundle ]] || mkdir -p ~/.vim/bundle
 
 if [[ -d ~/.vim/bundle/Vundle.vim ]]
@@ -136,3 +140,7 @@ else
   vim +PluginInstall +qall
 fi
 echo "Done configuring Vim plugins"
+
+echo " "
+
+echo "Done installing"
