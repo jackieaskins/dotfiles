@@ -10,8 +10,12 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 "" Themes
-" Material - Current
+" Material
 Plugin 'kaicataldo/material.vim'
+" One Dark - **Current**
+Plugin 'joshdick/onedark.vim'
+" One Half
+Plugin 'sonph/onehalf', { 'rtp': 'vim/' }
 " PaperColor
 Plugin 'NLKNguyen/papercolor-theme'
 
@@ -43,10 +47,6 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter.git'
 " Gundo - Vim undo tree
 Plugin 'sjl/gundo.vim'
-" Javascript - Syntax highlighting & improved indentation
-Plugin 'pangloss/vim-javascript'
-" JSX - JSX syntax highlighting
-Plugin 'mxw/vim-jsx'
 " Markdown Preview
 Plugin 'JamshedVesuna/vim-markdown-preview'
 " MatchIt - Extended bracket matching with %
@@ -55,12 +55,12 @@ Plugin 'adelarsq/vim-matchit'
 Plugin 'scrooloose/nerdtree'
 " NerdTree Git Plugin
 Plugin 'Xuyuanp/nerdtree-git-plugin'
+" Polyglot - All-in-one Syntax
+Plugin 'sheerun/vim-polyglot'
 " Rails - Commands for working with Rails
 Plugin 'tpope/vim-rails'
 " Repeat - Remap . command to do more
 Plugin 'tpope/vim-repeat'
-" SCSS Syntax
-Plugin 'cakebaker/scss-syntax.vim'
 " Snipmate - Language specific snippets
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
@@ -70,8 +70,6 @@ Plugin 'honza/vim-snippets'
 Plugin 'tpope/vim-surround'
 " Trailing Whitespace
 Plugin 'bronson/vim-trailing-whitespace'
-" Vue - Syntax Highlighting for Vue
-Plugin 'posva/vim-vue'
 
 call vundle#end()            " required
 filetype plugin indent on    " required

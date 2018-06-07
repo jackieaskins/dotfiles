@@ -1,3 +1,5 @@
+alias dotfiles='cd ~/dotfiles'
+
 alias vimconfig='vim ~/.vimrc'
 alias vimplugins='vim ~/.vim/plugins.vim'
 

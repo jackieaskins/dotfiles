@@ -4,27 +4,26 @@ source ~/.vim/plugins.vim
 " Colors
 syntax on " enable syntax processing
 
-" Material Theme
-function! MyHighlights() abort
-  let l:yellow    = '#ffcb6b'
-  let l:cyan      = '#89ddff'
-
-   exec 'hi jsObjectKey guifg=' l:yellow
-   exec 'hi cssProp guifg=' l:cyan
-   exec 'hi cssClassName guifg=' l:yellow
-endfunction
-
-augroup MyColors
-  autocmd!
-  autocmd ColorScheme * call MyHighlights()
-augroup END
-
 set background=dark
 if has('termguicolors')
   set termguicolors
 endif
-let g:material_theme_style = 'dark'
-colorscheme material
+
+" One Dark Theme
+if (has('autocmd'))
+  augroup colorextend
+    autocmd!
+    let s:colors = onedark#GetColors()
+    let s:red = s:colors.red
+
+    autocmd ColorScheme * call onedark#set_highlight('ExtraWhitespace', { 'fg': s:red })
+    autocmd ColorScheme * call onedark#set_highlight('jsObjectKey', { 'fg': s:red })
+    autocmd ColorScheme * call onedark#set_highlight('cssProp', { 'fg': s:red })
+  augroup END
+endif
+
+colorscheme onedark
+let g:airline_theme = 'onedark'
 
 " File specific
 autocmd BufRead,BufNewFile *.md setlocal spell
@@ -125,6 +124,3 @@ let NERDTreeShowHidden = 1
 let NERDTreeQuitOnOpen = 1
 let NERDTreeIgnore=['node_modules', '\.git']
 map <C-n> :NERDTreeToggle<CR>
-
-" Trailing Whitespace
-autocmd ColorScheme * highlight ExtraWhitespace guibg=red2
