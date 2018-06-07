@@ -58,7 +58,7 @@ ZSH_THEME="agnoster-custom"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git rails vundle)
+plugins=(git rails vundle shrink-path)
 
 source $ZSH/oh-my-zsh.sh
 

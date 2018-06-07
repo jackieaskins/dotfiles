@@ -53,6 +53,7 @@ set autoindent " keep same indent as line you're currently on
 set confirm " raise a dialog asking if you want to save changes when exiting
 set splitright " make vertical splits open on right
 set splitbelow " make horizontal splits open on botom
+set signcolumn=yes
 source ~/.vim/tabline.vim
 
 " Searching
@@ -69,6 +70,7 @@ map <C-l> <C-W>l
 "" Plugins
 " Airline
 set laststatus=2
+set timeoutlen=1000 ttimeoutlen=10 " speeds up switch between modes
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
@@ -81,8 +83,6 @@ let g:airline#extensions#tabline#tab_nr_type = 1 " display tab number in tabs
 
 " ALE
 let g:ale_linters = { 'javascript': ['eslint', 'prettier'] }
-let g:ale_sign_column_always = 1
-let g:ale_lint_delay = 1500
 let g:ale_sign_error = '●'
 let g:ale_sign_warning = '●'
 
@@ -90,7 +90,7 @@ let g:ale_sign_warning = '●'
 autocmd FileType ocaml setlocal commentstring=(*\ %s\ *)
 
 " CtrlP
-let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git'
+let g:ctrlp_custom_ignore = 'node_modules\|\.DS_Store\|\.git'
 let g:crtlp_match_window = 'bottom,order:ttb'
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_switch_buffer = 0
@@ -103,6 +103,9 @@ let g:user_emmet_settings = {
     \      'extends' : 'jsx',
     \  },
   \}
+
+" GitGutter
+set updatetime=100 " allows GitGutter to update almost instantly
 
 " Gundo
 noremap <F5> :GundoToggle<CR>
@@ -122,3 +125,6 @@ let NERDTreeShowHidden = 1
 let NERDTreeQuitOnOpen = 1
 let NERDTreeIgnore=['node_modules', '\.git']
 map <C-n> :NERDTreeToggle<CR>
+
+" Trailing Whitespace
+autocmd ColorScheme * highlight ExtraWhitespace guibg=red2
