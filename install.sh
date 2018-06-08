@@ -74,16 +74,13 @@ then
   exit 1
 fi
 
-if [ ! $(echo $SHELL) = $(which zsh) ]
-then
-  chsh -s $(which zsh)
-fi
-
 if [ ! -d ~/.oh-my-zsh ]
 then
   echo "Installing Oh My Zsh..."
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+  (sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)")
 fi
+
+echo ""
 
 ################################  Set up iTerm ################################
 # TODO: Set up iTerm
@@ -102,45 +99,36 @@ echo "Creating dotfiles backup directory..."
 mkdir -p $backupdir
 echo "Backup directory created at $backupdir"
 
-[[ -d ~/.vim ]] || mkdir -p ~/.vim
-mkdir -p $backupdir/vim
-mkdir -p $backupdir/zsh
+echo ""
 
 echo "Backing up any existing dotfiles..."
-mv ~/.zshrc $backupdir/zshrc
-mv ~/.oh-my-zsh/custom/aliases.zsh $backupdir/zsh/aliases.zsh
-mv ~/.oh-my-zsh/custom/functions.zsh $backupdir/zsh/functions.zsh
-mv ~/.oh-my-zsh/custom/themes $backupdir/zsh
-mv ~/.vimrc $backupdir/vimrc
-mv ~/.vim/plugins.vim $backupdir/vim/plugins.vim
-mv ~/.vim/tabline.vim $backupdir/vim/tabline.vim
+[[ ! -f ~/.zshrc ]] || mv ~/.zshrc $backupdir/zshrc
+[[ ! -d ~/.oh-my-zsh/custom ]] || mv ~/.oh-my-zsh/custom $backupdir/zsh
+[[ ! -f ~/.vimrc ]] || mv ~/.vimrc $backupdir/vimrc
+[[ ! -d ~/.vim ]] || mv ~/.vim $backupdir/vim
 echo "Done backing up files"
 
 echo ""
 
 echo "Symlinking dotfiles to $dir directory..."
 ln -s $dir/zshrc ~/.zshrc
-ln -s $dir/zsh/aliases.zsh ~/.oh-my-zsh/custom/aliases.zsh
-ln -s $dir/zsh/functions.zsh ~/.oh-my-zsh/custom/functions.zsh
-ln -s $dir/zsh/themes ~/.oh-my-zsh/custom
+ln -s $dir/zsh ~/.oh-my-zsh/custom
 ln -s $dir/vimrc ~/.vimrc
-ln -s $dir/vim/plugins.vim ~/.vim/plugins.vim
-ln -s $dir/vim/tabline.vim ~/.vim/tabline.vim
+ln -s $dir/vim ~/.vim
 echo "Done symlinking files"
 
-echo "Configuring Vim plugins..."
-[[ -d ~/.vim/bundle ]] || mkdir -p ~/.vim/bundle
+echo ""
 
+echo "Configuring Vim plugins..."
 if [[ -d ~/.vim/bundle/Vundle.vim ]]
 then
-  vim +PluginClean +qall
-  vim +PluginUpdate +qall
+  vim +PluginClean +PluginUpdate +qall
 else
   git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
   vim +PluginInstall +qall
 fi
 echo "Done configuring Vim plugins"
 
-echo " "
+echo ""
 
 echo "Done installing"

@@ -16,9 +16,9 @@ if (has('autocmd'))
     let s:colors = onedark#GetColors()
     let s:red = s:colors.red
 
-    autocmd ColorScheme * call onedark#set_highlight('ExtraWhitespace', { 'fg': s:red })
+    autocmd ColorScheme * call onedark#set_highlight('ExtraWhitespace', { 'bg': s:red })
     autocmd ColorScheme * call onedark#set_highlight('jsObjectKey', { 'fg': s:red })
-    autocmd ColorScheme * call onedark#set_highlight('cssProp', { 'fg': s:red })
+    " autocmd ColorScheme * call onedark#set_highlight('cssProp', { 'fg': s:red })
   augroup END
 endif
 
