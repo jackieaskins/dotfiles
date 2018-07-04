@@ -66,6 +66,8 @@ Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
+" Splitjoin - Split/join single/multi-line statements
+Plugin 'AndrewRadev/splitjoin.vim'
 " Surround - Surround in brackets/quotes
 Plugin 'tpope/vim-surround'
 " Trailing Whitespace

@@ -1,12 +1,10 @@
 alias dotfiles='cd ~/dotfiles'
 
-alias vimconfig='vim ~/.vimrc'
-alias vimplugins='vim ~/.vim/plugins.vim'
+alias vimconfig='vim ~/dotfiles/vimrc'
+alias vimplugins='vim ~/dotfiles/vim/plugins.vim'
 
 alias ohmyzsh='cd ~/.oh-my-zsh'
 alias sourcezsh='source ~/.zshrc'
-alias zshconfig='vim ~/.zshrc'
+alias zshconfig='vim ~/dotfiles/zshrc'
 
 alias chrome='open -a "Google Chrome"'
-
-alias eniac='ssh askinsj@eniac.seas.upenn.edu'

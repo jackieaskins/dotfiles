@@ -10,23 +10,21 @@ if has('termguicolors')
 endif
 
 " One Dark Theme
-if (has('autocmd'))
-  augroup colorextend
-    autocmd!
-    let s:colors = onedark#GetColors()
-    let s:red = s:colors.red
+augroup colorextend
+  autocmd!
+  let s:colors = onedark#GetColors()
+  let s:red = s:colors.red
 
-    autocmd ColorScheme * call onedark#set_highlight('ExtraWhitespace', { 'bg': s:red })
-    autocmd ColorScheme * call onedark#set_highlight('jsObjectKey', { 'fg': s:red })
-    " autocmd ColorScheme * call onedark#set_highlight('cssProp', { 'fg': s:red })
-  augroup END
-endif
+  autocmd ColorScheme * call onedark#set_highlight('ExtraWhitespace', { 'bg': s:red })
+  autocmd ColorScheme * call onedark#set_highlight('jsObjectKey', { 'fg': s:red })
+augroup END
 
 colorscheme onedark
 let g:airline_theme = 'onedark'
 
 " File specific
 autocmd BufRead,BufNewFile *.md setlocal spell
+autocmd BufWritePost *.md :call Vim_Markdown_Preview_Local()
 
 command! Eroutes e config/routes.rb
 command! Sroutes sp config/routes.rb
@@ -52,7 +50,11 @@ set autoindent " keep same indent as line you're currently on
 set confirm " raise a dialog asking if you want to save changes when exiting
 set splitright " make vertical splits open on right
 set splitbelow " make horizontal splits open on botom
-set signcolumn=yes
+if exists('&signcolumn')
+  set signcolumn=yes
+else
+  let g:gitgutter_sign_column_always = 1
+endif
 source ~/.vim/tabline.vim
 
 " Searching
@@ -89,7 +91,10 @@ let g:ale_sign_warning = '●'
 autocmd FileType ocaml setlocal commentstring=(*\ %s\ *)
 
 " CtrlP
-let g:ctrlp_custom_ignore = 'node_modules\|\.DS_Store\|\.git'
+let g:ctrlp_custom_ignore = {
+      \ 'dir': '\v[\/](_site|\.git|node_modules|vendors)$',
+      \ 'file': '\v\.(DS_Store|jpg|png|jpeg)'
+      \ }
 let g:crtlp_match_window = 'bottom,order:ttb'
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_switch_buffer = 0
@@ -98,10 +103,10 @@ let g:ctrlp_working_path_mode = 0
 " Emmet
 imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 let g:user_emmet_settings = {
-  \  'javascript.jsx' : {
-    \      'extends' : 'jsx',
-    \  },
-  \}
+      \  'javascript.jsx' : {
+      \      'extends' : 'jsx',
+      \  },
+      \}
 
 " GitGutter
 set updatetime=100 " allows GitGutter to update almost instantly
@@ -122,5 +127,5 @@ let vim_markdown_preview_temp_file = 1
 " NerdTree
 let NERDTreeShowHidden = 1
 let NERDTreeQuitOnOpen = 1
-let NERDTreeIgnore=['node_modules', '\.git']
+let NERDTreeIgnore = ['node_modules', '\.git', '\.DS_Store']
 map <C-n> :NERDTreeToggle<CR>
