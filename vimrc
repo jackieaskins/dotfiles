@@ -24,7 +24,6 @@ let g:airline_theme = 'onedark'
 
 " File specific
 autocmd BufRead,BufNewFile *.md setlocal spell
-autocmd BufWritePost *.md :call Vim_Markdown_Preview_Local()
 
 command! Eroutes e config/routes.rb
 command! Sroutes sp config/routes.rb
@@ -50,6 +49,7 @@ set autoindent " keep same indent as line you're currently on
 set confirm " raise a dialog asking if you want to save changes when exiting
 set splitright " make vertical splits open on right
 set splitbelow " make horizontal splits open on botom
+
 if exists('&signcolumn')
   set signcolumn=yes
 else

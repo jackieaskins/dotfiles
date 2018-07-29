@@ -103,7 +103,6 @@ echo ""
 
 echo "Backing up any existing dotfiles..."
 [[ ! -f ~/.zshrc ]] || mv ~/.zshrc $backupdir/zshrc
-[[ ! -d ~/.oh-my-zsh/custom ]] || mv ~/.oh-my-zsh/custom $backupdir/zsh
 [[ ! -f ~/.vimrc ]] || mv ~/.vimrc $backupdir/vimrc
 [[ ! -d ~/.vim ]] || mv ~/.vim $backupdir/vim
 echo "Done backing up files"
@@ -112,7 +111,6 @@ echo ""
 
 echo "Symlinking dotfiles to $dir directory..."
 ln -s $dir/zshrc ~/.zshrc
-ln -s $dir/zsh ~/.oh-my-zsh/custom
 ln -s $dir/vimrc ~/.vimrc
 ln -s $dir/vim ~/.vim
 echo "Done symlinking files"
