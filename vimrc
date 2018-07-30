@@ -1,5 +1,6 @@
 " Load plugins
 source ~/.vim/plugins.vim
+let g:lightline = {}
 
 " Colors
 syntax on " enable syntax processing
@@ -9,18 +10,9 @@ if has('termguicolors')
   set termguicolors
 endif
 
-" One Dark Theme
-augroup colorextend
-  autocmd!
-  let s:colors = onedark#GetColors()
-  let s:red = s:colors.red
-
-  autocmd ColorScheme * call onedark#set_highlight('ExtraWhitespace', { 'bg': s:red })
-  autocmd ColorScheme * call onedark#set_highlight('jsObjectKey', { 'fg': s:red })
-augroup END
-
-colorscheme onedark
-let g:airline_theme = 'onedark'
+let g:quantum_black=1
+let g:lightline.colorscheme = 'quantum'
+colorscheme quantum
 
 " File specific
 autocmd BufRead,BufNewFile *.md setlocal spell
@@ -37,6 +29,8 @@ set expandtab " tabs are spaces
 set list listchars=tab:\ \ ,trail:· " Add dots for spacing
 
 " UI Config
+set laststatus=2 " always display status line
+set showtabline=2 " always display tabline
 set number " show line number for current line
 set relativenumber " show line numbers relative to the current line
 set showcmd " show command in bottom bar
@@ -55,7 +49,6 @@ if exists('&signcolumn')
 else
   let g:gitgutter_sign_column_always = 1
 endif
-source ~/.vim/tabline.vim
 
 " Searching
 set incsearch " search as characters are entered
@@ -70,22 +63,21 @@ map <C-l> <C-W>l
 
 "" Plugins
 " Airline
-set laststatus=2
-set timeoutlen=1000 ttimeoutlen=10 " speeds up switch between modes
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
-let g:airline#extensions#tabline#show_buffers = 0
-let g:airline#extensions#tabline#show_close_button = 0
-let g:airline#extensions#tabline#show_splits = 0
-let g:airline#extensions#tabline#show_tab_type = 0
-let g:airline#extensions#tabline#tab_min_count = 0
-let g:airline#extensions#tabline#tab_nr_type = 1 " display tab number in tabs
+" set timeoutlen=1000 ttimeoutlen=10 " speeds up switch between modes
+" let g:airline_powerline_fonts = 1
+" let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+" let g:airline#extensions#tabline#show_buffers = 0
+" let g:airline#extensions#tabline#show_close_button = 0
+" let g:airline#extensions#tabline#show_splits = 0
+" let g:airline#extensions#tabline#show_tab_type = 0
+" let g:airline#extensions#tabline#tab_min_count = 0
+" let g:airline#extensions#tabline#tab_nr_type = 1 " display tab number in tabs
 
 " ALE
 let g:ale_linters = { 'javascript': ['eslint', 'prettier'] }
-let g:ale_sign_error = '●'
-let g:ale_sign_warning = '●'
+" let g:ale_sign_error = '●'
+" let g:ale_sign_warning = '●'
 
 " Commentary
 autocmd FileType ocaml setlocal commentstring=(*\ %s\ *)
@@ -116,6 +108,57 @@ noremap <F5> :GundoToggle<CR>
 
 " JSX
 let g:jsx_ext_required = 0
+
+" Lightline
+let g:lightline.active = {
+      \ 'left': [ [ 'mode', 'paste' ],
+      \           [ 'fugitive', 'readonly', 'filename' ] ],
+      \ 'right': [ [ 'linter_errors', 'linter_warnings', 'lineinfo' ],
+      \            [ 'percent' ],
+      \            [ 'fileformat', 'fileencoding', 'filetype' ] ]
+      \ }
+let g:lightline.component = {
+      \ 'lineinfo': ' %3l:%-2v',
+      \ }
+let g:lightline.component_expand = {
+      \  'linter_checking': 'lightline#ale#checking',
+      \  'linter_warnings': 'lightline#ale#warnings',
+      \  'linter_errors': 'lightline#ale#errors',
+      \  'linter_ok': 'lightline#ale#ok',
+      \ }
+let g:lightline.component_function = {
+      \ 'filename': 'LightlineFilename',
+      \ 'readonly': 'LightlineReadonly',
+      \ 'fugitive': 'LightlineFugitive',
+      \ }
+let g:lightline.component_type = {
+      \     'linter_checking': 'left',
+      \     'linter_warnings': 'warning',
+      \     'linter_errors': 'error',
+      \     'linter_ok': 'left',
+      \ }
+let g:lightline.separator = { 'left': '', 'right': '' }
+let g:lightline.subseparator = { 'left': '', 'right': '' }
+let g:lightline.tabline = {
+  \ 'left': [ [ 'tabs' ] ],
+  \ 'right': [ [ ] ],
+  \ }
+
+function! LightlineFilename()
+  let filename = expand('%:t') !=# '' ? expand('%:t') : '[No Name]'
+  let modified = &modified ? ' +' : ''
+  return filename . modified
+endfunction
+function! LightlineReadonly()
+  return &readonly ? '' : ''
+endfunction
+function! LightlineFugitive()
+  if exists('*fugitive#head')
+    let branch = fugitive#head()
+    return branch !=# '' ? ' ' . branch : ''
+  endif
+  return ''
+endfunction
 
 " Markdown Preview
 let vim_markdown_preview_toggle = 1

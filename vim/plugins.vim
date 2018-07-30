@@ -10,8 +10,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 "" Themes
-" Material
-Plugin 'kaicataldo/material.vim'
+Plugin 'tyrannicaltoucan/vim-quantum'
 " One Dark - **Current**
 Plugin 'joshdick/onedark.vim'
 " One Half
@@ -21,8 +20,8 @@ Plugin 'NLKNguyen/papercolor-theme'
 
 "" Plugins
 " Airline - Customize status/tabline
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+" Plugin 'vim-airline/vim-airline'
+" Plugin 'vim-airline/vim-airline-themes'
 " ALE - Asynchronous syntax checking
 Plugin 'w0rp/ale'
 " Commentary - Easily insert comments
@@ -47,6 +46,10 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter.git'
 " Gundo - Vim undo tree
 Plugin 'sjl/gundo.vim'
+" Lightline - Customize status/tabline
+Plugin 'itchyny/lightline.vim'
+" Lightline Ale
+Plugin 'maximbaz/lightline-ale'
 " Markdown Preview
 Plugin 'JamshedVesuna/vim-markdown-preview'
 " MatchIt - Extended bracket matching with %
