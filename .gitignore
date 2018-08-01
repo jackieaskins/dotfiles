@@ -1,2 +1,4 @@
 vim/bundle
+vim/custom.vim
 .DS_Store
+zsh/custom.zsh

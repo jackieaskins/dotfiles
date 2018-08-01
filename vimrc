@@ -5,6 +5,10 @@ let g:lightline = {}
 " Colors
 syntax on " enable syntax processing
 
+if !empty(glob("~/.vim/custom.vim"))
+  source ~/.vim/custom.vim
+endif
+
 set background=dark
 if has('termguicolors')
   set termguicolors
