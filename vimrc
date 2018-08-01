@@ -10,7 +10,7 @@ if has('termguicolors')
   set termguicolors
 endif
 
-let g:quantum_black=1
+let g:quantum_black = 1
 let g:lightline.colorscheme = 'quantum'
 colorscheme quantum
 
