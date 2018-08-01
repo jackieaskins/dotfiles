@@ -46,5 +46,4 @@ echo "Done configuring Vim plugins\n"
 
 echo "${GREEN}Done installing\n${NC}"
 
-echo "If using iTerm:"
-echo "Configure iTerm to load preferences from ~/dotfiles/iTerm (refer to the README)"
+echo "If using iTerm, configure it to load preferences from ~/dotfiles/iterm (refer to the README)\n"
