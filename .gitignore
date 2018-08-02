@@ -1,4 +1,9 @@
+/* Vim */
 vim/bundle
 vim/custom.vim
-.DS_Store
+vim/custom_plugins.vim
+
+/* Zsh */
 zsh/custom.zsh
+
+.DS_Store

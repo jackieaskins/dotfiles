@@ -19,19 +19,16 @@ Plugin 'sonph/onehalf', { 'rtp': 'vim/' }
 Plugin 'NLKNguyen/papercolor-theme'
 
 "" Plugins
-" Airline - Customize status/tabline
-" Plugin 'vim-airline/vim-airline'
-" Plugin 'vim-airline/vim-airline-themes'
 " ALE - Asynchronous syntax checking
 Plugin 'w0rp/ale'
+" Better Whitespace
+Plugin 'ntpeters/vim-better-whitespace'
 " Commentary - Easily insert comments
 Plugin 'tpope/vim-commentary'
 " CSS Color - Preview colors in code
 Plugin 'ap/vim-css-color'
 " CSS3 Syntax
 Plugin 'hail2u/vim-css3-syntax'
-" CtrlP - Fuzzy file search
-Plugin 'kien/ctrlp.vim'
 " Easy Dir - Allow creating directories
 Plugin 'duggiefresh/vim-easydir'
 " Endwise - Add end keywords
@@ -42,13 +39,14 @@ Plugin 'mattn/emmet-vim'
 Plugin 'tpope/vim-eunuch'
 " Fugitive - Git integration in Vim
 Plugin 'tpope/vim-fugitive'
+" FZF - Fuzzy Finder
+Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
 " GitGutter
-Plugin 'airblade/vim-gitgutter.git'
-" Gundo - Vim undo tree
-Plugin 'sjl/gundo.vim'
+Plugin 'airblade/vim-gitgutter'
 " Lightline - Customize status/tabline
 Plugin 'itchyny/lightline.vim'
-" Lightline Ale
+" Lightline Ale - Lighline support for Ale
 Plugin 'maximbaz/lightline-ale'
 " Markdown Preview
 Plugin 'JamshedVesuna/vim-markdown-preview'
@@ -75,6 +73,11 @@ Plugin 'AndrewRadev/splitjoin.vim'
 Plugin 'tpope/vim-surround'
 " Trailing Whitespace
 Plugin 'bronson/vim-trailing-whitespace'
+
+" Custom Plugins
+if !empty(glob("~/.vim/custom_plugins.vim"))
+  source ~/.vim/custom_plugins.vim
+endif
 
 call vundle#end()            " required
 filetype plugin indent on    " required

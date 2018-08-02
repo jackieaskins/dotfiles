@@ -1,5 +1,3 @@
-**\*\*Work in Progress\*\***
-
 # My Dotfiles
 My dotfiles for Vim, Zsh, and iTerm.
 
@@ -31,5 +29,10 @@ My dotfiles for Vim, Zsh, and iTerm.
     - Check under Preferences on the General Tab
     - Check the checkbox next to "Load preferences from a custom folder or URL" and fill in `~/dotfiles/iterm`
 
-## Note
-If you need to add Vim or Zsh specific content, you can create a file named `~/dotfiles/vim/custom.vim` or `~/dotfiles/zsh/custom.zsh` respectively. These files will be automatically sourced and ignored by Git.
+## Customization
+To add machine-specific settings, create the files below. For:
+- Vim Plugins: `~/dotfiles/vim/custom_plugins.vim`
+- General Vim: `~/dotfiles/vim/custom.vim`
+- Zsh: `~/dotfiles/zsh/custom.zsh`
+
+The files will be automatically sourced and ignored by Git.

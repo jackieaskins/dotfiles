@@ -66,18 +66,6 @@ map <C-h> <C-W>h
 map <C-l> <C-W>l
 
 "" Plugins
-" Airline
-" set timeoutlen=1000 ttimeoutlen=10 " speeds up switch between modes
-" let g:airline_powerline_fonts = 1
-" let g:airline#extensions#tabline#enabled = 1
-" let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
-" let g:airline#extensions#tabline#show_buffers = 0
-" let g:airline#extensions#tabline#show_close_button = 0
-" let g:airline#extensions#tabline#show_splits = 0
-" let g:airline#extensions#tabline#show_tab_type = 0
-" let g:airline#extensions#tabline#tab_min_count = 0
-" let g:airline#extensions#tabline#tab_nr_type = 1 " display tab number in tabs
-
 " ALE
 let g:ale_linters = { 'javascript': ['eslint', 'prettier'] }
 " let g:ale_sign_error = '●'
@@ -87,14 +75,14 @@ let g:ale_linters = { 'javascript': ['eslint', 'prettier'] }
 autocmd FileType ocaml setlocal commentstring=(*\ %s\ *)
 
 " CtrlP
-let g:ctrlp_custom_ignore = {
-      \ 'dir': '\v[\/](_site|\.git|node_modules|vendors)$',
-      \ 'file': '\v\.(DS_Store|jpg|png|jpeg)'
-      \ }
-let g:crtlp_match_window = 'bottom,order:ttb'
-let g:ctrlp_show_hidden = 1
-let g:ctrlp_switch_buffer = 0
-let g:ctrlp_working_path_mode = 0
+" let g:ctrlp_custom_ignore = {
+"       \ 'dir': '\v[\/](_site|\.git|node_modules|vendors)$',
+"       \ 'file': '\v\.(DS_Store|jpg|png|jpeg)'
+"       \ }
+" let g:crtlp_match_window = 'bottom,order:ttb'
+" let g:ctrlp_show_hidden = 1
+" let g:ctrlp_switch_buffer = 0
+" let g:ctrlp_working_path_mode = 0
 
 " Emmet
 imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
