@@ -1,13 +1,14 @@
+" Load custom settings
+if !empty(glob("~/.vim/custom.vim"))
+  source ~/.vim/custom.vim
+endif
+
 " Load plugins
 source ~/.vim/plugins.vim
 let g:lightline = {}
 
 " Colors
 syntax on " enable syntax processing
-
-if !empty(glob("~/.vim/custom.vim"))
-  source ~/.vim/custom.vim
-endif
 
 set background=dark
 if has('termguicolors')
@@ -132,9 +133,9 @@ let g:lightline.component_type = {
 let g:lightline.separator = { 'left': '', 'right': '' }
 let g:lightline.subseparator = { 'left': '', 'right': '' }
 let g:lightline.tabline = {
-  \ 'left': [ [ 'tabs' ] ],
-  \ 'right': [ [ ] ],
-  \ }
+      \ 'left': [ [ 'tabs' ] ],
+      \ 'right': [ [ ] ],
+      \ }
 
 function! LightlineFilename()
   let filename = expand('%:t') !=# '' ? expand('%:t') : '[No Name]'
