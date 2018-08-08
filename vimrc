@@ -69,8 +69,9 @@ map <C-l> <C-W>l
 "" Plugins
 " ALE
 let g:ale_linters = { 'javascript': ['eslint', 'prettier'] }
-" let g:ale_sign_error = '●'
-" let g:ale_sign_warning = '●'
+
+" Better Whitespace
+let g:better_whitespace_guicolor='#dd7186'
 
 " Commentary
 autocmd FileType ocaml setlocal commentstring=(*\ %s\ *)

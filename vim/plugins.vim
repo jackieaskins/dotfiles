@@ -13,8 +13,6 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'tyrannicaltoucan/vim-quantum'
 " One Dark - **Current**
 Plugin 'joshdick/onedark.vim'
-" One Half
-Plugin 'sonph/onehalf', { 'rtp': 'vim/' }
 " PaperColor
 Plugin 'NLKNguyen/papercolor-theme'
 
@@ -71,8 +69,6 @@ Plugin 'honza/vim-snippets'
 Plugin 'AndrewRadev/splitjoin.vim'
 " Surround - Surround in brackets/quotes
 Plugin 'tpope/vim-surround'
-" Trailing Whitespace
-Plugin 'bronson/vim-trailing-whitespace'
 
 " Custom Plugins
 if !empty(glob("~/.vim/custom_plugins.vim"))
