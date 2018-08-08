@@ -79,8 +79,7 @@ prompt_end() {
 
 # Context: user@hostname (who am I and where am I)
 prompt_context() {
-  if [[ -n "$SSH_CLIENT" ]]; then
-  # if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
+  if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
     prompt_segment black default "%(!.%{%F{yellow}%}.)$USER@%m"
   fi
 }
@@ -188,8 +187,7 @@ prompt_hg() {
 
 # Dir: current working directory
 prompt_dir() {
-  # prompt_segment blue black '%1d'
-  prompt_segment blue black $(shrink_path -f)
+  prompt_segment blue black '%~'
 }
 
 # Virtualenv: current working virtualenv
@@ -214,8 +212,25 @@ prompt_status() {
   [[ -n "$symbols" ]] && prompt_segment black default "$symbols"
 }
 
+prompt_start() {
+  echo -n "\n"
+}
+
+prompt_newline() {
+  if [[ -n $CURRENT_BG ]]; then
+    echo -n " %{%k%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR
+%{%K{blue}%F{black}%} %% %{%k%F{blue}%}$SEGMENT_SEPARATOR"
+  else
+    echo -n "%{%k%}"
+  fi
+
+  echo -n "%{%f%}"
+  CURRENT_BG=''
+}
+
 ## Main prompt
 build_prompt() {
+  prompt_start
   RETVAL=$?
   prompt_status
   prompt_virtualenv
@@ -224,6 +239,7 @@ build_prompt() {
   prompt_git
   prompt_bzr
   prompt_hg
+  prompt_newline
   prompt_end
 }
 
