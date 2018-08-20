@@ -10,9 +10,8 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 "" Themes
+" Quantum - **Current**
 Plugin 'tyrannicaltoucan/vim-quantum'
-" One Dark - **Current**
-Plugin 'joshdick/onedark.vim'
 " PaperColor
 Plugin 'NLKNguyen/papercolor-theme'
 
@@ -21,18 +20,18 @@ Plugin 'NLKNguyen/papercolor-theme'
 Plugin 'w0rp/ale'
 " Better Whitespace
 Plugin 'ntpeters/vim-better-whitespace'
+" Closer - Autoclose braces on enter
+Plugin 'rstacruz/vim-closer'
+" CloseTag - Autoclose HTML tags
+  Plugin 'alvan/vim-closetag'
 " Commentary - Easily insert comments
 Plugin 'tpope/vim-commentary'
-" CSS Color - Preview colors in code
-Plugin 'ap/vim-css-color'
 " CSS3 Syntax
 Plugin 'hail2u/vim-css3-syntax'
-" Easy Dir - Allow creating directories
-Plugin 'duggiefresh/vim-easydir'
-" Endwise - Add end keywords
-Plugin 'tpope/vim-endwise'
 " Emmet
 Plugin 'mattn/emmet-vim'
+" Endwise - Add end keywords
+Plugin 'tpope/vim-endwise'
 " Eunuch - UNIX commands in Vim
 Plugin 'tpope/vim-eunuch'
 " Fugitive - Git integration in Vim
@@ -60,15 +59,13 @@ Plugin 'sheerun/vim-polyglot'
 Plugin 'tpope/vim-rails'
 " Repeat - Remap . command to do more
 Plugin 'tpope/vim-repeat'
-" Snipmate - Language specific snippets
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-Plugin 'garbas/vim-snipmate'
-Plugin 'honza/vim-snippets'
 " Splitjoin - Split/join single/multi-line statements
 Plugin 'AndrewRadev/splitjoin.vim'
 " Surround - Surround in brackets/quotes
 Plugin 'tpope/vim-surround'
+" UltiSnips - Language-specific snippets
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
 
 " Custom Plugins
 if !empty(glob("~/.vim/custom_plugins.vim"))

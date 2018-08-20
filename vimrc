@@ -48,6 +48,7 @@ set autoindent " keep same indent as line you're currently on
 set confirm " raise a dialog asking if you want to save changes when exiting
 set splitright " make vertical splits open on right
 set splitbelow " make horizontal splits open on botom
+set timeoutlen=1000 ttimeoutlen=10 " speed up switch between modes
 
 if exists('&signcolumn')
   set signcolumn=yes
@@ -73,26 +74,29 @@ let g:ale_linters = { 'javascript': ['eslint', 'prettier'] }
 " Better Whitespace
 let g:better_whitespace_guicolor='#dd7186'
 
+" Closetag
+let g:closetag_filenames = '*.html,*.js,*.jsx'
+let g:closetag_xhtml_filenames = '*.js,*.jsx'
+
 " Commentary
 autocmd FileType ocaml setlocal commentstring=(*\ %s\ *)
 
-" CtrlP
-" let g:ctrlp_custom_ignore = {
-"       \ 'dir': '\v[\/](_site|\.git|node_modules|vendors)$',
-"       \ 'file': '\v\.(DS_Store|jpg|png|jpeg)'
-"       \ }
-" let g:crtlp_match_window = 'bottom,order:ttb'
-" let g:ctrlp_show_hidden = 1
-" let g:ctrlp_switch_buffer = 0
-" let g:ctrlp_working_path_mode = 0
-
 " Emmet
-imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
+let g:user_emmet_leader_key = '<leader>m'
 let g:user_emmet_settings = {
       \  'javascript.jsx' : {
       \      'extends' : 'jsx',
       \  },
       \}
+
+" FZF
+nnoremap <c-p> :FZF<cr>
+augroup fzf
+  autocmd!
+  autocmd! FileType fzf
+  autocmd  FileType fzf set laststatus=0 noshowmode noruler
+    \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+augroup END
 
 " GitGutter
 set updatetime=100 " allows GitGutter to update almost instantly
@@ -166,3 +170,7 @@ let NERDTreeShowHidden = 1
 let NERDTreeQuitOnOpen = 1
 let NERDTreeIgnore = ['node_modules', '\.git', '\.DS_Store']
 map <C-n> :NERDTreeToggle<CR>
+
+" UltiSnips
+let g:UltiSnipsJumpForwardTrigger='<leader>n'
+let g:UltiSnipsJumpBackwardTrigger='<leader>p'
