@@ -44,6 +44,10 @@ rm ~/.vimrc
 ln -s $dir/vimrc ~/.vimrc
 echo -e "Done configuring Vim plugins\n"
 
+echo -e "Installing Pure Zsh Prompt..."
+npm install -g pure-prompt
+echo -e "Done installing Pure Prompt\n"
+
 echo -e "${GREEN}Done installing\n${NC}"
 
 echo -e "If using iTerm, configure it to load preferences from ~/dotfiles/iterm (refer to the README)"

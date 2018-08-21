@@ -115,9 +115,6 @@ let g:lightline.active = {
       \            [ 'percent' ],
       \            [ 'fileformat', 'fileencoding', 'filetype' ] ]
       \ }
-let g:lightline.component = {
-      \ 'lineinfo': ' %3l:%-2v',
-      \ }
 let g:lightline.component_expand = {
       \  'linter_checking': 'lightline#ale#checking',
       \  'linter_warnings': 'lightline#ale#warnings',
@@ -126,8 +123,7 @@ let g:lightline.component_expand = {
       \ }
 let g:lightline.component_function = {
       \ 'filename': 'LightlineFilename',
-      \ 'readonly': 'LightlineReadonly',
-      \ 'fugitive': 'LightlineFugitive',
+      \ 'fugitive': 'fugitive#head',
       \ }
 let g:lightline.component_type = {
       \     'linter_checking': 'left',
@@ -135,8 +131,6 @@ let g:lightline.component_type = {
       \     'linter_errors': 'error',
       \     'linter_ok': 'left',
       \ }
-let g:lightline.separator = { 'left': '', 'right': '' }
-let g:lightline.subseparator = { 'left': '', 'right': '' }
 let g:lightline.tabline = {
       \ 'left': [ [ 'tabs' ] ],
       \ 'right': [ [ ] ],
@@ -146,16 +140,6 @@ function! LightlineFilename()
   let filename = expand('%:t') !=# '' ? expand('%:t') : '[No Name]'
   let modified = &modified ? ' +' : ''
   return filename . modified
-endfunction
-function! LightlineReadonly()
-  return &readonly ? '' : ''
-endfunction
-function! LightlineFugitive()
-  if exists('*fugitive#head')
-    let branch = fugitive#head()
-    return branch !=# '' ? ' ' . branch : ''
-  endif
-  return ''
 endfunction
 
 " Markdown Preview
