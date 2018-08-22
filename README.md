@@ -7,8 +7,6 @@ My dotfiles for Vim, Zsh, and iTerm.
 2. Zsh must be installed and set as your default shell: https://github.com/robbyrussell/oh-my-zsh/wiki/Installing-ZSH
 3. Oh-My-Zsh must be installed
     - Find installation instructions here: https://github.com/robbyrussell/oh-my-zsh
-4. Node & NPM must be installed
-    - Find instructions here: https://www.npmjs.com/get-npm
 
 ## Installation
 1. Clone this repo:

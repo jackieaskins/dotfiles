@@ -18,6 +18,9 @@ timestamp=$(date +%Y%m%d%H%M%S) # timestamp for backup
 dir=~/dotfiles # dotfiles directory
 backupdir=~/dotfiles_backups/$timestamp # backup directory for old dotfiles
 
+[ -d ~/.zfunctions ] || mkdir ~/.zfunctions
+mkdir $backupdir/zfunctions
+
 echo -e "Creating dotfiles backup directory..."
 mkdir -p $backupdir
 echo -e "Backup directory created at $backupdir\n"
@@ -26,12 +29,16 @@ echo -e "Backing up any existing dotfiles..."
 [ ! -f ~/.zshrc ] || mv ~/.zshrc $backupdir/zshrc
 [ ! -f ~/.vimrc ] || mv ~/.vimrc $backupdir/vimrc
 [ ! -d ~/.vim ] || mv ~/.vim $backupdir/vim
+[ ! -f ~/.zfunctions/prompt_pure_setup ] || mv ~/.zfunctions/prompt_pure_setup $backupdir/zfunctions/prompt_pure_setup
+[ ! -f ~/.zfunctions/async ] || mv ~/.zfunctions/async $backupdir/zfunctions/async
 echo -e "Done backing up files\n"
 
 echo -e "Symlinking dotfiles to $dir directory..."
 ln -s $dir/zshrc ~/.zshrc
 ln -s $dir/vim ~/.vim
 ln -s $dir/vimtemp ~/.vimrc
+ln -s $dir/pure/pure.zsh ~/.zfunctions/prompt_pure_setup
+ln -s $dir/pure/async.zsh ~/.zfunctions/async
 echo -e "Done symlinking files\n"
 
 echo -e "Configuring Vim plugins..."
@@ -43,10 +50,6 @@ vim +PluginInstall +PluginClean +PluginUpdate +qall
 rm ~/.vimrc
 ln -s $dir/vimrc ~/.vimrc
 echo -e "Done configuring Vim plugins\n"
-
-echo -e "Installing Pure Zsh Prompt..."
-npm install -g pure-prompt
-echo -e "Done installing Pure Prompt\n"
 
 echo -e "${GREEN}Done installing\n${NC}"
 

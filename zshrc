@@ -10,6 +10,7 @@ plugins=(git rails zsh-autosuggestions zsh-syntax-highlighting shrink-path)
 source $ZSH/oh-my-zsh.sh
 export EDITOR='vim'
 
+# Pure Prompt
+fpath=(~/.zfunctions $fpath)
 autoload -U promptinit; promptinit
-
 prompt pure
