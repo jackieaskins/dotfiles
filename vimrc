@@ -49,6 +49,7 @@ set confirm " raise a dialog asking if you want to save changes when exiting
 set splitright " make vertical splits open on right
 set splitbelow " make horizontal splits open on botom
 set timeoutlen=1000 ttimeoutlen=10 " speed up switch between modes
+set updatetime=100 " allow GitGutter to update almost instantly
 
 if exists('&signcolumn')
   set signcolumn=yes
@@ -68,11 +69,14 @@ map <C-h> <C-W>h
 map <C-l> <C-W>l
 
 "" Plugins
+" Ack
+let g:ackprg = 'ag --nogroup --nocolor --column' " Use Ag for searching with Ack
+
 " ALE
 let g:ale_linters = { 'javascript': ['eslint', 'prettier'] }
 
 " Better Whitespace
-let g:better_whitespace_guicolor='#dd7186'
+let g:better_whitespace_guicolor = '#dd7186'
 
 " Closetag
 let g:closetag_filenames = '*.html,*.js,*.jsx'
@@ -90,6 +94,7 @@ let g:user_emmet_settings = {
       \}
 
 " FZF
+" Make FZF behave more like Ctrl-P
 nnoremap <c-p> :FZF<cr>
 augroup fzf
   autocmd!
@@ -97,12 +102,6 @@ augroup fzf
   autocmd  FileType fzf set laststatus=0 noshowmode noruler
     \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 augroup END
-
-" GitGutter
-set updatetime=100 " allows GitGutter to update almost instantly
-
-" Gundo
-noremap <F5> :GundoToggle<CR>
 
 " JSX
 let g:jsx_ext_required = 0
@@ -156,5 +155,5 @@ let NERDTreeIgnore = ['node_modules', '\.git', '\.DS_Store']
 map <C-n> :NERDTreeToggle<CR>
 
 " UltiSnips
-let g:UltiSnipsJumpForwardTrigger='<leader>n'
-let g:UltiSnipsJumpBackwardTrigger='<leader>p'
+let g:UltiSnipsJumpForwardTrigger = '<leader>n'
+let g:UltiSnipsJumpBackwardTrigger = '<leader>p'

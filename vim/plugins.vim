@@ -16,6 +16,8 @@ Plugin 'tyrannicaltoucan/vim-quantum'
 Plugin 'NLKNguyen/papercolor-theme'
 
 "" Plugins
+" Ack - Better searching
+Plugin 'mileszs/ack.vim'
 " ALE - Asynchronous syntax checking
 Plugin 'w0rp/ale'
 " Better Whitespace
@@ -23,7 +25,7 @@ Plugin 'ntpeters/vim-better-whitespace'
 " Closer - Autoclose braces on enter
 Plugin 'rstacruz/vim-closer'
 " CloseTag - Autoclose HTML tags
-  Plugin 'alvan/vim-closetag'
+Plugin 'alvan/vim-closetag'
 " Commentary - Easily insert comments
 Plugin 'tpope/vim-commentary'
 " CSS3 Syntax
