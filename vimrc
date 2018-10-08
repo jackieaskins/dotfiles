@@ -15,7 +15,7 @@ if has('termguicolors')
   set termguicolors
 endif
 
-let g:quantum_black = 1
+" let g:quantum_black = 1
 let g:lightline.colorscheme = 'quantum'
 colorscheme quantum
 
@@ -95,6 +95,7 @@ let g:user_emmet_settings = {
 
 " FZF
 " Make FZF behave more like Ctrl-P
+let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 nnoremap <c-p> :FZF<cr>
 augroup fzf
   autocmd!

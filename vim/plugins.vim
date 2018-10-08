@@ -10,10 +10,12 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 "" Themes
-" Quantum - **Current**
-Plugin 'tyrannicaltoucan/vim-quantum'
+" Ayu
+Plugin 'ayu-theme/ayu-vim'
 " PaperColor
 Plugin 'NLKNguyen/papercolor-theme'
+" Quantum - **Current**
+Plugin 'tyrannicaltoucan/vim-quantum'
 
 "" Plugins
 " Ack - Better searching
@@ -25,7 +27,7 @@ Plugin 'ntpeters/vim-better-whitespace'
 " Closer - Autoclose braces on enter
 Plugin 'rstacruz/vim-closer'
 " CloseTag - Autoclose HTML tags
-Plugin 'alvan/vim-closetag'
+" Plugin 'alvan/vim-closetag'
 " Commentary - Easily insert comments
 Plugin 'tpope/vim-commentary'
 " CSS3 Syntax
