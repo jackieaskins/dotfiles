@@ -21,6 +21,7 @@ colorscheme quantum
 
 " File specific
 autocmd BufRead,BufNewFile *.md setlocal spell
+autocmd FileType javascript setlocal omnifunc=tern#Complete
 
 command! Eroutes e config/routes.rb
 command! Sroutes sp config/routes.rb
@@ -50,6 +51,7 @@ set splitright " make vertical splits open on right
 set splitbelow " make horizontal splits open on botom
 set timeoutlen=1000 ttimeoutlen=10 " speed up switch between modes
 set updatetime=100 " allow GitGutter to update almost instantly
+set diffopt+=vertical
 
 if exists('&signcolumn')
   set signcolumn=yes
@@ -68,6 +70,11 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
+"" Backup/Swp/Undo dirs
+set undodir=$HOME/.undo//
+set backupdir=$HOME/.backup//
+set directory=$HOME/.swp//
+
 "" Plugins
 " Ack
 let g:ackprg = 'ag --nogroup --nocolor --column' " Use Ag for searching with Ack
@@ -77,6 +84,7 @@ let g:ale_linters = { 'javascript': ['eslint', 'prettier'] }
 
 " Better Whitespace
 let g:better_whitespace_guicolor = '#dd7186'
+command! SW StripWhitespace
 
 " Closetag
 let g:closetag_filenames = '*.html,*.js,*.jsx'
@@ -84,6 +92,15 @@ let g:closetag_xhtml_filenames = '*.js,*.jsx'
 
 " Commentary
 autocmd FileType ocaml setlocal commentstring=(*\ %s\ *)
+
+" Deoplete
+" let g:deoplete#enable_at_startup = 0
+" func DeopleteHandler(timer)
+"   call deoplete#enable()
+" endfunc
+" autocmd VimEnter * call timer_start(150, 'DeopleteHandler')
+
+" autocmd BufWinEnter * call deoplete#enable()
 
 " Emmet
 let g:user_emmet_leader_key = '<leader>m'
@@ -103,6 +120,11 @@ augroup fzf
   autocmd  FileType fzf set laststatus=0 noshowmode noruler
     \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 augroup END
+
+" Istanbul
+let g:istanbul#jsonPath = ['coverage/coverage-final.json']
+command! IU IstanbulUpdate
+command! IT IstanbulToggle
 
 " JSX
 let g:jsx_ext_required = 0
@@ -155,6 +177,14 @@ let NERDTreeQuitOnOpen = 1
 let NERDTreeIgnore = ['node_modules', '\.git', '\.DS_Store']
 map <C-n> :NERDTreeToggle<CR>
 
+" SuperTab
+let g:SuperTabDefaultCompletionType = "<c-n>"
+
 " UltiSnips
 let g:UltiSnipsJumpForwardTrigger = '<leader>n'
 let g:UltiSnipsJumpBackwardTrigger = '<leader>p'
+
+" Vundle
+command! VI VundleInstall
+command! VU VundleUpdate
+command! VC VundleClean

@@ -28,6 +28,7 @@ echo -e "Backup directory created at $backupdir\n"
 echo -e "Backing up any existing dotfiles..."
 [ ! -f ~/.zshrc ] || mv ~/.zshrc $backupdir/zshrc
 [ ! -f ~/.vimrc ] || mv ~/.vimrc $backupdir/vimrc
+[ ! -f ~/.tern-project ] || mv ~/.tern-project $backupdir/tern-project
 [ ! -d ~/.vim ] || mv ~/.vim $backupdir/vim
 [ ! -f ~/.zfunctions/prompt_pure_setup ] || mv ~/.zfunctions/prompt_pure_setup $backupdir/zfunctions/prompt_pure_setup
 [ ! -f ~/.zfunctions/async ] || mv ~/.zfunctions/async $backupdir/zfunctions/async
@@ -36,6 +37,7 @@ echo -e "Done backing up files\n"
 echo -e "Symlinking dotfiles to $dir directory..."
 ln -s $dir/zshrc ~/.zshrc
 ln -s $dir/vim ~/.vim
+ln -s $dir/tern-project ~/.tern-project
 ln -s $dir/vimtemp ~/.vimrc
 ln -s $dir/pure/pure.zsh ~/.zfunctions/prompt_pure_setup
 ln -s $dir/pure/async.zsh ~/.zfunctions/async

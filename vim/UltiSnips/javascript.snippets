@@ -63,7 +63,7 @@ snippet rfc "React Functional Component" b
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function ${1:`!v expand('%:t:r')`}(${2:{...props}}) {
+const ${1:`!v expand('%:t:r')`} = (${2:{...props}}) => {
 	return (
 		<div>
 			$3

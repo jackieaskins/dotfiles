@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>AddNewTabAtEndOfTabs</key>
+	<false/>
 	<key>AdjustWindowForFontSizeChange</key>
 	<false/>
 	<key>AllowClipboardAccess</key>
@@ -3007,6 +3009,8 @@
 	</dict>
 	<key>Default Bookmark Guid</key>
 	<string>B65B3D10-41B7-455C-907C-A1CF3AFEDB62</string>
+	<key>DimInactiveSplitPanes</key>
+	<true/>
 	<key>DisableWindowSizeSnap</key>
 	<true/>
 	<key>EnableDivisionView</key>
@@ -3080,11 +3084,11 @@
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>269 301 606 469 0 0 1280 777 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>230 164 928 394 0 0 1280 777 </string>
+	<string>230 305 1018 447 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>640 0 640 777 0 0 1280 777 </string>
+	<string>640 7 634 770 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>640 0 634 777 0 0 1280 777 </string>
+	<string>640 0 640 777 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
 	<string>0 3 640 322 0 0 1280 777 </string>
 	<key>New Bookmarks</key>
@@ -5740,6 +5744,7 @@
 			<string>currentTab.currentSession.session.terminalWindowName</string>
 			<string>currentTab.currentSession</string>
 			<string>currentTab.currentSession.session.pid</string>
+			<string>currentTab.currentSession.session.mouseReportingMode</string>
 			<string>currentTab.currentSession.session.tty</string>
 			<string>currentTab.currentSession.session.autoName</string>
 			<string>currentTab.currentSession.session.presentationName</string>
@@ -5750,6 +5755,7 @@
 			<string>currentTab.currentSession.session.jobName</string>
 			<string>iterm2</string>
 			<string>currentTab.currentSession.session.hostname</string>
+			<string>currentTab.currentSession.session.termid</string>
 			<string>currentTab.currentSession.session.path</string>
 			<string>currentTab.currentSession.session.jobPid</string>
 		</array>
@@ -5757,10 +5763,12 @@
 		<array>
 			<string>currentSession</string>
 			<string>titleOverride</string>
-			<string>currentSession.session.terminalIconName</string>
+			<string>currentSession.session.terminalWindowName</string>
+			<string>currentSession.session.termid</string>
 			<string>currentSession.session.pid</string>
 			<string>currentSession.session.autoName</string>
 			<string>currentSession.session.name</string>
+			<string>currentSession.session.mouseReportingMode</string>
 			<string>currentSession.session.path</string>
 			<string>currentSession.session.hostname</string>
 			<string>currentSession.session.rows</string>
@@ -5768,10 +5776,10 @@
 			<string>currentSession.session.jobName</string>
 			<string>iterm2</string>
 			<string>tmuxWindow</string>
+			<string>currentSession.session.terminalIconName</string>
 			<string>currentSession.session.presentationName</string>
 			<string>currentSession.session.username</string>
 			<string>currentSession.session.jobPid</string>
-			<string>currentSession.session.terminalWindowName</string>
 			<string>currentSession.session.columns</string>
 		</array>
 		<key>4</key>
@@ -5936,7 +5944,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-10-07T21:16:52Z</date>
+	<date>2018-10-25T02:38:15Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>ShowBookmarkName</key>
@@ -5945,6 +5953,8 @@
 	<true/>
 	<key>ShowPaneTitles</key>
 	<true/>
+	<key>SplitPaneDimmingAmount</key>
+	<real>0.2202549078525641</real>
 	<key>StretchTabsToFillBar</key>
 	<true/>
 	<key>TabStyle</key>

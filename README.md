@@ -8,6 +8,7 @@ Ensure that the following are installed before beginning:
 2. Zsh (make sure it's set as your default shell): https://github.com/robbyrussell/oh-my-zsh/wiki/Installing-ZSH
 3. Oh-My-Zsh: https://github.com/robbyrussell/oh-my-zsh
 4. The Silver Searcher (Ag): https://github.com/ggreer/the_silver_searcher#installing
+5. NodeJS: https://nodejs.org/en/download/
 
 ## Installation
 1. Clone this repo:

@@ -45,6 +45,8 @@ Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 " GitGutter
 Plugin 'airblade/vim-gitgutter'
+" Istanbul - Javascript Code Coverage
+Plugin 'retorillo/istanbul.vim'
 " Lightline - Customize status/tabline
 Plugin 'itchyny/lightline.vim'
 " Lightline Ale - Lighline support for Ale
@@ -65,6 +67,10 @@ Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-repeat'
 " Splitjoin - Split/join single/multi-line statements
 Plugin 'AndrewRadev/splitjoin.vim'
+" Supertab
+Plugin 'ervandew/supertab'
+" Tern for Vim
+Plugin 'ternjs/tern_for_vim'
 " Surround - Surround in brackets/quotes
 Plugin 'tpope/vim-surround'
 " UltiSnips - Language-specific snippets
