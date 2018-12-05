@@ -9,6 +9,7 @@ Ensure that the following are installed before beginning:
 3. Oh-My-Zsh: https://github.com/robbyrussell/oh-my-zsh
 4. The Silver Searcher (Ag): https://github.com/ggreer/the_silver_searcher#installing
 5. NodeJS: https://nodejs.org/en/download/
+6. Universal Ctags: https://github.com/universal-ctags/ctags#the-latest-build-and-package
 
 ## Installation
 1. Clone this repo:

@@ -89,6 +89,7 @@ command! SW StripWhitespace
 " Closetag
 let g:closetag_filenames = '*.html,*.js,*.jsx'
 let g:closetag_xhtml_filenames = '*.js,*.jsx'
+let g:closetag_emptyTags_caseSensitive = 1
 
 " Commentary
 autocmd FileType ocaml setlocal commentstring=(*\ %s\ *)
@@ -121,6 +122,16 @@ augroup fzf
     \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 augroup END
 
+" Gutentags
+augroup MyGutentagsStatusLineRefresher
+  autocmd!
+  autocmd User GutentagsUpdating call lightline#update()
+  autocmd User GutentagsUpdated call lightline#update()
+augroup END
+
+" HardTime
+let g:hardtime_default_on = 1
+
 " Istanbul
 let g:istanbul#jsonPath = ['coverage/coverage-final.json']
 command! IU IstanbulUpdate
@@ -132,7 +143,8 @@ let g:jsx_ext_required = 0
 " Lightline
 let g:lightline.active = {
       \ 'left': [ [ 'mode', 'paste' ],
-      \           [ 'fugitive', 'readonly', 'filename' ] ],
+      \           [ 'fugitive', 'readonly', 'filename' ],
+      \           [ 'gutentags' ] ],
       \ 'right': [ [ 'linter_errors', 'linter_warnings', 'lineinfo' ],
       \            [ 'percent' ],
       \            [ 'fileformat', 'fileencoding', 'filetype' ] ]
@@ -146,6 +158,7 @@ let g:lightline.component_expand = {
 let g:lightline.component_function = {
       \ 'filename': 'LightlineFilename',
       \ 'fugitive': 'fugitive#head',
+      \ 'gutentags': 'gutentags#statusline'
       \ }
 let g:lightline.component_type = {
       \     'linter_checking': 'left',

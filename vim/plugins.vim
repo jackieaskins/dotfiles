@@ -11,9 +11,9 @@ Plugin 'VundleVim/Vundle.vim'
 
 "" Themes
 " Ayu
-Plugin 'ayu-theme/ayu-vim'
+" Plugin 'ayu-theme/ayu-vim'
 " PaperColor
-Plugin 'NLKNguyen/papercolor-theme'
+" Plugin 'NLKNguyen/papercolor-theme'
 " Quantum - **Current**
 Plugin 'tyrannicaltoucan/vim-quantum'
 
@@ -27,7 +27,7 @@ Plugin 'ntpeters/vim-better-whitespace'
 " Closer - Autoclose braces on enter
 Plugin 'rstacruz/vim-closer'
 " CloseTag - Autoclose HTML tags
-" Plugin 'alvan/vim-closetag'
+Plugin 'alvan/vim-closetag'
 " Commentary - Easily insert comments
 Plugin 'tpope/vim-commentary'
 " CSS3 Syntax
@@ -45,6 +45,10 @@ Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 " GitGutter
 Plugin 'airblade/vim-gitgutter'
+" Gutentags - Improving Ctags experience
+Plugin 'ludovicchabant/vim-gutentags'
+" Hardtime - Help break bad Vim habits
+Plugin 'takac/vim-hardtime'
 " Istanbul - Javascript Code Coverage
 Plugin 'retorillo/istanbul.vim'
 " Lightline - Customize status/tabline
@@ -61,14 +65,12 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 " Polyglot - All-in-one Syntax
 Plugin 'sheerun/vim-polyglot'
-" Rails - Commands for working with Rails
-Plugin 'tpope/vim-rails'
 " Repeat - Remap . command to do more
 Plugin 'tpope/vim-repeat'
 " Splitjoin - Split/join single/multi-line statements
 Plugin 'AndrewRadev/splitjoin.vim'
-" Supertab
-Plugin 'ervandew/supertab'
+" Tagbar - View tags in sidebar
+Plugin 'majutsushi/tagbar'
 " Tern for Vim
 Plugin 'ternjs/tern_for_vim'
 " Surround - Surround in brackets/quotes

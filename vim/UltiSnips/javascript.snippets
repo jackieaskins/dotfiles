@@ -1,3 +1,16 @@
+# React Enzyme test
+snippet enz "React Enzye test" b
+import React from 'react';
+import { shallow } from 'enzyme';
+import toJson from 'enzyme-to-json';
+
+import ${2:`!v expand('%:t:r:r')`} from '$1';
+
+describe('<$2 />', () => {
+	$3
+});
+endsnippet
+
 # React & JSX
 snippet rrcc "React Redux Class Component" b
 import React, { Component } from 'react';
@@ -18,9 +31,9 @@ class ${1:`!v expand('%:t:r')`} extends Component {
 	}
 }
 
-$1.defaultProps = {};
-
 $1.propTypes = {};
+
+$1.defaultProps = {};
 
 const mapStateToProps = state => ({
 });
@@ -52,9 +65,9 @@ class ${1:`!v expand('%:t:r')`} extends Component {
 	}
 }
 
-$1.defaultProps = {};
-
 $1.propTypes = {};
+
+$1.defaultProps = {};
 
 export default $1;
 endsnippet
@@ -63,17 +76,17 @@ snippet rfc "React Functional Component" b
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const ${1:`!v expand('%:t:r')`} = (${2:{...props}}) => {
+const ${1:`!v expand('%:t:r')`} = (${2:props}) => {
 	return (
 		<div>
 			$3
 		</div>
 	);
-}
-
-$1.defaultProps = {};
+};
 
 $1.propTypes = {};
+
+$1.defaultProps = {};
 
 export default $1;
 endsnippet
