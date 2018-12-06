@@ -1,3 +1,5 @@
+set nocompatible
+
 " Load custom settings
 if !empty(glob("~/.vim/custom.vim"))
   source ~/.vim/custom.vim
@@ -7,15 +9,11 @@ endif
 source ~/.vim/plugins.vim
 let g:lightline = {}
 
-" Colors
-syntax on " enable syntax processing
-
 set background=dark
 if has('termguicolors')
   set termguicolors
 endif
 
-" let g:quantum_black = 1
 let g:lightline.colorscheme = 'quantum'
 colorscheme quantum
 
@@ -94,15 +92,6 @@ let g:closetag_emptyTags_caseSensitive = 1
 " Commentary
 autocmd FileType ocaml setlocal commentstring=(*\ %s\ *)
 
-" Deoplete
-" let g:deoplete#enable_at_startup = 0
-" func DeopleteHandler(timer)
-"   call deoplete#enable()
-" endfunc
-" autocmd VimEnter * call timer_start(150, 'DeopleteHandler')
-
-" autocmd BufWinEnter * call deoplete#enable()
-
 " Emmet
 let g:user_emmet_leader_key = '<leader>m'
 let g:user_emmet_settings = {
@@ -122,13 +111,6 @@ augroup fzf
     \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 augroup END
 
-" Gutentags
-augroup MyGutentagsStatusLineRefresher
-  autocmd!
-  autocmd User GutentagsUpdating call lightline#update()
-  autocmd User GutentagsUpdated call lightline#update()
-augroup END
-
 " HardTime
 let g:hardtime_default_on = 1
 
@@ -143,8 +125,7 @@ let g:jsx_ext_required = 0
 " Lightline
 let g:lightline.active = {
       \ 'left': [ [ 'mode', 'paste' ],
-      \           [ 'fugitive', 'readonly', 'filename' ],
-      \           [ 'gutentags' ] ],
+      \           [ 'fugitive', 'readonly', 'filename' ] ],
       \ 'right': [ [ 'linter_errors', 'linter_warnings', 'lineinfo' ],
       \            [ 'percent' ],
       \            [ 'fileformat', 'fileencoding', 'filetype' ] ]
@@ -157,8 +138,7 @@ let g:lightline.component_expand = {
       \ }
 let g:lightline.component_function = {
       \ 'filename': 'LightlineFilename',
-      \ 'fugitive': 'fugitive#head',
-      \ 'gutentags': 'gutentags#statusline'
+      \ 'fugitive': 'fugitive#head'
       \ }
 let g:lightline.component_type = {
       \     'linter_checking': 'left',
@@ -193,11 +173,14 @@ map <C-n> :NERDTreeToggle<CR>
 " SuperTab
 let g:SuperTabDefaultCompletionType = "<c-n>"
 
+" Tagbar
+command! TT TagbarToggle
+
 " UltiSnips
 let g:UltiSnipsJumpForwardTrigger = '<leader>n'
 let g:UltiSnipsJumpBackwardTrigger = '<leader>p'
 
-" Vundle
-command! VI VundleInstall
-command! VU VundleUpdate
-command! VC VundleClean
+" Vim-Plug
+command! PI PlugInstall
+command! PU PlugUpgrade | PlugUpdate
+command! PC PlugClean

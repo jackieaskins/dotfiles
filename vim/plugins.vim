@@ -1,88 +1,85 @@
-" Vundle setup
-set nocompatible
-filetype off                  " required
+" Vim-Plug setup
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+call plug#begin('~/.vim/plugged')
 
 "" Themes
 " Ayu
-" Plugin 'ayu-theme/ayu-vim'
+" Plug 'ayu-theme/ayu-vim'
 " PaperColor
-" Plugin 'NLKNguyen/papercolor-theme'
+" Plug 'NLKNguyen/papercolor-theme'
 " Quantum - **Current**
-Plugin 'tyrannicaltoucan/vim-quantum'
+Plug 'tyrannicaltoucan/vim-quantum'
 
 "" Plugins
 " Ack - Better searching
-Plugin 'mileszs/ack.vim'
+Plug 'mileszs/ack.vim'
 " ALE - Asynchronous syntax checking
-Plugin 'w0rp/ale'
+Plug 'w0rp/ale'
 " Better Whitespace
-Plugin 'ntpeters/vim-better-whitespace'
+Plug 'ntpeters/vim-better-whitespace'
 " Closer - Autoclose braces on enter
-Plugin 'rstacruz/vim-closer'
+Plug 'rstacruz/vim-closer'
 " CloseTag - Autoclose HTML tags
-Plugin 'alvan/vim-closetag'
+Plug 'alvan/vim-closetag'
 " Commentary - Easily insert comments
-Plugin 'tpope/vim-commentary'
+Plug 'tpope/vim-commentary'
 " CSS3 Syntax
-Plugin 'hail2u/vim-css3-syntax'
+Plug 'hail2u/vim-css3-syntax'
 " Emmet
-Plugin 'mattn/emmet-vim'
+Plug 'mattn/emmet-vim'
 " Endwise - Add end keywords
-Plugin 'tpope/vim-endwise'
+Plug 'tpope/vim-endwise'
 " Eunuch - UNIX commands in Vim
-Plugin 'tpope/vim-eunuch'
+Plug 'tpope/vim-eunuch'
 " Fugitive - Git integration in Vim
-Plugin 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 " FZF - Fuzzy Finder
-Plugin 'junegunn/fzf'
-Plugin 'junegunn/fzf.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 " GitGutter
-Plugin 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter'
 " Gutentags - Improving Ctags experience
-Plugin 'ludovicchabant/vim-gutentags'
+Plug 'ludovicchabant/vim-gutentags'
 " Hardtime - Help break bad Vim habits
-Plugin 'takac/vim-hardtime'
+Plug 'takac/vim-hardtime'
 " Istanbul - Javascript Code Coverage
-Plugin 'retorillo/istanbul.vim'
+Plug 'retorillo/istanbul.vim'
 " Lightline - Customize status/tabline
-Plugin 'itchyny/lightline.vim'
+Plug 'itchyny/lightline.vim'
 " Lightline Ale - Lighline support for Ale
-Plugin 'maximbaz/lightline-ale'
+Plug 'maximbaz/lightline-ale'
 " Markdown Preview
-Plugin 'JamshedVesuna/vim-markdown-preview'
+Plug 'JamshedVesuna/vim-markdown-preview'
 " MatchIt - Extended bracket matching with %
-Plugin 'adelarsq/vim-matchit'
+Plug 'adelarsq/vim-matchit'
 " NerdTree - Visual file tree
-Plugin 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree'
 " NerdTree Git Plugin
-Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 " Polyglot - All-in-one Syntax
-Plugin 'sheerun/vim-polyglot'
+Plug 'sheerun/vim-polyglot'
 " Repeat - Remap . command to do more
-Plugin 'tpope/vim-repeat'
+Plug 'tpope/vim-repeat'
 " Splitjoin - Split/join single/multi-line statements
-Plugin 'AndrewRadev/splitjoin.vim'
+Plug 'AndrewRadev/splitjoin.vim'
 " Tagbar - View tags in sidebar
-Plugin 'majutsushi/tagbar'
+Plug 'majutsushi/tagbar'
 " Tern for Vim
-Plugin 'ternjs/tern_for_vim'
+Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
 " Surround - Surround in brackets/quotes
-Plugin 'tpope/vim-surround'
+Plug 'tpope/vim-surround'
 " UltiSnips - Language-specific snippets
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
 " Custom Plugins
 if !empty(glob("~/.vim/custom_plugins.vim"))
   source ~/.vim/custom_plugins.vim
 endif
 
-call vundle#end()            " required
-filetype plugin indent on    " required
+call plug#end()

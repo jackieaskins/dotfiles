@@ -8,11 +8,15 @@ echo -e "Checking for Requirements..."
 read -p "Have you completed all of the prerequisites outlined in the README? (Y/N) " ready
 if [ $ready != "Y" ] && [ $ready != "y" ]
 then
-  echo -e "${RED}Please complete the prequisites before beginning installation"
+  echo -e "${RED}Please complete the prerequisites before beginning installation"
   exit 1
 fi
 
 echo -e "Beginning installation\n"
+
+echo -e "Updating submodules..."
+git submodule update
+echo -e "Submodules updated\n"
 
 timestamp=$(date +%Y%m%d%H%M%S) # timestamp for backup
 dir=~/dotfiles # dotfiles directory
@@ -29,7 +33,7 @@ echo -e "Backing up any existing dotfiles..."
 [ ! -f ~/.zshrc ] || mv ~/.zshrc $backupdir/zshrc
 [ ! -f ~/.vimrc ] || mv ~/.vimrc $backupdir/vimrc
 [ ! -f ~/.ctags ] || mv ~/.ctags $backupdir/ctags
-[ ! -f ~/.tern-project ] || mv ~/.tern-project $backupdir/tern-project
+[ ! -f ~/.tern-config ] || mv ~/.tern-config $backupdir/tern-config
 [ ! -f ~/.gitignore_global ] || mv ~/.gitignore_global $backupdir/gitignore_global
 [ ! -d ~/.vim ] || mv ~/.vim $backupdir/vim
 [ ! -f ~/.zfunctions/prompt_pure_setup ] || mv ~/.zfunctions/prompt_pure_setup $backupdir/zfunctions/prompt_pure_setup
@@ -40,25 +44,20 @@ echo -e "Symlinking dotfiles to $dir directory..."
 ln -s $dir/zshrc ~/.zshrc
 ln -s $dir/vim ~/.vim
 ln -s $dir/ctags ~/.ctags
-ln -s $dir/tern-project ~/.tern-project
+ln -s $dir/tern-config ~/.tern-config
 ln -s $dir/gitignore_global ~/.gitignore_global
-ln -s $dir/vimtemp ~/.vimrc
+ln -s $dir/vimrc ~/.vimrc
 ln -s $dir/pure/pure.zsh ~/.zfunctions/prompt_pure_setup
 ln -s $dir/pure/async.zsh ~/.zfunctions/async
 echo -e "Done symlinking files\n"
 
-echo -e "Configuring Global Gitignore\n"
+echo -e "Configuring Global Gitignore..."
 git config --global core.excludesfile ~/.gitignore_global
+echo -e "Configured Global Gitignore\n"
 
 echo -e "Configuring Vim plugins..."
-if [ ! -d ~/.vim/bundle/Vundle.vim ]
-then
-  git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-fi
-vim +PluginInstall +PluginClean +PluginUpdate +qall
-rm ~/.vimrc
-ln -s $dir/vimrc ~/.vimrc
-echo -e "Done configuring Vim plugins\n"
+vim +qall
+echo -e "Configured Vim plugins"
 
 echo -e "${GREEN}Done installing\n${NC}"
 

@@ -1,5 +1,6 @@
 /* Vim */
-vim/bundle
+vim/autoload
+vim/plugged
 vim/custom.vim
 vim/custom_plugins.vim
 
