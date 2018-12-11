@@ -102,7 +102,6 @@ let g:user_emmet_settings = {
 
 " FZF
 " Make FZF behave more like Ctrl-P
-let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 nnoremap <c-p> :FZF<cr>
 augroup fzf
   autocmd!

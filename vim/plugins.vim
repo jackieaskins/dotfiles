@@ -45,8 +45,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-gitgutter'
 " Gutentags - Improving Ctags experience
 Plug 'ludovicchabant/vim-gutentags'
-" Hardtime - Help break bad Vim habits
-Plug 'takac/vim-hardtime'
 " Istanbul - Javascript Code Coverage
 Plug 'retorillo/istanbul.vim'
 " Lightline - Customize status/tabline
