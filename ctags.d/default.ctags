@@ -33,3 +33,8 @@
 --exclude=gulp
 --exclude=__tests__
 --exclude=tests
+--exclude=coverage
+--exclude=package.json
+--exclude=package-lock.json
+--exclude=README.md
+--exclude=public

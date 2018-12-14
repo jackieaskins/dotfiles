@@ -32,7 +32,7 @@ echo -e "Backup directory created at $backupdir\n"
 echo -e "Backing up any existing dotfiles..."
 [ ! -f ~/.zshrc ] || mv ~/.zshrc $backupdir/zshrc
 [ ! -f ~/.vimrc ] || mv ~/.vimrc $backupdir/vimrc
-[ ! -f ~/.ctags ] || mv ~/.ctags $backupdir/ctags
+[ ! -d ~/.ctags.d ] || mv ~/.ctags.d $backupdir/ctags.d
 [ ! -f ~/.tern-config ] || mv ~/.tern-config $backupdir/tern-config
 [ ! -f ~/.gitignore_global ] || mv ~/.gitignore_global $backupdir/gitignore_global
 [ ! -d ~/.vim ] || mv ~/.vim $backupdir/vim
@@ -43,7 +43,7 @@ echo -e "Done backing up files\n"
 echo -e "Symlinking dotfiles to $dir directory..."
 ln -s $dir/zshrc ~/.zshrc
 ln -s $dir/vim ~/.vim
-ln -s $dir/ctags ~/.ctags
+ln -s $dir/ctags.d ~/.ctags.d
 ln -s $dir/tern-config ~/.tern-config
 ln -s $dir/gitignore_global ~/.gitignore_global
 ln -s $dir/vimrc ~/.vimrc
@@ -54,10 +54,6 @@ echo -e "Done symlinking files\n"
 echo -e "Configuring Global Gitignore..."
 git config --global core.excludesfile ~/.gitignore_global
 echo -e "Configured Global Gitignore\n"
-
-echo -e "Configuring Vim plugins..."
-vim +qall
-echo -e "Configured Vim plugins"
 
 echo -e "${GREEN}Done installing\n${NC}"
 

@@ -88,6 +88,7 @@ command! SW StripWhitespace
 let g:closetag_filenames = '*.html,*.js,*.jsx'
 let g:closetag_xhtml_filenames = '*.js,*.jsx'
 let g:closetag_emptyTags_caseSensitive = 1
+let g:closetag_close_shortcut = '<leader>>'
 
 " Commentary
 autocmd FileType ocaml setlocal commentstring=(*\ %s\ *)
