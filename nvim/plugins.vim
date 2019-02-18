@@ -1,4 +1,4 @@
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.local/share/nvim/plugged')
 
 "" Themes
 " Ayu
@@ -23,6 +23,10 @@ Plug 'alvan/vim-closetag'
 Plug 'tpope/vim-commentary'
 " CSS3 Syntax
 Plug 'hail2u/vim-css3-syntax'
+" Deoplete
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+" Plug 'wokalski/autocomplete-flow'
 " Emmet
 Plug 'mattn/emmet-vim'
 " Endwise - Add end keywords
@@ -52,6 +56,9 @@ Plug 'adelarsq/vim-matchit'
 Plug 'scrooloose/nerdtree'
 " NerdTree Git Plugin
 Plug 'Xuyuanp/nerdtree-git-plugin'
+" Neosnippet
+Plug 'Shougo/neosnippet'
+Plug 'Shougo/neosnippet-snippets'
 " Polyglot - All-in-one Syntax
 Plug 'sheerun/vim-polyglot'
 " Repeat - Remap . command to do more
@@ -60,17 +67,7 @@ Plug 'tpope/vim-repeat'
 Plug 'AndrewRadev/splitjoin.vim'
 " Tagbar - View tags in sidebar
 Plug 'majutsushi/tagbar'
-" Tern for Vim
-Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
 " Surround - Surround in brackets/quotes
 Plug 'tpope/vim-surround'
-" UltiSnips - Language-specific snippets
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-
-" Custom Plugins
-if !empty(glob("~/.vim/custom_plugins.vim"))
-  source ~/.vim/custom_plugins.vim
-endif
 
 call plug#end()

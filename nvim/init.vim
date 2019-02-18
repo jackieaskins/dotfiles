@@ -1,25 +1,13 @@
-set nocompatible
+source ~/.config/nvim/plugins.vim
 
-" Load custom settings
-if !empty(glob("~/.vim/custom.vim"))
-  source ~/.vim/custom.vim
-endif
-
-" Load plugins
-source ~/.vim/plugins.vim
-let g:lightline = {}
-
-set background=dark
+" Theme
 if has('termguicolors')
   set termguicolors
 endif
 
-let g:lightline.colorscheme = 'quantum'
 colorscheme quantum
-
-" File specific
-autocmd BufRead,BufNewFile *.md setlocal spell
-" autocmd FileType javascript setlocal omnifunc=tern#Complete
+let g:lightline = {}
+let g:lightline.colorscheme = 'quantum'
 
 " Spaces & Tabs
 set shiftwidth=2
@@ -29,23 +17,18 @@ set expandtab " tabs are spaces
 set list listchars=tab:\ \ ,trail:· " Add dots for spacing
 
 " UI Config
-set laststatus=2 " always display status line
 set showtabline=2 " always display tabline
-set number " show line number for current line
+set number " show line number
 set relativenumber " show line numbers relative to the current line
-set showcmd " show command in bottom bar
 set cursorline " highlight current line
-set wildmenu " visual autocomple for command menu
 set showmatch " highlight matching bracket
-set backspace=indent,eol,start " allow backspacing over autoindent, line breaks, and start of insert action
-set ruler " display the cursor position on the last line of the screen
-set autoindent " keep same indent as line you're currently on
 set confirm " raise a dialog asking if you want to save changes when exiting
 set splitright " make vertical splits open on right
 set splitbelow " make horizontal splits open on botom
 set timeoutlen=1000 ttimeoutlen=10 " speed up switch between modes
 set updatetime=100 " allow GitGutter to update almost instantly
 set diffopt+=vertical
+set nohlsearch
 
 if exists('&signcolumn')
   set signcolumn=yes
@@ -54,20 +37,14 @@ else
 endif
 
 " Searching
-set incsearch " search as characters are entered
 set ignorecase " use case insensitive search
 set smartcase " don't use insensitive search when using capital letters
 
-" Window management
+" Windows
 map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
-
-"" Backup/Swp/Undo dirs
-set undodir=$HOME/.undo//
-set backupdir=$HOME/.backup//
-set directory=$HOME/.swp//
 
 "" Plugins
 " Ack
@@ -86,6 +63,9 @@ let g:closetag_xhtml_filenames = '*.js,*.jsx'
 let g:closetag_emptyTags_caseSensitive = 1
 let g:closetag_close_shortcut = '<leader>>'
 
+" Deoplete
+let g:deoplete#enable_at_startup = 1
+
 " Emmet
 let g:user_emmet_leader_key = '<leader>m'
 let g:user_emmet_settings = {
@@ -100,8 +80,8 @@ nnoremap <c-p> :FZF<cr>
 augroup fzf
   autocmd!
   autocmd! FileType fzf
-  autocmd  FileType fzf set laststatus=0 noshowmode noruler
-    \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+  autocmd  FileType fzf set laststatus=0 noshowmode noruler norelativenumber nonumber
+    \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler relativenumber number
 augroup END
 
 " Istanbul
@@ -159,6 +139,9 @@ let NERDTreeShowHidden = 1
 let NERDTreeQuitOnOpen = 1
 let NERDTreeIgnore = ['node_modules', '\.git', '\.DS_Store']
 map <C-n> :NERDTreeToggle<CR>
+
+" Neosnippet
+let g:neosnippet#enable_completed_snippet = 1
 
 " Tagbar
 command! TT TagbarToggle
