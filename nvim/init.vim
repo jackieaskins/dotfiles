@@ -5,9 +5,9 @@ if has('termguicolors')
   set termguicolors
 endif
 
+let g:lightline = { 'colorscheme': 'quantum' }
+let g:quantum_black = 1
 colorscheme quantum
-let g:lightline = {}
-let g:lightline.colorscheme = 'quantum'
 
 " Spaces & Tabs
 set shiftwidth=2
