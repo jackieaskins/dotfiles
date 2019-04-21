@@ -25,8 +25,8 @@ Plug 'tpope/vim-commentary'
 Plug 'hail2u/vim-css3-syntax'
 " Deoplete
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
-" Plug 'wokalski/autocomplete-flow'
+Plug 'deoplete-plugins/deoplete-tag'
+" Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 " Emmet
 Plug 'mattn/emmet-vim'
 " Endwise - Add end keywords
@@ -56,18 +56,18 @@ Plug 'adelarsq/vim-matchit'
 Plug 'scrooloose/nerdtree'
 " NerdTree Git Plugin
 Plug 'Xuyuanp/nerdtree-git-plugin'
-" Neosnippet
-Plug 'Shougo/neosnippet'
-Plug 'Shougo/neosnippet-snippets'
 " Polyglot - All-in-one Syntax
 Plug 'sheerun/vim-polyglot'
 " Repeat - Remap . command to do more
 Plug 'tpope/vim-repeat'
 " Splitjoin - Split/join single/multi-line statements
 Plug 'AndrewRadev/splitjoin.vim'
-" Tagbar - View tags in sidebar
-Plug 'majutsushi/tagbar'
 " Surround - Surround in brackets/quotes
 Plug 'tpope/vim-surround'
+" Tagbar - View tags in sidebar
+Plug 'majutsushi/tagbar'
+" UltiSnips - Language-specific snippets
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
 call plug#end()

@@ -69,6 +69,9 @@ let g:deoplete#enable_at_startup = 1
 " Emmet
 let g:user_emmet_leader_key = '<leader>m'
 let g:user_emmet_settings = {
+      \  'javascript' : {
+      \      'extends' : 'jsx',
+      \  },
       \  'javascript.jsx' : {
       \      'extends' : 'jsx',
       \  },
@@ -140,8 +143,25 @@ let NERDTreeQuitOnOpen = 1
 let NERDTreeIgnore = ['node_modules', '\.git', '\.DS_Store']
 map <C-n> :NERDTreeToggle<CR>
 
-" Neosnippet
-let g:neosnippet#enable_completed_snippet = 1
+" Plug
+command! PI PlugInstall
+command! PU PlugUpgrade | PlugUpdate
+command! PC PlugClean
+
+" SplitJoin
+function! GetTagEnd()
+  normal %h
+  let l:char = matchstr(getline('.'), '\%' . col('.') . 'c.')
+  if l:char == '/'
+    normal hx
+  else
+    normal l
+  endif
+endfunction
+nmap gj gJ=%
+nmap gs gS=%
+nmap gps %r}<C-O>r{oreturn (<ESC>k$%O);<ESC>h=%
+nmap gts gs:call GetTagEnd()<CR>i<CR><ESC>
 
 " Tagbar
 command! TT TagbarToggle
@@ -149,8 +169,3 @@ command! TT TagbarToggle
 " UltiSnips
 let g:UltiSnipsJumpForwardTrigger = '<leader>n'
 let g:UltiSnipsJumpBackwardTrigger = '<leader>p'
-
-" Vim-Plug
-command! PI PlugInstall
-command! PU PlugUpgrade | PlugUpdate
-command! PC PlugClean
