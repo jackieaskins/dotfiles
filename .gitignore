@@ -4,6 +4,9 @@ vim/plugged
 vim/custom.vim
 vim/custom_plugins.vim
 
+/* Neovim */
+nvim/custom.vim
+
 /* Zsh */
 zsh/custom.zsh
 

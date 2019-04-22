@@ -1,5 +1,9 @@
 source ~/.config/nvim/plugins.vim
 
+if !empty(glob("~/.config/nvim/custom.vim"))
+  source ~/.config/nvim/custom.vim
+endif
+
 " Theme
 if has('termguicolors')
   set termguicolors
@@ -149,19 +153,10 @@ command! PU PlugUpgrade | PlugUpdate
 command! PC PlugClean
 
 " SplitJoin
-function! GetTagEnd()
-  normal %h
-  let l:char = matchstr(getline('.'), '\%' . col('.') . 'c.')
-  if l:char == '/'
-    normal hx
-  else
-    normal l
-  endif
-endfunction
+let g:splitjoin_html_attributes_bracket_on_new_line = 1
 nmap gj gJ=%
 nmap gs gS=%
 nmap gps %r}<C-O>r{oreturn (<ESC>k$%O);<ESC>h=%
-nmap gts gs:call GetTagEnd()<CR>i<CR><ESC>
 
 " Tagbar
 command! TT TagbarToggle

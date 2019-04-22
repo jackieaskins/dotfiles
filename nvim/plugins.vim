@@ -27,6 +27,7 @@ Plug 'hail2u/vim-css3-syntax'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'deoplete-plugins/deoplete-tag'
 " Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+Plug 'daliusd/deoplete-ternjs', { 'do': 'npm install -g tern' }
 " Emmet
 Plug 'mattn/emmet-vim'
 " Endwise - Add end keywords

@@ -1,10 +1,11 @@
 {
   "libs": [
+    "browser",
     "ecmascript",
     "react"
   ],
   "plugins": {
     "node": {},
-    "esmodules": {}
+    "es_modules": {}
   }
 }
