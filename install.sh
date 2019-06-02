@@ -38,6 +38,7 @@ echo -e "Backing up any existing dotfiles..."
 [ ! -d ~/.vim ] || mv ~/.vim $backupdir/vim
 [ ! -f ~/.zfunctions/prompt_pure_setup ] || mv ~/.zfunctions/prompt_pure_setup $backupdir/zfunctions/prompt_pure_setup
 [ ! -f ~/.zfunctions/async ] || mv ~/.zfunctions/async $backupdir/zfunctions/async
+[ ! -d ~/.iterm2_shell_integration.zsh ] || mv ~/.iterm2_shell_integration.zsh $backupdir/iterm2_shell_integration.zsh
 echo -e "Done backing up files\n"
 
 echo -e "Symlinking dotfiles to $dir directory..."
@@ -49,6 +50,7 @@ ln -s $dir/gitignore_global ~/.gitignore_global
 ln -s $dir/vimrc ~/.vimrc
 ln -s $dir/pure/pure.zsh ~/.zfunctions/prompt_pure_setup
 ln -s $dir/pure/async.zsh ~/.zfunctions/async
+ln -s $dir/iterm2_shell_integration.zsh ~/.iterm2_shell_integration.zsh
 echo -e "Done symlinking files\n"
 
 echo -e "Configuring Global Gitignore..."

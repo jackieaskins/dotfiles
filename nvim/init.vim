@@ -55,15 +55,18 @@ map <C-l> <C-W>l
 let g:ackprg = 'ag --nogroup --nocolor --column' " Use Ag for searching with Ack
 
 " ALE
-let g:ale_linters = { 'javascript': ['eslint', 'prettier'] }
+let g:ale_linters = {
+      \ 'javascript': ['eslint'],
+      \ 'typescript': ['eslint', 'tsserver']
+      \}
 
 " Better Whitespace
 let g:better_whitespace_guicolor = '#dd7186'
 command! SW StripWhitespace
 
 " Closetag
-let g:closetag_filenames = '*.html,*.js,*.jsx'
-let g:closetag_xhtml_filenames = '*.js,*.jsx'
+let g:closetag_filenames = '*.html,*.js,*.jsx,*.ts,*.tsx'
+let g:closetag_xhtml_filenames = '*.js,*.jsx,*.ts,*.tsx'
 let g:closetag_emptyTags_caseSensitive = 1
 let g:closetag_close_shortcut = '<leader>>'
 
@@ -77,6 +80,12 @@ let g:user_emmet_settings = {
       \      'extends' : 'jsx',
       \  },
       \  'javascript.jsx' : {
+      \      'extends' : 'jsx',
+      \  },
+      \  'typescript' : {
+      \      'extends' : 'jsx',
+      \  },
+      \  'typescript.jsx' : {
       \      'extends' : 'jsx',
       \  },
       \}
@@ -144,7 +153,7 @@ let vim_markdown_preview_temp_file = 1
 " NerdTree
 let NERDTreeShowHidden = 1
 let NERDTreeQuitOnOpen = 1
-let NERDTreeIgnore = ['node_modules', '\.git', '\.DS_Store']
+let NERDTreeIgnore = ['node_modules', '\.git$', '\.DS_Store', 'tags.lock']
 map <C-n> :NERDTreeToggle<CR>
 
 " Plug

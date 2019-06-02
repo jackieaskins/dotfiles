@@ -67,6 +67,8 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'tpope/vim-surround'
 " Tagbar - View tags in sidebar
 Plug 'majutsushi/tagbar'
+" Typescript
+Plug 'leafgarland/typescript-vim'
 " UltiSnips - Language-specific snippets
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
