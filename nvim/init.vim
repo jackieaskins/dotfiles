@@ -4,6 +4,10 @@ if !empty(glob("~/.config/nvim/custom.vim"))
   source ~/.config/nvim/custom.vim
 endif
 
+" Set space as leader key
+nnoremap <Space> <nop>
+let mapleader = " "
+
 " Theme
 if has('termguicolors')
   set termguicolors
@@ -28,7 +32,7 @@ set cursorline " highlight current line
 set showmatch " highlight matching bracket
 set confirm " raise a dialog asking if you want to save changes when exiting
 set splitright " make vertical splits open on right
-set splitbelow " make horizontal splits open on botom
+set splitbelow " make horizontal splits open on bottom
 set timeoutlen=1000 ttimeoutlen=10 " speed up switch between modes
 set updatetime=100 " allow GitGutter to update almost instantly
 set diffopt+=vertical
@@ -41,6 +45,8 @@ else
 endif
 
 " Searching
+set inccommand=nosplit " show matches when using substitute/replace
+set incsearch " search as characters are entered
 set ignorecase " use case insensitive search
 set smartcase " don't use insensitive search when using capital letters
 
@@ -51,30 +57,39 @@ map <C-h> <C-W>h
 map <C-l> <C-W>l
 
 "" Plugins
-" Ack
-let g:ackprg = 'ag --nogroup --nocolor --column' " Use Ag for searching with Ack
-
-" ALE
-let g:ale_linters = {
-      \ 'javascript': ['eslint'],
-      \ 'typescript': ['eslint', 'tsserver']
-      \}
-
 " Better Whitespace
-let g:better_whitespace_guicolor = '#dd7186'
 command! SW StripWhitespace
+let g:better_whitespace_guicolor = '#dd7186'
+let g:better_whitespace_filetypes_blacklist = ['diff', 'gitcommit', 'unite', 'qf', 'help', 'markdown', 'ctrlsf']
 
 " Closetag
 let g:closetag_filenames = '*.html,*.js,*.jsx,*.ts,*.tsx'
 let g:closetag_xhtml_filenames = '*.js,*.jsx,*.ts,*.tsx'
 let g:closetag_emptyTags_caseSensitive = 1
-let g:closetag_close_shortcut = '<leader>>'
+let g:closetag_close_shortcut = '\>'
 
-" Deoplete
-let g:deoplete#enable_at_startup = 1
+" Coc
+nmap <silent> <leader>N <Plug>(coc-diagnostic-prev)
+nmap <silent> <leader>n <Plug>(coc-diagnostic-next)
+
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" CtrlSF
+command! CSF CtrlSF
+let g:ctrlsf_auto_focus = {
+      \ 'at': 'start'
+      \ }
+let g:ctrlsf_context = '-C 1' " Display 1 line before and after match
+let g:ctrlsf_mapping = {
+      \ "next": "n",
+      \ "prev": "N",
+      \ }
 
 " Emmet
-let g:user_emmet_leader_key = '<leader>m'
+let g:user_emmet_leader_key = '\m'
 let g:user_emmet_settings = {
       \  'javascript' : {
       \      'extends' : 'jsx',
@@ -109,39 +124,34 @@ command! IT IstanbulToggle
 let g:jsx_ext_required = 0
 
 " Lightline
-let g:lightline.active = {
-      \ 'left': [ [ 'mode', 'paste' ],
-      \           [ 'fugitive', 'readonly', 'filename' ] ],
-      \ 'right': [ [ 'linter_errors', 'linter_warnings', 'lineinfo' ],
-      \            [ 'percent' ],
-      \            [ 'fileformat', 'fileencoding', 'filetype' ] ]
-      \ }
-let g:lightline.component_expand = {
-      \  'linter_checking': 'lightline#ale#checking',
-      \  'linter_warnings': 'lightline#ale#warnings',
-      \  'linter_errors': 'lightline#ale#errors',
-      \  'linter_ok': 'lightline#ale#ok',
-      \ }
-let g:lightline.component_function = {
-      \ 'filename': 'LightlineFilename',
-      \ 'fugitive': 'fugitive#head'
-      \ }
-let g:lightline.component_type = {
-      \     'linter_checking': 'left',
-      \     'linter_warnings': 'warning',
-      \     'linter_errors': 'error',
-      \     'linter_ok': 'left',
-      \ }
-let g:lightline.tabline = {
-      \ 'left': [ [ 'tabs' ] ],
-      \ 'right': [ [ ] ],
-      \ }
+function! CocCurrentFunction()
+  return get(b:, 'coc_current_function', '')
+endfunction
 
 function! LightlineFilename()
   let filename = expand('%:t') !=# '' ? expand('%:t') : '[No Name]'
   let modified = &modified ? ' +' : ''
   return filename . modified
 endfunction
+
+let g:lightline.active = {
+      \ 'left': [ [ 'mode', 'paste' ],
+      \           [ 'fugitive', 'readonly', 'filename' ],
+      \           [ 'cocstatus', 'coccurrentfunction' ] ],
+      \ 'right': [ [ 'lineinfo' ],
+      \            [ 'percent' ],
+      \            [ 'filetype' ] ]
+      \ }
+let g:lightline.component_function = {
+      \ 'cocstatus': 'coc#status',
+      \ 'coccurrentfunction': 'CocCurrentFunction',
+      \ 'filename': 'LightlineFilename',
+      \ 'fugitive': 'fugitive#head'
+      \ }
+let g:lightline.tabline = {
+      \ 'left': [ [ 'tabs' ] ],
+      \ 'right': [ [ ] ],
+      \ }
 
 " Markdown Preview
 let vim_markdown_preview_toggle = 1
@@ -167,9 +177,15 @@ nmap gj gJ=%
 nmap gs gS=%
 nmap gps %r}<C-O>r{oreturn (<ESC>k$%O);<ESC>h=%
 
+" Startify
+let g:startify_change_to_dir = 0
+let g:startify_lists = [
+      \ { 'type': 'dir',       'header': [ '   MRU in ' . getcwd() ] },
+      \ { 'type': 'files',     'header': [ '   MRU'                ] },
+      \ { 'type': 'sessions',  'header': [ '   Sessions'           ] },
+      \ { 'type': 'bookmarks', 'header': [ '   Bookmarks'          ] },
+      \ { 'type': 'commands',  'header': [ '   Commands'           ] },
+      \ ]
+
 " Tagbar
 command! TT TagbarToggle
-
-" UltiSnips
-let g:UltiSnipsJumpForwardTrigger = '<leader>n'
-let g:UltiSnipsJumpBackwardTrigger = '<leader>p'

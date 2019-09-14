@@ -1,33 +1,26 @@
 call plug#begin('~/.local/share/nvim/plugged')
 
-"" Themes
-" Ayu
-" Plug 'ayu-theme/ayu-vim'
-" PaperColor
-" Plug 'NLKNguyen/papercolor-theme'
+"" Theme
 " Quantum - **Current**
 Plug 'tyrannicaltoucan/vim-quantum'
 
 "" Plugins
-" Ack - Better searching
-Plug 'mileszs/ack.vim'
-" ALE - Asynchronous syntax checking
-Plug 'w0rp/ale'
 " Better Whitespace
 Plug 'ntpeters/vim-better-whitespace'
 " Closer - Autoclose braces on enter
 Plug 'rstacruz/vim-closer'
 " CloseTag - Autoclose HTML tags
 Plug 'alvan/vim-closetag'
+" CoC - Intellisense
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 " Commentary - Easily insert comments
 Plug 'tpope/vim-commentary'
 " CSS3 Syntax
 Plug 'hail2u/vim-css3-syntax'
-" Deoplete
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'deoplete-plugins/deoplete-tag'
-Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
-" Plug 'daliusd/deoplete-ternjs', { 'do': 'npm install -g tern' }
+" Ctrlsf - Mimick Sublime Text Cmd-Shift-F
+Plug 'dyng/ctrlsf.vim'
+" Easymotion
+Plug 'easymotion/vim-easymotion'
 " Emmet
 Plug 'mattn/emmet-vim'
 " Endwise - Add end keywords
@@ -47,8 +40,6 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'retorillo/istanbul.vim'
 " Lightline - Customize status/tabline
 Plug 'itchyny/lightline.vim'
-" Lightline Ale - Lightline support for Ale
-Plug 'maximbaz/lightline-ale'
 " Markdown Preview
 Plug 'JamshedVesuna/vim-markdown-preview'
 " MatchIt - Extended bracket matching with %
@@ -65,10 +56,10 @@ Plug 'tpope/vim-repeat'
 Plug 'AndrewRadev/splitjoin.vim'
 " Surround - Surround in brackets/quotes
 Plug 'tpope/vim-surround'
+" Startify - Customized startup screen
+Plug 'mhinz/vim-startify'
 " Tagbar - View tags in sidebar
 Plug 'majutsushi/tagbar'
-" Typescript
-Plug 'leafgarland/typescript-vim'
 " UltiSnips - Language-specific snippets
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
