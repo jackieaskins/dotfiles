@@ -30,6 +30,15 @@ Ensure that the following are installed before beginning:
     - Go to iTerm2 > Preferences
     - Check under Preferences on the General Tab
     - Check the checkbox next to "Load preferences from a custom folder or URL" and fill in `~/dotfiles/iterm`
+2. :CocInstall the following extensions:
+    - coc-snippets
+    - coc-marketplace
+    - coc-eslint
+    - coc-tsserver
+    - coc-json
+    - coc-html
+    - coc-yaml
+    - coc-python
 
 ## Customization
 To add machine-specific settings, create the files below. For:
