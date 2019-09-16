@@ -8,7 +8,7 @@ Plug 'tyrannicaltoucan/vim-quantum'
 " Better Whitespace
 Plug 'ntpeters/vim-better-whitespace'
 " Closer - Autoclose braces on enter
-Plug 'rstacruz/vim-closer'
+Plug 'jackieaskins/vim-closer'
 " CloseTag - Autoclose HTML tags
 Plug 'alvan/vim-closetag'
 " CoC - Intellisense
