@@ -5,6 +5,8 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'tyrannicaltoucan/vim-quantum'
 
 "" Plugins
+" ALE - Asynchronous syntax checking
+Plug 'w0rp/ale'
 " Better Whitespace
 Plug 'ntpeters/vim-better-whitespace'
 " Closer - Autoclose braces on enter
@@ -40,6 +42,8 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'retorillo/istanbul.vim'
 " Lightline - Customize status/tabline
 Plug 'itchyny/lightline.vim'
+" Lightline Ale - Lightline support for Ale
+Plug 'maximbaz/lightline-ale'
 " Markdown Preview
 Plug 'JamshedVesuna/vim-markdown-preview'
 " MatchIt - Extended bracket matching with %

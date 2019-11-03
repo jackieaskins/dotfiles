@@ -33,7 +33,6 @@ Ensure that the following are installed before beginning:
 2. :CocInstall the following extensions:
     - coc-snippets
     - coc-marketplace
-    - coc-eslint
     - coc-tsserver
     - coc-json
     - coc-html

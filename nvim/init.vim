@@ -57,10 +57,19 @@ map <C-h> <C-W>h
 map <C-l> <C-W>l
 
 "" Plugins
+" ALE
+let g:ale_linters = {
+      \ 'javascript': ['eslint'],
+      \ 'typescript': ['eslint', 'tsserver']
+      \ }
+
 " Better Whitespace
 command! SW StripWhitespace
 let g:better_whitespace_guicolor = '#dd7186'
 let g:better_whitespace_filetypes_blacklist = ['diff', 'gitcommit', 'unite', 'qf', 'help', 'markdown', 'ctrlsf']
+
+" Closer
+let g:closer_no_semi = 'else'
 
 " Closetag
 let g:closetag_filenames = '*.html,*.js,*.jsx,*.ts,*.tsx'
@@ -69,8 +78,10 @@ let g:closetag_emptyTags_caseSensitive = 1
 let g:closetag_close_shortcut = '\>'
 
 " Coc
-nmap <silent> <leader>N <Plug>(coc-diagnostic-prev)
-nmap <silent> <leader>n <Plug>(coc-diagnostic-next)
+" coc-tsserver changes types to javascriptreact/typescriptreact which breaks
+" other plugins, changing them back here
+au BufNewFile,BufRead *.jsx set filetype=javascript.jsx
+au BufNewFile,BufRead *.tsx set filetype=typescript.tsx
 
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
@@ -103,7 +114,7 @@ let g:user_emmet_settings = {
       \  'typescript' : {
       \      'extends' : 'jsx',
       \  },
-      \  'typescript.jsx' : {
+      \  'typescript.tsx' : {
       \      'extends' : 'jsx',
       \  },
       \}
@@ -141,15 +152,27 @@ let g:lightline.active = {
       \ 'left': [ [ 'mode', 'paste' ],
       \           [ 'fugitive', 'readonly', 'filename' ],
       \           [ 'cocstatus', 'coccurrentfunction' ] ],
-      \ 'right': [ [ 'lineinfo' ],
+      \ 'right': [ [ 'linter_errors', 'linter_warnings', 'lineinfo' ],
       \            [ 'percent' ],
       \            [ 'filetype' ] ]
+      \ }
+let g:lightline.component_expand = {
+      \  'linter_checking': 'lightline#ale#checking',
+      \  'linter_warnings': 'lightline#ale#warnings',
+      \  'linter_errors': 'lightline#ale#errors',
+      \  'linter_ok': 'lightline#ale#ok'
       \ }
 let g:lightline.component_function = {
       \ 'cocstatus': 'coc#status',
       \ 'coccurrentfunction': 'CocCurrentFunction',
       \ 'filename': 'LightlineFilename',
       \ 'fugitive': 'fugitive#head'
+      \ }
+let g:lightline.component_type = {
+      \     'linter_checking': 'left',
+      \     'linter_warnings': 'warning',
+      \     'linter_errors': 'error',
+      \     'linter_ok': 'left'
       \ }
 let g:lightline.tabline = {
       \ 'left': [ [ 'tabs' ] ],
