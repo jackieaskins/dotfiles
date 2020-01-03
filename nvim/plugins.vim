@@ -1,8 +1,11 @@
 call plug#begin('~/.local/share/nvim/plugged')
 
 "" Theme
-" Quantum - **Current**
+" Quantum
 Plug 'tyrannicaltoucan/vim-quantum'
+
+" Try to break bad habits
+Plug 'takac/vim-hardtime'
 
 "" Plugins
 " ALE - Asynchronous syntax checking
@@ -36,8 +39,6 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 " GitGutter
 Plug 'airblade/vim-gitgutter'
-" Gutentags - Improving Ctags experience
-Plug 'ludovicchabant/vim-gutentags'
 " Istanbul - Javascript Code Coverage
 Plug 'retorillo/istanbul.vim'
 " Lightline - Customize status/tabline
@@ -62,8 +63,6 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'tpope/vim-surround'
 " Startify - Customized startup screen
 Plug 'mhinz/vim-startify'
-" Tagbar - View tags in sidebar
-Plug 'majutsushi/tagbar'
 " UltiSnips - Language-specific snippets
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'

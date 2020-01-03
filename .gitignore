@@ -6,6 +6,7 @@ vim/custom_plugins.vim
 
 /* Neovim */
 nvim/custom.vim
+nvim/spell/
 
 /* Zsh */
 zsh/custom.zsh

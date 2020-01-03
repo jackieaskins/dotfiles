@@ -56,9 +56,19 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
+" SpellCheck
+autocmd BufRead,BufNewFile *.md setlocal spell
+
 "" Plugins
 " ALE
+let g:ale_fix_on_save = 1
+let g:ale_fixers = {
+      \ 'javascript': ['prettier', 'eslint'],
+      \ 'typescript': ['prettier', 'eslint']
+      \ }
+let g:ale_lint_delay = 50
 let g:ale_linters = {
+      \ 'java': [],
       \ 'javascript': ['eslint'],
       \ 'typescript': ['eslint', 'tsserver']
       \ }
@@ -67,9 +77,6 @@ let g:ale_linters = {
 command! SW StripWhitespace
 let g:better_whitespace_guicolor = '#dd7186'
 let g:better_whitespace_filetypes_blacklist = ['diff', 'gitcommit', 'unite', 'qf', 'help', 'markdown', 'ctrlsf']
-
-" Closer
-let g:closer_no_semi = 'else'
 
 " Closetag
 let g:closetag_filenames = '*.html,*.js,*.jsx,*.ts,*.tsx'
@@ -90,6 +97,7 @@ nmap <silent> gr <Plug>(coc-references)
 
 " CtrlSF
 command! CSF CtrlSF
+let g:ctrlsf_default_view_mode = 'compact'
 let g:ctrlsf_auto_focus = {
       \ 'at': 'start'
       \ }
@@ -103,9 +111,6 @@ let g:ctrlsf_mapping = {
 let g:user_emmet_leader_key = '\m'
 let g:user_emmet_settings = {
       \  'javascript' : {
-      \      'extends' : 'jsx',
-      \  },
-      \  'javascriptreact' : {
       \      'extends' : 'jsx',
       \  },
       \  'javascript.jsx' : {
@@ -128,6 +133,9 @@ augroup fzf
   autocmd  FileType fzf set laststatus=0 noshowmode noruler norelativenumber nonumber
     \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler relativenumber number
 augroup END
+
+" HardTime
+let g:hardtime_default_on = 1
 
 " Istanbul
 let g:istanbul#jsonPath = ['coverage/coverage-final.json']
@@ -199,9 +207,6 @@ command! PC PlugClean
 
 " SplitJoin
 let g:splitjoin_html_attributes_bracket_on_new_line = 1
-nmap gj gJ=%
-nmap gs gS=%
-nmap gps %r}<C-O>r{oreturn (<ESC>k$%O);<ESC>h=%
 
 " Startify
 let g:startify_change_to_dir = 0
@@ -212,6 +217,3 @@ let g:startify_lists = [
       \ { 'type': 'bookmarks', 'header': [ '   Bookmarks'          ] },
       \ { 'type': 'commands',  'header': [ '   Commands'           ] },
       \ ]
-
-" Tagbar
-command! TT TagbarToggle
