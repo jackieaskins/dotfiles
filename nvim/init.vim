@@ -27,7 +27,8 @@ set list listchars=tab:\ \ ,trail:· " Add dots for spacing
 " UI Config
 set showtabline=2 " always display tabline
 set number " show line number
-set relativenumber " show line numbers relative to the current line
+" Temporarily disabling relativenumber to help break reliance on hjkl
+" set relativenumber " show line numbers relative to the current line
 set cursorline " highlight current line
 set showmatch " highlight matching bracket
 set confirm " raise a dialog asking if you want to save changes when exiting
@@ -63,8 +64,8 @@ autocmd BufRead,BufNewFile *.md setlocal spell
 " ALE
 let g:ale_fix_on_save = 1
 let g:ale_fixers = {
-      \ 'javascript': ['prettier', 'eslint'],
-      \ 'typescript': ['prettier', 'eslint']
+      \ 'javascript': ['prettier'],
+      \ 'typescript': ['prettier']
       \ }
 let g:ale_lint_delay = 50
 let g:ale_linters = {
@@ -136,6 +137,7 @@ augroup END
 
 " HardTime
 let g:hardtime_default_on = 1
+let g:hardtime_allow_different_key = 1
 
 " Istanbul
 let g:istanbul#jsonPath = ['coverage/coverage-final.json']
