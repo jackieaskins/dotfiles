@@ -136,8 +136,9 @@ augroup fzf
 augroup END
 
 " HardTime
+let g:hardtime_allow_different_keys = 1
 let g:hardtime_default_on = 1
-let g:hardtime_allow_different_key = 1
+let g:hardtime_timeout = 2000
 
 " Istanbul
 let g:istanbul#jsonPath = ['coverage/coverage-final.json']
