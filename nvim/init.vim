@@ -27,8 +27,7 @@ set list listchars=tab:\ \ ,trail:· " Add dots for spacing
 " UI Config
 set showtabline=2 " always display tabline
 set number " show line number
-" Temporarily disabling relativenumber to help break reliance on hjkl
-" set relativenumber " show line numbers relative to the current line
+set relativenumber " show line numbers relative to the current line
 set cursorline " highlight current line
 set showmatch " highlight matching bracket
 set confirm " raise a dialog asking if you want to save changes when exiting
@@ -134,11 +133,6 @@ augroup fzf
   autocmd  FileType fzf set laststatus=0 noshowmode noruler norelativenumber nonumber
     \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler relativenumber number
 augroup END
-
-" HardTime
-let g:hardtime_allow_different_keys = 1
-let g:hardtime_default_on = 1
-let g:hardtime_timeout = 2000
 
 " Istanbul
 let g:istanbul#jsonPath = ['coverage/coverage-final.json']

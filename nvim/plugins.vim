@@ -4,9 +4,6 @@ call plug#begin('~/.local/share/nvim/plugged')
 " Quantum
 Plug 'tyrannicaltoucan/vim-quantum'
 
-" Try to break bad habits
-Plug 'takac/vim-hardtime'
-
 "" Plugins
 " ALE - Asynchronous syntax checking
 Plug 'w0rp/ale'
