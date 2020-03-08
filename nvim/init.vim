@@ -95,6 +95,17 @@ let g:closetag_regions = {
     \ }
 
 " Coc
+let g:coc_global_extensions = [
+      \ 'coc-emmet',
+      \ 'coc-inline-jest',
+      \ 'coc-marketplace',
+      \ 'coc-java',
+      \ 'coc-json',
+      \ 'coc-tag',
+      \ 'coc-tsserver',
+      \ 'coc-yaml',
+      \ ]
+
 " coc-tsserver changes types to javascriptreact/typescriptreact which breaks
 " other plugins, changing them back here
 au BufNewFile,BufRead *.jsx set filetype=javascript.jsx
