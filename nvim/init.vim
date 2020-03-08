@@ -17,6 +17,9 @@ let g:lightline = { 'colorscheme': 'quantum' }
 let g:quantum_black = 1
 colorscheme quantum
 
+" Reload Vim
+nnoremap <leader>r :source $MYVIMRC<cr>
+
 " Spaces & Tabs
 set shiftwidth=2
 set tabstop=2 " number of visual spaces per <TAB>
@@ -216,3 +219,7 @@ let g:startify_lists = [
       \ { 'type': 'bookmarks', 'header': [ '   Bookmarks'          ] },
       \ { 'type': 'commands',  'header': [ '   Commands'           ] },
       \ ]
+
+" Vista
+nnoremap <leader>v :Vista!!<cr>
+let g:vista#renderer#enable_icon = 0

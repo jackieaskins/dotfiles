@@ -36,6 +36,8 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 " GitGutter
 Plug 'airblade/vim-gitgutter'
+" GutenTags
+Plug 'ludovicchabant/vim-gutentags'
 " Istanbul - Javascript Code Coverage
 Plug 'retorillo/istanbul.vim'
 " Lightline - Customize status/tabline
@@ -63,5 +65,7 @@ Plug 'mhinz/vim-startify'
 " UltiSnips - Language-specific snippets
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+" Vista - View LSP symbols and tags
+Plug 'liuchengxu/vista.vim'
 
 call plug#end()
