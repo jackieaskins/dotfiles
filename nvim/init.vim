@@ -24,6 +24,9 @@ set softtabstop=2 " number of spaces in tab when editing
 set expandtab " tabs are spaces
 set list listchars=tab:\ \ ,trail:· " Add dots for spacing
 
+" Comments
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o " don't auto-comment
+
 " UI Config
 set showtabline=2 " always display tabline
 set number " show line number
