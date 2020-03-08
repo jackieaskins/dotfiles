@@ -83,6 +83,10 @@ let g:closetag_filenames = '*.html,*.js,*.jsx,*.ts,*.tsx'
 let g:closetag_xhtml_filenames = '*.js,*.jsx,*.ts,*.tsx'
 let g:closetag_emptyTags_caseSensitive = 1
 let g:closetag_close_shortcut = '\>'
+let g:closetag_regions = {
+    \ 'typescript.tsx': 'jsxRegion,tsxRegion',
+    \ 'javascript.jsx': 'jsxRegion',
+    \ }
 
 " Coc
 " coc-tsserver changes types to javascriptreact/typescriptreact which breaks
@@ -96,7 +100,6 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " CtrlSF
-command! CSF CtrlSF
 let g:ctrlsf_default_view_mode = 'compact'
 let g:ctrlsf_auto_focus = {
       \ 'at': 'start'
@@ -185,11 +188,7 @@ let g:lightline.tabline = {
       \ }
 
 " Markdown Preview
-let vim_markdown_preview_toggle = 1
-let vim_markdown_preview_hotkey = '<C-m>'
-let vim_markdown_preview_github = 1
-let vim_markdown_preview_browser = 'Google Chrome'
-let vim_markdown_preview_temp_file = 1
+nmap <C-m> <Plug>MarkdownPreview
 
 " NerdTree
 let NERDTreeShowHidden = 1

@@ -6,7 +6,7 @@ Plug 'tyrannicaltoucan/vim-quantum'
 
 "" Plugins
 " ALE - Asynchronous syntax checking
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 " Better Whitespace
 Plug 'ntpeters/vim-better-whitespace'
 " Closer - Autoclose braces on enter
@@ -43,9 +43,9 @@ Plug 'itchyny/lightline.vim'
 " Lightline Ale - Lightline support for Ale
 Plug 'maximbaz/lightline-ale'
 " Markdown Preview
-Plug 'JamshedVesuna/vim-markdown-preview'
-" MatchIt - Extended bracket matching with %
-Plug 'adelarsq/vim-matchit'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
+" MatchUp - Extend bracket matching with %
+Plug 'andymass/vim-matchup'
 " NerdTree - Visual file tree
 Plug 'scrooloose/nerdtree'
 " NerdTree Git Plugin

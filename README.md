@@ -31,13 +31,14 @@ Ensure that the following are installed before beginning:
     - Check under Preferences on the General Tab
     - Check the checkbox next to "Load preferences from a custom folder or URL" and fill in `~/dotfiles/iterm`
 2. :CocInstall the following extensions:
-    - coc-snippets
-    - coc-marketplace
-    - coc-tsserver
-    - coc-json
-    - coc-html
-    - coc-yaml
-    - coc-python
+    - [coc-marketplace](https://github.com/fannheyward/coc-marketplace) - List of extensions available within CoC
+    - [coc-emmet](https://github.com/neoclide/coc-emmet) - View emmet completions in suggestions
+    - [coc-html](https://github.com/neoclide/coc-html) - HTML support
+    - [coc-inline-jest](https://github.com/khanghoang/coc-jest) - Jest testing framework integration
+    - [coc-json](https://github.com/neoclide/coc-json) - JSON support
+    - [coc-python](https://github.com/neoclide/coc-python) - Python support
+    - [coc-tsserver](https://github.com/neoclide/coc-tsserver) - JavaScript & Typescript support
+    - [coc-yaml](https://github.com/neoclide/coc-yaml) - Yaml support
 
 ## Customization
 To add machine-specific settings, create the files below. For:
