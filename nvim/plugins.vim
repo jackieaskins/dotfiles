@@ -5,6 +5,8 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'tyrannicaltoucan/vim-quantum'
 
 "" Plugins
+" Ack - Better searching
+Plug 'mileszs/ack.vim'
 " ALE - Asynchronous syntax checking
 Plug 'dense-analysis/ale'
 " Better Whitespace
@@ -17,8 +19,6 @@ Plug 'alvan/vim-closetag'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 " CSS3 Syntax
 Plug 'hail2u/vim-css3-syntax'
-" Ctrlsf - Mimick Sublime Text Cmd-Shift-F
-Plug 'dyng/ctrlsf.vim'
 " Easymotion
 Plug 'easymotion/vim-easymotion'
 " Emmet

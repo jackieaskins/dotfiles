@@ -66,6 +66,10 @@ map <C-l> <C-W>l
 autocmd BufRead,BufNewFile *.md setlocal spell
 
 "" Plugins
+" Ack
+let g:ackprg = 'ag --nogroup --nocolor --column' " Use Ag for searching with Ack
+nnoremap <Leader>a :Ack!<Space>
+
 " ALE
 let g:ale_fix_on_save = 1
 let g:ale_fixers = {
@@ -82,7 +86,7 @@ let g:ale_linters = {
 " Better Whitespace
 command! SW StripWhitespace
 let g:better_whitespace_guicolor = '#dd7186'
-let g:better_whitespace_filetypes_blacklist = ['diff', 'gitcommit', 'unite', 'qf', 'help', 'markdown', 'ctrlsf']
+let g:better_whitespace_filetypes_blacklist = ['diff', 'gitcommit', 'unite', 'qf', 'help', 'markdown']
 
 " Closetag
 let g:closetag_filenames = '*.html,*.js,*.jsx,*.ts,*.tsx'
@@ -112,17 +116,6 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-
-" CtrlSF
-let g:ctrlsf_default_view_mode = 'compact'
-let g:ctrlsf_auto_focus = {
-      \ 'at': 'start'
-      \ }
-let g:ctrlsf_context = '-C 1' " Display 1 line before and after match
-let g:ctrlsf_mapping = {
-      \ "next": "n",
-      \ "prev": "N",
-      \ }
 
 " Emmet
 let g:user_emmet_leader_key = '\m'
