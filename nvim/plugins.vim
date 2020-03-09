@@ -15,8 +15,6 @@ Plug 'jackieaskins/vim-closer'
 Plug 'alvan/vim-closetag'
 " CoC - Intellisense
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-" Commentary - Easily insert comments
-Plug 'tpope/vim-commentary'
 " CSS3 Syntax
 Plug 'hail2u/vim-css3-syntax'
 " Ctrlsf - Mimick Sublime Text Cmd-Shift-F
@@ -48,6 +46,8 @@ Plug 'maximbaz/lightline-ale'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 " MatchUp - Extend bracket matching with %
 Plug 'andymass/vim-matchup'
+" NerdCommenter
+Plug 'preservim/nerdcommenter'
 " NerdTree - Visual file tree
 Plug 'scrooloose/nerdtree'
 " NerdTree Git Plugin

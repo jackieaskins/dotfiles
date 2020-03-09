@@ -90,6 +90,8 @@ let g:closetag_xhtml_filenames = '*.js,*.jsx,*.ts,*.tsx'
 let g:closetag_emptyTags_caseSensitive = 1
 let g:closetag_close_shortcut = '\>'
 let g:closetag_regions = {
+    \ 'typescriptreact': 'jsxRegion,tsxRegion',
+    \ 'javascriptreact': 'jsxRegion',
     \ 'typescript.tsx': 'jsxRegion,tsxRegion',
     \ 'javascript.jsx': 'jsxRegion',
     \ }
@@ -97,7 +99,7 @@ let g:closetag_regions = {
 " Coc
 let g:coc_global_extensions = [
       \ 'coc-emmet',
-      \ 'coc-inline-jest',
+      \ 'coc-jest',
       \ 'coc-marketplace',
       \ 'coc-java',
       \ 'coc-json',
@@ -105,11 +107,6 @@ let g:coc_global_extensions = [
       \ 'coc-tsserver',
       \ 'coc-yaml',
       \ ]
-
-" coc-tsserver changes types to javascriptreact/typescriptreact which breaks
-" other plugins, changing them back here
-au BufNewFile,BufRead *.jsx set filetype=javascript.jsx
-au BufNewFile,BufRead *.tsx set filetype=typescript.tsx
 
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
@@ -130,18 +127,12 @@ let g:ctrlsf_mapping = {
 " Emmet
 let g:user_emmet_leader_key = '\m'
 let g:user_emmet_settings = {
-      \  'javascript' : {
-      \      'extends' : 'jsx',
-      \  },
-      \  'javascript.jsx' : {
-      \      'extends' : 'jsx',
-      \  },
-      \  'typescript' : {
-      \      'extends' : 'jsx',
-      \  },
-      \  'typescript.tsx' : {
-      \      'extends' : 'jsx',
-      \  },
+      \ 'javascript' : { 'extends' : 'jsx' },
+      \ 'javascript.jsx' : { 'extends' : 'jsx', },
+      \ 'javascriptreact' : { 'extends' : 'jsx' },
+      \ 'typescript' : { 'extends' : 'jsx' },
+      \ 'typescript.tsx' : { 'extends' : 'jsx' },
+      \ 'typescriptreact' : { 'extends': 'jsx' },
       \}
 
 " FZF
@@ -207,6 +198,12 @@ let g:lightline.tabline = {
 " Markdown Preview
 nmap <C-m> <Plug>MarkdownPreview
 
+" MatchUp
+let g:matchup_matchparen_offscreen = { 'method': 'status_manual' }
+
+" NerdCommenter
+let g:NERDSpaceDelims = 1
+
 " NerdTree
 let NERDTreeShowHidden = 1
 let NERDTreeQuitOnOpen = 1
@@ -233,4 +230,5 @@ let g:startify_lists = [
 
 " Vista
 nnoremap <leader>v :Vista!!<cr>
+let g:vista_echo_cursor_strategy = 'floating_win'
 let g:vista#renderer#enable_icon = 0
