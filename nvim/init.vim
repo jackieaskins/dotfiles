@@ -18,7 +18,7 @@ let g:quantum_black = 1
 colorscheme quantum
 
 " Reload Vim
-nnoremap <leader>r :source $MYVIMRC<cr>
+nnoremap <Leader>r :source $MYVIMRC<CR>
 
 " Spaces & Tabs
 set shiftwidth=2
@@ -74,7 +74,9 @@ nnoremap <Leader>a :Ack!<Space>
 let g:ale_fix_on_save = 1
 let g:ale_fixers = {
       \ 'javascript': ['prettier'],
-      \ 'typescript': ['prettier']
+      \ 'typescript': ['prettier'],
+      \ 'javascriptreact': ['prettier'],
+      \ 'typescriptreact': ['prettier']
       \ }
 let g:ale_lint_delay = 50
 let g:ale_linters = {
@@ -96,6 +98,8 @@ let g:closetag_close_shortcut = '\>'
 let g:closetag_regions = {
     \ 'typescriptreact': 'jsxRegion,tsxRegion',
     \ 'javascriptreact': 'jsxRegion',
+    \ 'typescript': 'jsxRegion,tsxRegion',
+    \ 'javascript': 'jsxRegion',
     \ 'typescript.tsx': 'jsxRegion,tsxRegion',
     \ 'javascript.jsx': 'jsxRegion',
     \ }
@@ -107,7 +111,7 @@ let g:coc_global_extensions = [
       \ 'coc-marketplace',
       \ 'coc-java',
       \ 'coc-json',
-      \ 'coc-tag',
+      \ 'coc-snippets',
       \ 'coc-tsserver',
       \ 'coc-yaml',
       \ ]
@@ -116,6 +120,22 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+
+nnoremap <Leader>s :CocList symbols<CR>
+
+"" coc-snippets
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_snippet_next = '<tab>'
 
 " Emmet
 let g:user_emmet_leader_key = '\m'
@@ -130,7 +150,7 @@ let g:user_emmet_settings = {
 
 " FZF
 " Make FZF behave more like Ctrl-P
-nnoremap <c-p> :FZF<cr>
+nnoremap <C-p> :FZF<CR>
 augroup fzf
   autocmd!
   autocmd! FileType fzf
@@ -196,6 +216,7 @@ let g:matchup_matchparen_offscreen = { 'method': 'status_manual' }
 
 " NerdCommenter
 let g:NERDSpaceDelims = 1
+let g:NERDDefaultAlign = 'left'
 
 " NerdTree
 let NERDTreeShowHidden = 1
@@ -222,6 +243,6 @@ let g:startify_lists = [
       \ ]
 
 " Vista
-nnoremap <leader>v :Vista!!<cr>
+nnoremap <Leader>v :Vista!!<CR>
 let g:vista_echo_cursor_strategy = 'floating_win'
 let g:vista#renderer#enable_icon = 0
