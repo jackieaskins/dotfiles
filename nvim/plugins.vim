@@ -17,8 +17,8 @@ Plug 'jackieaskins/vim-closer'
 Plug 'alvan/vim-closetag'
 " CoC - Intellisense
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-" CSS3 Syntax
-Plug 'hail2u/vim-css3-syntax'
+" CssColor - In-line CSS colors
+Plug 'ap/vim-css-color'
 " Easymotion
 Plug 'easymotion/vim-easymotion'
 " Emmet
@@ -56,10 +56,12 @@ Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-repeat'
 " Splitjoin - Split/join single/multi-line statements
 Plug 'AndrewRadev/splitjoin.vim'
-" Surround - Surround in brackets/quotes
-Plug 'tpope/vim-surround'
 " Startify - Customized startup screen
 Plug 'mhinz/vim-startify'
+" Surround - Surround in brackets/quotes
+Plug 'tpope/vim-surround'
+" Targets - Add additional targets
+Plug 'wellle/targets.vim'
 " Vista - View LSP symbols and tags
 Plug 'liuchengxu/vista.vim'
 
