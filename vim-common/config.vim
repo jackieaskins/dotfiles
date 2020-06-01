@@ -32,6 +32,7 @@ colorscheme quantum
 set shiftwidth=2
 set tabstop=2
 set softtabstop=2
+autocmd FileType java setlocal shiftwidth=4 tabstop=4 softtabstop=4
 set expandtab " tabs are spaces
 set list listchars=tab:\ \ ,trail:· " Add dots for spacing
 
@@ -146,8 +147,8 @@ function! s:show_documentation()
 endfunction
 
 nmap <Leader>rn <Plug>(coc-rename)
-nnoremap <silent> <Leader>s  :<C-u>CocList -I symbols<cr>
-nnoremap <silent> <Leader>d  :<C-u>CocList diagnostics<cr>
+nnoremap <silent> <Leader>s :<C-u>CocList -I symbols<cr>
+nnoremap <silent> <Leader>d :<C-u>CocList diagnostics<cr>
 
 "" coc-eslint
 nnoremap <Leader>ef :CocCommand eslint.executeAutofix<CR>
@@ -217,6 +218,7 @@ let g:NERDSpaceDelims = 1 " Add space after comment
 let g:NERDDefaultAlign = 'left'
 
 " NerdTree
+let g:NERDTreeWinSize = 60
 let NERDTreeShowHidden = 1
 let NERDTreeQuitOnOpen = 1
 let NERDTreeIgnore = ['node_modules', '\.git$', '\.DS_Store', 'tags.lock']

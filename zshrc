@@ -5,7 +5,6 @@ ZSH_CUSTOM=$HOME/dotfiles/zsh
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting shrink-path)
 
 source $ZSH/oh-my-zsh.sh
-command -v nvim &> /dev/null && alias vim=nvim
 export EDITOR='vim'
 
 # Pure Prompt

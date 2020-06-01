@@ -23,6 +23,7 @@
   "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
   "javascript.validate.enable": false,
   "javascript.preferences.importModuleSpecifier": "relative",
+  "tsserver.npm": "/usr/local/bin/npm",
   "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
   "typescript.preferences.importModuleSpecifier": "relative",
   "typescript.validate.enable": true,
