@@ -2,7 +2,7 @@ source ~/dotfiles/vim-common/plugins.vim
 
 " Set space as Leader key
 nnoremap <Space> <nop>
-let mapLeader = " "
+let mapleader = " "
 
 " Reload Vim
 nnoremap <Leader>r :source $MYVIMRC<CR>
