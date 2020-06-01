@@ -1,6 +1,7 @@
 {
   // Coc Preferences
   "coc.preferences.formatOnSaveFiletypes": [
+    "html",
     "typescriptreact",
     "typescript",
     "javacsript",
@@ -26,10 +27,7 @@
   "typescript.preferences.importModuleSpecifier": "relative",
   "typescript.validate.enable": true,
 
-  // Prettier Configuration
-  "prettier.formatterPriority": 10,
-
-  // SolarGraph Configuration
+  // SolarGraph (Ruby) Configuration
   "solargraph.diagnostics": true,
 
   // YAML Configuration
