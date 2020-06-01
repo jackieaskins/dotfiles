@@ -1,8 +1,9 @@
+/* Vim Common */
+vim-common/custom.vim
+
 /* Vim */
 vim/autoload
 vim/plugged
-vim/custom.vim
-vim/custom_plugins.vim
 
 /* Neovim */
 nvim/custom.vim
