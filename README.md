@@ -33,8 +33,7 @@ Ensure that the following are installed before beginning:
 
 ## Customization
 To add machine-specific settings, create the files below. For:
-- Vim Plugins: `~/dotfiles/vim/custom_plugins.vim`
-- General Vim: `~/dotfiles/vim/custom.vim`
+- Vim: `~/dotfiles/vim-common/custom.vim`
 - Zsh: `~/dotfiles/zsh/custom.zsh`
 
 These files will be automatically sourced and ignored by Git.
