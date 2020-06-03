@@ -122,6 +122,7 @@ let g:coc_global_extensions = [
       \ 'coc-java',
       \ 'coc-json',
       \ 'coc-prettier',
+      \ 'coc-snippets',
       \ 'coc-solargraph',
       \ 'coc-styled-components',
       \ 'coc-tsserver',
@@ -152,6 +153,20 @@ nnoremap <silent> <Leader>d :<C-u>CocList diagnostics<cr>
 
 "" coc-eslint
 nnoremap <Leader>ef :CocCommand eslint.executeAutofix<CR>
+
+"" coc-snippets
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_snippet_next = '<tab>'
 
 " Emmet
 let g:user_emmet_Leader_key = '\m'
@@ -193,7 +208,7 @@ let g:lightline.active = {
       \           [ 'fugitive', 'readonly', 'filename' ],
       \           ['coc_status' ] ],
       \ 'right': [ [ 'coc_errors', 'coc_warnings', 'coc_ok' ],
-      \            [ 'percent' ],
+      \            [ 'lineinfo', 'percent' ],
       \            [ 'filetype' ] ]
       \ }
 let g:lightline.component_function = {

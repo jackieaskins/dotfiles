@@ -28,6 +28,17 @@
   "typescript.preferences.importModuleSpecifier": "relative",
   "typescript.validate.enable": true,
 
+  // Prettier Configuration
+  "prettier.requireConfig": true,
+
+  // Snippets Configuration
+  "snippets.extends": {
+    "javascriptreact": ["javascript"],
+    "typescript": ["javascript"],
+    "typescriptreact": ["typescript", "javascriptreact"]
+  },
+  "snippets.userSnippetsDirectory": "~/dotfiles/vim-common/snippets",
+
   // SolarGraph (Ruby) Configuration
   "solargraph.diagnostics": true,
 

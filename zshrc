@@ -2,7 +2,8 @@ export ZSH=~/.oh-my-zsh
 
 ZSH_THEME=""
 ZSH_CUSTOM=$HOME/dotfiles/zsh
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting shrink-path)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting shrink-path vi-mode)
+export KEYTIMEOUT=1
 
 source $ZSH/oh-my-zsh.sh
 export EDITOR='vim'
