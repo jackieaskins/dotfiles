@@ -31,6 +31,9 @@
   // Prettier Configuration
   "prettier.requireConfig": true,
 
+  // Python
+  "python.jediEnabled": false,
+
   // Snippets Configuration
   "snippets.extends": {
     "javascriptreact": ["javascript"],

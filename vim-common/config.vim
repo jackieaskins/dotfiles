@@ -32,8 +32,8 @@ colorscheme quantum
 set shiftwidth=2
 set tabstop=2
 set softtabstop=2
-autocmd FileType java setlocal shiftwidth=4 tabstop=4 softtabstop=4
 set expandtab " tabs are spaces
+autocmd FileType java setlocal shiftwidth=4 tabstop=4 softtabstop=4
 set list listchars=tab:\ \ ,trail:· " Add dots for spacing
 
 " Comments
@@ -122,6 +122,7 @@ let g:coc_global_extensions = [
       \ 'coc-java',
       \ 'coc-json',
       \ 'coc-prettier',
+      \ 'coc-python',
       \ 'coc-snippets',
       \ 'coc-solargraph',
       \ 'coc-styled-components',
@@ -252,13 +253,31 @@ let g:jsx_ext_required = 0
 let g:splitjoin_html_attributes_bracket_on_new_line = 1
 
 " Startify
+function! s:gitStashed()
+    let files = systemlist('git diff --cached --name-only 2>/dev/null')
+    return map(files, "{'line': v:val, 'path': v:val}")
+endfunction
+
+function! s:gitModified()
+    let files = systemlist('git ls-files -m 2>/dev/null')
+    return map(files, "{'line': v:val, 'path': v:val}")
+endfunction
+
+function! s:gitUntracked()
+    let files = systemlist('git ls-files -o --exclude-standard 2>/dev/null')
+    return map(files, "{'line': v:val, 'path': v:val}")
+endfunction
+
 let g:startify_change_to_dir = 0
 let g:startify_lists = [
-      \ { 'type': 'dir',       'header': [ '   MRU in ' . getcwd() ] },
-      \ { 'type': 'files',     'header': [ '   MRU'                ] },
-      \ { 'type': 'sessions',  'header': [ '   Sessions'           ] },
-      \ { 'type': 'bookmarks', 'header': [ '   Bookmarks'          ] },
-      \ { 'type': 'commands',  'header': [ '   Commands'           ] },
+      \ { 'type': function('s:gitModified'),  'header': [ '   Git Modified'       ] },
+      \ { 'type': function('s:gitUntracked'), 'header': [ '   Git Untracked'      ] },
+      \ { 'type': function('s:gitStashed'),   'header': [ '   Git Stashed'        ] },
+      \ { 'type': 'dir',                      'header': [ '   MRU in ' . getcwd() ] },
+      \ { 'type': 'files',                    'header': [ '   MRU'                ] },
+      \ { 'type': 'sessions',                 'header': [ '   Sessions'           ] },
+      \ { 'type': 'bookmarks',                'header': [ '   Bookmarks'          ] },
+      \ { 'type': 'commands',                 'header': [ '   Commands'           ] },
       \ ]
 
 " Vista
