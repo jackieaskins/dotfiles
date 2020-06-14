@@ -183,13 +183,19 @@ let g:user_emmet_settings = {
 
 " FZF
 " Make FZF behave more like Ctrl-P
-nnoremap <C-p> :FZF<CR>
-augroup fzf
-  autocmd!
-  autocmd! FileType fzf
-  autocmd  FileType fzf set laststatus=0 noshowmode noruler norelativenumber nonumber
-    \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler relativenumber number
-augroup END
+if has('nvim-0.4.0')
+  nnoremap <C-p> :FzfPreviewProjectFiles<CR>
+  let g:fzf_preview_preview_key_bindings = 'ctrl-f:preview-page-up,ctrl-b:preview-page-down,?:toggle-preview'
+  let g:fzf_preview_command = 'bat --color=always {-1}'
+else
+  nnoremap <C-p> :FZF<CR>
+  augroup fzf
+    autocmd!
+    autocmd! FileType fzf
+    autocmd  FileType fzf set laststatus=0 noshowmode noruler norelativenumber nonumber
+          \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler relativenumber number
+  augroup END
+endif
 
 " Istanbul
 let g:istanbul#jsonPath = ['coverage/coverage-final.json']

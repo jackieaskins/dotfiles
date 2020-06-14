@@ -25,7 +25,11 @@ Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
 " FZF - Fuzzy Finder
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
+if has('nvim-0.4.0')
+  Plug 'yuki-ycino/fzf-preview.vim'
+else
+  Plug 'junegunn/fzf.vim'
+endif
 " GitGutter
 Plug 'airblade/vim-gitgutter'
 " Istanbul - Javascript Code Coverage

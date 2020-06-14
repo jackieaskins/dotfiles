@@ -8,6 +8,7 @@ Ensure that the following are installed before beginning:
 1. Zsh (make sure it's set as your default shell): https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH#how-to-install-zsh-on-many-platforms
 1. The Silver Searcher (Ag): https://github.com/ggreer/the_silver_searcher#installing
 1. NodeJS: https://nodejs.org/en/download/
+1. Bat: https://github.com/sharkdp/bat#installation
 1. Universal Ctags: https://github.com/universal-ctags/ctags#the-latest-build-and-package
 
 ## Installation
