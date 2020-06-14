@@ -28,6 +28,8 @@ Plug 'yuki-ycino/fzf-preview.vim'
 Plug 'airblade/vim-gitgutter'
 " Istanbul - Javascript Code Coverage
 Plug 'retorillo/istanbul.vim'
+" Java Syntax
+Plug 'uiiaoo/java-syntax.vim'
 " Lightline - Customize status/tabline
 Plug 'itchyny/lightline.vim'
 " Lightline-Coc - Lightline Coc integraiton

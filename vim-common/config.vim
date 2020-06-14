@@ -190,6 +190,9 @@ let g:istanbul#jsonPath = ['coverage/coverage-final.json']
 command! IU IstanbulUpdate
 command! IT IstanbulToggle
 
+" Java Syntax
+highlight link JavaIdentifier NONE
+
 " Lightline
 function! LightlineFilename()
   "" vim-common/config.vim -> v/config.vim
