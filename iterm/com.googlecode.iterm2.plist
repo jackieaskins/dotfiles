@@ -3458,7 +3458,7 @@
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>80 193 592 584 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>640 0 640 777 0 0 1280 777 </string>
+	<string>0 288 650 489 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>0 288 650 489 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
@@ -4481,7 +4481,7 @@
 			<key>Visual Bell</key>
 			<true/>
 			<key>Window Type</key>
-			<integer>13</integer>
+			<integer>15</integer>
 			<key>Working Directory</key>
 			<string>~</string>
 		</dict>
@@ -8245,7 +8245,7 @@
 	<key>NoSyncLastTipTime</key>
 	<real>588479529.06321001</real>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>96</integer>
+	<integer>122</integer>
 	<key>NoSyncNewWindowOrTabFromTmuxOpensTmux</key>
 	<true/>
 	<key>NoSyncNewWindowOrTabFromTmuxOpensTmux_selection</key>
@@ -9555,6 +9555,10 @@
 		<string>ignore</string>
 		<string>exclude</string>
 	</array>
+	<key>NoSyncSuppressDownloadConfirmation</key>
+	<true/>
+	<key>NoSyncSuppressDownloadConfirmation_selection</key>
+	<integer>0</integer>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
 	<real>519428968.28963101</real>
 	<key>NoSyncTipsToNotShow</key>
@@ -9753,7 +9757,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2020-06-04T22:47:47Z</date>
+	<date>2020-06-13T00:56:58Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUUpdateRelaunchingMarker</key>

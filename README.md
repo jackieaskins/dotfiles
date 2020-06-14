@@ -5,11 +5,10 @@ My dotfiles for Vim, Zsh, and iTerm.
 Ensure that the following are installed before beginning:
 
 1. Vim: https://www.vim.org/download.php
-2. Zsh (make sure it's set as your default shell): https://github.com/robbyrussell/oh-my-zsh/wiki/Installing-ZSH
-3. Oh-My-Zsh: https://github.com/robbyrussell/oh-my-zsh
-4. The Silver Searcher (Ag): https://github.com/ggreer/the_silver_searcher#installing
-5. NodeJS: https://nodejs.org/en/download/
-6. Universal Ctags: https://github.com/universal-ctags/ctags#the-latest-build-and-package
+1. Zsh (make sure it's set as your default shell): https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH#how-to-install-zsh-on-many-platforms
+1. The Silver Searcher (Ag): https://github.com/ggreer/the_silver_searcher#installing
+1. NodeJS: https://nodejs.org/en/download/
+1. Universal Ctags: https://github.com/universal-ctags/ctags#the-latest-build-and-package
 
 ## Installation
 1. Clone this repo:
@@ -18,7 +17,7 @@ Ensure that the following are installed before beginning:
    git clone --recurse-submodules https://github.com/jackieaskins/dotfiles.git ~/dotfiles
    ```
 
-2. Run the install script:
+1. Run the install script:
 
    ```
    chmod +x ./install.sh
