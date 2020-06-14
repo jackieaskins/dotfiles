@@ -1,4 +1,5 @@
 # Directory Navigation
+# alias ls='ls --color=auto'
 alias -- -="cd -"
 alias ..='cd ..'
 alias ...='cd ../..'
