@@ -5,8 +5,6 @@ call plug#begin(has('nvim') ? '~/.local/share/nvim/plugged' : '~/.vim/plugged')
 Plug 'tyrannicaltoucan/vim-quantum'
 
 "" Plugins
-" Ack - Better searching
-Plug 'mileszs/ack.vim'
 " Better Whitespace
 Plug 'ntpeters/vim-better-whitespace'
 " Closer - Autoclose braces on enter
@@ -25,11 +23,7 @@ Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
 " FZF - Fuzzy Finder
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-if has('nvim-0.4.0')
-  Plug 'yuki-ycino/fzf-preview.vim'
-else
-  Plug 'junegunn/fzf.vim'
-endif
+Plug 'yuki-ycino/fzf-preview.vim'
 " GitGutter
 Plug 'airblade/vim-gitgutter'
 " Istanbul - Javascript Code Coverage

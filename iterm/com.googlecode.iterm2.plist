@@ -3458,7 +3458,7 @@
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>80 193 592 584 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 288 650 489 0 0 1280 777 </string>
+	<string>0 0 1280 777 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>0 288 650 489 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
@@ -4481,7 +4481,7 @@
 			<key>Visual Bell</key>
 			<true/>
 			<key>Window Type</key>
-			<integer>15</integer>
+			<integer>0</integer>
 			<key>Working Directory</key>
 			<string>~</string>
 		</dict>
@@ -8245,7 +8245,7 @@
 	<key>NoSyncLastTipTime</key>
 	<real>588479529.06321001</real>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>122</integer>
+	<integer>124</integer>
 	<key>NoSyncNewWindowOrTabFromTmuxOpensTmux</key>
 	<true/>
 	<key>NoSyncNewWindowOrTabFromTmuxOpensTmux_selection</key>
@@ -9757,7 +9757,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2020-06-13T00:56:58Z</date>
+	<date>2020-06-14T01:13:44Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUUpdateRelaunchingMarker</key>

@@ -1,6 +1,3 @@
-# Vim
-command -v nvim &> /dev/null && alias vim=nvim
-
 # Directory Navigation
 alias -- -="cd -"
 alias ..='cd ..'

@@ -85,10 +85,6 @@ map <C-h> <C-W>h
 map <C-l> <C-W>l
 
 "" Plugins
-" Ack
-let g:ackprg = 'ag --nogroup --nocolor --column' " Use Ag for searching with Ack
-nnoremap <Leader>a :Ack!<Space>
-
 " Better Whitespace
 command! SW StripWhitespace
 let g:better_whitespace_guicolor = '#dd7186'
@@ -182,20 +178,12 @@ let g:user_emmet_settings = {
       \}
 
 " FZF
-" Make FZF behave more like Ctrl-P
-if has('nvim-0.4.0')
-  nnoremap <C-p> :FzfPreviewProjectFiles<CR>
-  let g:fzf_preview_preview_key_bindings = 'ctrl-f:preview-page-up,ctrl-b:preview-page-down,?:toggle-preview'
-  let g:fzf_preview_command = 'bat --color=always {-1}'
-else
-  nnoremap <C-p> :FZF<CR>
-  augroup fzf
-    autocmd!
-    autocmd! FileType fzf
-    autocmd  FileType fzf set laststatus=0 noshowmode noruler norelativenumber nonumber
-          \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler relativenumber number
-  augroup END
-endif
+let g:fzf_preview_preview_key_bindings = 'ctrl-f:preview-page-up,ctrl-b:preview-page-down,?:toggle-preview'
+let g:fzf_preview_grep_cmd = 'rg --line-number --no-heading --ignore-case'
+
+nnoremap <C-p> :FzfPreviewDirectoryFiles<CR>
+nnoremap <Leader>a :FzfPreviewProjectGrep<Space>
+nnoremap <Leader>gs :FzfPreviewGitStatus<CR>
 
 " Istanbul
 let g:istanbul#jsonPath = ['coverage/coverage-final.json']
