@@ -178,7 +178,7 @@ let g:user_emmet_settings = {
       \}
 
 " FZF
-let g:fzf_preview_preview_key_bindings = 'ctrl-f:preview-page-up,ctrl-b:preview-page-down,?:toggle-preview'
+let g:fzf_preview_preview_key_bindings = 'ctrl-b:preview-page-up,ctrl-f:preview-page-down,?:toggle-preview'
 let g:fzf_preview_grep_cmd = 'rg --line-number --no-heading --ignore-case'
 
 nnoremap <C-p> :FzfPreviewDirectoryFiles<CR>
