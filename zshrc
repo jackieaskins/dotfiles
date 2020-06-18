@@ -1,13 +1,22 @@
-# Vim
-command -v nvim &> /dev/null && alias vim=nvim
-
 zsh_config=$HOME/dotfiles/zsh
 export EDITOR='vim'
 
-# Pure Prompt
 fpath=(~/.zfunctions $fpath)
+# The following lines were added by compinstall
+
+zstyle ':completion:*' completer _expand _complete _ignored
+zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*'
+zstyle :compinstall filename '${HOME}/dotfiles/zshrc'
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+
+# Pure Prompt
 autoload -U promptinit; promptinit
 prompt pure
+
+setopt auto_cd
 
 # Use up & down arrows to iterate through commands starting with entered text
 autoload -U history-search-end

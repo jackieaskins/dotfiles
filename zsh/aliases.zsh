@@ -1,5 +1,7 @@
+# Vim
+command -v nvim &> /dev/null && alias vim=nvim
+
 # Directory Navigation
-# alias ls='ls --color=auto'
 alias -- -="cd -"
 alias ..='cd ..'
 alias ...='cd ../..'
