@@ -7,7 +7,6 @@
     "javacsript",
     "javascriptreact"
   ],
-  "codeLens.enable": true,
 
   // General Diagnostic Configuration
   "diagnostic.errorSign": "•",

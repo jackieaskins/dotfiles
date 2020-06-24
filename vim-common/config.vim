@@ -5,7 +5,7 @@ nnoremap <Space> <nop>
 let mapleader = " "
 
 " Reload Vim
-nnoremap <Leader>r :source $MYVIMRC<CR>
+nnoremap <Leader>re :source $MYVIMRC<CR>
 
 " Backup/Swp/Undo dirs
 if (!has('nvim'))
@@ -127,6 +127,7 @@ let g:coc_global_extensions = [
       \ ]
 
 nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
@@ -183,6 +184,7 @@ let g:fzf_preview_grep_cmd = 'rg --line-number --no-heading --ignore-case'
 
 nnoremap <C-p> :FzfPreviewDirectoryFiles<CR>
 nnoremap <Leader>a :FzfPreviewProjectGrep<Space>
+nnoremap <Leader>f :FzfPreviewProjectGrep<Space><C-R><C-W><CR>
 nnoremap <Leader>gs :FzfPreviewGitStatus<CR>
 
 " Istanbul
@@ -267,10 +269,10 @@ endfunction
 
 let g:startify_change_to_dir = 0
 let g:startify_lists = [
+      \ { 'type': 'dir',                      'header': [ '   MRU in ' . getcwd() ] },
       \ { 'type': function('s:gitModified'),  'header': [ '   Git Modified'       ] },
       \ { 'type': function('s:gitUntracked'), 'header': [ '   Git Untracked'      ] },
       \ { 'type': function('s:gitStashed'),   'header': [ '   Git Stashed'        ] },
-      \ { 'type': 'dir',                      'header': [ '   MRU in ' . getcwd() ] },
       \ { 'type': 'files',                    'header': [ '   MRU'                ] },
       \ { 'type': 'sessions',                 'header': [ '   Sessions'           ] },
       \ { 'type': 'bookmarks',                'header': [ '   Bookmarks'          ] },
