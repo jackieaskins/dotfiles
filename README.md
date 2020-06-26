@@ -6,10 +6,10 @@ Ensure that the following are installed before beginning:
 
 1. Vim: https://www.vim.org/download.php
 1. Zsh (make sure it's set as your default shell): https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH#how-to-install-zsh-on-many-platforms
-1. The Silver Searcher (Ag): https://github.com/ggreer/the_silver_searcher#installing
+1. Ripgrep: https://github.com/BurntSushi/ripgrep
 1. NodeJS: https://nodejs.org/en/download/
 1. Bat: https://github.com/sharkdp/bat#installation
-1. Universal Ctags: https://github.com/universal-ctags/ctags#the-latest-build-and-package
+1. Hack Nerd Font: https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Hack
 
 ## Installation
 1. Clone this repo:

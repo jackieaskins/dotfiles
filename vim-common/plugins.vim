@@ -57,5 +57,7 @@ Plug 'liuchengxu/vista.vim'
 
 " Polyglot - All-in-one Syntax
 Plug 'sheerun/vim-polyglot'
+" DevIcons
+Plug 'ryanoasis/vim-devicons'
 
 call plug#end()

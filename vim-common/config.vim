@@ -1,5 +1,7 @@
 source ~/dotfiles/vim-common/plugins.vim
 
+set encoding=utf8
+
 " Set space as Leader key
 nnoremap <Space> <nop>
 let mapleader = " "
@@ -138,7 +140,7 @@ nmap <silent> ]g <Plug>(coc-diagnostic-next)
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
+  if (index(['vim', 'help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
   else
     call CocAction('doHover')
@@ -179,8 +181,9 @@ let g:user_emmet_settings = {
       \}
 
 " FZF
-let g:fzf_preview_preview_key_bindings = 'ctrl-b:preview-page-up,ctrl-f:preview-page-down,?:toggle-preview'
+let g:fzf_preview_preview_key_bindings = 'ctrl-n:page-down,ctrl-p:page-up,ctrl-b:preview-page-up,ctrl-f:preview-page-down,?:toggle-preview'
 let g:fzf_preview_grep_cmd = 'rg --line-number --no-heading --ignore-case'
+let g:fzf_preview_use_dev_icons = 1
 
 nnoremap <C-p> :FzfPreviewDirectoryFiles<CR>
 nnoremap <Leader>a :FzfPreviewProjectGrep<Space>
@@ -203,6 +206,14 @@ function! LightlineFilename()
   return filename . modified
 endfunction
 
+function! LightlineFiletype()
+  return index(['', 'gitcommit'], &filetype) < 0 ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft'
+endfunction
+
+function! LightlineBranch()
+  return fugitive#head() !=# '' ? '' . ' ' . fugitive#head() : ''
+endfunction
+
 let g:lightline.active = {
       \ 'left': [ [ 'mode', 'paste' ],
       \           [ 'fugitive', 'readonly', 'filename' ],
@@ -213,7 +224,8 @@ let g:lightline.active = {
       \ }
 let g:lightline.component_function = {
       \ 'filename': 'LightlineFilename',
-      \ 'fugitive': 'fugitive#head'
+      \ 'fugitive': 'LightlineBranch',
+      \ 'filetype': 'LightlineFiletype'
       \ }
 let g:lightline.tabline = {
       \ 'left': [ [ 'tabs' ] ],
