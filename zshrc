@@ -1,6 +1,13 @@
 zsh_config=$HOME/dotfiles/zsh
 export EDITOR='vim'
 
+# Vi Mode
+bindkey -v
+export KEYTIMEOUT=1
+
+bindkey "^A" vi-beginning-of-line
+bindkey "^E" vi-end-of-line
+
 fpath=(~/.zfunctions $fpath)
 # The following lines were added by compinstall
 
@@ -33,7 +40,7 @@ for f in $zsh_config/*; do source $f; done
 plugins=(zsh-autosuggestions zsh-syntax-highlighting)
 for plugin in $plugins; do source $zsh_config/plugins/$plugin/$plugin.zsh; done
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='ag --hidden -g ""'
+bindkey "ç" fzf-cd-widget
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"

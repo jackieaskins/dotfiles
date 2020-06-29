@@ -1,5 +1,5 @@
-# Vim
 command -v nvim &> /dev/null && alias vim=nvim
+alias fzfp="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'"
 
 # Directory Navigation
 alias -- -="cd -"
@@ -35,6 +35,8 @@ alias gsu='git submodule update --recursive'
 # Dotfiles
 alias dotfiles='cd ~/dotfiles'
 alias sourcezsh='source ~/.zshrc'
+alias zshaliases='vim ~/dotfiles/zsh/aliases.zsh'
+alias zshfuncs='vim ~/dotfiles/zsh/functions.zsh'
 alias zshconfig='vim ~/dotfiles/zshrc'
 alias zshcustom='vim ~/dotfiles/zsh/custom.zsh'
 alias vimconfig='vim ~/dotfiles/vim-common/config.vim'
