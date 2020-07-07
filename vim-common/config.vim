@@ -1,5 +1,7 @@
 source ~/dotfiles/vim-common/plugins.vim
 
+let g:node_host_prog = '/usr/local/bin/neovim-node-host'
+
 set encoding=utf8
 
 " Set space as Leader key
@@ -81,10 +83,10 @@ set smartcase " don't use insensitive search when using capital letters
 set path+=** " recursively search path
 
 " Windows
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-h> <C-w>h
+map <C-l> <C-w>l
 
 "" Plugins
 " Better Whitespace
@@ -181,14 +183,47 @@ let g:user_emmet_settings = {
       \}
 
 " FZF
-let g:fzf_preview_preview_key_bindings = 'ctrl-n:page-down,ctrl-p:page-up,ctrl-b:preview-page-up,ctrl-f:preview-page-down,?:toggle-preview'
-let g:fzf_preview_grep_cmd = 'rg --line-number --no-heading --ignore-case'
-let g:fzf_preview_use_dev_icons = 1
+" floating fzf
+if has('nvim')
+  let $FZF_DEFAULT_OPTS .= ' --layout=reverse --preview-window=noborder'
 
-nnoremap <C-p> :FzfPreviewDirectoryFiles<CR>
-nnoremap <Leader>a :FzfPreviewProjectGrep<Space>
-nnoremap <Leader>f :FzfPreviewProjectGrep<Space><C-R><C-W><CR>
-nnoremap <Leader>gs :FzfPreviewGitStatus<CR>
+  function! FloatingFZF()
+    let buf = nvim_create_buf(v:false, v:true)
+
+   " here be dragoons
+    let height = &lines - 3
+    let width = float2nr(&columns - (&columns * 2 / 10))
+    let col = float2nr((&columns - width) / 2)
+    let col_offset = &columns / 10
+
+    let opts = {
+          \ 'relative': 'editor',
+          \ 'row': 1,
+          \ 'col': col,
+          \ 'width': width,
+          \ 'height': height
+          \ }
+
+    let win = nvim_open_win(buf, v:true, opts)
+    call setwinvar(win, '&winhl', 'NormalFloat:TabLine')
+
+  " this is to remove all line numbers and so on from the window
+    setlocal
+          \ buftype=nofile
+          \ nobuflisted
+          \ bufhidden=hide
+          \ nonumber
+          \ norelativenumber
+          \ signcolumn=no
+  endfunction
+
+  let g:fzf_layout = { 'window': 'call FloatingFZF()' }
+endif
+
+nnoremap <C-p> :Files<CR>
+nnoremap <Leader>a :Rg<Space>
+nnoremap <Leader>f :Rg<Space><C-r><C-w><CR>
+nnoremap <Leader>gs :GFiles?<CR>
 
 " Istanbul
 let g:istanbul#jsonPath = ['coverage/coverage-final.json']

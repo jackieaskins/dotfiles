@@ -44,3 +44,5 @@ export FZF_DEFAULT_COMMAND='ag --hidden -g ""'
 bindkey "ç" fzf-cd-widget
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
