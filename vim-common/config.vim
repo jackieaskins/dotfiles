@@ -183,45 +183,52 @@ let g:user_emmet_settings = {
       \}
 
 " FZF
-" floating fzf
+let $FZF_DEFAULT_OPTS .= ' --bind=ctrl-f:preview-page-down,ctrl-b:preview-page-up,ctrl-d:page-down,ctrl-u:page-up'
+
 if has('nvim')
-  let $FZF_DEFAULT_OPTS .= ' --layout=reverse --preview-window=noborder'
+  let $FZF_DEFAULT_OPTS .= ' --layout=reverse'
 
-  function! FloatingFZF()
-    let buf = nvim_create_buf(v:false, v:true)
+  function! CreateCenteredFloatingWindow()
+      let width = min([&columns - 4, max([80, &columns - 20])])
+      let height = min([&lines - 4, max([20, &lines - 10])])
+      let row = ((&lines - height) / 2) - 1
+      let col = (&columns - width) / 2
 
-   " here be dragoons
-    let height = &lines - 3
-    let width = float2nr(&columns - (&columns * 2 / 10))
-    let col = float2nr((&columns - width) / 2)
-    let col_offset = &columns / 10
+      let opts = {
+            \ 'relative': 'editor',
+            \ 'row': row,
+            \ 'col': col,
+            \ 'width': width,
+            \ 'height': height,
+            \ 'style': 'minimal'
+            \ }
 
-    let opts = {
-          \ 'relative': 'editor',
-          \ 'row': 1,
-          \ 'col': col,
-          \ 'width': width,
-          \ 'height': height
-          \ }
+      let top = "╭" . repeat("─", width - 2) . "╮"
+      let mid = "│" . repeat(" ", width - 2) . "│"
+      let bot = "╰" . repeat("─", width - 2) . "╯"
+      let lines = [top] + repeat([mid], height - 2) + [bot]
 
-    let win = nvim_open_win(buf, v:true, opts)
-    call setwinvar(win, '&winhl', 'NormalFloat:TabLine')
+      let s:buf = nvim_create_buf(v:false, v:true)
+      call nvim_buf_set_lines(s:buf, 0, -1, v:true, lines)
+      call nvim_open_win(s:buf, v:true, opts)
 
-  " this is to remove all line numbers and so on from the window
-    setlocal
-          \ buftype=nofile
-          \ nobuflisted
-          \ bufhidden=hide
-          \ nonumber
-          \ norelativenumber
-          \ signcolumn=no
+      set winhl=Normal:Floating
+
+      let opts.row += 1
+      let opts.height -= 2
+      let opts.col += 2
+      let opts.width -= 4
+
+      call nvim_open_win(nvim_create_buf(v:false, v:true), v:true, opts)
+
+      au BufWipeout <buffer> exe 'bw ' . s:buf
   endfunction
 
-  let g:fzf_layout = { 'window': 'call FloatingFZF()' }
+  let g:fzf_layout = { 'window': 'call CreateCenteredFloatingWindow()' }
 endif
 
 nnoremap <C-p> :Files<CR>
-nnoremap <Leader>a :Rg<Space>
+nnoremap <Leader>/ :Rg<Space>
 nnoremap <Leader>f :Rg<Space><C-r><C-w><CR>
 nnoremap <Leader>gs :GFiles?<CR>
 
