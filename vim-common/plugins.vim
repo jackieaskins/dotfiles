@@ -5,6 +5,8 @@ call plug#begin(has('nvim') ? '~/.local/share/nvim/plugged' : '~/.vim/plugged')
 Plug 'tyrannicaltoucan/vim-quantum'
 
 "" Plugins
+" ALE
+Plug 'dense-analysis/ale'
 " Better Whitespace
 Plug 'ntpeters/vim-better-whitespace'
 " Closer - Autoclose braces on enter
@@ -13,6 +15,8 @@ Plug 'jackieaskins/vim-closer'
 Plug 'alvan/vim-closetag'
 " CoC - Intellisense
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+" Commandline Complete
+Plug 'j5shi/CommandlineComplete.vim'
 " Easymotion
 Plug 'easymotion/vim-easymotion'
 " Emmet

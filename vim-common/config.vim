@@ -37,7 +37,7 @@ set shiftwidth=2
 set tabstop=2
 set softtabstop=2
 set expandtab " tabs are spaces
-autocmd FileType java setlocal shiftwidth=4 tabstop=4 softtabstop=4
+autocmd FileType cs,java setlocal shiftwidth=4 tabstop=4 softtabstop=4
 set list listchars=tab:\ \ ,trail:· " Add dots for spacing
 
 " Comments
@@ -89,6 +89,18 @@ map <C-h> <C-w>h
 map <C-l> <C-w>l
 
 "" Plugins
+" Ale
+let g:ale_fix_on_save = 1
+let g:ale_fixers = {
+      \ 'javascript': ['eslint']
+      \ }
+let g:ale_lint_delay = 50
+let g:ale_linters = {
+      \ 'java': [],
+      \ 'javascript': ['eslint'],
+      \ 'typescript': ['eslint']
+      \ }
+
 " Better Whitespace
 command! SW StripWhitespace
 let g:better_whitespace_guicolor = '#dd7186'
@@ -114,7 +126,6 @@ let g:coc_config_home = '~/dotfiles/vim-common'
 let g:coc_global_extensions = [
       \ 'coc-css',
       \ 'coc-emmet',
-      \ 'coc-eslint',
       \ 'coc-highlight',
       \ 'coc-html',
       \ 'coc-jest',
@@ -134,6 +145,7 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+nmap <silent> <leader>qf <Plug>(coc-fix-current)
 
 " Use `[g` and `]g` to navigate diagnostics
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
@@ -171,7 +183,7 @@ endfunction
 let g:coc_snippet_next = '<tab>'
 
 " Emmet
-let g:user_emmet_Leader_key = '\m'
+let g:user_emmet_leader_key = '\m'
 let g:user_emmet_settings = {
       \ 'javascript' : { 'extends' : 'jsx' },
       \ 'javascript.jsx' : { 'extends' : 'jsx', },
@@ -183,52 +195,52 @@ let g:user_emmet_settings = {
       \}
 
 " FZF
-let $FZF_DEFAULT_OPTS .= ' --bind=ctrl-f:preview-page-down,ctrl-b:preview-page-up,ctrl-d:page-down,ctrl-u:page-up'
+let $FZF_DEFAULT_OPTS .= ' --bind=ctrl-f:preview-page-down,ctrl-b:preview-page-up,ctrl-n:page-down,ctrl-p:page-up'
 
 if has('nvim')
   let $FZF_DEFAULT_OPTS .= ' --layout=reverse'
 
   function! CreateCenteredFloatingWindow()
-      let width = min([&columns - 4, max([80, &columns - 20])])
-      let height = min([&lines - 4, max([20, &lines - 10])])
-      let row = ((&lines - height) / 2) - 1
-      let col = (&columns - width) / 2
+    let width = min([&columns - 4, max([80, &columns - 20])])
+    let height = min([&lines - 4, max([20, &lines - 10])])
+    let row = ((&lines - height) / 2) - 1
+    let col = (&columns - width) / 2
 
-      let opts = {
-            \ 'relative': 'editor',
-            \ 'row': row,
-            \ 'col': col,
-            \ 'width': width,
-            \ 'height': height,
-            \ 'style': 'minimal'
-            \ }
+    let opts = {
+          \ 'relative': 'editor',
+          \ 'row': row,
+          \ 'col': col,
+          \ 'width': width,
+          \ 'height': height,
+          \ 'style': 'minimal'
+          \ }
 
-      let top = "╭" . repeat("─", width - 2) . "╮"
-      let mid = "│" . repeat(" ", width - 2) . "│"
-      let bot = "╰" . repeat("─", width - 2) . "╯"
-      let lines = [top] + repeat([mid], height - 2) + [bot]
+    let top = "╭" . repeat("─", width - 2) . "╮"
+    let mid = "│" . repeat(" ", width - 2) . "│"
+    let bot = "╰" . repeat("─", width - 2) . "╯"
+    let lines = [top] + repeat([mid], height - 2) + [bot]
 
-      let s:buf = nvim_create_buf(v:false, v:true)
-      call nvim_buf_set_lines(s:buf, 0, -1, v:true, lines)
-      call nvim_open_win(s:buf, v:true, opts)
+    let s:buf = nvim_create_buf(v:false, v:true)
+    call nvim_buf_set_lines(s:buf, 0, -1, v:true, lines)
+    call nvim_open_win(s:buf, v:true, opts)
 
-      set winhl=Normal:Floating
+    set winhl=Normal:Floating
 
-      let opts.row += 1
-      let opts.height -= 2
-      let opts.col += 2
-      let opts.width -= 4
+    let opts.row += 1
+    let opts.height -= 2
+    let opts.col += 2
+    let opts.width -= 4
 
-      call nvim_open_win(nvim_create_buf(v:false, v:true), v:true, opts)
+    call nvim_open_win(nvim_create_buf(v:false, v:true), v:true, opts)
 
-      au BufWipeout <buffer> exe 'bw ' . s:buf
+    au BufWipeout <buffer> exe 'bw ' . s:buf
   endfunction
 
   let g:fzf_layout = { 'window': 'call CreateCenteredFloatingWindow()' }
 endif
 
 nnoremap <C-p> :Files<CR>
-nnoremap <Leader>/ :Rg<Space>
+nnoremap <Leader>a :Rg<Space>
 nnoremap <Leader>f :Rg<Space><C-r><C-w><CR>
 nnoremap <Leader>gs :GFiles?<CR>
 
@@ -291,7 +303,13 @@ let g:NERDTreeWinSize = 60
 let NERDTreeShowHidden = 1
 let NERDTreeQuitOnOpen = 1
 let NERDTreeIgnore = ['node_modules', '\.git$', '\.DS_Store', 'tags.lock']
-map <C-n> :NERDTreeToggle<CR>
+let NERDTreeMinimalUI = 1
+
+nnoremap <C-n> :NERDTreeToggle<CR>
+nnoremap <Leader>n :NERDTreeFind<CR>
+
+" Omnisharp
+let g:OmniSharp_server_use_mono = 1
 
 " Plug
 command! PI PlugInstall
@@ -307,18 +325,18 @@ let g:splitjoin_html_attributes_bracket_on_new_line = 1
 
 " Startify
 function! s:gitStashed()
-    let files = systemlist('git diff --cached --name-only 2>/dev/null')
-    return map(files, "{'line': v:val, 'path': v:val}")
+  let files = systemlist('git diff --cached --name-only 2>/dev/null')
+  return map(files, "{'line': v:val, 'path': v:val}")
 endfunction
 
 function! s:gitModified()
-    let files = systemlist('git ls-files -m 2>/dev/null')
-    return map(files, "{'line': v:val, 'path': v:val}")
+  let files = systemlist('git ls-files -m 2>/dev/null')
+  return map(files, "{'line': v:val, 'path': v:val}")
 endfunction
 
 function! s:gitUntracked()
-    let files = systemlist('git ls-files -o --exclude-standard 2>/dev/null')
-    return map(files, "{'line': v:val, 'path': v:val}")
+  let files = systemlist('git ls-files -o --exclude-standard 2>/dev/null')
+  return map(files, "{'line': v:val, 'path': v:val}")
 endfunction
 
 let g:startify_change_to_dir = 0
