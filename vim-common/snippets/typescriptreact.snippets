@@ -23,29 +23,3 @@
 #		endsnippet
 #
 # Online reference: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt
-
-snippet ir "Import React" b
-import React from 'react';
-endsnippet
-
-snippet rfc "React Functional Component" b
-import React from 'react';
-
-const ${1:`!p snip.rv = snip.basename`}: React.FC = () => (
-	<div>$1</div>
-);
-
-export default $1;
-endsnippet
-
-snippet rfcp "React Functional Component with Props" b
-import React from 'react';
-
-type ${1:`!p snip.rv = snip.basename`}Props = {};
-
-const $1: React.FC<$1Props> = () => (
-	<div>$1</div>
-);
-
-export default $1;
-endsnippet

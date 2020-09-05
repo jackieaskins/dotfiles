@@ -48,6 +48,8 @@ Plug 'preservim/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 " NerdTree Git Plugin
 Plug 'Xuyuanp/nerdtree-git-plugin'
+" OmniSharp - C# support
+Plug 'OmniSharp/omnisharp-vim'
 " Repeat - Remap . command to do more
 Plug 'tpope/vim-repeat'
 " Splitjoin - Split/join single/multi-line statements
