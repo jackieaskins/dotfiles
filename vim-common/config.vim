@@ -333,6 +333,9 @@ command! PC PlugClean
 "" JSX
 let g:jsx_ext_required = 0
 
+" Scalpel
+nmap <Leader>es <Plug>(Scalpel)
+
 " SplitJoin
 let g:splitjoin_html_attributes_bracket_on_new_line = 1
 

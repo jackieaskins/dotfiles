@@ -48,10 +48,10 @@ Plug 'preservim/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 " NerdTree Git Plugin
 Plug 'Xuyuanp/nerdtree-git-plugin'
-" OmniSharp - C# support
-Plug 'OmniSharp/omnisharp-vim'
 " Repeat - Remap . command to do more
 Plug 'tpope/vim-repeat'
+" Scalpel - Better substitions
+Plug 'wincent/scalpel'
 " Splitjoin - Split/join single/multi-line statements
 Plug 'AndrewRadev/splitjoin.vim'
 " Startify - Customized startup screen
