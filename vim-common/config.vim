@@ -32,6 +32,13 @@ let g:lightline = { 'colorscheme': 'quantum' }
 let g:quantum_black = 1
 colorscheme quantum
 
+" Folds
+set foldmethod=syntax
+autocmd FileType vim setlocal foldmethod=marker
+highlight Folded guifg=PeachPuff4
+set foldlevel=99 " Start folds expanded by default
+set foldcolumn=2 " Show fold column with width 2
+
 " Spaces & Tabs
 set shiftwidth=2
 set tabstop=2
@@ -88,7 +95,7 @@ map <C-k> <C-w>k
 map <C-h> <C-w>h
 map <C-l> <C-w>l
 
-"" Plugins
+"" Plugins {{{
 " Ale
 let g:ale_fix_on_save = 1
 let g:ale_fixers = {
@@ -371,3 +378,4 @@ let g:startify_lists = [
 nnoremap <Leader>v :Vista!!<CR>
 let g:vista_echo_cursor_strategy = 'floating_win'
 let g:vista#renderer#enable_icon = 0
+" }}}
