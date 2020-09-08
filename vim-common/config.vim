@@ -328,9 +328,6 @@ let NERDTreeMinimalUI = 1
 nnoremap <C-n> :NERDTreeToggle<CR>
 nnoremap <Leader>n :NERDTreeFind<CR>
 
-" Omnisharp
-let g:OmniSharp_server_use_mono = 1
-
 " Plug
 command! PI PlugInstall
 command! PU PlugUpgrade | PlugUpdate

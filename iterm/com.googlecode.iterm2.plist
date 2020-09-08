@@ -3460,9 +3460,9 @@
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>80 193 592 584 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 0 1280 777 0 0 1280 777 </string>
+	<string>-1920 -315 960 1177 -1920 -315 1920 1177 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>0 338 650 439 0 0 1280 777 </string>
+	<string>2294 0 1146 1417 0 0 3440 1417 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
 	<string>0 0 650 439 0 0 1280 777 </string>
 	<key>New Bookmarks</key>
@@ -4260,7 +4260,7 @@
 			<key>Normal Font</key>
 			<string>HackNerdFontComplete-Regular 13</string>
 			<key>Option Key Sends</key>
-			<integer>0</integer>
+			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
 			<false/>
 			<key>Right Option Key Sends</key>
@@ -8245,9 +8245,9 @@
 	<key>NoSyncFrame_SharedPreferences</key>
 	<dict>
 		<key>screenFrame</key>
-		<string>{{0, 0}, {1280, 800}}</string>
+		<string>{{-1920, -315}, {1920, 1200}}</string>
 		<key>topLeft</key>
-		<string>{210, 665}</string>
+		<string>{-1499, 659}</string>
 	</dict>
 	<key>NoSyncHaveRequestedFullDiskAccess</key>
 	<true/>
@@ -8258,7 +8258,7 @@
 	<key>NoSyncLastTipTime</key>
 	<real>588479529.06321001</real>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>164</integer>
+	<integer>179</integer>
 	<key>NoSyncNewWindowOrTabFromTmuxOpensTmux</key>
 	<true/>
 	<key>NoSyncNewWindowOrTabFromTmuxOpensTmux_selection</key>
@@ -9770,7 +9770,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2020-07-07T13:06:31Z</date>
+	<date>2020-09-06T20:50:04Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUUpdateRelaunchingMarker</key>

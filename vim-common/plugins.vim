@@ -42,6 +42,8 @@ Plug 'josa42/vim-lightline-coc'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 " MatchUp - Extend bracket matching with %
 Plug 'andymass/vim-matchup'
+" Move
+Plug 'matze/vim-move'
 " NerdCommenter
 Plug 'preservim/nerdcommenter'
 " NerdTree - Visual file tree
