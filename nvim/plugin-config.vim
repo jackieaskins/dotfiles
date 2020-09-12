@@ -3,7 +3,6 @@ set termguicolors
 set background=dark
 let g:quantum_black = 1
 silent! colorscheme quantum " Don't complain if colorscheme isn't installed yet
-
 " }}}
 
 " Better Whitespace {{{
@@ -87,6 +86,14 @@ set shortmess+=c " avoid showing extra message when using completion
 
 " Diagnostic
 let g:diagnostic_enable_virtual_text = 1
+
+" Commands
+nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> gi    <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent> gy    <cmd>lua vim.lsp.buf.type_definition()<CR>
+nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
+nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 " }}}
 
 " Markdown Preview {{{
@@ -153,6 +160,8 @@ nnoremap <Leader>f :lua require'telescope.builtin'.grep_string{ search = <C-r><C
 
 " LSP
 nnoremap <silent> gr :lua require'telescope.builtin'.lsp_references{}<CR>
+nnoremap <silent> sd :lua require'telescope.builtin'.lsp_document_symbols{}<CR>
+nnoremap <silent> sw :lua require'telescope.builtin'.lsp_workspace_symbols{}<CR>
 
 " Quickfix
 nnoremap <Leader>qf :lua require'telescope.builtin'.quickfix{}<CR>
