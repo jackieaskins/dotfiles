@@ -21,7 +21,7 @@ set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
 autocmd FileType vim setlocal foldmethod=marker
 highlight Folded guifg=PeachPuff4
-" set foldlevel=99 " Start folds expanded by default
+set foldlevel=99 " Start folds expanded by default
 set foldcolumn=2 " Show fold column with width 2
 " }}}
 

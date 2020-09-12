@@ -42,6 +42,14 @@ let g:user_emmet_settings = {
 " Lightline {{{
 let g:lightline = { 'colorscheme': 'quantum' }
 
+function! LspStatus() abort
+  if luaeval('#vim.lsp.buf_get_clients() > 0')
+    return luaeval("require('lsp-status').status()")
+  endif
+
+  return ''
+endfunction
+
 function! LightlineFilename()
   "" vim-common/config.vim -> v/config.vim
   let filename = expand('%:t') !=# '' ? pathshorten(fnamemodify(expand('%'),':~:.')) : '[No Name]'
@@ -60,7 +68,7 @@ endfunction
 let g:lightline.active = {
       \ 'left': [ [ 'mode', 'paste' ],
       \           [ 'fugitive', 'readonly', 'filename' ],
-      \           [ ] ],
+      \           [ 'lsp_status' ] ],
       \ 'right': [ [ ],
       \            [ 'lineinfo', 'percent' ],
       \            [ 'filetype' ] ]
@@ -68,7 +76,8 @@ let g:lightline.active = {
 let g:lightline.component_function = {
       \ 'filename': 'LightlineFilename',
       \ 'fugitive': 'LightlineBranch',
-      \ 'filetype': 'LightlineFiletype'
+      \ 'filetype': 'LightlineFiletype',
+      \ 'lsp_status': 'LspStatus'
       \ }
 let g:lightline.tabline = {
       \ 'left': [ [ 'tabs' ] ],
@@ -87,6 +96,10 @@ set shortmess+=c " avoid showing extra message when using completion
 " Diagnostic
 let g:diagnostic_enable_virtual_text = 1
 
+nnoremap [g        <cmd>PrevDiagnosticCycle<CR>
+nnoremap ]g        <cmd>NextDiagnosticCycle<CR>
+nnoremap <leader>d <cmd>OpenDiagnostic<CR>
+
 " Commands
 nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
@@ -94,6 +107,8 @@ nnoremap <silent> gi    <cmd>lua vim.lsp.buf.implementation()<CR>
 nnoremap <silent> gy    <cmd>lua vim.lsp.buf.type_definition()<CR>
 nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+
+nnoremap <leader>rn <cmd>lua vim.lsp.buf.rename()<CR>
 " }}}
 
 " Markdown Preview {{{
@@ -160,11 +175,12 @@ nnoremap <Leader>f :lua require'telescope.builtin'.grep_string{ search = <C-r><C
 
 " LSP
 nnoremap <silent> gr :lua require'telescope.builtin'.lsp_references{}<CR>
-nnoremap <silent> sd :lua require'telescope.builtin'.lsp_document_symbols{}<CR>
-nnoremap <silent> sw :lua require'telescope.builtin'.lsp_workspace_symbols{}<CR>
+nnoremap <Leader>sd :lua require'telescope.builtin'.lsp_document_symbols{}<CR>
+nnoremap <Leader>sw :lua require'telescope.builtin'.lsp_workspace_symbols{}<CR>
 
-" Quickfix
+" Quickfix/LocationList
 nnoremap <Leader>qf :lua require'telescope.builtin'.quickfix{}<CR>
+nnoremap <Leader>ll :lua require'telescope.builtin'.loclist{}<CR>
 
 " Fallback
 nnoremap <Leader>tb :lua require'telescope.builtin'.builtin{}<CR>
