@@ -21,8 +21,32 @@ call plug#begin('~/.local/share/nvim/plugged')
 " Theme
 Plug 'tyrannicaltoucan/vim-quantum'
 
+" Better Whitespace
+Plug 'ntpeters/vim-better-whitespace'
+
+" Closer - Autoclose braces on enter
+Plug 'jackieaskins/vim-closer'
+
+" CloseTag - Autoclose HTML tags
+Plug 'alvan/vim-closetag'
+
+" Commandline Complete
+Plug 'j5shi/CommandlineComplete.vim'
+
+" Easymotion
+Plug 'easymotion/vim-easymotion'
+
+" Emmet
+Plug 'mattn/emmet-vim'
+
+" Endwise - Add end keywords
+Plug 'tpope/vim-endwise'
+
 " Fugitive - Git integration
 Plug 'tpope/vim-fugitive'
+
+" GitGutter
+Plug 'airblade/vim-gitgutter'
 
 " Lightline - Improved status/tabline
 Plug 'itchyny/lightline.vim'
@@ -32,8 +56,26 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
 Plug 'nvim-lua/diagnostic-nvim'
 
+" Markdown Preview
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
+
+" MatchUp - Extend bracket matching with %
+Plug 'andymass/vim-matchup'
+
+" Move
+Plug 'matze/vim-move'
+
 " NerdCommenter - Comments
 Plug 'preservim/nerdcommenter'
+
+" Repeat - Remap . command to do more
+Plug 'tpope/vim-repeat'
+
+" Scalpel - Better substitions
+Plug 'wincent/scalpel'
+
+" Splitjoin - Split/join single/multi-line statements
+Plug 'AndrewRadev/splitjoin.vim'
 
 " Startify - Customized startup screen
 Plug 'mhinz/vim-startify'

@@ -6,6 +6,40 @@ silent! colorscheme quantum " Don't complain if colorscheme isn't installed yet
 
 " }}}
 
+" Better Whitespace {{{
+command! SW StripWhitespace
+let g:better_whitespace_guicolor = '#dd7186'
+let g:better_whitespace_filetypes_blacklist = ['diff', 'gitcommit', 'unite', 'qf', 'help', 'markdown']
+" }}}
+
+" Closetag {{{
+let g:closetag_filenames = '*.html,*.js,*.jsx,*.ts,*.tsx'
+let g:closetag_xhtml_filenames = '*.js,*.jsx,*.ts,*.tsx'
+let g:closetag_emptyTags_caseSensitive = 1
+let g:closetag_close_shortcut = '\>'
+let g:closetag_regions = {
+    \ 'typescriptreact': 'jsxRegion,tsxRegion',
+    \ 'javascriptreact': 'jsxRegion',
+    \ 'typescript': 'jsxRegion,tsxRegion',
+    \ 'javascript': 'jsxRegion',
+    \ 'typescript.tsx': 'jsxRegion,tsxRegion',
+    \ 'javascript.jsx': 'jsxRegion',
+    \ }
+" }}}
+
+" Emmet {{{
+let g:user_emmet_leader_key = '\m'
+let g:user_emmet_settings = {
+      \ 'javascript' : { 'extends' : 'jsx' },
+      \ 'javascript.jsx' : { 'extends' : 'jsx', },
+      \ 'javascriptreact' : { 'extends' : 'jsx' },
+      \ 'typescript' : { 'extends' : 'jsx' },
+      \ 'typescript.jsx' : { 'extends' : 'jsx' },
+      \ 'typescript.tsx' : { 'extends' : 'jsx' },
+      \ 'typescriptreact' : { 'extends': 'jsx' },
+      \}
+" }}}
+
 " Lightline {{{
 let g:lightline = { 'colorscheme': 'quantum' }
 
@@ -55,9 +89,25 @@ set shortmess+=c " avoid showing extra message when using completion
 let g:diagnostic_enable_virtual_text = 1
 " }}}
 
+" Markdown Preview {{{
+nmap <C-m> <Plug>MarkdownPreview
+" }}}
+
+" MatchUp {{{
+let g:matchup_matchparen_offscreen = { 'method': 'status_manual' }
+" }}}
+
 " NerdCommenter {{{
 let g:NERDSpaceDelims = 1 " Add space after comment
 let g:NERDDefaultAlign = 'left'
+" }}}
+
+" Scalpel {{{
+nmap <Leader>es <Plug>(Scalpel)
+" }}}
+
+" SplitJoin {{{
+let g:splitjoin_html_attributes_bracket_on_new_line = 1
 " }}}
 
 " Startify {{{
