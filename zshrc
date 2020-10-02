@@ -9,6 +9,7 @@ bindkey "^A" vi-beginning-of-line
 bindkey "^E" vi-end-of-line
 
 fpath=(~/.zfunctions $fpath)
+
 # The following lines were added by compinstall
 
 zstyle ':completion:*' completer _expand _complete _ignored
@@ -24,6 +25,13 @@ autoload -U promptinit; promptinit
 prompt pure
 
 setopt auto_cd
+
+# History
+setopt histignorealldups sharehistory
+
+HISTSIZE=1000
+SAVEHIST=1000
+HISTFILE=~/.zsh_history
 
 # Use up & down arrows to iterate through commands starting with entered text
 autoload -U history-search-end

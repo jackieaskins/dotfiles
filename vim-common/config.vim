@@ -12,7 +12,11 @@ let mapleader = " "
 nnoremap <Leader>re :source $MYVIMRC<CR>
 
 " Backup/Swp/Undo dirs
-if (!has('nvim'))
+if !has('nvim')
+  mkdir($HOME . "/.undo", "p")
+  mkdir($HOME . "/.backup", "p")
+  mkdir($HOME . "/.swp", "p")
+
   set undodir=$HOME/.undo
   set backupdir=$HOME/.backup
   set directory=$HOME/.swp
@@ -35,6 +39,7 @@ colorscheme quantum
 " Folds
 set foldmethod=syntax
 autocmd FileType vim setlocal foldmethod=marker
+autocmd FileType xml setlocal foldmethod=indent
 highlight Folded guifg=PeachPuff4
 set foldlevel=99 " Start folds expanded by default
 set foldcolumn=2 " Show fold column with width 2

@@ -23,7 +23,9 @@ dir=~/dotfiles # dotfiles directory
 backupdir=~/dotfiles_backups/$timestamp # backup directory for old dotfiles
 
 [ -d ~/.zfunctions ] || mkdir ~/.zfunctions
+[ -d ~/.config ] || mkdir ~/.config
 mkdir $backupdir/zfunctions
+mkdir $backupdir/nvim
 
 echo -e "Creating dotfiles backup directory..."
 mkdir -p $backupdir
@@ -36,6 +38,7 @@ echo -e "Backing up any existing dotfiles..."
 [ ! -f ~/.tern-config ] || mv ~/.tern-config $backupdir/tern-config
 [ ! -f ~/.gitignore_global ] || mv ~/.gitignore_global $backupdir/gitignore_global
 [ ! -d ~/.vim ] || mv ~/.vim $backupdir/vim
+[ ! -d ~/.config/nvim ] || mv ~/.config/nvim $backupdir/nvim
 [ ! -f ~/.zfunctions/prompt_pure_setup ] || mv ~/.zfunctions/prompt_pure_setup $backupdir/zfunctions/prompt_pure_setup
 [ ! -f ~/.zfunctions/async ] || mv ~/.zfunctions/async $backupdir/zfunctions/async
 [ ! -d ~/.iterm2_shell_integration.zsh ] || mv ~/.iterm2_shell_integration.zsh $backupdir/iterm2_shell_integration.zsh
@@ -45,6 +48,7 @@ echo -e "Done backing up files\n"
 echo -e "Symlinking dotfiles to $dir directory..."
 ln -s $dir/zshrc ~/.zshrc
 ln -s $dir/vim ~/.vim
+ln -s $dir/nvim ~/.config/nvim
 ln -s $dir/ctags.d ~/.ctags.d
 ln -s $dir/tern-config ~/.tern-config
 ln -s $dir/gitignore_global ~/.gitignore_global
