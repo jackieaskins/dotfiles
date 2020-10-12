@@ -49,6 +49,7 @@ plugins=(zsh-autosuggestions zsh-syntax-highlighting)
 for plugin in $plugins; do source $zsh_config/plugins/$plugin/$plugin.zsh; done
 
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*" --glob "!*.class"'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 bindkey "ç" fzf-cd-widget
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
