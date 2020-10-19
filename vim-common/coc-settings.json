@@ -27,9 +27,6 @@
   "typescript.preferences.importModuleSpecifier": "relative",
   "typescript.validate.enable": true,
 
-  // Prettier Configuration
-  "prettier.requireConfig": true,
-
   // Python
   "python.jediEnabled": false,
 

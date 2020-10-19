@@ -102,16 +102,22 @@ map <C-l> <C-w>l
 
 "" Plugins {{{
 " Ale
-let g:ale_fix_on_save = 1
 let g:ale_fixers = {
-      \ 'javascript': ['eslint']
+      \ 'javascript': ['eslint'],
+      \ 'javascriptreact': ['eslint'],
+      \ 'typescript': ['eslint'],
+      \ 'typescriptreact': ['eslint']
       \ }
 let g:ale_lint_delay = 50
 let g:ale_linters = {
       \ 'java': [],
       \ 'javascript': ['eslint'],
-      \ 'typescript': ['eslint']
+      \ 'javascriptreact': ['eslint'],
+      \ 'typescript': ['eslint'],
+      \ 'typescriptreact': ['eslint']
       \ }
+
+nmap <silent> <leader>af :<C-u>ALEFix<cr>
 
 " Better Whitespace
 command! SW StripWhitespace
@@ -176,9 +182,6 @@ endfunction
 nmap <Leader>rn <Plug>(coc-rename)
 nnoremap <silent> <Leader>s :<C-u>CocList -I symbols<cr>
 nnoremap <silent> <Leader>d :<C-u>CocList diagnostics<cr>
-
-"" coc-eslint
-nnoremap <Leader>ef :CocCommand eslint.executeAutofix<CR>
 
 "" coc-snippets
 inoremap <silent><expr> <TAB>
