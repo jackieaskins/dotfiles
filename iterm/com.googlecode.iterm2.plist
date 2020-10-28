@@ -3460,9 +3460,9 @@
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>80 193 592 584 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>-1920 -315 960 1177 -1920 -315 1920 1177 </string>
+	<string>0 0 1280 777 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>2294 0 1146 1417 0 0 3440 1417 </string>
+	<string>134 338 650 439 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
 	<string>0 0 650 439 0 0 1280 777 </string>
 	<key>New Bookmarks</key>
@@ -4314,6 +4314,8 @@
 				<key>advanced configuration</key>
 				<dict>
 					<key>algorithm</key>
+					<integer>0</integer>
+					<key>auto-rainbow style</key>
 					<integer>0</integer>
 					<key>font</key>
 					<string>.AppleSystemUIFont 12</string>
@@ -5278,7 +5280,7 @@
 			<key>Normal Font</key>
 			<string>Consolas 14</string>
 			<key>Option Key Sends</key>
-			<integer>0</integer>
+			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
 			<false/>
 			<key>Right Option Key Sends</key>
@@ -6139,7 +6141,7 @@
 			<key>Normal Font</key>
 			<string>Consolas 14</string>
 			<key>Option Key Sends</key>
-			<integer>0</integer>
+			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
 			<false/>
 			<key>Right Option Key Sends</key>
@@ -7002,7 +7004,7 @@
 			<key>Normal Font</key>
 			<string>HackNerdFontComplete-Regular 14</string>
 			<key>Option Key Sends</key>
-			<integer>0</integer>
+			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
 			<false/>
 			<key>Right Option Key Sends</key>
@@ -8121,7 +8123,7 @@
 			<key>Normal Font</key>
 			<string>Consolas 14</string>
 			<key>Option Key Sends</key>
-			<integer>0</integer>
+			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
 			<false/>
 			<key>Right Option Key Sends</key>
@@ -8245,9 +8247,9 @@
 	<key>NoSyncFrame_SharedPreferences</key>
 	<dict>
 		<key>screenFrame</key>
-		<string>{{-1920, -315}, {1920, 1200}}</string>
+		<string>{{0, 0}, {1280, 800}}</string>
 		<key>topLeft</key>
-		<string>{-1499, 659}</string>
+		<string>{175, 713}</string>
 	</dict>
 	<key>NoSyncHaveRequestedFullDiskAccess</key>
 	<true/>
@@ -8258,7 +8260,7 @@
 	<key>NoSyncLastTipTime</key>
 	<real>588479529.06321001</real>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>179</integer>
+	<integer>186</integer>
 	<key>NoSyncNewWindowOrTabFromTmuxOpensTmux</key>
 	<true/>
 	<key>NoSyncNewWindowOrTabFromTmuxOpensTmux_selection</key>
@@ -9770,7 +9772,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2020-09-06T20:50:04Z</date>
+	<date>2020-10-21T02:54:29Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUUpdateRelaunchingMarker</key>
@@ -9803,11 +9805,7 @@
 	<integer>0</integer>
 	<key>ToolbeltTools</key>
 	<array>
-		<string>Command History</string>
-		<string>Jobs</string>
-		<string>Recent Directories</string>
-		<string>Paste History</string>
-		<string>Notes</string>
+		<string>Actions</string>
 	</array>
 	<key>UKCrashReporterLastCrashReportDate</key>
 	<real>1570486400</real>

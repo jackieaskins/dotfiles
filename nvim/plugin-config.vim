@@ -92,6 +92,7 @@ inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 set completeopt=menuone,noinsert,noselect
 set shortmess+=c " avoid showing extra message when using completion
+let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
 
 " Diagnostic
 let g:diagnostic_enable_virtual_text = 1
@@ -122,6 +123,11 @@ let g:matchup_matchparen_offscreen = { 'method': 'status_manual' }
 " NerdCommenter {{{
 let g:NERDSpaceDelims = 1 " Add space after comment
 let g:NERDDefaultAlign = 'left'
+" }}}
+
+" Polyglot {{{
+"" JSX
+let g:jsx_ext_required = 0
 " }}}
 
 " Scalpel {{{

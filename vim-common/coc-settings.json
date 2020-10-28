@@ -16,7 +16,6 @@
   "diagnostic.virtualTextCurrentLineOnly": false,
   "diagnostic.virtualTextPrefix": "‣ ",
   "diagnostic.checkCurrentLine": true,
-  "diagnostic.refreshOnInsertMode": true,
 
   // JavaScript/TypeScript Configuration
   "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,

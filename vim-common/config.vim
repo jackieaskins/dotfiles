@@ -268,7 +268,7 @@ if has('nvim')
 endif
 
 nnoremap <C-p> :Files<CR>
-nnoremap <Leader>a :Rg<Space>
+nnoremap <Leader>/ :Rg<Space>
 nnoremap <Leader>f :Rg<Space><C-r><C-w><CR>
 nnoremap <Leader>gs :GFiles?<CR>
 

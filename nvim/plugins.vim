@@ -69,6 +69,8 @@ Plug 'nvim-lua/telescope.nvim'
 " Treesitter - Syntax highlighting and other utils
 Plug 'nvim-treesitter/nvim-treesitter'
 
+" Polyglot - Syntax highlighting
+" Plug 'sheerun/vim-polyglot'
 " DevIcons
 Plug 'ryanoasis/vim-devicons'
 
