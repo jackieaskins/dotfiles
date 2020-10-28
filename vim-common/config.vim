@@ -13,9 +13,9 @@ nnoremap <Leader>re :source $MYVIMRC<CR>
 
 " Backup/Swp/Undo dirs
 if !has('nvim')
-  mkdir($HOME . "/.undo", "p")
-  mkdir($HOME . "/.backup", "p")
-  mkdir($HOME . "/.swp", "p")
+  call mkdir($HOME . "/.undo", "p")
+  call mkdir($HOME . "/.backup", "p")
+  call mkdir($HOME . "/.swp", "p")
 
   set undodir=$HOME/.undo
   set backupdir=$HOME/.backup
