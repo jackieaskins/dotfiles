@@ -288,6 +288,18 @@ function! LightlineFilename()
   return filename . modified
 endfunction
 
+function! LightlineTabFilename(n)
+  "" vim-common/config.vim -> v/config.vim
+  let bufnr = tabpagebuflist(a:n)[tabpagewinnr(a:n) - 1]
+  let bufFiletype = getbufvar(bufnr, '&filetype')
+
+  if bufFiletype == 'fzf'
+    return '[FZF]'
+  endif
+
+  return expand('#' . bufnr . ':t') !=# '' ? pathshorten(fnamemodify(expand('%'),':~:.')) : '[No Name]'
+endfunction
+
 function! LightlineFiletype()
   return index(['', 'gitcommit'], &filetype) < 0 ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft'
 endfunction
@@ -312,6 +324,13 @@ let g:lightline.component_function = {
 let g:lightline.tabline = {
       \ 'left': [ [ 'tabs' ] ],
       \ 'right': [ [ ] ],
+      \ }
+let g:lightline.tab_component_function = {
+      \ 'filename': 'LightlineTabFilename'
+      \ }
+let g:lightline.tab = {
+      \ 'active': ['tabum', 'filename', 'modified'],
+      \ 'inactive': ['tabnum', 'filename', 'modified']
       \ }
 
 call lightline#coc#register()
