@@ -24,6 +24,8 @@ compinit
 autoload -U promptinit; promptinit
 prompt pure
 
+RPROMPT='[%D{%L:%M:%S %p}]'
+
 setopt auto_cd
 
 # History
