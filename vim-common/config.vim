@@ -385,6 +385,7 @@ function! s:gitUntracked()
 endfunction
 
 let g:startify_change_to_dir = 0
+let g:startify_custom_indices = map(range(0, 100), 'v:val < 10 ? 0 . string(v:val) : string(v:val)')
 let g:startify_lists = [
       \ { 'type': 'dir',                      'header': [ '   MRU in ' . getcwd() ] },
       \ { 'type': function('s:gitModified'),  'header': [ '   Git Modified'       ] },
