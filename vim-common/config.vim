@@ -283,9 +283,7 @@ highlight link JavaIdentifier NONE
 " Lightline
 function! LightlineFilename()
   "" vim-common/config.vim -> v/config.vim
-  let filename = expand('%:t') !=# '' ? pathshorten(fnamemodify(expand('%'),':~:.')) : '[No Name]'
-  let modified = &modified ? ' +' : ''
-  return filename . modified
+  return expand('%:t') !=# '' ? pathshorten(fnamemodify(expand('%'), ':~:.')) : '[No Name]'
 endfunction
 
 function! LightlineTabFilename(n)
@@ -297,7 +295,7 @@ function! LightlineTabFilename(n)
     return '[FZF]'
   endif
 
-  return expand('#' . bufnr . ':t') !=# '' ? pathshorten(fnamemodify(expand('%'),':~:.')) : '[No Name]'
+  return expand('#' . bufnr . ':t') !=# '' ? pathshorten(fnamemodify(expand('#' . bufnr), ':~:.')) : '[No Name]'
 endfunction
 
 function! LightlineFiletype()
@@ -310,7 +308,7 @@ endfunction
 
 let g:lightline.active = {
       \ 'left': [ [ 'mode', 'paste' ],
-      \           [ 'fugitive', 'readonly', 'filename' ],
+      \           [ 'fugitive', 'readonly', 'filename', 'modified' ],
       \           ['coc_status' ] ],
       \ 'right': [ [ 'coc_errors', 'coc_warnings', 'coc_ok' ],
       \            [ 'lineinfo', 'percent' ],
