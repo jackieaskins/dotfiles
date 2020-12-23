@@ -1,3 +1,3 @@
 require'lsp'
-require'telescope'
+require'tscope'
 require'treesitter'

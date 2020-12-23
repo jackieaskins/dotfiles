@@ -44,7 +44,6 @@ Plug 'itchyny/lightline.vim'
 " LSP
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
-Plug 'nvim-lua/diagnostic-nvim'
 Plug 'nvim-lua/lsp-status.nvim'
 " Markdown Preview
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
@@ -62,6 +61,8 @@ Plug 'wincent/scalpel'
 Plug 'AndrewRadev/splitjoin.vim'
 " Startify - Customized startup screen
 Plug 'mhinz/vim-startify'
+" Surround - Surround in brackets/quotes
+Plug 'tpope/vim-surround'
 " Telescope - Fuzzy finding
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
@@ -69,8 +70,6 @@ Plug 'nvim-lua/telescope.nvim'
 " Treesitter - Syntax highlighting and other utils
 Plug 'nvim-treesitter/nvim-treesitter'
 
-" Polyglot - Syntax highlighting
-" Plug 'sheerun/vim-polyglot'
 " DevIcons
 Plug 'ryanoasis/vim-devicons'
 

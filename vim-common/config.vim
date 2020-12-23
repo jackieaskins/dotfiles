@@ -314,6 +314,12 @@ let g:lightline.active = {
       \            [ 'lineinfo', 'percent' ],
       \            [ 'filetype' ] ]
       \ }
+let g:lightline.inactive = {
+      \ 'left': [ [ 'filename', 'modified' ],
+      \           [ 'lsp_status' ] ],
+      \ 'right': [ [ 'lineinfo' ],
+      \            [ 'percent' ] ],
+      \ }
 let g:lightline.component_function = {
       \ 'filename': 'LightlineFilename',
       \ 'fugitive': 'LightlineBranch',
@@ -369,19 +375,23 @@ nmap <Leader>es <Plug>(Scalpel)
 let g:splitjoin_html_attributes_bracket_on_new_line = 1
 
 " Startify
-function! s:gitStashed()
+function! MapFiles(files)
+  return map(a:files, "{'line': WebDevIconsGetFileTypeSymbol(v:val) . ' ' . v:val, 'path': v:val}")
+endfunction
+
+function! s:gitCached()
   let files = systemlist('git diff --cached --name-only 2>/dev/null')
-  return map(files, "{'line': v:val, 'path': v:val}")
+  return MapFiles(files)
 endfunction
 
 function! s:gitModified()
   let files = systemlist('git ls-files -m 2>/dev/null')
-  return map(files, "{'line': v:val, 'path': v:val}")
+  return MapFiles(files)
 endfunction
 
 function! s:gitUntracked()
   let files = systemlist('git ls-files -o --exclude-standard 2>/dev/null')
-  return map(files, "{'line': v:val, 'path': v:val}")
+  return MapFiles(files)
 endfunction
 
 let g:startify_change_to_dir = 0
@@ -390,7 +400,7 @@ let g:startify_lists = [
       \ { 'type': 'dir',                      'header': [ '   MRU in ' . getcwd() ] },
       \ { 'type': function('s:gitModified'),  'header': [ '   Git Modified'       ] },
       \ { 'type': function('s:gitUntracked'), 'header': [ '   Git Untracked'      ] },
-      \ { 'type': function('s:gitStashed'),   'header': [ '   Git Stashed'        ] },
+      \ { 'type': function('s:gitCached'),    'header': [ '   Git Cached'         ] },
       \ { 'type': 'files',                    'header': [ '   MRU'                ] },
       \ { 'type': 'sessions',                 'header': [ '   Sessions'           ] },
       \ { 'type': 'bookmarks',                'header': [ '   Bookmarks'          ] },

@@ -52,9 +52,19 @@ endfunction
 
 function! LightlineFilename()
   "" vim-common/config.vim -> v/config.vim
-  let filename = expand('%:t') !=# '' ? pathshorten(fnamemodify(expand('%'),':~:.')) : '[No Name]'
-  let modified = &modified ? ' +' : ''
-  return filename . modified
+  return expand('%:t') !=# '' ? pathshorten(fnamemodify(expand('%'), ':~:.')) : '[No Name]'
+endfunction
+
+function! LightlineTabFilename(n)
+  "" vim-common/config.vim -> v/config.vim
+  let bufnr = tabpagebuflist(a:n)[tabpagewinnr(a:n) - 1]
+  let bufFiletype = getbufvar(bufnr, '&filetype')
+
+  if bufFiletype == 'fzf'
+    return '[FZF]'
+  endif
+
+  return expand('#' . bufnr . ':t') !=# '' ? pathshorten(fnamemodify(expand('#' . bufnr), ':~:.')) : '[No Name]'
 endfunction
 
 function! LightlineFiletype()
@@ -67,11 +77,17 @@ endfunction
 
 let g:lightline.active = {
       \ 'left': [ [ 'mode', 'paste' ],
-      \           [ 'fugitive', 'readonly', 'filename' ],
+      \           [ 'fugitive', 'readonly', 'filename', 'modified' ],
       \           [ 'lsp_status' ] ],
       \ 'right': [ [ ],
       \            [ 'lineinfo', 'percent' ],
       \            [ 'filetype' ] ]
+      \ }
+let g:lightline.inactive = {
+      \ 'left': [ [ 'filename', 'modified' ],
+      \           [ 'lsp_status' ] ],
+      \ 'right': [ [ 'lineinfo' ],
+      \            [ 'percent' ] ],
       \ }
 let g:lightline.component_function = {
       \ 'filename': 'LightlineFilename',
@@ -82,6 +98,13 @@ let g:lightline.component_function = {
 let g:lightline.tabline = {
       \ 'left': [ [ 'tabs' ] ],
       \ 'right': [ [ ] ],
+      \ }
+let g:lightline.tab_component_function = {
+      \ 'filename': 'LightlineTabFilename'
+      \ }
+let g:lightline.tab = {
+      \ 'active': ['tabum', 'filename', 'modified'],
+      \ 'inactive': ['tabnum', 'filename', 'modified']
       \ }
 " }}}
 
@@ -94,12 +117,9 @@ set completeopt=menuone,noinsert,noselect
 set shortmess+=c " avoid showing extra message when using completion
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
 
-" Diagnostic
-let g:diagnostic_enable_virtual_text = 1
-
-nnoremap [g        <cmd>PrevDiagnosticCycle<CR>
-nnoremap ]g        <cmd>NextDiagnosticCycle<CR>
-nnoremap <leader>d <cmd>OpenDiagnostic<CR>
+nnoremap [g        <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
+nnoremap ]g        <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
+nnoremap <leader>d <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
 
 " Commands
 nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
@@ -123,11 +143,6 @@ let g:matchup_matchparen_offscreen = { 'method': 'status_manual' }
 " NerdCommenter {{{
 let g:NERDSpaceDelims = 1 " Add space after comment
 let g:NERDDefaultAlign = 'left'
-" }}}
-
-" Polyglot {{{
-"" JSX
-let g:jsx_ext_required = 0
 " }}}
 
 " Scalpel {{{
@@ -159,6 +174,7 @@ function! s:gitUntracked()
 endfunction
 
 let g:startify_change_to_dir = 0
+let g:startify_custom_indices = map(range(0, 100), 'v:val < 10 ? 0 . string(v:val) : string(v:val)')
 let g:startify_lists = [
       \ { 'type': 'dir',                      'header': [ '   MRU in ' . getcwd() ] },
       \ { 'type': function('s:gitModified'),  'header': [ '   Git Modified'       ] },
@@ -173,11 +189,14 @@ let g:startify_lists = [
 
 " Telescope {{{
 " Files
-nnoremap <C-p> :lua require'telescope.builtin'.find_files{}<CR>
+nnoremap <C-p> :lua require'telescope.builtin'.find_files({ find_command = {'rg','--ignore','--hidden','--files'} })<CR>
 
 " Text searching
-nnoremap <Leader>a :lua require'telescope.builtin'.live_grep{}<CR>
+nnoremap <Leader>/ :lua require'telescope.builtin'.live_grep{}<CR>
 nnoremap <Leader>f :lua require'telescope.builtin'.grep_string{ search = <C-r><C-w> }<CR>
+
+" Git
+nnoremap <Leader>gs :lua require'telescope.builtin'.git_status{}<CR>
 
 " LSP
 nnoremap <silent> gr :lua require'telescope.builtin'.lsp_references{}<CR>
