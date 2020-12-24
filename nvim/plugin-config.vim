@@ -210,3 +210,14 @@ nnoremap <Leader>ll :lua require'telescope.builtin'.loclist{}<CR>
 " Fallback
 nnoremap <Leader>tb :lua require'telescope.builtin'.builtin{}<CR>
 " }}}
+
+" Tree {{{
+let g:lua_tree_git_hl = 1
+let g:lua_tree_ignore = ['.git', 'node_modules', '.DS_Store']
+let g:lua_tree_indent_markers = 1
+let g:lua_tree_quit_on_open = 1
+let g:lua_tree_width = 50
+
+nnoremap <C-n> :LuaTreeToggle<CR>
+nnoremap <Leader>n :LuaTreeFindFile<CR>
+" }}}

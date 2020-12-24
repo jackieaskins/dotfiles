@@ -19,7 +19,7 @@ lua require'init'
 " Folds {{{
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
-autocmd FileType vim setlocal foldmethod=marker
+autocmd FileType vim setlocal foldmethod=marker foldlevel=0
 highlight Folded guifg=PeachPuff4
 set foldlevel=99 " Start folds expanded by default
 set foldcolumn=2 " Show fold column with width 2

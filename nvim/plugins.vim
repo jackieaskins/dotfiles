@@ -67,10 +67,13 @@ Plug 'tpope/vim-surround'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/telescope.nvim'
+" Tree - File explorer
+Plug 'kyazdani42/nvim-tree.lua'
 " Treesitter - Syntax highlighting and other utils
-Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " DevIcons
+Plug 'kyazdani42/nvim-web-devicons'
 Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
