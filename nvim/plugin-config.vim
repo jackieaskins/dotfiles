@@ -16,14 +16,14 @@ let g:closetag_filenames = '*.html,*.js,*.jsx,*.ts,*.tsx'
 let g:closetag_xhtml_filenames = '*.js,*.jsx,*.ts,*.tsx'
 let g:closetag_emptyTags_caseSensitive = 1
 let g:closetag_close_shortcut = '\>'
-let g:closetag_regions = {
-    \ 'typescriptreact': 'jsxRegion,tsxRegion',
-    \ 'javascriptreact': 'jsxRegion',
-    \ 'typescript': 'jsxRegion,tsxRegion',
-    \ 'javascript': 'jsxRegion',
-    \ 'typescript.tsx': 'jsxRegion,tsxRegion',
-    \ 'javascript.jsx': 'jsxRegion',
-    \ }
+" let g:closetag_regions = {
+"     \ 'typescriptreact': 'jsxRegion,tsxRegion',
+"     \ 'javascriptreact': 'jsxRegion',
+"     \ 'typescript': 'jsxRegion,tsxRegion',
+"     \ 'javascript': 'jsxRegion',
+"     \ 'typescript.tsx': 'jsxRegion,tsxRegion',
+"     \ 'javascript.jsx': 'jsxRegion',
+"     \ }
 " }}}
 
 " Emmet {{{
@@ -117,6 +117,11 @@ set completeopt=menuone,noinsert,noselect
 set shortmess+=c " avoid showing extra message when using completion
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
 
+autocmd BufWritePre *.js lua vim.lsp.buf.formatting_sync(nil, 1000)
+autocmd BufWritePre *.jsx lua vim.lsp.buf.formatting_sync(nil, 1000)
+autocmd BufWritePre *.ts lua vim.lsp.buf.formatting_sync(nil, 1000)
+autocmd BufWritePre *.tsx lua vim.lsp.buf.formatting_sync(nil, 1000)
+
 nnoremap [g        <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
 nnoremap ]g        <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
 nnoremap <leader>d <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
@@ -130,6 +135,7 @@ nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 
 nnoremap <leader>rn <cmd>lua vim.lsp.buf.rename()<CR>
+nnoremap <leader>ef <cmd>lua vim.lsp.buf.formatting()<CR>
 " }}}
 
 " Markdown Preview {{{

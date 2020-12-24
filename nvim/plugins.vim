@@ -43,7 +43,6 @@ Plug 'airblade/vim-gitgutter'
 Plug 'itchyny/lightline.vim'
 " LSP
 Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-lua/completion-nvim'
 Plug 'nvim-lua/lsp-status.nvim'
 " Markdown Preview
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
