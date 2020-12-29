@@ -18,9 +18,37 @@ local custom_attach = function(client)
   lsp_status.on_attach(client)
 end
 
+local eslint = {
+  lintCommand = './node_modules/.bin/eslint -f unix --stdin --stdin-filename ${INPUT}',
+  lintStdin = true,
+  lintIgnoreExitCode = true
+}
+
+local prettier = {
+  formatCommand = './node_modules/.bin/prettier',
+}
+
+lspconfig.efm.setup{
+  filetypes = { 'typescript', 'javascript', 'typescriptreact', 'javascriptreact' },
+  on_attach = custom_attach,
+  init_options = { documentFormatting = true },
+  settings = {
+    root_markers = { '.git/' },
+    languages = {
+      typescript = { eslint, prettier },
+      javascript = { eslint, prettier },
+      typescriptreact = { eslint, prettier },
+      javascriptreact = { eslint, prettier }
+    }
+  }
+}
+
 lspconfig.tsserver.setup{
   capabilities = lsp_status.capabilities,
-  on_attach = custom_attach
+  on_attach = function(client)
+    client.resolved_capabilities.document_formatting = false
+    custom_attach(client)
+  end
 }
 
 lspconfig.sumneko_lua.setup{
@@ -34,67 +62,6 @@ lspconfig.sumneko_lua.setup{
       }
     }
   }
-}
-
-local eslint = {
-  command = './node_modules/.bin/eslint',
-  rootPatterns = { '.git' },
-  debounce = 100,
-  args = { '--stdin', '--stdin-filename', '%filepath', '--format', 'json' },
-  sourceName = 'eslint',
-  parseJson = {
-    errorsRoot = '[0].messages',
-    line = 'line',
-    column = 'column',
-    endLine = 'endLine',
-    endColumn = 'endColumn',
-    message = '[eslint] ${message} [${ruleId}]',
-    security = 'severity'
-  },
-  securities = {
-    [2] = 'error',
-    [1] = 'warning'
-  }
-}
-
-local prettier = {
-  command = './node_modules/.bin/prettier',
-  args = { '--stdin', '--stdin-filepath', '%filepath' },
-  rootPatterns = {
-    '.prettierrc',
-    '.prettierrc.json',
-    '.prettierrc.toml',
-    '.prettierrc.json',
-    '.prettierrc.yml',
-    '.prettierrc.yaml',
-    '.prettierrc.json5',
-    '.prettierrc.js',
-    '.prettierrc.cjs',
-    'prettier.config.js',
-    'prettier.config.cjs',
-  }
-}
-
-lspconfig.diagnosticls.setup{
-  capabilities = lsp_status.capabilities,
-  on_attach = custom_attach,
-  filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
-  init_options = {
-    linters = { eslint = eslint },
-    filetypes = {
-      javascript = 'eslint',
-      javascriptreact = 'eslint',
-      typescript = 'eslint',
-      typescriptreact = 'eslint'
-    },
-    formatters = { prettier = prettier },
-    formatFiletypes = {
-      javascript = 'prettier',
-      typescript = 'prettier',
-      javascriptreact = 'prettier',
-      typescriptreact = 'prettier'
-    },
-  },
 }
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
