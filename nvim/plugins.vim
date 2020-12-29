@@ -21,6 +21,8 @@ call plug#begin('~/.local/share/nvim/plugged')
 " Theme
 Plug 'tyrannicaltoucan/vim-quantum'
 
+" ALE
+" Plug 'dense-analysis/ale'
 " Better Whitespace
 Plug 'ntpeters/vim-better-whitespace'
 " Closer - Autoclose braces on enter
@@ -41,6 +43,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 " Lightline - Improved status/tabline
 Plug 'itchyny/lightline.vim'
+Plug 'maximbaz/lightline-ale'
 " LSP
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/lsp-status.nvim'

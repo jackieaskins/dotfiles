@@ -18,31 +18,6 @@ local custom_attach = function(client)
   lsp_status.on_attach(client)
 end
 
-local eslint = {
-  lintCommand = './node_modules/.bin/eslint -f unix --stdin --stdin-filename ${INPUT}',
-  lintStdin = true,
-  lintIgnoreExitCode = true
-}
-
-local prettier = {
-  formatCommand = './node_modules/.bin/prettier',
-}
-
-lspconfig.efm.setup{
-  filetypes = { 'typescript', 'javascript', 'typescriptreact', 'javascriptreact' },
-  on_attach = custom_attach,
-  init_options = { documentFormatting = true },
-  settings = {
-    root_markers = { '.git/' },
-    languages = {
-      typescript = { eslint, prettier },
-      javascript = { eslint, prettier },
-      typescriptreact = { eslint, prettier },
-      javascriptreact = { eslint, prettier }
-    }
-  }
-}
-
 lspconfig.tsserver.setup{
   capabilities = lsp_status.capabilities,
   on_attach = function(client)

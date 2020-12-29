@@ -5,6 +5,29 @@ let g:quantum_black = 1
 silent! colorscheme quantum " Don't complain if colorscheme isn't installed yet
 " }}}
 
+" ALE {{{
+let g:ale_fix_on_save = 1
+let g:ale_fix_on_save_ignore = ['eslint']
+let g:ale_fixers = {
+      \ 'javascript': ['eslint', 'prettier'],
+      \ 'javascriptreact': ['eslint', 'prettier'],
+      \ 'typescript': ['eslint', 'prettier'],
+      \ 'typescriptreact': ['eslint', 'prettier']
+      \ }
+" let g:ale_lint_delay = 50
+let g:ale_linters = {
+      \ 'java': [],
+      \ 'javascript': ['eslint'],
+      \ 'javascriptreact': ['eslint'],
+      \ 'typescript': ['eslint'],
+      \ 'typescriptreact': ['eslint']
+      \ }
+
+nmap <silent> <leader>af :<C-u>ALEFix<cr>
+nmap <silent> [a <Plug>(ale_previous_wrap)
+nmap <silent> ]a <Plug>(ale_next_wrap)
+" }}}
+
 " Better Whitespace {{{
 command! SW StripWhitespace
 let g:better_whitespace_guicolor = '#dd7186'
@@ -79,7 +102,7 @@ let g:lightline.active = {
       \ 'left': [ [ 'mode', 'paste' ],
       \           [ 'fugitive', 'readonly', 'filename', 'modified' ],
       \           [ 'lsp_status' ] ],
-      \ 'right': [ [ ],
+      \ 'right': [ [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_infos', 'linter_ok' ],
       \            [ 'lineinfo', 'percent' ],
       \            [ 'filetype' ] ]
       \ }
@@ -89,11 +112,25 @@ let g:lightline.inactive = {
       \ 'right': [ [ 'lineinfo' ],
       \            [ 'percent' ] ],
       \ }
+let g:lightline.component_expand = {
+      \  'linter_checking': 'lightline#ale#checking',
+      \  'linter_infos': 'lightline#ale#infos',
+      \  'linter_warnings': 'lightline#ale#warnings',
+      \  'linter_errors': 'lightline#ale#errors',
+      \  'linter_ok': 'lightline#ale#ok',
+      \ }
 let g:lightline.component_function = {
       \ 'filename': 'LightlineFilename',
       \ 'fugitive': 'LightlineBranch',
       \ 'filetype': 'LightlineFiletype',
       \ 'lsp_status': 'LspStatus'
+      \ }
+let g:lightline.component_type = {
+      \     'linter_checking': 'right',
+      \     'linter_infos': 'right',
+      \     'linter_warnings': 'warning',
+      \     'linter_errors': 'error',
+      \     'linter_ok': 'right',
       \ }
 let g:lightline.tabline = {
       \ 'left': [ [ 'tabs' ] ],
@@ -117,25 +154,19 @@ set completeopt=menuone,noinsert,noselect
 set shortmess+=c " avoid showing extra message when using completion
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
 
-autocmd BufWritePre *.js lua vim.lsp.buf.formatting_sync(nil, 1000)
-autocmd BufWritePre *.jsx lua vim.lsp.buf.formatting_sync(nil, 1000)
-autocmd BufWritePre *.ts lua vim.lsp.buf.formatting_sync(nil, 1000)
-autocmd BufWritePre *.tsx lua vim.lsp.buf.formatting_sync(nil, 1000)
+nnoremap [g         <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
+nnoremap ]g         <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
+nnoremap <leader>d  <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
+nnoremap <leader>ld <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
 
-nnoremap [g        <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
-nnoremap ]g        <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
-nnoremap <leader>d <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
-
-" Commands
-nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <silent> gi    <cmd>lua vim.lsp.buf.implementation()<CR>
 nnoremap <silent> gy    <cmd>lua vim.lsp.buf.type_definition()<CR>
 nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 
 nnoremap <leader>rn <cmd>lua vim.lsp.buf.rename()<CR>
-nnoremap <leader>ef <cmd>lua vim.lsp.buf.formatting()<CR>
 " }}}
 
 " Markdown Preview {{{
