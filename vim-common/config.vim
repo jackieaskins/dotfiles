@@ -252,6 +252,7 @@ endif
 
 nnoremap <C-p> :Files<CR>
 nnoremap <Leader>/ :Rg<Space>
+nnoremap <Leader>rg :Rg<CR>
 nnoremap <Leader>f :Rg<Space><C-r><C-w><CR>
 nnoremap <Leader>gs :GFiles?<CR>
 
