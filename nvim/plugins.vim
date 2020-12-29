@@ -22,7 +22,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'tyrannicaltoucan/vim-quantum'
 
 " ALE
-" Plug 'dense-analysis/ale'
+Plug 'dense-analysis/ale'
 " Better Whitespace
 Plug 'ntpeters/vim-better-whitespace'
 " Closer - Autoclose braces on enter
