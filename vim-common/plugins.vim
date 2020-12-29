@@ -18,8 +18,6 @@ call plug#begin(has('nvim') ? '~/.local/share/nvim/plugged' : '~/.vim/plugged')
 Plug 'tyrannicaltoucan/vim-quantum'
 
 "" Plugins
-" ALE
-Plug 'dense-analysis/ale'
 " Better Whitespace
 Plug 'ntpeters/vim-better-whitespace'
 " Closer - Autoclose braces on enter

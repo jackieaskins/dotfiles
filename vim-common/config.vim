@@ -101,24 +101,6 @@ map <C-h> <C-w>h
 map <C-l> <C-w>l
 
 "" Plugins {{{
-" Ale
-let g:ale_fixers = {
-      \ 'javascript': ['eslint'],
-      \ 'javascriptreact': ['eslint'],
-      \ 'typescript': ['eslint'],
-      \ 'typescriptreact': ['eslint']
-      \ }
-let g:ale_lint_delay = 50
-let g:ale_linters = {
-      \ 'java': [],
-      \ 'javascript': ['eslint'],
-      \ 'javascriptreact': ['eslint'],
-      \ 'typescript': ['eslint'],
-      \ 'typescriptreact': ['eslint']
-      \ }
-
-nmap <silent> <leader>af :<C-u>ALEFix<cr>
-
 " Better Whitespace
 command! SW StripWhitespace
 let g:better_whitespace_guicolor = '#dd7186'
@@ -143,6 +125,7 @@ inoremap <silent><expr> <c-space> coc#refresh()
 let g:coc_config_home = '~/dotfiles/vim-common'
 let g:coc_global_extensions = [
       \ 'coc-css',
+      \ 'coc-diagnostic',
       \ 'coc-emmet',
       \ 'coc-highlight',
       \ 'coc-html',
@@ -163,7 +146,11 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-nmap <silent> <leader>qf <Plug>(coc-fix-current)
+
+nmap <Leader>qf <Plug>(coc-fix-current)
+nmap <Leader>rn <Plug>(coc-rename)
+nnoremap <silent> <Leader>s :<C-u>CocList -I symbols<cr>
+nnoremap <silent> <Leader>d :<C-u>CocList diagnostics<cr>
 
 " Use `[g` and `]g` to navigate diagnostics
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
@@ -178,10 +165,6 @@ function! s:show_documentation()
     call CocAction('doHover')
   endif
 endfunction
-
-nmap <Leader>rn <Plug>(coc-rename)
-nnoremap <silent> <Leader>s :<C-u>CocList -I symbols<cr>
-nnoremap <silent> <Leader>d :<C-u>CocList diagnostics<cr>
 
 "" coc-snippets
 inoremap <silent><expr> <TAB>
