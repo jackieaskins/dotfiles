@@ -43,7 +43,11 @@
     "typescript": ["javascript"],
     "typescriptreact": ["typescript", "javascriptreact"]
   },
-  "snippets.userSnippetsDirectory": "~/dotfiles/vim-common/snippets",
+  "snippets.ultisnips.enable": false,
+  "snippets.snipmate.enable": false,
+  "snippets.textmateSnippetsRoots": [
+    "~/dotfiles/vim-common/snippets/textmate"
+  ],
 
   // SolarGraph (Ruby) Configuration
   "solargraph.diagnostics": true,

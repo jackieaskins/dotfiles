@@ -1,0 +1,12 @@
+{
+  "React Function Component": {
+    "prefix": "rfc",
+    "body": [
+      "const ${1:$TM_FILENAME_BASE} = (): JSX.Element => (",
+      "  ${2:<div />}",
+      ")",
+      "",
+      "export default $1;"
+    ]
+  }
+}
