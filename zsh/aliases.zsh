@@ -30,6 +30,7 @@ alias gst='git status'
 alias gsta='git stash push'
 alias gstl='git stash list'
 alias gstp='git stash pop'
+alias gstd='git stash drop'
 alias gsu='git submodule update --recursive'
 
 # Dotfiles
