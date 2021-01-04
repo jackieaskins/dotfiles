@@ -9,13 +9,6 @@
   ],
   "coc.source.file.trimSameExts": [".ts", ".js", ".jsx", ".tsx"],
 
-  "diagnostic-languageserver.filetypes": {
-    "javascript": "eslint",
-    "javascriptreact": "eslint",
-    "typescript": "eslint",
-    "typescriptreact": "eslint"
-  },
-
   // General Diagnostic Configuration
   "diagnostic.errorSign": "•",
   "diagnostic.warningSign": "•",

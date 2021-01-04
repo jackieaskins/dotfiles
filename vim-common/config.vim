@@ -125,8 +125,8 @@ inoremap <silent><expr> <c-space> coc#refresh()
 let g:coc_config_home = '~/dotfiles/vim-common'
 let g:coc_global_extensions = [
       \ 'coc-css',
-      \ 'coc-diagnostic',
       \ 'coc-emmet',
+      \ 'coc-eslint',
       \ 'coc-highlight',
       \ 'coc-html',
       \ 'coc-jest',
@@ -165,6 +165,9 @@ function! s:show_documentation()
     call CocAction('doHover')
   endif
 endfunction
+
+"" coc-eslint
+nnoremap <Leader>ef :CocCommand eslint.executeAutofix<CR>
 
 "" coc-snippets
 inoremap <silent><expr> <TAB>
