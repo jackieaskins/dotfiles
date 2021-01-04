@@ -17,13 +17,18 @@
   "diagnostic.virtualTextCurrentLineOnly": false,
   "diagnostic.virtualTextPrefix": "‣ ",
   "diagnostic.checkCurrentLine": true,
+  "diagnostic.enableMessage": "jump",
 
   // JavaScript/TypeScript Configuration
+  "javascript.format.enabled": false,
   "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
   "javascript.validate.enable": false,
   "javascript.preferences.importModuleSpecifier": "relative",
+  "javascript.suggest.completeFunctionCalls": false,
   "tsserver.npm": "/usr/local/bin/npm",
+  "typescript.format.enabled": false,
   "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
+  "typescript.suggest.completeFunctionCalls": false,
   "typescript.preferences.importModuleSpecifier": "relative",
   "typescript.validate.enable": true,
 
@@ -41,9 +46,14 @@
   "snippets.textmateSnippetsRoots": [
     "~/dotfiles/vim-common/snippets"
   ],
+  "snippets.loadFromExtensions": false,
+  "snippets.priority": 99,
 
   // SolarGraph (Ruby) Configuration
   "solargraph.diagnostics": true,
+
+  // Suggest
+  "suggest.languageSourcePriority": 98,
 
   // YAML Configuration
   "yaml.format.enable": true
