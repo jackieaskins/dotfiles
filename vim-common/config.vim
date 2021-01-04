@@ -84,6 +84,9 @@ else
   let g:gitgutter_sign_column_always = 1
 endif
 
+" Helpful mappings
+nnoremap <Leader>{ i{<CR>return <Esc>$%o};<Esc>^=i{
+
 " Searching
 if has('nvim')
   set inccommand=nosplit " show matches when using substitute/replace
