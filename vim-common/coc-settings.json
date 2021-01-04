@@ -46,7 +46,7 @@
   "snippets.ultisnips.enable": false,
   "snippets.snipmate.enable": false,
   "snippets.textmateSnippetsRoots": [
-    "~/dotfiles/vim-common/snippets/textmate"
+    "~/dotfiles/vim-common/snippets"
   ],
 
   // SolarGraph (Ruby) Configuration

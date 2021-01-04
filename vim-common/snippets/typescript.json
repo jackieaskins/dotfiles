@@ -1,0 +1,11 @@
+{
+  "Jest Module Mock Require Actual": {
+    "prefix": "mmra",
+    "body": [
+      "jest.mock('${1}', () => ({",
+      "  ${2:...jest.requireActual<any>('$1'),}",
+      "  ${3}",
+      "}));"
+    ]
+  }
+}
