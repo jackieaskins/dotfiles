@@ -125,19 +125,17 @@ inoremap <silent><expr> <c-space> coc#refresh()
 let g:coc_config_home = '~/dotfiles/vim-common'
 let g:coc_global_extensions = [
       \ 'coc-css',
-      \ 'coc-emmet',
       \ 'coc-eslint',
       \ 'coc-highlight',
       \ 'coc-html',
-      \ 'coc-jest',
-      \ 'coc-marketplace',
       \ 'coc-java',
+      \ 'coc-jest',
       \ 'coc-json',
+      \ 'coc-marketplace',
       \ 'coc-prettier',
       \ 'coc-python',
       \ 'coc-snippets',
       \ 'coc-solargraph',
-      \ 'coc-styled-components',
       \ 'coc-tsserver',
       \ 'coc-yaml',
       \ ]
@@ -149,8 +147,8 @@ nmap <silent> gr <Plug>(coc-references)
 
 nmap <Leader>qf <Plug>(coc-fix-current)
 nmap <Leader>rn <Plug>(coc-rename)
-nnoremap <silent> <Leader>s :<C-u>CocList -I symbols<cr>
-nnoremap <silent> <Leader>d :<C-u>CocList diagnostics<cr>
+nmap <Leader>s :<C-u>CocList -I symbols<cr>
+nmap <Leader>d :<C-u>CocList diagnostics<cr>
 
 " Use `[g` and `]g` to navigate diagnostics
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
@@ -182,6 +180,9 @@ function! s:check_back_space() abort
 endfunction
 
 let g:coc_snippet_next = '<tab>'
+
+" Commentary
+autocmd FileType json setlocal commentstring=\/\/\ %s
 
 " Emmet
 let g:user_emmet_leader_key = '\m'
@@ -259,11 +260,6 @@ nnoremap <Leader>rg :Rg<CR>
 nnoremap <Leader>f :Rg<Space><C-r><C-w><CR>
 nnoremap <Leader>gs :GFiles?<CR>
 
-" Istanbul
-let g:istanbul#jsonPath = ['coverage/coverage-final.json']
-command! IU IstanbulUpdate
-command! IT IstanbulToggle
-
 " Java Syntax
 highlight link JavaIdentifier NONE
 
@@ -289,15 +285,11 @@ function! LightlineFiletype()
   return index(['', 'gitcommit'], &filetype) < 0 ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft'
 endfunction
 
-function! LightlineBranch()
-  return fugitive#head() !=# '' ? '' . ' ' . fugitive#head() : ''
-endfunction
-
 let g:lightline.active = {
       \ 'left': [ [ 'mode', 'paste' ],
-      \           [ 'fugitive', 'readonly', 'filename', 'modified' ],
+      \           [ 'readonly', 'filename', 'modified' ],
       \           ['coc_status' ] ],
-      \ 'right': [ [ 'coc_errors', 'coc_warnings', 'coc_ok' ],
+      \ 'right': [ [ 'coc_errors', 'coc_warnings', 'coc_info', 'coc_ok' ],
       \            [ 'lineinfo', 'percent' ],
       \            [ 'filetype' ] ]
       \ }
@@ -309,7 +301,6 @@ let g:lightline.inactive = {
       \ }
 let g:lightline.component_function = {
       \ 'filename': 'LightlineFilename',
-      \ 'fugitive': 'LightlineBranch',
       \ 'filetype': 'LightlineFiletype'
       \ }
 let g:lightline.tabline = {
@@ -326,15 +317,8 @@ let g:lightline.tab = {
 
 call lightline#coc#register()
 
-" Markdown Preview
-nmap <C-m> <Plug>MarkdownPreview
-
 " MatchUp
 let g:matchup_matchparen_offscreen = { 'method': 'status_manual' }
-
-" NerdCommenter
-let g:NERDSpaceDelims = 1 " Add space after comment
-let g:NERDDefaultAlign = 'left'
 
 " NerdTree
 let g:NERDTreeWinSize = 60
@@ -354,9 +338,6 @@ command! PC PlugClean
 " Polyglot
 "" JSX
 let g:jsx_ext_required = 0
-
-" Scalpel
-nmap <Leader>es <Plug>(Scalpel)
 
 " SplitJoin
 let g:splitjoin_html_attributes_bracket_on_new_line = 1
@@ -393,9 +374,4 @@ let g:startify_lists = [
       \ { 'type': 'bookmarks',                'header': [ '   Bookmarks'          ] },
       \ { 'type': 'commands',                 'header': [ '   Commands'           ] },
       \ ]
-
-" Vista
-nnoremap <Leader>v :Vista!!<CR>
-let g:vista_echo_cursor_strategy = 'floating_win'
-let g:vista#renderer#enable_icon = 0
 " }}}
