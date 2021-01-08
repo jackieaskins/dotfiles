@@ -17,19 +17,20 @@
   "diagnostic.virtualTextCurrentLineOnly": false,
   "diagnostic.virtualTextPrefix": "‣ ",
   "diagnostic.checkCurrentLine": true,
-  "diagnostic.enableMessage": "jump",
 
   // JavaScript/TypeScript Configuration
   "javascript.format.enabled": false,
   "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
   "javascript.validate.enable": false,
   "javascript.preferences.importModuleSpecifier": "relative",
+  "javascript.preferences.importModuleSpecifierEnding": "minimal",
   "javascript.suggest.completeFunctionCalls": false,
   "tsserver.npm": "/usr/local/bin/npm",
   "typescript.format.enabled": false,
   "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
   "typescript.suggest.completeFunctionCalls": false,
   "typescript.preferences.importModuleSpecifier": "relative",
+  "typescript.preferences.importModuleSpecifierEnding": "minimal",
   "typescript.validate.enable": true,
 
   // Python
@@ -38,8 +39,7 @@
   // Snippets Configuration
   "snippets.extends": {
     "javascriptreact": ["javascript"],
-    "typescript": ["javascript"],
-    "typescriptreact": ["typescript", "javascriptreact"]
+    "typescriptreact": ["typescript"]
   },
   "snippets.ultisnips.enable": false,
   "snippets.snipmate.enable": false,

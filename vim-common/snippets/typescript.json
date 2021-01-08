@@ -1,4 +1,12 @@
 {
+  "Jest Module Mock": {
+    "prefix": "mm",
+    "body": [
+      "jest.mock('${1}', () => ({",
+      "  ${2}",
+      "}));"
+    ]
+  },
   "Jest Module Mock Require Actual": {
     "prefix": "mmra",
     "body": [
@@ -6,6 +14,54 @@
       "  ${2:...jest.requireActual<any>('$1'),}",
       "  ${3}",
       "}));"
+    ]
+  },
+  "Jest Before Each Block": {
+    "prefix": "be",
+    "body": [
+      "beforeEach(() => {",
+      "  ${1}",
+      "});"
+    ]
+  },
+  "Jest Describe Block": {
+    "prefix": "desc",
+    "body": [
+      "describe('${1}', () => {",
+      "  ${2}",
+      "});"
+    ]
+  },
+  "Jest Test Case": {
+    "prefix": "it",
+    "body": [
+      "it('${1}', () => {",
+      "  ${2}",
+      "});"
+    ]
+  },
+  "Except To Equal": {
+    "prefix": "ete",
+    "body": [
+      "expect(${1}).toEqual(${2});"
+    ]
+  },
+  "Except To Match Snapshot": {
+    "prefix": "etms",
+    "body": [
+      "expect(${1}).toMatchSnapshot();"
+    ]
+  },
+  "Except To Have Been Called": {
+    "prefix": "ethbc",
+    "body": [
+      "expect(${1}).toHaveBeenCalled();"
+    ]
+  },
+  "Expect To Have Been Called With": {
+    "prefix": "ethbcw",
+    "body": [
+      "expect(${1}).toHaveBeenCalledWith(${2});"
     ]
   }
 }
