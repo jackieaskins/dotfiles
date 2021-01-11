@@ -53,10 +53,12 @@ Plug 'josa42/vim-lightline-coc'
 Plug 'andymass/vim-matchup'
 " Move
 Plug 'matze/vim-move'
-" NerdTree - Visual file tree
-Plug 'scrooloose/nerdtree'
-" NerdTree Git Plugin
-Plug 'Xuyuanp/nerdtree-git-plugin'
+if !has('nvim-0.5')
+  " NerdTree - Visual file tree
+  Plug 'scrooloose/nerdtree'
+  " NerdTree Git Plugin
+  Plug 'Xuyuanp/nerdtree-git-plugin'
+end
 " Repeat - Remap . command to do more
 Plug 'tpope/vim-repeat'
 " Splitjoin - Split/join single/multi-line statements
@@ -65,10 +67,17 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'mhinz/vim-startify'
 " Surround - Surround in brackets/quotes
 Plug 'tpope/vim-surround'
+if has('nvim-0.5')
+  " Tree - File explorer
+  Plug 'kyazdani42/nvim-tree.lua'
+end
 
 " Polyglot - All-in-one Syntax
 Plug 'sheerun/vim-polyglot'
 " DevIcons
 Plug 'ryanoasis/vim-devicons'
+if has('nvim-0.5')
+  Plug 'kyazdani42/nvim-web-devicons' " Used for nvim-tree
+end
 
 call plug#end()

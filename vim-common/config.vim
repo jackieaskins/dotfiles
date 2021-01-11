@@ -1,12 +1,12 @@
+" Set space as Leader key
+nnoremap <Space> <nop>
+let mapleader = " "
+
 source ~/dotfiles/vim-common/plugins.vim
 
 let g:node_host_prog = '/usr/local/bin/neovim-node-host'
 
 set encoding=utf8
-
-" Set space as Leader key
-nnoremap <Space> <nop>
-let mapleader = " "
 
 " Reload Vim
 nnoremap <Leader>re :source $MYVIMRC<CR>
@@ -332,14 +332,16 @@ call lightline#coc#register()
 let g:matchup_matchparen_offscreen = { 'method': 'status_manual' }
 
 " NerdTree
-let g:NERDTreeWinSize = 60
-let NERDTreeShowHidden = 1
-let NERDTreeQuitOnOpen = 1
-let NERDTreeIgnore = ['node_modules', '\.git$', '\.DS_Store', 'tags.lock']
-let NERDTreeMinimalUI = 1
+if !has('nvim-0.5')
+  let g:NERDTreeWinSize = 60
+  let NERDTreeShowHidden = 1
+  let NERDTreeQuitOnOpen = 1
+  let NERDTreeIgnore = ['node_modules', '\.git$', '\.DS_Store', 'tags.lock']
+  let NERDTreeMinimalUI = 1
 
-nnoremap <C-n> :NERDTreeToggle<CR>
-nnoremap <Leader>n :NERDTreeFind<CR>
+  nnoremap <C-n> :NERDTreeToggle<CR>
+  nnoremap <Leader>n :NERDTreeFind<CR>
+end
 
 " Plug
 command! PI PlugInstall
@@ -385,4 +387,17 @@ let g:startify_lists = [
       \ { 'type': 'bookmarks',                'header': [ '   Bookmarks'          ] },
       \ { 'type': 'commands',                 'header': [ '   Commands'           ] },
       \ ]
+
+" Tree
+if has('nvim-0.5')
+  let g:nvim_tree_follow = 1
+  let g:nvim_tree_git_hl = 1
+  let g:nvim_tree_ignore = ['.git', 'node_modules', '.DS_Store']
+  let g:nvim_tree_indent_markers = 1
+  let g:nvim_tree_quit_on_open = 1
+  let g:nvim_tree_width = 50
+
+  nnoremap <C-n> :NvimTreeToggle<CR>
+  nnoremap <Leader>n :NvimTreeFindFile<CR>
+end
 " }}}
