@@ -11,8 +11,8 @@
     "prefix": "mmra",
     "body": [
       "jest.mock(\"${1}\", () => ({",
-      "  ${2:...jest.requireActual(\"$1\"),}",
-      "  ${3}",
+      "  ...jest.requireActual(\"$1\"),",
+      "  ${2}",
       "}));"
     ]
   },
