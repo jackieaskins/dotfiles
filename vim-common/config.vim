@@ -170,6 +170,11 @@ endfunction
 "" coc-eslint
 nnoremap <Leader>ef :CocCommand eslint.executeAutofix<CR>
 
+"" coc-jest
+command! -nargs=0 J :call CocAction('runCommand', 'jest.projectTest')
+command! -nargs=0 JC :call CocAction('runCommand', 'jest.fileTest', ['%'])
+nnoremap <Leader>jt :call CocAction('runCommand', 'jest.singleTest')<CR>
+
 "" coc-snippets
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? coc#_select_confirm() :
