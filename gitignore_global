@@ -6,3 +6,5 @@ tags.temp
 
 .git
 .DS_Store
+
+.ignore

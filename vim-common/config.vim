@@ -105,7 +105,7 @@ map <C-l> <C-w>l
 
 "" Plugins {{{
 " Better Whitespace
-command! SW StripWhitespace
+nmap <Leader>sw :StripWhitespace<CR>
 let g:better_whitespace_guicolor = '#dd7186'
 let g:better_whitespace_filetypes_blacklist = ['diff', 'gitcommit', 'unite', 'qf', 'help', 'markdown']
 
@@ -150,7 +150,7 @@ nmap <silent> gr <Plug>(coc-references)
 
 nmap <Leader>qf <Plug>(coc-fix-current)
 nmap <Leader>rn <Plug>(coc-rename)
-nmap <Leader>s :<C-u>CocList -I symbols<cr>
+nmap <Leader>sy :<C-u>CocList -I symbols<cr>
 nmap <Leader>d :<C-u>CocList diagnostics<cr>
 
 " Use `[g` and `]g` to navigate diagnostics
