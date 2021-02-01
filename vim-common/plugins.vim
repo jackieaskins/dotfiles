@@ -1,4 +1,4 @@
-" Auto-install vim-plug
+" Auto-install vim-plug {{{
 let autoload_plug_path = has('nvim') ? '~/.local/share/nvim/site/autoload/plug.vim' : '~/.vim/autoload/plug.vim'
 
 if empty(glob(autoload_plug_path))
@@ -7,9 +7,17 @@ if empty(glob(autoload_plug_path))
 
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
+" }}}
+
+" Plug Mappings {{{
+command! PI PlugInstall
+command! PU PlugUpgrade | PlugUpdate
+command! PC PlugClean
+command! PD PlugDiff
 
 " Open plugin in GitHub
 nnoremap <Leader>gh yi':!open https://github.com/<C-R>0<CR><CR>
+" }}}
 
 call plug#begin(has('nvim') ? '~/.local/share/nvim/plugged' : '~/.vim/plugged')
 
