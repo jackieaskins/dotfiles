@@ -34,8 +34,10 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'jackieaskins/vim-closer'
 " CloseTag - Autoclose HTML tags
 Plug 'alvan/vim-closetag'
-" CoC - Intellisense
-Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+if !g:use_builtin_lsp
+  " CoC - Intellisense
+  Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+endif
 " Commentary
 Plug 'tpope/vim-commentary'
 " Easymotion
@@ -57,6 +59,12 @@ Plug 'uiiaoo/java-syntax.vim'
 Plug 'itchyny/lightline.vim'
 " Lightline-Coc - Lightline Coc integraiton
 Plug 'josa42/vim-lightline-coc'
+if g:use_builtin_lsp
+  " LSP
+  Plug 'neovim/nvim-lspconfig'
+  Plug 'nvim-lua/lsp-status.nvim'
+  Plug 'hrsh7th/nvim-compe'
+endif
 " MatchUp - Extend bracket matching with %
 Plug 'andymass/vim-matchup'
 " Move

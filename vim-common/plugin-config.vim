@@ -30,73 +30,75 @@ let g:closetag_regions = {
 " }}}
 
 " Coc {{{
-inoremap <silent><expr> <c-space> coc#refresh()
-let g:coc_config_home = '~/dotfiles/vim-common'
-let g:coc_global_extensions = [
-      \ 'coc-css',
-      \ 'coc-eslint',
-      \ 'coc-highlight',
-      \ 'coc-html',
-      \ 'coc-java',
-      \ 'coc-jest',
-      \ 'coc-json',
-      \ 'coc-marketplace',
-      \ 'coc-prettier',
-      \ 'coc-python',
-      \ 'coc-snippets',
-      \ 'coc-solargraph',
-      \ 'coc-tsserver',
-      \ 'coc-yaml',
-      \ ]
+if !g:use_builtin_lsp
+  inoremap <silent><expr> <c-space> coc#refresh()
+  let g:coc_config_home = '~/dotfiles/vim-common'
+  let g:coc_global_extensions = [
+        \ 'coc-css',
+        \ 'coc-eslint',
+        \ 'coc-highlight',
+        \ 'coc-html',
+        \ 'coc-java',
+        \ 'coc-jest',
+        \ 'coc-json',
+        \ 'coc-marketplace',
+        \ 'coc-prettier',
+        \ 'coc-python',
+        \ 'coc-snippets',
+        \ 'coc-solargraph',
+        \ 'coc-tsserver',
+        \ 'coc-yaml',
+        \ ]
 
-nnoremap <silent> gd <Plug>(coc-definition)
-nnoremap <silent> gy <Plug>(coc-type-definition)
-nnoremap <silent> gi <Plug>(coc-implementation)
-nnoremap <silent> gr <Plug>(coc-references)
+  nnoremap <silent> gd <Plug>(coc-definition)
+  nnoremap <silent> gy <Plug>(coc-type-definition)
+  nnoremap <silent> gi <Plug>(coc-implementation)
+  nnoremap <silent> gr <Plug>(coc-references)
 
-nnoremap <Leader>qf <Plug>(coc-fix-current)
-nnoremap <Leader>rn <Plug>(coc-rename)
-nnoremap <Leader>sy :<C-u>CocList -I symbols<cr>
-nnoremap <Leader>d :<C-u>CocList diagnostics<cr>
+  nnoremap <Leader>qf <Plug>(coc-fix-current)
+  nnoremap <Leader>rn <Plug>(coc-rename)
+  nnoremap <Leader>sy :<C-u>CocList -I symbols<cr>
+  nnoremap <Leader>d :<C-u>CocList diagnostics<cr>
 
-" Use `[g` and `]g` to navigate diagnostics
-nnoremap <silent> [g <Plug>(coc-diagnostic-prev)
-nnoremap <silent> ]g <Plug>(coc-diagnostic-next)
+  " Use `[g` and `]g` to navigate diagnostics
+  nnoremap <silent> [g <Plug>(coc-diagnostic-prev)
+  nnoremap <silent> ]g <Plug>(coc-diagnostic-next)
 
-" Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-function! s:show_documentation()
-  if (index(['vim', 'help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
+  " Use K to show documentation in preview window.
+  nnoremap <silent> K :call <SID>show_documentation()<CR>
+  function! s:show_documentation()
+    if (index(['vim', 'help'], &filetype) >= 0)
+      execute 'h '.expand('<cword>')
+    else
+      call CocAction('doHover')
+    endif
+  endfunction
 
-"" coc-eslint
-nnoremap <Leader>ef :CocCommand eslint.executeAutofix<CR>
+  "" coc-eslint
+  nnoremap <Leader>ef :CocCommand eslint.executeAutofix<CR>
 
-"" coc-jest
-command! -nargs=0 J :call CocAction('runCommand', 'jest.projectTest')
-command! -nargs=0 JC :call CocAction('runCommand', 'jest.fileTest', ['%'])
-nnoremap <Leader>jt :call CocAction('runCommand', 'jest.singleTest')<CR>
+  "" coc-jest
+  command! -nargs=0 J :call CocAction('runCommand', 'jest.projectTest')
+  command! -nargs=0 JC :call CocAction('runCommand', 'jest.fileTest', ['%'])
+  nnoremap <Leader>jt :call CocAction('runCommand', 'jest.singleTest')<CR>
 
-"" coc-snippets
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? coc#_select_confirm() :
-      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+  "" coc-snippets
+  inoremap <silent><expr> <TAB>
+        \ pumvisible() ? coc#_select_confirm() :
+        \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+        \ <SID>check_back_space() ? "\<TAB>" :
+        \ coc#refresh()
 
-"" coc-tsserver
-nnoremap <Leader>tf :CocCommand tsserver.executeAutofix<CR>
+  "" coc-tsserver
+  nnoremap <Leader>tf :CocCommand tsserver.executeAutofix<CR>
 
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
+  function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
+  endfunction
 
-let g:coc_snippet_next = '<tab>'
+  let g:coc_snippet_next = '<tab>'
+endif
 " }}}
 
 " Commentary {{{
@@ -210,16 +212,14 @@ endfunction
 let g:lightline.active = {
       \ 'left': [ [ 'mode', 'paste' ],
       \           [ 'readonly', 'filename', 'modified' ],
-      \           ['coc_status' ] ],
-      \ 'right': [ [ 'coc_errors', 'coc_warnings', 'coc_info', 'coc_ok' ],
+      \           g:use_builtin_lsp ? [] : ['coc_status' ] ],
+      \ 'right': [ g:use_builtin_lsp ? [] : [ 'coc_errors', 'coc_warnings', 'coc_info', 'coc_ok' ],
       \            [ 'lineinfo', 'percent' ],
       \            [ 'filetype' ] ]
       \ }
 let g:lightline.inactive = {
-      \ 'left': [ [ 'filename', 'modified' ],
-      \           [ 'lsp_status' ] ],
-      \ 'right': [ [ 'lineinfo' ],
-      \            [ 'percent' ] ],
+      \ 'left': [ [ 'filename', 'modified' ], [ 'lsp_status' ] ],
+      \ 'right': [ [ 'lineinfo' ], [ 'percent' ] ],
       \ }
 let g:lightline.component_function = {
       \ 'filename': 'LightlineFilename',
@@ -233,11 +233,19 @@ let g:lightline.tab_component_function = {
       \ 'filename': 'LightlineTabFilename'
       \ }
 let g:lightline.tab = {
-      \ 'active': ['tabum', 'filename', 'modified'],
+      \ 'active': ['tabnum', 'filename', 'modified'],
       \ 'inactive': ['tabnum', 'filename', 'modified']
       \ }
 
-call lightline#coc#register()
+if !g:use_builtin_lsp
+  call lightline#coc#register()
+endif
+" }}}
+
+" LSP {{{
+if g:use_builtin_lsp
+  lua require'lsp'
+endif
 " }}}
 
 " MatchUp {{{

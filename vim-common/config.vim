@@ -1,4 +1,3 @@
-" let g:node_host_prog = '/usr/local/bin/neovim-node-host'
 
 " Settings {{{
 set nocompatible
@@ -8,11 +7,15 @@ set encoding=utf8
 nnoremap <Space> <nop>
 let mapleader = " "
 
+let g:vimsyn_embed = 'lPr'
+
 " Reload Vim
 nnoremap <Leader>re :source $MYVIMRC<CR>
 
 " SpellCheck
 autocmd BufRead,BufNewFile *.md setlocal spell
+
+let g:use_builtin_lsp = v:false
 
 " Custom settings
 if !empty(glob("~/dotfiles/vim-common/custom.vim"))
@@ -39,7 +42,7 @@ end
 
 " Folds {{{
 set foldmethod=syntax
-autocmd FileType vim setlocal foldmethod=marker foldlevel=0
+autocmd FileType lua,vim setlocal foldmethod=marker foldlevel=0
 autocmd FileType xml setlocal foldmethod=indent
 highlight Folded guifg=PeachPuff4
 set foldlevel=99 " Start folds expanded by default
