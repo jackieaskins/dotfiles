@@ -57,13 +57,14 @@ Plug 'airblade/vim-gitgutter'
 Plug 'uiiaoo/java-syntax.vim'
 " Lightline - Customize status/tabline
 Plug 'itchyny/lightline.vim'
-" Lightline-Coc - Lightline Coc integraiton
 Plug 'josa42/vim-lightline-coc'
+Plug 'spywhere/lightline-lsp'
 if g:use_builtin_lsp
   " LSP
   Plug 'neovim/nvim-lspconfig'
   Plug 'nvim-lua/lsp-status.nvim'
   Plug 'hrsh7th/nvim-compe'
+  Plug 'kosayoda/nvim-lightbulb'
 endif
 " MatchUp - Extend bracket matching with %
 Plug 'andymass/vim-matchup'

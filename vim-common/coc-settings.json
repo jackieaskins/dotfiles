@@ -1,5 +1,6 @@
 {
   // Coc Preferences
+  "coc.preferences.currentFunctionSymbolAutoUpdate": true,
   "coc.preferences.formatOnSaveFiletypes": [
     "html",
     "typescriptreact",

@@ -25,10 +25,6 @@ end
 -- }}}
 
 -- General Settings {{{
-local custom_attach = function(client, bufnr)
-  set_lsp_options_mappings(bufnr)
-end
-
 vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
     virtual_text = {
@@ -36,6 +32,11 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
     }
   }
 )
+
+vim.fn.sign_define("LspDiagnosticsSignError", {text = "", texthl = "LspDiagnosticsSignError"})
+vim.fn.sign_define("LspDiagnosticsSignWarning", {text = "", texthl = "LspDiagnosticsSignWarning"})
+vim.fn.sign_define("LspDiagnosticsSignInformation", {text = "🛈", texthl = "LspDiagnosticsSignInformation"})
+vim.fn.sign_define("LspDiagnosticsSignHint", {text = "!", texthl = "LspDiagnosticsSignHint"})
 -- }}}
 
 -- Completion {{{
@@ -56,10 +57,24 @@ vim.api.nvim_set_keymap('i', '<C-e>', 'compe#close("<C-e>")', compe_opts)
 vim.api.nvim_set_keymap('i', '<Tab>', 'compe#confirm("<Tab>")', compe_opts)
 -- }}}
 
+-- Status {{{
+local lsp_status = require'lsp-status'
+lsp_status.register_progress()
+-- }}}
+
+-- Lightbulb {{{
+vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
+-- }}}
+
 -- Language Servers {{{
+local custom_attach = function(client, bufnr)
+  set_lsp_options_mappings(bufnr)
+  lsp_status.on_attach(client)
+end
+
 local lspconfig = require'lspconfig'
 lspconfig.tsserver.setup{
-  -- capabilities = lsp_status.capabilities,
+  capabilities = lsp_status.capabilities,
   on_attach = function(client, bufnr)
     client.resolved_capabilities.document_formatting = false
     custom_attach(client, bufnr)

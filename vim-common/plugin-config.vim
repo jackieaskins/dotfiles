@@ -188,6 +188,32 @@ highlight link JavaIdentifier NONE
 " }}}
 
 " Lightline {{{
+let s:error_indicator = ' '
+let s:warning_indicator = ' '
+let s:info_indicator = '🛈 '
+let s:hint_indicator = '! '
+let s:ok_indicator = ''
+
+let g:lightline#coc#indicator_errors = s:error_indicator
+let g:lightline#coc#indicator_warnings = s:warning_indicator
+let g:lightline#coc#indicator_info = s:info_indicator
+let g:lightline#coc#indicator_hints = s:hint_indicator
+let g:lightline#coc#indicator_ok = s:ok_indicator
+
+let g:lightline#lsp#indicator_errors = s:error_indicator
+let g:lightline#lsp#indicator_warnings = s:warning_indicator
+let g:lightline#lsp#indicator_infos = s:info_indicator
+let g:lightline#lsp#indicator_hints = s:hint_indicator
+let g:lightline#lsp#indicator_ok = s:ok_indicator
+
+function! LightlineLspStatus()
+  if !g:use_builtin_lsp
+    return get(g:, 'coc_status', '')
+  endif
+
+  return luaeval("require'lsp-statusline'.get_status()")
+endfunction
+
 function! LightlineFilename()
   "" vim-common/config.vim -> v/config.vim
   return expand('%:t') !=# '' ? pathshorten(fnamemodify(expand('%'), ':~:.')) : '[No Name]'
@@ -212,19 +238,35 @@ endfunction
 let g:lightline.active = {
       \ 'left': [ [ 'mode', 'paste' ],
       \           [ 'readonly', 'filename', 'modified' ],
-      \           g:use_builtin_lsp ? [] : ['coc_status' ] ],
-      \ 'right': [ g:use_builtin_lsp ? [] : [ 'coc_errors', 'coc_warnings', 'coc_info', 'coc_ok' ],
+      \           [ 'lsp_status' ] ],
+      \ 'right': [ ['lsp_info', 'lsp_warnings', 'lsp_errors', 'lsp_ok', 'lsp_hints' ],
       \            [ 'lineinfo', 'percent' ],
       \            [ 'filetype' ] ]
       \ }
 let g:lightline.inactive = {
-      \ 'left': [ [ 'filename', 'modified' ], [ 'lsp_status' ] ],
-      \ 'right': [ [ 'lineinfo' ], [ 'percent' ] ],
+      \ 'left': [ [ 'filename', 'modified' ] ],
+      \ 'right': [ [ 'lineinfo', 'percent' ] ],
       \ }
 let g:lightline.component_function = {
       \ 'filename': 'LightlineFilename',
-      \ 'filetype': 'LightlineFiletype'
+      \ 'filetype': 'LightlineFiletype',
+      \ 'lsp_status': 'LightlineLspStatus',
       \ }
+let g:lightline.component_expand = {
+      \ 'lsp_errors': g:use_builtin_lsp ? 'lightline#lsp#errors' : 'lightline#coc#errors',
+      \ 'lsp_warnings': g:use_builtin_lsp ? 'lightline#lsp#warnings' : 'lightline#coc#warnings',
+      \ 'lsp_info': g:use_builtin_lsp ? 'lightline#lsp#infos' : 'lightline#coc#info',
+      \ 'lsp_hints': g:use_builtin_lsp ? 'lightline#lsp#hints' : 'lightline#coc#hints',
+      \ 'lsp_ok': g:use_builtin_lsp ? 'lightline#lsp#ok' : 'lightline#coc#ok'
+      \ }
+let g:lightline.component_type = {
+      \ 'lsp_warnings': 'warning',
+      \ 'lsp_errors': 'error',
+      \ 'lsp_info': 'info',
+      \ 'lsp_hints': 'hint',
+      \ 'lsp_ok': 'left'
+      \ }
+
 let g:lightline.tabline = {
       \ 'left': [ [ 'tabs' ] ],
       \ 'right': [ [ ] ],
@@ -236,10 +278,6 @@ let g:lightline.tab = {
       \ 'active': ['tabnum', 'filename', 'modified'],
       \ 'inactive': ['tabnum', 'filename', 'modified']
       \ }
-
-if !g:use_builtin_lsp
-  call lightline#coc#register()
-endif
 " }}}
 
 " LSP {{{
