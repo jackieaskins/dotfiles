@@ -50,7 +50,9 @@ Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
 " FZF - Fuzzy Finder
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
+if !has('nvim-0.5')
+  Plug 'junegunn/fzf.vim'
+endif
 " GitGutter
 Plug 'airblade/vim-gitgutter'
 " Java Syntax
@@ -84,6 +86,12 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'mhinz/vim-startify'
 " Surround - Surround in brackets/quotes
 Plug 'tpope/vim-surround'
+if has('nvim-0.5')
+  " Telescope
+  Plug 'nvim-lua/popup.nvim'
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-telescope/telescope.nvim'
+endif
 if has('nvim-0.5')
   " Tree - File explorer
   Plug 'kyazdani42/nvim-tree.lua'
