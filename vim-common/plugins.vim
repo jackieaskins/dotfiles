@@ -49,6 +49,10 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'tpope/vim-commentary'
 Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-repeat'
+
+if has('nvim')
+  Plug 'mfussenegger/nvim-dap'
+endif
 " }}}
 
 " File Navigation {{{

@@ -105,6 +105,24 @@ endif
 autocmd FileType json setlocal commentstring=\/\/\ %s
 " }}}
 
+" DAP {{{
+lua << EOF
+require('dap')
+vim.fn.sign_define('DapBreakpoint', {text='●', texthl='WarningMsg', linehl='', numhl=''})
+vim.fn.sign_define('DapLogPoint', {text='◆', texthl='WarningMsg', linehl='', nuhl=''})
+EOF
+
+nnoremap <silent> <F5> :lua require'dap'.continue()<CR>
+nnoremap <silent> <F10> :lua require'dap'.step_over()<CR>
+nnoremap <silent> <F11> :lua require'dap'.step_into()<CR>
+nnoremap <silent> <F12> :lua require'dap'.step_out()<CR>
+nnoremap <leader>dbp :lua require'dap'.toggle_breakpoint()<CR>
+nnoremap <leader>dbc :lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>
+nnoremap <leader>dlp :lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>
+nnoremap <leader>dro :lua require'dap'.repl.open()<CR>
+nnoremap <leader>drl :lua require'dap'.repl.run_last()<CR>
+" }}}
+
 " Emmet {{{
 let g:user_emmet_leader_key = '\m'
 let g:user_emmet_settings = {
@@ -378,6 +396,7 @@ set_keymap('n', '<C-p>',      '<cmd>Telescope find_files find_command=rg,--ignor
 set_keymap('n', '<leader>/',  '<cmd>Telescope live_grep<CR>', opts)
 set_keymap('n', '<leader>f',  '<cmd>Telescope grep_string<CR>', opts)
 set_keymap('n', '<leader>gs', '<cmd>Telescope git_status<CR>', opts)
+set_keymap('n', '<leader>ca', '<cmd>Telescope lsp_code_actions<CR>', opts)
 set_keymap('n', 'gr',         '<cmd>Telescope lsp_references<CR>', opts)
 set_keymap('n', '<leader>ht', '<cmd>Telescope help_tags<CR>', opts)
 set_keymap('n', '<leader>qf', '<cmd>Telescope quickfix<CR>', opts)

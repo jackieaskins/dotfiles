@@ -45,7 +45,7 @@ vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_li
 local lspconfig = require'lspconfig'
 local custom_attach = require'lsp-attach'.custom_attach
 
--- tsserver
+-- tsserver {{{
 lspconfig.tsserver.setup {
   capabilities = lsp_status.capabilities,
   on_attach = function(client, bufnr)
@@ -53,17 +53,18 @@ lspconfig.tsserver.setup {
     custom_attach(client, bufnr)
   end
 }
+-- }}}
 
--- jdtls
-local jdtls = require'jdtls-setup'
+-- jdtls {{{
 vim.api.nvim_exec([[
   augroup java_lsp
     au!
-    au FileType java lua require'jdtls-setup'.start_or_attach()
+    au FileType java lua require'jdtls-setup'.initialize_client()
   augroup end
 ]], true)
+-- }}}
 
--- diagnosticls
+-- diagnosticls {{{
 local eslint = {
   command = './node_modules/.bin/eslint',
   rootPatterns = {'.git'},
@@ -134,4 +135,5 @@ lspconfig.diagnosticls.setup{
     },
   },
 }
+-- }}}
 -- }}}

@@ -9,5 +9,7 @@
 /zsh/custom.zsh
 
 /jdt-language-server-latest
+/java-debug-latest
+/vscode-java-test-latest
 
 .DS_Store
