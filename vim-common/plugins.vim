@@ -50,7 +50,7 @@ Plug 'tpope/vim-commentary'
 Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-repeat'
 
-if has('nvim')
+if g:use_builtin_lsp
   Plug 'mfussenegger/nvim-dap'
 endif
 " }}}

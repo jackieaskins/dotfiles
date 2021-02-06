@@ -106,6 +106,7 @@ autocmd FileType json setlocal commentstring=\/\/\ %s
 " }}}
 
 " DAP {{{
+if g:use_builtin_lsp
 lua << EOF
 require('dap')
 vim.fn.sign_define('DapBreakpoint', {text='●', texthl='WarningMsg', linehl='', numhl=''})
@@ -121,6 +122,7 @@ nnoremap <leader>dbc :lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint c
 nnoremap <leader>dlp :lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>
 nnoremap <leader>dro :lua require'dap'.repl.open()<CR>
 nnoremap <leader>drl :lua require'dap'.repl.run_last()<CR>
+endif
 " }}}
 
 " Emmet {{{
