@@ -71,11 +71,32 @@ local custom_attach = function(client, bufnr)
 end
 
 local lspconfig = require'lspconfig'
-lspconfig.tsserver.setup{
+lspconfig.tsserver.setup {
   capabilities = lsp_status.capabilities,
   on_attach = function(client, bufnr)
     client.resolved_capabilities.document_formatting = false
     custom_attach(client, bufnr)
   end
+}
+
+local eslint = {
+  lintCommand = "./node_modules/.bin/eslint -f unix --stdin --stdin-filename ${INPUT}",
+  lintIgnoreExitCode = true,
+  lintStdin = true
+}
+
+lspconfig.efm.setup {
+  capabilities = lsp_status.capabilities,
+  on_attach = custom_attach,
+  init_options = {documentFormatting = true},
+  settings = {
+    rootMarkers = {".git/"},
+    languages = {
+      typescript = {eslint},
+      javascript = {eslint},
+      typescriptreact = {eslint},
+      javascriptreact = {eslint},
+    }
+  }
 }
 -- }}}

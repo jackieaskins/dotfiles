@@ -59,8 +59,11 @@ Plug 'airblade/vim-gitgutter'
 Plug 'uiiaoo/java-syntax.vim'
 " Lightline - Customize status/tabline
 Plug 'itchyny/lightline.vim'
-Plug 'josa42/vim-lightline-coc'
-Plug 'spywhere/lightline-lsp'
+if has('nvim-0.5')
+  Plug 'spywhere/lightline-lsp'
+else
+  Plug 'josa42/vim-lightline-coc'
+endif
 if g:use_builtin_lsp
   " LSP
   Plug 'neovim/nvim-lspconfig'
