@@ -70,6 +70,7 @@ local custom_attach = function(client, bufnr)
   lsp_status.on_attach(client)
 end
 
+-- tsserver
 local lspconfig = require'lspconfig'
 lspconfig.tsserver.setup {
   capabilities = lsp_status.capabilities,
@@ -79,24 +80,75 @@ lspconfig.tsserver.setup {
   end
 }
 
+-- diagnosticls
 local eslint = {
-  lintCommand = "./node_modules/.bin/eslint -f unix --stdin --stdin-filename ${INPUT}",
-  lintIgnoreExitCode = true,
-  lintStdin = true
+  command = './node_modules/.bin/eslint',
+  rootPatterns = {'.git'},
+  debounce = 100,
+  args = {'--stdin', '--stdin-filename', '%filepath', '--format', 'json'},
+  sourceName = 'eslint',
+  parseJson = {
+    errorsRoot = '[0].messages',
+    line = 'line',
+    column = 'column',
+    endLine = 'endLine',
+    endColumn = 'endColumn',
+    message = '[eslint] ${message} [${ruleId}]',
+    security = 'severity'
+  },
+  securities = {
+    [2] = 'error',
+    [1] = 'warning'
+  }
 }
 
-lspconfig.efm.setup {
+local prettier = {
+  command = './node_modules/.bin/prettier',
+  args = {'--stdin', '--stdin-filepath', '%filepath'},
+  rootPatterns = {
+    '.prettierrc',
+    '.prettierrc.json',
+    '.prettierrc.toml',
+    '.prettierrc.json',
+    '.prettierrc.yml',
+    '.prettierrc.yaml',
+    '.prettierrc.json5',
+    '.prettierrc.js',
+    '.prettierrc.cjs',
+    'prettier.config.js',
+    'prettier.config.cjs',
+    '.git'
+  }
+}
+
+lspconfig.diagnosticls.setup{
   capabilities = lsp_status.capabilities,
   on_attach = custom_attach,
-  init_options = {documentFormatting = true},
-  settings = {
-    rootMarkers = {".git/"},
-    languages = {
-      typescript = {eslint},
-      javascript = {eslint},
-      typescriptreact = {eslint},
-      javascriptreact = {eslint},
-    }
-  }
+  on_attach = function(client, bufnr)
+    vim.api.nvim_exec([[
+      augroup FormatAutogroup
+        autocmd!
+        autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync(nil, 1000)
+      augroup END
+    ]], true)
+    custom_attach(client, bufnr)
+  end,
+  filetypes = {'javascript', 'javascriptreact', 'typescript', 'typescriptreact'},
+  init_options = {
+    linters = {eslint = eslint},
+    filetypes = {
+      javascript = 'eslint',
+      javascriptreact = 'eslint',
+      typescript = 'eslint',
+      typescriptreact = 'eslint'
+    },
+    formatters = {prettier = prettier},
+    formatFiletypes = {
+      javascript = 'prettier',
+      typescript = 'prettier',
+      javascriptreact = 'prettier',
+      typescriptreact = 'prettier'
+    },
+  },
 }
 -- }}}
