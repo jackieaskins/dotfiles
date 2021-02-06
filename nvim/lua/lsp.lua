@@ -1,41 +1,3 @@
--- LSP Options & Mappings {{{
-local set_lsp_options_mappings = function(bufnr)
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-  local opts = { noremap=true, silent=true }
-
-  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-  buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  buf_set_keymap('n', 'gy', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-
-  buf_set_keymap('n', '<leader>lf', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
-  buf_set_keymap('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  buf_set_keymap('n', '<leader>d', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-  buf_set_keymap('n', '<leader>sy', '<cmd>lua vim.document_symbol()<CR>', opts)
-
-  buf_set_keymap('n', '[g', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-  buf_set_keymap('n', ']g', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-
-  buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-
-  vim.api.nvim_exec([[
-    hi link LspReferenceText Visual
-    hi link LspReferenceRead Visual
-    hi link LspReferenceWrite Visual
-
-    augroup document_hightlight
-      autocmd!
-      autocmd CursorHold  * lua vim.lsp.buf.document_highlight()
-      autocmd CursorHoldI * lua vim.lsp.buf.document_highlight()
-      autocmd CursorMoved * lua vim.lsp.buf.clear_references()
-      autocmd CursorMovedI * lua vim.lsp.buf.clear_references()
-    augroup END
-  ]], true)
-end
--- }}}
-
 -- General Settings {{{
 vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
@@ -80,13 +42,10 @@ vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_li
 -- }}}
 
 -- Language Servers {{{
-local custom_attach = function(client, bufnr)
-  set_lsp_options_mappings(bufnr)
-  lsp_status.on_attach(client)
-end
+local lspconfig = require'lspconfig'
+local custom_attach = require'lsp-attach'.custom_attach
 
 -- tsserver
-local lspconfig = require'lspconfig'
 lspconfig.tsserver.setup {
   capabilities = lsp_status.capabilities,
   on_attach = function(client, bufnr)
@@ -94,6 +53,15 @@ lspconfig.tsserver.setup {
     custom_attach(client, bufnr)
   end
 }
+
+-- jdtls
+local jdtls = require'jdtls-setup'
+vim.api.nvim_exec([[
+  augroup java_lsp
+    au!
+    au FileType java lua require'jdtls-setup'.start_or_attach()
+  augroup end
+]], true)
 
 -- diagnosticls
 local eslint = {

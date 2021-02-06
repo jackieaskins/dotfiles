@@ -352,26 +352,37 @@ let g:startify_lists = [
 
 " Telescope {{{
 if g:use_builtin_lsp
-
 lua << EOF
+local actions = require('telescope.actions')
+local builtin = require('telescope.builtin')
+
 require('telescope').setup {
   defaults = {
     layout_strategy = 'flex',
     prompt_position = 'top',
-    sorting_strategy = 'ascending'
+    sorting_strategy = 'ascending',
+    mappings = {
+      i = {
+        ["<C-q>"] = actions.send_selected_to_qflist,
+      },
+      n = {
+        ["<C-q>"] = actions.send_selected_to_qflist,
+      },
+    }
   }
 }
+
+opts = { silent = true, noremap = true }
+local set_keymap = vim.api.nvim_set_keymap
+set_keymap('n', '<C-p>',      '<cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files<CR>', opts)
+set_keymap('n', '<leader>/',  '<cmd>Telescope live_grep<CR>', opts)
+set_keymap('n', '<leader>f',  '<cmd>Telescope grep_string<CR>', opts)
+set_keymap('n', '<leader>gs', '<cmd>Telescope git_status<CR>', opts)
+set_keymap('n', 'gr',         '<cmd>Telescope lsp_references<CR>', opts)
+set_keymap('n', '<leader>ht', '<cmd>Telescope help_tags<CR>', opts)
+set_keymap('n', '<leader>qf', '<cmd>Telescope quickfix<CR>', opts)
+set_keymap('n', '<leader>ll', '<cmd>Telescope loclist<CR>', opts)
 EOF
-
-nnoremap <C-p> :lua require'telescope.builtin'.find_files({ find_command = {'rg','--ignore','--hidden','--files'} })<CR>
-nnoremap <leader>/ :lua require'telescope.builtin'.live_grep{}<CR>
-nnoremap <leader>f :lua require'telescope.builtin'.grep_string{}<CR>
-nnoremap <leader>gs :lua require'telescope.builtin'.git_status{}<CR>
-nnoremap <silent> gr :lua require'telescope.builtin'.lsp_references{}<CR>
-nnoremap <leader>ca :lua require'telescope.builtin'.lsp_code_actions{}<CR>
-nnoremap <leader>cr :lua require'telescope.builtin'.lsp_range_code_actions{}<CR>
-nnoremap <leader>ht :lua require'telescope.builtin'.help_tags{}<CR>
-
 endif
 " }}}
 

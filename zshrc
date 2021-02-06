@@ -59,3 +59,5 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export BAT_THEME="base16"
+
+export PATH=$PATH:$HOME/dotfiles/bin

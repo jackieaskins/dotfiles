@@ -42,7 +42,7 @@ end
 
 " Folds {{{
 set foldmethod=syntax
-autocmd FileType lua,vim setlocal foldmethod=marker foldlevel=0
+autocmd FileType lua,sh,vim setlocal foldmethod=marker foldlevel=0
 autocmd FileType xml setlocal foldmethod=indent
 highlight Folded guifg=PeachPuff4
 set foldlevel=99 " Start folds expanded by default

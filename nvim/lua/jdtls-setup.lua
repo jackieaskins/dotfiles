@@ -1,0 +1,52 @@
+local finders = require'telescope.finders'
+local sorters = require'telescope.sorters'
+local actions = require'telescope.actions'
+local pickers = require'telescope.pickers'
+
+require('jdtls.ui').pick_one_async = function(items, prompt, label_fn, cb)
+  local opts = {}
+  local index = 0
+  pickers.new(opts, {
+      prompt_title = prompt,
+      finder = finders.new_table {
+        results = items,
+        entry_maker = function(entry)
+          index = index + 1
+
+          return {
+            value = entry,
+            display = index .. ': ' .. label_fn(entry),
+            ordinal = index .. label_fn(entry),
+          }
+        end,
+      },
+      sorter = sorters.get_generic_fuzzy_sorter(),
+      attach_mappings = function(prompt_bufnr)
+        actions.goto_file_selection_edit:replace(function()
+          local selection = actions.get_selected_entry(prompt_bufnr)
+          actions.close(prompt_bufnr)
+
+          cb(selection.value)
+        end)
+
+        return true
+      end,
+    }):find()
+end
+
+opts = { silent = true, noremap = true }
+local set_keymap = vim.api.nvim_set_keymap
+set_keymap('n', '<leader>ca', "<cmd>lua require('jdtls').code_action()<CR>", opts)
+set_keymap('v', '<leader>ca', "<esc><cmd>lua require('jdtls').code_action(true)<CR>", opts)
+
+local M = {}
+
+function M.start_or_attach()
+  require('jdtls').start_or_attach({
+    capabilities = require'lsp-status'.capabilities,
+    on_attach = require'lsp-attach'.custom_attach,
+    cmd = {'run_jdtls.sh'},
+  })
+end
+
+return M

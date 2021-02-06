@@ -1,15 +1,13 @@
-/* Vim Common */
-vim-common/custom.vim
+/vim-common/custom.vim
 
-/* Vim */
-vim/autoload
-vim/plugged
+/vim/autoload
+/vim/plugged
 
-/* Neovim */
-nvim/custom.vim
-nvim/spell/
+/nvim/custom.vim
+/nvim/spell/
 
-/* Zsh */
-zsh/custom.zsh
+/zsh/custom.zsh
+
+/jdt-language-server-latest
 
 .DS_Store
