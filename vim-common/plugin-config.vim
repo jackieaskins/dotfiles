@@ -117,11 +117,17 @@ nnoremap <silent> <F5> :lua require'dap'.continue()<CR>
 nnoremap <silent> <F10> :lua require'dap'.step_over()<CR>
 nnoremap <silent> <F11> :lua require'dap'.step_into()<CR>
 nnoremap <silent> <F12> :lua require'dap'.step_out()<CR>
+
 nnoremap <leader>dbp :lua require'dap'.toggle_breakpoint()<CR>
 nnoremap <leader>dbc :lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>
 nnoremap <leader>dlp :lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>
 nnoremap <leader>dro :lua require'dap'.repl.open()<CR>
 nnoremap <leader>drl :lua require'dap'.repl.run_last()<CR>
+
+nnoremap <leader>dlc :lua require'telescope'.extensions.dap.commands{}<CR>
+nnoremap <leader>dco :lua require'telescope'.extensions.dap.configurations{}<CR>
+nnoremap <leader>dlb :lua require'telescope'.extensions.dap.list_breakpoints{}<CR>
+nnoremap <leader>dlv :lua require'telescope'.extensions.dap.variables{}<CR>
 endif
 " }}}
 
@@ -391,6 +397,7 @@ require('telescope').setup {
     }
   }
 }
+require('telescope').load_extension('dap')
 
 opts = { silent = true, noremap = true }
 local set_keymap = vim.api.nvim_set_keymap

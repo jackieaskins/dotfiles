@@ -52,6 +52,7 @@ Plug 'tpope/vim-repeat'
 
 if g:use_builtin_lsp
   Plug 'mfussenegger/nvim-dap'
+  Plug 'nvim-telescope/telescope-dap.nvim'
 endif
 " }}}
 
