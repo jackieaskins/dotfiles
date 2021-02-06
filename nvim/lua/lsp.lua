@@ -19,6 +19,20 @@ local set_lsp_options_mappings = function(bufnr)
   buf_set_keymap('n', ']g', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
 
   buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+
+  vim.api.nvim_exec([[
+    hi link LspReferenceText Visual
+    hi link LspReferenceRead Visual
+    hi link LspReferenceWrite Visual
+
+    augroup document_hightlight
+      autocmd!
+      autocmd CursorHold  * lua vim.lsp.buf.document_highlight()
+      autocmd CursorHoldI * lua vim.lsp.buf.document_highlight()
+      autocmd CursorMoved * lua vim.lsp.buf.clear_references()
+      autocmd CursorMovedI * lua vim.lsp.buf.clear_references()
+    augroup END
+  ]], true)
 end
 -- }}}
 
@@ -27,6 +41,7 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
     virtual_text = {
       spacing = 0,
+      underline = true,
     }
   }
 )
@@ -126,7 +141,7 @@ lspconfig.diagnosticls.setup{
   on_attach = custom_attach,
   on_attach = function(client, bufnr)
     vim.api.nvim_exec([[
-      augroup FormatAutogroup
+      augroup auto_format
         autocmd!
         autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync(nil, 1000)
       augroup END

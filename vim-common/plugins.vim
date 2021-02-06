@@ -21,91 +21,87 @@ nnoremap <Leader>gh yi':!open https://github.com/<C-R>0<CR><CR>
 
 call plug#begin(has('nvim') ? '~/.local/share/nvim/plugged' : '~/.vim/plugged')
 
-"" Theme
-" Quantum
+" Appearance {{{
 Plug 'tyrannicaltoucan/vim-quantum'
 
-"" Plugins
-" Abolish - Improved search, substitute, and abbreviate
-Plug 'tpope/vim-abolish'
-" Better Whitespace
-Plug 'ntpeters/vim-better-whitespace'
-" Closer - Autoclose braces on enter
-Plug 'jackieaskins/vim-closer'
-" CloseTag - Autoclose HTML tags
-Plug 'alvan/vim-closetag'
-if !g:use_builtin_lsp
-  " CoC - Intellisense
-  Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-endif
-" Commentary
-Plug 'tpope/vim-commentary'
-" Easymotion
-Plug 'easymotion/vim-easymotion'
-" Emmet
-Plug 'mattn/emmet-vim'
-" Endwise - Add end keywords
-Plug 'tpope/vim-endwise'
-" Fugitive - Git integration in Vim
-Plug 'tpope/vim-fugitive'
-" FZF - Fuzzy Finder
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-if !has('nvim-0.5')
-  Plug 'junegunn/fzf.vim'
-endif
-" GitGutter
-Plug 'airblade/vim-gitgutter'
-" Java Syntax
-Plug 'uiiaoo/java-syntax.vim'
-" Lightline - Customize status/tabline
+Plug 'mhinz/vim-startify'
+
 Plug 'itchyny/lightline.vim'
-if has('nvim-0.5')
+if g:use_builtin_lsp
   Plug 'spywhere/lightline-lsp'
 else
   Plug 'josa42/vim-lightline-coc'
 endif
+" }}}
+
+" Brackets {{{
+Plug 'jackieaskins/vim-closer'
+Plug 'alvan/vim-closetag'
+Plug 'tpope/vim-endwise'
+Plug 'andymass/vim-matchup'
+Plug 'AndrewRadev/splitjoin.vim'
+Plug 'tpope/vim-surround'
+" }}}
+
+" Editing {{{
+Plug 'tpope/vim-abolish'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'tpope/vim-commentary'
+Plug 'mattn/emmet-vim'
+Plug 'tpope/vim-repeat'
+" }}}
+
+" File Navigation {{{
+" File explorer
+if has('nvim-0.5')
+  Plug 'kyazdani42/nvim-tree.lua'
+else
+  Plug 'scrooloose/nerdtree'
+  Plug 'Xuyuanp/nerdtree-git-plugin'
+end
+
+" FZF / Searching
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 if g:use_builtin_lsp
-  " LSP
+  Plug 'nvim-lua/popup.nvim'
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-telescope/telescope.nvim'
+else
+  Plug 'junegunn/fzf.vim'
+end
+" }}}
+
+" Git {{{
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+" }}}
+
+" LSP {{{
+if g:use_builtin_lsp
   Plug 'neovim/nvim-lspconfig'
   Plug 'nvim-lua/lsp-status.nvim'
   Plug 'hrsh7th/nvim-compe'
   Plug 'kosayoda/nvim-lightbulb'
+else
+  Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 endif
-" MatchUp - Extend bracket matching with %
-Plug 'andymass/vim-matchup'
-" Move
-Plug 'matze/vim-move'
-if !has('nvim-0.5')
-  " NerdTree - Visual file tree
-  Plug 'scrooloose/nerdtree'
-  " NerdTree Git Plugin
-  Plug 'Xuyuanp/nerdtree-git-plugin'
-end
-" Repeat - Remap . command to do more
-Plug 'tpope/vim-repeat'
-" Splitjoin - Split/join single/multi-line statements
-Plug 'AndrewRadev/splitjoin.vim'
-" Startify - Customized startup screen
-Plug 'mhinz/vim-startify'
-" Surround - Surround in brackets/quotes
-Plug 'tpope/vim-surround'
-if has('nvim-0.5')
-  " Telescope
-  Plug 'nvim-lua/popup.nvim'
-  Plug 'nvim-lua/plenary.nvim'
-  Plug 'nvim-telescope/telescope.nvim'
-endif
-if has('nvim-0.5')
-  " Tree - File explorer
-  Plug 'kyazdani42/nvim-tree.lua'
-end
+" }}}
 
-" Polyglot - All-in-one Syntax
-Plug 'sheerun/vim-polyglot'
-" DevIcons
-Plug 'ryanoasis/vim-devicons'
+" Movement {{{
+Plug 'easymotion/vim-easymotion'
+Plug 'matze/vim-move'
+" }}}
+
+" Syntax {{{
+Plug 'uiiaoo/java-syntax.vim'
+Plug 'sheerun/vim-polyglot' " Polyglot needs to go after other syntax plugins
+" }}}
+
+" DevIcons {{{
 if has('nvim-0.5')
   Plug 'kyazdani42/nvim-web-devicons' " Used for nvim-tree
 end
+Plug 'ryanoasis/vim-devicons' " Needs to be last plugin
+" }}}
 
 call plug#end()

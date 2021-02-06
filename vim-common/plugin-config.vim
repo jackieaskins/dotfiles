@@ -119,7 +119,7 @@ let g:user_emmet_settings = {
 " }}}
 
 " FZF {{{
-if !has('nvim-0.5')
+if !g:use_builtin_lsp
   let $FZF_DEFAULT_OPTS .= ' --bind=ctrl-f:preview-page-down,ctrl-b:preview-page-up,ctrl-j:page-down,ctrl-k:page-up,ctrl-a:select-all,?:toggle-preview'
 
   function! s:build_quickfix_list(lines)
@@ -196,24 +196,26 @@ let s:info_indicator = '🛈 '
 let s:hint_indicator = '! '
 let s:ok_indicator = ''
 
-let g:lightline#coc#indicator_errors = s:error_indicator
-let g:lightline#coc#indicator_warnings = s:warning_indicator
-let g:lightline#coc#indicator_info = s:info_indicator
-let g:lightline#coc#indicator_hints = s:hint_indicator
-let g:lightline#coc#indicator_ok = s:ok_indicator
-
-let g:lightline#lsp#indicator_errors = s:error_indicator
-let g:lightline#lsp#indicator_warnings = s:warning_indicator
-let g:lightline#lsp#indicator_infos = s:info_indicator
-let g:lightline#lsp#indicator_hints = s:hint_indicator
-let g:lightline#lsp#indicator_ok = s:ok_indicator
+if g:use_builtin_lsp
+  let g:lightline#lsp#indicator_errors = s:error_indicator
+  let g:lightline#lsp#indicator_warnings = s:warning_indicator
+  let g:lightline#lsp#indicator_infos = s:info_indicator
+  let g:lightline#lsp#indicator_hints = s:hint_indicator
+  let g:lightline#lsp#indicator_ok = s:ok_indicator
+else
+  let g:lightline#coc#indicator_errors = s:error_indicator
+  let g:lightline#coc#indicator_warnings = s:warning_indicator
+  let g:lightline#coc#indicator_info = s:info_indicator
+  let g:lightline#coc#indicator_hints = s:hint_indicator
+  let g:lightline#coc#indicator_ok = s:ok_indicator
+endif
 
 function! LightlineLspStatus()
-  if !g:use_builtin_lsp
-    return get(g:, 'coc_status', '')
+  if g:use_builtin_lsp
+    return luaeval("require'lsp-statusline'.get_status()")
   endif
 
-  return luaeval("require'lsp-statusline'.get_status()")
+  return get(g:, 'coc_status', '')
 endfunction
 
 function! LightlineFilename()
@@ -349,7 +351,8 @@ let g:startify_lists = [
 " }}}
 
 " Telescope {{{
-if has('nvim-0.5')
+if g:use_builtin_lsp
+
 lua << EOF
 require('telescope').setup {
   defaults = {
@@ -368,6 +371,7 @@ nnoremap <silent> gr :lua require'telescope.builtin'.lsp_references{}<CR>
 nnoremap <leader>ca :lua require'telescope.builtin'.lsp_code_actions{}<CR>
 nnoremap <leader>cr :lua require'telescope.builtin'.lsp_range_code_actions{}<CR>
 nnoremap <leader>ht :lua require'telescope.builtin'.help_tags{}<CR>
+
 endif
 " }}}
 
