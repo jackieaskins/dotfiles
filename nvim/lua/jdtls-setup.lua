@@ -68,12 +68,7 @@ function M.initialize_client()
     on_attach = function(client, bufnr)
       require'lsp-attach'.custom_attach(client, bufnr)
     end,
-    cmd = {'run_jdtls.sh'},
-    init_options = {
-      bundles = {
-        vim.fn.glob("$HOME/dotfiles/java-debug-latest/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar")
-      }
-    }
+    cmd = {'run_jdtls.sh'}
   })
 end
 -- }}}
