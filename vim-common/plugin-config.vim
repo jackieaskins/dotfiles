@@ -149,7 +149,7 @@ lua << EOF
 local prettier = {
   function()
     return {
-      exe = "prettier",
+      exe = "./node_modules/.bin/prettier",
       args = {"--stdin-filepath", vim.api.nvim_buf_get_name(0)},
       stdin = true
     }
@@ -157,7 +157,7 @@ local prettier = {
 }
 
 require('formatter').setup({
-  logging = false,
+  logging = true,
   filetype = {
     javascript = prettier,
     javascriptreact = prettier,
