@@ -52,8 +52,6 @@ Plug 'tpope/vim-repeat'
 
 if g:use_builtin_lsp
   Plug 'mhartington/formatter.nvim'
-  Plug 'mfussenegger/nvim-dap'
-  Plug 'nvim-telescope/telescope-dap.nvim'
   Plug 'norcalli/snippets.nvim'
 endif
 " }}}

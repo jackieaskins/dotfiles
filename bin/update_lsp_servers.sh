@@ -83,7 +83,6 @@ if should_install "^(diagnosticls|diagnostic-languageserver)$"; then
 fi
 # }}}
 
-# java {{{
 # jdtls {{{
 if should_install "^(jdtls|jdt-language-server|eclipse.jdt.ls)$"; then
   echo -e "Updating jdtls..."
@@ -99,24 +98,6 @@ if should_install "^(jdtls|jdt-language-server|eclipse.jdt.ls)$"; then
   rm $zip_file
   echo -e "${GREEN}Successfully updated jdtls\n${NC}"
 fi
-# }}}
-
-# java-debug {{{
-install_java_debug() {
-  ./mvnw clean install
-}
-
-download_microsoft_version "java-debug" "install_java_debug"
-# }}}
-
-# vscode-java-test {{{
-install_vscode_java_test() {
-  npm install
-  npm run build-plugin
-}
-
-download_microsoft_version "vscode-java-test" "install_vscode_java_test"
-# }}}
 # }}}
 
 # Cleanup {{{

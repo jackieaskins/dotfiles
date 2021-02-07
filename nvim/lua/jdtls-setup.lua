@@ -60,11 +60,6 @@ local M = {}
 
 -- Initialize client {{{
 function M.initialize_client()
-  local bundles = {
-    vim.fn.glob("$HOME/dotfiles/java-debug-latest/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar")
-  }
-  vim.list_extend(bundles, vim.split(vim.fn.glob("$HOME/dotfiles/vscode-java-test-latest/server/*.jar"), "\n"))
-
   configure_ui()
   add_mappings()
 
@@ -72,11 +67,12 @@ function M.initialize_client()
     capabilities = require'lsp-attach'.get_capabilities(),
     on_attach = function(client, bufnr)
       require'lsp-attach'.custom_attach(client, bufnr)
-      require'jdtls'.setup_dap()
     end,
     cmd = {'run_jdtls.sh'},
     init_options = {
-      bundles = bundles
+      bundles = {
+        vim.fn.glob("$HOME/dotfiles/java-debug-latest/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar")
+      }
     }
   })
 end
