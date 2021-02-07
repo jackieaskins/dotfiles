@@ -144,6 +144,37 @@ let g:user_emmet_settings = {
       \}
 " }}}
 
+" Formatter {{{
+lua << EOF
+local prettier = {
+  function()
+    return {
+      exe = "prettier",
+      args = {"--stdin-filepath", vim.api.nvim_buf_get_name(0)},
+      stdin = true
+    }
+  end
+}
+
+require('formatter').setup({
+  logging = false,
+  filetype = {
+    javascript = prettier,
+    javascriptreact = prettier,
+    typescript = prettier,
+    typescriptreact = prettier
+  }
+})
+
+vim.api.nvim_exec([[
+augroup auto_format
+  autocmd!
+  autocmd BufWritePost *.js,*.jsx,*.ts,*.tsx FormatWrite
+augroup END
+]], true)
+EOF
+" }}}
+
 " FZF {{{
 if !g:use_builtin_lsp
   let $FZF_DEFAULT_OPTS .= ' --bind=ctrl-f:preview-page-down,ctrl-b:preview-page-up,ctrl-j:page-down,ctrl-k:page-up,ctrl-a:select-all,?:toggle-preview'

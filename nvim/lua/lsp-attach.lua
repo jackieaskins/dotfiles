@@ -1,5 +1,12 @@
 local M = {}
 
+M.get_capabilities = function()
+  local capabilities = require'lsp-status'.capabilities
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+  return capabilities
+end
+
 M.custom_attach = function(client, bufnr)
   require'lsp-status'.on_attach(client)
 
@@ -15,7 +22,6 @@ M.custom_attach = function(client, bufnr)
 
   buf_set_keymap('n', '<leader>lf', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
   buf_set_keymap('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  buf_set_keymap('n', '<leader>d', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
   buf_set_keymap('n', '<leader>sy', '<cmd>lua vim.document_symbol()<CR>', opts)
 
   buf_set_keymap('n', '[g', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)

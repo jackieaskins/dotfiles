@@ -18,11 +18,13 @@ vim.fn.sign_define("LspDiagnosticsSignHint", {text = "!", texthl = "LspDiagnosti
 vim.o.completeopt = 'menu,menuone,noselect'
 require'compe'.setup {
   enabled = true;
+  min_length = 3;
   source = {
     path = true;
     buffer = true;
     nvim_lsp = true;
     nvim_lua = true;
+    snippets_nvim = true;
   }
 }
 
@@ -44,10 +46,11 @@ vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_li
 -- Language Servers {{{
 local lspconfig = require'lspconfig'
 local custom_attach = require'lsp-attach'.custom_attach
+local capabilities = require'lsp-attach'.get_capabilities()
 
 -- tsserver {{{
 lspconfig.tsserver.setup {
-  capabilities = lsp_status.capabilities,
+  capabilities = capabilities,
   on_attach = function(client, bufnr)
     client.resolved_capabilities.document_formatting = false
     custom_attach(client, bufnr)
@@ -86,37 +89,9 @@ local eslint = {
   }
 }
 
-local prettier = {
-  command = './node_modules/.bin/prettier',
-  args = {'--stdin', '--stdin-filepath', '%filepath'},
-  rootPatterns = {
-    '.prettierrc',
-    '.prettierrc.json',
-    '.prettierrc.toml',
-    '.prettierrc.json',
-    '.prettierrc.yml',
-    '.prettierrc.yaml',
-    '.prettierrc.json5',
-    '.prettierrc.js',
-    '.prettierrc.cjs',
-    'prettier.config.js',
-    'prettier.config.cjs',
-    '.git'
-  }
-}
-
 lspconfig.diagnosticls.setup{
-  capabilities = lsp_status.capabilities,
+  capabilities = capabilities,
   on_attach = custom_attach,
-  on_attach = function(client, bufnr)
-    vim.api.nvim_exec([[
-      augroup auto_format
-        autocmd!
-        autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync(nil, 1000)
-      augroup END
-    ]], true)
-    custom_attach(client, bufnr)
-  end,
   filetypes = {'javascript', 'javascriptreact', 'typescript', 'typescriptreact'},
   init_options = {
     linters = {eslint = eslint},
@@ -125,15 +100,8 @@ lspconfig.diagnosticls.setup{
       javascriptreact = 'eslint',
       typescript = 'eslint',
       typescriptreact = 'eslint'
-    },
-    formatters = {prettier = prettier},
-    formatFiletypes = {
-      javascript = 'prettier',
-      typescript = 'prettier',
-      javascriptreact = 'prettier',
-      typescriptreact = 'prettier'
-    },
-  },
+    }
+  }
 }
 -- }}}
 -- }}}

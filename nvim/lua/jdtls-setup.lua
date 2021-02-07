@@ -69,7 +69,7 @@ function M.initialize_client()
   add_mappings()
 
   require'jdtls'.start_or_attach({
-    capabilities = require'lsp-status'.capabilities,
+    capabilities = require'lsp-attach'.get_capabilities(),
     on_attach = function(client, bufnr)
       require'lsp-attach'.custom_attach(client, bufnr)
       require'jdtls'.setup_dap()
