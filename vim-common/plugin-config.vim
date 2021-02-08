@@ -119,6 +119,7 @@ let g:user_emmet_settings = {
 " }}}
 
 " Formatter {{{
+if g:use_builtin_lsp
 lua << EOF
 local prettier = {
   function()
@@ -147,6 +148,7 @@ augroup auto_format
 augroup END
 ]], true)
 EOF
+endif
 " }}}
 
 " FZF {{{
