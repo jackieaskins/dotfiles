@@ -109,6 +109,7 @@ local eslint = {
 lspconfig.diagnosticls.setup{
   capabilities = capabilities,
   on_attach = nonjava_attach,
+  root_dir = lspconfig.util.root_pattern('.git'),
   filetypes = {'javascript', 'javascriptreact', 'typescript', 'typescriptreact'},
   init_options = {
     linters = {eslint = eslint},

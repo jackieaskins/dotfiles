@@ -12,9 +12,9 @@ shopt -s dotglob # Include hidden files when globbing
 cd $DOTFILES_DIR
 
 if [[ $SERVER_TO_INSTALL == 'all' ]]; then
-  echo -e "Updating all language servers..."
+  echo -e "Updating all language servers...\n"
 else
-  echo -e "Only updating ${SERVER_TO_INSTALL} language server"
+  echo -e "Only updating ${SERVER_TO_INSTALL} language server\n"
 fi
 # }}}
 
@@ -70,7 +70,7 @@ download_microsoft_version() {
 # tsserver {{{
 if should_install "^(tsserver|typescript-language-server)$"; then
   echo -e "Updating typescript-language-server..."
-  npm install -g typescript-language-server
+  npm install -g typescript typescript-language-server
   echo -e "${GREEN}Finished updating typescript-language-server\n${NC}"
 fi
 # }}}
