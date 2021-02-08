@@ -21,13 +21,7 @@ M.custom_attach = function(client, bufnr)
   buf_set_keymap('n', 'gy', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
 
   buf_set_keymap('n', '<leader>lf', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
-  buf_set_keymap('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   buf_set_keymap('n', '<leader>sy', '<cmd>lua vim.document_symbol()<CR>', opts)
-
-  buf_set_keymap('n', '[g', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-  buf_set_keymap('n', ']g', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-
-  buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
 
   vim.api.nvim_exec([[
     hi link LspReferenceText Visual
@@ -42,6 +36,18 @@ M.custom_attach = function(client, bufnr)
       autocmd CursorMovedI * lua vim.lsp.buf.clear_references()
     augroup END
   ]], true)
+
+  -- Saga
+  buf_set_keymap('n', 'K', ':Lspsaga hover_doc<CR>', opts)
+  buf_set_keymap('n', 'gp', ':Lspsaga preview_definition<CR>', opts)
+
+  buf_set_keymap('n', '[g', ':Lspsaga diagnostic_jump_prev<CR>', opts)
+  buf_set_keymap('n', ']g', ':Lspsaga diagnostic_jump_next<CR>', opts)
+
+  buf_set_keymap('n', '<leader>rn', ':Lspsaga rename<CR>', opts)
+
+  vim.cmd [[autocmd CursorHoldI * silent! Lspsaga signature_help]]
+  vim.cmd [[autocmd CursorHold * Lspsaga show_line_diagnostics]]
 end
 
 return M

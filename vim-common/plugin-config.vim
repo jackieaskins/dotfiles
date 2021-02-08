@@ -409,7 +409,6 @@ set_keymap('n', '<C-p>',      '<cmd>Telescope find_files find_command=rg,--ignor
 set_keymap('n', '<leader>/',  '<cmd>Telescope live_grep<CR>', opts)
 set_keymap('n', '<leader>f',  '<cmd>Telescope grep_string<CR>', opts)
 set_keymap('n', '<leader>gs', '<cmd>Telescope git_status<CR>', opts)
-set_keymap('n', '<leader>ca', '<cmd>Telescope lsp_code_actions<CR>', opts)
 set_keymap('n', 'gr',         '<cmd>Telescope lsp_references<CR>', opts)
 set_keymap('n', '<leader>ht', '<cmd>Telescope help_tags<CR>', opts)
 set_keymap('n', '<leader>qf', '<cmd>Telescope quickfix<CR>', opts)
