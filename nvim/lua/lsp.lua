@@ -38,6 +38,8 @@ local compe_opts = { silent = true, expr = true, noremap = true }
 vim.api.nvim_set_keymap('i', '<C-Space>', 'compe#complete()', compe_opts)
 vim.api.nvim_set_keymap('i', '<C-e>', 'compe#close("<C-e>")', compe_opts)
 vim.api.nvim_set_keymap('i', '<Tab>', 'compe#confirm("<Tab>")', compe_opts)
+vim.api.nvim_set_keymap('i', '<C-f>', 'compe#scroll({ "delta": +4 })', compe_opts)
+vim.api.nvim_set_keymap('i', '<C-b>', 'compe#scroll({ "delta": -4 })', compe_opts)
 -- }}}
 
 -- Status {{{

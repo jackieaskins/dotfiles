@@ -38,15 +38,21 @@ M.custom_attach = function(client, bufnr)
   ]], true)
 
   -- Saga
-  buf_set_keymap('n', 'K', ':Lspsaga hover_doc<CR>', opts)
-  buf_set_keymap('n', 'gp', ':Lspsaga preview_definition<CR>', opts)
+  buf_set_keymap('i', '<C-k>', "<cmd>lua require'lspsaga.signaturehelp'.signature_help()<CR>", opts)
+  buf_set_keymap('n', '<C-k>', "<cmd>lua require'lspsaga.signaturehelp'.signature_help()<CR>", opts)
 
-  buf_set_keymap('n', '[g', ':Lspsaga diagnostic_jump_prev<CR>', opts)
-  buf_set_keymap('n', ']g', ':Lspsaga diagnostic_jump_next<CR>', opts)
+  buf_set_keymap('n', 'K', "<cmd>lua require'lspsaga.hover'.render_hover_doc()<CR>", opts)
+  -- Smart scroll <C-b> is currently broken
+  -- buf_set_keymap('n', '<C-f>', "<cmd>lua require'lspsaga.hover'.smart_scroll_hover(1)<CR>", opts)
+  -- buf_set_keymap('n', '<C-b>', "<cmd>lua require'lspsaga.hover'.smart_scroll_hover(-1)<CR>", opts)
 
-  buf_set_keymap('n', '<leader>rn', ':Lspsaga rename<CR>', opts)
+  buf_set_keymap('n', 'gp', "<cmd>lua require'lspsaga.provider'.preview_definition()<CR>", opts)
 
-  vim.cmd [[autocmd CursorHoldI * silent! Lspsaga signature_help]]
+  buf_set_keymap('n', '[g', "<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>", opts)
+  buf_set_keymap('n', ']g', "<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>", opts)
+
+  buf_set_keymap('n', '<leader>rn', "<cmd>lua require'lspsaga.rename'.rename()<CR>", opts)
+
   vim.cmd [[autocmd CursorHold * Lspsaga show_line_diagnostics]]
 end
 

@@ -243,7 +243,11 @@ endif
 
 function! LightlineLspStatus()
   if g:use_builtin_lsp
-    return luaeval("require'lsp-statusline'.get_status()")
+    if luaeval('#vim.lsp.buf_get_clients() > 0')
+      return luaeval("require('lsp-status').status()")
+    endif
+
+    return ''
   endif
 
   return get(g:, 'coc_status', '')

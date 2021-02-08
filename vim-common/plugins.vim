@@ -84,7 +84,7 @@ Plug 'airblade/vim-gitgutter'
 " LSP {{{
 if g:use_builtin_lsp
   Plug 'neovim/nvim-lspconfig', { 'do': 'update_lsp_servers.sh' }
-  Plug 'nvim-lua/lsp-status.nvim'
+  Plug 'jackieaskins/lsp-status.nvim'
   Plug 'glepnir/lspsaga.nvim'
   Plug 'hrsh7th/nvim-compe'
   Plug 'kosayoda/nvim-lightbulb'
