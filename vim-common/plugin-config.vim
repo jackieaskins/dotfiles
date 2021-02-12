@@ -152,70 +152,68 @@ endif
 " }}}
 
 " FZF {{{
-if !g:use_builtin_lsp
-  let $FZF_DEFAULT_OPTS .= ' --bind=ctrl-f:preview-page-down,ctrl-b:preview-page-up,ctrl-j:page-down,ctrl-k:page-up,ctrl-a:select-all,?:toggle-preview'
+let $FZF_DEFAULT_OPTS .= ' --bind=ctrl-f:preview-page-down,ctrl-b:preview-page-up,ctrl-j:page-down,ctrl-k:page-up,ctrl-a:select-all,?:toggle-preview'
 
-  function! s:build_quickfix_list(lines)
-    call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
-    copen
-    cc
+function! s:build_quickfix_list(lines)
+  call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+  copen
+  cc
+endfunction
+
+let g:fzf_action = {
+      \ 'ctrl-q': function('s:build_quickfix_list'),
+      \ 'ctrl-t': 'tab split',
+      \ 'ctrl-x': 'split',
+      \ 'ctrl-v': 'vsplit'
+      \ }
+
+if has('nvim')
+  let $FZF_DEFAULT_OPTS .= ' --layout=reverse'
+
+  function! CreateCenteredFloatingWindow()
+    let width = min([&columns - 4, max([80, &columns - 20])])
+    let height = min([&lines - 4, max([20, &lines - 10])])
+    let row = ((&lines - height) / 2) - 1
+    let col = (&columns - width) / 2
+
+    let opts = {
+          \ 'relative': 'editor',
+          \ 'row': row,
+          \ 'col': col,
+          \ 'width': width,
+          \ 'height': height,
+          \ 'style': 'minimal'
+          \ }
+
+    let top = "╭" . repeat("─", width - 2) . "╮"
+    let mid = "│" . repeat(" ", width - 2) . "│"
+    let bot = "╰" . repeat("─", width - 2) . "╯"
+    let lines = [top] + repeat([mid], height - 2) + [bot]
+
+    let s:buf = nvim_create_buf(v:false, v:true)
+    call nvim_buf_set_lines(s:buf, 0, -1, v:true, lines)
+    call nvim_open_win(s:buf, v:true, opts)
+
+    set winhl=Normal:Floating
+
+    let opts.row += 1
+    let opts.height -= 2
+    let opts.col += 2
+    let opts.width -= 4
+
+    call nvim_open_win(nvim_create_buf(v:false, v:true), v:true, opts)
+
+    au BufWipeout <buffer> exe 'bw ' . s:buf
   endfunction
 
-  let g:fzf_action = {
-        \ 'ctrl-q': function('s:build_quickfix_list'),
-        \ 'ctrl-t': 'tab split',
-        \ 'ctrl-x': 'split',
-        \ 'ctrl-v': 'vsplit'
-        \ }
-
-  if has('nvim')
-    let $FZF_DEFAULT_OPTS .= ' --layout=reverse'
-
-    function! CreateCenteredFloatingWindow()
-      let width = min([&columns - 4, max([80, &columns - 20])])
-      let height = min([&lines - 4, max([20, &lines - 10])])
-      let row = ((&lines - height) / 2) - 1
-      let col = (&columns - width) / 2
-
-      let opts = {
-            \ 'relative': 'editor',
-            \ 'row': row,
-            \ 'col': col,
-            \ 'width': width,
-            \ 'height': height,
-            \ 'style': 'minimal'
-            \ }
-
-      let top = "╭" . repeat("─", width - 2) . "╮"
-      let mid = "│" . repeat(" ", width - 2) . "│"
-      let bot = "╰" . repeat("─", width - 2) . "╯"
-      let lines = [top] + repeat([mid], height - 2) + [bot]
-
-      let s:buf = nvim_create_buf(v:false, v:true)
-      call nvim_buf_set_lines(s:buf, 0, -1, v:true, lines)
-      call nvim_open_win(s:buf, v:true, opts)
-
-      set winhl=Normal:Floating
-
-      let opts.row += 1
-      let opts.height -= 2
-      let opts.col += 2
-      let opts.width -= 4
-
-      call nvim_open_win(nvim_create_buf(v:false, v:true), v:true, opts)
-
-      au BufWipeout <buffer> exe 'bw ' . s:buf
-    endfunction
-
-    let g:fzf_layout = { 'window': 'call CreateCenteredFloatingWindow()' }
-  endif
-
-  nnoremap <C-p> :Files<CR>
-  nnoremap <Leader>/ :Rg<Space>
-  nnoremap <Leader>rg :Rg<CR>
-  nnoremap <Leader>f :Rg<Space><C-r><C-w><CR>
-  nnoremap <Leader>gs :GFiles?<CR>
+  let g:fzf_layout = { 'window': 'call CreateCenteredFloatingWindow()' }
 endif
+
+nnoremap <C-p> :Files<CR>
+nnoremap <Leader>/ :Rg<Space>
+nnoremap <Leader>rg :Rg<CR>
+nnoremap <Leader>f :Rg<Space><C-r><C-w><CR>
+nnoremap <Leader>gs :GFiles?<CR>
 " }}}
 
 " Java Syntax {{{
@@ -385,42 +383,6 @@ let g:startify_lists = [
       \ { 'type': 'bookmarks',                'header': [ '   Bookmarks'          ] },
       \ { 'type': 'commands',                 'header': [ '   Commands'           ] },
       \ ]
-" }}}
-
-" Telescope {{{
-if g:use_builtin_lsp
-lua << EOF
-local actions = require('telescope.actions')
-local builtin = require('telescope.builtin')
-
-require('telescope').setup {
-  defaults = {
-    layout_strategy = 'flex',
-    prompt_position = 'top',
-    sorting_strategy = 'ascending',
-    mappings = {
-      i = {
-        ["<C-q>"] = actions.send_selected_to_qflist,
-      },
-      n = {
-        ["<C-q>"] = actions.send_selected_to_qflist,
-      },
-    }
-  }
-}
-
-opts = { silent = true, noremap = true }
-local set_keymap = vim.api.nvim_set_keymap
-set_keymap('n', '<C-p>',      '<cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files<CR>', opts)
-set_keymap('n', '<leader>/',  '<cmd>Telescope live_grep<CR>', opts)
-set_keymap('n', '<leader>f',  '<cmd>Telescope grep_string<CR>', opts)
-set_keymap('n', '<leader>gs', '<cmd>Telescope git_status<CR>', opts)
-set_keymap('n', 'gr',         '<cmd>Telescope lsp_references<CR>', opts)
-set_keymap('n', '<leader>ht', '<cmd>Telescope help_tags<CR>', opts)
-set_keymap('n', '<leader>qf', '<cmd>Telescope quickfix<CR>', opts)
-set_keymap('n', '<leader>ll', '<cmd>Telescope loclist<CR>', opts)
-EOF
-endif
 " }}}
 
 " Tree {{{

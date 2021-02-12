@@ -1,6 +1,4 @@
 -- General Settings {{{
-require 'jdtls-setup'.configure_ui()
-
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
     virtual_text = false,
@@ -15,7 +13,15 @@ vim.fn.sign_define("LspDiagnosticsSignInformation", {text = "🛈", texthl = "Ls
 vim.fn.sign_define("LspDiagnosticsSignHint", {text = "!", texthl = "LspDiagnosticsSignHint"})
 
 require'lspsaga'.init_lsp_saga {
-  use_saga_diagnostic_sign = false
+  use_saga_diagnostic_sign = false,
+  finder_action_keys = {
+    open = '<CR>',
+    vsplit = '<C-v>',
+    split = '<C-x>',
+    quit = 'q',
+    scroll_down = '<C-f>',
+    scroll_up = '<C-b>'
+  },
 }
 -- }}}
 

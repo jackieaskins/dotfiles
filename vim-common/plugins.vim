@@ -65,15 +65,9 @@ else
   Plug 'Xuyuanp/nerdtree-git-plugin'
 end
 
-" FZF / Searching
+" FZF
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-if g:use_builtin_lsp
-  Plug 'nvim-lua/popup.nvim'
-  Plug 'nvim-lua/plenary.nvim'
-  Plug 'nvim-telescope/telescope.nvim'
-else
-  Plug 'junegunn/fzf.vim'
-end
+Plug 'junegunn/fzf.vim'
 " }}}
 
 " Git {{{
