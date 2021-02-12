@@ -51,8 +51,11 @@ Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-repeat'
 
 if g:use_builtin_lsp
-  Plug 'mhartington/formatter.nvim'
   Plug 'norcalli/snippets.nvim'
+endif
+
+if has('nvim-0.5')
+  Plug 'mhartington/formatter.nvim'
 endif
 " }}}
 

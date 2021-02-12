@@ -42,13 +42,16 @@ if !g:use_builtin_lsp
         \ 'coc-jest',
         \ 'coc-json',
         \ 'coc-marketplace',
-        \ 'coc-prettier',
         \ 'coc-python',
         \ 'coc-snippets',
         \ 'coc-solargraph',
         \ 'coc-tsserver',
         \ 'coc-yaml',
         \ ]
+
+  if !has('nvim-0.5')
+    call add(g:coc_global_extensions, 'coc-prettier')
+  endif
 
   nnoremap <silent> gd <Plug>(coc-definition)
   nnoremap <silent> gy <Plug>(coc-type-definition)
@@ -119,7 +122,7 @@ let g:user_emmet_settings = {
 " }}}
 
 " Formatter {{{
-if g:use_builtin_lsp
+if has('nvim-0.5')
 lua << EOF
 local prettier = {
   function()
