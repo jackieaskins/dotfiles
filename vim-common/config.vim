@@ -99,6 +99,7 @@ endif
 
 " Mappings {{{
 nnoremap <Leader>{ i{<CR>return <Esc>$%o};<Esc>^=i{
+tnoremap <Esc> <C-\><C-n>
 " }}}
 
 " Searching {{{

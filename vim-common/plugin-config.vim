@@ -53,19 +53,19 @@ if !g:use_builtin_lsp
     call add(g:coc_global_extensions, 'coc-prettier')
   endif
 
-  nnoremap <silent> gd <Plug>(coc-definition)
-  nnoremap <silent> gy <Plug>(coc-type-definition)
-  nnoremap <silent> gi <Plug>(coc-implementation)
-  nnoremap <silent> gr <Plug>(coc-references)
+  nmap <silent> gd <Plug>(coc-definition)
+  nmap <silent> gy <Plug>(coc-type-definition)
+  nmap <silent> gi <Plug>(coc-implementation)
+  nmap <silent> gr <Plug>(coc-references)
 
-  nnoremap <Leader>qf <Plug>(coc-fix-current)
-  nnoremap <Leader>rn <Plug>(coc-rename)
-  nnoremap <Leader>sy :<C-u>CocList -I symbols<cr>
-  nnoremap <Leader>d :<C-u>CocList diagnostics<cr>
+  nmap <Leader>qf <Plug>(coc-fix-current)
+  nmap <Leader>rn <Plug>(coc-rename)
+  nmap <Leader>sy :<C-u>CocList -I symbols<cr>
+  nmap <Leader>d :<C-u>CocList diagnostics<cr>
 
   " Use `[g` and `]g` to navigate diagnostics
-  nnoremap <silent> [g <Plug>(coc-diagnostic-prev)
-  nnoremap <silent> ]g <Plug>(coc-diagnostic-next)
+  nmap <silent> [g <Plug>(coc-diagnostic-prev)
+  nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
   " Use K to show documentation in preview window.
   nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -78,7 +78,7 @@ if !g:use_builtin_lsp
   endfunction
 
   "" coc-eslint
-  nnoremap <Leader>ef :CocCommand eslint.executeAutofix<CR>
+  nmap <Leader>ef :CocCommand eslint.executeAutofix<CR>
 
   "" coc-jest
   command! -nargs=0 J :call CocAction('runCommand', 'jest.projectTest')
