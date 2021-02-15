@@ -16,6 +16,7 @@ nnoremap <Leader>re :source $MYVIMRC<CR>
 autocmd BufRead,BufNewFile *.md setlocal spell
 
 let g:use_builtin_lsp = v:false
+let g:use_treesitter = v:false
 
 " Custom settings
 if !empty(glob("~/dotfiles/vim-common/custom.vim"))
@@ -41,7 +42,12 @@ end
 " }}}
 
 " Folds {{{
-set foldmethod=syntax
+if g:use_treesitter
+  set foldmethod=expr
+  set foldexpr=nvim_treesitter#foldexpr()
+else
+  set foldmethod=syntax
+endif
 autocmd FileType lua,sh,vim setlocal foldmethod=marker foldlevel=0
 autocmd FileType xml setlocal foldmethod=indent
 highlight Folded guifg=PeachPuff4

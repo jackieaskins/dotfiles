@@ -69,7 +69,7 @@ else
 end
 
 " FZF
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 " }}}
 
@@ -97,8 +97,12 @@ Plug 'matze/vim-move'
 " }}}
 
 " Syntax {{{
-Plug 'uiiaoo/java-syntax.vim'
-Plug 'sheerun/vim-polyglot' " Polyglot needs to go after other syntax plugins
+if g:use_treesitter
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+else
+  Plug 'uiiaoo/java-syntax.vim'
+  Plug 'sheerun/vim-polyglot' " Polyglot needs to go after other syntax plugins
+endif
 " }}}
 
 " DevIcons {{{

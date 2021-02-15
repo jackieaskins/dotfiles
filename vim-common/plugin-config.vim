@@ -220,7 +220,9 @@ nnoremap <Leader>gs :GFiles?<CR>
 " }}}
 
 " Java Syntax {{{
-highlight link JavaIdentifier NONE
+if !g:use_treesitter
+  highlight link JavaIdentifier NONE
+endif
 " }}}
 
 " Lightline {{{
@@ -346,8 +348,10 @@ end
 " }}}
 
 " Polyglot {{{
-"" JSX
-let g:jsx_ext_required = 0
+if !g:use_treesitter
+  "" JSX
+  let g:jsx_ext_required = 0
+endif
 " }}}
 
 " SplitJoin {{{
@@ -400,4 +404,29 @@ if has('nvim-0.5')
   nnoremap <C-n> :NvimTreeToggle<CR>
   nnoremap <Leader>n :NvimTreeFindFile<CR>
 end
+" }}}
+
+" Treesitter {{{
+if g:use_treesitter
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained",
+  highlight = {
+    enable = true,
+  },
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      init_selection = "gnn",
+      node_incremental = "grn",
+      scope_incremental = "grc",
+      node_decremental = "grm",
+    },
+  },
+  indent = {
+    enable = true
+  }
+}
+EOF
+endif
 " }}}
