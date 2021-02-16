@@ -2,6 +2,7 @@
 " Settings {{{
 set nocompatible
 set encoding=utf8
+set hidden
 
 " Leader key
 nnoremap <Space> <nop>
@@ -42,14 +43,7 @@ end
 " }}}
 
 " Folds {{{
-if g:use_treesitter
-  set foldmethod=expr
-  set foldexpr=nvim_treesitter#foldexpr()
-else
-  set foldmethod=syntax
-endif
 autocmd FileType lua,sh,vim setlocal foldmethod=marker foldlevel=0
-autocmd FileType xml setlocal foldmethod=indent
 highlight Folded guifg=PeachPuff4
 set foldlevel=99 " Start folds expanded by default
 set foldcolumn=2 " Show fold column with width 2
@@ -105,7 +99,6 @@ endif
 
 " Mappings {{{
 nnoremap <Leader>{ i{<CR>return <Esc>$%o};<Esc>^=i{
-tnoremap <Esc> <C-\><C-n>
 " }}}
 
 " Searching {{{

@@ -334,6 +334,10 @@ endif
 let g:matchup_matchparen_offscreen = { 'method': 'status_manual' }
 " }}}
 
+" Maximizer {{{
+let g:maximizer_default_mapping_key = '<F2>'
+" }}}
+
 " NerdTree {{{
 if !has('nvim-0.5')
   let g:NERDTreeWinSize = 60
@@ -400,6 +404,8 @@ if has('nvim-0.5')
   let g:nvim_tree_indent_markers = 1
   let g:nvim_tree_quit_on_open = 1
   let g:nvim_tree_width = 50
+  let g:nvim_tree_auto_open = 1
+  let g:nvim_tree_auto_ignore_ft = ['startify']
 
   nnoremap <C-n> :NvimTreeToggle<CR>
   nnoremap <Leader>n :NvimTreeFindFile<CR>

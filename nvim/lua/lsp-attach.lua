@@ -16,7 +16,6 @@ M.custom_attach = function(client, bufnr)
 
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-  buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
   buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
   buf_set_keymap('n', 'gy', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
 
@@ -42,10 +41,10 @@ M.custom_attach = function(client, bufnr)
   buf_set_keymap('n', '<C-k>', "<cmd>lua require'lspsaga.signaturehelp'.signature_help()<CR>", opts)
 
   buf_set_keymap('n', 'K', "<cmd>lua require'lspsaga.hover'.render_hover_doc()<CR>", opts)
-  buf_set_keymap('n', '<C-f>', "<cmd>lua require'lspsaga.hover'.smart_scroll_hover(1)<CR>", opts)
-  buf_set_keymap('n', '<C-b>', "<cmd>lua require'lspsaga.hover'.smart_scroll_hover(-1)<CR>", opts)
+  buf_set_keymap('n', '<C-f>', "<cmd>lua require'lspsaga.action'.smart_scroll_with_saga(1)<CR>", opts)
+  buf_set_keymap('n', '<C-b>', "<cmd>lua require'lspsaga.action'.smart_scroll_with_saga(-1)<CR>", opts)
 
-  buf_set_keymap('n', 'gp', "<cmd>lua require'lspsaga.provider'.preview_definition()<CR>", opts)
+  buf_set_keymap('n', 'gd', "<cmd>lua require'lspsaga.provider'.preview_definition()<CR>", opts)
   buf_set_keymap('n', 'gh', "<cmd>lua require'lspsaga.provider'.lsp_finder()<CR>", opts)
   buf_set_keymap('n', 'gr', "<cmd>lua require'lspsaga.provider'.lsp_finder()<CR>", opts)
 

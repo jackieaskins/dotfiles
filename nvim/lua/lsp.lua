@@ -29,7 +29,6 @@ require'lspsaga'.init_lsp_saga {
 vim.o.completeopt = 'menu,menuone,noselect'
 require'compe'.setup {
   enabled = true;
-  preselect = 'always';
   min_length = 3;
   source = {
     path = true;

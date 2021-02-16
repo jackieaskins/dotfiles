@@ -10,7 +10,6 @@ JAR="$HOME/dotfiles/jdt-language-server-latest/plugins/org.eclipse.equinox.launc
 GRADLE_HOME="$(which gradle)" "$(which java)" \
   -Declipse.application=org.eclipse.jdt.ls.core.id1 \
   -Dosgi.bundles.defaultStartLevel=4 \
-  -Dosgi.locking=none \
   -Declipse.product=org.eclipse.jdt.ls.core.product \
   -Dlog.protocol=true \
   -Dlog.level=ALL \

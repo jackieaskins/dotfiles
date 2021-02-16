@@ -93,6 +93,7 @@ endif
 
 " Movement {{{
 Plug 'easymotion/vim-easymotion'
+Plug 'szw/vim-maximizer'
 Plug 'matze/vim-move'
 " }}}
 
