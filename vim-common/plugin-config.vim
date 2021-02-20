@@ -8,6 +8,24 @@ let g:quantum_black = 1
 colorscheme quantum
 " }}}
 
+" Dev Icons {{{
+lua << EOF
+function _G.webDevIcons(path)
+  local filename = vim.fn.fnamemodify(path, ':t')
+  local extension = vim.fn.fnamemodify(path, ':e')
+  return require'nvim-web-devicons'.get_icon(filename, extension, { default = true })
+end
+EOF
+
+function! GetIcon(path)
+  if has('nvim-0.5')
+    return v:lua.webDevIcons(a:path)
+  else
+    return WebDevIconsGetFileTypeSymbol(a:path)
+  endif
+endfunction
+" }}}
+
 " Better Whitespace {{{
 nnoremap <Leader>sw :StripWhitespace<CR>
 let g:better_whitespace_guicolor = '#dd7186'
@@ -226,6 +244,7 @@ endif
 " }}}
 
 " Lightline {{{
+" Lightline LSP {{{
 let s:error_indicator = ' '
 let s:warning_indicator = ' '
 let s:info_indicator = '🛈 '
@@ -257,10 +276,16 @@ function! LightlineLspStatus()
 
   return get(g:, 'coc_status', '')
 endfunction
+" }}}
 
+" Lightline File Functions {{{
 function! LightlineFilename()
   "" vim-common/config.vim -> v/config.vim
-  return expand('%:t') !=# '' ? pathshorten(fnamemodify(expand('%'), ':~:.')) : '[No Name]'
+  if expand('%:t') !=# ''
+    return pathshorten(fnamemodify(expand('%'), ':~:.'))
+  endif
+
+  return '[No Name]'
 endfunction
 
 function! LightlineTabFilename(n)
@@ -272,13 +297,23 @@ function! LightlineTabFilename(n)
     return '[FZF]'
   endif
 
-  return expand('#' . bufnr . ':t') !=# '' ? pathshorten(fnamemodify(expand('#' . bufnr), ':~:.')) : '[No Name]'
+  if expand('#' . bufnr . ':t') !=# ''
+    return pathshorten(fnamemodify(expand('#' . bufnr), ':~:.'))
+  endif
+
+  return '[No Name]'
 endfunction
 
 function! LightlineFiletype()
-  return index(['', 'gitcommit'], &filetype) < 0 ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft'
-endfunction
+  if index(['', 'gitcommit'], &filetype) < 0
+    return &filetype . ' ' . GetIcon(expand('%'))
+  endif
 
+  return 'no ft'
+endfunction
+" }}}
+
+" Lightline Components {{{
 let g:lightline.active = {
       \ 'left': [ [ 'mode', 'paste' ],
       \           [ 'readonly', 'filename', 'modified' ],
@@ -319,9 +354,10 @@ let g:lightline.tab_component_function = {
       \ 'filename': 'LightlineTabFilename'
       \ }
 let g:lightline.tab = {
-      \ 'active': ['tabnum', 'filename', 'modified'],
+      \ 'active': ['filename', 'modified'],
       \ 'inactive': ['tabnum', 'filename', 'modified']
       \ }
+" }}}
 " }}}
 
 " LSP {{{
@@ -363,32 +399,14 @@ let g:splitjoin_html_attributes_bracket_on_new_line = 1
 " }}}
 
 " Startify {{{
-function! MapFiles(files)
-  return map(a:files, "{'line': WebDevIconsGetFileTypeSymbol(v:val) . ' ' . v:val, 'path': v:val}")
-endfunction
-
-function! s:gitCached()
-  let files = systemlist('git diff --cached --name-only 2>/dev/null')
-  return MapFiles(files)
-endfunction
-
-function! s:gitModified()
-  let files = systemlist('git ls-files -m 2>/dev/null')
-  return MapFiles(files)
-endfunction
-
-function! s:gitUntracked()
-  let files = systemlist('git ls-files -o --exclude-standard 2>/dev/null')
-  return MapFiles(files)
+function! StartifyEntryFormat()
+  return 'GetIcon(absolute_path) . " " . entry_path'
 endfunction
 
 let g:startify_change_to_dir = 0
 let g:startify_custom_indices = map(range(0, 100), 'v:val < 10 ? 0 . string(v:val) : string(v:val)')
 let g:startify_lists = [
       \ { 'type': 'dir',                      'header': [ '   MRU in ' . getcwd() ] },
-      \ { 'type': function('s:gitModified'),  'header': [ '   Git Modified'       ] },
-      \ { 'type': function('s:gitUntracked'), 'header': [ '   Git Untracked'      ] },
-      \ { 'type': function('s:gitCached'),    'header': [ '   Git Cached'         ] },
       \ { 'type': 'files',                    'header': [ '   MRU'                ] },
       \ { 'type': 'sessions',                 'header': [ '   Sessions'           ] },
       \ { 'type': 'bookmarks',                'header': [ '   Bookmarks'          ] },

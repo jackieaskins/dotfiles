@@ -109,8 +109,9 @@ endif
 " DevIcons {{{
 if has('nvim-0.5')
   Plug 'kyazdani42/nvim-web-devicons' " Used for nvim-tree
+else
+  Plug 'ryanoasis/vim-devicons' " Needs to be last plugin
 end
-Plug 'ryanoasis/vim-devicons' " Needs to be last plugin
 " }}}
 
 call plug#end()
