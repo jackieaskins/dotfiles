@@ -237,6 +237,10 @@ nnoremap <Leader>f :Rg<Space><C-r><C-w><CR>
 nnoremap <Leader>gs :GFiles?<CR>
 " }}}
 
+" GitGutter {{{
+nnoremap <Leader>hf :GitGutterFold<CR>
+" }}}
+
 " Java Syntax {{{
 if !g:use_treesitter
   highlight link JavaIdentifier NONE
@@ -412,6 +416,12 @@ let g:startify_lists = [
       \ { 'type': 'bookmarks',                'header': [ '   Bookmarks'          ] },
       \ { 'type': 'commands',                 'header': [ '   Commands'           ] },
       \ ]
+" }}}
+
+" Test {{{
+let test#java#runner = 'gradletest'
+let test#typescript#jest#options = '--watch --no-cov'
+let test#neovim#term_position = 'vert'
 " }}}
 
 " Tree {{{

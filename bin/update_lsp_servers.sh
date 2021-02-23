@@ -78,7 +78,7 @@ fi
 # diagnosticls {{{
 if should_install "^(diagnosticls|diagnostic-languageserver)$"; then
   echo -e "Updating diagnostic-languageserver..."
-  npm install -g diagnostic-languageserver
+  npm install -g diagnostic-languageserver eslint_d
   echo -e "${GREEN}Successfully updated diagnostic-languageserver\n${NC}"
 fi
 # }}}

@@ -53,6 +53,8 @@ M.custom_attach = function(client, bufnr)
   buf_set_keymap('n', ']g', "<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>", opts)
 
   buf_set_keymap('n', '<leader>rn', "<cmd>lua require'lspsaga.rename'.rename()<CR>", opts)
+
+  vim.cmd [[autocmd CursorHold * Lspsaga show_line_diagnostics]]
 end
 
 return M

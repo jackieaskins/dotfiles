@@ -1,7 +1,6 @@
 " Settings {{{
 set nocompatible
 set encoding=utf8
-set hidden
 
 " Leader key
 nnoremap <Space> <nop>

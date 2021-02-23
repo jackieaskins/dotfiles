@@ -35,9 +35,8 @@ endif
 " }}}
 
 " Brackets {{{
-Plug 'jackieaskins/vim-closer'
 Plug 'alvan/vim-closetag'
-Plug 'tpope/vim-endwise'
+Plug 'cohama/lexima.vim'
 Plug 'andymass/vim-matchup'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'tpope/vim-surround'
@@ -49,6 +48,7 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'tpope/vim-commentary'
 Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-repeat'
+Plug 'vim-test/vim-test'
 
 if g:use_builtin_lsp
   Plug 'norcalli/snippets.nvim'
@@ -108,7 +108,7 @@ endif
 
 " DevIcons {{{
 if has('nvim-0.5')
-  Plug 'kyazdani42/nvim-web-devicons' " Used for nvim-tree
+  Plug 'kyazdani42/nvim-web-devicons'
 else
   Plug 'ryanoasis/vim-devicons' " Needs to be last plugin
 end

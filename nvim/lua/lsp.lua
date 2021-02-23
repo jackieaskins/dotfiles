@@ -91,7 +91,7 @@ vim.api.nvim_exec([[
 
 -- diagnosticls {{{
 local eslint = {
-  command = './node_modules/.bin/eslint',
+  command = 'eslint_d',
   rootPatterns = {'.git'},
   debounce = 100,
   args = {'--stdin', '--stdin-filename', '%filepath', '--format', 'json'},
