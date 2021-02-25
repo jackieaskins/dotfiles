@@ -51,7 +51,8 @@ Plug 'tpope/vim-repeat'
 Plug 'vim-test/vim-test'
 
 if g:use_builtin_lsp
-  Plug 'norcalli/snippets.nvim'
+  Plug 'hrsh7th/vim-vsnip'
+  " Plug 'hrsh7th/vim-vsnip-integ'
 endif
 
 if has('nvim-0.5')
