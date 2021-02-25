@@ -9,14 +9,7 @@ function M.initialize_client()
 
   require'jdtls'.start_or_attach({
     capabilities = require'lsp-attach'.get_capabilities(),
-    on_attach = function(client, bufnr)
-      require'lsp-attach'.custom_attach(client, bufnr)
-
-      local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-      local opts = { noremap=true, silent=true }
-      buf_set_keymap('n', '<leader>ca', "<cmd>lua require('jdtls').code_action()<CR>", opts)
-      buf_set_keymap('v', '<leader>ca', "<esc><cmd>lua require('jdtls').code_action(true)<CR>", opts)
-    end,
+    on_attach = require'lsp-attach'.custom_attach,
     cmd = {'run_jdtls.sh'}
   })
 end

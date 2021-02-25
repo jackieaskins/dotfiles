@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 # Initialization {{{
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -67,25 +66,8 @@ download_microsoft_version() {
 }
 # }}}
 
-# tsserver {{{
-if should_install "^(tsserver|typescript-language-server)$"; then
-  echo -e "Updating typescript-language-server..."
-  npm install -g typescript typescript-language-server
-  echo -e "${GREEN}Finished updating typescript-language-server\n${NC}"
-fi
-# }}}
-
-# diagnosticls {{{
-if should_install "^(diagnosticls|diagnostic-languageserver)$"; then
-  echo -e "Updating diagnostic-languageserver..."
-  npm install -g diagnostic-languageserver eslint_d
-  echo -e "${GREEN}Successfully updated diagnostic-languageserver\n${NC}"
-fi
-# }}}
-
-# jdtls {{{
-if should_install "^(jdtls|jdt-language-server|eclipse.jdt.ls)$"; then
-  echo -e "Updating jdtls..."
+# Custom install functions {{{
+install_jdtls() {
   zip_file=jdt-language-server-latest.tar.gz
   dest_dir=$DOTFILES_DIR/jdt-language-server-latest
 
@@ -96,8 +78,45 @@ if should_install "^(jdtls|jdt-language-server|eclipse.jdt.ls)$"; then
   tar -xf $zip_file -C $dest_dir
 
   rm $zip_file
-  echo -e "${GREEN}Successfully updated jdtls\n${NC}"
-fi
+}
+# }}}
+
+# Language server installation {{{
+language_servers=(
+  'diagnostic-languageserver'
+  'jdt-language-server'
+  'solargraph'
+  'typescript-language-server'
+  'vim-language-server'
+)
+
+language_server_aliases=(
+  'diagnostic-languageserver|diagnosticls'
+  'jdt-language-server|jdtls|eclipse.jdt.ls'
+  'solargraph'
+  'tsserver|typescript-language-server'
+  'vimls|vim-language-server'
+)
+
+language_server_cmds=(
+  'npm install -g diagnostic-languageserver eslint_d'
+  'install_jdtls'
+  'gem install --user-install solargraph'
+  'npm install -g typescript typescript-language-server'
+  'npm install -g vim-language-server'
+)
+
+for i in "${!language_servers[@]}"; do
+  server=${language_servers[$i]}
+  aliases=${language_server_aliases[$i]}
+  cmd=${language_server_cmds[$i]}
+
+  if should_install "^${aliases}$"; then
+    echo -e "Updating ${server}..."
+    $cmd
+    echo -e "${GREEN}Successfully updated ${server}\n${NC}"
+  fi
+done
 # }}}
 
 # Cleanup {{{

@@ -36,7 +36,14 @@ M.custom_attach = function(client, bufnr)
     augroup END
   ]], true)
 
-  -- Saga
+  if client.name == 'jdtls' then
+    buf_set_keymap('n', '<leader>ca', "<cmd>lua require('jdtls').code_action()<CR>", opts)
+    buf_set_keymap('v', '<leader>ca', "<esc><cmd>lua require('jdtls').code_action(true)<CR>", opts)
+  else
+    buf_set_keymap('n', '<leader>ca', ':Lspsaga code_action<CR>', opts)
+    buf_set_keymap('v', '<leader>ca', ':<C-U>Lspsaga range_code_action<CR>', opts)
+  end
+
   buf_set_keymap('i', '<C-k>', "<cmd>lua require'lspsaga.signaturehelp'.signature_help()<CR>", opts)
   buf_set_keymap('n', '<C-k>', "<cmd>lua require'lspsaga.signaturehelp'.signature_help()<CR>", opts)
 

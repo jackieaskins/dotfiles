@@ -101,22 +101,27 @@ local lspconfig = require'lspconfig'
 local custom_attach = require'lsp-attach'.custom_attach
 local capabilities = require'lsp-attach'.get_capabilities()
 
-function nonjava_attach(client, bufnr)
-  custom_attach(client, bufnr)
-
-  local opts = { noremap=true, silent=true }
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  buf_set_keymap('n', '<leader>ca', ':Lspsaga code_action<CR>', opts)
-  buf_set_keymap('v', '<leader>ca', ':<C-U>Lspsaga range_code_action<CR>', opts)
-end
+-- vimls {{{
+require'lspconfig'.vimls.setup {
+  capabilities = capabilities,
+  on_attach = custom_attach
+}
+-- }}}
 
 -- tsserver {{{
 lspconfig.tsserver.setup {
   capabilities = capabilities,
   on_attach = function(client, bufnr)
     client.resolved_capabilities.document_formatting = false
-    nonjava_attach(client, bufnr)
+    custom_attach(client, bufnr)
   end
+}
+-- }}}
+
+-- solargraph {{{
+require'lspconfig'.solargraph.setup {
+  capabilities = capabilities,
+  on_attach = custom_attach
 }
 -- }}}
 
@@ -153,7 +158,7 @@ local eslint = {
 
 lspconfig.diagnosticls.setup{
   capabilities = capabilities,
-  on_attach = nonjava_attach,
+  on_attach = custom_attach,
   root_dir = lspconfig.util.root_pattern('.git'),
   filetypes = {'javascript', 'javascriptreact', 'typescript', 'typescriptreact'},
   init_options = {
