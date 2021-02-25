@@ -35,8 +35,9 @@ endif
 " }}}
 
 " Brackets {{{
+Plug 'jackieaskins/vim-closer'
 Plug 'alvan/vim-closetag'
-Plug 'cohama/lexima.vim'
+Plug 'tpope/vim-endwise'
 Plug 'andymass/vim-matchup'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'tpope/vim-surround'
@@ -52,7 +53,10 @@ Plug 'vim-test/vim-test'
 
 if g:use_builtin_lsp
   Plug 'hrsh7th/vim-vsnip'
-  " Plug 'hrsh7th/vim-vsnip-integ'
+endif
+
+if g:use_treesitter
+  Plug 'tpope/vim-sleuth'
 endif
 
 if has('nvim-0.5')
