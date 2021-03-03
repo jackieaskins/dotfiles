@@ -173,7 +173,7 @@ endif
 " }}}
 
 " FZF {{{
-let $FZF_DEFAULT_OPTS .= ' --bind=ctrl-f:preview-page-down,ctrl-b:preview-page-up,ctrl-j:page-down,ctrl-k:page-up,ctrl-a:select-all,?:toggle-preview'
+let $FZF_DEFAULT_OPTS .= ' --bind=ctrl-f:preview-page-down,ctrl-b:preview-page-up,ctrl-j:page-down,ctrl-k:page-up,ctrl-a:select-all,?:toggle-preview --layout=reverse'
 
 function! s:build_quickfix_list(lines)
   call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
@@ -189,8 +189,6 @@ let g:fzf_action = {
       \ }
 
 if has('nvim')
-  let $FZF_DEFAULT_OPTS .= ' --layout=reverse'
-
   function! CreateCenteredFloatingWindow()
     let width = min([&columns - 4, max([80, &columns - 20])])
     let height = min([&lines - 4, max([20, &lines - 10])])
@@ -283,29 +281,35 @@ endfunction
 " }}}
 
 " Lightline File Functions {{{
-function! LightlineFilename()
+function! FilenameHelper(fileRef, filetype, buftype)
+  if a:filetype == 'fzf'
+    return '[FZF]'
+  endif
+
+  if a:buftype ==# 'terminal'
+    return '[Terminal]'
+  endif
+
   "" vim-common/config.vim -> v/config.vim
-  if expand('%:t') !=# ''
-    return pathshorten(fnamemodify(expand('%'), ':~:.'))
+  if expand(a:fileRef . ':t') !=# ''
+    return pathshorten(fnamemodify(expand(a:fileRef), ':~:.'))
   endif
 
   return '[No Name]'
+endfunction
+
+function! LightlineFilename()
+  "" vim-common/config.vim -> v/config.vim
+  return FilenameHelper('%', &filetype, &buftype)
 endfunction
 
 function! LightlineTabFilename(n)
   "" vim-common/config.vim -> v/config.vim
   let bufnr = tabpagebuflist(a:n)[tabpagewinnr(a:n) - 1]
   let bufFiletype = getbufvar(bufnr, '&filetype')
+  let bufType = getbufvar(bufnr, '&buftype')
 
-  if bufFiletype == 'fzf'
-    return '[FZF]'
-  endif
-
-  if expand('#' . bufnr . ':t') !=# ''
-    return pathshorten(fnamemodify(expand('#' . bufnr), ':~:.'))
-  endif
-
-  return '[No Name]'
+  return FilenameHelper('#' . bufnr, bufFiletype, bufType)
 endfunction
 
 function! LightlineFiletype()
@@ -419,9 +423,23 @@ let g:startify_lists = [
 " }}}
 
 " Test {{{
+if has('nvim')
+  let test#strategy = 'neovim'
+  let test#neovim#term_position = 'vert'
+else
+  let test#strategy = 'vimterminal'
+  let test#vim#term_position = 'vert'
+endif
+
 let test#java#runner = 'gradletest'
 let test#typescript#jest#options = '--watch --no-cov'
-let test#neovim#term_position = 'vert'
+let test#javascript#jest#options = '--watch --no-cov'
+
+nmap <leader>tn :TestNearest<CR>
+nmap <leader>tf :TestFile<CR>
+nmap <leader>ts :TestSuite<CR>
+nmap <leader>tl :TestLast<CR>
+nmap <leader>tv :TestVisit<CR>
 " }}}
 
 " Tree {{{
@@ -445,21 +463,8 @@ if g:use_treesitter
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
   ensure_installed = "maintained",
-  highlight = {
-    enable = true,
-  },
-  incremental_selection = {
-    enable = true,
-    keymaps = {
-      init_selection = "gnn",
-      node_incremental = "grn",
-      scope_incremental = "grc",
-      node_decremental = "grm",
-    },
-  },
-  indent = {
-    enable = true
-  }
+  highlight = { enable = true },
+  indent = { enable = true }
 }
 EOF
 endif
