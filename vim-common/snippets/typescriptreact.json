@@ -28,7 +28,7 @@
     "body": [
       "import { shallow } from 'enzyme';",
       "",
-      "import ${1:${TM_FILENAME_BASE/(.test|.spec)//}} from './$1';",
+      "import ${1:${TM_FILENAME_BASE}} from './$1';",
       "",
       "describe('<$1 />', () => {",
       "  const renderComponent = (propOverrides = {}) =>",

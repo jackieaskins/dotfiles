@@ -54,10 +54,6 @@ if g:use_builtin_lsp
   Plug 'hrsh7th/vim-vsnip'
 endif
 
-if g:use_treesitter
-  Plug 'tpope/vim-sleuth'
-endif
-
 if has('nvim-0.5')
   Plug 'mhartington/formatter.nvim', { 'do': './bin/update_formatters.sh' }
 endif
@@ -104,6 +100,7 @@ Plug 'matze/vim-move'
 
 " Syntax {{{
 if g:use_treesitter
+  Plug 'tpope/vim-sleuth'
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 else
   Plug 'uiiaoo/java-syntax.vim'
