@@ -49,7 +49,6 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'tpope/vim-commentary'
 Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-repeat'
-Plug 'vim-test/vim-test'
 
 if g:use_builtin_lsp
   Plug 'hrsh7th/vim-vsnip'
@@ -110,6 +109,16 @@ else
   Plug 'uiiaoo/java-syntax.vim'
   Plug 'sheerun/vim-polyglot' " Polyglot needs to go after other syntax plugins
 endif
+" }}}
+
+" Testing {{{
+if has('vim')
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+
+Plug 'vim-test/vim-test'
+Plug 'jackieaskins/vim-ultest', { 'do': ':UpdateRemotePlugins' }
 " }}}
 
 " DevIcons {{{

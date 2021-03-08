@@ -57,7 +57,6 @@ if !g:use_builtin_lsp
         \ 'coc-highlight',
         \ 'coc-html',
         \ 'coc-java',
-        \ 'coc-jest',
         \ 'coc-json',
         \ 'coc-marketplace',
         \ 'coc-python',
@@ -97,11 +96,6 @@ if !g:use_builtin_lsp
 
   "" coc-eslint
   nmap <Leader>ef :CocCommand eslint.executeAutofix<CR>
-
-  "" coc-jest
-  command! -nargs=0 J :call CocAction('runCommand', 'jest.projectTest')
-  command! -nargs=0 JC :call CocAction('runCommand', 'jest.fileTest', ['%'])
-  nnoremap <Leader>jt :call CocAction('runCommand', 'jest.singleTest')<CR>
 
   "" coc-snippets
   inoremap <silent><expr> <TAB>
@@ -448,21 +442,15 @@ let g:startify_lists = [
 " Test {{{
 if has('nvim')
   let test#strategy = 'neovim'
-  let test#neovim#term_position = 'vert'
+  let test#neovim#term_position = 'vert botright'
 else
   let test#strategy = 'vimterminal'
-  let test#vim#term_position = 'vert'
+  let test#vim#term_position = 'vert botright'
 endif
 
 let test#java#runner = 'gradletest'
-let test#typescript#jest#options = '--watch --no-cov'
-let test#javascript#jest#options = '--watch --no-cov'
-
-nmap <leader>tn :TestNearest<CR>
-nmap <leader>tf :TestFile<CR>
-nmap <leader>ts :TestSuite<CR>
-nmap <leader>tl :TestLast<CR>
-nmap <leader>tv :TestVisit<CR>
+let test#typescript#jest#options = '--color=always'
+let test#javascript#jest#options = '--color=always'
 " }}}
 
 " Tree {{{
@@ -491,4 +479,14 @@ require'nvim-treesitter.configs'.setup {
 }
 EOF
 endif
+" }}}
+
+" Ultest {{{
+nmap <leader>tn :UltestNearest<CR>
+nmap <leader>tf :Ultest<CR>
+nmap <leader>ts :UltestStop<CR>
+nmap <leader>tt :UltestSummary<CR>
+
+nmap ]t <Plug>(ultest-next-fail)
+nmap [t <Plug>(ultest-prev-fail)
 " }}}
