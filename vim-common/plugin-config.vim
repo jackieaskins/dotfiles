@@ -142,6 +142,7 @@ let g:user_emmet_settings = {
 " Formatter {{{
 if has('nvim-0.5')
 lua << EOF
+-- Prettier Formatter {{{
 local prettier = {
   function()
     return {
@@ -151,24 +152,46 @@ local prettier = {
     }
   end
 }
+-- }}}
+-- Google Java Formatter {{{
+local google = {
+  function()
+    return {
+      exe = 'java',
+      args = {
+        '-jar',
+        os.getenv('HOME') .. '/dotfiles/formatters/google-java-format/google-java-format.jar',
+        vim.api.nvim_buf_get_name(0)
+      },
+      stdin = true
+    }
+  end
+}
+-- }}}
 
 require('formatter').setup({
   logging = true,
   filetype = {
+    java = google,
     javascript = prettier,
     javascriptreact = prettier,
     typescript = prettier,
     typescriptreact = prettier
   }
 })
+EOF
 
-vim.api.nvim_exec([[
+function! FormatWithPrettier()
+  if !empty(glob('./node_modules/.bin/prettier'))
+    execute 'FormatWrite'
+  endif
+endfunction
+
 augroup auto_format
   autocmd!
-  autocmd BufWritePost *.js,*.jsx,*.ts,*.tsx FormatWrite
+  autocmd BufWritePost *.js,*.jsx,*.ts,*.tsx call FormatWithPrettier()
+  autocmd BufWritePost *.java FormatWrite
 augroup END
-]], true)
-EOF
 endif
 " }}}
 

@@ -8,6 +8,8 @@
 
 /zsh/custom.zsh
 
+/formatters
+
 /jdt-language-server-latest
 /java-debug-latest
 /vscode-java-test-latest

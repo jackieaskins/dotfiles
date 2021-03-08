@@ -60,7 +60,7 @@ if g:use_treesitter
 endif
 
 if has('nvim-0.5')
-  Plug 'mhartington/formatter.nvim'
+  Plug 'mhartington/formatter.nvim', { 'do': './bin/update_formatters.sh' }
 endif
 " }}}
 
