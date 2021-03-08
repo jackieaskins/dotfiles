@@ -11,10 +11,9 @@ GRADLE_HOME="$(which gradle)" "$(which java)" \
   -Declipse.application=org.eclipse.jdt.ls.core.id1 \
   -Dosgi.bundles.defaultStartLevel=4 \
   -Declipse.product=org.eclipse.jdt.ls.core.product \
-  -Dlog.protocol=true \
   -Dlog.level=ALL \
-  -Xms1g \
-  -Xmx2G \
+  -noverify \
+  -Xmx1G \
   -jar $(echo "$JAR") \
   -configuration "$HOME/dotfiles/jdt-language-server-latest/config_$OS" \
   -data "${1:-$HOME/workspace}" \

@@ -125,6 +125,13 @@ require'lspconfig'.solargraph.setup {
 }
 -- }}}
 
+-- pyright {{{
+require'lspconfig'.pyright.setup {
+  capabilities = capabilities,
+  on_attach = custom_attach
+}
+-- }}}
+
 -- jdtls {{{
 vim.api.nvim_exec([[
   augroup java_lsp

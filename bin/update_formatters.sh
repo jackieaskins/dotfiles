@@ -1,5 +1,8 @@
 #!/bin/bash
 
+GREEN='\033[0;32m'
+NC='\033[0m'
+
 FORMATTERS_DIR="$HOME/dotfiles/formatters"
 
 # Java Google Formatter {{{
