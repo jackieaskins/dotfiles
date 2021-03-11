@@ -109,13 +109,7 @@ endif
 " }}}
 
 " Testing {{{
-if has('vim')
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
-
 Plug 'vim-test/vim-test'
-Plug 'jackieaskins/vim-ultest', { 'do': ':UpdateRemotePlugins' }
 " }}}
 
 " DevIcons {{{

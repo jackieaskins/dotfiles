@@ -449,8 +449,14 @@ else
 endif
 
 let test#java#runner = 'gradletest'
-let test#typescript#jest#options = '--color=always'
-let test#javascript#jest#options = '--color=always'
+let test#typescript#jest#options = '--no-coverage --watch'
+let test#javascript#jest#options = '--no-coverage --watch'
+
+nmap <leader>tn :TestNearest<CR>
+nmap <leader>tf :TestFile<CR>
+nmap <leader>ts :TestSuite<CR>
+nmap <leader>tl :TestLast<CR>
+nmap <leader>tv :TestVisit<CR>
 " }}}
 
 " Tree {{{
@@ -479,14 +485,4 @@ require'nvim-treesitter.configs'.setup {
 }
 EOF
 endif
-" }}}
-
-" Ultest {{{
-nmap <leader>tn :UltestNearest<CR>
-nmap <leader>tf :Ultest<CR>
-nmap <leader>ts :UltestStop<CR>
-nmap <leader>tt :UltestSummary<CR>
-
-nmap ]t <Plug>(ultest-next-fail)
-nmap [t <Plug>(ultest-prev-fail)
 " }}}
