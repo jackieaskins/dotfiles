@@ -1,22 +1,24 @@
 #!/usr/bin/env bash
 
-OS='linux'
+JDT_LS_ROOT="$HOME/dotfiles/lsp-servers/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository"
+OS="linux"
 case "$OSTYPE" in
   darwin*)  OS=mac ;;
   msys*)    OS=win ;;
 esac
 
-JAR="$HOME/dotfiles/jdt-language-server-latest/plugins/org.eclipse.equinox.launcher_*.jar"
+JAR="$JDT_LS_ROOT/plugins/org.eclipse.equinox.launcher_*.jar"
 GRADLE_HOME="$(which gradle)" "$(which java)" \
   -Declipse.application=org.eclipse.jdt.ls.core.id1 \
   -Dosgi.bundles.defaultStartLevel=4 \
   -Declipse.product=org.eclipse.jdt.ls.core.product \
+  -Dlog.level=ALL \
   -noverify \
   -Xmx1G \
   -XX:+UseG1GC \
   -XX:+UseStringDeduplication \
   -jar $(echo "$JAR") \
-  -configuration "$HOME/dotfiles/jdt-language-server-latest/config_$OS" \
+  -configuration "$JDT_LS_ROOT/config_$OS" \
   -data "${1:-$HOME/workspace}" \
   --add-modules=ALL-SYSTEM \
   --add-opens java.base/java.util=ALL-UNNAMED \

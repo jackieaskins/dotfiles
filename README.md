@@ -30,6 +30,9 @@ Ensure that the following are installed before beginning:
     - Go to iTerm2 > Preferences
     - Check under Preferences on the General Tab
     - Check the checkbox next to "Load preferences from a custom folder or URL" and fill in `~/dotfiles/iterm`
+2. Navigate to the LSP submodules & run install instructions:
+    - Sumneko Lua: https://github.com/sumneko/lua-language-server/wiki/Build-and-Run-(Standalone)
+    - Eclipse JDTLS: https://github.com/eclipse/eclipse.jdt.ls#building-from-the-command-line
 
 ## Customization
 To add machine-specific settings, create the files below. For:

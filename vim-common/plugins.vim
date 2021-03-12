@@ -55,7 +55,7 @@ if g:use_builtin_lsp
 endif
 
 if has('nvim-0.5')
-  Plug 'mhartington/formatter.nvim', { 'do': './bin/update_formatters.sh' }
+  Plug 'mhartington/formatter.nvim'
 endif
 " }}}
 
@@ -80,7 +80,7 @@ Plug 'airblade/vim-gitgutter'
 
 " LSP {{{
 if g:use_builtin_lsp
-  Plug 'neovim/nvim-lspconfig', { 'do': './bin/update_custom_lsp_servers.sh' }
+  Plug 'neovim/nvim-lspconfig'
   Plug 'alexaandru/nvim-lspupdate'
   Plug 'jackieaskins/lsp-status.nvim'
   Plug 'glepnir/lspsaga.nvim'
