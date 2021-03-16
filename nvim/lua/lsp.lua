@@ -22,6 +22,9 @@ require'lspsaga'.init_lsp_saga {
     scroll_down = '<C-f>',
     scroll_up = '<C-b>'
   },
+  code_action_prompt = {
+    enable = false
+  }
 }
 -- }}}
 
@@ -29,7 +32,6 @@ require'lspsaga'.init_lsp_saga {
 vim.o.completeopt = 'menu,menuone,noselect'
 require'compe'.setup {
   enabled = true;
-  min_length = 3;
   source = {
     path = true;
     buffer = true;
@@ -97,86 +99,18 @@ vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_li
 -- }}}
 
 -- Language Servers {{{
+-- https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
 local lspconfig = require'lspconfig'
 local custom_attach = require'lsp-attach'.custom_attach
 local capabilities = require'lsp-attach'.get_capabilities()
 
--- vimls {{{
-require'lspconfig'.vimls.setup {
-  capabilities = capabilities,
-  on_attach = custom_attach
-}
--- }}}
-
--- tsserver {{{
-lspconfig.tsserver.setup {
-  capabilities = capabilities,
-  on_attach = function(client, bufnr)
-    client.resolved_capabilities.document_formatting = false
-    custom_attach(client, bufnr)
-  end
-}
--- }}}
-
--- sumneko_lua {{{
-local system_name
-if vim.fn.has("mac") == 1 then
-  system_name = "macOS"
-elseif vim.fn.has("unix") == 1 then
-  system_name = "Linux"
-elseif vim.fn.has('win32') == 1 then
-  system_name = "Windows"
-else
-  print("Unsupported system for sumneko")
+local simple_servers = { "jsonls", "pyright", "solargraph", "vimls" }
+for _, server in ipairs(simple_servers) do
+  lspconfig[server].setup {
+    capabilities = capabilities,
+    on_attach = custom_attach
+  }
 end
-
-local sumneko_root_path = vim.fn.expand('$HOME/dotfiles/lsp-servers/lua-language-server')
-local sumneko_binary = sumneko_root_path .. "/bin/" .. system_name .. "/lua-language-server"
-
-require'lspconfig'.sumneko_lua.setup {
-  cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"};
-  settings = {
-    Lua = {
-      runtime = {
-        version = 'LuaJIT',
-        path = vim.split(package.path, ';'),
-      },
-      diagnostics = {
-        globals = {'vim'},
-      },
-      workspace = {
-        library = {
-          [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-          [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
-        },
-      },
-    },
-  },
-}
--- }}}
-
--- solargraph {{{
-require'lspconfig'.solargraph.setup {
-  capabilities = capabilities,
-  on_attach = custom_attach
-}
--- }}}
-
--- pyright {{{
-require'lspconfig'.pyright.setup {
-  capabilities = capabilities,
-  on_attach = custom_attach
-}
--- }}}
-
--- jdtls {{{
-vim.api.nvim_exec([[
-  augroup java_lsp
-    au!
-    au FileType java lua require'jdtls-setup'.initialize_client()
-  augroup end
-]], true)
--- }}}
 
 -- diagnosticls {{{
 local eslint = {
@@ -214,6 +148,64 @@ lspconfig.diagnosticls.setup{
       typescriptreact = 'eslint'
     }
   }
+}
+-- }}}
+
+-- jdtls {{{
+vim.api.nvim_exec([[
+  augroup java_lsp
+    au!
+    au FileType java lua require'jdtls-setup'.initialize_client()
+  augroup end
+]], true)
+-- }}}
+
+-- sumneko_lua {{{
+local system_name
+if vim.fn.has("mac") == 1 then
+  system_name = "macOS"
+elseif vim.fn.has("unix") == 1 then
+  system_name = "Linux"
+elseif vim.fn.has('win32') == 1 then
+  system_name = "Windows"
+else
+  print("Unsupported system for sumneko")
+end
+
+local sumneko_root_path = vim.fn.expand('$HOME/dotfiles/lsp-servers/lua-language-server')
+local sumneko_binary = sumneko_root_path .. "/bin/" .. system_name .. "/lua-language-server"
+
+lspconfig.sumneko_lua.setup {
+  cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"};
+  capabilities = capabilities,
+  on_attach = custom_attach,
+  settings = {
+    Lua = {
+      runtime = {
+        version = 'LuaJIT',
+        path = vim.split(package.path, ';'),
+      },
+      diagnostics = {
+        globals = {'vim'},
+      },
+      workspace = {
+        library = {
+          [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+          [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
+        },
+      },
+    },
+  },
+}
+-- }}}
+
+-- tsserver {{{
+lspconfig.tsserver.setup {
+  capabilities = capabilities,
+  on_attach = function(client, bufnr)
+    client.resolved_capabilities.document_formatting = false
+    custom_attach(client, bufnr)
+  end
 }
 -- }}}
 -- }}}

@@ -389,6 +389,12 @@ let g:lightline.tab = {
 if g:use_builtin_lsp
   lua require'lsp'
 endif
+
+function! ReloadLsp()
+  :lua vim.lsp.stop_client(vim.lsp.get_active_clients())
+  :edit
+endfunction
+command LspReload call ReloadLsp()
 " }}}
 
 " MatchUp {{{
@@ -396,7 +402,7 @@ let g:matchup_matchparen_offscreen = { 'method': 'status_manual' }
 " }}}
 
 " Maximizer {{{
-let g:maximizer_default_mapping_key = '<F2>'
+nnoremap <leader>mt :MaximizerToggle<CR>
 " }}}
 
 " NerdTree {{{

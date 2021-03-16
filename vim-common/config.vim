@@ -52,6 +52,9 @@ map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-h> <C-w>h
 map <C-l> <C-w>l
+
+command! -nargs=* T split | terminal <args>
+command! -nargs=* VT vsplit | terminal <args>
 " }}}
 
 " Spaces & Tabs {{{
@@ -96,6 +99,16 @@ endif
 " }}}
 
 " Mappings {{{
+function! OpenURLUnderCursor()
+  let s:uri = expand('<cWORD>')
+  let s:uri = substitute(s:uri, '?', '\\?', '')
+  let s:uri = shellescape(s:uri, 1)
+  if s:uri != ''
+    silent exec "!open '".s:uri."'"
+    :redraw!
+  endif
+endfunction
+nnoremap gx :call OpenURLUnderCursor()<CR>
 nnoremap <Leader>{ i{<CR>return <Esc>$%o};<Esc>^=i{
 " }}}
 

@@ -22,20 +22,6 @@ M.custom_attach = function(client, bufnr)
   buf_set_keymap('n', '<leader>lf', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
   buf_set_keymap('n', '<leader>sy', '<cmd>lua vim.document_symbol()<CR>', opts)
 
-  if client.resolved_capabilities.document_highlight then
-    vim.api.nvim_exec([[
-      hi link LspReferenceText Visual
-      hi link LspReferenceRead Visual
-      hi link LspReferenceWrite Visual
-
-      augroup document_hightlight
-        autocmd!
-        autocmd CursorHold  * lua vim.lsp.buf.document_highlight()
-        autocmd CursorMoved * lua vim.lsp.buf.clear_references()
-      augroup END
-    ]], false)
-  end
-
   if client.name == 'jdt.ls' then
     buf_set_keymap('n', '<leader>ca', "<cmd>lua require('jdtls').code_action()<CR>", opts)
     buf_set_keymap('v', '<leader>ca', "<esc><cmd>lua require('jdtls').code_action(true)<CR>", opts)
