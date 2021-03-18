@@ -10,7 +10,8 @@ function M.initialize_client()
   require'jdtls'.start_or_attach({
     capabilities = require'lsp-attach'.get_capabilities(),
     on_attach = require'lsp-attach'.custom_attach,
-    cmd = {'run_jdtls.sh'}
+    cmd = {'run_jdtls.sh'},
+    filetypes = {'java'}
   })
 end
 

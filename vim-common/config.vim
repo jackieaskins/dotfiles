@@ -53,8 +53,8 @@ map <C-k> <C-w>k
 map <C-h> <C-w>h
 map <C-l> <C-w>l
 
-command! -nargs=* T split | terminal <args>
-command! -nargs=* VT vsplit | terminal <args>
+command! -nargs=* T botright split | terminal <args>
+command! -nargs=* VT botright vsplit | terminal <args>
 " }}}
 
 " Spaces & Tabs {{{

@@ -1,0 +1,23 @@
+{
+  "Typescript Component With Styles": {
+    "prefix": "tcws",
+    "body": [
+      "<template>",
+      "  ${3}",
+      "</template>",
+      "",
+      "<script lang=\"ts\">",
+      "import { defineComponent } from 'vue';",
+      "",
+      "export default defineComponent({",
+      "  name: '${1:$TM_FILENAME_BASE}',",
+      "  ${2}",
+      "});",
+      "</script>",
+      "",
+      "<style scoped>",
+      "${4}",
+      "</style>"
+    ]
+  }
+}
