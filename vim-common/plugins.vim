@@ -87,10 +87,9 @@ if g:use_builtin_lsp
   Plug 'neovim/nvim-lspconfig'
   Plug 'alexaandru/nvim-lspupdate'
   Plug 'jackieaskins/lsp-status.nvim'
-  Plug 'glepnir/lspsaga.nvim'
+  Plug 'jackieaskins/lspsaga.nvim'
   Plug 'hrsh7th/nvim-compe'
   Plug 'kosayoda/nvim-lightbulb'
-  Plug 'mfussenegger/nvim-jdtls'
 else
   Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 endif

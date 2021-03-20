@@ -18,21 +18,11 @@ M.custom_attach = function(client, bufnr)
 
   buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
   buf_set_keymap('n', 'gy', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  buf_set_keymap('n', 'gr', "<cmd>lua require'lspsaga.provider'.lsp_finder()<CR>", opts)
 
-  buf_set_keymap('n', '<leader>lf', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
-  buf_set_keymap('n', '<leader>sy', '<cmd>lua vim.document_symbol()<CR>', opts)
-
-  if client.name == 'jdt.ls' then
-    buf_set_keymap('n', '<leader>ca', "<cmd>lua require('jdtls').code_action()<CR>", opts)
-    buf_set_keymap('v', '<leader>ca', "<esc><cmd>lua require('jdtls').code_action(true)<CR>", opts)
-    buf_set_keymap('n', 'gd', "<cmd>vsplit | lua vim.lsp.buf.definition()<CR>", opts)
-    buf_set_keymap('n', 'gr', "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-  else
-    buf_set_keymap('n', '<leader>ca', ':Lspsaga code_action<CR>', opts)
-    buf_set_keymap('v', '<leader>ca', ':<C-U>Lspsaga range_code_action<CR>', opts)
-    buf_set_keymap('n', 'gd', "<cmd>lua require'lspsaga.provider'.lsp_finder()<CR>", opts)
-    buf_set_keymap('n', 'gr', "<cmd>lua require'lspsaga.provider'.lsp_finder()<CR>", opts)
-  end
+  buf_set_keymap('n', '<leader>ca', "<cmd>lua require'lspsaga.codeaction'.code_action()<CR>", opts)
+  buf_set_keymap('v', '<leader>ca', ":<C-U>lua require'lspsaga.codeaction'.range_code_action()<CR>", opts)
 
   buf_set_keymap('i', '<C-k>', "<cmd>lua require'lspsaga.signaturehelp'.signature_help()<CR>", opts)
   buf_set_keymap('n', '<C-k>', "<cmd>lua require'lspsaga.signaturehelp'.signature_help()<CR>", opts)

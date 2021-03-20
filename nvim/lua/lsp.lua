@@ -152,12 +152,11 @@ lspconfig.diagnosticls.setup{
 -- }}}
 
 -- jdtls {{{
-vim.api.nvim_exec([[
-  augroup java_lsp
-    au!
-    au FileType java lua require'jdtls-setup'.initialize_client()
-  augroup end
-]], true)
+lspconfig.jdtls.setup {
+  capabilities = capabilities,
+  on_attach = custom_attach,
+  cmd = { 'run_jdtls.sh' }
+}
 -- }}}
 
 -- sumneko_lua {{{
