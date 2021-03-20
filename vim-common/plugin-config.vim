@@ -8,24 +8,6 @@ let g:quantum_black = 1
 colorscheme quantum
 " }}}
 
-" Dev Icons {{{
-lua << EOF
-function _G.webDevIcons(path)
-  local filename = vim.fn.fnamemodify(path, ':t')
-  local extension = vim.fn.fnamemodify(path, ':e')
-  return require'nvim-web-devicons'.get_icon(filename, extension, { default = true })
-end
-EOF
-
-function! GetIcon(path)
-  if has('nvim-0.5')
-    return v:lua.webDevIcons(a:path)
-  else
-    return WebDevIconsGetFileTypeSymbol(a:path)
-  endif
-endfunction
-" }}}
-
 " Better Whitespace {{{
 nnoremap <Leader>sw :StripWhitespace<CR>
 let g:better_whitespace_guicolor = '#dd7186'
@@ -131,6 +113,55 @@ let g:user_emmet_settings = {
       \ 'typescript.tsx' : { 'extends' : 'jsx' },
       \ 'typescriptreact' : { 'extends': 'jsx' },
       \}
+" }}}
+
+" Fern {{{
+nnoremap <C-n> :Fern . -drawer -toggle<CR>
+nnoremap <Leader>n :Fern . -drawer -toggle -reveal=%<CR>
+
+let g:fern#disable_default_mappings = 1
+let g:fern#drawer_width = 50
+let g:fern#default_hidden = 1
+let g:fern#hide_cursor = 1
+let g:fern#renderer = 'nerdfont'
+
+let g:fern_git_status#disable_ignored = 1
+
+function! s:init_fern() abort
+  nnoremap <Plug>(fern-custom-action-close-drawer) :<C-u>FernDo close<CR>
+  nmap <buffer><silent> <Plug>(fern-custom-action-open-and-close)
+      \ <Plug>(fern-action-open)
+      \ <Plug>(fern-custom-action-close-drawer)
+
+  nmap <buffer><expr>
+        \ <Plug>(fern-custom-action-smart-open)
+        \ fern#smart#leaf(
+        \   "\<Plug>(fern-custom-action-open-and-close)",
+        \   "\<Plug>(fern-action-expand)",
+        \   "\<Plug>(fern-action-collapse)",
+        \ )
+
+  nmap <buffer><silent> <CR> <Plug>(fern-custom-action-smart-open)
+  nmap <buffer><silent> o <Plug>(fern-custom-action-smart-open)
+
+  nmap <buffer><silent> <Tab> <Plug>(fern-action-open)<C-w><C-p>
+  nmap <buffer><silent> <C-v> <Plug>(fern-action-open:vsplit) <Plug>(fern-custom-action-close-drawer)
+  nmap <buffer><silent> <C-s> <Plug>(fern-action-open:split) <Plug>(fern-custom-action-close-drawer)
+  nmap <buffer><silent> <C-t> <Plug>(fern-action-open:tabedit)
+
+  nmap <buffer><silent> R <Plug>(fern-action-reload:all)
+  nmap <buffer><silent> r <Plug>(fern-action-rename)
+  nmap <buffer><silent> n <Plug>(fern-action-new-path)
+  nmap <buffer><silent> m <Plug>(fern-action-move)
+  nmap <buffer><silent> d <Plug>(fern-action-remove)
+  nmap <buffer><silent> c <Plug>(fern-action-copy)
+  nmap <buffer><silent> - <Plug>(fern-action-mark:toggle)
+endfunction
+
+augroup init_fern
+  autocmd! *
+  autocmd FileType fern call s:init_fern()
+augroup END
 " }}}
 
 " Formatter {{{
@@ -256,6 +287,13 @@ nnoremap <Leader>gs :GFiles?<CR>
 nnoremap <Leader>hf :GitGutterFold<CR>
 " }}}
 
+" Glyph Palette {{{
+augroup glyph_palette
+  autocmd! *
+  autocmd FileType fern call glyph_palette#apply()
+augroup END
+" }}}
+
 " Java Syntax {{{
 if !g:use_treesitter
   highlight link JavaIdentifier NONE
@@ -303,6 +341,10 @@ function! FilenameHelper(fileRef, filetype, buftype)
     return '[FZF]'
   endif
 
+  if a:filetype == 'fern'
+    return '[Fern]'
+  endif
+
   if a:buftype ==# 'terminal'
     return '[Terminal]'
   endif
@@ -331,7 +373,7 @@ endfunction
 
 function! LightlineFiletype()
   if index(['', 'gitcommit'], &filetype) < 0
-    return &filetype . ' ' . GetIcon(expand('%'))
+    return &filetype . ' ' . nerdfont#find(expand('%'))
   endif
 
   return 'no ft'
@@ -405,19 +447,6 @@ let g:matchup_matchparen_offscreen = { 'method': 'status_manual' }
 nnoremap <leader>mt :MaximizerToggle<CR>
 " }}}
 
-" NerdTree {{{
-if !has('nvim-0.5')
-  let g:NERDTreeWinSize = 60
-  let NERDTreeShowHidden = 1
-  let NERDTreeQuitOnOpen = 1
-  let NERDTreeIgnore = ['node_modules', '\.git$', '\.DS_Store', 'tags.lock']
-  let NERDTreeMinimalUI = 1
-
-  nnoremap <C-n> :NERDTreeToggle<CR>
-  nnoremap <Leader>n :NERDTreeFind<CR>
-end
-" }}}
-
 " Polyglot {{{
 if !g:use_treesitter
   "" JSX
@@ -431,7 +460,7 @@ let g:splitjoin_html_attributes_bracket_on_new_line = 1
 
 " Startify {{{
 function! StartifyEntryFormat()
-  return 'GetIcon(absolute_path) . " " . entry_path'
+  return 'nerdfont#find(absolute_path) . " " . entry_path'
 endfunction
 
 let g:startify_change_to_dir = 0
@@ -463,22 +492,6 @@ nmap <leader>tf :TestFile<CR>
 nmap <leader>ts :TestSuite<CR>
 nmap <leader>tl :TestLast<CR>
 nmap <leader>tv :TestVisit<CR>
-" }}}
-
-" Tree {{{
-if has('nvim-0.5')
-  let g:nvim_tree_follow = 1
-  let g:nvim_tree_git_hl = 1
-  let g:nvim_tree_ignore = ['.git', 'node_modules', '.DS_Store']
-  let g:nvim_tree_indent_markers = 1
-  let g:nvim_tree_quit_on_open = 1
-  let g:nvim_tree_width = 50
-  let g:nvim_tree_auto_open = 1
-  let g:nvim_tree_auto_ignore_ft = ['startify']
-
-  nnoremap <C-n> :NvimTreeToggle<CR>
-  nnoremap <Leader>n :NvimTreeFindFile<CR>
-end
 " }}}
 
 " Treesitter {{{
