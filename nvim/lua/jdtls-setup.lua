@@ -1,18 +1,23 @@
 local M = {}
 
-function M.initialize_client()
-    vim.api.nvim_command [[command! -buffer JdtCompile lua require'jdtls'.compile()]]
-    vim.api.nvim_command [[command! -buffer JdtUpdateConfig lua require'jdtls'.update_project_config()]]
-    vim.api.nvim_command [[command! -buffer JdtJol lua require'jdtls'.jol()]]
-    vim.api.nvim_command [[command! -buffer JdtBytecode lua require'jdtls'.javap()]]
-    vim.api.nvim_command [[command! -buffer JdtJshell lua require'jdtls'.jshell()]]
+function M.handle_jdt_uri(uri)
+  vim.api.nvim_buf_set_option(0, 'filetype', 'java')
 
-  require'jdtls'.start_or_attach({
-    capabilities = require'lsp-attach'.get_capabilities(),
-    on_attach = require'lsp-attach'.custom_attach,
-    cmd = {'run_jdtls.sh'},
-    filetypes = {'java'}
-  })
+  local buf = vim.api.nvim_get_current_buf()
+
+  local timeout_ms = 1000
+  local params = { uri = uri }
+  local response, err = vim.lsp.buf_request_sync(0, 'java/classFileContents', params, timeout_ms)
+
+  local get_buf_content = function()
+    if err then
+      return 'An error occurred retrieving class file contents ' .. err
+    end
+
+    return vim.split(response[1].result, '\n', true)
+  end
+
+  vim.api.nvim_buf_set_lines(buf, 0, -1, false, get_buf_content())
 end
 
 return M

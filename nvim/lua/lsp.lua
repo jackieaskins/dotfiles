@@ -155,7 +155,21 @@ lspconfig.diagnosticls.setup{
 lspconfig.jdtls.setup {
   capabilities = capabilities,
   on_attach = custom_attach,
-  cmd = { 'run_jdtls.sh' }
+  cmd = { 'run_jdtls.sh' },
+  init_options = {
+    extendedClientCapabilities = {
+      advancedExtractRefactoringSupport = true;
+      advancedOrganizeImportsSupport = true;
+      classFileContentsSupport = true;
+      generateToStringPromptSupport = true;
+      generateConstructorsPromptSupport = true;
+      generateDelegateMethodsPromptSupport = true;
+      hashCodeEqualsPromptSupport = true;
+      inferSelectionSupport = {"extractMethod", "extractVariable"};
+      moveRefactoringSupport = true;
+      overrideMethodsPromptSupport = true;
+    }
+  }
 }
 -- }}}
 

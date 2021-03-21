@@ -149,6 +149,9 @@ function! s:init_fern() abort
   nmap <buffer><silent> <C-s> <Plug>(fern-action-open:split) <Plug>(fern-custom-action-close-drawer)
   nmap <buffer><silent> <C-t> <Plug>(fern-action-open:tabedit)
 
+  nmap <buffer><silent> h <Plug>(fern-action-collapse)
+  nmap <buffer><silent> l <Plug>(fern-action-expand)
+
   nmap <buffer><silent> R <Plug>(fern-action-reload:all)
   nmap <buffer><silent> r <Plug>(fern-action-rename)
   nmap <buffer><silent> n <Plug>(fern-action-new-path)
@@ -349,6 +352,12 @@ function! FilenameHelper(fileRef, filetype, buftype)
     return '[Terminal]'
   endif
 
+  if expand(a:fileRef) =~ '^jdt://.*'
+    let filename = split(expand(a:fileRef), '%3C')[-1]
+    let filename = substitute(filename, '(', '.', '')
+    return substitute(filename, '.class', '', '')
+  endif
+
   "" vim-common/config.vim -> v/config.vim
   if expand(a:fileRef . ':t') !=# ''
     return pathshorten(fnamemodify(expand(a:fileRef), ':~:.'))
@@ -430,13 +439,18 @@ let g:lightline.tab = {
 " LSP {{{
 if g:use_builtin_lsp
   lua require'lsp'
-endif
 
-function! ReloadLsp()
-  :lua vim.lsp.stop_client(vim.lsp.get_active_clients())
-  :edit
-endfunction
-command LspReload call ReloadLsp()
+  augroup jdt_setup
+    autocmd!
+    autocmd BufReadCmd jdt://* call luaeval('require"jdtls-setup".handle_jdt_uri(_A)', expand('<amatch>'))
+  augroup END
+
+  function! ReloadLsp()
+    :lua vim.lsp.stop_client(vim.lsp.get_active_clients())
+    :edit
+  endfunction
+  command LspReload call ReloadLsp()
+endif
 " }}}
 
 " MatchUp {{{
