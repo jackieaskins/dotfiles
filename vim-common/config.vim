@@ -25,7 +25,16 @@ endif
 
 " Plugins {{{
 source ~/dotfiles/vim-common/plugins.vim
-source ~/dotfiles/vim-common/plugin-config.vim
+" }}}
+
+" Theme {{{
+if has('termguicolors')
+  set termguicolors
+endif
+
+let g:lightline = { 'colorscheme': 'quantum' }
+let g:quantum_black = 1
+colorscheme quantum
 " }}}
 
 " Backup/Swp/Undo {{{

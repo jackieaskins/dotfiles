@@ -2,9 +2,11 @@
 
 /vim/autoload
 /vim/plugged
+/vim/plugin
 
 /nvim/custom.vim
 /nvim/spell/
+/nvim/plugin
 
 /zsh/custom.zsh
 
