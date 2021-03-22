@@ -1,31 +1,45 @@
 -- General Settings {{{
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
-    virtual_text = false,
     underline = true,
     signs = true,
   }
 )
+vim.lsp.handlers['textDocument/codeAction'] = require'lsputil.codeAction'.code_action_handler
+vim.lsp.handlers['textDocument/references'] = require'lsputil.locations'.references_handler
+vim.lsp.handlers['textDocument/definition'] = require'lsputil.locations'.definition_handler
+vim.lsp.handlers['textDocument/declaration'] = require'lsputil.locations'.declaration_handler
+vim.lsp.handlers['textDocument/typeDefinition'] = require'lsputil.locations'.typeDefinition_handler
+vim.lsp.handlers['textDocument/implementation'] = require'lsputil.locations'.implementation_handler
+vim.lsp.handlers['textDocument/documentSymbol'] = require'lsputil.symbols'.document_handler
+vim.lsp.handlers['workspace/symbol'] = require'lsputil.symbols'.workspace_handler
+
+vim.g.lsp_utils_location_opts = {
+  mode = 'editor',
+  list = {
+    border = true,
+    title = 'Locations',
+  },
+  preview = {
+    border = true,
+    title = 'Preview',
+  },
+}
+
+vim.g.lsp_utils_codeaction_opts = {
+  mode = 'editor',
+  list = {
+    border = true,
+    title = 'Code Actions',
+  }
+}
+
+vim.cmd[[ highlight LspDiagnosticsDefaultHint guifg=#70ace5 ]]
 
 vim.fn.sign_define("LspDiagnosticsSignError", {text = "", texthl = "LspDiagnosticsSignError"})
 vim.fn.sign_define("LspDiagnosticsSignWarning", {text = "", texthl = "LspDiagnosticsSignWarning"})
 vim.fn.sign_define("LspDiagnosticsSignInformation", {text = "🛈", texthl = "LspDiagnosticsSignInformation"})
 vim.fn.sign_define("LspDiagnosticsSignHint", {text = "!", texthl = "LspDiagnosticsSignHint"})
-
-require'lspsaga'.init_lsp_saga {
-  use_saga_diagnostic_sign = false,
-  finder_action_keys = {
-    open = '<CR>',
-    vsplit = '<C-v>',
-    split = '<C-x>',
-    quit = 'q',
-    scroll_down = '<C-f>',
-    scroll_up = '<C-b>'
-  },
-  code_action_prompt = {
-    enable = false
-  }
-}
 -- }}}
 
 -- Completion {{{
