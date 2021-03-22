@@ -99,6 +99,8 @@ endif
 " Movement {{{
 Plug 'szw/vim-maximizer'
 Plug 'matze/vim-move'
+Plug 'chaoren/vim-wordmotion'
+Plug 'tpope/vim-unimpaired'
 " }}}
 
 " Syntax {{{
