@@ -1,5 +1,5 @@
-nnoremap <C-n> :Fern . -drawer -toggle<CR>
-nnoremap <Leader>n :Fern . -drawer -toggle -reveal=%<CR>
+nnoremap <silent> <C-n> :Fern . -drawer -toggle<CR>
+nnoremap <silent> <Leader>n :Fern . -drawer -toggle -reveal=%<CR>
 
 let g:fern#disable_default_mappings = 1
 let g:fern#drawer_width = 50

@@ -1,0 +1,16 @@
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+  vim.lsp.diagnostic.on_publish_diagnostics, {
+    underline = true,
+    signs = true,
+  }
+)
+vim.cmd[[ highlight LspDiagnosticsDefaultHint guifg=#70ace5 ]]
+vim.fn.sign_define("LspDiagnosticsSignError", {text = "", texthl = "LspDiagnosticsSignError"})
+vim.fn.sign_define("LspDiagnosticsSignWarning", {text = "", texthl = "LspDiagnosticsSignWarning"})
+vim.fn.sign_define("LspDiagnosticsSignInformation", {text = "🛈", texthl = "LspDiagnosticsSignInformation"})
+vim.fn.sign_define("LspDiagnosticsSignHint", {text = "!", texthl = "LspDiagnosticsSignHint"})
+
+require'lsp/utils'
+local lsp_status = require'lsp-status'
+lsp_status.register_progress()
+require'lsp/servers'.setup_servers()

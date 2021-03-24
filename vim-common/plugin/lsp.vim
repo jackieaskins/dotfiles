@@ -3,7 +3,7 @@ if g:use_builtin_lsp
 
   augroup jdt_setup
     autocmd!
-    autocmd BufReadCmd jdt://* call luaeval('require"jdtls-setup".handle_jdt_uri(_A)', expand('<amatch>'))
+    autocmd BufReadCmd jdt://* call luaeval('require"lsp/servers/jdtls".handle_jdt_uri(_A)', expand('<amatch>'))
   augroup END
 
   function! ReloadLsp()
