@@ -52,6 +52,10 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'tpope/vim-commentary'
 Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-repeat'
+Plug 'iamcco/markdown-preview.nvim', {
+      \ 'do': { -> mkdp#util#install() },
+      \ 'for': ['markdown', 'vim-plug']
+      \ }
 
 if g:use_builtin_lsp
   Plug 'hrsh7th/vim-vsnip'
@@ -99,7 +103,6 @@ endif
 " Movement {{{
 Plug 'szw/vim-maximizer'
 Plug 'matze/vim-move'
-Plug 'chaoren/vim-wordmotion'
 Plug 'tpope/vim-unimpaired'
 " }}}
 
