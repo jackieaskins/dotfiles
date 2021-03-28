@@ -1,5 +1,8 @@
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
+    virtual_text = {
+      spacing = 0
+    },
     underline = true,
     signs = true,
   }
@@ -13,4 +16,6 @@ vim.fn.sign_define("LspDiagnosticsSignHint", {text = "!", texthl = "LspDiagnosti
 require'lsp/utils'
 local lsp_status = require'lsp-status'
 lsp_status.register_progress()
+
+require'lsp/configs'.add_configs()
 require'lsp/servers'.setup_servers()
