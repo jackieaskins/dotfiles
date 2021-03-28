@@ -8,3 +8,5 @@ tags.temp
 .DS_Store
 
 .ignore
+
+/google-java-format.jar

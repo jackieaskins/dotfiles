@@ -15,7 +15,7 @@ local google = {
       exe = 'java',
       args = {
         '-jar',
-        os.getenv('HOME') .. '/dotfiles/formatters/google-java-format/google-java-format.jar',
+        './google-java-format.jar',
         vim.api.nvim_buf_get_name(0)
       },
       stdin = true
@@ -35,15 +35,17 @@ require('formatter').setup({
 })
 EOF
 
-function! FormatWithPrettier()
-  if !empty(glob('./node_modules/.bin/prettier'))
+function! s:format()
+  let useGoogle = !empty(glob('./google-java-format.jar'))
+  let usePrettier = !empty(glob('./node_modules/.bin/prettier'))
+
+  if useGoogle || usePrettier
     execute 'FormatWrite'
   endif
 endfunction
 
 augroup auto_format
   autocmd!
-  autocmd BufWritePost *.js,*.jsx,*.ts,*.tsx call FormatWithPrettier()
-  autocmd BufWritePost *.java FormatWrite
+  autocmd BufWritePost *.java,*.js,*.jsx,*.ts,*.tsx call <SID>format()
 augroup END
 endif
