@@ -91,8 +91,6 @@ if g:use_builtin_lsp
   Plug 'neovim/nvim-lspconfig'
   Plug 'alexaandru/nvim-lspupdate'
   Plug 'jackieaskins/lsp-status.nvim'
-  Plug 'RishabhRD/popfix'
-  Plug 'RishabhRD/nvim-lsputils'
   Plug 'hrsh7th/nvim-compe'
   Plug 'kosayoda/nvim-lightbulb'
 else

@@ -2,7 +2,6 @@
 local M = {}
 
 local all_servers = {
-  -- diagnosticls = require'lsp/servers/diagnosticls'.configure,
   eslintls = false,
   jdtls = require'lsp/servers/jdtls'.configure,
   jsonls = false,
@@ -10,7 +9,7 @@ local all_servers = {
   solargraph = false,
   sumneko_lua = require'lsp/servers/sumneko_lua'.configure,
   vimls = false,
-  tsserver = false,
+  tsserver = require'lsp/servers/tsserver'.configure,
 }
 
 function M.setup_servers()

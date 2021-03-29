@@ -28,9 +28,12 @@ function M.custom_attach(client, bufnr)
   bsk('n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
   bsk('n', '<leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
 
-  vim.cmd [[
-    autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()
-  ]]
+  vim.api.nvim_exec([[
+    augroup lightbulb
+      autocmd! * <buffer>
+      autocmd CursorHold,CursorHoldI <buffer> lua require'nvim-lightbulb'.update_lightbulb()
+    augroup END
+  ]], false)
 end
 
 return M
