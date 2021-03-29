@@ -13,6 +13,7 @@ vim.fn.sign_define("LspDiagnosticsSignWarning", {text = "", texthl = "LspDiag
 vim.fn.sign_define("LspDiagnosticsSignInformation", {text = "🛈", texthl = "LspDiagnosticsSignInformation"})
 vim.fn.sign_define("LspDiagnosticsSignHint", {text = "!", texthl = "LspDiagnosticsSignHint"})
 
+require'fzf_lsp'.setup()
 require'lsp-status'.register_progress()
 require'lsp/configs'.add_configs()
 require'lsp/servers'.setup_servers()

@@ -1,4 +1,16 @@
-let $FZF_DEFAULT_OPTS .= ' --bind=ctrl-f:preview-page-down,ctrl-b:preview-page-up,ctrl-j:page-down,ctrl-k:page-up,ctrl-a:select-all,?:toggle-preview --layout=reverse'
+let s:fzf_mappings = {
+      \ 'ctrl-f': 'preview-page-down',
+      \ 'ctrl-b': 'preview-page-up',
+      \ 'ctrl-j': 'page-down',
+      \ 'ctrl-k': 'page-up',
+      \ 'ctrl-a': 'select-all',
+      \ }
+
+let s:fzf_bind = ''
+for mapping in items(s:fzf_mappings)
+  let s:fzf_bind .= mapping[0] . ':' . mapping[1] . ','
+endfor
+let $FZF_DEFAULT_OPTS .= ' --layout=reverse --bind=' . s:fzf_bind . '?:toggle-preview'
 
 function! s:build_quickfix_list(lines)
   call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
@@ -9,49 +21,11 @@ endfunction
 let g:fzf_action = {
       \ 'ctrl-q': function('s:build_quickfix_list'),
       \ 'ctrl-t': 'tab split',
-      \ 'ctrl-x': 'split',
+      \ 'ctrl-s': 'split',
       \ 'ctrl-v': 'vsplit'
       \ }
-
-if has('nvim')
-  function! CreateCenteredFloatingWindow()
-    let width = min([&columns - 4, max([80, &columns - 20])])
-    let height = min([&lines - 4, max([20, &lines - 10])])
-    let row = ((&lines - height) / 2) - 1
-    let col = (&columns - width) / 2
-
-    let opts = {
-          \ 'relative': 'editor',
-          \ 'row': row,
-          \ 'col': col,
-          \ 'width': width,
-          \ 'height': height,
-          \ 'style': 'minimal'
-          \ }
-
-    let top = "╭" . repeat("─", width - 2) . "╮"
-    let mid = "│" . repeat(" ", width - 2) . "│"
-    let bot = "╰" . repeat("─", width - 2) . "╯"
-    let lines = [top] + repeat([mid], height - 2) + [bot]
-
-    let s:buf = nvim_create_buf(v:false, v:true)
-    call nvim_buf_set_lines(s:buf, 0, -1, v:true, lines)
-    call nvim_open_win(s:buf, v:true, opts)
-
-    set winhl=Normal:Floating
-
-    let opts.row += 1
-    let opts.height -= 2
-    let opts.col += 2
-    let opts.width -= 4
-
-    call nvim_open_win(nvim_create_buf(v:false, v:true), v:true, opts)
-
-    au BufWipeout <buffer> exe 'bw ' . s:buf
-  endfunction
-
-  let g:fzf_layout = { 'window': 'call CreateCenteredFloatingWindow()' }
-endif
+let g:fzf_colors = { 'border': ['fg', 'Directory'] }
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8 } }
 
 nnoremap <C-p> :Files<CR>
 nnoremap <Leader>/ :Rg<Space>

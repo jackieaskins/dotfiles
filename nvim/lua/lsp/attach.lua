@@ -20,9 +20,14 @@ function M.custom_attach(client, bufnr)
   bsk('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
   bsk('i', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
 
-  bsk('n', '<leader>ld', "<cmd>lua vim.lsp.show_line_diagnostics()<CR>", opts)
+  bsk('n', '<leader>ld', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
   bsk('n', '[g', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
   bsk('n', ']g', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+
+  bsk('n', '<leader>bf', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+
+  bsk('n', '<leader>sw', '<cmd>lua vim.lsp.buf.workspace_symbol()<CR>', opts)
+  bsk('n', '<leader>sd', '<cmd>lua vim.lsp.buf.document_symbol()<CR>', opts)
 
   bsk('n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
   bsk('n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
