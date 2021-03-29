@@ -103,12 +103,13 @@ endif
 " Movement {{{
 Plug 'szw/vim-maximizer'
 Plug 'matze/vim-move'
+Plug 'unblevable/quick-scope'
+Plug 'justinmk/vim-sneak'
 Plug 'tpope/vim-unimpaired'
 " }}}
 
 " Syntax {{{
 if g:use_treesitter
-  Plug 'tpope/vim-sleuth'
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 else
   Plug 'uiiaoo/java-syntax.vim'
