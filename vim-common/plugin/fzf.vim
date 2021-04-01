@@ -24,7 +24,13 @@ let g:fzf_action = {
       \ 'ctrl-s': 'split',
       \ 'ctrl-v': 'vsplit'
       \ }
-let g:fzf_colors = { 'border': ['fg', 'Directory'] }
+let g:fzf_colors = {
+      \ 'border':  ['fg', 'Directory'  ],
+      \ 'gutter':  ['bg', 'Normal'     ],
+      \ 'marker':  ['fg', 'Identifier' ],
+      \ 'pointer': ['fg', 'Identifier' ],
+      \ }
+
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8 } }
 
 nnoremap <C-p> :Files<CR>
