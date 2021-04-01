@@ -34,7 +34,6 @@ let g:fzf_colors = {
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8 } }
 
 nnoremap <C-p> :Files<CR>
-nnoremap <Leader>/ :Rg<Space>
-nnoremap <Leader>rg :Rg<CR>
+nnoremap <Leader>/ :Rg<CR>
 nnoremap <Leader>f :Rg<Space><C-r><C-w><CR>
 nnoremap <Leader>gs :GFiles?<CR>
