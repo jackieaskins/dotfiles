@@ -93,7 +93,7 @@ if g:use_builtin_lsp
   Plug 'jackieaskins/lsp-status.nvim'
   Plug 'hrsh7th/nvim-compe'
   Plug 'kosayoda/nvim-lightbulb'
-  Plug 'gfanto/fzf-lsp.nvim'
+  Plug 'ojroques/nvim-lspfuzzy'
 else
   Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 endif
