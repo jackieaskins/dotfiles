@@ -50,7 +50,7 @@ end
 " }}}
 
 " Folds {{{
-autocmd FileType lua,sh,vim setlocal foldmethod=marker foldlevel=0
+autocmd FileType lua,sh,vim setlocal foldmethod=marker
 highlight Folded guifg=PeachPuff4
 set foldlevel=99 " Start folds expanded by default
 set foldcolumn=2 " Show fold column with width 2

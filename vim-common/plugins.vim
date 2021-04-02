@@ -100,10 +100,10 @@ endif
 " }}}
 
 " Movement {{{
+Plug 'easymotion/vim-easymotion'
 Plug 'szw/vim-maximizer'
 Plug 'matze/vim-move'
 Plug 'unblevable/quick-scope'
-Plug 'justinmk/vim-sneak'
 Plug 'tpope/vim-unimpaired'
 " }}}
 
