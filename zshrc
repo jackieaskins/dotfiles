@@ -1,5 +1,5 @@
 zsh_config=$HOME/dotfiles/zsh
-export EDITOR='vim'
+export EDITOR='nvim'
 
 # Vi Mode
 bindkey -v
