@@ -33,6 +33,9 @@ let g:fzf_colors = {
 
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8 } }
 
+command! -bang -nargs=? -complete=dir Files
+  \ call fzf#vim#files(<q-args>, &columns > 80 ? fzf#vim#with_preview() : {}, <bang>0)
+
 nnoremap <C-p> :Files<CR>
 nnoremap <Leader>/ :Rg<CR>
 nnoremap <Leader>f :Rg<Space><C-r><C-w><CR>

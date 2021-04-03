@@ -1,0 +1,5 @@
+require'settings'
+require'plugins'
+require'plugins/configs'
+require'lsp'
+require'completion'

@@ -1,11 +1,9 @@
 local M = {}
 
 function M.custom_attach(client, bufnr)
-  require'lsp-status'.on_attach(client)
-
   local function bsk(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function bso(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-  local opts = { noremap=true, silent=true }
+  local opts = {noremap=true, silent=true}
 
   bso('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
@@ -32,13 +30,6 @@ function M.custom_attach(client, bufnr)
   bsk('n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
   bsk('n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
   bsk('n', '<leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-
-  vim.api.nvim_exec([[
-    augroup lightbulb
-      autocmd! * <buffer>
-      autocmd CursorHold,CursorHoldI <buffer> lua require'nvim-lightbulb'.update_lightbulb()
-    augroup END
-  ]], false)
 end
 
 return M
