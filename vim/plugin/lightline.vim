@@ -1,33 +1,11 @@
 " Lightline LSP {{{
-let s:error_indicator = ' '
-let s:warning_indicator = ' '
-let s:info_indicator = '🛈 '
-let s:hint_indicator = '! '
-let s:ok_indicator = ''
-
-if g:use_builtin_lsp
-  let g:lightline#lsp#indicator_errors = s:error_indicator
-  let g:lightline#lsp#indicator_warnings = s:warning_indicator
-  let g:lightline#lsp#indicator_infos = s:info_indicator
-  let g:lightline#lsp#indicator_hints = s:hint_indicator
-  let g:lightline#lsp#indicator_ok = s:ok_indicator
-else
-  let g:lightline#coc#indicator_errors = s:error_indicator
-  let g:lightline#coc#indicator_warnings = s:warning_indicator
-  let g:lightline#coc#indicator_info = s:info_indicator
-  let g:lightline#coc#indicator_hints = s:hint_indicator
-  let g:lightline#coc#indicator_ok = s:ok_indicator
-endif
+let g:lightline#coc#indicator_errors = ' '
+let g:lightline#coc#indicator_warnings = ' '
+let g:lightline#coc#indicator_info = '🛈 '
+let g:lightline#coc#indicator_hints = '! '
+let g:lightline#coc#indicator_ok = ''
 
 function! LightlineLspStatus()
-  if g:use_builtin_lsp
-    if luaeval('#vim.lsp.buf_get_clients() > 0')
-      return luaeval("require('lsp-status').status()")
-    endif
-
-    return ''
-  endif
-
   return get(g:, 'coc_status', '')
 endfunction
 " }}}
@@ -102,11 +80,11 @@ let g:lightline.component_function = {
       \ 'lsp_status': 'LightlineLspStatus',
       \ }
 let g:lightline.component_expand = {
-      \ 'lsp_errors': g:use_builtin_lsp ? 'lightline#lsp#errors' : 'lightline#coc#errors',
-      \ 'lsp_warnings': g:use_builtin_lsp ? 'lightline#lsp#warnings' : 'lightline#coc#warnings',
-      \ 'lsp_info': g:use_builtin_lsp ? 'lightline#lsp#infos' : 'lightline#coc#info',
-      \ 'lsp_hints': g:use_builtin_lsp ? 'lightline#lsp#hints' : 'lightline#coc#hints',
-      \ 'lsp_ok': g:use_builtin_lsp ? 'lightline#lsp#ok' : 'lightline#coc#ok'
+      \ 'lsp_errors': 'lightline#coc#errors',
+      \ 'lsp_warnings': 'lightline#coc#warnings',
+      \ 'lsp_info': 'lightline#coc#info',
+      \ 'lsp_hints': 'lightline#coc#hints',
+      \ 'lsp_ok': 'lightline#coc#ok'
       \ }
 let g:lightline.component_type = {
       \ 'lsp_warnings': 'warning',

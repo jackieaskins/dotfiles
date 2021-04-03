@@ -1,1 +1,1 @@
-source ~/dotfiles/vim-common/config.vim
+" Nothing yet

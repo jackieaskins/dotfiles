@@ -48,9 +48,7 @@ echo -e "Done backing up files\n"
 echo -e "Symlinking dotfiles to $dir directory..."
 ln -s $dir/zshrc ~/.zshrc
 ln -s $dir/vim ~/.vim
-ln -s $dir/vim-common/plugin ~/.vim/plugin
 ln -s $dir/nvim ~/.config/nvim
-ln -s $dir/vim-common/plugin ~/.config/nvim/plugin
 ln -s $dir/ctags.d ~/.ctags.d
 ln -s $dir/tern-config ~/.tern-config
 ln -s $dir/gitignore_global ~/.gitignore_global

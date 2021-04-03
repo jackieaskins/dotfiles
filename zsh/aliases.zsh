@@ -42,8 +42,5 @@ alias zshaliases='nvim ~/dotfiles/zsh/aliases.zsh'
 alias zshfuncs='nvim ~/dotfiles/zsh/functions.zsh'
 alias zshconfig='nvim ~/dotfiles/zshrc'
 alias zshcustom='nvim ~/dotfiles/zsh/custom.zsh'
-alias vimconfig='nvim ~/dotfiles/vim-common/config.vim'
-alias vimplugins='nvim ~/dotfiles/vim-common/plugins.vim'
-alias vimcustom='nvim ~/dotfiles/vim-common/custom.vim'
 
 alias chrome='open -a "Google Chrome"'
