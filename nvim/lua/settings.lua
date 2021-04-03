@@ -1,12 +1,11 @@
 -- TODO: Folds, Reload Neovim (may require plenary), Java autocmd for spacing & comments, showtabline?, showmatch?, open url under cursor
 
 local utils = require('utils')
-local map,opt = utils.map,utils.opt
+local opt = utils.opt
 local cmd = vim.cmd
 
 -- Map Leader to Space
 vim.g.mapleader = ' '
-map('n', '<space>', '<nop>')
 
 -- General
 opt('w', 'number', true)
@@ -16,12 +15,6 @@ opt('w', 'signcolumn', 'number')
 opt('o', 'confirm', true)
 opt('o', 'splitright', true)
 opt('o', 'splitbelow', true)
-
--- Window Management
-map('n', '<C-j>', '<C-w>j')
-map('n', '<C-k>', '<C-w>k')
-map('n', '<C-h>', '<C-w>h')
-map('n', '<C-l>', '<C-w>l')
 
 -- Terminal
 cmd 'command! -nargs=* T botright split | terminal <args>'

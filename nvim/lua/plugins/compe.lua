@@ -46,7 +46,7 @@ _G.s_tab_complete = function()
   end
 end
 
-local vsnip_opts = { expr = true, silent = true, noremap = false }
+local vsnip_opts = {expr = true, silent = true, noremap = false}
 map('i', '<Tab>', 'v:lua.tab_complete()', vsnip_opts)
 map('s', '<Tab>', 'v:lua.tab_complete()', vsnip_opts)
 map('i', '<S-Tab>', 'v:lua.s_tab_complete()', vsnip_opts)
