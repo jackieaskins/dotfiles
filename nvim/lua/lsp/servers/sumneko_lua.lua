@@ -14,6 +14,8 @@ end
 local sumneko_root_path = vim.fn.expand('$HOME/dotfiles/lsp-servers/lua-language-server')
 local sumneko_binary = sumneko_root_path .. "/bin/" .. system_name .. "/lua-language-server"
 
+-- TODO: Better map K
+
 function M.configure(config)
   config.cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"}
   config.settings = {
