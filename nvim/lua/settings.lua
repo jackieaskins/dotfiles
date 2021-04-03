@@ -11,7 +11,7 @@ vim.g.mapleader = ' '
 opt('w', 'number', true)
 opt('w', 'relativenumber', true)
 opt('w', 'cursorline', true)
-opt('w', 'signcolumn', 'number')
+opt('w', 'signcolumn', 'yes')
 opt('o', 'confirm', true)
 opt('o', 'splitright', true)
 opt('o', 'splitbelow', true)

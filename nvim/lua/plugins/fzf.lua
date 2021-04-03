@@ -8,7 +8,7 @@ vim.cmd [[
 map('n', '<C-p>', ':Files<CR>')
 map('n', '<leader>/', ':Rg<CR>')
 map('n', '<leader>f', ':Rg<space><C-r><C-w><CR>')
-map('n', '<leader>gs', ':Gfiles?<CR>')
+map('n', '<leader>gs', ':GFiles?<CR>')
 
 local fzf_mappings = {
   'ctrl-f:preview-page-down',

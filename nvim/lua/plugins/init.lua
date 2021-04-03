@@ -10,6 +10,7 @@ end
 cmd 'packadd paq-nvim'
 local paq = require'paq-nvim'.paq
 paq {'savq/paq-nvim', opt = true}
+paq {'nvim-lua/plenary.nvim'}
 
 -- Appearance
 paq {'tyrannicaltoucan/vim-quantum'}
@@ -19,6 +20,10 @@ require'plugins/colorscheme'
 paq {'AndrewRadev/splitjoin.vim'}
 require'plugins/splitjoin'
 paq {'tpope/vim-surround'}
+
+-- Git
+paq {'jackieaskins/gitsigns.nvim'} -- requires plenary
+require'plugins/gitsigns'
 
 -- File Navigation
 paq {'junegunn/fzf', run = fn['fzf#install']}
