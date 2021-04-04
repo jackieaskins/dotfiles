@@ -1,4 +1,4 @@
--- TODO: Folds, Reload Neovim (may require plenary), Java autocmd for spacing & comments, showtabline?, showmatch?, open url under cursor
+-- TODO: Reload Neovim (may require plenary), comments, showtabline?, showmatch?
 
 local utils = require('utils')
 local opt = utils.opt
@@ -15,6 +15,16 @@ opt('w', 'signcolumn', 'yes')
 opt('o', 'confirm', true)
 opt('o', 'splitright', true)
 opt('o', 'splitbelow', true)
+opt('o', 'termguicolors', true)
+
+-- Folds
+vim.api.nvim_exec([[
+  augroup folds
+    autocmd!
+    autocmd FileType lua,sh,vim setlocal foldmethod=marker
+    autocmd ColorScheme * highlight Folded guifg=PeachPuff4
+  augroup END
+]], true)
 
 -- Terminal
 cmd 'command! -nargs=* T botright split | terminal <args>'

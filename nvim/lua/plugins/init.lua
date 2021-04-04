@@ -8,57 +8,69 @@ cmd 'packadd packer.nvim'
 return require('packer').startup(function(use)
   use {'wbthomason/packer.nvim', opt = true}
 
-  -- Appearance
+  -- Appearance {{{
   use {'tyrannicaltoucan/vim-quantum', config = [[require'plugins/colorscheme']]}
-  use  {'mhinz/vim-startify', config = [[require'plugins/startify']]}
+  use 'kyazdani42/nvim-web-devicons'
+  use 'lambdalisue/glyph-palette.vim'
+  use {'mhinz/vim-startify', config = [[require'plugins/startify']]}
+  use {'norcalli/nvim-colorizer.lua', config = [[require'colorizer'.setup()]]}
+  -- }}}
 
-  -- Brackets
+  -- Brackets {{{
   use {'AndrewRadev/splitjoin.vim', config = [[require'plugins/splitjoin']]}
   use 'tpope/vim-surround'
+  -- }}}
 
-  -- Git
+  -- Git {{{
   use {
     'lewis6991/gitsigns.nvim',
+    requires = 'nvim-lua/plenary.nvim',
     config = [[require'plugins/gitsigns']],
-    requires = 'nvim-lua/plenary.nvim'
   }
+  -- }}}
 
-  -- File Navigation
+  -- File Navigation {{{
   use {
     'junegunn/fzf.vim',
+    requires = {'junegunn/fzf', run = fn['fzf#install']},
     config = [[require'plugins/fzf']],
-    requires = {'junegunn/fzf', run = fn['fzf#install']}
   }
+  -- }}}
 
-  -- LSP
+  -- LSP {{{
   use {
     'neovim/nvim-lspconfig',
-    config = [[require'lsp']]
+    config = [[require'lsp']],
   }
+  -- }}}
 
-  -- General Editing
+  -- General Editing {{{
   use 'tpope/vim-abolish'
   use 'tpope/vim-commentary'
   use 'tpope/vim-repeat'
   use {
     'hrsh7th/nvim-compe',
+    requires = 'hrsh7th/vim-vsnip',
     config = [[require'plugins/compe']],
-    requires = 'hrsh7th/vim-vsnip'
   }
+  -- }}}
 
-  -- Movement
+  -- Movement {{{
   use {'phaazon/hop.nvim', config = [[require'plugins/hop']]}
   use {'szw/vim-maximizer', config = [[require'plugins/maximizer']]}
   use 'matze/vim-move'
   use 'unblevable/quick-scope'
+  -- }}}
 
-  -- Syntax
+  -- Syntax {{{
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
-    config = [[require'plugins/treesitter']]
+    config = [[require'plugins/treesitter']],
   }
+  -- }}}
 
-  -- Testing
+  -- Testing {{{
   use {'vim-test/vim-test', config = [[require'plugins/test']]}
+  -- }}}
 end)
