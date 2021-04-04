@@ -47,7 +47,7 @@ return require('packer').startup(function(use)
   }
 
   -- Movement
-  use 'easymotion/vim-easymotion'
+  use {'phaazon/hop.nvim', config = [[require'plugins/hop']]}
   use {'szw/vim-maximizer', config = [[require'plugins/maximizer']]}
   use 'matze/vim-move'
   use 'unblevable/quick-scope'
