@@ -2,63 +2,62 @@ local fn = vim.fn
 local cmd = vim.cmd
 local map = require'utils'.map
 
-local install_path = fn.stdpath('data') .. '/site/pack/paqs/opt/paq-nvim'
-if fn.empty(fn.glob(install_path)) > 0 then
-  cmd('!git clone https://github.com/savq/paq-nvim.git ' .. install_path)
-end
-
-cmd 'packadd paq-nvim'
-local paq = require'paq-nvim'.paq
-paq {'savq/paq-nvim', opt = true}
-paq {'nvim-lua/plenary.nvim'}
-
--- Appearance
-paq {'tyrannicaltoucan/vim-quantum'}
-require'plugins/colorscheme'
-
--- Brackets
-paq {'AndrewRadev/splitjoin.vim'}
-require'plugins/splitjoin'
-paq {'tpope/vim-surround'}
-
--- Git
-paq {'jackieaskins/gitsigns.nvim'} -- requires plenary
-require'plugins/gitsigns'
-
--- File Navigation
-paq {'junegunn/fzf', run = fn['fzf#install']}
-paq {'junegunn/fzf.vim'}
-require'plugins/fzf'
-
--- LSP
-paq {'neovim/nvim-lspconfig'}
-
--- General Editing
-paq {'tpope/vim-abolish'}
-paq {'tpope/vim-commentary'}
-paq {'tpope/vim-repeat'}
-paq {'hrsh7th/vim-vsnip'}
-paq {'hrsh7th/nvim-compe'}
-require'plugins/compe'
-
--- Movement
-paq {'easymotion/vim-easymotion'}
-paq {'szw/vim-maximizer'}
-require'plugins/maximizer'
-paq {'matze/vim-move'}
-paq {'unblevable/quick-scope'}
-
--- Syntax
-paq {'nvim-treesitter/nvim-treesitter', run = function() return cmd 'TSUpdate' end}
-require'plugins/treesitter'
-
--- Testing
-paq {'vim-test/vim-test'}
-require'plugins/test'
-
 map('n', '<leader>gh', "yi':!open https://github.com/<C-R>0<CR><CR>")
-vim.api.nvim_exec([[
-  command! PI PaqInstall
-  command! PU PaqUpdate
-  command! PC PaqClean
-]], true)
+
+cmd 'packadd packer.nvim'
+return require('packer').startup(function(use)
+  use {'wbthomason/packer.nvim', opt = true}
+
+  -- Appearance
+  use {'tyrannicaltoucan/vim-quantum', config = [[require'plugins/colorscheme']]}
+
+  -- Brackets
+  use {'AndrewRadev/splitjoin.vim', config = [[require'plugins/splitjoin']]}
+  use 'tpope/vim-surround'
+
+  -- Git
+  use {
+    'lewis6991/gitsigns.nvim',
+    config = [[require'plugins/gitsigns']],
+    requires = 'nvim-lua/plenary.nvim'
+  }
+
+  -- File Navigation
+  use {
+    'junegunn/fzf.vim',
+    config = [[require'plugins/fzf']],
+    requires = {'junegunn/fzf', run = fn['fzf#install']}
+  }
+
+  -- LSP
+  use {
+    'neovim/nvim-lspconfig',
+    config = [[require'lsp']]
+  }
+
+  -- General Editing
+  use 'tpope/vim-abolish'
+  use 'tpope/vim-commentary'
+  use 'tpope/vim-repeat'
+  use {
+    'hrsh7th/nvim-compe',
+    config = [[require'plugins/compe']],
+    requires = 'hrsh7th/vim-vsnip'
+  }
+
+  -- Movement
+  use 'easymotion/vim-easymotion'
+  use {'szw/vim-maximizer', config = [[require'plugins/maximizer']]}
+  use 'matze/vim-move'
+  use 'unblevable/quick-scope'
+
+  -- Syntax
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    run = ':TSUpdate',
+    config = [[require'plugins/treesitter']]
+  }
+
+  -- Testing
+  use {'vim-test/vim-test', config = [[require'plugins/test']]}
+end)

@@ -5,6 +5,8 @@
 /nvim/custom.vim
 /nvim/spell/
 
+/nvim/plugin/packer_compiled.vim
+
 /zsh/custom.zsh
 
 .DS_Store
