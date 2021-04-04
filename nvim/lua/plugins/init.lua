@@ -2,6 +2,11 @@ local fn = vim.fn
 local cmd = vim.cmd
 local map = require'utils'.map
 
+vim.api.nvim_exec([[
+  command! PI PackerInstall
+  command! PC PackerCompile
+  command! PS PackerSync
+]], true)
 map('n', '<leader>gh', "yi':!open https://github.com/<C-R>0<CR><CR>")
 
 cmd 'packadd packer.nvim'
@@ -9,9 +14,16 @@ return require('packer').startup(function(use)
   use {'wbthomason/packer.nvim', opt = true}
 
   -- Appearance {{{
-  use {'tyrannicaltoucan/vim-quantum', config = [[require'plugins/colorscheme']]}
+  use {
+    'tyrannicaltoucan/vim-quantum',
+    after = 'quick-scope',
+    config = [[require'plugins/colorscheme']],
+  }
   use 'kyazdani42/nvim-web-devicons'
-  use 'lambdalisue/glyph-palette.vim'
+  use {
+    'lambdalisue/glyph-palette.vim',
+    config = [[require'plugins/glyph-palette']]
+  }
   use {'mhinz/vim-startify', config = [[require'plugins/startify']]}
   use {'norcalli/nvim-colorizer.lua', config = [[require'colorizer'.setup()]]}
   -- }}}
@@ -27,6 +39,7 @@ return require('packer').startup(function(use)
     requires = 'nvim-lua/plenary.nvim',
     config = [[require'plugins/gitsigns']],
   }
+  use 'tpope/vim-fugitive'
   -- }}}
 
   -- File Navigation {{{
@@ -35,11 +48,17 @@ return require('packer').startup(function(use)
     requires = {'junegunn/fzf', run = fn['fzf#install']},
     config = [[require'plugins/fzf']],
   }
+  use {
+    'kyazdani42/nvim-tree.lua',
+    requires = 'kyazdani42/nvim-web-devicons',
+    config = [[require'plugins/tree']]
+  }
   -- }}}
 
   -- LSP {{{
   use {
     'neovim/nvim-lspconfig',
+    after = 'vim-quantum',
     config = [[require'lsp']],
   }
   -- }}}
@@ -59,7 +78,7 @@ return require('packer').startup(function(use)
   use {'phaazon/hop.nvim', config = [[require'plugins/hop']]}
   use {'szw/vim-maximizer', config = [[require'plugins/maximizer']]}
   use 'matze/vim-move'
-  use 'unblevable/quick-scope'
+  use {'unblevable/quick-scope', config = [[require'plugins/quick-scope']]}
   -- }}}
 
   -- Syntax {{{

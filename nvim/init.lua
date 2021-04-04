@@ -13,4 +13,3 @@ else
   cmd 'autocmd BufWritePost */plugins/init.lua PackerCompile'
   require'plugins'
 end
-

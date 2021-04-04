@@ -1,3 +1,5 @@
+local api = vim.api
+
 local M = {}
 
 -- https://github.com/neovim/neovim/pull/13479
@@ -15,6 +17,17 @@ end
 
 function M.t(str)
   return vim.api.nvim_replace_termcodes(str, true, true, true)
+end
+
+function M.augroup(group_name, autocmds)
+  api.nvim_command('augroup ' .. group_name)
+  api.nvim_command('autocmd!')
+
+  for _, autocmd in ipairs(autocmds) do
+    api.nvim_command(autocmd)
+  end
+
+  api.nvim_command('augroup END')
 end
 
 return M

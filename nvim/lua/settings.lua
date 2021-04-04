@@ -1,4 +1,4 @@
--- TODO: Reload Neovim (may require plenary), comments, showtabline?, showmatch?
+-- TODO: Reload Neovim (may require plenary), showtabline?, showmatch?, no auto comment
 
 local utils = require('utils')
 local opt = utils.opt
@@ -25,6 +25,7 @@ vim.api.nvim_exec([[
     autocmd ColorScheme * highlight Folded guifg=PeachPuff4
   augroup END
 ]], true)
+opt('w', 'foldlevel', 99)
 
 -- Terminal
 cmd 'command! -nargs=* T botright split | terminal <args>'
@@ -48,4 +49,4 @@ opt('o', 'inccommand', 'nosplit')
 opt('o', 'hlsearch', false)
 opt('o', 'ignorecase', true)
 opt('o', 'smartcase', true)
-opt('o', 'path', vim.o.path .. '**')
+opt('o', 'path', vim.o.path .. ',**')
