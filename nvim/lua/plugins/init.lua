@@ -10,6 +10,7 @@ return require('packer').startup(function(use)
 
   -- Appearance
   use {'tyrannicaltoucan/vim-quantum', config = [[require'plugins/colorscheme']]}
+  use  {'mhinz/vim-startify', config = [[require'plugins/startify']]}
 
   -- Brackets
   use {'AndrewRadev/splitjoin.vim', config = [[require'plugins/splitjoin']]}
