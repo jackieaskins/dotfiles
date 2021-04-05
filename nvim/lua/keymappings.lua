@@ -8,8 +8,8 @@ map('n', '<C-k>', '<C-w>k')
 map('n', '<C-h>', '<C-w>h')
 map('n', '<C-l>', '<C-w>l')
 
-map('n', ']q', ':cnext')
-map('n', '[q', ':cprevious')
+map('n', ']q', ':cnext<CR>')
+map('n', '[q', ':cprevious<CR>')
 
 function _G.OpenURLUnderCursor()
   local uri = fn.shellescape(

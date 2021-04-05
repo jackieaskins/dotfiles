@@ -19,6 +19,7 @@ return require('packer').startup(function(use)
     after = 'quick-scope',
     config = [[require'plugins/colorscheme']],
   }
+  use {'glepnir/galaxyline.nvim', config = [[require'plugins/galaxyline']]}
   use 'kyazdani42/nvim-web-devicons'
   use {
     'lambdalisue/glyph-palette.vim',

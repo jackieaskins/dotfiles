@@ -1,7 +1,7 @@
 -- TODO: Reload Neovim (may require plenary), showtabline?, showmatch?, no auto comment
 
 local utils = require('utils')
-local opt = utils.opt
+local opt,augroup = utils.opt,utils.augroup
 local cmd = vim.cmd
 
 -- Map Leader to Space
@@ -18,13 +18,10 @@ opt('o', 'splitbelow', true)
 opt('o', 'termguicolors', true)
 
 -- Folds
-vim.api.nvim_exec([[
-  augroup folds
-    autocmd!
-    autocmd FileType lua,sh,vim setlocal foldmethod=marker
-    autocmd ColorScheme * highlight Folded guifg=PeachPuff4
-  augroup END
-]], true)
+augroup('folds', {
+  'autocmd FileType lua,sh,vim setlocal foldmethod=marker',
+  'autocmd ColorScheme * highlight Folded guifg=PeachPuff4',
+})
 opt('w', 'foldlevel', 99)
 
 -- Terminal
