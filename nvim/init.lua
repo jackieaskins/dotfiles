@@ -10,6 +10,6 @@ if fn.empty(fn.glob(install_path)) > 0 then
   require'plugins'
   cmd 'PackerSync'
 else
-  cmd 'autocmd BufWritePost */plugins/init.lua PackerCompile'
+  cmd 'autocmd BufWritePost */plugins.lua PackerCompile'
   require'plugins'
 end
