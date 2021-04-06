@@ -24,7 +24,7 @@ function M.augroup(group_name, autocmds)
   api.nvim_command('autocmd!')
 
   for _, autocmd in ipairs(autocmds) do
-    api.nvim_command(autocmd)
+    api.nvim_command('autocmd ' .. table.concat(autocmd, ' '))
   end
 
   api.nvim_command('augroup END')

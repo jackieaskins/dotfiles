@@ -19,8 +19,8 @@ opt('o', 'termguicolors', true)
 
 -- Folds
 augroup('folds', {
-  'autocmd FileType lua,sh,vim setlocal foldmethod=marker',
-  'autocmd ColorScheme * highlight Folded guifg=PeachPuff4',
+  {'FileType', 'lua,sh,vim', 'setlocal foldmethod=marker'},
+  {'ColorScheme', '*', 'highlight Folded guifg=PeachPuff4'}
 })
 opt('w', 'foldlevel', 99)
 
