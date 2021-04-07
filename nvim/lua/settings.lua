@@ -15,7 +15,13 @@ opt('o', 'confirm', true)
 opt('o', 'splitright', true)
 opt('o', 'splitbelow', true)
 opt('o', 'termguicolors', true)
-opt('o', 'statusline', require'statusline')
+
+
+-- Status Line
+augroup('statusline', {
+  {'BufEnter,WinEnter', '*', [[lua require'statusline'.get_active()]]},
+  {'BufLeave,WinLeave', '*', [[lua require'statusline'.get_inactive()]]}
+})
 
 -- Folds
 augroup('folds', {
