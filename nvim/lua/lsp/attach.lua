@@ -5,6 +5,8 @@ function M.custom_attach(client, bufnr)
   local function bso(...) vim.api.nvim_buf_set_option(bufnr, ...) end
   local opts = {noremap=true, silent=true}
 
+  require'lsp_signature'.on_attach()
+
   bso('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   bsk('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)

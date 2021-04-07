@@ -20,7 +20,7 @@ function M.t(str)
 end
 
 function M.augroup(group_name, autocmds)
-  api.nvim_command('augroup ' .. group_name)
+  api.nvim_command('augroup my_' .. group_name)
   api.nvim_command('autocmd!')
 
   for _, autocmd in ipairs(autocmds) do

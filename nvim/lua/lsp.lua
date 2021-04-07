@@ -15,3 +15,11 @@ vim.fn.sign_define("LspDiagnosticsSignHint", {text = "!", texthl = "LspDiagnosti
 
 require'lsp/configs'.add_configs()
 require'lsp/servers'.setup_servers()
+
+require'utils'.augroup('lsp_config', {
+  {
+    'BufReadCmd',
+    'jdt://*',
+    [[call luaeval('require"lsp/servers/jdtls".handle_jdt_uri(_A)', expand('<amatch>'))]]
+  }
+})
