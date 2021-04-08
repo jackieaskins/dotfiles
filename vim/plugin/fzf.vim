@@ -21,7 +21,7 @@ endfunction
 let g:fzf_action = {
       \ 'ctrl-q': function('s:build_quickfix_list'),
       \ 'ctrl-t': 'tab split',
-      \ 'ctrl-s': 'split',
+      \ 'ctrl-x': 'split',
       \ 'ctrl-v': 'vsplit'
       \ }
 let g:fzf_colors = {
@@ -37,6 +37,6 @@ command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, &columns > 80 ? fzf#vim#with_preview() : {}, <bang>0)
 
 nnoremap <C-p> :Files<CR>
-nnoremap <Leader>/ :Rg<CR>
+nnoremap <Leader>/ :Rg<space>
 nnoremap <Leader>f :Rg<Space><C-r><C-w><CR>
 nnoremap <Leader>gs :GFiles?<CR>

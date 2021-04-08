@@ -6,7 +6,7 @@ vim.cmd [[
 ]]
 
 map('n', '<C-p>', ':Files<CR>')
-map('n', '<leader>/', ':Rg<CR>')
+map('n', '<leader>/', ':Rg<space>')
 map('n', '<leader>f', ':Rg<space><C-r><C-w><CR>')
 map('n', '<leader>gs', ':GFiles?<CR>')
 
@@ -48,5 +48,5 @@ vim.api.nvim_exec([[
     cc
   endfunction
 
-  let g:fzf_action = { 'ctrl-q': function('BuildQuickfixList'), 'ctrl-t': 'tab split', 'ctrl-s': 'split', 'ctrl-v': 'vsplit' }
+  let g:fzf_action = { 'ctrl-q': function('BuildQuickfixList'), 'ctrl-t': 'tab split', 'ctrl-x': 'split', 'ctrl-v': 'vsplit' }
 ]], true)
