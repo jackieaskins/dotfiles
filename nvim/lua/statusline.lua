@@ -1,7 +1,7 @@
 local fn = vim.fn
 local bo,o = vim.bo,vim.o
 
-local colors = require'statusline/colors'
+local colors = require'colors'
 local modes = require'statusline/modes'
 local highlights = require'statusline/highlights'
 
@@ -22,28 +22,21 @@ local function get_file_icon_component(filename, extension)
 end
 
 local function get_buf_clients()
-  local active_clients = vim.lsp.get_active_clients()
   local filetype = bo.filetype
 
-  local buf_clients = {}
-  for _, client in ipairs(active_clients) do
+  local function is_buf_client(client)
     local filetypes = client.config.filetypes or {}
-    if fn.index(filetypes, filetype) ~= -1 then
-      table.insert(buf_clients, client)
-    end
+    return fn.index(filetypes, filetype)
   end
 
-  return buf_clients
+  return vim.tbl_filter(is_buf_client, vim.lsp.get_active_clients())
 end
 
 local function get_lsp_clients_component()
-  local buf_clients = get_buf_clients()
-
-  local client_names = {}
-  for _, client in ipairs(buf_clients) do
-    table.insert(client_names, client.name)
+  local function get_name(client)
+    return client.name
   end
-
+  local client_names = vim.tbl_map(get_name, get_buf_clients())
   return table.concat(client_names, ' ')
 end
 
@@ -64,7 +57,7 @@ end
 function GetActiveLine()
   local default_highlight = highlights.define_active('')
   local mode_highlight = highlights.define_active('Mode', modes.get_color())
-  local subtle_highlight = highlights.define_active('Subtle', colors.subtle_fg)
+  local subtle_highlight = highlights.define_active('Subtle', colors.gray4)
   local info_highlight = highlights.define_active('Info', colors.cyan)
   local warn_highlight = highlights.define_active('Warn', colors.orange)
   local error_highlight = highlights.define_active('Error', colors.red)

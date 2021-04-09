@@ -40,6 +40,7 @@ return require('packer').startup(function(use)
   -- LSP {{{
   use {'neovim/nvim-lspconfig', after = {'vim-quantum', 'lsp_signature.nvim'}, config = [[require'lsp']]}
   use {'kosayoda/nvim-lightbulb', config = [[require'plugins/lightbulb']]}
+  use {'ojroques/nvim-lspfuzzy', requires = 'fzf.vim', config = [[require'lspfuzzy'.setup{}]]}
   use 'ray-x/lsp_signature.nvim'
   -- }}}
 

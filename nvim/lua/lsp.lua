@@ -1,3 +1,5 @@
+local colors = require'colors'
+
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
     virtual_text = {
@@ -7,11 +9,21 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     signs = true,
   }
 )
-vim.cmd[[ highlight LspDiagnosticsDefaultHint guifg=#70ace5 ]]
-vim.fn.sign_define("LspDiagnosticsSignError", {text = "", texthl = "LspDiagnosticsSignError"})
-vim.fn.sign_define("LspDiagnosticsSignWarning", {text = "", texthl = "LspDiagnosticsSignWarning"})
-vim.fn.sign_define("LspDiagnosticsSignInformation", {text = "🛈", texthl = "LspDiagnosticsSignInformation"})
-vim.fn.sign_define("LspDiagnosticsSignHint", {text = "!", texthl = "LspDiagnosticsSignHint"})
+
+local diagnostic_mappings = {
+  Hint = {color = colors.fg, icon = ''},
+  Information = {color = colors.cyan, icon = ''},
+  Warning = {color = colors.orange, icon = ''},
+  Error = {color = colors.red, icon = ''}
+}
+
+for level, mapping in pairs(diagnostic_mappings) do
+  local highlight = 'LspDiagnosticsDefault' .. level
+  vim.cmd(string.format('highlight %s guifg=%s', highlight, mapping.color))
+
+  local sign = 'LspDiagnosticsSign' .. level
+  vim.fn.sign_define(sign, {text = mapping.icon, texthl = sign})
+end
 
 require'lsp/configs'.add_configs()
 require'lsp/servers'.setup_servers()

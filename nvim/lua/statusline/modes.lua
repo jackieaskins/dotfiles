@@ -1,4 +1,4 @@
-local colors = require'statusline/colors'
+local colors = require'colors'
 local fn = vim.fn
 
 local mode_map = {

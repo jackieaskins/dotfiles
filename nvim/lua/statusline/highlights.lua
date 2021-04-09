@@ -1,5 +1,5 @@
 local cmd = vim.cmd
-local colors = require'statusline/colors'
+local colors = require'colors'
 
 local ACTIVE_HIGHLIGHT = 'StatusLine'
 local INACTIVE_HIGHLIGHT = 'StatusLineNC'
@@ -7,8 +7,8 @@ local INACTIVE_HIGHLIGHT = 'StatusLineNC'
 local M = {}
 
 local function define_highlight(prefix, suffix, fg, bg, mod)
-  fg = fg or colors.fg
-  bg = bg or colors.bg
+  fg = fg or colors.gray5
+  bg = bg or colors.gray2
   mod = mod or 'none'
 
   cmd(string.format(
@@ -24,7 +24,7 @@ function M.define_active(name, fg, bg, mod)
 end
 
 function M.define_inactive(name, fg, bg, mod)
-  fg = fg or colors.inactive_fg
+  fg = fg or colors.gray3
   return define_highlight(INACTIVE_HIGHLIGHT, name, fg, bg, mod)
 end
 
