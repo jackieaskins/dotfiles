@@ -1,4 +1,4 @@
--- TODO: Reload Neovim (may require plenary), showtabline?, showmatch?, no auto comment
+-- TODO: Reload Neovim (may require plenary), showmatch?, no auto comment
 
 local utils = require('utils')
 local opt,augroup = utils.opt,utils.augroup
@@ -16,7 +16,7 @@ opt('o', 'confirm', true)
 opt('o', 'splitright', true)
 opt('o', 'splitbelow', true)
 opt('o', 'termguicolors', true)
-
+opt('o', 'tabline', require'tabline')
 
 -- Status Line
 augroup('statusline', {
