@@ -49,6 +49,8 @@ return require('packer').startup(function(use)
   use 'tpope/vim-commentary'
   use 'tpope/vim-repeat'
   use {'hrsh7th/nvim-compe', requires = 'hrsh7th/vim-vsnip', config = [[require'plugins/compe']]}
+  use 'axelf4/vim-strip-trailing-whitespace'
+  use {'mhartington/formatter.nvim', config = [[require'plugins/formatter']]}
   -- }}}
 
   -- Movement {{{
