@@ -16,20 +16,21 @@ return require('packer').startup(function(use)
   -- Appearance {{{
   use {'tyrannicaltoucan/vim-quantum', after = 'quick-scope', config = [[require'plugins/colorscheme']]}
   use {'glepnir/galaxyline.nvim', config = [[require'plugins/galaxyline']], disable = true}
-  use 'kyazdani42/nvim-web-devicons'
+  use {'kyazdani42/nvim-web-devicons'}
   use {'lambdalisue/glyph-palette.vim', config = [[require'plugins/glyph-palette']]}
   use {'mhinz/vim-startify', config = [[require'plugins/startify']]}
   use {'norcalli/nvim-colorizer.lua', config = [[require'colorizer'.setup()]]}
   -- }}}
 
   -- Brackets {{{
+  use {'jackieaskins/vim-closer'}
   use {'AndrewRadev/splitjoin.vim', config = [[require'plugins/splitjoin']]}
-  use 'tpope/vim-surround'
+  use {'tpope/vim-surround'}
   -- }}}
 
   -- Git {{{
   use {'lewis6991/gitsigns.nvim', requires = 'nvim-lua/plenary.nvim', config = [[require'plugins/gitsigns']]}
-  use 'tpope/vim-fugitive'
+  use {'tpope/vim-fugitive'}
   -- }}}
 
   -- File Navigation {{{
@@ -45,18 +46,18 @@ return require('packer').startup(function(use)
   -- }}}
 
   -- General Editing {{{
-  use 'tpope/vim-abolish'
-  use 'tpope/vim-commentary'
-  use 'tpope/vim-repeat'
+  use {'tpope/vim-abolish'}
+  use {'tpope/vim-commentary'}
+  use {'tpope/vim-repeat'}
   use {'hrsh7th/nvim-compe', requires = 'hrsh7th/vim-vsnip', config = [[require'plugins/compe']]}
-  use 'axelf4/vim-strip-trailing-whitespace'
+  use {'axelf4/vim-strip-trailing-whitespace'}
   use {'mhartington/formatter.nvim', config = [[require'plugins/formatter']]}
   -- }}}
 
   -- Movement {{{
   use {'phaazon/hop.nvim', config = [[require'plugins/hop']]}
   use {'szw/vim-maximizer', config = [[require'plugins/maximizer']]}
-  use 'matze/vim-move'
+  use {'matze/vim-move'}
   use {'unblevable/quick-scope', config = [[require'plugins/quick-scope']]}
   -- }}}
 
