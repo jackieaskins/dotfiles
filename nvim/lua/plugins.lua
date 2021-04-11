@@ -61,7 +61,12 @@ return require('packer').startup(function(use)
   -- }}}
 
   -- Syntax {{{
-  use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', config = [[require'plugins/treesitter']]}
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    run = ':TSUpdate',
+    config = [[require'plugins/treesitter']],
+    requires = {'nvim-treesitter/playground', 'jackieaskins/nvim-ts-autotag'}
+  }
   -- }}}
 
   -- Testing {{{

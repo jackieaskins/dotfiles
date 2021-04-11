@@ -26,7 +26,7 @@ local function get_buf_clients()
 
   local function is_buf_client(client)
     local filetypes = client.config.filetypes or {}
-    return fn.index(filetypes, filetype)
+    return fn.index(filetypes, filetype) ~= -1
   end
 
   return vim.tbl_filter(is_buf_client, vim.lsp.get_active_clients())
