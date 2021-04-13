@@ -75,6 +75,13 @@ function GetActiveLine()
   local filetype_component = bo.filetype
   local line_col_percent_component = ' %l:%c │ %p%%'
 
+  local function render_based_on_width(component, max_width)
+    local window_width = fn.winwidth('%')
+    max_width = max_width or 80
+
+    return window_width > max_width and component or ''
+  end
+
   local status_line_components = {
     default_highlight,
 
@@ -104,16 +111,20 @@ function GetActiveLine()
     get_lsp_diagnostic_component('Error'),
     default_highlight,
 
-    subtle_highlight,
-    get_lsp_clients_component(),
-    spacer_component,
+    render_based_on_width(subtle_highlight),
+    render_based_on_width(get_lsp_clients_component()),
+    render_based_on_width(spacer_component),
+    render_based_on_width(default_highlight),
 
     split_component,
 
-    filetype_component,
+    render_based_on_width(subtle_highlight),
+    render_based_on_width(filetype_component),
+    render_based_on_width(default_highlight),
 
     mode_highlight,
     line_col_percent_component,
+    default_highlight,
   }
 
   return table.concat(status_line_components, '')

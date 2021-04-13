@@ -1,6 +1,6 @@
 local M = {}
 
-function M.custom_attach(client, bufnr)
+function M.custom_attach(_, bufnr)
   local function bsk(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function bso(...) vim.api.nvim_buf_set_option(bufnr, ...) end
   local opts = {noremap=true, silent=true}

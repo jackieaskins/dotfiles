@@ -2,6 +2,18 @@ local fn = vim.fn
 local colors = require'colors'
 local modes = require'statusline/modes'
 
+local function get_file_icon_component(filename, extension)
+  if filename == '' then return '' end
+
+  local icon = require'nvim-web-devicons'.get_icon(
+    filename,
+    extension,
+    {default = false}
+  )
+
+  return icon and icon .. ' ' or ''
+end
+
 function GetTabLine()
   vim.cmd('highlight TabLineSel guifg=' .. modes.get_color() .. ' guibg=' .. colors.gray1)
 
@@ -27,11 +39,12 @@ function GetTabLine()
     local buflist = fn.tabpagebuflist(tabnr)
     local bufnr = buflist[winnr]
 
-    local function get_bufname()
-      local filetype = fn.getbufvar(bufnr, '&filetype')
-      local bufname = fn.bufname(bufnr)
-      local filename = fn.fnamemodify(bufname, ':t')
+    local filetype = fn.getbufvar(bufnr, '&filetype')
+    local bufname = fn.bufname(bufnr)
+    local filename = fn.fnamemodify(bufname, ':t')
+    local extension = fn.fnamemodify(bufname, ':e')
 
+    local function get_bufname()
       if filetype == 'fzf' then return '[FZF]' end
       if filetype == 'startify' then return '[Startify]' end
       if bufname == '' then return '[No Name]' end
@@ -50,8 +63,10 @@ function GetTabLine()
 
     local components = {
       set_current_tab('%#TabLineSel#', '%#TabLine#'),
-      set_current_tab('▊ ', ' '),
-      set_current_tab('', tabnr .. ' '),
+      ' ',
+      tabnr,
+      ' ',
+      get_file_icon_component(filename, extension),
       get_bufname(),
       modified,
       readonly,
