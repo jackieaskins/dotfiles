@@ -13,23 +13,17 @@ local split_component = '%='
 
 local function get_file_icon_component(filename, extension)
   if filename == '' then return '' end
-
-  return require'nvim-web-devicons'.get_icon(
+  local icon = require'nvim-web-devicons'.get_icon(
     filename,
     extension,
     {default = false}
-  ) or ''
+  )
+
+  return icon and icon .. ' ' or ''
 end
 
 local function get_buf_clients()
-  local filetype = bo.filetype
-
-  local function is_buf_client(client)
-    local filetypes = client.config.filetypes or {}
-    return fn.index(filetypes, filetype) ~= -1
-  end
-
-  return vim.tbl_filter(is_buf_client, vim.lsp.get_active_clients())
+  return vim.tbl_values(vim.lsp.buf_get_clients(fn.bufnr('%')))
 end
 
 local function get_lsp_clients_component()
@@ -93,7 +87,6 @@ function GetActiveLine()
 
     default_highlight,
     get_file_icon_component(filename, extension),
-    spacer_component,
     filename_component,
     modified_component,
     readonly_component,

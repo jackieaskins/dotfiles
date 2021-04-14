@@ -6,6 +6,7 @@ vim.api.nvim_exec([[
   command! PI PackerInstall
   command! PC PackerCompile
   command! PS PackerSync
+  command! PU PackerUpdate
 ]], true)
 map('n', '<leader>gh', "yi':!open https://github.com/<C-R>0<CR><CR>")
 
@@ -15,7 +16,6 @@ return require('packer').startup(function(use)
 
   -- Appearance {{{
   use {'tyrannicaltoucan/vim-quantum', after = 'quick-scope', config = [[require'plugins/colorscheme']]}
-  use {'glepnir/galaxyline.nvim', config = [[require'plugins/galaxyline']], disable = true}
   use {'kyazdani42/nvim-web-devicons'}
   use {'lambdalisue/glyph-palette.vim', config = [[require'plugins/glyph-palette']]}
   use {'mhinz/vim-startify', config = [[require'plugins/startify']]}
@@ -41,7 +41,7 @@ return require('packer').startup(function(use)
   -- LSP {{{
   use {'neovim/nvim-lspconfig', after = {'vim-quantum', 'lsp_signature.nvim'}, config = [[require'lsp']]}
   use {'kosayoda/nvim-lightbulb', config = [[require'plugins/lightbulb']]}
-  use {'ojroques/nvim-lspfuzzy', requires = 'fzf.vim', config = [[require'lspfuzzy'.setup{}]]}
+  use {'jackieaskins/nvim-lspfuzzy', requires = 'fzf.vim', config = [[require'lspfuzzy'.setup{}]]}
   use 'ray-x/lsp_signature.nvim'
   -- }}}
 

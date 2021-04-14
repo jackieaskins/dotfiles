@@ -20,9 +20,9 @@ function M.custom_attach(_, bufnr)
   bsk('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
   bsk('i', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
 
-  bsk('n', '<leader>ld', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-  bsk('n', '[g', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-  bsk('n', ']g', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+  bsk('n', '<leader>ld', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({border = "single"})<CR>', opts)
+  bsk('n', '[g', '<cmd>lua vim.lsp.diagnostic.goto_prev({popup_opts = {border = "single"}})<CR>', opts)
+  bsk('n', ']g', '<cmd>lua vim.lsp.diagnostic.goto_next({popup_opts = {border = "single"}})<CR>', opts)
 
   bsk('n', '<leader>bf', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 
