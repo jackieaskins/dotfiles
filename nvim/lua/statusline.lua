@@ -111,9 +111,9 @@ function GetActiveLine()
 
     split_component,
 
-    render_based_on_width(subtle_highlight),
-    render_based_on_width(filetype_component),
-    render_based_on_width(default_highlight),
+    subtle_highlight,
+    filetype_component,
+    default_highlight,
 
     mode_highlight,
     line_col_percent_component,

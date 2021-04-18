@@ -15,6 +15,7 @@ opt('w', 'signcolumn', 'yes')
 opt('o', 'confirm', true)
 opt('o', 'splitright', true)
 opt('o', 'splitbelow', true)
+opt('o', 'diffopt', vim.o.diffopt .. ',vertical')
 opt('o', 'termguicolors', true)
 opt('o', 'tabline', require'tabline')
 
@@ -46,7 +47,6 @@ opt('w', 'listchars', 'tab:  ,trail:·')
 -- Timeouts
 opt('o', 'ttimeoutlen', 10)
 opt('o', 'updatetime', 100)
-opt('o', 'diffopt', vim.o.diffopt .. ',vertical')
 
 -- Searching
 opt('o', 'inccommand', 'nosplit')

@@ -17,7 +17,6 @@ return require('packer').startup(function(use)
   -- Appearance {{{
   use {'tyrannicaltoucan/vim-quantum', after = 'quick-scope', config = [[require'plugins/colorscheme']]}
   use {'kyazdani42/nvim-web-devicons'}
-  use {'lambdalisue/glyph-palette.vim', config = [[require'plugins/glyph-palette']]}
   use {'mhinz/vim-startify', config = [[require'plugins/startify']]}
   use {'norcalli/nvim-colorizer.lua', config = [[require'colorizer'.setup()]]}
   -- }}}
@@ -42,7 +41,7 @@ return require('packer').startup(function(use)
   use {'neovim/nvim-lspconfig', after = {'vim-quantum', 'lsp_signature.nvim'}, config = [[require'lsp']]}
   use {'kosayoda/nvim-lightbulb', config = [[require'plugins/lightbulb']]}
   use {'jackieaskins/nvim-lspfuzzy', requires = 'fzf.vim', config = [[require'lspfuzzy'.setup{}]]}
-  use 'ray-x/lsp_signature.nvim'
+  use {'ray-x/lsp_signature.nvim'}
   -- }}}
 
   -- General Editing {{{
