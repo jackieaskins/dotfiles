@@ -29,9 +29,11 @@ if has('termguicolors')
   set termguicolors
 endif
 
-let g:lightline = { 'colorscheme': 'quantum' }
-let g:quantum_black = 1
-colorscheme quantum
+let g:onedark_color_overrides = {
+      \ 'black': { 'gui': '#1E1E1E', 'cterm': '234', 'cterm16': '0' },
+      \ }
+let g:lightline = { 'colorscheme': 'onedark' }
+colorscheme onedark
 " }}}
 
 " Backup/Swp/Undo {{{

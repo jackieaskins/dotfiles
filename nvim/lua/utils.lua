@@ -19,6 +19,21 @@ function M.t(str)
   return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
 
+function M.get_highlight_string(name, highlight_map)
+  local highlight_string = {'highlight', name}
+  highlight_map = highlight_map or {}
+
+  for k, v in pairs(highlight_map) do
+    table.insert(highlight_string, string.format('%s=%s', k, v))
+  end
+
+  return table.concat(highlight_string, ' ')
+end
+
+function M.highlight(name, highlight_map)
+  vim.cmd(M.get_highlight_string(name, highlight_map))
+end
+
 function M.augroup(group_name, autocmds)
   api.nvim_command('augroup my_' .. group_name)
   api.nvim_command('autocmd!')

@@ -4,6 +4,7 @@ local bo,o = vim.bo,vim.o
 local colors = require'colors'
 local modes = require'statusline/modes'
 local highlights = require'statusline/highlights'
+local lsp_icons = require'lsp/icons'
 
 local M = {}
 
@@ -34,27 +35,22 @@ local function get_lsp_clients_component()
   return table.concat(client_names, ' ')
 end
 
-local level_icons = {
-  Hint = '',
-  Information = '',
-  Warning = '',
-  Error = '',
-}
 local function get_lsp_diagnostic_component(level)
   if #get_buf_clients() == 0 then return '' end
 
   local count = vim.lsp.diagnostic.get_count(0, level)
 
-  return level_icons[level] .. ' ' .. count .. ' '
+  return lsp_icons[level] .. ' ' .. count .. ' '
 end
 
+local active_highlight = highlights.define_active('')
+local subtle_highlight = highlights.define_active('Subtle', colors.comment_gray)
+local hint_highlight = highlights.define_active('Hint', colors.cyan)
+local info_highlight = highlights.define_active('Info', colors.blue)
+local warn_highlight = highlights.define_active('Warn', colors.yellow)
+local error_highlight = highlights.define_active('Error', colors.red)
 function GetActiveLine()
-  local default_highlight = highlights.define_active('')
   local mode_highlight = highlights.define_active('Mode', modes.get_color())
-  local subtle_highlight = highlights.define_active('Subtle', colors.gray4)
-  local info_highlight = highlights.define_active('Info', colors.cyan)
-  local warn_highlight = highlights.define_active('Warn', colors.orange)
-  local error_highlight = highlights.define_active('Error', colors.red)
 
   local extension = fn.expand('%:e')
   local filename = fn.expand('%:t')
@@ -77,7 +73,7 @@ function GetActiveLine()
   end
 
   local status_line_components = {
-    default_highlight,
+    active_highlight,
 
     mode_highlight,
     prefix_component,
@@ -85,7 +81,7 @@ function GetActiveLine()
     paste_component,
     spacer_component,
 
-    default_highlight,
+    active_highlight,
     get_file_icon_component(filename, extension),
     filename_component,
     modified_component,
@@ -94,7 +90,7 @@ function GetActiveLine()
 
     split_component,
 
-    default_highlight,
+    hint_highlight,
     get_lsp_diagnostic_component('Hint'),
     info_highlight,
     get_lsp_diagnostic_component('Information'),
@@ -102,35 +98,34 @@ function GetActiveLine()
     get_lsp_diagnostic_component('Warning'),
     error_highlight,
     get_lsp_diagnostic_component('Error'),
-    default_highlight,
+    active_highlight,
 
     render_based_on_width(subtle_highlight),
     render_based_on_width(get_lsp_clients_component()),
     render_based_on_width(spacer_component),
-    render_based_on_width(default_highlight),
+    render_based_on_width(active_highlight),
 
     split_component,
 
     subtle_highlight,
     filetype_component,
-    default_highlight,
+    active_highlight,
 
     mode_highlight,
     line_col_percent_component,
-    default_highlight,
+    active_highlight,
   }
 
   return table.concat(status_line_components, '')
 end
 
+local inactive_highlight = highlights.define_inactive('')
 function GetInactiveLine()
-  local default_highlight = highlights.define_inactive('')
-
   local filename_component = '%t'
   local line_col_percent_component = ' %l:%c │ %p%%'
 
   local components = {
-    default_highlight,
+    inactive_highlight,
     prefix_component,
     filename_component,
 

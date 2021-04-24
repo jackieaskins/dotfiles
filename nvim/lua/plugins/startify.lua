@@ -20,5 +20,5 @@ g.startify_custom_indices = fn.map(
 )
 g.startify_lists = {
   {type = 'dir', header = {' MRU in ' .. vim.fn.getcwd()}},
-  {type = 'files', header = {'MRU'}}
+  {type = 'files', header = {' MRU'}}
 }

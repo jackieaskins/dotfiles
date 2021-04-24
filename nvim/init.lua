@@ -13,3 +13,5 @@ else
   cmd 'autocmd BufWritePost */plugins.lua PackerCompile'
   require'plugins'
 end
+
+require'plugins/colorscheme'

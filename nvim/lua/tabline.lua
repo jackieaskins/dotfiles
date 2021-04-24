@@ -1,6 +1,7 @@
 local fn = vim.fn
 local colors = require'colors'
 local modes = require'statusline/modes'
+local highlight = require'utils'.highlight
 
 local function get_file_icon_component(filename, extension)
   if filename == '' then return '' end
@@ -15,7 +16,8 @@ local function get_file_icon_component(filename, extension)
 end
 
 function GetTabLine()
-  vim.cmd('highlight TabLineSel guifg=' .. modes.get_color() .. ' guibg=' .. colors.gray1)
+  highlight('TabLine', {guibg = colors.colorcolumn_gray})
+  highlight('TabLineSel', {guifg = modes.get_color(), guibg = colors.black})
 
   local current_tabnr = fn.tabpagenr()
   local tabline_components = {}
