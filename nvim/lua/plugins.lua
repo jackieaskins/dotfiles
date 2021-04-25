@@ -26,6 +26,7 @@ return require('packer').startup(function(use)
   use {'jackieaskins/vim-closer'}
   use {'AndrewRadev/splitjoin.vim', config = "require'plugins/splitjoin'"}
   use {'tpope/vim-surround'}
+  use {'airblade/vim-matchquote'}
   -- }}}
 
   -- Git {{{

@@ -31,6 +31,7 @@ endif
 
 let g:onedark_color_overrides = {
       \ 'black': { 'gui': '#1E1E1E', 'cterm': '234', 'cterm16': '0' },
+      \ 'yellow': { "gui": "#ecbf6f", "cterm": "180", "cterm16": "3" }
       \ }
 let g:lightline = { 'colorscheme': 'onedark' }
 colorscheme onedark
@@ -48,9 +49,7 @@ set directory=$HOME/.swp
 
 " Folds {{{
 autocmd FileType lua,sh,vim setlocal foldmethod=marker
-highlight Folded guifg=PeachPuff4
 set foldlevel=99 " Start folds expanded by default
-set foldcolumn=2 " Show fold column with width 2
 " }}}
 
 " Windows {{{

@@ -1,4 +1,4 @@
--- TODO: Reload Neovim (may require plenary), showmatch?, no auto comment
+-- TODO: Reload Neovim (may require plenary)
 
 local utils = require('utils')
 local opt,augroup = utils.opt,utils.augroup
@@ -6,6 +6,12 @@ local cmd = vim.cmd
 
 -- Map Leader to Space
 vim.g.mapleader = ' '
+
+-- Disable auto-comments
+cmd 'filetype plugin on'
+augroup('no_auto_comment', {
+  {'FileType', '*', 'setlocal formatoptions-=r formatoptions-=o'}
+})
 
 -- General
 opt('w', 'number', true)
@@ -28,8 +34,9 @@ augroup('statusline', {
 -- Folds
 augroup('folds', {
   {'FileType', 'lua,sh,vim', 'setlocal foldmethod=marker'},
-  {'ColorScheme', '*', 'highlight Folded guifg=PeachPuff4'}
 })
+opt('w', 'foldmethod', 'expr')
+opt('w', 'foldexpr', 'nvim_treesitter#foldexpr()')
 opt('w', 'foldlevel', 99)
 
 -- Terminal
