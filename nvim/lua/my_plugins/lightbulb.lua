@@ -1,4 +1,4 @@
-require'utils'.augroup('lightbulb', {
+require'my_utils'.augroup('lightbulb', {
   {
     'CursorHold,CursorHoldI',
     '*',

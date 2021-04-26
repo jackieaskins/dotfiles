@@ -1,4 +1,4 @@
-local colors = require'colors'
+local colors = require'my_colors'
 local fn = vim.fn
 
 local mode_map = {

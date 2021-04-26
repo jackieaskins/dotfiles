@@ -1,4 +1,4 @@
-local icons = require'lsp/icons'
+local icons = require'my_lsp/icons'
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
@@ -23,10 +23,10 @@ for level, icon in pairs(icons) do
   vim.fn.sign_define(sign, {text = icon})
 end
 
-require'lsp/configs'.add_configs()
-require'lsp/servers'.setup_servers()
+require'my_lsp/configs'.add_configs()
+require'my_lsp/servers'.setup_servers()
 
-require'utils'.augroup('lsp_config', {
+require'my_utils'.augroup('lsp_config', {
   {
     'BufReadCmd',
     'jdt://*',

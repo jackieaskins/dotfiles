@@ -3,13 +3,13 @@ local M = {}
 
 local all_servers = {
   eslintls = false,
-  jdtls = require'lsp/servers/jdtls'.configure,
+  jdtls = require'my_lsp/servers/jdtls'.configure,
   jsonls = false,
   pyright = false,
   solargraph = false,
-  sumneko_lua = require'lsp/servers/sumneko_lua'.configure,
+  sumneko_lua = require'my_lsp/servers/sumneko_lua'.configure,
   vimls = false,
-  tsserver = require'lsp/servers/tsserver'.configure,
+  tsserver = require'my_lsp/servers/tsserver'.configure,
 }
 
 function M.setup_servers()
@@ -17,8 +17,8 @@ function M.setup_servers()
 
   for server, config_func in pairs(all_servers) do
     local base_config = {
-      capabilities = require'lsp/capabilities',
-      on_attach = require'lsp/attach'.custom_attach
+      capabilities = require'my_lsp/capabilities',
+      on_attach = require'my_lsp/attach'.custom_attach
     }
 
     local config = config_func and config_func(base_config) or base_config

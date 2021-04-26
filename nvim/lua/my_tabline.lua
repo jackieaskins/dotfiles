@@ -1,7 +1,7 @@
 local fn = vim.fn
-local colors = require'colors'
-local modes = require'statusline/modes'
-local highlight = require'utils'.highlight
+local colors = require'my_colors'
+local modes = require'my_statusline/modes'
+local highlight = require'my_utils'.highlight
 
 local function get_file_icon_component(filename, extension)
   if filename == '' then return '' end

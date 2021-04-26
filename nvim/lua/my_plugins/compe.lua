@@ -1,4 +1,4 @@
-local utils = require'utils'
+local utils = require'my_utils'
 local map,opt,t = utils.map,utils.opt,utils.t
 
 opt('o', 'completeopt', 'menu,menuone,noselect')

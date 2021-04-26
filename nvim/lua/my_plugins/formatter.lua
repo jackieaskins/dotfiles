@@ -24,8 +24,8 @@ require'formatter'.setup({
   }
 })
 
-require'utils'.augroup('auto_format', {
-  {'BufWritePost', '*.java,*.js,*.jsx,*.ts,*.tsx', 'lua require"plugins/formatter".format_on_save()'}
+require'my_utils'.augroup('auto_format', {
+  {'BufWritePost', '*.java,*.js,*.jsx,*.ts,*.tsx', 'lua require"my_plugins/formatter".format_on_save()'}
 })
 
 local M = {}

@@ -1,7 +1,7 @@
 local M = {}
 
 function M.add_configs()
-  require'lsp/configs/eslintls'
+  require'my_lsp/configs/eslintls'
 end
 
 return M

@@ -1,4 +1,4 @@
-local map = require'utils'.map
+local map = require'my_utils'.map
 local g = vim.g
 
 g['test#strategy'] = 'neovim'

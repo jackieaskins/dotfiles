@@ -1,5 +1,5 @@
-local colors = require'colors'
-local utils = require'utils'
+local colors = require'my_colors'
+local utils = require'my_utils'
 
 local ACTIVE_HIGHLIGHT = 'StatusLine'
 local INACTIVE_HIGHLIGHT = 'StatusLineNC'

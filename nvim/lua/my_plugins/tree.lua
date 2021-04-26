@@ -1,5 +1,5 @@
 local g = vim.g
-local map = require'utils'.map
+local map = require'my_utils'.map
 
 g.nvim_tree_disable_netrw = 0
 g.nvim_tree_git_hl = 1

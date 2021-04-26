@@ -1,6 +1,7 @@
-local utils = require('utils')
+local utils = require('my_utils')
 local map = utils.map
 local fn = vim.fn
+local cmd = vim.cmd
 
 -- Window Management
 map('n', '<C-j>', '<C-w>j')
@@ -13,6 +14,8 @@ map('n', ']q', ':cnext<CR>')
 map('n', '[q', ':cprevious<CR>')
 
 map('n', 'gx', '<cmd>call v:lua.OpenURLUnderCursor()<CR>')
+map('n', '<leader>re', '<cmd>call v:lua.ReloadConfig()<CR>')
+
 function _G.OpenURLUnderCursor()
   local uri = fn.substitute(fn.expand('<cWORD>'), '?', '\\?', '')
   local pairs = {
@@ -39,7 +42,14 @@ function _G.OpenURLUnderCursor()
   uri = fn.shellescape(uri)
 
   if uri ~= '' then
-    vim.cmd('!open ' .. uri)
-    vim.cmd 'redraw!'
+    cmd('!open ' .. uri)
+    cmd 'redraw!'
   end
+end
+
+function _G.ReloadConfig()
+  require'plenary.reload'.reload_module('my_', true)
+  require'my_init'
+
+  cmd 'LspRestart'
 end

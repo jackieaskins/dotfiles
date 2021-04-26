@@ -1,10 +1,10 @@
 local fn = vim.fn
 local bo,o = vim.bo,vim.o
 
-local colors = require'colors'
-local modes = require'statusline/modes'
-local highlights = require'statusline/highlights'
-local lsp_icons = require'lsp/icons'
+local colors = require'my_colors'
+local modes = require'my_statusline/modes'
+local highlights = require'my_statusline/highlights'
+local lsp_icons = require'my_lsp/icons'
 
 local M = {}
 
@@ -43,14 +43,14 @@ local function get_lsp_diagnostic_component(level)
   return lsp_icons[level] .. ' ' .. count .. ' '
 end
 
-local active_highlight = highlights.define_active('')
-local subtle_highlight = highlights.define_active('Subtle', colors.comment_gray)
-local hint_highlight = highlights.define_active('Hint', colors.cyan)
-local info_highlight = highlights.define_active('Info', colors.blue)
-local warn_highlight = highlights.define_active('Warn', colors.yellow)
-local error_highlight = highlights.define_active('Error', colors.red)
 function GetActiveLine()
   local mode_highlight = highlights.define_active('Mode', modes.get_color())
+  local active_highlight = highlights.define_active('')
+  local subtle_highlight = highlights.define_active('Subtle', colors.comment_gray)
+  local hint_highlight = highlights.define_active('Hint', colors.cyan)
+  local info_highlight = highlights.define_active('Info', colors.blue)
+  local warn_highlight = highlights.define_active('Warn', colors.yellow)
+  local error_highlight = highlights.define_active('Error', colors.red)
 
   local extension = fn.expand('%:e')
   local filename = fn.expand('%:t')

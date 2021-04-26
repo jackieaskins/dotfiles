@@ -1,6 +1,4 @@
--- TODO: Reload Neovim (may require plenary)
-
-local utils = require('utils')
+local utils = require('my_utils')
 local opt,augroup = utils.opt,utils.augroup
 local cmd = vim.cmd
 
@@ -23,12 +21,12 @@ opt('o', 'splitright', true)
 opt('o', 'splitbelow', true)
 opt('o', 'diffopt', vim.o.diffopt .. ',vertical')
 opt('o', 'termguicolors', true)
-opt('o', 'tabline', require'tabline')
+opt('o', 'tabline', require'my_tabline')
 
 -- Status Line
 augroup('statusline', {
-  {'BufEnter,WinEnter', '*', [[lua require'statusline'.get_active()]]},
-  {'BufLeave,WinLeave', '*', [[lua require'statusline'.get_inactive()]]}
+  {'BufEnter,WinEnter', '*', [[lua require'my_statusline'.get_active()]]},
+  {'BufLeave,WinLeave', '*', [[lua require'my_statusline'.get_inactive()]]}
 })
 
 -- Folds
