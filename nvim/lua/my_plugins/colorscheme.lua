@@ -15,7 +15,8 @@ augroup('custom_colors', {
   highlight_autocmd('CursorLine', color_column_bg),
   highlight_autocmd('CursorLineNr', color_column_bg),
   highlight_autocmd('NormalFloat', color_column_bg),
-  highlight_autocmd('TSComment', {guifg = colors.comment_gray, gui = 'italic'})
+  highlight_autocmd('TSComment', {guifg = colors.comment_gray, gui = 'italic'}),
+  highlight_autocmd('ModeMsg', {guifg = colors.comment_gray}),
 })
 
 vim.o.background = 'dark'

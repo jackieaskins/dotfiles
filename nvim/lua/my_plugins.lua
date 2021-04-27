@@ -14,6 +14,7 @@ cmd 'packadd packer.nvim'
 
 return require('packer').startup(function(use)
   use {'wbthomason/packer.nvim', opt = true}
+  use {'nvim-lua/plenary.nvim'}
 
   -- Appearance {{{
   use {'olimorris/onedark.nvim', requires = 'rktjmp/lush.nvim'}

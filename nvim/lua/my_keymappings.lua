@@ -10,11 +10,16 @@ map('n', '<C-h>', '<C-w>h')
 map('n', '<C-l>', '<C-w>l')
 
 -- Navigate Quickfix
-map('n', ']q', ':cnext<CR>')
 map('n', '[q', ':cprevious<CR>')
+map('n', ']q', ':cnext<CR>')
+map('n', '[Q', ':cfirst<CR>')
+map('n', ']Q', ':clast<CR>')
+map('n', '[<C-Q>', ':cpfile<CR>')
+map('n', ']<C-Q>', ':cpnile<CR>')
 
 map('n', 'gx', '<cmd>call v:lua.OpenURLUnderCursor()<CR>')
 map('n', '<leader>re', '<cmd>call v:lua.ReloadConfig()<CR>')
+map('n', '<leader>rp', '<cmd>call v:lua.ReloadPlugins()<CR>')
 
 function _G.OpenURLUnderCursor()
   local uri = fn.substitute(fn.expand('<cWORD>'), '?', '\\?', '')
@@ -47,9 +52,19 @@ function _G.OpenURLUnderCursor()
   end
 end
 
-function _G.ReloadConfig()
+local function reload()
   require'plenary.reload'.reload_module('my_', true)
   require'my_init'
+end
 
+function _G.ReloadConfig()
+  reload()
   cmd 'LspRestart'
+end
+
+function _G.ReloadPlugins()
+  cmd 'LspStop'
+  reload()
+  cmd 'PackerSync'
+  cmd 'LspStart'
 end
