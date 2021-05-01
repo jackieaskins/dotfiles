@@ -31,13 +31,27 @@ function M.configure(config)
       generateConstructorsPromptSupport = true;
       generateDelegateMethodsPromptSupport = true;
       hashCodeEqualsPromptSupport = true;
-      inferSelectionSupport = {"extractMethod", "extractVariable"};
+      inferSelectionSupport = {'extractMethod', 'extractVariable'};
       moveRefactoringSupport = true;
       overrideMethodsPromptSupport = true;
     }
   }
 
   return config
+end
+
+-- TODO: Only update if there's a new version
+function M.update(servers_dir)
+  local install_dir = servers_dir .. '/eclipse.jdt.ls'
+  local zip_file = 'jdt-language-server-latest.tar.gz'
+
+  return {
+    'rm -rf ' .. install_dir,
+    'mkdir ' .. install_dir,
+    'wget http://download.eclipse.org/jdtls/snapshots/' .. zip_file,
+    'tar -xf ' .. zip_file .. ' -C ' .. install_dir,
+    'rm ' .. zip_file,
+  }
 end
 
 return M

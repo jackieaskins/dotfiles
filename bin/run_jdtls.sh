@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-JDT_LS_ROOT="$HOME/dotfiles/lsp-servers/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository"
+JDT_LS_ROOT="$HOME/.local/share/nvim/lsp-servers/eclipse.jdt.ls"
 OS="linux"
 case "$OSTYPE" in
   darwin*)  OS=mac ;;
