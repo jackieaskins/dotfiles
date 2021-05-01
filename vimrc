@@ -34,7 +34,7 @@ let g:onedark_color_overrides = {
       \ 'yellow': { "gui": "#ecbf6f", "cterm": "180", "cterm16": "3" }
       \ }
 let g:lightline = { 'colorscheme': 'onedark' }
-colorscheme onedark
+silent! colorscheme onedark
 " }}}
 
 " Backup/Swp/Undo {{{

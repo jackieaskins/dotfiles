@@ -3,15 +3,8 @@ local colors = require'my_colors'
 local modes = require'my_statusline/modes'
 local highlight = require'my_utils'.highlight
 
-local function get_file_icon_component(filename, extension)
-  if filename == '' then return '' end
-
-  local icon = require'nvim-web-devicons'.get_icon(
-    filename,
-    extension,
-    {default = false}
-  )
-
+local function get_file_icon_component(filename)
+  local icon = require'my_icons'.get_file_icon(filename, false)
   return icon and icon .. ' ' or ''
 end
 
@@ -44,7 +37,6 @@ function GetTabLine()
     local filetype = fn.getbufvar(bufnr, '&filetype')
     local bufname = fn.bufname(bufnr)
     local filename = fn.fnamemodify(bufname, ':t')
-    local extension = fn.fnamemodify(bufname, ':e')
 
     local function get_bufname()
       if filetype == 'fzf' then return '[FZF]' end
@@ -68,7 +60,7 @@ function GetTabLine()
       ' ',
       tabnr,
       ' ',
-      get_file_icon_component(filename, extension),
+      get_file_icon_component(filename),
       get_bufname(),
       modified,
       readonly,

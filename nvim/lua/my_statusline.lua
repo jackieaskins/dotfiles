@@ -12,14 +12,8 @@ local prefix_component = '▊ '
 local spacer_component = ' '
 local split_component = '%='
 
-local function get_file_icon_component(filename, extension)
-  if filename == '' then return '' end
-  local icon = require'nvim-web-devicons'.get_icon(
-    filename,
-    extension,
-    {default = false}
-  )
-
+local function get_file_icon_component(filename)
+  local icon = require'my_icons'.get_file_icon(filename, false)
   return icon and icon .. ' ' or ''
 end
 
@@ -52,7 +46,6 @@ function GetActiveLine()
   local warn_highlight = highlights.define_active('Warn', colors.yellow)
   local error_highlight = highlights.define_active('Error', colors.red)
 
-  local extension = fn.expand('%:e')
   local filename = fn.expand('%:t')
 
   local mode_component = modes.get_label()
@@ -82,7 +75,7 @@ function GetActiveLine()
     spacer_component,
 
     active_highlight,
-    get_file_icon_component(filename, extension),
+    get_file_icon_component(filename),
     filename_component,
     modified_component,
     readonly_component,

@@ -5,7 +5,13 @@ function M.custom_attach(_, bufnr)
   local function bso(...) vim.api.nvim_buf_set_option(bufnr, ...) end
   local opts = {noremap=true, silent=true}
 
-  require'lsp_signature'.on_attach()
+  require'lsp_signature'.on_attach({
+    bind = true, -- Required for border
+    handler_opts = {
+      border = 'single'
+    },
+    decorator = {'**', '**'}
+  })
 
   bso('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
@@ -19,6 +25,7 @@ function M.custom_attach(_, bufnr)
   bsk('v', '<leader>ca', '<cmd>lua vim.lsp.buf.range_code_action()<CR>', opts)
   bsk('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
   bsk('i', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  bsk('n', '<leader>K', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
 
   bsk('n', 'g?', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({border = "single"})<CR>', opts)
   bsk('n', '[g', '<cmd>lua vim.lsp.diagnostic.goto_prev({popup_opts = {border = "single"}})<CR>', opts)

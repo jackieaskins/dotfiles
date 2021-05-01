@@ -1,4 +1,5 @@
 local utils = require('my_utils')
+local augroup = utils.augroup
 local map = utils.map
 local fn = vim.fn
 local cmd = vim.cmd
@@ -21,6 +22,23 @@ map('n', 'gx', '<cmd>call v:lua.OpenURLUnderCursor()<CR>')
 map('n', '<leader>re', '<cmd>call v:lua.ReloadConfig()<CR>')
 map('n', '<leader>rp', '<cmd>call v:lua.ReloadPlugins()<CR>')
 
+map('n', '<leader>gh', "yi':!open https://github.com/<C-R>0<CR><CR>")
+augroup('packer_links', {
+  {
+    'FileType',
+    'packer',
+    'nnoremap <buffer> <leader>gh <cmd>call v:lua.OpenPackerURL()<CR>',
+  }
+})
+
+function _G.OpenPackerURL()
+  local user_package = fn.expand('<cWORD>')
+  user_package = string.sub(user_package, 1, -2) -- Remove trailing ':'
+
+  cmd('!open https://github.com/' .. user_package)
+  cmd 'redraw!'
+end
+
 function _G.OpenURLUnderCursor()
   local uri = fn.substitute(fn.expand('<cWORD>'), '?', '\\?', '')
   local pairs = {
@@ -41,7 +59,7 @@ function _G.OpenURLUnderCursor()
   end
 
   while is_surrounded() do
-    uri = string.sub(uri, 2, -2)
+    uri = string.sub(uri, 2, -2) -- Remove surrounding chracters
   end
 
   uri = fn.shellescape(uri)

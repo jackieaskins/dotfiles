@@ -2,9 +2,7 @@ local g = vim.g
 local fn = vim.fn
 
 function _G.webDevIcons(path)
-  local filename = vim.fn.fnamemodify(path, ':t')
-  local extension = vim.fn.fnamemodify(path, ':e')
-  return require'nvim-web-devicons'.get_icon(filename, extension, { default = true })
+  return require'my_icons'.get_file_icon(path)
 end
 
 vim.api.nvim_exec([[

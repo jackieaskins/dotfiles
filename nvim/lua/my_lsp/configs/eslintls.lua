@@ -5,13 +5,13 @@ local util = require'lspconfig/util'
 if not lspconfig.eslintls then
   configs.eslintls = {
     default_config = {
-      cmd = {'eslint-ls', '--stdio'};
+      cmd = {'eslint-ls', '--stdio'},
       filetypes = {
         'javascript',
         'javascriptreact',
         'typescript',
         'typescriptreact'
-      };
+      },
       root_dir = util.root_pattern(
         '.eslintrc',
         '.eslintrc.js',
@@ -19,7 +19,7 @@ if not lspconfig.eslintls then
         '.eslintrc.yaml',
         '.eslintignore',
         '.git'
-      );
+      ),
     }
   }
 end
