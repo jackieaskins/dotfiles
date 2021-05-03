@@ -1,8 +1,7 @@
-local lspconfig = require'lspconfig'
 local configs = require'lspconfig/configs'
 local util = require'lspconfig/util'
 
-if not lspconfig.eslintls then
+if not configs.eslintls then
   configs.eslintls = {
     default_config = {
       cmd = {'eslint-ls', '--stdio'},

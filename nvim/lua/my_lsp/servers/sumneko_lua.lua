@@ -52,7 +52,7 @@ function M.update()
     'cd 3rd/luamake',
     'compile/install.sh',
     'cd ../..',
-    './3rd/luamake/luamake rebuild'
+    './3rd/luamake/luamake rebuild',
   }
 end
 

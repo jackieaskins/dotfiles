@@ -1,5 +1,5 @@
 # My Dotfiles
-My dotfiles for Vim, Zsh, and iTerm.
+My dotfiles for Neovim 0.5, Vim, Zsh, and iTerm.
 
 ## Prerequisites
 Ensure that the following are installed before beginning:

@@ -34,15 +34,26 @@ function M.highlight(name, highlight_map)
   vim.cmd(M.get_highlight_string(name, highlight_map))
 end
 
-function M.augroup(group_name, autocmds)
+local function define_augroup(group_name, autocmds, buf)
   api.nvim_command('augroup my_' .. group_name)
-  api.nvim_command('autocmd!')
+
+  local suffix = ''
+  if buf then suffix = ' * <buffer>' end
+  api.nvim_command('autocmd!' .. suffix)
 
   for _, autocmd in ipairs(autocmds) do
     api.nvim_command('autocmd ' .. table.concat(autocmd, ' '))
   end
 
   api.nvim_command('augroup END')
+end
+
+function M.augroup(group_name, autocmds)
+  define_augroup(group_name, autocmds, false)
+end
+
+function M.augroup_buf(group_name, autocmds)
+  define_augroup(group_name, autocmds, true)
 end
 
 return M

@@ -2,19 +2,24 @@
 local cmd = vim.cmd
 local fn = vim.fn
 
+local eslintls = require'my_lsp/servers/eslintls'
 local jdtls = require'my_lsp/servers/jdtls'
+local jsonls = require'my_lsp/servers/jsonls'
 local sumneko_lua = require'my_lsp/servers/sumneko_lua'
 local tsserver = require'my_lsp/servers/tsserver'
 
 local M = {}
 
 local all_servers = {
-  -- eslintls = {},
+  eslintls = {
+    update = eslintls.update,
+  },
   jdtls = {
     configure = jdtls.configure,
     update = jdtls.update,
   },
   jsonls = {
+    configure = jsonls.configure,
     update = {'npm', 'vscode-json-languageserver'},
   },
   pyright = {

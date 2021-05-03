@@ -7,9 +7,3 @@
 [submodule "pure"]
 	path = pure
 	url = https://github.com/sindresorhus/pure.git
-[submodule "lsp-servers/eclipse.jdt.ls"]
-	path = lsp-servers/eclipse.jdt.ls
-	url = https://github.com/eclipse/eclipse.jdt.ls.git
-[submodule "lsp-servers/lua-language-server"]
-	path = lsp-servers/lua-language-server
-	url = https://github.com/sumneko/lua-language-server

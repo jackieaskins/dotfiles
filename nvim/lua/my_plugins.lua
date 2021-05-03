@@ -40,9 +40,11 @@ return require('packer').startup{
     -- }}}
 
     -- LSP {{{
-    use {'neovim/nvim-lspconfig', config = "require'my_lsp'"}
-    use {'ray-x/lsp_signature.nvim'}
-    use {'kosayoda/nvim-lightbulb', config = "require'my_plugins/lightbulb'"}
+    use {
+      'neovim/nvim-lspconfig',
+      config = "require'my_lsp'",
+      requires = {'ray-x/lsp_signature.nvim', 'kosayoda/nvim-lightbulb'}
+    }
     use {'ojroques/nvim-lspfuzzy', requires = 'fzf.vim', config = "require'lspfuzzy'.setup{}"}
     -- }}}
 
@@ -65,10 +67,10 @@ return require('packer').startup{
 
     -- Syntax {{{
     use {
-    'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate',
-    config = "require'my_plugins/treesitter'",
-    requires = {'nvim-treesitter/playground', 'jackieaskins/nvim-ts-autotag'}
+      'nvim-treesitter/nvim-treesitter',
+      run = ':TSUpdate',
+      config = "require'my_plugins/treesitter'",
+      requires = {'nvim-treesitter/playground', 'jackieaskins/nvim-ts-autotag'}
     }
     -- }}}
 

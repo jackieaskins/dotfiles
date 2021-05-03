@@ -10,7 +10,16 @@ function M.custom_attach(_, bufnr)
     handler_opts = {
       border = 'single'
     },
-    decorator = {'**', '**'}
+    decorator = {'**', '**'},
+    hint_enable = true,
+  })
+
+  require'my_utils'.augroup_buf('lightbulb', {
+    {
+      'CursorHold,CursorHoldI',
+      '<buffer>',
+      "lua require'nvim-lightbulb'.update_lightbulb()",
+    }
   })
 
   bso('omnifunc', 'v:lua.vim.lsp.omnifunc')
