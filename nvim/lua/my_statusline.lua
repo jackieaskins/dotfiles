@@ -115,12 +115,14 @@ end
 local inactive_highlight = highlights.define_inactive('')
 function GetInactiveLine()
   local filename_component = '%t'
+  local modified_component = "%{&mod ? ' ' : ''}"
   local line_col_percent_component = ' %l:%c │ %p%%'
 
   local components = {
     inactive_highlight,
     prefix_component,
     filename_component,
+    modified_component,
 
     split_component,
 

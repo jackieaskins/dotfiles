@@ -70,7 +70,11 @@ return require('packer').startup{
       'nvim-treesitter/nvim-treesitter',
       run = ':TSUpdate',
       config = "require'my_plugins/treesitter'",
-      requires = {'nvim-treesitter/playground', 'jackieaskins/nvim-ts-autotag'}
+      requires = {
+        'nvim-treesitter/playground',
+        'jackieaskins/nvim-ts-autotag',
+        'JoosepAlviste/nvim-ts-context-commentstring',
+      }
     }
     -- }}}
 

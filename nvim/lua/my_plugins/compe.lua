@@ -4,13 +4,14 @@ local map,opt,t = utils.map,utils.opt,utils.t
 opt('o', 'completeopt', 'menu,menuone,noselect')
 
 require'compe'.setup {
-  enabled = true;
+  enabled = true,
+  preselect = 'always',
   source = {
-    path = true;
-    buffer = true;
-    nvim_lsp = true;
-    nvim_lua = true;
-    vsnip = true;
+    path = true,
+    buffer = true,
+    nvim_lsp = true,
+    nvim_lua = true,
+    vsnip = true,
   }
 }
 
