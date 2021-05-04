@@ -1,4 +1,5 @@
 local api = vim.api
+local fn = vim.fn
 
 local M = {}
 
@@ -54,6 +55,10 @@ end
 
 function M.augroup_buf(group_name, autocmds)
   define_augroup(group_name, autocmds, true)
+end
+
+function M.file_exists(filename)
+  return fn.empty(fn.glob(filename)) == 0
 end
 
 return M

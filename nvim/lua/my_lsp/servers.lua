@@ -81,6 +81,7 @@ local function update_servers(server_list)
       for _, line in ipairs(update(servers_dir)) do
         table.insert(script_lines, line)
       end
+      table.insert(script_lines, 'cd ' .. servers_dir)
       echo ''
     elseif generic_installs[update[1]] ~= nil then
       local install = generic_installs[update[1]]
@@ -102,9 +103,11 @@ local function update_servers(server_list)
 
   local script = table.concat(script_lines, '\n')
 
+  cmd 'LspStop'
   os.execute('mkdir -p ' .. servers_dir)
   cmd 'new | startinsert'
   fn.termopen({'sh', '-c', script}, {cwd = servers_dir})
+  cmd 'LspStart'
 end
 
 function M.update_servers(server_names)

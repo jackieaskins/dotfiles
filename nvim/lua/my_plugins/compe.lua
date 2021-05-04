@@ -5,7 +5,6 @@ opt('o', 'completeopt', 'menu,menuone,noselect')
 
 require'compe'.setup {
   enabled = true,
-  preselect = 'always',
   source = {
     path = true,
     buffer = true,

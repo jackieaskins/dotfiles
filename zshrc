@@ -1,4 +1,5 @@
 zsh_config=$HOME/dotfiles/zsh
+export VISUAL='nvim'
 export EDITOR='nvim'
 
 # Vi Mode
