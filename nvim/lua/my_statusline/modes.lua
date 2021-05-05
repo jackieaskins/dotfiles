@@ -1,4 +1,4 @@
-local colors = require'my_colors'
+local colors = require 'my_colors'
 local fn = vim.fn
 
 local mode_map = {
@@ -20,8 +20,8 @@ local mode_map = {
   r = {color = colors.yellow, label = 'HIT-ENTER'},
   rm = {color = colors.yellow, label = '--MORE--'},
   ['r?'] = {color = colors.yellow, label = 'CONFIRM'},
-  ['!']  = {color = colors.purple, label = 'SHELL'},
-  t = {color = colors.purple, label = 'TERMINAL'}
+  ['!'] = {color = colors.purple, label = 'SHELL'},
+  t = {color = colors.purple, label = 'TERMINAL'},
 }
 
 local M = {}

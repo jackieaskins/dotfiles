@@ -1,5 +1,5 @@
 local map = require('my_utils').map
-local env,g = vim.env,vim.g
+local env, g = vim.env, vim.g
 
 vim.cmd [[
   command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, &columns > 80 ? fzf#vim#with_preview() : {}, <bang>0)
@@ -16,22 +16,18 @@ local fzf_mappings = {
   'ctrl-j:page-down',
   'ctrl-k:page-up',
   'ctrl-a:select-all',
-  '?:toggle-preview'
+  '?:toggle-preview',
 }
 local fzf_opts = {
   env.FZF_DEFAULT_OPTS or '',
   ' --layout=reverse',
-  ' --bind=', table.concat(fzf_mappings, ',')
+  ' --bind=',
+  table.concat(fzf_mappings, ','),
 }
 
 env.FZF_DEFAULT_OPTS = table.concat(fzf_opts, '')
 
-g.fzf_layout = {
-  window = {
-    width = 0.9,
-    height = 0.8,
-  },
-}
+g.fzf_layout = {window = {width = 0.9, height = 0.8}}
 
 g.fzf_colors = {
   border = {'fg', 'Directory'},

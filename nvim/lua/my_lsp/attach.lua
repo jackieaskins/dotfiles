@@ -3,23 +3,17 @@ local M = {}
 function M.custom_attach(_, bufnr)
   local function bsk(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function bso(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-  local opts = {noremap=true, silent=true}
+  local opts = {noremap = true, silent = true}
 
   require'lsp_signature'.on_attach({
     bind = true, -- Required for border
-    handler_opts = {
-      border = 'single'
-    },
+    handler_opts = {border = 'single'},
     decorator = {'**', '**'},
     hint_enable = true,
   })
 
   require'my_utils'.augroup_buf('lightbulb', {
-    {
-      'CursorHold,CursorHoldI',
-      '<buffer>',
-      "lua require'nvim-lightbulb'.update_lightbulb()",
-    }
+    {'CursorHold,CursorHoldI', '<buffer>', "lua require'nvim-lightbulb'.update_lightbulb()"},
   })
 
   bso('omnifunc', 'v:lua.vim.lsp.omnifunc')
@@ -37,8 +31,10 @@ function M.custom_attach(_, bufnr)
   bsk('n', '<leader>K', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
 
   bsk('n', 'g?', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({border = "single"})<CR>', opts)
-  bsk('n', '[g', '<cmd>lua vim.lsp.diagnostic.goto_prev({popup_opts = {border = "single"}})<CR>', opts)
-  bsk('n', ']g', '<cmd>lua vim.lsp.diagnostic.goto_next({popup_opts = {border = "single"}})<CR>', opts)
+  bsk('n', '[g', '<cmd>lua vim.lsp.diagnostic.goto_prev({popup_opts = {border = "single"}})<CR>',
+      opts)
+  bsk('n', ']g', '<cmd>lua vim.lsp.diagnostic.goto_next({popup_opts = {border = "single"}})<CR>',
+      opts)
 
   bsk('n', '<leader>bf', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 
@@ -47,7 +43,8 @@ function M.custom_attach(_, bufnr)
 
   bsk('n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
   bsk('n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-  bsk('n', '<leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+  bsk('n', '<leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>',
+      opts)
 end
 
 return M
