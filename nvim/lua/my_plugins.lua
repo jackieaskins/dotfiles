@@ -10,7 +10,7 @@ vim.api.nvim_exec([[
 
 cmd 'packadd packer.nvim'
 
-return require('packer').startup{
+return require'packer'.startup {
   function(use)
     use {'wbthomason/packer.nvim', opt = true}
     use {'nvim-lua/plenary.nvim'}
@@ -30,20 +30,37 @@ return require('packer').startup{
     -- }}}
 
     -- Git {{{
-    use {'lewis6991/gitsigns.nvim', requires = 'nvim-lua/plenary.nvim', config = "require'gitsigns'.setup()"}
+    use {
+      'lewis6991/gitsigns.nvim',
+      requires = 'nvim-lua/plenary.nvim',
+      config = "require'gitsigns'.setup()",
+    }
     use {'tpope/vim-fugitive'}
     -- }}}
 
     -- File Navigation {{{
-    use {'junegunn/fzf.vim', requires = {'junegunn/fzf', run = fn['fzf#install']}, config = "require'my_plugins/fzf'"}
-    use {'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons', config = "require'my_plugins/tree'"}
+    use {
+      'junegunn/fzf.vim',
+      requires = {'junegunn/fzf', run = fn['fzf#install']},
+      config = "require'my_plugins/fzf'",
+    }
+    use {
+      'kyazdani42/nvim-tree.lua',
+      requires = 'kyazdani42/nvim-web-devicons',
+      config = "require'my_plugins/tree'",
+    }
     -- }}}
 
     -- LSP {{{
     use {
       'neovim/nvim-lspconfig',
       config = "require'my_lsp'",
-      requires = {'ray-x/lsp_signature.nvim', 'kosayoda/nvim-lightbulb'}
+      requires = {
+        'ray-x/lsp_signature.nvim',
+        'kosayoda/nvim-lightbulb',
+        'jose-elias-alvarez/nvim-lsp-ts-utils',
+        'RRethy/vim-illuminate',
+      },
     }
     use {'ojroques/nvim-lspfuzzy', requires = 'fzf.vim', config = "require'lspfuzzy'.setup{}"}
     -- }}}
@@ -74,7 +91,7 @@ return require('packer').startup{
         'nvim-treesitter/playground',
         'jackieaskins/nvim-ts-autotag',
         'JoosepAlviste/nvim-ts-context-commentstring',
-      }
+      },
     }
     -- }}}
 
@@ -82,9 +99,5 @@ return require('packer').startup{
     use {'vim-test/vim-test', config = "require'my_plugins/test'"}
     -- }}}
   end,
-  config = {
-    display = {
-      prompt_border = 'single',
-    },
-  }
+  config = {display = {prompt_border = 'single'}},
 }

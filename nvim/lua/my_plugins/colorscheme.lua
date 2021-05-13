@@ -22,6 +22,7 @@ augroup('custom_colors', {
   clear_highlight_autocmd('StartifySlash'),
   clear_highlight_autocmd('StartifySection'),
   clear_highlight_autocmd('StartifySpecial'),
+  clear_highlight_autocmd('TSNone'),
 })
 
 vim.o.background = 'dark'

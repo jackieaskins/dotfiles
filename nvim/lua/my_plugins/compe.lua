@@ -5,7 +5,7 @@ opt('o', 'completeopt', 'menu,menuone,noselect')
 
 require'compe'.setup {
   enabled = true,
-  source = {path = true, buffer = true, nvim_lsp = true, nvim_lua = true, vsnip = true},
+  source = {buffer = true, nvim_lsp = true, nvim_lua = true, vsnip = true},
 }
 
 local compe_opts = {silent = true, expr = true}

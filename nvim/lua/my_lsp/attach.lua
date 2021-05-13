@@ -1,6 +1,6 @@
 local M = {}
 
-function M.custom_attach(_, bufnr)
+function M.custom_attach(client, bufnr)
   local function bsk(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function bso(...) vim.api.nvim_buf_set_option(bufnr, ...) end
   local opts = {noremap = true, silent = true}
@@ -9,8 +9,10 @@ function M.custom_attach(_, bufnr)
     bind = true, -- Required for border
     handler_opts = {border = 'single'},
     decorator = {'**', '**'},
-    hint_enable = true,
+    hint_enable = false,
   })
+
+  require'illuminate'.on_attach(client)
 
   require'my_utils'.augroup_buf('lightbulb', {
     {'CursorHold,CursorHoldI', '<buffer>', "lua require'nvim-lightbulb'.update_lightbulb()"},

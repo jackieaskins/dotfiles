@@ -1,4 +1,5 @@
 -- https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
+local api = vim.api
 local cmd = vim.cmd
 local fn = vim.fn
 
@@ -93,7 +94,11 @@ function M.update_servers(server_names) update_servers(vim.split(server_names, '
 
 function M.update_all_servers() update_servers(vim.tbl_keys(all_servers)) end
 
-cmd "command! LspUpdateAll lua require'my_lsp/servers'.update_all_servers()"
-cmd "command! -nargs=1 LspUpdate lua require'my_lsp/servers'.update_servers(<f-args>)"
+function _G.ServerList() return vim.tbl_keys(all_servers) end
+
+api.nvim_exec([[
+  command! LspUpdateAll lua require'my_lsp/servers'.update_all_servers()
+  command! -nargs=1 -complete=customlist,v:lua.ServerList LspUpdate lua require'my_lsp/servers'.update_servers(<f-args>)
+]], true)
 
 return M
