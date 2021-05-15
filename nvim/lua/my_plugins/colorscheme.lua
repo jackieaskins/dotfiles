@@ -11,9 +11,17 @@ augroup('custom_colors', {
   highlight_autocmd('QuickScopePrimary', {guifg = '#ff007c'}),
   highlight_autocmd('QuickScopeSecondary', {guifg = '#00dfff'}),
   highlight_autocmd('LspDiagnosticsDefaultHint', {guifg = colors.cyan}),
+  highlight_autocmd('LspDiagnosticsUnderlineHint', {guifg = colors.cyan, gui = 'underline'}),
   highlight_autocmd('LspDiagnosticsDefaultInformation', {guifg = colors.blue}),
+  highlight_autocmd('LspDiagnosticsUnderlineInformation', {guifg = colors.blue, gui = 'underline'}),
   highlight_autocmd('LspDiagnosticsDefaultWarning', {guifg = colors.orange}),
+  highlight_autocmd('LspDiagnosticsUnderlineWarning', {guifg = colors.orange, gui = 'underline'}),
   highlight_autocmd('LspDiagnosticsDefaultError', {guifg = colors.red}),
+  highlight_autocmd('LspDiagnosticsUnderlineError', {guifg = colors.red, gui = 'underline'}),
+  highlight_autocmd('NormalFloat', {guibg = colors.gray2}),
+  highlight_autocmd('GitSignsAdd', {guifg = colors.green}),
+  highlight_autocmd('GitSignsChange', {guifg = colors.yellow}),
+  highlight_autocmd('GitSignsDelete', {guifg = colors.red}),
 })
 
 g.quantum_black = 1
