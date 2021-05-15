@@ -6,13 +6,11 @@ function M.handle_jdt_uri(uri)
   local buf = vim.api.nvim_get_current_buf()
 
   local timeout_ms = 1000
-  local params = { uri = uri }
+  local params = {uri = uri}
   local response, err = vim.lsp.buf_request_sync(0, 'java/classFileContents', params, timeout_ms)
 
   local get_buf_content = function()
-    if err then
-      return 'An error occurred retrieving class file contents ' .. err
-    end
+    if err then return 'An error occurred retrieving class file contents ' .. err end
 
     return vim.split(response[1].result, '\n', true)
   end
@@ -21,20 +19,20 @@ function M.handle_jdt_uri(uri)
 end
 
 function M.configure(config)
-  config.cmd = { 'run_jdtls.sh' }
+  config.cmd = {'run_jdtls.sh'}
   config.init_options = {
     extendedClientCapabilities = {
-      advancedExtractRefactoringSupport = true;
-      advancedOrganizeImportsSupport = true;
-      classFileContentsSupport = true;
-      generateToStringPromptSupport = true;
-      generateConstructorsPromptSupport = true;
-      generateDelegateMethodsPromptSupport = true;
-      hashCodeEqualsPromptSupport = true;
-      inferSelectionSupport = {'extractMethod', 'extractVariable'};
-      moveRefactoringSupport = true;
-      overrideMethodsPromptSupport = true;
-    }
+      advancedExtractRefactoringSupport = true,
+      advancedOrganizeImportsSupport = true,
+      classFileContentsSupport = true,
+      generateToStringPromptSupport = true,
+      generateConstructorsPromptSupport = true,
+      generateDelegateMethodsPromptSupport = true,
+      hashCodeEqualsPromptSupport = true,
+      inferSelectionSupport = {'extractMethod', 'extractVariable'},
+      moveRefactoringSupport = true,
+      overrideMethodsPromptSupport = true,
+    },
   }
 
   return config

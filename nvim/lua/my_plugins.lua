@@ -16,6 +16,7 @@ return require'packer'.startup {
     use {'nvim-lua/plenary.nvim'}
 
     -- Appearance {{{
+    use {'tyrannicaltoucan/vim-quantum'}
     use {'olimorris/onedark.nvim', requires = 'rktjmp/lush.nvim'}
     use {'kyazdani42/nvim-web-devicons'}
     use {'mhinz/vim-startify', config = "require'my_plugins/startify'"}

@@ -24,11 +24,7 @@ map('n', '<leader>rp', '<cmd>call v:lua.ReloadPlugins()<CR>')
 
 map('n', '<leader>gh', "yi':!open https://github.com/<C-R>0<CR><CR>")
 augroup('packer_links', {
-  {
-    'FileType',
-    'packer',
-    'nnoremap <buffer> <leader>gh <cmd>call v:lua.OpenPackerURL()<CR>',
-  }
+  {'FileType', 'packer', 'nnoremap <buffer> <leader>gh <cmd>call v:lua.OpenPackerURL()<CR>'},
 })
 
 function _G.OpenPackerURL()
@@ -41,17 +37,10 @@ end
 
 function _G.OpenURLUnderCursor()
   local uri = fn.substitute(fn.expand('<cWORD>'), '?', '\\?', '')
-  local pairs = {
-    {'"', '"'},
-    {"'", "'"},
-    {'(', ')'},
-    {'[', ']'},
-    {'{', '}'},
-    {'*', '*'},
-  }
+  local pairs = {{'"', '"'}, {"'", "'"}, {'(', ')'}, {'[', ']'}, {'{', '}'}, {'*', '*'}}
 
   local function is_surrounded()
-    local matches = vim.tbl_filter(function (pair)
+    local matches = vim.tbl_filter(function(pair)
       return vim.startswith(uri, pair[1]) and vim.endswith(uri, pair[2])
     end, pairs)
 
@@ -72,7 +61,7 @@ end
 
 local function reload()
   require'plenary.reload'.reload_module('my_', true)
-  require'my_init'
+  require 'my_init'
 end
 
 function _G.ReloadConfig()

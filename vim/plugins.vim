@@ -22,7 +22,7 @@ nnoremap <Leader>gh yi':!open https://github.com/<C-R>0<CR><CR>
 call plug#begin('~/.vim/plugged')
 
 " Appearance {{{
-Plug 'joshdick/onedark.vim'
+Plug 'tyrannicaltoucan/vim-quantum'
 
 Plug 'mhinz/vim-startify'
 

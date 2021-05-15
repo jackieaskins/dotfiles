@@ -1,5 +1,5 @@
 local utils = require('my_utils')
-local opt,augroup = utils.opt,utils.augroup
+local opt, augroup = utils.opt, utils.augroup
 local cmd = vim.cmd
 
 -- Map Leader to Space
@@ -7,9 +7,7 @@ vim.g.mapleader = ' '
 
 -- Disable auto-comments
 cmd 'filetype plugin on'
-augroup('no_auto_comment', {
-  {'FileType', '*', 'setlocal formatoptions-=r formatoptions-=o'}
-})
+augroup('no_auto_comment', {{'FileType', '*', 'setlocal formatoptions-=r formatoptions-=o'}})
 
 -- General
 opt('w', 'number', true)
@@ -21,18 +19,16 @@ opt('o', 'splitright', true)
 opt('o', 'splitbelow', true)
 opt('o', 'diffopt', vim.o.diffopt .. ',vertical')
 opt('o', 'termguicolors', true)
-opt('o', 'tabline', require'my_tabline')
+opt('o', 'tabline', require 'my_tabline')
 
 -- Status Line
 augroup('statusline', {
   {'BufEnter,WinEnter', '*', [[lua require'my_statusline'.get_active()]]},
-  {'BufLeave,WinLeave', '*', [[lua require'my_statusline'.get_inactive()]]}
+  {'BufLeave,WinLeave', '*', [[lua require'my_statusline'.get_inactive()]]},
 })
 
 -- Folds
-augroup('folds', {
-  {'FileType', 'lua,sh,vim', 'setlocal foldmethod=marker'},
-})
+augroup('folds', {{'FileType', 'lua,sh,vim', 'setlocal foldmethod=marker'}})
 opt('w', 'foldmethod', 'expr')
 opt('w', 'foldexpr', 'nvim_treesitter#foldexpr()')
 opt('w', 'foldlevel', 99)

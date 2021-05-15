@@ -1,6 +1,6 @@
 local fn = vim.fn
-local colors = require'my_colors'
-local modes = require'my_statusline/modes'
+local colors = require 'my_colors'
+local modes = require 'my_statusline/modes'
 local highlight = require'my_utils'.highlight
 
 local function get_file_icon_component(filename)
@@ -9,15 +9,14 @@ local function get_file_icon_component(filename)
 end
 
 function GetTabLine()
-  highlight('TabLine', {guibg = colors.colorcolumn_gray})
-  highlight('TabLineSel', {guifg = modes.get_color(), guibg = colors.black})
+  highlight('TabLineSel', {guifg = modes.get_color(), guibg = colors.gray1})
 
   local current_tabnr = fn.tabpagenr()
   local tabline_components = {}
 
   local filenames = {}
 
-  for tabnr=1,fn.tabpagenr('$') do
+  for tabnr = 1, fn.tabpagenr('$') do
     local winnr = fn.tabpagewinnr(tabnr)
     local buflist = fn.tabpagebuflist(tabnr)
     local bufnr = buflist[winnr]
@@ -29,7 +28,7 @@ function GetTabLine()
     end
   end
 
-  for tabnr=1,fn.tabpagenr('$') do
+  for tabnr = 1, fn.tabpagenr('$') do
     local winnr = fn.tabpagewinnr(tabnr)
     local buflist = fn.tabpagebuflist(tabnr)
     local bufnr = buflist[winnr]
@@ -65,7 +64,7 @@ function GetTabLine()
       modified,
       readonly,
       ' ',
-      '%#TabLine#'
+      '%#TabLine#',
     }
 
     table.insert(tabline_components, table.concat(components))

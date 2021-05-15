@@ -1,1 +1,1 @@
-require'my_init'
+require 'my_init'

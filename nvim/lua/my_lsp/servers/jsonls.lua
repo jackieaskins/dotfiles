@@ -9,16 +9,10 @@ function M.configure(config)
           fileMatch = {'.babelrc', '.babelrc.json', 'babel.config.json'},
           url = 'https://json.schemastore.org/babelrc.json',
         },
-        {
-          fileMatch = {'package.json'},
-          url = 'https://json.schemastore.org/package.json',
-        },
-        {
-          fileMatch = {'tsconfig*.json'},
-          url = 'https://json.schemastore.org/tsconfig.json'
-        }
-      }
-    }
+        {fileMatch = {'package.json'}, url = 'https://json.schemastore.org/package.json'},
+        {fileMatch = {'tsconfig*.json'}, url = 'https://json.schemastore.org/tsconfig.json'},
+      },
+    },
   }
   return config
 end

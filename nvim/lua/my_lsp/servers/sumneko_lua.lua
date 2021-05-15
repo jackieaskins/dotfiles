@@ -21,13 +21,8 @@ function M.configure(config)
   config.cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"}
   config.settings = {
     Lua = {
-      runtime = {
-        version = 'LuaJIT',
-        path = vim.split(package.path, ';'),
-      },
-      diagnostics = {
-        globals = {'vim'},
-      },
+      runtime = {version = 'LuaJIT', path = vim.split(package.path, ';')},
+      diagnostics = {globals = {'vim'}},
       workspace = {
         library = {
           [fn.expand('$VIMRUNTIME/lua')] = true,
