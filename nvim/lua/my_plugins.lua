@@ -2,114 +2,102 @@ local fn = vim.fn
 local cmd = vim.cmd
 
 vim.api.nvim_exec([[
-  command! PC lua require('user').clean()
-  command! PU lua require('user').update()
+  command! PI PackerInstall
+  command! PC PackerCompile
+  command! PS PackerSync
+  command! PU PackerUpdate
 ]], true)
 
-local user_install_path = vim.fn.stdpath('data') ..
-                              '/site/pack/user/opt/jackieaskins/user.nvim/default/default'
-if vim.fn.empty(vim.fn.glob(user_install_path)) > 0 then
-  os.execute('git clone --depth 1 https://github.com/jackieaskins/user.nvim.git "' ..
-                 user_install_path .. '"')
-end
-cmd 'packadd jackieaskins/user.nvim/default/default'
+cmd 'packadd packer.nvim'
 
-local user = require("user")
-user.setup()
-local use = user.use
+return require'packer'.startup {
+  function(use)
+    use {'wbthomason/packer.nvim', opt = true}
+    use {'nvim-lua/plenary.nvim'}
 
-use {'jackieaskins/user.nvim'}
-use {'nvim-lua/plenary.nvim'}
+    -- Appearance {{{
+    use {'tyrannicaltoucan/vim-quantum'}
+    use {'kyazdani42/nvim-web-devicons'}
+    use {'mhinz/vim-startify', config = "require'my_plugins/startify'"}
+    use {'norcalli/nvim-colorizer.lua', config = "require'colorizer'.setup()"}
+    -- }}}
 
--- Appearance {{{
-use {'tyrannicaltoucan/vim-quantum', config = function() require 'my_plugins/colorscheme' end}
-use {'kyazdani42/nvim-web-devicons'}
-use {'mhinz/vim-startify', config = function() require 'my_plugins/startify' end}
-use {'norcalli/nvim-colorizer.lua', config = function() require'colorizer'.setup() end}
--- }}}
+    -- Brackets {{{
+    use {'jackieaskins/vim-closer'}
+    use {'AndrewRadev/splitjoin.vim', config = "require'my_plugins/splitjoin'"}
+    use {'tpope/vim-surround'}
+    use {'airblade/vim-matchquote'}
+    -- }}}
 
--- Brackets {{{
-use {'jackieaskins/vim-closer'}
-use {'AndrewRadev/splitjoin.vim', config = function() require 'my_plugins/splitjoin' end}
-use {'tpope/vim-surround'}
-use {'airblade/vim-matchquote'}
--- }}}
+    -- Git {{{
+    use {
+      'lewis6991/gitsigns.nvim',
+      requires = 'nvim-lua/plenary.nvim',
+      config = "require'gitsigns'.setup()",
+    }
+    use {'tpope/vim-fugitive'}
+    -- }}}
 
--- Git {{{
-use {
-  'lewis6991/gitsigns.nvim',
-  requires = 'nvim-lua/plenary.nvim',
-  config = function() require'gitsigns'.setup() end,
+    -- File Navigation {{{
+    use {
+      'junegunn/fzf.vim',
+      requires = {'junegunn/fzf', run = fn['fzf#install']},
+      config = "require'my_plugins/fzf'",
+    }
+    use {
+      'kyazdani42/nvim-tree.lua',
+      requires = 'kyazdani42/nvim-web-devicons',
+      config = "require'my_plugins/tree'",
+    }
+    -- }}}
+
+    -- LSP {{{
+    use {
+      'neovim/nvim-lspconfig',
+      config = "require'my_lsp'",
+      requires = {
+        'ray-x/lsp_signature.nvim',
+        'kosayoda/nvim-lightbulb',
+        'jose-elias-alvarez/nvim-lsp-ts-utils',
+        'RRethy/vim-illuminate',
+      },
+    }
+    use {'ojroques/nvim-lspfuzzy', requires = 'fzf.vim', config = "require'lspfuzzy'.setup{}"}
+    -- }}}
+
+    -- General Editing {{{
+    use {'mattn/emmet-vim'}
+    use {'tpope/vim-abolish'}
+    use {'tpope/vim-commentary'}
+    use {'tpope/vim-repeat'}
+    use {'hrsh7th/nvim-compe', requires = 'hrsh7th/vim-vsnip', config = "require'my_plugins/compe'"}
+    use {'axelf4/vim-strip-trailing-whitespace'}
+    use {'mhartington/formatter.nvim', config = "require'my_plugins/formatter'"}
+    -- }}}
+
+    -- Movement {{{
+    use {'phaazon/hop.nvim', config = "require'my_plugins/hop'"}
+    use {'szw/vim-maximizer', config = "require'my_plugins/maximizer'"}
+    use {'matze/vim-move'}
+    use {'unblevable/quick-scope'}
+    -- }}}
+
+    -- Syntax {{{
+    use {
+      'nvim-treesitter/nvim-treesitter',
+      run = ':TSUpdate',
+      config = "require'my_plugins/treesitter'",
+      requires = {
+        'nvim-treesitter/playground',
+        'jackieaskins/nvim-ts-autotag',
+        'JoosepAlviste/nvim-ts-context-commentstring',
+      },
+    }
+    -- }}}
+
+    -- Testing {{{
+    use {'vim-test/vim-test', config = "require'my_plugins/test'"}
+    -- }}}
+  end,
+  config = {display = {prompt_border = 'single'}},
 }
-use {'tpope/vim-fugitive'}
--- }}}
-
--- File Navigation {{{
-local function install_fzf() fn['fzf#install']() end
-use {
-  'junegunn/fzf.vim',
-  requires = {'junegunn/fzf', install = install_fzf, update = install_fzf},
-  config = function() require 'my_plugins/fzf' end,
-}
-use {
-  'kyazdani42/nvim-tree.lua',
-  requires = 'kyazdani42/nvim-web-devicons',
-  config = function() require 'my_plugins/tree' end,
-}
--- }}}
-
--- LSP {{{
-use {
-  'neovim/nvim-lspconfig',
-  config = function() require 'my_lsp' end,
-  requires = {
-    'ray-x/lsp_signature.nvim',
-    'kosayoda/nvim-lightbulb',
-    'jose-elias-alvarez/nvim-lsp-ts-utils',
-    'RRethy/vim-illuminate',
-  },
-}
-use {
-  'ojroques/nvim-lspfuzzy',
-  requires = 'junegunn/fzf.vim',
-  config = function() require'lspfuzzy'.setup {} end,
-}
--- }}}
-
--- General Editing {{{
-use {'mattn/emmet-vim'}
-use {'tpope/vim-abolish'}
-use {'tpope/vim-commentary'}
-use {'tpope/vim-repeat'}
-use {
-  'hrsh7th/nvim-compe',
-  requires = 'hrsh7th/vim-vsnip',
-  config = function() require 'my_plugins/compe' end,
-}
-use {'axelf4/vim-strip-trailing-whitespace'}
-use {'mhartington/formatter.nvim', config = function() require 'my_plugins/formatter' end}
--- }}}
-
--- Movement {{{
-use {'phaazon/hop.nvim', config = function() require 'my_plugins/hop' end}
-use {'szw/vim-maximizer', config = function() require 'my_plugins/maximizer' end}
-use {'matze/vim-move'}
-use {'unblevable/quick-scope'}
--- }}}
-
--- Syntax {{{
-use {
-  'nvim-treesitter/nvim-treesitter',
-  update = function() cmd 'TSUpdate' end,
-  config = function() require 'my_plugins/treesitter' end,
-}
-use {'jackieaskins/nvim-ts-autotag', after = 'nvim-treesitter/nvim-treesitter'}
-use {'nvim-treesitter/playground', after = 'nvim-treesitter/nvim-treesitter'}
-use {'JoosepAlviste/nvim-ts-context-commentstring', after = 'nvim-treesitter/nvim-treesitter'}
--- }}}
-
--- Testing {{{
-use {'vim-test/vim-test', config = function() require 'my_plugins/test' end}
--- }}}
-
-user.startup()
