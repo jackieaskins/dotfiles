@@ -97,6 +97,7 @@ function M.update_all_servers() update_servers(vim.tbl_keys(all_servers)) end
 function _G.ServerList() return vim.tbl_keys(all_servers) end
 
 api.nvim_exec([[
+  command! LspLog vsplit ~/.cache/nvim/lsp.log
   command! LspUpdateAll lua require'my_lsp/servers'.update_all_servers()
   command! -nargs=1 -complete=customlist,v:lua.ServerList LspUpdate lua require'my_lsp/servers'.update_servers(<f-args>)
 ]], true)

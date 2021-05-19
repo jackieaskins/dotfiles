@@ -66,6 +66,7 @@ return require'packer'.startup {
     -- }}}
 
     -- General Editing {{{
+    use {'folke/lua-dev.nvim'}
     use {'mattn/emmet-vim'}
     use {'tpope/vim-abolish'}
     use {'tpope/vim-commentary'}

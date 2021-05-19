@@ -16,23 +16,14 @@ end
 local sumneko_root_path = fn.stdpath('data') .. '/lsp-servers/lua-language-server'
 local sumneko_binary = sumneko_root_path .. "/bin/" .. system_name .. "/lua-language-server"
 
--- TODO: Better map K
 function M.configure(config)
-  config.cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"}
-  config.settings = {
-    Lua = {
-      runtime = {version = 'LuaJIT', path = vim.split(package.path, ';')},
-      diagnostics = {globals = {'vim'}},
-      workspace = {
-        library = {
-          [fn.expand('$VIMRUNTIME/lua')] = true,
-          [fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
-        },
-      },
-    },
-  }
+  local luaDevConfig = require('lua-dev').setup {}
 
-  return config
+  luaDevConfig.capabilities = config.capabilities
+  luaDevConfig.on_attach = config.on_attach
+  luaDevConfig.cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"}
+
+  return luaDevConfig
 end
 
 -- TODO: This assumes ninja is already installed

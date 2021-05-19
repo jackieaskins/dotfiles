@@ -14,9 +14,11 @@ function M.custom_attach(client, bufnr)
 
   require'illuminate'.on_attach(client)
 
-  require'my_utils'.augroup_buf('lightbulb', {
-    {'CursorHold,CursorHoldI', '<buffer>', "lua require'nvim-lightbulb'.update_lightbulb()"},
-  })
+  if client.supports_method('textDocument/codeAction') then
+    require'my_utils'.augroup_buf('lightbulb', {
+      {'CursorHold,CursorHoldI', '<buffer>', "lua require'nvim-lightbulb'.update_lightbulb()"},
+    })
+  end
 
   bso('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
