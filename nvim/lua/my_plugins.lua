@@ -1,4 +1,5 @@
 local fn = vim.fn
+local g = vim.g
 local cmd = vim.cmd
 
 vim.api.nvim_exec([[
@@ -9,6 +10,10 @@ vim.api.nvim_exec([[
 ]], true)
 
 cmd 'packadd packer.nvim'
+
+local function get_my_plugin_path(plugin_name)
+  return g.is_personal_machine and '~/vim-plugins/' .. plugin_name or 'jackieaskins/' .. plugin_name
+end
 
 return require'packer'.startup {
   function(use)
@@ -23,7 +28,7 @@ return require'packer'.startup {
     -- }}}
 
     -- Brackets {{{
-    use {'jackieaskins/vim-closer'}
+    use {get_my_plugin_path('vim-closer')}
     use {'AndrewRadev/splitjoin.vim', config = "require'my_plugins/splitjoin'"}
     use {'tpope/vim-surround'}
     use {'airblade/vim-matchquote'}
@@ -89,7 +94,7 @@ return require'packer'.startup {
       config = "require'my_plugins/treesitter'",
       requires = {
         'nvim-treesitter/playground',
-        'jackieaskins/nvim-ts-autotag',
+        get_my_plugin_path('nvim-ts-autotag'),
         'JoosepAlviste/nvim-ts-context-commentstring',
         'nvim-treesitter/nvim-treesitter-refactor',
       },

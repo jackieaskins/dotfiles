@@ -1,9 +1,12 @@
 local utils = require('my_utils')
 local augroup, map = utils.augroup, utils.map
-local cmd, opt = vim.cmd, vim.opt
+local cmd, g, opt = vim.cmd, vim.g, vim.opt
+
+-- Flags
+g.is_personal_machine = false
 
 -- Map Leader to Space
-vim.g.mapleader = ' '
+g.mapleader = ' '
 map('n', '<space>', '<nop>')
 
 -- Disable auto-comments
