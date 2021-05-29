@@ -1,6 +1,6 @@
 local utils = require('my_utils')
-local opt, augroup, map = utils.opt, utils.augroup, utils.map
-local cmd = vim.cmd
+local augroup, map = utils.augroup, utils.map
+local cmd, opt = vim.cmd, vim.opt
 
 -- Map Leader to Space
 vim.g.mapleader = ' '
@@ -11,16 +11,16 @@ cmd 'filetype plugin on'
 augroup('no_auto_comment', {{'FileType', '*', 'setlocal formatoptions-=r formatoptions-=o'}})
 
 -- General
-opt('w', 'number', true)
-opt('w', 'relativenumber', true)
-opt('w', 'cursorline', true)
-opt('w', 'signcolumn', 'yes')
-opt('o', 'confirm', true)
-opt('o', 'splitright', true)
-opt('o', 'splitbelow', true)
-opt('o', 'diffopt', vim.o.diffopt .. ',vertical')
-opt('o', 'termguicolors', true)
-opt('o', 'tabline', require 'my_tabline')
+opt.number = true
+opt.relativenumber = true
+opt.cursorline = true
+opt.signcolumn = 'yes'
+opt.confirm = true
+opt.splitright = true
+opt.splitbelow = true
+opt.diffopt:append{'vertical'}
+opt.termguicolors = true
+opt.tabline = require 'my_tabline'
 
 -- Status Line
 augroup('statusline', {
@@ -30,29 +30,29 @@ augroup('statusline', {
 
 -- Folds
 augroup('folds', {{'FileType', 'lua,sh,vim', 'setlocal foldmethod=marker'}})
-opt('w', 'foldmethod', 'expr')
-opt('w', 'foldexpr', 'nvim_treesitter#foldexpr()')
-opt('w', 'foldlevel', 99)
+opt.foldmethod = 'expr'
+opt.foldexpr = 'nvim_treesitter#foldexpr()'
+opt.foldlevel = 99
 
 -- Terminal
 cmd 'command! -nargs=* T botright split | terminal <args>'
 cmd 'command! -nargs=* VT botright vsplit | terminal <args>'
 
 -- Spaces & Tabs
-opt('b', 'shiftwidth', 2)
-opt('b', 'tabstop', 2)
-opt('b', 'softtabstop', 2)
-opt('b', 'expandtab', true)
-opt('w', 'list', true)
-opt('w', 'listchars', 'tab:  ,trail:·')
+opt.shiftwidth = 2
+opt.tabstop = 2
+opt.softtabstop = 2
+opt.expandtab = true
+opt.list = true
+opt.listchars = 'tab:  ,trail:·'
 
 -- Timeouts
-opt('o', 'ttimeoutlen', 10)
-opt('o', 'updatetime', 100)
+opt.ttimeoutlen = 10
+opt.updatetime = 100
 
 -- Searching
-opt('o', 'inccommand', 'nosplit')
-opt('o', 'hlsearch', false)
-opt('o', 'ignorecase', true)
-opt('o', 'smartcase', true)
-opt('o', 'path', vim.o.path .. ',**')
+opt.inccommand = 'nosplit'
+opt.hlsearch = false
+opt.ignorecase = true
+opt.smartcase = true
+opt.path:append{'**'}

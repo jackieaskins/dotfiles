@@ -1,7 +1,8 @@
 local utils = require 'my_utils'
-local map, opt, t = utils.map, utils.opt, utils.t
+local map, t = utils.map, utils.t
+local opt = vim.opt
 
-opt('o', 'completeopt', 'menu,menuone,noselect')
+opt.completeopt = 'menu,menuone,noselect'
 
 require'compe'.setup {
   enabled = true,
