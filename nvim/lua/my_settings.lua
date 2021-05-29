@@ -1,9 +1,10 @@
 local utils = require('my_utils')
-local opt, augroup = utils.opt, utils.augroup
+local opt, augroup, map = utils.opt, utils.augroup, utils.map
 local cmd = vim.cmd
 
 -- Map Leader to Space
 vim.g.mapleader = ' '
+map('n', '<space>', '<nop>')
 
 -- Disable auto-comments
 cmd 'filetype plugin on'

@@ -1,5 +1,5 @@
 local map = require('my_utils').map
-local env, g = vim.env, vim.g
+local cmd, env, fn, g = vim.cmd, vim.env, vim.fn, vim.g
 
 vim.cmd [[
   command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, &columns > 80 ? fzf#vim#with_preview() : {}, <bang>0)
@@ -24,25 +24,22 @@ local fzf_opts = {
   ' --bind=',
   table.concat(fzf_mappings, ','),
 }
-
 env.FZF_DEFAULT_OPTS = table.concat(fzf_opts, '')
 
 g.fzf_layout = {window = {width = 0.9, height = 0.8}}
-
 g.fzf_colors = {
   border = {'fg', 'Directory'},
   gutter = {'bg', 'Normal'},
   marker = {'fg', 'Identifier'},
   pointer = {'fg', 'Identifier'},
 }
-
--- TODO: Figure out a better solution
-vim.api.nvim_exec([[
-  function! BuildQuickfixList(lines)
-    call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
-    copen
-    cc
-  endfunction
-
-  let g:fzf_action = { 'ctrl-q': function('BuildQuickfixList'), 'ctrl-t': 'tab split', 'ctrl-x': 'split', 'ctrl-v': 'vsplit' }
-]], true)
+g.fzf_action = {
+  ['ctrl-q'] = function(lines)
+    fn.setqflist(fn.map(fn.copy(lines), '{"filename": v:val}'))
+    cmd 'copen'
+    cmd 'cc'
+  end,
+  ['ctrl-t'] = 'tab split',
+  ['ctrl-x'] = 'split',
+  ['ctrl-v'] = 'vsplit',
+}

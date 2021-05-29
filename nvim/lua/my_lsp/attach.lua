@@ -12,8 +12,6 @@ function M.custom_attach(client, bufnr)
     hint_enable = false,
   })
 
-  require'illuminate'.on_attach(client)
-
   if client.supports_method('textDocument/codeAction') then
     require'my_utils'.augroup_buf('lightbulb', {
       {'CursorHold,CursorHoldI', '<buffer>', "lua require'nvim-lightbulb'.update_lightbulb()"},
@@ -27,7 +25,6 @@ function M.custom_attach(client, bufnr)
   bsk('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
   bsk('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
 
-  bsk('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   bsk('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   bsk('v', '<leader>ca', '<cmd>lua vim.lsp.buf.range_code_action()<CR>', opts)
   bsk('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)

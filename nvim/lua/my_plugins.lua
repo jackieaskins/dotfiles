@@ -59,7 +59,6 @@ return require'packer'.startup {
         'ray-x/lsp_signature.nvim',
         'kosayoda/nvim-lightbulb',
         'jose-elias-alvarez/nvim-lsp-ts-utils',
-        'RRethy/vim-illuminate',
       },
     }
     use {'ojroques/nvim-lspfuzzy', requires = 'fzf.vim', config = "require'lspfuzzy'.setup{}"}
@@ -92,6 +91,7 @@ return require'packer'.startup {
         'nvim-treesitter/playground',
         'jackieaskins/nvim-ts-autotag',
         'JoosepAlviste/nvim-ts-context-commentstring',
+        'nvim-treesitter/nvim-treesitter-refactor',
       },
     }
     -- }}}
