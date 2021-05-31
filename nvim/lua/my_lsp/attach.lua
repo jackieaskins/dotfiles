@@ -9,7 +9,8 @@ function M.custom_attach(client, bufnr)
     bind = true, -- Required for border
     handler_opts = {border = 'single'},
     decorator = {'**', '**'},
-    hint_enable = false,
+    hint_enable = true,
+    floating_window = false,
   })
 
   if client.supports_method('textDocument/codeAction') then

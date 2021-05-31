@@ -13,6 +13,7 @@ local M = {}
 
 local all_servers = {
   eslintls = {update = eslintls.update},
+  graphql = {update = {'npm', 'graphql-language-service-cli'}},
   jdtls = {configure = jdtls.configure, update = jdtls.update},
   jsonls = {configure = jsonls.configure, update = {'npm', 'vscode-json-languageserver'}},
   pyright = {update = {'npm', 'pyright'}},

@@ -25,6 +25,8 @@ opt.diffopt:append{'vertical'}
 opt.termguicolors = true
 opt.tabline = require 'my_tabline'
 
+augroup('filetypes', {{'BufRead,BufNewFile', '*.graphql', 'set filetype=graphql'}})
+
 -- Status Line
 augroup('statusline', {
   {'BufEnter,WinEnter', '*', [[lua require'my_statusline'.get_active()]]},
