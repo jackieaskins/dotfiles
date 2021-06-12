@@ -21,7 +21,7 @@ return require'packer'.startup {
     use {'nvim-lua/plenary.nvim'}
 
     -- Appearance {{{
-    use {'tyrannicaltoucan/vim-quantum'}
+    use {'Th3Whit3Wolf/one-nvim'}
     use {'kyazdani42/nvim-web-devicons'}
     use {'mhinz/vim-startify', config = "require'my_plugins/startify'"}
     use {'norcalli/nvim-colorizer.lua', config = "require'colorizer'.setup()"}

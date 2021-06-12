@@ -39,7 +39,7 @@ end
 function GetActiveLine()
   local active_highlight = highlights.define_active('')
   local mode_highlight = highlights.define_active('Mode', modes.get_color())
-  local subtle_highlight = highlights.define_active('Subtle', colors.gray4)
+  local subtle_highlight = highlights.define_active('Subtle', colors.gray6)
   local hint_highlight = highlights.define_active('Hint', colors.cyan)
   local info_highlight = highlights.define_active('Info', colors.blue)
   local warn_highlight = highlights.define_active('Warn', colors.orange)

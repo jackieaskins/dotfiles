@@ -20,8 +20,8 @@ local mode_map = {
   r = {color = colors.cyan, label = 'HIT-ENTER'},
   rm = {color = colors.cyan, label = '--MORE--'},
   ['r?'] = {color = colors.cyan, label = 'CONFIRM'},
-  ['!'] = {color = colors.indigo, label = 'SHELL'},
-  t = {color = colors.indigo, label = 'TERMINAL'},
+  ['!'] = {color = colors.dark_blue, label = 'SHELL'},
+  t = {color = colors.dark_blue, label = 'TERMINAL'},
 }
 
 local M = {}
