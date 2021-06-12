@@ -95,7 +95,10 @@ function M.update_servers(server_names) update_servers(vim.split(server_names, '
 
 function M.update_all_servers() update_servers(vim.tbl_keys(all_servers)) end
 
-function _G.ServerList() return vim.tbl_keys(all_servers) end
+function _G.ServerList(enteredText)
+  return vim.tbl_filter(function(server) return vim.startswith(server, enteredText) end,
+                        vim.tbl_keys(all_servers))
+end
 
 api.nvim_exec([[
   command! LspLog vsplit ~/.cache/nvim/lsp.log

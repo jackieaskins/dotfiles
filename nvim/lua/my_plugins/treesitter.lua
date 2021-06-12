@@ -5,7 +5,7 @@ require'nvim-treesitter.configs'.setup {
   highlight = {enable = true},
   indent = {enable = true},
   playground = {enable = true},
-  refactor = {highlight_definitions = {enable = true}, highlight_current_scope = {enable = true}},
+  refactor = {highlight_definitions = {enable = true}},
 }
 
 local M = {}
@@ -31,7 +31,7 @@ function M.smart_rename()
 
   local is_definition_in_current_file = has_match(vim.tbl_values(definitions), function(definition)
     return has_match(definition.result, function(res)
-      local filename = string.gsub(res.uri, 'file://', '')
+      local filename = string.gsub(res.uri or res.targetUri, 'file://', '')
       return vim.fn.expand('%:p') == vim.fn.fnamemodify(filename, ':p')
     end)
   end)
