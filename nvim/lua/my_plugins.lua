@@ -63,6 +63,7 @@ return require'packer'.startup {
       requires = {
         'ray-x/lsp_signature.nvim',
         'kosayoda/nvim-lightbulb',
+        {'jose-elias-alvarez/null-ls.nvim', requires = 'nvim-lua/plenary.nvim'},
         'jose-elias-alvarez/nvim-lsp-ts-utils',
       },
     }
