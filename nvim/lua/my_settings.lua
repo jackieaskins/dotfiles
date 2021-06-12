@@ -4,6 +4,7 @@ local cmd, g, opt = vim.cmd, vim.g, vim.opt
 
 -- Flags
 g.is_personal_machine = false
+g.fuzzy_finder = 'fzf'
 
 -- Map Leader to Space
 g.mapleader = ' '

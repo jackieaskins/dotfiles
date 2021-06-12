@@ -21,13 +21,19 @@ function M.custom_attach(client, bufnr)
 
   bso('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-  bsk('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  bsk('n', 'gy', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  bsk('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  bsk('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  if vim.g.fuzzy_finder ~= 'telescope' then
+    bsk('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+    bsk('n', 'gy', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+    bsk('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+    bsk('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
 
-  bsk('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  bsk('v', '<leader>ca', '<cmd>lua vim.lsp.buf.range_code_action()<CR>', opts)
+    bsk('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+    bsk('v', '<leader>ca', '<cmd>lua vim.lsp.buf.range_code_action()<CR>', opts)
+
+    bsk('n', '<leader>sw', '<cmd>lua vim.lsp.buf.workspace_symbol()<CR>', opts)
+    bsk('n', '<leader>sd', '<cmd>lua vim.lsp.buf.document_symbol()<CR>', opts)
+  end
+
   bsk('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
   bsk('i', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
   bsk('n', '<leader>K', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
@@ -39,9 +45,6 @@ function M.custom_attach(client, bufnr)
       opts)
 
   bsk('n', '<leader>bf', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
-
-  bsk('n', '<leader>sw', '<cmd>lua vim.lsp.buf.workspace_symbol()<CR>', opts)
-  bsk('n', '<leader>sd', '<cmd>lua vim.lsp.buf.document_symbol()<CR>', opts)
 
   bsk('n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
   bsk('n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)

@@ -50,6 +50,16 @@ return require'packer'.startup {
       config = "require'my_plugins/fzf'",
     }
     use {
+      'nvim-telescope/telescope.nvim',
+      requires = {'nvim-lua/popup.nvim', 'nvim-lua/plenary.nvim'},
+      config = "require'my_plugins/telescope'",
+    }
+    use {
+      'camspiers/snap',
+      requires = {'junegunn/fzf', run = fn['fzf#install']},
+      config = "require'my_plugins/snap'",
+    }
+    use {
       'kyazdani42/nvim-tree.lua',
       requires = 'kyazdani42/nvim-web-devicons',
       config = "require'my_plugins/tree'",
@@ -67,7 +77,11 @@ return require'packer'.startup {
         'jose-elias-alvarez/nvim-lsp-ts-utils',
       },
     }
-    use {'ojroques/nvim-lspfuzzy', requires = 'fzf.vim', config = "require'lspfuzzy'.setup{}"}
+    use {
+      'ojroques/nvim-lspfuzzy',
+      requires = 'fzf.vim',
+      config = function() if vim.g.fuzzy_finder == 'fzf' then require'lspfuzzy'.setup {} end end,
+    }
     -- }}}
 
     -- General Editing {{{
