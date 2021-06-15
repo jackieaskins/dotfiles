@@ -3,6 +3,7 @@ local api = vim.api
 local cmd = vim.cmd
 local fn = vim.fn
 
+local eslintls = require 'my_lsp/servers/eslintls'
 local jdtls = require 'my_lsp/servers/jdtls'
 local jsonls = require 'my_lsp/servers/jsonls'
 local sumneko_lua = require 'my_lsp/servers/sumneko_lua'
@@ -11,6 +12,7 @@ local tsserver = require 'my_lsp/servers/tsserver'
 local M = {}
 
 local all_servers = {
+  eslintls = {update = eslintls.update},
   graphql = {update = {'npm', 'graphql-language-service-cli'}},
   jdtls = {configure = jdtls.configure, update = jdtls.update},
   jsonls = {configure = jsonls.configure, update = {'npm', 'vscode-json-languageserver'}},
@@ -20,14 +22,12 @@ local all_servers = {
   vimls = {update = {'npm', 'vim-language-server'}},
   tsserver = {
     configure = tsserver.configure,
-    update = {'npm', 'typescript typescript-language-server eslint_d'},
+    update = {'npm', 'typescript typescript-language-server'},
   },
 }
 
 function M.setup_servers()
   local lspconfig = require 'lspconfig'
-
-  require('null-ls').setup {}
 
   for server, server_info in pairs(all_servers) do
     local base_config = {

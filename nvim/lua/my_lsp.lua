@@ -12,6 +12,7 @@ for level, icon in pairs(icons) do
   vim.fn.sign_define(sign, {text = icon})
 end
 
+require'my_lsp/configs'.add_configs()
 require'my_lsp/servers'.setup_servers()
 
 require'my_utils'.augroup('lsp_config', {

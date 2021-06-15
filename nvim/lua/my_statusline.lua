@@ -21,11 +21,7 @@ local function get_buf_clients() return vim.tbl_values(vim.lsp.buf_get_clients(f
 
 local function get_lsp_clients_component()
   local client_names = vim.tbl_map(function(client) return client.name end, get_buf_clients())
-
-  local non_null_client_names = vim.tbl_filter(function(name) return name ~= 'null-ls' end,
-                                               client_names)
-
-  return table.concat(non_null_client_names, ' ')
+  return table.concat(client_names, ' ')
 end
 
 local function get_lsp_diagnostic_component(level)

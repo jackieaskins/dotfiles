@@ -8,11 +8,6 @@ function M.configure(config)
     require'my_lsp/attach'.custom_attach(client, bufnr)
 
     ts_utils.setup {
-      eslint_enable_code_actions = true,
-      eslint_enable_diagnostics = true,
-      eslint_enable_disable_comments = true,
-      eslint_bin = 'eslint_d',
-
       enable_import_on_completion = true,
 
       update_imports_on_move = true,
