@@ -28,7 +28,7 @@ return require'packer'.startup {
     -- }}}
 
     -- Brackets {{{
-    use {get_my_plugin_path('vim-closer')}
+    use {'windwp/nvim-autopairs', config = "require'my_plugins/autopairs'"}
     use {'AndrewRadev/splitjoin.vim', config = "require'my_plugins/splitjoin'"}
     use {'tpope/vim-surround'}
     use {'airblade/vim-matchquote'}
@@ -76,6 +76,7 @@ return require'packer'.startup {
         'jose-elias-alvarez/nvim-lsp-ts-utils',
       },
     }
+    use {'rmagatti/goto-preview', config = "require'my_plugins/goto-preview'"}
     use {
       'ojroques/nvim-lspfuzzy',
       requires = 'fzf.vim',
@@ -111,6 +112,7 @@ return require'packer'.startup {
         get_my_plugin_path('nvim-ts-autotag'),
         'JoosepAlviste/nvim-ts-context-commentstring',
         'nvim-treesitter/nvim-treesitter-refactor',
+        'RRethy/nvim-treesitter-textsubjects',
       },
     }
     -- }}}
