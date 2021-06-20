@@ -22,6 +22,8 @@ augroup('custom_colors', {
   highlight_autocmd('LspDiagnosticsUnderlineHint', {guifg = colors.blue, gui = 'underline'}),
   highlight_autocmd('LspDiagnosticsFloatingHint', {guifg = colors.blue, guibg = colors.gray2}),
   highlight_autocmd('LspDiagnosticsSignHint', {guifg = colors.blue}),
+
+  highlight_autocmd('MatchParen', {guifg = colors.cyan}),
 })
 
 cmd 'silent! colorscheme one-nvim'

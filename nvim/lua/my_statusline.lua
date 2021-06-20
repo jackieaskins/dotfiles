@@ -38,7 +38,7 @@ function GetActiveLine()
   local subtle_highlight = highlights.define_active('Subtle', colors.gray6)
   local hint_highlight = highlights.define_active('Hint', colors.cyan)
   local info_highlight = highlights.define_active('Info', colors.blue)
-  local warn_highlight = highlights.define_active('Warn', colors.orange)
+  local warn_highlight = highlights.define_active('Warn', colors.yellow)
   local error_highlight = highlights.define_active('Error', colors.red)
 
   local filename = fn.expand('%:t')

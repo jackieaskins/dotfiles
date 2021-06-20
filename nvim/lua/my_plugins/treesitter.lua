@@ -6,7 +6,10 @@ require'nvim-treesitter.configs'.setup {
   indent = {enable = true},
   playground = {enable = true},
   refactor = {highlight_definitions = {enable = true}},
-  textsubjects = {enable = true, keymaps = {['.'] = 'textsubjects-smart'}},
+  textsubjects = {
+    enable = true,
+    keymaps = {['.'] = 'textsubjects-smart', [';'] = 'textsubjects-big'},
+  },
 }
 
 local M = {}

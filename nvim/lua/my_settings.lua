@@ -19,7 +19,6 @@ opt.number = true
 opt.relativenumber = true
 opt.cursorline = true
 opt.signcolumn = 'yes'
-opt.confirm = true
 opt.splitright = true
 opt.splitbelow = true
 opt.diffopt:append{'vertical'}

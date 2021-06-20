@@ -8,9 +8,8 @@ function M.custom_attach(client, bufnr)
   require'lsp_signature'.on_attach({
     bind = true, -- Required for border
     handler_opts = {border = 'single'},
-    decorator = {'**', '**'},
-    hint_enable = true,
-    floating_window = false,
+    hint_enable = false,
+    floating_window = true,
   })
 
   if client.supports_method('textDocument/codeAction') then
