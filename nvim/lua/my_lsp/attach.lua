@@ -1,5 +1,22 @@
 local M = {}
 
+function M.custom_code_actions()
+  local method = 'textDocument/codeAction'
+  local params = vim.lsp.util.make_range_params()
+  params.context = {diagnostics = vim.lsp.diagnostic.get_line_diagnostics()}
+
+  local all_code_actions, err = vim.lsp.buf_request_sync(0, method, params, 1000)
+
+  if err then vim.cmd('echoerr "' .. err .. '"') end
+
+  local code_actions = {}
+  for _, response in ipairs(all_code_actions) do
+    for _, result in ipairs(response.result) do table.insert(code_actions, result) end
+  end
+
+  vim.lsp.handlers[method](err, method, code_actions)
+end
+
 function M.custom_attach(client, bufnr)
   local function bsk(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function bso(...) vim.api.nvim_buf_set_option(bufnr, ...) end
@@ -26,8 +43,11 @@ function M.custom_attach(client, bufnr)
     bsk('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
     bsk('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
 
-    bsk('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-    bsk('v', '<leader>ca', '<cmd>lua vim.lsp.buf.range_code_action()<CR>', opts)
+    if vim.g.fuzzy_finder == 'fzf' then
+      bsk('n', '<leader>ca', '<cmd>lua require"my_lsp/attach".custom_code_actions()<CR>', opts)
+    else
+      bsk('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+    end
 
     bsk('n', '<leader>sw', '<cmd>lua vim.lsp.buf.workspace_symbol()<CR>', opts)
     bsk('n', '<leader>sd', '<cmd>lua vim.lsp.buf.document_symbol()<CR>', opts)
