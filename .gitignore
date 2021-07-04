@@ -5,7 +5,7 @@
 /nvim/lua/my_custom.lua
 /nvim/spell/
 
-/nvim/plugin/packer_compiled.vim
+/nvim/plugin/packer_compiled.*
 
 /zsh/custom.zsh
 
