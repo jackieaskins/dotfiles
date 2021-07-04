@@ -33,6 +33,7 @@ function M.setup_servers()
     local base_config = {
       capabilities = require 'my_lsp/capabilities',
       on_attach = require'my_lsp/attach'.custom_attach,
+      flags = {debounce_text_changes = 150},
     }
 
     local config_func = server_info['configure']

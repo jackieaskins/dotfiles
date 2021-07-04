@@ -13,6 +13,12 @@ function M.configure(config)
       update_imports_on_move = true,
       require_confirmation_on_move = true,
     }
+
+    local opts = {noremap = true, silent = true}
+    local function bsk(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+    bsk('n', '<leader>oi', '<cmd>TSLspOrganize<CR>', opts)
+    bsk('n', '<leader>ia', '<cmd>TSLspOrganize<CR>', opts)
+    bsk('n', '<leader>rf', '<cmd>TSLspRenameFile<CR>', opts)
   end
   return config
 end
