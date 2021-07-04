@@ -12,7 +12,7 @@ vim.api.nvim_exec([[
 cmd 'packadd packer.nvim'
 
 local function get_my_plugin_path(plugin_name)
-  return g.is_personal_machine and '~/vim-plugins/' .. plugin_name or 'jackieaskins/' .. plugin_name
+  return (g.is_personal_machine and '~/vim-plugins/' or 'jackieaskins/') .. plugin_name
 end
 
 return require'packer'.startup {
@@ -27,7 +27,7 @@ return require'packer'.startup {
     use {'norcalli/nvim-colorizer.lua', config = "require'colorizer'.setup()"}
     -- }}}
 
-    -- Brackets {{{
+    -- Surrounding {{{
     use {'windwp/nvim-autopairs', config = "require'my_plugins/autopairs'"}
     use {'AndrewRadev/splitjoin.vim', config = "require'my_plugins/splitjoin'"}
     use {'tpope/vim-surround'}
@@ -50,16 +50,6 @@ return require'packer'.startup {
       config = "require'my_plugins/fzf'",
     }
     use {
-      'nvim-telescope/telescope.nvim',
-      requires = {'nvim-lua/popup.nvim', 'nvim-lua/plenary.nvim'},
-      config = "require'my_plugins/telescope'",
-    }
-    use {
-      'camspiers/snap',
-      requires = {'junegunn/fzf', run = fn['fzf#install']},
-      config = "require'my_plugins/snap'",
-    }
-    use {
       'kyazdani42/nvim-tree.lua',
       requires = 'kyazdani42/nvim-web-devicons',
       config = "require'my_plugins/tree'",
@@ -77,11 +67,7 @@ return require'packer'.startup {
       },
     }
     use {'rmagatti/goto-preview', config = "require'my_plugins/goto-preview'"}
-    use {
-      'ojroques/nvim-lspfuzzy',
-      requires = 'fzf.vim',
-      config = function() if vim.g.fuzzy_finder == 'fzf' then require'lspfuzzy'.setup {} end end,
-    }
+    use {'ojroques/nvim-lspfuzzy', requires = 'fzf.vim', config = "require'lspfuzzy'.setup{}"}
     -- }}}
 
     -- General Editing {{{
