@@ -8,7 +8,7 @@ require'nvim-treesitter.configs'.setup {
   refactor = {highlight_definitions = {enable = true}},
   textsubjects = {
     enable = true,
-    keymaps = {['.'] = 'textsubjects-smart', [';'] = 'textsubjects-big'},
+    keymaps = {['.'] = 'textsubjects-smart', [';'] = 'textsubjects-container-outer'},
   },
 }
 

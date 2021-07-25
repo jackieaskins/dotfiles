@@ -22,25 +22,16 @@ local check_back_space = function()
 end
 
 _G.tab_complete = function()
-  if vim.fn.pumvisible() == 1 then
-    return t "<C-n>"
-  elseif vim.fn['vsnip#available'](1) == 1 then
+  if vim.fn['vsnip#available'](1) == 1 then
     return t "<Plug>(vsnip-expand-or-jump)"
   elseif check_back_space() then
     return t "<Tab>"
-  else
-    return vim.fn['compe#complete']()
   end
 end
+
 _G.s_tab_complete = function()
-  if vim.fn.pumvisible() == 1 then
-    return t "<C-p>"
-  elseif vim.fn['vsnip#jumpable'](-1) == 1 then
-    return t "<Plug>(vsnip-jump-prev)"
-  else
-    -- If <S-Tab> is not working in your terminal, change it to <C-h>
-    return t "<S-Tab>"
-  end
+  if vim.fn['vsnip#jumpable'](-1) == 1 then return t "<Plug>(vsnip-jump-prev)" end
+  return t "<S-Tab>"
 end
 
 local vsnip_opts = {expr = true, silent = true, noremap = false}

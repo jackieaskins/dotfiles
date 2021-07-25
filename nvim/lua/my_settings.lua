@@ -14,6 +14,7 @@ cmd 'filetype plugin on'
 augroup('no_auto_comment', {{'FileType', '*', 'setlocal formatoptions-=r formatoptions-=o'}})
 
 -- General
+opt.hidden = true
 opt.number = true
 opt.relativenumber = true
 opt.cursorline = true
