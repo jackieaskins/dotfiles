@@ -8,5 +8,6 @@
 /nvim/plugin/packer_compiled.*
 
 /zsh/custom.zsh
+/Brewfile*.lock.json
 
 .DS_Store

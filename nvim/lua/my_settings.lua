@@ -25,7 +25,10 @@ opt.diffopt:append{'vertical'}
 opt.termguicolors = true
 opt.tabline = require 'my_tabline'
 
-augroup('filetypes', {{'BufRead,BufNewFile', '*.graphql', 'set filetype=graphql'}})
+augroup('filetypes', {
+  {'BufRead,BufNewFile', '*.graphql', 'set filetype=graphql'},
+  {'BufRead,BufNewFile', 'Brewfile*', 'set filetype=ruby'},
+})
 
 -- Status Line
 augroup('statusline', {

@@ -1,8 +1,15 @@
+local augroup = require'my_utils'.augroup
 local fn = vim.fn
 local g = vim.g
 local cmd = vim.cmd
 
+function _G.PackerSyncAndExit()
+  augroup('packer_complete', {{'User', 'PackerComplete', 'qall'}})
+  cmd 'PackerSync'
+end
+
 vim.api.nvim_exec([[
+  command! PackerSyncAndExit call v:lua.PackerSyncAndExit()
   command! PI PackerInstall
   command! PC PackerCompile
   command! PS PackerSync

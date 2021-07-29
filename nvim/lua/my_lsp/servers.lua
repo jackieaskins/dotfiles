@@ -11,6 +11,8 @@ local tsserver = require 'my_lsp/servers/tsserver'
 
 local M = {}
 
+-- TODO: Check if server is installed when navigating to file
+-- TODO: Exit once install script has completed
 local all_servers = {
   eslintls = {update = eslintls.update},
   graphql = {update = {'npm', 'graphql-language-service-cli'}},

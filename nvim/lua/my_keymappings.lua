@@ -23,16 +23,29 @@ map('n', '<leader>re', '<cmd>call v:lua.ReloadConfig()<CR>')
 map('n', '<leader>rp', '<cmd>call v:lua.ReloadPlugins()<CR>')
 
 map('n', '<leader>gh', "yi':!open https://github.com/<C-R>0<CR><CR>")
+map('n', '<leader>ob', '<cmd>call v:lua.OpenHomebrewURL()<CR>')
 augroup('packer_links', {
   {'FileType', 'packer', 'nnoremap <buffer> <leader>gh <cmd>call v:lua.OpenPackerURL()<CR>'},
 })
 
+local function open_url(url) os.execute('open ' .. url) end
+
+function _G.OpenHomebrewURL()
+  local current_line = vim.fn.getline('.')
+  local package = string.match(current_line, "'.-'")
+  package = string.sub(package, 2, -2)
+
+  if vim.startswith(current_line, 'brew') then
+    open_url('https://formulae.brew.sh/formula/' .. package .. '#default')
+  elseif vim.startswith(current_line, 'cask') then
+    open_url('https://formulae.brew.sh/cask/' .. package .. '#default')
+  end
+end
+
 function _G.OpenPackerURL()
   local user_package = fn.expand('<cWORD>')
   user_package = string.sub(user_package, 1, -2) -- Remove trailing ':'
-
-  cmd('!open https://github.com/' .. user_package)
-  cmd 'redraw!'
+  open_url('https://github.com/' .. user_package)
 end
 
 function _G.OpenURLUnderCursor()
@@ -52,11 +65,7 @@ function _G.OpenURLUnderCursor()
   end
 
   uri = fn.shellescape(uri)
-
-  if uri ~= '' then
-    cmd('!open ' .. uri)
-    cmd 'redraw!'
-  end
+  if uri ~= '' then open_url(uri) end
 end
 
 local function reload()
@@ -70,8 +79,8 @@ function _G.ReloadConfig()
 end
 
 function _G.ReloadPlugins()
+  augroup('reload_plugins', {{'User', 'PackerComplete', '++once', 'LspStart'}})
   cmd 'LspStop'
   reload()
   cmd 'PackerSync'
-  cmd 'LspStart'
 end

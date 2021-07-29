@@ -1,68 +1,170 @@
 #!/bin/bash
 
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-NC='\033[0m'
+function success_echo() {
+  local green='\033[0;32m'
+  local nc='\033[0m'
+  echo -e "$green$1\n$nc"
+}
 
-echo -e "Checking for Requirements..."
-read -p "Have you completed all of the prerequisites outlined in the README? (Y/N) " ready
-if [ $ready != "Y" ] && [ $ready != "y" ]
-then
-  echo -e "${RED}Please complete the prerequisites before beginning installation"
-  exit 1
+#--------------------------------------------------------------------#
+#                            MacOS Check                             #
+#--------------------------------------------------------------------#
+is_mac=false
+if [[ $OSTYPE == 'darwin'* ]]; then is_mac=true; fi
+
+#--------------------------------------------------------------------#
+#                       Personal Machine Check                       #
+#--------------------------------------------------------------------#
+echo -e "Are you installing on a personal machine?"
+select yn in "Yes" "No"; do
+  case $yn in
+    Yes)
+      is_personal_machine=true
+      echo -e "Got it, this IS a personal machine."
+      break
+      ;;
+    No)
+      is_personal_machine=false
+      echo -e "Got it, this IS NOT a personal machine."
+      break
+      ;;
+  esac
+done
+
+echo -e "Beginning installation!\n"
+
+#--------------------------------------------------------------------#
+#                   Xcode Command Line Tools Check                   #
+#--------------------------------------------------------------------#
+if [ $is_mac = true ]; then
+  echo -e "Making sure Xcode command line tools are installed..."
+  xcode-select --install 2>/dev/null
+  success_echo "Xcode command line tools installed."
+else
+  echo -e "Not on MacOS, not checking for Xcode Command Line Tools.\n"
 fi
 
-echo -e "Beginning installation\n"
+# TODO: Configure MacOS System Preferences
 
+#--------------------------------------------------------------------#
+#                   Homebrew Installation & Bundle                   #
+#--------------------------------------------------------------------#
+echo -e "Checking if Homebrew is installed..."
+if [ -x "$(command -v brew)" ]; then
+  echo -e "Homebrew is installed! We'll update it and upgrade your packages..."
+  brew update
+  brew upgrade
+else
+  echo -e "Homebrew is not installed, let's change that..."
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+echo -e "Bundling Homebrew packages..."
+brew bundle --file ./Brewfile
+
+if [ $is_personal_machine = true ]; then
+  echo -e "Bundling personal machine Homebrew packages..."
+  brew bundle --file ./Brewfile_personal
+else
+  echo -e "Not on personal machine, not installing personal machine Homebrew packages."
+fi
+echo -e ""
+
+#--------------------------------------------------------------------#
+#                  iTerm Preferences Folder Config                   #
+#--------------------------------------------------------------------#
+if [ $is_mac = true ]; then
+  iterm_config=~/dotfiles/iterm
+  echo -e "Setting iTerm2 preferences folder..."
+  defaults write com.googlecode.iterm2 PrefsCustomFolder $iterm_config
+  success_echo "iTerm2 is configured to read from $iterm_config."
+else
+  echo -e "Not on MacOS, not configuring iTerm2 preferences folder.\n"
+fi
+
+#--------------------------------------------------------------------#
+#                          Submodule Update                          #
+#--------------------------------------------------------------------#
 echo -e "Updating submodules..."
 git submodule update
-echo -e "Submodules updated\n"
+success_echo "Submodules updated."
 
+#--------------------------------------------------------------------#
+#                    Dotfiles Backup & Symlinking                    #
+#--------------------------------------------------------------------#
 timestamp=$(date +%Y%m%d%H%M%S) # timestamp for backup
-dir=~/dotfiles # dotfiles directory
-backupdir=~/dotfiles_backups/$timestamp # backup directory for old dotfiles
+dotfiles_dir=~/dotfiles
+backup_dir=~/dotfiles_backups/$timestamp
+
+echo -e "Creating dotfiles backup directory..."
+mkdir -p "$backup_dir"
+mkdir "$backup_dir/zfunctions"
+mkdir "$backup_dir/nvim"
+success_echo "Backup directory created at $backup_dir."
 
 [ -d ~/.zfunctions ] || mkdir ~/.zfunctions
 [ -d ~/.config ] || mkdir ~/.config
-mkdir $backupdir/zfunctions
-mkdir $backupdir/nvim
 
-echo -e "Creating dotfiles backup directory..."
-mkdir -p $backupdir
-echo -e "Backup directory created at $backupdir\n"
+function backup_and_symlink() {
+  local dotfile_path="$HOME/$1"
+  local backup_path="$backup_dir/$2"
+  local sym_path="$dotfiles_dir/$3"
 
-echo -e "Backing up any existing dotfiles..."
-[ ! -f ~/.zshrc ] || mv ~/.zshrc $backupdir/zshrc
-[ ! -f ~/.vimrc ] || mv ~/.vimrc $backupdir/vimrc
-[ ! -d ~/.ctags.d ] || mv ~/.ctags.d $backupdir/ctags.d
-[ ! -f ~/.tern-config ] || mv ~/.tern-config $backupdir/tern-config
-[ ! -f ~/.gitignore_global ] || mv ~/.gitignore_global $backupdir/gitignore_global
-[ ! -d ~/.vim ] || mv ~/.vim $backupdir/vim
-[ ! -d ~/.config/nvim ] || mv ~/.config/nvim $backupdir/nvim
-[ ! -f ~/.zfunctions/prompt_pure_setup ] || mv ~/.zfunctions/prompt_pure_setup $backupdir/zfunctions/prompt_pure_setup
-[ ! -f ~/.zfunctions/async ] || mv ~/.zfunctions/async $backupdir/zfunctions/async
-[ ! -d ~/.iterm2_shell_integration.zsh ] || mv ~/.iterm2_shell_integration.zsh $backupdir/iterm2_shell_integration.zsh
-[ ! -f ~/.tmux.conf ] || mv ~/.tmux.conf $backupdir/tmux.conf
-echo -e "Done backing up files\n"
+  # Check if file or directory exists at $dotfile_path
+  if [ -f "$dotfile_path" ] || [ -d "$dotfile_path" ]; then
+    local sym
+    sym=$(ls -l "$dotfile_path" | awk '{print $NF}') # Follow symlink of $dotfile_path
 
-echo -e "Symlinking dotfiles to $dir directory..."
-ln -s $dir/zshrc ~/.zshrc
-ln -s $dir/vim ~/.vim
-ln -s $dir/nvim ~/.config/nvim
-ln -s $dir/ctags.d ~/.ctags.d
-ln -s $dir/tern-config ~/.tern-config
-ln -s $dir/gitignore_global ~/.gitignore_global
-ln -s $dir/vimrc ~/.vimrc
-ln -s $dir/pure/pure.zsh ~/.zfunctions/prompt_pure_setup
-ln -s $dir/pure/async.zsh ~/.zfunctions/async
-ln -s $dir/iterm2_shell_integration.zsh ~/.iterm2_shell_integration.zsh
-ln -s $dir/tmux.conf ~/.tmux.conf
-echo -e "Done symlinking files\n"
+    # Check if $dotfile_path is already symlinked to $sym_path
+    if [ ! "$sym" == "$sym_path" ]; then
+      echo -e "$dotfile_path exists but is not symlinked to $sym_path, backing up and symlinking..."
+      mv "$dotfile_path" "$backup_path"
+      ln -s "$sym_path" "$dotfile_path"
+    else
+      echo -e "$dotfile_path is symlinked to $sym_path, no action required."
+    fi
+  else
+    echo -e "$dotfile_path does not exist, symlinking..."
+    ln -s "$sym_path" "$dotfile_path"
+  fi
+}
 
+echo -e "Backing up and symlinking dotfiles..."
+#                  dotfile                       backup                       sym
+backup_and_symlink .zshrc                        zshrc                        zshrc
+backup_and_symlink .vimrc                        vimrc                        vimrc
+backup_and_symlink .vim                          vim                          vim
+backup_and_symlink .config/nvim                  nvim                         nvim
+backup_and_symlink .tmux.conf                    tmux.conf                    tmux.conf
+backup_and_symlink .zfunctions/prompt_pure_setup zfunctions/prompt_pure_setup pure/pure.zsh
+backup_and_symlink .zfunctions/async             zfunctions/async             pure/async.zsh
+backup_and_symlink .iterm2_shell_integration.zsh iterm2_shell_integration.zsh iterm2_shell_integration.zsh
+backup_and_symlink .gitignore_global             gitignore_global             gitignore_global
+success_echo "Dotfiles backed up and symlinked."
+
+#--------------------------------------------------------------------#
+#                      Global Gitignore Config                       #
+#--------------------------------------------------------------------#
 echo -e "Configuring Global Gitignore..."
 git config --global core.excludesfile ~/.gitignore_global
-echo -e "Configured Global Gitignore\n"
+success_echo "Configured Global Gitignore."
 
-echo -e "${GREEN}Done installing\n${NC}"
+#--------------------------------------------------------------------#
+#                           Neovim Config                            #
+#--------------------------------------------------------------------#
+echo -e "Configuring Neovim..."
+std_data_path=${XDG_CONFIG_HOME:-"$HOME/.local/share/nvim"}
+install_path="$std_data_path/site/pack/packer/opt/packer.nvim"
+if [ ! -d "$install_path" ]; then
+  echo -e "Installing Packer.nvim..."
+  git clone "https://github.com/wbthomason/packer.nvim" "$install_path"
+else
+  echo -e "Packer.nvim already exists."
+fi
+rm ./nvim/plugin/packer_compiled.*
 
-echo -e "If using iTerm, configure it to load preferences from ~/dotfiles/iterm (refer to the README)"
+echo -e "Running PackerSync, this may take a while..."
+nvim --headless +PackerSyncAndExit
+echo -e ""
+success_echo "Done configuring Neovim."
+
+success_echo "Congratulations, everything is done installing!"
