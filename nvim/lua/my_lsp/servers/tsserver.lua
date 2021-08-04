@@ -17,7 +17,7 @@ function M.configure(config)
     local opts = {noremap = true, silent = true}
     local function bsk(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
     bsk('n', '<leader>oi', '<cmd>TSLspOrganize<CR>', opts)
-    bsk('n', '<leader>ia', '<cmd>TSLspOrganize<CR>', opts)
+    bsk('n', '<leader>ia', '<cmd>TSLspImportAll<CR>', opts)
     bsk('n', '<leader>rf', '<cmd>TSLspRenameFile<CR>', opts)
   end
   return config

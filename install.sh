@@ -75,6 +75,7 @@ echo -e ""
 if [ $is_mac = true ]; then
   iterm_config=~/dotfiles/iterm
   echo -e "Setting iTerm2 preferences folder..."
+  defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder 1
   defaults write com.googlecode.iterm2 PrefsCustomFolder $iterm_config
   success_echo "iTerm2 is configured to read from $iterm_config."
 else

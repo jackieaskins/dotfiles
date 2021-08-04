@@ -2,6 +2,7 @@ tap 'heroku/brew'
 brew 'heroku'
 
 if RUBY_PLATFORM =~ /darwin/
+  cask 'dropbox'
   cask 'google-chrome'
   cask 'spotify'
 end
