@@ -1,4 +1,4 @@
-const s:pattern = '[a-zA-Z0-9_.-]\+\/[a-zA-Z0-9_.-]\+'
+const s:pattern = '.*''\([a-zA-Z0-9_.-]\+\/[a-zA-Z0-9_.-]\+\)'''
 
 function! gxext#lua#plugin#open(line, mode)
   let l:line = a:line
@@ -13,6 +13,6 @@ function! gxext#lua#plugin#open(line, mode)
     return 0
   endif
 
-  call gxext#browse('https://github.com/' . l:match[0])
+  call gxext#browse('https://github.com/' . l:match[1])
   return 1
 endfunction

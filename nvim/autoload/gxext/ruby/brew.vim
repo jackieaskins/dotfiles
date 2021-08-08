@@ -1,4 +1,4 @@
-const s:pattern = '\(brew\|cask\)\s\+''\([a-zA-Z0-9_.-]\+\)'''
+const s:pattern = '\s*\(brew\|cask\)\s\+''\([a-zA-Z0-9_.-]\+\)'''
 
 function! gxext#ruby#brew#open(line, mode)
   let l:line = a:line
