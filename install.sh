@@ -143,10 +143,12 @@ backup_and_symlink .gitignore_global             gitignore_global             gi
 success_echo "Dotfiles backed up and symlinked."
 
 #--------------------------------------------------------------------#
-#                      Global Gitignore Config                       #
+#                         Global Git Config                          #
 #--------------------------------------------------------------------#
 echo -e "Configuring Global Gitignore..."
 git config --global core.excludesfile ~/.gitignore_global
+git config --global pull.rebase true
+git config --global rerere.enabled true
 success_echo "Configured Global Gitignore."
 
 #--------------------------------------------------------------------#
@@ -164,7 +166,7 @@ fi
 rm ./nvim/plugin/packer_compiled.*
 
 echo -e "Running PackerSync, this may take a while..."
-nvim --headless +PackerSyncAndExit
+nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 echo -e ""
 success_echo "Done configuring Neovim."
 

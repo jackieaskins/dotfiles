@@ -17,7 +17,7 @@ My dotfiles for Neovim 0.5, Vim, Zsh, and iTerm.
 ## Customization
 To add machine-specific settings, create the files below. For:
 - Vim: `~/dotfiles/vim/custom.vim`
-- Neovim: `~/dotfiles/nvim/lua/my_custom.lua`
+- Neovim: `~/dotfiles/nvim/lua/custom.lua`
 - Zsh: `~/dotfiles/zsh/custom.zsh`
 
 These files are automatically sourced and ignored by Git.

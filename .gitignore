@@ -2,7 +2,7 @@
 /vim/autoload
 /vim/plugged
 
-/nvim/lua/my_custom.lua
+/nvim/lua/custom.lua
 /nvim/spell/
 
 /nvim/plugin/packer_compiled.*
