@@ -59,7 +59,6 @@ return require('packer').startup({
       config = function()
         require('gitsigns').setup()
       end,
-      event = 'BufRead',
     })
     use({ 'tpope/vim-fugitive', cmd = { 'Git', 'G', 'Gread' } })
     -- }}}
@@ -92,8 +91,6 @@ return require('packer').startup({
       config = function()
         require('plugins/lspconfig')
       end,
-      event = 'BufReadPre',
-      cmd = { 'LspStart', 'LspStop', 'LspRestart' },
     })
     use({
       'jose-elias-alvarez/null-ls.nvim',
