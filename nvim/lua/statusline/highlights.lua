@@ -7,8 +7,8 @@ local INACTIVE_HIGHLIGHT = 'StatusLineNC'
 local M = {}
 
 local function define_highlight(prefix, suffix, fg, bg, opts)
-  fg = fg or colors.default_fg
-  bg = bg or colors.gray1
+  fg = fg or colors.fg
+  bg = bg or colors.bg1
   opts = opts or 'none'
 
   local name = prefix .. suffix
@@ -23,7 +23,7 @@ function M.define_active(name, fg, bg, opts)
 end
 
 function M.define_inactive(name, fg, bg, opts)
-  fg = fg or colors.gray3
+  fg = fg or colors.bg4
   return define_highlight(INACTIVE_HIGHLIGHT, name, fg, bg, opts)
 end
 

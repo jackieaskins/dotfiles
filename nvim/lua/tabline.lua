@@ -9,8 +9,8 @@ local function get_file_icon_component(filename)
 end
 
 function GetTabLine()
-  highlight('TabLineSel', { guifg = modes.get_color(), guibg = colors.default_bg })
-  highlight('TabLine', { guifg = colors.default_fg, guibg = colors.gray1 })
+  highlight('TabLineSel', { guifg = modes.get_color(), guibg = colors.bg1 })
+  highlight('TabLine', { guifg = colors.fg, guibg = colors.bg0 })
 
   local current_tabnr = fn.tabpagenr()
   local tabline_components = {}

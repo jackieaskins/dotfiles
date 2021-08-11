@@ -4,9 +4,9 @@ local fn = vim.fn
 local mode_map = {
   n = { color = colors.blue, label = 'NORMAL' },
   no = { color = colors.blue, label = 'NORMAL' },
-  v = { color = colors.orange, label = 'VISUAL' },
-  V = { color = colors.orange, label = 'VISUAL' },
-  ['^V'] = { color = colors.orange, label = 'VISUAL' },
+  v = { color = colors.purple, label = 'VISUAL' },
+  V = { color = colors.purple, label = 'VISUAL' },
+  ['^V'] = { color = colors.purple, label = 'VISUAL' },
   s = { color = colors.purple, label = 'SELECT' },
   S = { color = colors.purple, label = 'SELECT' },
   ['^S'] = { color = colors.purple, label = 'SELECT' },
@@ -16,12 +16,12 @@ local mode_map = {
   Rv = { color = colors.red, label = 'REPLACE' },
   c = { color = colors.yellow, label = 'COMMAND' },
   cv = { color = colors.yellow, label = 'EX' },
-  ce = { color = colors.red, label = 'EX' },
+  ce = { color = colors.yellow, label = 'EX' },
   r = { color = colors.cyan, label = 'HIT-ENTER' },
   rm = { color = colors.cyan, label = '--MORE--' },
   ['r?'] = { color = colors.cyan, label = 'CONFIRM' },
-  ['!'] = { color = colors.dark_blue, label = 'SHELL' },
-  t = { color = colors.dark_blue, label = 'TERMINAL' },
+  ['!'] = { color = colors.blue, label = 'SHELL' },
+  t = { color = colors.blue, label = 'TERMINAL' },
 }
 
 local M = {}

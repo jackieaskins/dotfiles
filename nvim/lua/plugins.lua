@@ -20,7 +20,7 @@ return require('packer').startup({
     -- }}}
 
     -- Appearance {{{
-    use({ 'Th3Whit3Wolf/one-nvim' })
+    use({ 'sainnhe/edge' })
     use({ 'kyazdani42/nvim-web-devicons' })
     use({ 'norcalli/nvim-colorizer.lua', cmd = 'ColorizerToggle' })
     -- }}}

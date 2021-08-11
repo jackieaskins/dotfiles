@@ -25,6 +25,7 @@ function M.show(on_vimenter)
     cmd('noautocmd enew')
   end
 
+  vim.b.qs_local_disable = 1
   local settings = table.concat({
     'bufhidden=wipe',
     'colorcolumn=',
