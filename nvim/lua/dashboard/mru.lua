@@ -29,7 +29,7 @@ return function()
   local cwd = fn.fnamemodify(fn.getcwd(), ':p')
 
   local lines = {
-    'MRU in ' .. cwd,
+    'MRU in ' .. fn.fnamemodify(cwd, ':~'),
     '',
   }
 

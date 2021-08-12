@@ -11,6 +11,7 @@ null_ls.config({
       condition = function(utils)
         return utils.root_has_file('node_modules/prettier')
       end,
+      filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
     }),
     null_ls.builtins.diagnostics.eslint.with({
       command = 'eslint_d',

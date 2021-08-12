@@ -38,8 +38,6 @@ augroup('colorcolumn', {
 augroup('dashboard', {
   { 'VimEnter', '*', 'lua require("dashboard").show(1)' },
   { 'VimResized', '*', 'lua require("dashboard").resize()' },
-  { 'FileType', 'my_dashboard', 'set laststatus=0' },
-  { 'BufEnter', '*', 'lua require("dashboard").reset_statusline()' },
 })
 cmd('command! Dashboard lua require("dashboard").show()')
 

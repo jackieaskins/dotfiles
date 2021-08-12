@@ -5,8 +5,8 @@ local M = {}
 
 local cursor_lines = {}
 local current_line = -1
-local left_pad = 0
-local cursor_column = 2
+local left_pad = 2
+local cursor_column = 4
 
 function M.show(on_vimenter)
   if on_vimenter == 1 then
@@ -65,6 +65,9 @@ function M.show(on_vimenter)
     end, section.lines)))
   end, sections)))
   left_pad = (columns - longest_line_length) / 2
+  if left_pad < 2 then
+    left_pad = 2
+  end
   cursor_column = math.floor(left_pad) + 2
 
   local function align_left(line)
@@ -119,14 +122,6 @@ end
 function M.resize()
   if vim.o.filetype == 'my_dashboard' then
     M.show()
-  end
-end
-
-function M.reset_statusline()
-  if vim.o.filetype == 'my_dashboard' then
-    vim.opt.laststatus = 0
-  else
-    vim.opt.laststatus = 2
   end
 end
 

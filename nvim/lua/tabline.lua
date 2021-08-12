@@ -42,8 +42,8 @@ function GetTabLine()
       if filetype == 'fzf' then
         return '[FZF]'
       end
-      if filetype == 'startify' then
-        return '[Startify]'
+      if filetype == 'my_dashboard' then
+        return '[Dashboard]'
       end
       if bufname == '' then
         return '[No Name]'
