@@ -85,7 +85,13 @@ return require('packer').startup({
     use({ 'folke/lua-dev.nvim' })
     use({ 'ray-x/lsp_signature.nvim' })
     use({ 'jose-elias-alvarez/nvim-lsp-ts-utils' })
-    use({ 'kosayoda/nvim-lightbulb' })
+    use({
+      'kosayoda/nvim-lightbulb',
+      config = function()
+        -- Explicitly assigning to avoid default highlight
+        vim.fn.sign_define('LightBulbSign', { text = '💡' })
+      end,
+    })
     use({
       'neovim/nvim-lspconfig',
       config = function()

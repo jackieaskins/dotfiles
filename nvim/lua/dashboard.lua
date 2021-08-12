@@ -110,19 +110,14 @@ function M.show(on_vimenter)
   end
   fn.append('$', dashboard)
 
-  utils.augroup_buf('dashboard_cursor', {
+  utils.augroup_buf('dashboard_buf', {
     { 'CursorMoved', '<buffer>', 'lua require("dashboard").set_cursor()' },
+    { 'VimResized', '<buffer>', 'lua require("dashboard").show()' },
   })
 
   vim.api.nvim_buf_set_keymap(0, 'n', '<CR>', '<cmd>call feedkeys(expand("<cword>"))<CR>', { noremap = true })
 
   cmd('setlocal nomodified nomodifiable')
-end
-
-function M.resize()
-  if vim.o.filetype == 'my_dashboard' then
-    M.show()
-  end
 end
 
 function M.set_cursor()

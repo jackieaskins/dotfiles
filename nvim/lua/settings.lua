@@ -37,7 +37,6 @@ augroup('colorcolumn', {
 -- Dashboard
 augroup('dashboard', {
   { 'VimEnter', '*', 'lua require("dashboard").show(1)' },
-  { 'VimResized', '*', 'lua require("dashboard").resize()' },
 })
 cmd('command! Dashboard lua require("dashboard").show()')
 
