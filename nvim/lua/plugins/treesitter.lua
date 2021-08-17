@@ -16,6 +16,7 @@ require('nvim-treesitter.configs').setup({
     'scss',
     'tsx',
     'typescript',
+    'vim',
     'yaml',
   },
   highlight = { enable = true }, -- TODO: Investigate lag on BufRead

@@ -11,8 +11,6 @@ augroup('custom_colors', {
   highlight_autocmd('CursorLineNr', { guifg = colors.blue }),
 })
 
-cmd('silent! colorscheme one-nvim')
-
 g.edge_style = 'neon'
 g.edge_diagnostic_virtual_text = 'colored'
 g.edge_better_performance = 1

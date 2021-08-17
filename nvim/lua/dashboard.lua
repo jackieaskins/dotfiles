@@ -58,16 +58,13 @@ function M.show(on_vimenter)
     require('dashboard/quit')(),
   }
 
-  local columns = vim.o.columns
+  local width = fn.winwidth(0)
   local longest_line_length = math.max(unpack(vim.tbl_map(function(section)
     return math.max(unpack(vim.tbl_map(function(line)
       return fn.strwidth(line)
     end, section.lines)))
   end, sections)))
-  left_pad = (columns - longest_line_length) / 2
-  if left_pad < 2 then
-    left_pad = 2
-  end
+  left_pad = math.max((width - longest_line_length) / 2, 2)
   cursor_column = math.floor(left_pad) + 2
 
   local function align_left(line)
@@ -75,7 +72,7 @@ function M.show(on_vimenter)
   end
 
   local function align_center(line)
-    return string.rep(' ', (columns - fn.strwidth(line)) / 2) .. line
+    return string.rep(' ', math.max((width - fn.strwidth(line)) / 2, 2)) .. line
   end
 
   local dashboard = {}

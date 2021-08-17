@@ -8,8 +8,6 @@ function! gxext#packer#plugin#open(line, mode)
     let l:line = gxext#matchstr_around(l:line, s:pattern, l:col)
   endif
 
-  echom l:line
-
   let l:match = matchlist(l:line, s:pattern)
   if empty(l:match)
     return 0

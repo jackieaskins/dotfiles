@@ -9,7 +9,6 @@ function! gxext#ruby#brew#open(line, mode)
   endif
 
   let l:match = matchlist(l:line, s:pattern)
-
   if empty(l:match)
     return 0
   endif
