@@ -1,5 +1,4 @@
 require('nvim-treesitter.configs').setup({
-  autotag = { enable = true, skip_close_shortcut = '\\>' },
   ensure_installed = {
     'bash',
     'css',
