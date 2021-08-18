@@ -1,5 +1,3 @@
-alias fzfp="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'"
-
 # Directory Navigation
 alias -- -="cd -"
 alias ..='cd ..'

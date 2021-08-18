@@ -1,4 +1,3 @@
-local map = require('utils').map
 local cmd, env, fn, g = vim.cmd, vim.env, vim.fn, vim.g
 
 vim.cmd([[

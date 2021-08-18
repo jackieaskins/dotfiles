@@ -54,7 +54,6 @@ for f in $zsh_config/*; do source $f; done
 
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*" --glob "!*.class"'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-bindkey "ç" fzf-cd-widget
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
