@@ -1,4 +1,4 @@
-local icons = require('lsp/icons')
+local icons = require('lsp.icons')
 
 vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics,
@@ -13,14 +13,14 @@ for level, icon in pairs(icons) do
 end
 
 function _G.GetServers()
-  return table.concat(require('lsp/servers'), '\n')
+  return table.concat(require('lsp.servers'), '\n')
 end
 
 vim.api.nvim_exec(
   [[
   command! LspLog vsplit ~/.cache/nvim/lsp.log
-  command! LspUpdateAll lua require'lsp/update'.update_all_servers()
-  command! -nargs=1 -complete=custom,v:lua.GetServers LspUpdate lua require'lsp/update'.update_servers(<f-args>)
+  command! LspUpdateAll lua require('lsp.update').update_all_servers()
+  command! -nargs=1 -complete=custom,v:lua.GetServers LspUpdate lua require('lsp.update').update_servers(<f-args>)
 ]],
   true
 )

@@ -37,7 +37,7 @@ local function update_servers(server_list)
   end
 
   for _, server in ipairs(server_list) do
-    local ok, update = pcall(require, 'lsp/update/' .. server)
+    local ok, update = pcall(require, 'lsp.update.' .. server)
 
     if not ok then
       print('No update function for ' .. server)
@@ -68,6 +68,6 @@ return {
     update_servers(vim.split(server_names, ' '))
   end,
   update_all_servers = function()
-    update_servers(require('lsp/servers'))
+    update_servers(require('lsp.servers'))
   end,
 }

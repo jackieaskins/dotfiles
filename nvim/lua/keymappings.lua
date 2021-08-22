@@ -22,7 +22,7 @@ map('n', '<leader>f', ':Rg<space><C-r><C-w><CR>')
 map('n', '<leader>gs', ':GFiles?<CR>')
 
 -- Reload
-map('n', '<leader>rp', ':lua require"plugins/reload".reload_plugins()<CR>')
+map('n', '<leader>rp', ':lua require("plugins.reload").reload_plugins()<CR>')
 map('n', '<leader>re', ':Reload<CR>')
 
 -- Startup Time
@@ -33,4 +33,4 @@ map('n', '<C-n>', ':NvimTreeToggle<CR>')
 map('n', '<leader>n', ':NvimTreeFindFile<CR>')
 
 -- Treesitter
-map('n', '<leader>rn', '<cmd>lua require"plugins/treesitter-refactor".smart_rename()<CR>')
+map('n', '<leader>rn', '<cmd>lua require("plugins.treesitter-refactor").smart_rename()<CR>')

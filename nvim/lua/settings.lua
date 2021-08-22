@@ -46,8 +46,8 @@ cmd('command! Dashboard lua require("dashboard").show()')
 
 -- Status Line
 augroup('statusline', {
-  { 'BufEnter,WinEnter', '*', [[lua require'statusline'.get_active()]] },
-  { 'BufLeave,WinLeave', '*', [[lua require'statusline'.get_inactive()]] },
+  { 'BufEnter,WinEnter', '*', [[lua require('statusline').get_active()]] },
+  { 'BufLeave,WinLeave', '*', [[lua require('statusline').get_inactive()]] },
 })
 
 -- Folds

@@ -49,13 +49,13 @@ function M.show(on_vimenter)
 
   local spacer = { lines = { '' }, align = 'left' }
   local sections = {
-    require('dashboard/header')(),
-    require('dashboard/version')(),
+    require('dashboard.header')(),
+    require('dashboard.version')(),
     spacer,
     spacer,
-    require('dashboard/mru')(),
+    require('dashboard.mru')(),
     spacer,
-    require('dashboard/quit')(),
+    require('dashboard.quit')(),
   }
 
   local width = fn.winwidth(0)

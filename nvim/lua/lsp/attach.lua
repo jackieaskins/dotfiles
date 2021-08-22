@@ -16,7 +16,7 @@ return function(client, bufnr)
 
   if client.supports_method('textDocument/codeAction') then
     require('utils').augroup_buf('lightbulb', {
-      { 'CursorHold,CursorHoldI', '<buffer>', "lua require'nvim-lightbulb'.update_lightbulb()" },
+      { 'CursorHold,CursorHoldI', '<buffer>', "lua require('nvim-lightbulb').update_lightbulb()" },
     })
   end
 

@@ -1,7 +1,7 @@
 return function(config)
   config.on_attach = function(client, bufnr)
     client.resolved_capabilities.document_formatting = false
-    require('lsp/attach')(client, bufnr)
+    require('lsp.attach')(client, bufnr)
 
     require('nvim-lsp-ts-utils').setup({
       enable_import_on_completion = true,

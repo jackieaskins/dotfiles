@@ -2,9 +2,9 @@ local fn = vim.fn
 local bo, o = vim.bo, vim.o
 
 local colors = require('colors')
-local modes = require('statusline/modes')
-local highlights = require('statusline/highlights')
-local lsp_icons = require('lsp/icons')
+local modes = require('statusline.modes')
+local highlights = require('statusline.highlights')
+local lsp_icons = require('lsp.icons')
 
 local M = {}
 

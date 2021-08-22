@@ -62,7 +62,7 @@ return require('packer').startup({
     use({
       'AndrewRadev/splitjoin.vim',
       config = function()
-        require('plugins/splitjoin')
+        require('plugins.splitjoin')
       end,
       keys = { 'gJ', 'gS' },
     })
@@ -86,14 +86,14 @@ return require('packer').startup({
       requires = 'kyazdani42/nvim-web-devicons',
       cmd = { 'NvimTreeToggle', 'NvimTreeFindFile' },
       config = function()
-        require('plugins/tree')
+        require('plugins.tree')
       end,
     })
     use({
       'junegunn/fzf.vim',
       requires = { 'junegunn/fzf', run = fn['fzf#install'] },
       config = function()
-        require('plugins/fzf')
+        require('plugins.fzf')
       end,
     })
     -- }}}
@@ -112,7 +112,7 @@ return require('packer').startup({
     use({
       'neovim/nvim-lspconfig',
       config = function()
-        require('plugins/lspconfig')
+        require('plugins.lspconfig')
       end,
     })
     use({
@@ -147,7 +147,7 @@ return require('packer').startup({
     use({
       'phaazon/hop.nvim',
       config = function()
-        require('plugins/hop')
+        require('plugins.hop')
       end,
       keys = '<leader><leader>',
     })
@@ -158,7 +158,7 @@ return require('packer').startup({
       'nvim-treesitter/nvim-treesitter',
       run = ':TSUpdate',
       config = function()
-        require('plugins/treesitter')
+        require('plugins.treesitter')
       end,
     })
     use({

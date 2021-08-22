@@ -1,6 +1,6 @@
 local fn = vim.fn
 local colors = require('colors')
-local modes = require('statusline/modes')
+local modes = require('statusline.modes')
 local highlight = require('utils').highlight
 
 local function get_file_icon_component(filename)
