@@ -31,11 +31,22 @@ return require('packer').startup({
     use({ 'tpope/vim-repeat' })
     use({ 'axelf4/vim-strip-trailing-whitespace' })
     use({
-      'hrsh7th/nvim-compe',
-      requires = 'L3MON4D3/LuaSnip',
+      'hrsh7th/nvim-cmp',
       event = 'InsertEnter',
+      requires = {
+        { 'hrsh7th/vim-vsnip', opt = true },
+        { 'hrsh7th/cmp-vsnip', opt = true },
+        { 'hrsh7th/cmp-path', opt = true },
+        { 'hrsh7th/cmp-calc', opt = true },
+        { 'hrsh7th/cmp-nvim-lsp', opt = true },
+      },
       config = function()
-        require('plugins/compe')
+        vim.cmd('packadd vim-vsnip')
+        vim.cmd('packadd cmp-vsnip')
+        vim.cmd('packadd cmp-path')
+        vim.cmd('packadd cmp-calc')
+        vim.cmd('packadd cmp-nvim-lsp')
+        require('plugins.cmp')
       end,
     })
     -- }}}
