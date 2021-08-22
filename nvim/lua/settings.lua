@@ -25,6 +25,10 @@ opt.diffopt:append({ 'vertical' })
 opt.termguicolors = true
 opt.tabline = require('tabline')
 
+augroup('spell', {
+  { 'BufRead,BufNewFile', '*.md', 'setlocal spell' },
+})
+
 augroup('filetypes', {
   { 'BufRead,BufNewFile', '*.graphql', 'set filetype=graphql' },
   { 'BufRead,BufNewFile', 'Brewfile*', 'set filetype=ruby' },

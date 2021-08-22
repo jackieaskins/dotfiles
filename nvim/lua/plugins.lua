@@ -22,7 +22,13 @@ return require('packer').startup({
     -- Appearance {{{
     use({ 'sainnhe/edge' })
     use({ 'kyazdani42/nvim-web-devicons' })
-    use({ 'norcalli/nvim-colorizer.lua', cmd = 'ColorizerToggle' })
+    use({
+      'norcalli/nvim-colorizer.lua',
+      cmd = 'ColorizerToggle',
+      config = function()
+        require('colorizer').setup()
+      end,
+    })
     -- }}}
 
     -- Editing {{{
@@ -51,7 +57,7 @@ return require('packer').startup({
     })
     -- }}}
 
-    -- Brackets {{{
+    -- Surround {{{
     use({ 'airblade/vim-matchquote' })
     use({
       'AndrewRadev/splitjoin.vim',

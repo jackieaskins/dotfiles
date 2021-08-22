@@ -18,7 +18,7 @@ require('nvim-treesitter.configs').setup({
     'vim',
     'yaml',
   },
-  highlight = { enable = true }, -- TODO: Investigate lag on BufRead
+  highlight = { enable = true },
   indent = { enable = true },
   playground = { enable = true },
   refactor = { highlight_definitions = { enable = true } },
