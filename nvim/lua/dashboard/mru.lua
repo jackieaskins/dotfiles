@@ -7,6 +7,7 @@ local ignore_list = {
   'plugged/.*/doc/.*\\.txt$',
   '/.git/',
   'fugitiveblame$',
+  'node_modules',
   fn.escape(fn.fnamemodify(fn.resolve('$VIMRUNTIME'), ':p'), '\\') .. 'doc/.*\\.txt$',
 }
 

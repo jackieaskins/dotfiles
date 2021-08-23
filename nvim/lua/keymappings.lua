@@ -12,7 +12,7 @@ map('n', ']q', ':cnext<CR>')
 map('n', '[Q', ':cfirst<CR>')
 map('n', ']Q', ':clast<CR>')
 map('n', '[<C-Q>', ':cpfile<CR>')
-map('n', ']<C-Q>', ':cpnile<CR>')
+map('n', ']<C-Q>', ':cnfile<CR>')
 
 -- Plugins
 -- FZF
