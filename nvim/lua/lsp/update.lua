@@ -1,12 +1,12 @@
 local cmd, fn = vim.cmd, vim.fn
 
-local generic_installs = {
-  npm = { cmd = 'npm install -g', servers = {}, packages = {} },
-  gem = { cmd = 'gem install --user-install', servers = {}, packages = {} },
-  cargo = { cmd = 'cargo install', servers = {}, packages = {} },
-}
-
 local function update_servers(server_list)
+  local generic_installs = {
+    npm = { cmd = 'npm install -g', servers = {}, packages = {} },
+    gem = { cmd = 'gem install --user-install', servers = {}, packages = {} },
+    cargo = { cmd = 'cargo install', servers = {}, packages = {} },
+  }
+
   local servers_dir = fn.stdpath('data') .. '/lsp-servers'
   local script_lines = {}
 

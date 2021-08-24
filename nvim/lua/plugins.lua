@@ -162,13 +162,19 @@ return require('packer').startup({
       end,
     })
     use({
-      requires = 'nvim-treesitter/nvim-treesitter',
       {
         'nvim-treesitter/playground',
         cmd = { 'TSPlaygroundToggle', 'TSHighlightCapturesUnderCursor' },
+        requires = 'nvim-treesitter/nvim-treesitter',
       },
-      { 'nvim-treesitter/nvim-treesitter-refactor' },
-      { 'RRethy/nvim-treesitter-textsubjects' },
+      {
+        'nvim-treesitter/nvim-treesitter-refactor',
+        requires = 'nvim-treesitter/nvim-treesitter',
+      },
+      {
+        'RRethy/nvim-treesitter-textsubjects',
+        requires = 'nvim-treesitter/nvim-treesitter',
+      },
     })
     -- }}}
   end,

@@ -21,7 +21,10 @@ require('nvim-treesitter.configs').setup({
   highlight = { enable = true },
   indent = { enable = true },
   playground = { enable = true },
-  refactor = { highlight_definitions = { enable = true } },
+  refactor = {
+    highlight_definitions = { enable = true },
+    navigation = { enable = true },
+  },
   textsubjects = {
     enable = true,
     keymaps = {

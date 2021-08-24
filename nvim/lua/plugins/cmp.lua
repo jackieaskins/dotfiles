@@ -4,6 +4,8 @@ local t = require('utils').t
 
 require('cmp_nvim_lsp').setup()
 
+vim.opt.completeopt = 'menuone,noselect'
+
 cmp.setup({
   snippet = {
     expand = function(args)
