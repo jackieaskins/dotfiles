@@ -19,29 +19,35 @@ cmp.setup({
     { name = 'vsnip' },
   },
   mapping = {
-    ['<C-p>'] = cmp.mapping.prev_item(),
-    ['<C-n>'] = cmp.mapping.next_item(),
-    ['<C-b>'] = cmp.mapping.scroll(-4),
-    ['<C-f>'] = cmp.mapping.scroll(4),
+    ['<C-p>'] = cmp.mapping.select_prev_item(),
+    ['<C-n>'] = cmp.mapping.select_next_item(),
+    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
     ['<C-e>'] = cmp.mapping.close(),
     ['<CR>'] = cmp.mapping.confirm({
       behavior = cmp.ConfirmBehavior.Replace,
       select = false,
     }),
-    ['<Tab>'] = cmp.mapping.mode({ 'i', 's' }, function(_, fallback)
+    ['<Tab>'] = cmp.mapping(function(fallback)
       if fn['vsnip#jumpable'](1) == 1 then
         fn.feedkeys(t('<Plug>(vsnip-jump-next)'), '')
       else
         fallback()
       end
-    end),
-    ['<S-Tab>'] = cmp.mapping.mode({ 'i', 's' }, function(_, fallback)
+    end, {
+      'i',
+      's',
+    }),
+    ['<S-Tab>'] = cmp.mapping(function(fallback)
       if fn['vsnip#jumpable'](-1) == 1 then
         fn.feedkeys(t('<Plug>(vsnip-jump-prev)'), '')
       else
         fallback()
       end
-    end),
+    end, {
+      'i',
+      's',
+    }),
   },
 })
