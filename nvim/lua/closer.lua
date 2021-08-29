@@ -2,7 +2,9 @@ local fn = vim.fn
 local utils = require('utils')
 local map, t = utils.map, utils.t
 local ts_utils = require('nvim-treesitter.ts_utils')
+local ts_query = require('nvim-treesitter.query')
 
+-- TODO: Allow snippet-like jumping between brackets
 local standard = {
   ['{'] = '}',
   ['('] = ')',
@@ -14,6 +16,7 @@ local pairs_by_language = {
     ['function'] = 'end',
     ['do'] = 'end',
     ['then'] = 'end',
+    ['repeat'] = 'until',
     ['{'] = '}',
     ['('] = ')',
     ['['] = ']',
@@ -24,21 +27,16 @@ local function fallback()
   return t('<CR>')
 end
 
-local function is_in_string(col)
+-- TODO: Make this work for multi-line comments
+local function is_comment_or_string(col)
   local row = fn.line('.') - 1
+  local matches = ts_query.get_capture_matches(0, { '@comment', '@string' }, 'highlights')
 
-  local root = ts_utils.get_root_for_position(row, col)
-  if not root then
-    return false
-  end
-
-  local node = root:named_descendant_for_range(row, col, row, col)
-
-  while node ~= nil do
-    if node:type() == 'string' then
+  for _, match in ipairs(matches) do
+    local node = match.node
+    if node and ts_utils.is_in_node_range(node, row, col) then
       return true
     end
-    node = node:parent()
   end
 
   return false
@@ -60,13 +58,19 @@ function _G.close()
   local stack = {}
 
   local start = 0
-  local line = string.sub(fn.getline('.'), 1, fn.col('.') - 1)
 
-  while start ~= -1 do
+  -- TODO: Ideally check for matching brackets instead
+  if fn.col('.') < fn.col('$') - 1 then
+    return fallback()
+  end
+
+  local line = fn.getline('.')
+
+  repeat
     local matched, match_start, match_end = unpack(fn.matchstrpos(line, pattern, start))
     start = match_end
 
-    if is_in_string(match_start) then
+    if is_comment_or_string(match_start) then
     elseif open_pairs[matched] then
       table.insert(stack, matched)
     elseif close_pairs[matched] then
@@ -77,7 +81,7 @@ function _G.close()
         return fallback()
       end
     end
-  end
+  until start == -1
 
   if #stack == 0 then
     return fallback()

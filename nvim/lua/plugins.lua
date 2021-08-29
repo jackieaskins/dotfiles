@@ -35,6 +35,7 @@ return require('packer').startup({
     use({ 'tpope/vim-abolish' })
     use({ 'tpope/vim-commentary' })
     use({ 'tpope/vim-repeat' })
+    use({ 'mattn/emmet-vim', event = 'InsertEnter' })
     use({ 'axelf4/vim-strip-trailing-whitespace' })
     use({
       'hrsh7th/nvim-cmp',
@@ -137,7 +138,12 @@ return require('packer').startup({
     -- }}}
 
     -- Movement {{{
-    use({ 'unblevable/quick-scope' })
+    use({
+      'unblevable/quick-scope',
+      config = function()
+        require('plugins.quick-scope')
+      end,
+    })
     use({ 'matze/vim-move' })
     use({
       'phaazon/hop.nvim',
