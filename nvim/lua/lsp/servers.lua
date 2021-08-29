@@ -1,5 +1,6 @@
 return {
   -- 'graphql',
+  -- 'html',
   -- 'jdtls',
   'jsonls',
   'null-ls',

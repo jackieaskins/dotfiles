@@ -40,18 +40,13 @@ return require('packer').startup({
       'hrsh7th/nvim-cmp',
       event = 'InsertEnter',
       requires = {
-        { 'hrsh7th/vim-vsnip', opt = true },
-        { 'hrsh7th/cmp-vsnip', opt = true },
-        { 'hrsh7th/cmp-path', opt = true },
-        { 'hrsh7th/cmp-calc', opt = true },
-        { 'hrsh7th/cmp-nvim-lsp', opt = true },
+        { 'hrsh7th/vim-vsnip', after = 'nvim-cmp' },
+        { 'hrsh7th/cmp-vsnip', after = 'nvim-cmp' },
+        { 'hrsh7th/cmp-path', after = 'nvim-cmp' },
+        { 'hrsh7th/cmp-calc', after = 'nvim-cmp' },
+        { 'hrsh7th/cmp-nvim-lsp' },
       },
       config = function()
-        vim.cmd('packadd vim-vsnip')
-        vim.cmd('packadd cmp-vsnip')
-        vim.cmd('packadd cmp-path')
-        vim.cmd('packadd cmp-calc')
-        vim.cmd('packadd cmp-nvim-lsp')
         require('plugins.cmp')
       end,
     })

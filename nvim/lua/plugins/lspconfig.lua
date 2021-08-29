@@ -6,7 +6,7 @@ require('plugins.null-ls')
 
 for _, server in ipairs(servers) do
   local base_config = {
-    capabilities = require('lsp.capabilities'),
+    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
     on_attach = require('lsp.attach'),
     flags = { debounce_text_changes = 150 },
   }
