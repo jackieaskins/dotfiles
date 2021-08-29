@@ -25,10 +25,10 @@ let g:fzf_action = {
       \ 'ctrl-v': 'vsplit'
       \ }
 let g:fzf_colors = {
-      \ 'border':  ['fg', 'Directory'  ],
+      \ 'border':  ['fg', 'Function'  ],
       \ 'gutter':  ['bg', 'Normal'     ],
-      \ 'marker':  ['fg', 'Identifier' ],
-      \ 'pointer': ['fg', 'Identifier' ],
+      \ 'marker':  ['fg', 'Statement' ],
+      \ 'pointer': ['fg', 'Statement' ],
       \ }
 
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8 } }

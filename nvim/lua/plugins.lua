@@ -38,6 +38,11 @@ return require('packer').startup({
     use({ 'mattn/emmet-vim', event = 'InsertEnter' })
     use({ 'axelf4/vim-strip-trailing-whitespace' })
     use({
+      'iamcco/markdown-preview.nvim',
+      ft = { 'markdown' },
+      run = 'cd app && npm install',
+    })
+    use({
       'hrsh7th/nvim-cmp',
       event = 'InsertEnter',
       requires = {

@@ -1,5 +1,5 @@
 /vim/custom.vim
-/vim/autoload
+/vim/autoload/plug.vim*
 /vim/plugged
 
 /nvim/lua/custom.lua

@@ -11,9 +11,6 @@ let g:vimsyn_embed = 'lPr'
 " Reload Vim
 nnoremap <Leader>re :source $MYVIMRC<CR>
 
-" SpellCheck
-autocmd BufRead,BufNewFile *.md setlocal spell
-
 " Custom settings
 if !empty(glob("~/dotfiles/vim/custom.vim"))
   source ~/dotfiles/vim/custom.vim
@@ -29,10 +26,19 @@ if has('termguicolors')
   set termguicolors
 endif
 
-let g:quantum_black = 1
-let g:quantum_italics = 1
-let g:lightline = { 'colorscheme': 'quantum' }
-silent! colorscheme quantum
+augroup my_colorscheme
+  autocmd!
+  autocmd ColorScheme * highlight CursorLineNr guifg=#6cb6eb
+  autocmd ColorScheme * highlight NormalFloat guifg=#c5cdd9 guibg=#2b2d3a
+  autocmd ColorScheme * let g:terminal_ansi_colors[8] = '#333648'
+augroup END
+
+let g:edge_style = 'neon'
+let g:edge_diagnostic_virtual_text = 'colored'
+let g:edge_better_performance = 1
+
+let g:lightline = { 'colorscheme': 'edge' }
+silent! colorscheme edge
 " }}}
 
 " Backup/Swp/Undo {{{
@@ -45,16 +51,41 @@ set backupdir=$HOME/.backup
 set directory=$HOME/.swp
 " }}}
 
+" SpellCheck {{{
+augroup my_spell
+  autocmd!
+  autocmd BufRead,BufNewFile *.md setlocal spell
+augroup END
+" }}}
+
+" Custom FileTypes {{{
+augroup my_filetypes
+  autocmd!
+  autocmd BufRead,BufNewFile *.graphql set filetype=graphql
+  autocmd BufRead,BufNewFile Brewfile* set filetype=ruby
+augroup END
+" }}}
+
+" ColorColumn {{{
+augroup my_colorcolumn
+  autocmd!
+  autocmd BufRead,BufNewFile *.lua set colorcolumn=120
+augroup END
+" }}}
+
 " Folds {{{
-autocmd FileType lua,sh,vim setlocal foldmethod=marker
+augroup my_folds
+  autocmd!
+  autocmd FileType lua,sh,vim setlocal foldmethod=marker
+augroup END
 set foldlevel=99 " Start folds expanded by default
 " }}}
 
 " Windows {{{
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-h> <C-w>h
-map <C-l> <C-w>l
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
 
 command! -nargs=* T botright split | terminal <args>
 command! -nargs=* VT botright vsplit | terminal <args>
@@ -65,13 +96,19 @@ set shiftwidth=2
 set tabstop=2
 set softtabstop=2
 set expandtab " tabs are spaces
-autocmd FileType cs,java setlocal shiftwidth=4 tabstop=4 softtabstop=4
 set list listchars=tab:\ \ ,trail:· " Add dots for spacing
 " }}}
 
 " Comments {{{
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o " don't auto-comment
-autocmd FileType json syntax match Comment +\/\/.\+$+ " enable comments in JSON
+augroup my_comments
+  autocmd!
+  autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o " don't auto-comment
+  autocmd FileType json syntax match Comment +\/\/.\+$+ " highlight comments in JSON
+augroup END
+" }}}
+
+" General {{{
+set hidden
 " }}}
 
 " UI Config {{{
@@ -87,7 +124,6 @@ set showmatch " highlight matching bracket
 set backspace=indent,eol,start " allow backspacing over autoindent, line breaks, and start of insert action
 set ruler " display the cursor position on the last line of the screen
 set autoindent " keep same indent as line you're currently on
-set confirm " raise a dialog asking if you want to save changes when exiting
 set splitright " make vertical splits open on right
 set splitbelow " make horizontal splits open on botom
 set timeoutlen=1000 ttimeoutlen=10 " speed up switch between modes
@@ -95,20 +131,6 @@ set updatetime=100 " allow GitGutter to update almost instantly
 set diffopt+=vertical
 
 set signcolumn=yes
-" }}}
-
-" Mappings {{{
-function! OpenURLUnderCursor()
-  let s:uri = expand('<cWORD>')
-  let s:uri = substitute(s:uri, '?', '\\?', '')
-  let s:uri = shellescape(s:uri, 1)
-  if s:uri != ''
-    silent exec "!open '".s:uri."'"
-    :redraw!
-  endif
-endfunction
-nnoremap gx :call OpenURLUnderCursor()<CR>
-nnoremap <Leader>{ i{<CR>return <Esc>$%o};<Esc>^=i{
 " }}}
 
 " Searching {{{

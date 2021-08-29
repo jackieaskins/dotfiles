@@ -1,4 +1,4 @@
-" Lightline LSP {{{
+" Lightline COC {{{
 let g:lightline#coc#indicator_errors = ' '
 let g:lightline#coc#indicator_warnings = ' '
 let g:lightline#coc#indicator_info = '🛈 '
@@ -84,7 +84,7 @@ let g:lightline.component_expand = {
       \ 'lsp_warnings': 'lightline#coc#warnings',
       \ 'lsp_info': 'lightline#coc#info',
       \ 'lsp_hints': 'lightline#coc#hints',
-      \ 'lsp_ok': 'lightline#coc#ok'
+      \ 'lsp_ok': 'lightline#coc#ok',
       \ }
 let g:lightline.component_type = {
       \ 'lsp_warnings': 'warning',
