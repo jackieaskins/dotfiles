@@ -22,14 +22,6 @@ return function(client, bufnr)
 
   bso('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-  bsk('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  bsk('n', 'gy', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  bsk('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  bsk('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-
-  -- TODO: Revisit if custom function is needed for handling multiple servers
-  bsk('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-
   bsk('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
   bsk('i', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
   bsk('n', '<leader>k', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
@@ -43,6 +35,4 @@ return function(client, bufnr)
   bsk('n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
   bsk('n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
   bsk('n', '<leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-  bsk('n', '<leader>sw', '<cmd>lua vim.lsp.buf.workspace_symbol()<CR>', opts)
-  bsk('n', '<leader>sd', '<cmd>lua vim.lsp.buf.document_symbol()<CR>', opts)
 end

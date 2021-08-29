@@ -28,12 +28,6 @@ map('n', '<leader>ps', ':PackerSync<CR>')
 map('n', '<leader>pu', ':PackerUpdate<CR>')
 map('n', '<leader>pp', ':PackerProfile<CR>')
 
--- FZF
-map('n', '<C-p>', ':Files<CR>')
-map('n', '<leader>/', ':Rg<space>')
-map('n', '<leader>f', ':Rg<space><C-r><C-w><CR>')
-map('n', '<leader>gs', ':GFiles?<CR>')
-
 -- Reload
 map('n', '<leader>rp', ':lua require("plugins.reload").reload_plugins()<CR>')
 map('n', '<leader>re', ':Reload<CR>')

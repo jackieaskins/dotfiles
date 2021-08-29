@@ -91,11 +91,13 @@ return require('packer').startup({
       end,
     })
     use({
-      'junegunn/fzf.vim',
-      requires = { 'junegunn/fzf', run = fn['fzf#install'] },
+      'nvim-telescope/telescope.nvim',
       config = function()
-        require('plugins.fzf')
+        require('plugins.telescope')
       end,
+      requires = {
+        { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
+      },
     })
     -- }}}
 
@@ -122,16 +124,6 @@ return require('packer').startup({
         'nvim-lua/plenary.nvim',
         'neovim/nvim-lspconfig',
       },
-    })
-    use({
-      'ojroques/nvim-lspfuzzy',
-      requires = {
-        { 'junegunn/fzf' },
-        { 'junegunn/fzf.vim' },
-      },
-      config = function()
-        require('lspfuzzy').setup({})
-      end,
     })
     use({
       'rmagatti/goto-preview',

@@ -1,4 +1,5 @@
 local cmd, env, fn, g = vim.cmd, vim.env, vim.fn, vim.g
+local map = require('utils').map
 
 vim.cmd([[
 command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, &columns > 80 ? fzf#vim#with_preview() : {}, <bang>0)
@@ -43,3 +44,8 @@ g.fzf_action = {
   ['ctrl-x'] = 'split',
   ['ctrl-v'] = 'vsplit',
 }
+
+map('n', '<C-p>', ':Files<CR>')
+map('n', '<leader>/', ':Rg<space>')
+map('n', '<leader>f', ':Rg<space><C-r><C-w><CR>')
+map('n', '<leader>gs', ':GFiles?<CR>')
