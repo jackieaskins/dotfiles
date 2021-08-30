@@ -1,8 +1,6 @@
 local fn = vim.fn
 local utils = require('utils')
 local map, t = utils.map, utils.t
-local ts_utils = require('nvim-treesitter.ts_utils')
-local ts_query = require('nvim-treesitter.query')
 
 -- TODO: Allow snippet-like jumping between brackets
 local standard = {
@@ -30,11 +28,11 @@ end
 -- TODO: Make this work for multi-line comments
 local function is_comment_or_string(col)
   local row = fn.line('.') - 1
-  local matches = ts_query.get_capture_matches(0, { '@comment', '@string' }, 'highlights')
+  local matches = require('nvim-treesitter.query').get_capture_matches(0, { '@comment', '@string' }, 'highlights')
 
   for _, match in ipairs(matches) do
     local node = match.node
-    if node and ts_utils.is_in_node_range(node, row, col) then
+    if node and require('nvim-treesitter.ts_utils').is_in_node_range(node, row, col) then
       return true
     end
   end

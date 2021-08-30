@@ -1,6 +1,4 @@
-local cmd, fn = vim.cmd, vim.fn
-
-cmd('packadd packer.nvim')
+vim.cmd('packadd packer.nvim')
 
 return require('packer').startup({
   function(use)
@@ -35,7 +33,13 @@ return require('packer').startup({
     use({ 'tpope/vim-abolish' })
     use({ 'tpope/vim-commentary' })
     use({ 'tpope/vim-repeat' })
-    use({ 'mattn/emmet-vim', event = 'InsertEnter' })
+    use({
+      'mattn/emmet-vim',
+      event = 'InsertEnter',
+      setup = function()
+        require('plugins.emmet')
+      end,
+    })
     use({ 'axelf4/vim-strip-trailing-whitespace' })
     use({
       'iamcco/markdown-preview.nvim',
@@ -160,6 +164,10 @@ return require('packer').startup({
       end,
     })
     use({
+      {
+        'jackieaskins/nvim-ts-autotag',
+        requires = 'nvim-treesitter/nvim-treesitter',
+      },
       {
         'nvim-treesitter/playground',
         cmd = { 'TSPlaygroundToggle', 'TSHighlightCapturesUnderCursor' },
