@@ -27,6 +27,7 @@ map('n', ']<C-l>', ':lnfile<CR>')
 map('n', '<leader>ps', ':PackerSync<CR>')
 map('n', '<leader>pu', ':PackerUpdate<CR>')
 map('n', '<leader>pp', ':PackerProfile<CR>')
+map('n', '<leader>pl', ':PackerLoad ')
 
 -- Reload
 map('n', '<leader>rp', ':lua require("plugins.reload").reload_plugins()<CR>')
@@ -34,6 +35,13 @@ map('n', '<leader>re', ':Reload<CR>')
 
 -- Startup Time
 map('n', '<leader>su', ':StartupTime --tries 20<CR>')
+
+-- Test
+map('n', '<leader>tn', ':TestNearest<CR>')
+map('n', '<leader>tf', ':TestFile<CR>')
+map('n', '<leader>ts', ':TestSuite<CR>')
+map('n', '<leader>tl', ':TestLast<CR>')
+map('n', '<leader>tv', ':TestVisit<CR>')
 
 -- Tree
 map('n', '<C-n>', ':NvimTreeToggle<CR>')

@@ -183,6 +183,22 @@ return require('packer').startup({
       },
     })
     -- }}}
+
+    -- Testing {{{
+    use({
+      'vim-test/vim-test',
+      cmd = {
+        'TestNearest',
+        'TestFile',
+        'TestSuite',
+        'TestLast',
+        'TestVisit',
+      },
+      config = function()
+        require('plugins.test')
+      end,
+    })
+    -- }}}
   end,
   config = {
     display = { prompt_border = 'single' },
