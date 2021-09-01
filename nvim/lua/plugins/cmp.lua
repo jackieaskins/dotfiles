@@ -2,11 +2,12 @@ local fn = vim.fn
 local cmp = require('cmp')
 local t = require('utils').t
 
-require('cmp_nvim_lsp').setup()
-
 vim.opt.completeopt = 'menuone,noselect'
 
 cmp.setup({
+  completion = {
+    keyword_length = 3,
+  },
   snippet = {
     expand = function(args)
       vim.fn['vsnip#anonymous'](args.body)

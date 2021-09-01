@@ -1,1 +1,1 @@
-vim.g.user_emmet_leader_key = '\\m'
+vim.g.user_emmet_mode = 'i'
