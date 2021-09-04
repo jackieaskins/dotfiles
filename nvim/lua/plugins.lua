@@ -1,10 +1,12 @@
 vim.cmd('packadd packer.nvim')
 
+vim.fn.setenv('MACOSX_DEPLOYMENT_TARGET', '10.15')
 return require('packer').startup({
   function(use)
     use({ 'wbthomason/packer.nvim', opt = true })
 
     -- Dev Tools {{{
+    use({ 'lewis6991/impatient.nvim', rocks = 'mpack' })
     use({ 'dstein64/vim-startuptime', cmd = 'StartupTime' })
     use({
       'famiu/nvim-reload',
