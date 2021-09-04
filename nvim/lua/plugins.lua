@@ -37,7 +37,7 @@ return require('packer').startup({
     use({ 'tpope/vim-repeat' })
     use({
       'mattn/emmet-vim',
-      event = 'InsertEnter',
+      keys = { { 'i', '\\m' } },
       setup = function()
         require('plugins.emmet')
       end,
