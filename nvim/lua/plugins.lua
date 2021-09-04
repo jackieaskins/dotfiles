@@ -49,11 +49,18 @@ return require('packer').startup({
       run = 'cd app && npm install',
     })
     use({
-      'hrsh7th/nvim-cmp',
-      event = 'InsertEnter',
+      'L3MON4D3/LuaSnip',
       requires = {
-        { 'hrsh7th/vim-vsnip', after = 'nvim-cmp' },
-        { 'hrsh7th/cmp-vsnip', after = 'nvim-cmp' },
+        'rafamadriz/friendly-snippets',
+      },
+      config = function()
+        require('plugins.LuaSnip')
+      end,
+    })
+    use({
+      'hrsh7th/nvim-cmp',
+      requires = {
+        { 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' },
         { 'hrsh7th/cmp-path', after = 'nvim-cmp' },
         { 'hrsh7th/cmp-calc', after = 'nvim-cmp' },
         { 'hrsh7th/cmp-nvim-lsp' },

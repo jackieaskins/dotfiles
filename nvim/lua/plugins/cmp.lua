@@ -1,8 +1,9 @@
 local fn = vim.fn
 local cmp = require('cmp')
+local luasnip = require('luasnip')
 local t = require('utils').t
 
-vim.opt.completeopt = 'menuone,noselect'
+vim.opt.completeopt = 'menu,menuone,noselect'
 
 cmp.setup({
   completion = {
@@ -10,14 +11,14 @@ cmp.setup({
   },
   snippet = {
     expand = function(args)
-      vim.fn['vsnip#anonymous'](args.body)
+      luasnip.lsp_expand(args.body)
     end,
   },
   sources = {
     { name = 'calc' },
     { name = 'nvim_lsp' },
     { name = 'path' },
-    { name = 'vsnip' },
+    { name = 'luasnip' },
   },
   mapping = {
     ['<C-p>'] = cmp.mapping.select_prev_item(),
@@ -31,8 +32,8 @@ cmp.setup({
       select = false,
     }),
     ['<Tab>'] = cmp.mapping(function(fallback)
-      if fn['vsnip#jumpable'](1) == 1 then
-        fn.feedkeys(t('<Plug>(vsnip-jump-next)'), '')
+      if luasnip.jumpable(1) then
+        fn.feedkeys(t('<Plug>luasnip-jump-next'), '')
       else
         fallback()
       end
@@ -41,8 +42,8 @@ cmp.setup({
       's',
     }),
     ['<S-Tab>'] = cmp.mapping(function(fallback)
-      if fn['vsnip#jumpable'](-1) == 1 then
-        fn.feedkeys(t('<Plug>(vsnip-jump-prev)'), '')
+      if luasnip.jumpable(-1) then
+        fn.feedkeys(t('<Plug>luasnip-jump-prev'), '')
       else
         fallback()
       end
