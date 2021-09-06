@@ -6,9 +6,6 @@ local t = require('utils').t
 vim.opt.completeopt = 'menu,menuone,noselect'
 
 cmp.setup({
-  completion = {
-    keyword_length = 3,
-  },
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body)
@@ -51,5 +48,18 @@ cmp.setup({
       'i',
       's',
     }),
+  },
+})
+
+require('utils').augroup('cmp_filetypes', {
+  {
+    'FileType',
+    'javascript,javascriptreact,typescript,typescriptreact',
+    'lua require("cmp").setup.buffer({ completion = { keyword_length = 3 } })',
+  },
+  {
+    'FileType',
+    'dart',
+    'lua require("cmp").setup.buffer({ completion = { autocomplete = false } })',
   },
 })

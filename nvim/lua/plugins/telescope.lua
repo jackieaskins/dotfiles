@@ -37,7 +37,7 @@ telescope.load_extension('fzf')
 map('n', '<C-p>', '<cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files<CR>')
 map('n', '<leader>/', '<cmd>Telescope live_grep<CR>')
 map('n', '<leader>rg', ':Telescope grep_string search=')
-map('n', '<leader>f', '<cmd>Telescope grep_string<CR>')
+map('n', '<leader>ff', '<cmd>Telescope grep_string<CR>')
 map('n', '<leader>gs', '<cmd>Telescope git_status<CR>')
 
 map('n', 'gi', '<cmd>Telescope lsp_implementations<CR>')

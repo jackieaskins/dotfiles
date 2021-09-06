@@ -49,6 +49,13 @@ return require('packer').startup({
       run = 'cd app && npm install',
     })
     use({
+      'akinsho/flutter-tools.nvim',
+      requires = 'nvim-lua/plenary.nvim',
+      config = function()
+        require('plugins.flutter-tools')
+      end,
+    })
+    use({
       'L3MON4D3/LuaSnip',
       requires = {
         'rafamadriz/friendly-snippets',
