@@ -11,7 +11,29 @@ local function highlight_link(name, to)
   return { 'ColorScheme', '*', 'highlight link ' .. name .. ' ' .. to }
 end
 
-augroup('custom_colors', {
+local lsp_types = {
+  Error = colors.red,
+  Hint = colors.cyan,
+  Information = colors.blue,
+  Warning = colors.yellow,
+}
+local lsp_highlights = {}
+for type, color in pairs(lsp_types) do
+  table.insert(lsp_highlights, highlight_autocmd('LspDiagnosticsDefault' .. type, { guifg = color }))
+  table.insert(
+    lsp_highlights,
+    highlight_autocmd('LspDiagnosticsFloating' .. type, { guifg = color, guibg = colors.bg2 })
+  )
+  table.insert(lsp_highlights, highlight_autocmd('LspDiagnosticsSign' .. type, { guifg = color }))
+  table.insert(
+    lsp_highlights,
+    highlight_autocmd('LspDiagnosticsUnderline' .. type, { guifg = color, gui = 'bold,underline' })
+  )
+  table.insert(lsp_highlights, highlight_autocmd('LspDiagnosticsVirtualText' .. type, { guifg = color }))
+end
+augroup('lsp_highlights', lsp_highlights)
+
+augroup('custom_highlights', {
   highlight_autocmd('CursorLineNr', { guifg = colors.blue }),
   highlight_autocmd('NormalFloat', { guifg = colors.fg, guibg = colors.bg0 }),
 

@@ -1,13 +1,16 @@
 return function(config)
   config.on_attach = function(client, bufnr)
     client.resolved_capabilities.document_formatting = false
+    client.resolved_capabilities.range_formatting = false
+
     require('lsp.attach')(client, bufnr)
 
     require('nvim-lsp-ts-utils').setup({
       enable_import_on_completion = true,
 
       update_imports_on_move = true,
-      require_confirmation_on_move = true,
+      -- TODO: While I'd like this to be set to true, I'm getting a confirmation on every save...
+      -- require_confirmation_on_move = true,
 
       eslint_bin = 'eslint_d',
     })

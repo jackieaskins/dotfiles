@@ -21,3 +21,5 @@ null_ls.config({
     }),
   },
 })
+
+vim.api.nvim_exec('command! NullLsLog vsplit ~/.cache/nvim/null-ls.log', true)

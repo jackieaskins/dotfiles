@@ -18,7 +18,11 @@ local function get_file_icon_component(filename)
 end
 
 local function get_buf_clients()
-  return vim.tbl_values(vim.lsp.buf_get_clients(fn.bufnr('%')))
+  return vim.tbl_filter(function(client)
+    return vim.tbl_contains(client.config.filetypes, bo.filetype)
+  end, vim.tbl_values(
+    vim.lsp.buf_get_clients(fn.bufnr('%'))
+  ))
 end
 
 local function get_lsp_clients_component()
@@ -42,7 +46,7 @@ function GetActiveLine()
   local active_highlight = highlights.define_active('')
   local mode_highlight = highlights.define_active('Mode', modes.get_color())
   local subtle_highlight = highlights.define_active('Subtle', colors.grey)
-  local hint_highlight = highlights.define_active('Hint', colors.green)
+  local hint_highlight = highlights.define_active('Hint', colors.cyan)
   local info_highlight = highlights.define_active('Info', colors.blue)
   local warn_highlight = highlights.define_active('Warn', colors.yellow)
   local error_highlight = highlights.define_active('Error', colors.red)

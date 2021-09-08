@@ -10,7 +10,7 @@ return function(client, bufnr)
   require('lsp_signature').on_attach({
     bind = true, -- Required for border
     handler_opts = { border = 'single' },
-    hint_enable = true,
+    hint_enable = false,
     floating_window = false,
   })
 
