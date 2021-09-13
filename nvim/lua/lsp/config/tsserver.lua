@@ -9,8 +9,7 @@ return function(config)
       enable_import_on_completion = true,
 
       update_imports_on_move = true,
-      -- TODO: While I'd like this to be set to true, I'm getting a confirmation on every save...
-      -- require_confirmation_on_move = true,
+      require_confirmation_on_move = true,
 
       eslint_bin = 'eslint_d',
     })

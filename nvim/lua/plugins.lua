@@ -116,6 +116,7 @@ return require('packer').startup({
     -- File Navigation {{{
     use({
       'kyazdani42/nvim-tree.lua',
+      commit = '425f5eedc7fa2c6152063d59ec1d840136f37d0d',
       requires = 'kyazdani42/nvim-web-devicons',
       cmd = { 'NvimTreeToggle', 'NvimTreeFindFile' },
       config = function()
@@ -136,7 +137,7 @@ return require('packer').startup({
     -- LSP {{{
     use({ 'folke/lua-dev.nvim' })
     use({ 'ray-x/lsp_signature.nvim' })
-    use({ 'jose-elias-alvarez/nvim-lsp-ts-utils' })
+    use({ 'jose-elias-alvarez/nvim-lsp-ts-utils', commit = '2fd9a7d17d48fa95d889f8d7f8677d1375e52a9b' })
     use({
       'kosayoda/nvim-lightbulb',
       config = function()
