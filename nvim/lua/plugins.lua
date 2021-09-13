@@ -35,6 +35,12 @@ return require('packer').startup({
     use({ 'tpope/vim-commentary' })
     use({ 'tpope/vim-repeat' })
     use({
+      'windwp/nvim-autopairs',
+      config = function()
+        require('plugins.autopairs')
+      end,
+    })
+    use({
       'mattn/emmet-vim',
       keys = { { 'i', '\\m' } },
       setup = function()
@@ -64,11 +70,18 @@ return require('packer').startup({
       end,
     })
     use({
+      'hrsh7th/nvim-compe',
+      config = function()
+        require('plugins.compe')
+      end,
+    })
+    use({
       'hrsh7th/nvim-cmp',
+      disable = true,
       requires = {
-        { 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' },
-        { 'hrsh7th/cmp-path', after = 'nvim-cmp' },
-        { 'hrsh7th/cmp-calc', after = 'nvim-cmp' },
+        { 'saadparwaiz1/cmp_luasnip' },
+        { 'hrsh7th/cmp-path' },
+        { 'hrsh7th/cmp-calc' },
         { 'hrsh7th/cmp-nvim-lsp' },
       },
       config = function()

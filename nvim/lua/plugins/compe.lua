@@ -1,4 +1,3 @@
-local fn = vim.fn
 local utils = require('utils')
 local map, t = utils.map, utils.t
 local luasnip = require('luasnip')
@@ -7,6 +6,7 @@ vim.opt.completeopt = 'menuone,noselect'
 
 require('compe').setup({
   enabled = true,
+  min_length = 3,
   source = {
     buffer = true,
     calc = true,
@@ -17,7 +17,7 @@ require('compe').setup({
 })
 
 local compe_opts = { silent = true, expr = true }
-map('i', '<CR>', 'compe#confirm("<CR>")', compe_opts)
+map('i', '<C-Space>', 'compe#complete()', compe_opts)
 map('i', '<C-f>', 'compe#scroll({ "delta": +4 })', compe_opts)
 map('i', '<C-b>', 'compe#scroll({ "delta": -4 })', compe_opts)
 
@@ -26,20 +26,12 @@ _G.tab_complete = function()
     return t('<Plug>luasnip-jump-next')
   end
 
-  if fn.pumvisible() == 1 then
-    return t('<C-n>')
-  end
-
   return t('<Tab>')
 end
 
 _G.s_tab_complete = function()
   if luasnip.jumpable(-1) then
     return t('<Plug>luasnip-jump-prev')
-  end
-
-  if fn.pumvisible() == 1 then
-    return t('<C-p>')
   end
 
   return t('<S-Tab>')
