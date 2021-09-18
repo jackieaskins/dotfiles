@@ -19,17 +19,14 @@ local lsp_types = {
 }
 local lsp_highlights = {}
 for type, color in pairs(lsp_types) do
-  table.insert(lsp_highlights, highlight_autocmd('LspDiagnosticsDefault' .. type, { guifg = color }))
+  table.insert(lsp_highlights, highlight_autocmd('Diagnostic' .. type, { guifg = color }))
+  table.insert(lsp_highlights, highlight_autocmd('DiagnosticFloating' .. type, { guifg = color, guibg = colors.bg2 }))
+  table.insert(lsp_highlights, highlight_autocmd('DiagnosticSign' .. type, { guifg = color }))
   table.insert(
     lsp_highlights,
-    highlight_autocmd('LspDiagnosticsFloating' .. type, { guifg = color, guibg = colors.bg2 })
+    highlight_autocmd('DiagnosticUnderline' .. type, { guifg = color, gui = 'bold,underline' })
   )
-  table.insert(lsp_highlights, highlight_autocmd('LspDiagnosticsSign' .. type, { guifg = color }))
-  table.insert(
-    lsp_highlights,
-    highlight_autocmd('LspDiagnosticsUnderline' .. type, { guifg = color, gui = 'bold,underline' })
-  )
-  table.insert(lsp_highlights, highlight_autocmd('LspDiagnosticsVirtualText' .. type, { guifg = color }))
+  table.insert(lsp_highlights, highlight_autocmd('DiagnoticVirtualText' .. type, { guifg = color }))
 end
 augroup('lsp_highlights', lsp_highlights)
 

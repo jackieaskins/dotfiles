@@ -26,9 +26,9 @@ return function(client, bufnr)
   bsk('i', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
   bsk('n', '<leader>k', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
 
-  bsk('n', 'g?', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({border = "single"})<CR>', opts)
-  bsk('n', '[g', '<cmd>lua vim.lsp.diagnostic.goto_prev({popup_opts = {border = "single"}})<CR>', opts)
-  bsk('n', ']g', '<cmd>lua vim.lsp.diagnostic.goto_next({popup_opts = {border = "single"}})<CR>', opts)
+  bsk('n', 'g?', '<cmd>lua vim.diagnostic.show_line_diagnostics({border = "single"})<CR>', opts)
+  bsk('n', '[g', '<cmd>lua vim.diagnostic.goto_prev({popup_opts = {border = "single"}})<CR>', opts)
+  bsk('n', ']g', '<cmd>lua vim.diagnostic.goto_next({popup_opts = {border = "single"}})<CR>', opts)
 
   bsk('n', '<leader>bf', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 

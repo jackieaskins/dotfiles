@@ -37,7 +37,7 @@ local function get_lsp_diagnostic_component(level)
     return ''
   end
 
-  local count = vim.lsp.diagnostic.get_count(0, level)
+  local count = #vim.diagnostic.get(0, { severity = level})
 
   return lsp_icons[level] .. ' ' .. count .. ' '
 end

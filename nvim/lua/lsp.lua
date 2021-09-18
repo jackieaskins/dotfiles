@@ -8,8 +8,8 @@ vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { 
 vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = 'single' })
 
 for level, icon in pairs(icons) do
-  local sign = 'LspDiagnosticsSign' .. level
-  vim.fn.sign_define(sign, { text = icon })
+  local sign = 'DiagnosticSign' .. level
+  vim.fn.sign_define(sign, { text = icon, texthl = 'DiagnosticSign' .. level })
 end
 
 function _G.GetServers()
