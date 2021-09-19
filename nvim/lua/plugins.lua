@@ -34,6 +34,7 @@ return require('packer').startup({
     use({ 'tpope/vim-abolish' })
     use({ 'tpope/vim-commentary' })
     use({ 'tpope/vim-repeat' })
+    use({ 'tpope/vim-sleuth' })
     use({
       'windwp/nvim-autopairs',
       config = function()
@@ -163,7 +164,7 @@ return require('packer').startup({
       config = function()
         require('goto-preview').setup({ default_mappings = true })
       end,
-      keys = { 'gpd', 'gpi', 'gP' },
+      keys = { 'gpd', 'gpi', 'gpr', 'gP' },
     })
     -- }}}
 
