@@ -23,6 +23,10 @@ map('n', '[<C-l>', ':lpfile<CR>')
 map('n', ']<C-l>', ':lnfile<CR>')
 
 -- Plugins
+-- Fern
+map('n', '<C-n>', ':Fern . -drawer -toggle<CR>', { silent = true })
+map('n', '<leader>n', ':Fern . -drawer -toggle -reveal=%<CR>', { silent = true })
+
 -- Packer
 map('n', '<leader>ps', ':PackerSync<CR>')
 map('n', '<leader>pu', ':PackerUpdate<CR>')
@@ -42,10 +46,6 @@ map('n', '<leader>tf', ':TestFile<CR>')
 map('n', '<leader>ts', ':TestSuite<CR>')
 map('n', '<leader>tl', ':TestLast<CR>')
 map('n', '<leader>tv', ':TestVisit<CR>')
-
--- Tree
-map('n', '<C-n>', ':NvimTreeToggle<CR>')
-map('n', '<leader>n', ':NvimTreeFindFile<CR>')
 
 -- Treesitter
 map('n', '<leader>rn', '<cmd>lua require("plugins.treesitter-refactor").smart_rename()<CR>')

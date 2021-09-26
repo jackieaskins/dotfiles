@@ -45,6 +45,9 @@ function GetTabLine()
       if filetype == 'my_dashboard' then
         return '[Dashboard]'
       end
+      if filetype == 'fern' then
+        return '[Fern]'
+      end
       if bufname == '' then
         return '[No Name]'
       end

@@ -37,7 +37,7 @@ local function get_lsp_diagnostic_component(level)
     return ''
   end
 
-  local count = #vim.diagnostic.get(0, { severity = level})
+  local count = #vim.diagnostic.get(0, { severity = level })
 
   return lsp_icons[level] .. ' ' .. count .. ' '
 end
@@ -61,6 +61,9 @@ function GetActiveLine()
   local readonly_component = bo.readonly and ' ' or ''
 
   local filetype_component = bo.filetype
+  if bo.filetype == 'fern' then
+    filename_component = ''
+  end
   local line_col_percent_component = ' %l:%c │ %p%%'
 
   local function render_based_on_width(component, max_width)

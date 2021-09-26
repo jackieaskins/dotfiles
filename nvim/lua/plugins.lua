@@ -116,12 +116,16 @@ return require('packer').startup({
 
     -- File Navigation {{{
     use({
-      'kyazdani42/nvim-tree.lua',
-      commit = '425f5eedc7fa2c6152063d59ec1d840136f37d0d',
-      requires = 'kyazdani42/nvim-web-devicons',
-      cmd = { 'NvimTreeToggle', 'NvimTreeFindFile' },
+      'lambdalisue/fern.vim',
+      requires = {
+        { 'lambdalisue/fern-hijack.vim' },
+        { 'lambdalisue/fern-git-status.vim', opt = true },
+        { 'lambdalisue/nerdfont.vim', after = 'fern.vim' },
+        { 'lambdalisue/fern-renderer-nerdfont.vim', after = 'fern.vim' },
+      },
+      cmd = { 'Fern' },
       config = function()
-        require('plugins.tree')
+        require('plugins.fern')
       end,
     })
     use({

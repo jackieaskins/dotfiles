@@ -34,12 +34,13 @@ function! s:init_fern() abort
   nmap <buffer><silent> h <Plug>(fern-action-collapse)
   nmap <buffer><silent> l <Plug>(fern-action-expand)
 
+  nmap <buffer><silent> q <Plug>(fern-custom-action-close-drawer)
   nmap <buffer><silent> R <Plug>(fern-action-reload:all)
   nmap <buffer><silent> r <Plug>(fern-action-rename)
-  nmap <buffer><silent> n <Plug>(fern-action-new-path)
+  nmap <buffer><silent> c <Plug>(fern-action-new-path)
   nmap <buffer><silent> m <Plug>(fern-action-move)
   nmap <buffer><silent><nowait> d <Plug>(fern-action-remove)
-  nmap <buffer><silent> c <Plug>(fern-action-copy)
+  nmap <buffer><silent> y <Plug>(fern-action-copy)
   nmap <buffer><silent> - <Plug>(fern-action-mark:toggle)
 endfunction
 
