@@ -37,6 +37,9 @@ augroup('custom_highlights', {
   -- Current definition conflicts with quick-scope
   highlight_autocmd('TSDefinition', { gui = 'reverse' }),
 
+  -- LSP Signature
+  highlight_autocmd('LspSignatureActiveParameter', { guifg = colors.green }),
+
   -- Telescope
   highlight_link('TelescopeSelection', 'CursorLine'),
   highlight_autocmd('TelescopeResultsDiffAdd', { guifg = colors.green }),

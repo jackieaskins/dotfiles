@@ -7,13 +7,6 @@ return function(client, bufnr)
   end
   local opts = { noremap = true, silent = true }
 
-  require('lsp_signature').on_attach({
-    bind = true, -- Required for border
-    handler_opts = { border = 'single' },
-    hint_enable = false,
-    floating_window = false,
-  })
-
   if client.supports_method('textDocument/codeAction') then
     require('utils').augroup_buf('lightbulb', {
       { 'CursorHold,CursorHoldI', '<buffer>', "lua require('nvim-lightbulb').update_lightbulb()" },

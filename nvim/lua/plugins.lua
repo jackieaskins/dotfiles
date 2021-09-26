@@ -141,7 +141,12 @@ return require('packer').startup({
 
     -- LSP {{{
     use({ 'folke/lua-dev.nvim' })
-    use({ 'ray-x/lsp_signature.nvim' })
+    use({
+      'ray-x/lsp_signature.nvim',
+      config = function()
+        require('plugins.lsp_signature')
+      end,
+    })
     use({ 'jose-elias-alvarez/nvim-lsp-ts-utils', commit = '2fd9a7d17d48fa95d889f8d7f8677d1375e52a9b' })
     use({
       'kosayoda/nvim-lightbulb',
