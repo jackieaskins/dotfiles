@@ -12,10 +12,11 @@ cmp.setup({
     end,
   },
   sources = {
+    { name = 'buffer' },
     { name = 'calc' },
+    { name = 'luasnip' },
     { name = 'nvim_lsp' },
     { name = 'path' },
-    { name = 'luasnip' },
   },
   mapping = {
     ['<C-p>'] = cmp.mapping.select_prev_item(),

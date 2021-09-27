@@ -72,18 +72,19 @@ return require('packer').startup({
     })
     use({
       'hrsh7th/nvim-compe',
+      disable = true,
       config = function()
         require('plugins.compe')
       end,
     })
     use({
       'hrsh7th/nvim-cmp',
-      disable = true,
       requires = {
         { 'saadparwaiz1/cmp_luasnip' },
         { 'hrsh7th/cmp-path' },
         { 'hrsh7th/cmp-calc' },
         { 'hrsh7th/cmp-nvim-lsp' },
+        { 'hrsh7th/cmp-buffer' },
       },
       config = function()
         require('plugins.cmp')

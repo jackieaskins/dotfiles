@@ -20,6 +20,7 @@ return function(config)
       capabilities = config.capabilities,
       on_attach = config.on_attach,
       cmd = { sumneko_binary, '-E', sumneko_root_path .. '/main.lua' },
+      settings = { Lua = { diagnostics = { globals = { 'packer_plugins' } } } },
     },
   })
 

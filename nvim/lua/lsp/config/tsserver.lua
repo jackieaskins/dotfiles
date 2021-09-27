@@ -1,7 +1,7 @@
 return function(config)
   config.on_attach = function(client, bufnr)
     client.resolved_capabilities.document_formatting = false
-    client.resolved_capabilities.range_formatting = false
+    client.resolved_capabilities.document_range_formatting = false
 
     require('lsp.attach')(client, bufnr)
 
