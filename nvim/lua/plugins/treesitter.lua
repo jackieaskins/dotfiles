@@ -3,6 +3,7 @@ require('nvim-treesitter.configs').setup({
     enable = true,
     skip_close_shortcut = '\\>',
   },
+  context_commentstring = { enable = true },
   ensure_installed = {
     'bash',
     'css',

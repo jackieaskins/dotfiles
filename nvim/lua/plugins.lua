@@ -205,22 +205,14 @@ return require('packer').startup({
     })
     use({
       {
-        'jackieaskins/nvim-ts-autotag',
-        requires = 'nvim-treesitter/nvim-treesitter',
-      },
-      {
         'nvim-treesitter/playground',
         cmd = { 'TSPlaygroundToggle', 'TSHighlightCapturesUnderCursor' },
         requires = 'nvim-treesitter/nvim-treesitter',
       },
-      {
-        'nvim-treesitter/nvim-treesitter-refactor',
-        requires = 'nvim-treesitter/nvim-treesitter',
-      },
-      {
-        'RRethy/nvim-treesitter-textsubjects',
-        requires = 'nvim-treesitter/nvim-treesitter',
-      },
+      { 'jackieaskins/nvim-ts-autotag', requires = 'nvim-treesitter/nvim-treesitter' },
+      { 'nvim-treesitter/nvim-treesitter-refactor', requires = 'nvim-treesitter/nvim-treesitter' },
+      { 'RRethy/nvim-treesitter-textsubjects', requires = 'nvim-treesitter/nvim-treesitter' },
+      { 'JoosepAlviste/nvim-ts-context-commentstring', requires = 'nvim-treesitter/nvim-treesitter' },
     })
     -- }}}
 
