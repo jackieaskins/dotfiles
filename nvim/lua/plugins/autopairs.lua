@@ -11,6 +11,5 @@ elseif packer_plugins['nvim-cmp'] then
     map_cr = true,
     map_complete = true,
     auto_select = false,
-    insert = false,
   })
 end

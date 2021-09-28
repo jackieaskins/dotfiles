@@ -12,7 +12,6 @@ cmp.setup({
     end,
   },
   sources = {
-    { name = 'buffer' },
     { name = 'calc' },
     { name = 'luasnip' },
     { name = 'nvim_lsp' },
@@ -25,10 +24,6 @@ cmp.setup({
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
     ['<C-e>'] = cmp.mapping.close(),
-    ['<CR>'] = cmp.mapping.confirm({
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = false,
-    }),
     ['<Tab>'] = cmp.mapping(function(fallback)
       if luasnip.jumpable(1) then
         fn.feedkeys(t('<Plug>luasnip-jump-next'), '')
