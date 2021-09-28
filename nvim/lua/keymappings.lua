@@ -23,6 +23,10 @@ map('n', '[<C-l>', ':lpfile<CR>')
 map('n', ']<C-l>', ':lnfile<CR>')
 
 -- Plugins
+-- Code Action Menu
+map('n', '<leader>ca', ':CodeActionMenu<CR>')
+map('x', '<leader>ca', ':CodeActionMenu<CR>')
+
 -- Fern
 map('n', '<C-n>', ':Fern . -drawer -toggle<CR>', { silent = true })
 map('n', '<leader>n', ':Fern . -drawer -toggle -reveal=%<CR>', { silent = true })
