@@ -39,9 +39,6 @@ augroup('colorcolumn', {
 })
 
 -- Dashboard
-augroup('dashboard', {
-  { 'VimEnter', '*', 'lua require("dashboard").show(1)' },
-})
 cmd('command! Dashboard lua require("dashboard").show()')
 
 -- Status Line

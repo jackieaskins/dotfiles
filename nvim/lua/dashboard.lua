@@ -53,6 +53,8 @@ function M.show(on_vimenter)
     require('dashboard.version')(),
     spacer,
     spacer,
+    require('dashboard.empty_buffer')(),
+    spacer,
     require('dashboard.mru')(),
     spacer,
     require('dashboard.quit')(),

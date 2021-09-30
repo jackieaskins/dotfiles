@@ -9,7 +9,7 @@ syntax match MyDashboardVersion /Version:.*/
 
 syntax region MyDashboardBrackets start=/\[/ end=/\]/ contained
 syntax match MyDashboardDirectory /[^\]]*\// contained
-syntax match MyDashboardFile /\[.\][^<quit>].*/ contains=MyDashboardBrackets,MyDashboardDirectory
+syntax match MyDashboardFile /\[.\].*/ contains=MyDashboardBrackets,MyDashboardDirectory
 syntax match MyDashboardMRU /MRU.*/
 
 highlight default link MyDashboardHeader Directory
