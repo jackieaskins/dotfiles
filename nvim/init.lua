@@ -9,6 +9,8 @@ if file_exists('~/dotfiles/nvim/lua/custom.lua') then
   require('custom')
 end
 
+require('closer')
+
 require('plugins')
 require('lsp')
 require('colorscheme')

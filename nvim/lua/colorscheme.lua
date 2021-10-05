@@ -16,6 +16,7 @@ local lsp_types = {
   Hint = colors.cyan,
   Information = colors.blue,
   Warning = colors.yellow,
+  Warn = colors.yellow,
 }
 local lsp_highlights = {}
 for type, color in pairs(lsp_types) do

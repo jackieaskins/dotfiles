@@ -36,12 +36,6 @@ return require('packer').startup({
     use({ 'tpope/vim-repeat' })
     use({ 'tpope/vim-sleuth' })
     use({
-      'windwp/nvim-autopairs',
-      config = function()
-        require('plugins.autopairs')
-      end,
-    })
-    use({
       'mattn/emmet-vim',
       keys = { { 'i', '\\m' } },
       setup = function()
@@ -58,17 +52,6 @@ return require('packer').startup({
       'L3MON4D3/LuaSnip',
       config = function()
         require('plugins.LuaSnip')
-      end,
-    })
-    use({
-      'weilbith/nvim-code-action-menu',
-      cmd = 'CodeActionMenu',
-    })
-    use({
-      'hrsh7th/nvim-compe',
-      disable = true,
-      config = function()
-        require('plugins.compe')
       end,
     })
     use({

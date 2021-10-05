@@ -46,5 +46,8 @@ map('n', 'gi', '<cmd>Telescope lsp_implementations<CR>')
 map('n', 'gd', '<cmd>Telescope lsp_definitions<CR>')
 map('n', 'gr', '<cmd>Telescope lsp_references<CR>')
 
+map('n', '<leader>ca', '<cmd>Telescope lsp_code_actions<CR>')
+map('x', '<leader>ca', '<cmd>Telescope lsp_code_actions<CR>')
+
 map('n', '<leader>sw', '<cmd>Telescope lsp_dynamic_workspace_symbols<CR>')
 map('n', '<leader>sd', '<cmd>Telescope lsp_document_symbols<CR>')

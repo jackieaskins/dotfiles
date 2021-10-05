@@ -73,5 +73,4 @@ function _G.close()
   return ''
 end
 
--- map('i', '<CR>', 'v:lua.close()', { expr = true, silent = true })
-map('i', '<Plug>CloserCR', 'v:lua.close()', { expr = true, silent = true })
+map('i', '<CR>', 'v:lua.close()', { expr = true, silent = true })
