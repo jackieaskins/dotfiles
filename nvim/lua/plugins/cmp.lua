@@ -50,16 +50,3 @@ cmp.setup({
     }),
   },
 })
-
-require('utils').augroup('cmp_filetypes', {
-  {
-    'FileType',
-    'javascript,javascriptreact,typescript,typescriptreact',
-    'lua require("cmp").setup.buffer({ completion = { keyword_length = 3 } })',
-  },
-  {
-    'FileType',
-    'dart',
-    'lua require("cmp").setup.buffer({ completion = { autocomplete = false } })',
-  },
-})
