@@ -124,7 +124,7 @@ return require('packer').startup({
         require('plugins.lsp_signature')
       end,
     })
-    use({ 'jose-elias-alvarez/nvim-lsp-ts-utils', commit = '2fd9a7d17d48fa95d889f8d7f8677d1375e52a9b' })
+    use({ 'jose-elias-alvarez/nvim-lsp-ts-utils' })
     use({
       'kosayoda/nvim-lightbulb',
       config = function()
@@ -185,10 +185,22 @@ return require('packer').startup({
         cmd = { 'TSPlaygroundToggle', 'TSHighlightCapturesUnderCursor' },
         requires = 'nvim-treesitter/nvim-treesitter',
       },
-      { 'jackieaskins/nvim-ts-autotag', requires = 'nvim-treesitter/nvim-treesitter' },
-      { 'nvim-treesitter/nvim-treesitter-refactor', requires = 'nvim-treesitter/nvim-treesitter' },
-      { 'RRethy/nvim-treesitter-textsubjects', requires = 'nvim-treesitter/nvim-treesitter' },
-      { 'JoosepAlviste/nvim-ts-context-commentstring', requires = 'nvim-treesitter/nvim-treesitter' },
+      {
+        'jackieaskins/nvim-ts-autotag',
+        requires = 'nvim-treesitter/nvim-treesitter',
+      },
+      {
+        'nvim-treesitter/nvim-treesitter-refactor',
+        requires = 'nvim-treesitter/nvim-treesitter',
+      },
+      {
+        'RRethy/nvim-treesitter-textsubjects',
+        requires = 'nvim-treesitter/nvim-treesitter',
+      },
+      {
+        'JoosepAlviste/nvim-ts-context-commentstring',
+        requires = 'nvim-treesitter/nvim-treesitter',
+      },
     })
     -- }}}
 

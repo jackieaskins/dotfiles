@@ -14,8 +14,7 @@ end
 local lsp_types = {
   Error = colors.red,
   Hint = colors.cyan,
-  Information = colors.blue,
-  Warning = colors.yellow,
+  Info = colors.blue,
   Warn = colors.yellow,
 }
 local lsp_highlights = {}
