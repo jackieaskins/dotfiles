@@ -8,5 +8,6 @@ tags.temp
 .DS_Store
 
 .ignore
+.projections.json
 
 /google-java-format.jar

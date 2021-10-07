@@ -33,6 +33,7 @@ return require('packer').startup({
     -- Editing {{{
     use({ 'tpope/vim-abolish' })
     use({ 'tpope/vim-commentary' })
+    use({ 'tpope/vim-projectionist' })
     use({ 'tpope/vim-repeat' })
     use({ 'tpope/vim-sleuth' })
     use({
