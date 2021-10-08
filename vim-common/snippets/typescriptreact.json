@@ -26,7 +26,7 @@
   "React Context Component": {
     "prefix": "rcc",
     "body": [
-      "import { createContext, ReactNode, useContext } from 'react';",
+      "import { createContext, ReactNode, useContext } from \"react\";",
       "",
       "type ${1:$TM_FILENAME_BASE}State = {",
       "  ${2}",
@@ -48,15 +48,15 @@
   "Enzyme Test Setup": {
     "prefix": "enz",
     "body": [
-      "import { shallow } from 'enzyme';",
+      "import { shallow } from \"enzyme\";",
       "",
-      "import ${1:${TM_FILENAME_BASE}} from './$1';",
+      "import ${1:${TM_FILENAME_BASE}} from \"./$1\";",
       "",
-      "describe('<$1 />', () => {",
+      "describe(\"<$1 />\", () => {",
       "  const renderComponent = (propOverrides = {}) =>",
       "    shallow(<$1 ${2}{...propOverrides} />);",
       "",
-      "  it('renders ${3:properly}', () => {",
+      "  it(\"renders ${3:properly}\", () => {",
       "    expect(renderComponent()).toMatchSnapshot();",
       "  });",
       "",
