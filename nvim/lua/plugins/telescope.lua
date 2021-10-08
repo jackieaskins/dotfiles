@@ -4,8 +4,9 @@ local map = require('utils').map
 
 telescope.setup({
   defaults = {
-    layout_strategy = 'flex',
+    layout_strategy = 'vertical',
     layout_config = {
+      mirror = true,
       prompt_position = 'top',
     },
     sorting_strategy = 'ascending',

@@ -34,6 +34,12 @@ augroup('custom_highlights', {
   highlight_autocmd('CursorLineNr', { guifg = colors.blue }),
   highlight_autocmd('NormalFloat', { guifg = colors.fg, guibg = colors.bg0 }),
 
+  -- Cmp
+  highlight_autocmd('CmpItemKind', { guifg = colors.purple }),
+  highlight_autocmd('CmpItemAbbrMatch', { guifg = colors.fg }),
+  highlight_autocmd('CmpItemAbbrDeprecated', { guifg = colors.red }),
+  highlight_autocmd('CmpItemMenu', { guibg = colors.bg2 }),
+
   -- Current definition conflicts with quick-scope
   highlight_autocmd('TSDefinition', { gui = 'reverse' }),
 
