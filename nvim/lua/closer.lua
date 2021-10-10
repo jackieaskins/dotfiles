@@ -21,24 +21,57 @@ local function is_comment_or_string(col)
   return false
 end
 
+local function is_followed_by_close(rest_of_line, close_to_opens_map)
+  local first_word = rest_of_line:match('(%w+)(%W+)') or ''
+  local next_char = vim.trim(rest_of_line):sub(1, 1) or ''
+
+  local checks = { rest_of_line, first_word, next_char }
+
+  for close, _ in pairs(close_to_opens_map) do
+    if vim.tbl_contains(checks, close) then
+      return true
+    end
+  end
+
+  return false
+end
+
 function _G.close()
   local tag_result = require('closer.tags').handle_tags()
   if tag_result ~= nil then
     return ''
   end
 
-  if fn.col('.') < fn.col('$') then
-    return new_line()
-  end
-
   local open_to_close_map, close_to_opens_map, pattern = require('closer.pairs').get_filetype_opts()
+  local line = fn.getline('.')
+  local curr_col = fn.col('.')
+
+  if curr_col < fn.col('$') then
+    local rest_of_line = string.sub(line, curr_col)
+
+    new_line()
+    if is_followed_by_close(rest_of_line, close_to_opens_map) then
+      fn.feedkeys(t('<Esc>==O'))
+    end
+
+    return ''
+  end
 
   local stack = {}
   local start = 0
-  local line = fn.getline('.')
 
   repeat
     local matched, match_start, match_end = unpack(fn.matchstrpos(line, pattern, start))
+
+    if matched:match('^%w+$') ~= nil then
+      if match_start ~= 0 and line:sub(match_start, match_start):match('%w') ~= nil then
+        matched = nil
+      end
+
+      if match_end + 1 ~= #line and line:sub(match_end + 1, match_end + 1):match('%w') ~= nil then
+        matched = nil
+      end
+    end
     start = match_end
 
     if is_comment_or_string(match_start) then
