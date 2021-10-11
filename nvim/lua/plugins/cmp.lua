@@ -3,6 +3,13 @@ local cmp = require('cmp')
 local luasnip = require('luasnip')
 local t = require('utils').t
 
+local source_menu_map = {
+  calc = 'Calc',
+  luasnip = 'Snip',
+  nvim_lsp = 'LSP',
+  path = 'Path',
+}
+
 vim.opt.completeopt = 'menu,menuone,noselect'
 
 cmp.setup({
@@ -11,11 +18,18 @@ cmp.setup({
       luasnip.lsp_expand(args.body)
     end,
   },
-  sources = {
-    { name = 'calc' },
-    { name = 'luasnip' },
-    { name = 'nvim_lsp' },
-    { name = 'path' },
+  sources = vim.tbl_map(function(source)
+    return { name = source }
+  end, vim.tbl_keys(source_menu_map)),
+  documentation = {
+    border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
+  },
+  formatting = {
+    format = function(entry, vim_item)
+      local source = entry.source.name
+      vim_item.menu = '[' .. source_menu_map[source] .. ']'
+      return vim_item
+    end,
   },
   mapping = {
     ['<C-p>'] = cmp.mapping.select_prev_item(),
