@@ -22,6 +22,8 @@ map('n', ']L', ':llast<CR>')
 map('n', '[<C-l>', ':lpfile<CR>')
 map('n', ']<C-l>', ':lnfile<CR>')
 
+map('n', '<leader>rn', '<cmd>lua require("rename").smart_rename()<CR>')
+
 -- Plugins
 -- Fern
 map('n', '<C-n>', ':Fern . -drawer -toggle<CR>', { silent = true })
@@ -46,6 +48,3 @@ map('n', '<leader>tf', ':TestFile<CR>')
 map('n', '<leader>ts', ':TestSuite<CR>')
 map('n', '<leader>tl', ':TestLast<CR>')
 map('n', '<leader>tv', ':TestVisit<CR>')
-
--- Treesitter
-map('n', '<leader>rn', '<cmd>lua require("plugins.treesitter-refactor").smart_rename()<CR>')
