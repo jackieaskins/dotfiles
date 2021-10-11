@@ -38,7 +38,7 @@ return require('packer').startup({
     use({ 'tpope/vim-sleuth' })
     use({
       'mattn/emmet-vim',
-      keys = { { 'i', '\\m' } },
+      keys = { { 'i', '<C-y>' } },
       setup = function()
         require('plugins.emmet')
       end,
