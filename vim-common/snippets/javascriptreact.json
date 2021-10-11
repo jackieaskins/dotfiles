@@ -5,7 +5,7 @@
       "import React from \"react\"",
       "",
       "const ${1:$TM_FILENAME_BASE} = () => (",
-      "  ${2:<div />}",
+      "\t${2:<div />}",
       ");",
       "",
       "export default $1;"
@@ -17,7 +17,7 @@
       "import React from \"react\"",
       "",
       "const $1 = (${3:props}) => (",
-      "  ${4:<div />}",
+      "\t${4:<div />}",
       ");",
       "",
       "export default $1;"
@@ -32,14 +32,14 @@
       "import ${1:${TM_FILENAME_BASE}} from './$1';",
       "",
       "describe(\"$1\", () => {",
-      "  const renderComponent = (propOverrides = {}) =>",
-      "    shallow(<$1 ${2}{...propOverrides} />);",
+      "\tconst renderComponent = (propOverrides = {}) =>",
+      "\t\tshallow(<$1 ${2}{...propOverrides} />);",
       "",
-      "  it(\"renders ${3:properly}\", () => {",
-      "    expect(renderComponent()).toMatchSnapshot();",
-      "  });",
+      "\tit(\"renders ${3:properly}\", () => {",
+      "\t\texpect(renderComponent()).toMatchSnapshot();",
+      "\t});",
       "",
-      "  ${4}",
+      "\t${4}",
       "});"
     ]
   }
