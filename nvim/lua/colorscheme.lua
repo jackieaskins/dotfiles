@@ -34,8 +34,10 @@ augroup('custom_highlights', {
   highlight_autocmd('CursorLineNr', { guifg = colors.blue }),
   highlight_autocmd('NormalFloat', { guifg = colors.fg, guibg = colors.bg0 }),
 
+  highlight_autocmd('TSPlaygroundFocus', { guibg = colors.bg4 }),
+
   -- Cmp
-  highlight_autocmd('CmpItemMenu', { guifg = colors.blue }),
+  highlight_autocmd('CmpItemMenu', { guifg = colors.grey }),
   highlight_autocmd('CmpItemKind', { guifg = colors.blue }),
   highlight_autocmd('CmpItemAbbrMatch', { guifg = colors.fg }),
   highlight_autocmd('CmpItemAbbrDeprecated', { guifg = colors.red }),

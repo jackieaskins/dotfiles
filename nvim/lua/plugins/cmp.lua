@@ -11,8 +11,10 @@ local source_menu_map = {
 }
 
 vim.opt.completeopt = 'menu,menuone,noselect'
+vim.opt.lazyredraw = true -- Required to reduce flickering
 
 cmp.setup({
+  preselect = cmp.PreselectMode.None,
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body)
@@ -27,7 +29,7 @@ cmp.setup({
   formatting = {
     format = function(entry, vim_item)
       local source = entry.source.name
-      vim_item.menu = '[' .. source_menu_map[source] .. ']'
+      vim_item.menu = source_menu_map[source]
       return vim_item
     end,
   },

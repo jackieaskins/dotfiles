@@ -6,9 +6,12 @@ telescope.setup({
   defaults = {
     layout_strategy = 'vertical',
     layout_config = {
-      mirror = true,
+      vertical = {
+        mirror = true,
+      },
       prompt_position = 'top',
     },
+    path_display = { 'truncate' },
     sorting_strategy = 'ascending',
     mappings = {
       i = {
@@ -40,7 +43,7 @@ map('n', '<leader>rg', ':Telescope grep_string search=')
 map('n', '<leader>/', '<cmd>Telescope live_grep only_sort_text=true<CR>')
 map('n', '<leader>ff', '<cmd>Telescope grep_string<CR>')
 map('n', '<leader>gs', '<cmd>Telescope git_status<CR>')
-map('n', '<leader>bu', '<cmd>Telescope buffers<CR>')
+map('n', '<leader>bu', '<cmd>Telescope buffers sort_mru=true<CR>')
 map('n', '<leader>of', '<cmd>Telescope oldfiles cwd_only=true sort_lastused=true include_current_session=true<CR>')
 
 map('n', 'gi', '<cmd>Telescope lsp_implementations<CR>')
