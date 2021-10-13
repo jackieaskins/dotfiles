@@ -3,15 +3,21 @@ local cmp = require('cmp')
 local luasnip = require('luasnip')
 local t = require('utils').t
 
+-- Order dictates priority
 local source_menu_map = {
-  calc = 'Calc',
   luasnip = 'Snip',
   nvim_lsp = 'LSP',
+  buffer = 'Buff',
   path = 'Path',
+  calc = 'Calc',
 }
 
+local sources = {}
+for source, _ in pairs(source_menu_map) do
+  table.insert(sources, { name = source })
+end
+
 vim.opt.completeopt = 'menu,menuone,noselect'
-vim.opt.lazyredraw = true -- Required to reduce flickering
 
 cmp.setup({
   preselect = cmp.PreselectMode.None,
@@ -20,9 +26,7 @@ cmp.setup({
       luasnip.lsp_expand(args.body)
     end,
   },
-  sources = vim.tbl_map(function(source)
-    return { name = source }
-  end, vim.tbl_keys(source_menu_map)),
+  sources = sources,
   documentation = {
     border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
   },

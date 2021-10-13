@@ -39,6 +39,7 @@ augroup('custom_highlights', {
   -- Cmp
   highlight_autocmd('CmpItemMenu', { guifg = colors.grey }),
   highlight_autocmd('CmpItemKind', { guifg = colors.blue }),
+  highlight_autocmd('CmpItemAbbr', { guifg = colors.grey }),
   highlight_autocmd('CmpItemAbbrMatch', { guifg = colors.fg }),
   highlight_autocmd('CmpItemAbbrDeprecated', { guifg = colors.red }),
   highlight_autocmd('CmpItemMenu', { guibg = colors.bg2 }),
