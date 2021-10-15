@@ -11,7 +11,9 @@ return function(config)
       update_imports_on_move = true,
       require_confirmation_on_move = true,
 
-      eslint_bin = 'eslint_d',
+      eslint_enable_code_actions = false,
+      eslint_enable_disable_comments = false,
+      eslint_enable_diagnostics = false,
     })
 
     local function bsk(...)

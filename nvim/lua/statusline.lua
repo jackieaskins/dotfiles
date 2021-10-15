@@ -18,18 +18,27 @@ local function get_file_icon_component(filename)
 end
 
 local function get_buf_clients()
-  return vim.tbl_filter(function(client)
-    return vim.tbl_contains(client.config.filetypes, bo.filetype)
-  end, vim.tbl_values(
-    vim.lsp.buf_get_clients(fn.bufnr('%'))
-  ))
+  return vim.lsp.buf_get_clients(fn.bufnr('%'))
 end
 
 local function get_lsp_clients_component()
-  local client_names = vim.tbl_map(function(client)
-    return client.name
-  end, get_buf_clients())
-  return table.concat(client_names, ' ')
+  local client_names = {}
+
+  for _, client in ipairs(get_buf_clients()) do
+    if client.name == 'null-ls' then
+      local active_sources = vim.tbl_flatten(
+        vim.tbl_values(require('null-ls.info').get_active_sources(fn.bufnr('%'), bo.filetype))
+      )
+
+      for _, source in ipairs(active_sources) do
+        client_names[source] = true
+      end
+    else
+      client_names[client.name] = true
+    end
+  end
+
+  return table.concat(vim.tbl_keys(client_names), ' ')
 end
 
 local function get_lsp_diagnostic_component(level)

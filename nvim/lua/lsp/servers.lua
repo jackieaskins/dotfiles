@@ -1,4 +1,5 @@
 return {
+  'eslint',
   -- 'graphql',
   -- 'html',
   -- 'jdtls',

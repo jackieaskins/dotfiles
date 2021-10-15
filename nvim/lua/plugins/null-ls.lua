@@ -13,12 +13,6 @@ null_ls.config({
       end,
       filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
     }),
-    null_ls.builtins.diagnostics.eslint_d.with({
-      diagnostics_format = '[eslint] #{m} (#{c})',
-      condition = function(utils)
-        return utils.root_has_file('node_modules/eslint')
-      end,
-    }),
   },
 })
 
