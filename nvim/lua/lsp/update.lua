@@ -1,6 +1,14 @@
 local cmd, fn = vim.cmd, vim.fn
 
+local function get_active_server_names()
+  return vim.tbl_map(function(client)
+    return client.name
+  end, vim.lsp.buf_get_clients(0))
+end
+
 local function update_servers(server_list)
+  server_list = server_list or get_active_server_names()
+
   local generic_installs = {
     npm = { cmd = 'npm install -g', servers = {}, packages = {} },
     gem = { cmd = 'gem install --user-install', servers = {}, packages = {} },
@@ -65,7 +73,7 @@ end
 
 return {
   update_servers = function(server_names)
-    update_servers(vim.split(server_names, ' '))
+    update_servers(server_names and vim.split(server_names, ' ') or nil)
   end,
   update_all_servers = function()
     update_servers(require('lsp.servers'))

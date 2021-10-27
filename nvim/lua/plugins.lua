@@ -223,7 +223,7 @@ return require('packer').startup({
     -- }}}
   end,
   config = {
-    display = { prompt_border = 'single' },
+    display = { prompt_border = 'rounded' },
     profile = { enable = true },
   },
 })

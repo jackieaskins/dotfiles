@@ -38,6 +38,7 @@ cmp.setup({
     end,
   },
   mapping = {
+    ['<C-y>'] = cmp.config.disable,
     ['<C-p>'] = cmp.mapping.select_prev_item(),
     ['<C-n>'] = cmp.mapping.select_next_item(),
     ['<C-b>'] = cmp.mapping.scroll_docs(-4),
@@ -49,7 +50,11 @@ cmp.setup({
       select = false,
     }),
     ['<Tab>'] = cmp.mapping(function(fallback)
-      if luasnip.jumpable(1) then
+      local col = vim.fn.col('.') - 1
+
+      if col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') ~= nil then
+        fallback()
+      elseif luasnip.jumpable(1) then
         fn.feedkeys(t('<Plug>luasnip-jump-next'), '')
       else
         fallback()

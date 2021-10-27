@@ -1,12 +1,12 @@
 local icons = require('lsp.icons')
 
-vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'single' })
+vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'rounded' })
 vim.diagnostic.config({
   virtual_text = false,
   update_in_insert = true,
   float = {
     source = 'always',
-    border = 'single',
+    border = 'rounded',
   },
   severity_sort = true,
 })
@@ -24,7 +24,7 @@ vim.api.nvim_exec(
   [[
   command! LspLog vsplit ~/.cache/nvim/lsp.log
   command! LspUpdateAll lua require('lsp.update').update_all_servers()
-  command! -nargs=1 -complete=custom,v:lua.GetServers LspUpdate lua require('lsp.update').update_servers(<f-args>)
+  command! -nargs=? -complete=custom,v:lua.GetServers LspUpdate lua require('lsp.update').update_servers(<f-args>)
 ]],
   true
 )
