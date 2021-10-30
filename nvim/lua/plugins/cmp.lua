@@ -50,11 +50,7 @@ cmp.setup({
       select = false,
     }),
     ['<Tab>'] = cmp.mapping(function(fallback)
-      local col = vim.fn.col('.') - 1
-
-      if col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') ~= nil then
-        fallback()
-      elseif luasnip.jumpable(1) then
+      if luasnip.jumpable(1) then
         fn.feedkeys(t('<Plug>luasnip-jump-next'), '')
       else
         fallback()

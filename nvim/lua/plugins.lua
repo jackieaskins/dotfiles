@@ -148,6 +148,12 @@ return require('packer').startup({
       },
     })
     use({
+      'simrat39/symbols-outline.nvim',
+      config = function()
+        require('plugins.symbols-outline')
+      end,
+    })
+    use({
       'rmagatti/goto-preview',
       config = function()
         require('goto-preview').setup({ default_mappings = true })
