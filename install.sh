@@ -83,6 +83,16 @@ else
 fi
 
 #--------------------------------------------------------------------#
+#                         Global Git Config                          #
+#--------------------------------------------------------------------#
+echo -e "Configuring Global Gitignore..."
+git config --global core.excludesfile ~/.gitignore_global
+git config --global pull.rebase true
+git config --global rerere.enabled true
+git config --global rebase.autoStash true
+success_echo "Configured Global Gitignore."
+
+#--------------------------------------------------------------------#
 #                          Submodule Update                          #
 #--------------------------------------------------------------------#
 echo -e "Updating submodules..."
@@ -136,21 +146,9 @@ backup_and_symlink .vimrc                        vimrc                        vi
 backup_and_symlink .vim                          vim                          vim
 backup_and_symlink .config/nvim                  nvim                         nvim
 backup_and_symlink .tmux.conf                    tmux.conf                    tmux.conf
-backup_and_symlink .zfunctions/prompt_pure_setup zfunctions/prompt_pure_setup pure/pure.zsh
-backup_and_symlink .zfunctions/async             zfunctions/async             pure/async.zsh
 backup_and_symlink .iterm2_shell_integration.zsh iterm2_shell_integration.zsh iterm2_shell_integration.zsh
 backup_and_symlink .gitignore_global             gitignore_global             gitignore_global
 success_echo "Dotfiles backed up and symlinked."
-
-#--------------------------------------------------------------------#
-#                         Global Git Config                          #
-#--------------------------------------------------------------------#
-echo -e "Configuring Global Gitignore..."
-git config --global core.excludesfile ~/.gitignore_global
-git config --global pull.rebase true
-git config --global rerere.enabled true
-git config --global rebase.autoStash true
-success_echo "Configured Global Gitignore."
 
 #--------------------------------------------------------------------#
 #                           Neovim Config                            #

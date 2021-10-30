@@ -6,6 +6,7 @@ brew 'neovim', args: ['HEAD']
 brew 'ninja'
 brew 'node@12'
 brew 'node@14'
+brew 'pure'
 brew 'ripgrep'
 brew 'ruby'
 brew 'rust'
