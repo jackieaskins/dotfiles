@@ -149,6 +149,7 @@ echo -e "Configuring Global Gitignore..."
 git config --global core.excludesfile ~/.gitignore_global
 git config --global pull.rebase true
 git config --global rerere.enabled true
+git config --global rebase.autoStash true
 success_echo "Configured Global Gitignore."
 
 #--------------------------------------------------------------------#

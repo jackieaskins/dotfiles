@@ -209,6 +209,11 @@ return require('packer').startup({
         'JoosepAlviste/nvim-ts-context-commentstring',
         requires = 'nvim-treesitter/nvim-treesitter',
       },
+      {
+        's1n7ax/nvim-comment-frame',
+        requires = 's1n7ax/nvim-comment-frame',
+        module = 'nvim-comment-frame',
+      },
     })
     -- }}}
 

@@ -25,6 +25,9 @@ map('n', ']<C-l>', ':lnfile<CR>')
 map('n', '<leader>rn', '<cmd>lua require("rename").smart_rename()<CR>')
 
 -- Plugins
+-- Comment Frame
+map('n', '<leader>cf', ':lua require("nvim-comment-frame").add_multiline_comment()<CR>')
+
 -- Fern
 map('n', '<C-n>', ':Fern . -drawer -toggle<CR>', { silent = true })
 map('n', '<leader>n', ':Fern . -drawer -toggle -reveal=%<CR>', { silent = true })
