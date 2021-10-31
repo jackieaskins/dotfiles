@@ -57,6 +57,7 @@ if [ -x "$(command -v brew)" ]; then
 else
   echo -e "Homebrew is not installed, let's change that..."
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  [ -d /opt/homebrew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 echo -e "Bundling Homebrew packages..."
 brew bundle --file ./Brewfile
@@ -101,11 +102,9 @@ backup_dir=~/dotfiles_backups/$timestamp
 
 echo -e "Creating dotfiles backup directory..."
 mkdir -p "$backup_dir"
-mkdir "$backup_dir/zfunctions"
 mkdir "$backup_dir/nvim"
 success_echo "Backup directory created at $backup_dir."
 
-[ -d ~/.zfunctions ] || mkdir ~/.zfunctions
 [ -d ~/.config ] || mkdir ~/.config
 
 function backup_and_symlink() {

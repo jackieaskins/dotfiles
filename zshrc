@@ -1,3 +1,9 @@
+if [[ -d /opt/homebrew ]] then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+else
+  eval "$(/usr/local/bin/brew shellenv)"
+fi
+
 zsh_config=$HOME/dotfiles/zsh
 export VISUAL='nvim'
 export EDITOR='nvim'
@@ -9,7 +15,7 @@ export KEYTIMEOUT=1
 bindkey "^A" vi-beginning-of-line
 bindkey "^E" vi-end-of-line
 
-fpath=(~/.zfunctions $fpath)
+fpath=($HOMEBREW_PREFIX/share/zsh/site-functions $fpath)
 
 # The following lines were added by compinstall
 zstyle ':completion:*' completer _expand _complete _ignored
@@ -63,9 +69,5 @@ export BAT_THEME="base16"
 export PATH=$PATH:$HOME/dotfiles/bin
 
 # Load plugins
-if [[ -f /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]] then
-  source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-fi
-if [[ -f /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] then
-  source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-fi
+source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
