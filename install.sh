@@ -93,13 +93,6 @@ git config --global rebase.autoStash true
 success_echo "Configured Global Gitignore."
 
 #--------------------------------------------------------------------#
-#                          Submodule Update                          #
-#--------------------------------------------------------------------#
-echo -e "Updating submodules..."
-git submodule update
-success_echo "Submodules updated."
-
-#--------------------------------------------------------------------#
 #                    Dotfiles Backup & Symlinking                    #
 #--------------------------------------------------------------------#
 timestamp=$(date +%Y%m%d%H%M%S) # timestamp for backup
@@ -170,3 +163,4 @@ echo -e ""
 success_echo "Done configuring Neovim."
 
 success_echo "Congratulations, everything is done installing!"
+exec /bin/zsh

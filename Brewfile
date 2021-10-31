@@ -14,6 +14,8 @@ brew 'tmux'
 brew 'tree'
 brew 'vim'
 brew 'zsh'
+brew 'zsh-autosuggestions'
+brew 'zsh-syntax-highlighting'
 
 if RUBY_PLATFORM =~ /darwin/
   tap 'homebrew/cask-fonts'

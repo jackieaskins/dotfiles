@@ -63,6 +63,9 @@ export BAT_THEME="base16"
 export PATH=$PATH:$HOME/dotfiles/bin
 
 # Load plugins
-# zsh-syntax-highlighting must be the last thing sourced in the zshrc
-plugins=(zsh-autosuggestions zsh-syntax-highlighting)
-for plugin in $plugins; do source $zsh_config/plugins/$plugin/$plugin.zsh; done
+if [[ -f /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]] then
+  source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
+if [[ -f /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] then
+  source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi

@@ -5,7 +5,7 @@ My dotfiles for Neovim 0.5, Vim, Zsh, and iTerm.
 1. Clone this repo:
 
    ```
-   git clone --recurse-submodules https://github.com/jackieaskins/dotfiles.git ~/dotfiles
+   git clone https://github.com/jackieaskins/dotfiles.git ~/dotfiles
    ```
 
 2. Run the install script:
