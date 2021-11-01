@@ -31,6 +31,13 @@ return require('packer').startup({
     -- }}}
 
     -- Editing {{{
+    use({
+      'szw/vim-maximizer',
+      cmd = { 'MaximizerToggle' },
+      config = function()
+        require('plugins.maximizer')
+      end,
+    })
     use({ 'tpope/vim-abolish' })
     use({ 'tpope/vim-commentary' })
     use({ 'tpope/vim-projectionist' })
@@ -63,6 +70,7 @@ return require('packer').startup({
         { 'hrsh7th/cmp-path' },
         { 'hrsh7th/cmp-calc' },
         { 'hrsh7th/cmp-nvim-lsp' },
+        { 'hrsh7th/cmp-cmdline' },
       },
       config = function()
         require('plugins.cmp')

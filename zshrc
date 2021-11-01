@@ -4,6 +4,8 @@ else
   eval "$(/usr/local/bin/brew shellenv)"
 fi
 
+[ -d ~/.cargo/bin ] && export PATH=$PATH:~/.cargo/bin
+
 zsh_config=$HOME/dotfiles/zsh
 export VISUAL='nvim'
 export EDITOR='nvim'

@@ -32,6 +32,9 @@ map('n', '<leader>cf', ':lua require("nvim-comment-frame").add_multiline_comment
 map('n', '<C-n>', ':Fern . -drawer -toggle<CR>', { silent = true })
 map('n', '<leader>n', ':Fern . -drawer -toggle -reveal=%<CR>', { silent = true })
 
+-- Maximizer
+map('n', '<leader>mt', ':MaximizerToggle<CR>')
+
 -- Packer
 map('n', '<leader>ps', ':PackerSync<CR>')
 map('n', '<leader>pu', ':PackerUpdate<CR>')

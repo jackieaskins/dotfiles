@@ -36,14 +36,6 @@ augroup('custom_highlights', {
 
   highlight_autocmd('TSPlaygroundFocus', { guibg = colors.bg4 }),
 
-  -- Cmp
-  highlight_autocmd('CmpItemMenu', { guifg = colors.grey }),
-  highlight_autocmd('CmpItemKind', { guifg = colors.blue }),
-  highlight_autocmd('CmpItemAbbr', { guifg = colors.grey }),
-  highlight_autocmd('CmpItemAbbrMatch', { guifg = colors.fg }),
-  highlight_autocmd('CmpItemAbbrDeprecated', { guifg = colors.red }),
-  highlight_autocmd('CmpItemMenu', { guibg = colors.bg2 }),
-
   -- Current definition conflicts with quick-scope
   highlight_autocmd('TSDefinition', { gui = 'reverse' }),
 
