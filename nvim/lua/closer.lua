@@ -2,9 +2,8 @@ local fn = vim.fn
 local utils = require('utils')
 local map, t = utils.map, utils.t
 
-local function new_line()
-  fn.feedkeys(t('<CR>'), 'n')
-  return ''
+local function at_eol()
+  return fn.col('.') >= fn.col('$')
 end
 
 local function is_comment_or_string(col)
@@ -21,41 +20,9 @@ local function is_comment_or_string(col)
   return false
 end
 
-local function is_followed_by_close(rest_of_line, close_to_opens_map)
-  local first_word = rest_of_line:match('(%w+)(%W+)') or ''
-  local next_char = vim.trim(rest_of_line):sub(1, 1) or ''
-
-  local checks = { rest_of_line, first_word, next_char }
-
-  for close, _ in pairs(close_to_opens_map) do
-    if vim.tbl_contains(checks, close) then
-      return true
-    end
-  end
-
-  return false
-end
-
-function _G.close()
-  local tag_result = require('closer.tags').handle_tags()
-  if tag_result ~= nil then
-    return ''
-  end
-
+local function get_opens_on_curr_line()
   local open_to_close_map, close_to_opens_map, pattern = require('closer.pairs').get_filetype_opts()
   local line = fn.getline('.')
-  local curr_col = fn.col('.')
-
-  if curr_col < fn.col('$') then
-    local rest_of_line = string.sub(line, curr_col)
-
-    new_line()
-    if is_followed_by_close(rest_of_line, close_to_opens_map) then
-      fn.feedkeys(t('<Esc>==O'))
-    end
-
-    return ''
-  end
 
   local stack = {}
   local start = 0
@@ -87,23 +54,54 @@ function _G.close()
     end
   until start == -1
 
-  if #stack == 0 then
-    return new_line()
+  return stack
+end
+
+local function is_followed_by_close(rest_of_line, close_to_opens_map)
+  local first_word = rest_of_line:match('(%w+)(%W+)') or ''
+  local next_char = vim.trim(rest_of_line):sub(1, 1) or ''
+
+  local checks = { rest_of_line, first_word, next_char }
+
+  for close, _ in pairs(close_to_opens_map) do
+    if vim.tbl_contains(checks, close) then
+      return true
+    end
   end
 
-  new_line()
-  for i = 1, #stack do
-    local open = stack[#stack + 1 - i]
-    local close = open_to_close_map[open]
+  return false
+end
 
-    fn.feedkeys(t(close))
-    local trailing_chars = require('closer.trailing_chars').get_trailing_chars()
-    fn.feedkeys(t(trailing_chars))
+function _G.close()
+  local keys = { '<c-g>u<CR>' }
+
+  local open_to_close_map, close_to_opens_map = require('closer.pairs').get_filetype_opts()
+  local line = fn.getline('.')
+
+  local tag_key = require('closer.tags').handle_tags()
+
+  if tag_key ~= nil then
+    table.insert(keys, tag_key)
+  elseif at_eol() then
+    local opens = get_opens_on_curr_line()
+    for i = 1, #opens do
+      local open = opens[#opens + 1 - i]
+      local close = open_to_close_map[open]
+      table.insert(keys, close)
+    end
+
+    if #opens > 0 then
+      table.insert(keys, '<Esc>==O')
+    end
+  else
+    local rest_of_line = string.sub(line, fn.col('.'))
+    if is_followed_by_close(rest_of_line, close_to_opens_map) then
+      table.insert(keys, '<Esc>==O')
+    end
   end
 
-  fn.feedkeys(t('<Esc>==O'))
-
-  return ''
+  table.insert(keys, '<c-g>u')
+  return t(table.concat(keys, ''))
 end
 
 map('i', '<CR>', 'v:lua.close()', { expr = true, silent = true })

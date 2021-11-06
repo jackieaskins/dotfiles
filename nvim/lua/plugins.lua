@@ -16,11 +16,24 @@ return require('packer').startup({
       'stsewd/gx-extended.vim',
       keys = 'gx',
     })
+    use({
+      'szw/vim-maximizer',
+      cmd = { 'MaximizerToggle' },
+      config = function()
+        require('plugins.maximizer')
+      end,
+    })
     -- }}}
 
     -- Appearance {{{
     use({ 'sainnhe/edge' })
     use({ 'kyazdani42/nvim-web-devicons' })
+    use({
+      'lambdalisue/glyph-palette.vim',
+      config = function()
+        require('plugins.glyph-palette')
+      end,
+    })
     use({
       'norcalli/nvim-colorizer.lua',
       cmd = 'ColorizerToggle',
@@ -31,13 +44,6 @@ return require('packer').startup({
     -- }}}
 
     -- Editing {{{
-    use({
-      'szw/vim-maximizer',
-      cmd = { 'MaximizerToggle' },
-      config = function()
-        require('plugins.maximizer')
-      end,
-    })
     use({ 'tpope/vim-abolish' })
     use({ 'tpope/vim-commentary' })
     use({ 'tpope/vim-projectionist' })

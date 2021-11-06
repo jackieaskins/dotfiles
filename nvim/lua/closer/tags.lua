@@ -1,6 +1,5 @@
 local fn = vim.fn
 local ts_utils = require('nvim-treesitter.ts_utils')
-local t = require('utils').t
 
 local tags = {
   jsx_closing_element = 'jsx_opening_element',
@@ -8,8 +7,7 @@ local tags = {
 }
 
 local function new_line()
-  fn.feedkeys(t('<CR><Esc>==O'), 'n')
-  return ''
+  return '<Esc>==O'
 end
 
 local function check_for_tags(current_node)
@@ -22,7 +20,6 @@ local function check_for_tags(current_node)
     if previous_node:type() == open_tag and start_row == cursor[1] - 1 and start_col == cursor[2] then
       return new_line()
     end
-    fn.feedkeys(t('<CR>'), 'n')
     return ''
   end
 

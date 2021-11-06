@@ -15,7 +15,6 @@ augroup('no_auto_comment', { { 'FileType', '*', 'setlocal formatoptions-=r forma
 
 -- General
 opt.hidden = true
-opt.mouse = 'nv'
 opt.number = true
 opt.relativenumber = true
 opt.cursorline = true

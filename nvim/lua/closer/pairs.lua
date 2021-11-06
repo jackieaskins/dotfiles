@@ -4,22 +4,10 @@ local standard = {
   ['['] = ']',
 }
 
-local pairs_by_language = {
-  lua = {
-    ['function'] = 'end',
-    ['do'] = 'end',
-    ['then'] = 'end',
-    ['repeat'] = 'until',
-    ['{'] = '}',
-    ['('] = ')',
-    ['['] = ']',
-  },
-}
-
 local M = {}
 
 function M.get_filetype_opts()
-  local open_to_close_map = pairs_by_language[vim.bo.filetype] or standard
+  local open_to_close_map = vim.b.closer_pairs or standard
 
   local close_to_opens_map = {}
   for open, close in pairs(open_to_close_map) do
