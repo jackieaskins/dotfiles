@@ -53,7 +53,7 @@ augroup('custom_highlights', {
   { 'ColorScheme', '*', 'let g:terminal_color_8 = "' .. colors.bg1 .. '"' },
 })
 
-g.edge_style = 'neon'
+g.edge_style = 'default'
 g.edge_diagnostic_virtual_text = 'colored'
 g.edge_better_performance = 1
 
