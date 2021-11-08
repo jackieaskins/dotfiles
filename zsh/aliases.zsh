@@ -1,3 +1,8 @@
+# Ssh
+if type kitty &> /dev/null; then
+  alias ssh='kitty +kitten ssh'
+fi
+
 # Directory Navigation
 alias -- -="cd -"
 alias ..='cd ..'
