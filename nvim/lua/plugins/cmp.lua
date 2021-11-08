@@ -12,11 +12,6 @@ local source_menu_map = {
   calc = 'Calc',
 }
 
-local sources = {}
-for source, _ in pairs(source_menu_map) do
-  table.insert(sources, { name = source })
-end
-
 vim.opt.completeopt = 'menu,menuone,noselect'
 
 cmp.setup({
@@ -26,7 +21,14 @@ cmp.setup({
       luasnip.lsp_expand(args.body)
     end,
   },
-  sources = sources,
+  sources = cmp.config.sources({
+    { name = 'luasnip' },
+    { name = 'nvim_lsp' },
+    { name = 'path' },
+    { name = 'calc' },
+  }, {
+    { name = 'buffer' },
+  }),
   documentation = {
     border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
   },
@@ -73,14 +75,12 @@ cmp.setup({
   },
 })
 
----@diagnostic disable-next-line: undefined-field
 cmp.setup.cmdline('/', {
   sources = {
     { name = 'buffer' },
   },
 })
 
----@diagnostic disable-next-line: undefined-field
 cmp.setup.cmdline(':', {
   sources = cmp.config.sources({
     { name = 'path' },
