@@ -10,4 +10,5 @@ return {
   'sumneko_lua',
   'tsserver',
   'vimls',
+  'yamlls',
 }

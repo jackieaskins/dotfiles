@@ -193,7 +193,8 @@ return require('packer').startup({
     })
     -- }}}
 
-    -- Treesitter {{{
+    -- Syntax {{{
+    use({ 'fladson/vim-kitty' })
     use({
       'nvim-treesitter/nvim-treesitter',
       run = ':TSUpdate',

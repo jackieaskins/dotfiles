@@ -22,10 +22,7 @@ for type, color in pairs(lsp_types) do
   table.insert(lsp_highlights, highlight_autocmd('Diagnostic' .. type, { guifg = color }))
   table.insert(lsp_highlights, highlight_autocmd('DiagnosticFloating' .. type, { guifg = color, guibg = colors.bg2 }))
   table.insert(lsp_highlights, highlight_autocmd('DiagnosticSign' .. type, { guifg = color }))
-  table.insert(
-    lsp_highlights,
-    highlight_autocmd('DiagnosticUnderline' .. type, { guifg = color, gui = 'bold,underline' })
-  )
+  table.insert(lsp_highlights, highlight_autocmd('DiagnosticUnderline' .. type, { gui = 'undercurl', guisp = color }))
   table.insert(lsp_highlights, highlight_autocmd('DiagnoticVirtualText' .. type, { guifg = color }))
 end
 augroup('lsp_highlights', lsp_highlights)

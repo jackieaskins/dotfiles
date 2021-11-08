@@ -21,10 +21,13 @@ if RUBY_PLATFORM =~ /darwin/
   tap 'homebrew/cask-fonts'
   cask 'font-hack-nerd-font'
 
+  cask 'alacritty'
   cask 'alfred'
   cask 'docker'
   cask 'iterm2'
+  cask 'kitty'
   cask 'rectangle'
+  cask 'stats'
 
   brew 'awscli'
   brew 'openjdk'
