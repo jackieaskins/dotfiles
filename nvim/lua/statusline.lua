@@ -98,6 +98,9 @@ function GetActiveLine()
     readonly_component,
     spacer_component,
 
+    subtle_highlight,
+    vim.b.gitsigns_head and ' ' .. vim.b.gitsigns_head or '',
+
     split_component,
 
     hint_highlight,
