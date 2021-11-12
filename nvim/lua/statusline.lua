@@ -14,7 +14,7 @@ local split_component = '%='
 
 local function get_file_icon_component(filename)
   local icon = require('icons').get_file_icon(filename, false)
-  return icon and icon .. ' ' or ''
+  return icon == '' and '' or icon .. ' '
 end
 
 local function get_buf_clients()
@@ -77,7 +77,7 @@ function GetActiveLine()
 
   local function render_based_on_width(component, max_width)
     local window_width = fn.winwidth('%')
-    max_width = max_width or 80
+    max_width = max_width or 90
 
     return window_width > max_width and component or ''
   end
@@ -99,7 +99,7 @@ function GetActiveLine()
     spacer_component,
 
     subtle_highlight,
-    vim.b.gitsigns_head and ' ' .. vim.b.gitsigns_head or '',
+    render_based_on_width(vim.b.gitsigns_head and ' ' .. vim.b.gitsigns_head or ''),
 
     split_component,
 

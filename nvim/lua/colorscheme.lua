@@ -28,6 +28,9 @@ end
 augroup('lsp_highlights', lsp_highlights)
 
 augroup('custom_highlights', {
+  highlight_autocmd('QuickScopePrimary', { gui = 'underline', guifg = 'NONE', guisp = colors.green }),
+  highlight_autocmd('QuickScopeSecondary', { gui = 'underline', guifg = 'NONE', guisp = colors.blue }),
+
   highlight_autocmd('CursorLineNr', { guifg = colors.blue }),
   highlight_autocmd('NormalFloat', { guifg = colors.fg, guibg = colors.bg0 }),
 
