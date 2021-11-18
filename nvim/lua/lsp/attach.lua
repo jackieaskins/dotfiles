@@ -16,8 +16,8 @@ return function(client, bufnr)
   bso('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   bsk('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  bsk('i', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  bsk('n', '<leader>k', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  bsk('i', '<C-S>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  bsk('n', '<C-S>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
 
   bsk('n', 'g?', '<cmd>lua vim.diagnostic.open_float(0, { scope = "cursor" })<CR>', opts)
   bsk('n', '[g', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
