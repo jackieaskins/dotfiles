@@ -4,7 +4,6 @@ return {
   -- 'html',
   -- 'jdtls',
   'jsonls',
-  'null-ls',
   -- 'pyright',
   -- 'solargraph',
   'sumneko_lua',

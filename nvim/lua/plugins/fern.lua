@@ -53,7 +53,7 @@ function _G.InitFern()
   bsk('o', '<Plug>(fern-custom-action-smart-open)')
   bsk('<CR>', '<Plug>(fern-custom-action-smart-open)')
   bsk('<C-v>', '<Plug>(fern-action-open:vsplit) <Plug>(fern-custom-action-close-drawer)')
-  bsk('<C-s>', '<Plug>(fern-action-open:split) <Plug>(fern-custom-action-close-drawer)')
+  bsk('<C-x>', '<Plug>(fern-action-open:split) <Plug>(fern-custom-action-close-drawer)')
   bsk('<C-t>', '<Plug>(fern-action-open:tabedit) <Plug>(fern-custom-action-close-drawer)')
   bsk('<Tab>', '<Plug>(fern-action-open)<C-w><C-p>')
 

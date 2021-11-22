@@ -82,6 +82,12 @@ return require('packer').startup({
         require('plugins.cmp')
       end,
     })
+    use({
+      'mhartington/formatter.nvim',
+      config = function()
+        require('plugins.formatter')
+      end,
+    })
     -- }}}
 
     -- Surround {{{
@@ -153,13 +159,6 @@ return require('packer').startup({
       config = function()
         require('plugins.lspconfig')
       end,
-    })
-    use({
-      'jose-elias-alvarez/null-ls.nvim',
-      requires = {
-        'nvim-lua/plenary.nvim',
-        'neovim/nvim-lspconfig',
-      },
     })
     use({
       'simrat39/symbols-outline.nvim',

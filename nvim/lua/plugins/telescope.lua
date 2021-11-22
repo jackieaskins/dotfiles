@@ -1,5 +1,6 @@
 local telescope = require('telescope')
 local actions = require('telescope.actions')
+local action_layout = require('telescope.actions.layout')
 local map = require('utils').map
 
 telescope.setup({
@@ -23,6 +24,7 @@ telescope.setup({
         ['<C-u>'] = false,
         ['<C-a>'] = { '<home>', type = 'command' },
         ['<C-e>'] = { '<end>', type = 'command' },
+        ['<C-c>'] = action_layout.toggle_preview,
       },
     },
   },

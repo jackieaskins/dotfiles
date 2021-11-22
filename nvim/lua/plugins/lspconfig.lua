@@ -2,8 +2,6 @@
 local servers = require('lsp.servers')
 local lspconfig = require('lspconfig')
 
-require('plugins.null-ls')
-
 for _, server in ipairs(servers) do
   local base_config = require('lsp.base_config')()
 

@@ -25,17 +25,7 @@ local function get_lsp_clients_component()
   local client_names = {}
 
   for _, client in ipairs(get_buf_clients()) do
-    if client.name == 'null-ls' then
-      local active_sources = vim.tbl_flatten(
-        vim.tbl_values(require('null-ls.info').get_active_sources(fn.bufnr('%'), bo.filetype))
-      )
-
-      for _, source in ipairs(active_sources) do
-        client_names[source] = true
-      end
-    else
-      client_names[client.name] = true
-    end
+    client_names[client.name] = true
   end
 
   return table.concat(vim.tbl_keys(client_names), ' ')
