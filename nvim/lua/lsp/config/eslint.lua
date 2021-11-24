@@ -5,6 +5,7 @@ return function(config)
 
     require('utils').map('n', '<leader>ef', '<Cmd>EslintFixAll<CR>')
   end
+  config.flags = {}
 
   return config
 end

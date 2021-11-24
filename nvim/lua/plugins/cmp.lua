@@ -56,6 +56,10 @@ cmp.setup({
       i = cmp.mapping.abort(),
       c = cmp.mapping.close(),
     }),
+    ['<C-Y>'] = cmp.mapping.confirm({
+      select = false,
+      behavior = cmp.ConfirmBehavior.Replace,
+    }),
   },
 })
 
