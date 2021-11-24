@@ -1,3 +1,5 @@
+-- https://github.com/L3MON4D3/LuaSnip
+
 local map = require('utils').map
 
 require('luasnip/loaders/from_vscode').load({

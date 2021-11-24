@@ -1,3 +1,5 @@
+-- https://github.com/phaazon/hop.nvim
+
 local map = require('utils').map
 
 require('hop').setup({})

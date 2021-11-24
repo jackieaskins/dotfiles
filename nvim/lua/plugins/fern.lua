@@ -1,3 +1,5 @@
+-- https://github.com/lambdalisue/fern.vim
+
 local utils = require('utils')
 local augroup, map = utils.augroup, utils.map
 

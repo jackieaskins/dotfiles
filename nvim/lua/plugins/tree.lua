@@ -1,3 +1,5 @@
+-- https://github.com/kyazdani42/nvim-tree.lua
+
 local g = vim.g
 
 g.nvim_tree_disable_netrw = 0

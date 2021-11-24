@@ -1,3 +1,5 @@
+-- https://github.com/nvim-telescope/telescope.nvim
+
 local telescope = require('telescope')
 local actions = require('telescope.actions')
 local action_layout = require('telescope.actions.layout')
