@@ -58,4 +58,8 @@ function M.file_exists(filename)
   return fn.empty(fn.glob(filename)) == 0
 end
 
+function M.is_executable(path)
+  return fn.executable(path) == 1
+end
+
 return M

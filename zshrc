@@ -1,7 +1,8 @@
 if [[ -d /opt/homebrew ]] then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 else
-  eval "$(which brew) shellenv"
+  brew_path="$(which brew)"
+  eval "$($brew_path shellenv)"
 fi
 
 [ -d ~/.cargo/bin ] && export PATH=$PATH:~/.cargo/bin

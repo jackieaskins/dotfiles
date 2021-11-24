@@ -1,5 +1,5 @@
 local utils = require('utils')
-local augroup, file_exists = utils.augroup, utils.file_exists
+local file_exists, is_executable = utils.file_exists, utils.is_executable
 
 local prettier = {
   exe = 'prettierd',
@@ -40,14 +40,11 @@ for filetype, formatter in pairs(formatter_by_filetype) do
 end
 
 require('formatter').setup({ filetype = filetype_config })
-augroup('auto_format', {
-  { 'BufWritePost', '*', 'lua require("plugins.formatter").format_on_save()' },
-})
 
 return {
   format_on_save = function()
     local formatter = formatter_by_filetype[vim.bo.filetype]
-    if formatter and vim.fn.executable(formatter.exe) and file_exists(formatter.required_file) then
+    if formatter and is_executable(formatter.exe) and file_exists(formatter.required_file) then
       vim.cmd('FormatWrite')
     end
   end,

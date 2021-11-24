@@ -15,6 +15,7 @@ return require('packer').startup({
     use({
       'stsewd/gx-extended.vim',
       keys = 'gx',
+      fn = 'gxext#browse',
     })
     use({
       'szw/vim-maximizer',
@@ -84,9 +85,7 @@ return require('packer').startup({
     })
     use({
       'mhartington/formatter.nvim',
-      config = function()
-        require('plugins.formatter')
-      end,
+      module = 'formatter',
     })
     -- }}}
 
@@ -225,7 +224,7 @@ return require('packer').startup({
       },
       {
         's1n7ax/nvim-comment-frame',
-        requires = 's1n7ax/nvim-comment-frame',
+        requires = 'nvim-treesitter/nvim-treesitter',
         module = 'nvim-comment-frame',
       },
     })
@@ -234,13 +233,7 @@ return require('packer').startup({
     -- Testing {{{
     use({
       'vim-test/vim-test',
-      cmd = {
-        'TestNearest',
-        'TestFile',
-        'TestSuite',
-        'TestLast',
-        'TestVisit',
-      },
+      cmd = { 'TestNearest', 'TestFile', 'TestSuite', 'TestLast', 'TestVisit' },
       config = function()
         require('plugins.test')
       end,

@@ -1,4 +1,5 @@
-local map = require('utils').map
+local utils = require('utils')
+local augroup, map = utils.augroup, utils.map
 
 -- Window Management
 map('n', '<C-j>', '<C-w>j')
@@ -23,6 +24,8 @@ map('n', '[<C-l>', ':lpfile<CR>')
 map('n', ']<C-l>', ':lnfile<CR>')
 
 map('n', '<leader>rn', '<cmd>lua require("rename").smart_rename()<CR>')
+map('v', '<', '<gv')
+map('v', '>', '>gv')
 
 -- Plugins
 -- Comment Frame
@@ -54,3 +57,7 @@ map('n', '<leader>tf', ':TestFile<CR>')
 map('n', '<leader>ts', ':TestSuite<CR>')
 map('n', '<leader>tl', ':TestLast<CR>')
 map('n', '<leader>tv', ':TestVisit<CR>')
+
+augroup('auto_format', {
+  { 'BufWritePost', '*', 'lua require("plugins.formatter").format_on_save()' },
+})
