@@ -3,6 +3,7 @@
 require('nvim-treesitter.configs').setup({
   autotag = {
     enable = true,
+    enable_rename = 'false', -- This doesn't work that well
     skip_close_shortcut = '\\>',
   },
   context_commentstring = { enable = true },

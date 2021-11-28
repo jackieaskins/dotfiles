@@ -24,8 +24,6 @@ map('n', '[<C-l>', ':lpfile<CR>')
 map('n', ']<C-l>', ':lnfile<CR>')
 
 map('n', '<leader>rn', '<cmd>lua require("rename").smart_rename()<CR>')
-map('v', '<', '<gv')
-map('v', '>', '>gv')
 
 -- Plugins
 -- Comment Frame

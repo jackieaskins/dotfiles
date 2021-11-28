@@ -4,7 +4,6 @@ local api = vim.api
 local cmp = require('cmp')
 local luasnip = require('luasnip')
 
--- Order dictates priority
 local source_menu_map = {
   luasnip = 'Snip',
   nvim_lsp = 'LSP',
@@ -22,6 +21,7 @@ cmp.setup({
       luasnip.lsp_expand(args.body)
     end,
   },
+  -- Order dictates priority
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
