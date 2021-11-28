@@ -43,6 +43,7 @@ map('n', '<leader>pp', ':PackerProfile<CR>')
 map('n', '<leader>pl', ':PackerLoad ')
 
 -- Reload
+map('n', '<leader>so', ':luafile %<CR>')
 map('n', '<leader>rp', ':lua require("plugins.reload").reload_plugins()<CR>')
 map('n', '<leader>re', ':Reload<CR>')
 

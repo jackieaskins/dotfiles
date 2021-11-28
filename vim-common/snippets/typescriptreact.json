@@ -1,4 +1,28 @@
 {
+  "Use Effect": {
+    "prefix": "ue",
+    "body": [
+      "useEffect(() => {",
+      "\t${1}",
+      "}, [${2}]);"
+    ]
+  },
+  "Use Callback": {
+    "prefix": "uc",
+    "body": [
+      "const ${1} = useCallback((${2}) => {",
+      "\t${3}",
+      "}, [${4}]);"
+    ]
+  },
+  "Use Memo": {
+    "prefix": "um",
+    "body": [
+      "const ${1} = useMemo(() => {",
+      "\t${2}",
+      "}, [${3}]);"
+    ]
+  },
   "React Function Component": {
     "prefix": "rfc",
     "body": [
