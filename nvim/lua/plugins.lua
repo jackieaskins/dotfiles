@@ -8,11 +8,6 @@ return require('packer').startup({
     use({ 'lewis6991/impatient.nvim' })
     use({ 'dstein64/vim-startuptime', cmd = 'StartupTime' })
     use({
-      'famiu/nvim-reload',
-      cmd = { 'Restart', 'Reload' },
-      requires = 'nvim-lua/plenary.nvim',
-    })
-    use({
       'stsewd/gx-extended.vim',
       keys = 'gx',
       fn = 'gxext#browse',

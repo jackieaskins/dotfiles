@@ -23,6 +23,9 @@ map('n', ']L', ':llast<CR>')
 map('n', '[<C-l>', ':lpfile<CR>')
 map('n', ']<C-l>', ':lnfile<CR>')
 
+map('n', '<leader>so', ':luafile %<CR>')
+map('n', '<leader>rp', ':lua require("reload").reload_plugins()<CR>')
+
 map('n', '<leader>rn', '<cmd>lua require("rename").smart_rename()<CR>')
 
 -- Plugins
@@ -41,11 +44,6 @@ map('n', '<leader>ps', ':PackerSync<CR>')
 map('n', '<leader>pu', ':PackerUpdate<CR>')
 map('n', '<leader>pp', ':PackerProfile<CR>')
 map('n', '<leader>pl', ':PackerLoad ')
-
--- Reload
-map('n', '<leader>so', ':luafile %<CR>')
-map('n', '<leader>rp', ':lua require("plugins.reload").reload_plugins()<CR>')
-map('n', '<leader>re', ':Reload<CR>')
 
 -- Startup Time
 map('n', '<leader>su', ':StartupTime --tries 20<CR>')
