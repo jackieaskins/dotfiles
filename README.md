@@ -1,5 +1,5 @@
 # My Dotfiles
-My dotfiles for Neovim 0.5, Vim, Zsh, and iTerm/Alacritty/Kitty.
+My dotfiles for Neovim 0.5, Vim, Zsh, and iTerm/Kitty.
 
 ## Installation
 1. Clone this repo:

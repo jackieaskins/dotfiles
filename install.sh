@@ -138,7 +138,6 @@ backup_and_symlink .vimrc                        vimrc                        vi
 backup_and_symlink .vim                          vim                          vim
 backup_and_symlink .config/nvim                  nvim                         nvim
 backup_and_symlink .config/kitty                 kitty                        kitty
-backup_and_symlink .config/alacritty             alacritty                    alacritty
 backup_and_symlink .iterm2_shell_integration.zsh iterm2_shell_integration.zsh iterm2_shell_integration.zsh
 backup_and_symlink .tmux.conf                    tmux.conf                    tmux.conf
 backup_and_symlink .gitignore_global             gitignore_global             gitignore_global
