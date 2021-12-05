@@ -41,10 +41,15 @@ return require('packer').startup({
 
     -- Editing {{{
     use({ 'tpope/vim-abolish' })
-    use({ 'tpope/vim-commentary' })
     use({ 'tpope/vim-projectionist' })
     use({ 'tpope/vim-repeat' })
     use({ 'tpope/vim-sleuth' })
+    use({
+      'numToStr/Comment.nvim',
+      config = function()
+        require('plugins.Comment')
+      end,
+    })
     use({
       'mattn/emmet-vim',
       keys = { { 'i', '<C-y>' } },
