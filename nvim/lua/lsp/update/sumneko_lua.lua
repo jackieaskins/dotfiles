@@ -1,5 +1,6 @@
 local fn = vim.fn
 
+-- TODO: Fix separators for windows
 local install_path
 if fn.has('mac') == 1 then
   install_path = 'compile/ninja/macos.ninja'
