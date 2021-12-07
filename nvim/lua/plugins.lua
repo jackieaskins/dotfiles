@@ -22,6 +22,12 @@ return require('packer').startup({
         require('plugins.maximizer')
       end,
     })
+    use({
+      'nacro90/numb.nvim',
+      config = function()
+        require('numb').setup()
+      end,
+    })
     -- }}}
 
     -- Appearance {{{
@@ -43,6 +49,13 @@ return require('packer').startup({
     -- }}}
 
     -- Editing {{{
+    use({
+      'folke/twilight.nvim',
+      config = function()
+        require('plugins.twilight')
+      end,
+      cmd = { 'Twilight', 'TwilightEnable', 'TwilightDisable' },
+    })
     use({ 'tpope/vim-abolish' })
     use({ 'tpope/vim-projectionist' })
     use({ 'tpope/vim-repeat' })
