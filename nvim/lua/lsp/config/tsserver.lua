@@ -21,10 +21,7 @@ return function(config)
     end
     local opts = { noremap = true, silent = true }
     bsk('n', '<leader>oi', '<cmd>TSLspOrganize<CR>', opts)
-
-    -- TSLspImportAll is broken
-    bsk('n', '<leader>ia', '<cmd>lua require("nvim-lsp-ts-utils.import-all")(vim.api.nvim_get_current_buf())<CR>', opts)
-
+    bsk('n', '<leader>ia', '<cmd>TSLspImportAll<CR>', opts)
     bsk('n', '<leader>ic', '<cmd>TSLspImportCurrent<CR>', opts)
     bsk('n', '<leader>rf', '<cmd>TSLspRenameFile<CR>', opts)
   end
