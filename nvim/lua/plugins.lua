@@ -6,6 +6,7 @@ return require('packer').startup({
 
     -- Dev Tools {{{
     use({ 'lewis6991/impatient.nvim' })
+    use({ 'nathom/filetype.nvim' })
     use({ 'dstein64/vim-startuptime', cmd = 'StartupTime' })
     use({
       'stsewd/gx-extended.vim',
