@@ -32,6 +32,12 @@ return require('packer').startup({
 
     -- Appearance {{{
     use({ 'sainnhe/edge' })
+    use({
+      'SmiteshP/nvim-gps',
+      config = function()
+        require('nvim-gps').setup()
+      end,
+    })
     use({ 'kyazdani42/nvim-web-devicons' })
     use({
       'lambdalisue/glyph-palette.vim',

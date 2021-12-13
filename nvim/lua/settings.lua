@@ -34,6 +34,7 @@ augroup('filetypes', {
   { 'BufRead,BufNewFile', '*.graphql', 'set filetype=graphql' },
   { 'BufRead,BufNewFile', 'Brewfile*', 'set filetype=ruby' },
   { 'BufRead,BufNewFile', 'tmux/*.conf', 'set filetype=tmux' },
+  { 'BufRead,BufNewFile', 'tmux.conf', 'set filetype=tmux' },
 })
 
 augroup('colorcolumn', {

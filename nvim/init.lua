@@ -1,5 +1,3 @@
-local file_exists = require('utils').file_exists
-
 pcall(require, 'impatient')
 
 -- Needed because filetype.nvim disables ftdetect loading
@@ -10,7 +8,7 @@ vim.cmd('runtime! ftdetect/*.lua')
 require('settings')
 require('keymappings')
 
-if file_exists('~/dotfiles/nvim/lua/custom.lua') then
+if require('utils').file_exists('~/dotfiles/nvim/lua/custom.lua') then
   require('custom')
 end
 

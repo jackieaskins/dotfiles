@@ -1,7 +1,7 @@
 local fn = vim.fn
 local bo, o = vim.bo, vim.o
-
 local colors = require('colors')
+local gps = require('nvim-gps')
 local modes = require('statusline.modes')
 local highlights = require('statusline.highlights')
 local lsp_icons = require('lsp.icons')
@@ -22,13 +22,16 @@ local function get_buf_clients()
 end
 
 local function get_lsp_clients_component()
-  local client_names = {}
+  local buf_clients = get_buf_clients()
+  if #buf_clients == 0 then
+    return ''
+  end
 
+  local client_names = {}
   for _, client in ipairs(get_buf_clients()) do
     client_names[client.name] = true
   end
-
-  return table.concat(vim.tbl_keys(client_names), ' ')
+  return '  ' .. table.concat(vim.tbl_keys(client_names), ' ')
 end
 
 local function get_lsp_diagnostic_component(level)
@@ -37,8 +40,19 @@ local function get_lsp_diagnostic_component(level)
   end
 
   local count = #vim.diagnostic.get(0, { severity = level })
-
+  if count == 0 then
+    return ''
+  end
   return lsp_icons[level] .. ' ' .. count .. ' '
+end
+
+local function get_gps_component()
+  if gps.is_available() then
+    local location = gps.get_location()
+    return #location > 0 and ' > ' .. location or ''
+  else
+    return ''
+  end
 end
 
 function GetActiveLine()
@@ -63,7 +77,7 @@ function GetActiveLine()
   if bo.filetype == 'fern' then
     filename_component = ''
   end
-  local line_col_percent_component = ' %l:%c │ %p%%'
+  local line_col_percent_component = '%l:%c │ %p%% '
 
   local function render_based_on_width(component, max_width)
     local window_width = fn.winwidth('%')
@@ -86,12 +100,19 @@ function GetActiveLine()
     filename_component,
     modified_component,
     readonly_component,
-    spacer_component,
-
     subtle_highlight,
-    render_based_on_width(vim.b.gitsigns_head and ' ' .. vim.b.gitsigns_head or ''),
+    get_gps_component(),
+    active_highlight,
 
     split_component,
+
+    subtle_highlight,
+    filetype_component,
+    active_highlight,
+    spacer_component,
+
+    render_based_on_width(get_lsp_clients_component()),
+    render_based_on_width(spacer_component),
 
     hint_highlight,
     get_lsp_diagnostic_component('Hint'),
@@ -101,22 +122,9 @@ function GetActiveLine()
     get_lsp_diagnostic_component('Warn'),
     error_highlight,
     get_lsp_diagnostic_component('Error'),
-    active_highlight,
-
-    render_based_on_width(subtle_highlight),
-    render_based_on_width(get_lsp_clients_component()),
-    render_based_on_width(spacer_component),
-    render_based_on_width(active_highlight),
-
-    split_component,
-
-    subtle_highlight,
-    filetype_component,
-    active_highlight,
 
     mode_highlight,
     line_col_percent_component,
-    active_highlight,
   }
 
   return table.concat(status_line_components, '')
@@ -126,7 +134,7 @@ function GetInactiveLine()
   local inactive_highlight = highlights.define_inactive('')
   local filename_component = '%t'
   local modified_component = "%{&mod ? ' ' : ''}"
-  local line_col_percent_component = ' %l:%c │ %p%%'
+  local line_col_percent_component = ' %l:%c │ %p%% '
 
   local components = {
     inactive_highlight,
