@@ -15,6 +15,7 @@ brew 'tree'
 brew 'vim'
 brew 'zsh'
 brew 'zsh-autosuggestions'
+brew 'zsh-history-substring-search'
 brew 'zsh-syntax-highlighting'
 
 if RUBY_PLATFORM =~ /darwin/

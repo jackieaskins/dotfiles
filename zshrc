@@ -45,15 +45,7 @@ export HISTFILE=~/.zsh_history
 export HISTFILESIZE=10000
 export HISTSIZE=10000
 export SAVEHIST=10000
-
 setopt appendhistory histignorealldups sharehistory histreduceblanks
-
-# Use up & down arrows to iterate through commands starting with entered text
-autoload -U history-search-end
-zle -N history-beginning-search-backward-end history-search-end
-zle -N history-beginning-search-forward-end history-search-end
-bindkey "^[[A" history-beginning-search-backward-end
-bindkey "^[[B" history-beginning-search-forward-end
 
 # Color ls output
 export CLICOLOR="Yes"
@@ -91,3 +83,10 @@ bindkey '^L' clear-scrollback-buffer
 # Load plugins
 source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# History substring search must come after syntax highlighting
+source $HOMEBREW_PREFIX/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
