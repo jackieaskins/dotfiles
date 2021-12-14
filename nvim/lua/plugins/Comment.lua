@@ -1,4 +1,5 @@
 require('Comment').setup({
+  ignore = '^$',
   pre_hook = function(ctx)
     if vim.bo.filetype == 'typescriptreact' then
       local U = require('Comment.utils')

@@ -1,7 +1,6 @@
 local fn = vim.fn
 local bo, o = vim.bo, vim.o
 local colors = require('colors')
-local gps = require('nvim-gps')
 local modes = require('statusline.modes')
 local highlights = require('statusline.highlights')
 local lsp_icons = require('lsp.icons')
@@ -47,7 +46,9 @@ local function get_lsp_diagnostic_component(level)
 end
 
 local function get_gps_component()
-  if gps.is_available() then
+  local success, gps = pcall(require, 'nvim-gps')
+
+  if success and gps.is_available() then
     local location = gps.get_location()
     return #location > 0 and ' > ' .. location or ''
   else
