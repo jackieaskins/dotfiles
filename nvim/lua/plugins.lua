@@ -23,9 +23,9 @@ return require('packer').startup({
       end,
     })
     use({
-      'nacro90/numb.nvim',
+      'ethanholz/nvim-lastplace',
       config = function()
-        require('numb').setup()
+        require('nvim-lastplace').setup({})
       end,
     })
     -- }}}
@@ -35,7 +35,7 @@ return require('packer').startup({
     use({
       'SmiteshP/nvim-gps',
       config = function()
-        require('nvim-gps').setup()
+        require('plugins.gps')
       end,
     })
     use({ 'kyazdani42/nvim-web-devicons' })
@@ -91,7 +91,6 @@ return require('packer').startup({
         { 'saadparwaiz1/cmp_luasnip' },
         { 'hrsh7th/cmp-buffer' },
         { 'hrsh7th/cmp-path' },
-        { 'hrsh7th/cmp-calc' },
         { 'hrsh7th/cmp-nvim-lsp' },
         { 'hrsh7th/cmp-cmdline' },
       },
@@ -171,12 +170,6 @@ return require('packer').startup({
       end,
     })
     use({
-      'simrat39/symbols-outline.nvim',
-      config = function()
-        require('plugins.symbols-outline')
-      end,
-    })
-    use({
       'rmagatti/goto-preview',
       config = function()
         require('goto-preview').setup({ default_mappings = true })
@@ -210,33 +203,16 @@ return require('packer').startup({
       config = function()
         require('plugins.treesitter')
       end,
-    })
-    use({
-      {
-        'nvim-treesitter/playground',
-        cmd = { 'TSPlaygroundToggle', 'TSHighlightCapturesUnderCursor' },
-        requires = 'nvim-treesitter/nvim-treesitter',
-      },
-      {
-        'jackieaskins/nvim-ts-autotag',
-        requires = 'nvim-treesitter/nvim-treesitter',
-      },
-      {
-        'nvim-treesitter/nvim-treesitter-refactor',
-        requires = 'nvim-treesitter/nvim-treesitter',
-      },
-      {
-        'RRethy/nvim-treesitter-textsubjects',
-        requires = 'nvim-treesitter/nvim-treesitter',
-      },
-      {
-        'JoosepAlviste/nvim-ts-context-commentstring',
-        requires = 'nvim-treesitter/nvim-treesitter',
-      },
-      {
-        's1n7ax/nvim-comment-frame',
-        requires = 'nvim-treesitter/nvim-treesitter',
-        module = 'nvim-comment-frame',
+      requires = {
+        {
+          'nvim-treesitter/playground',
+          cmd = { 'TSPlaygroundToggle', 'TSHighlightCapturesUnderCursor' },
+        },
+        { 'jackieaskins/nvim-ts-autotag' },
+        { 'nvim-treesitter/nvim-treesitter-refactor' },
+        { 'RRethy/nvim-treesitter-textsubjects' },
+        { 'JoosepAlviste/nvim-ts-context-commentstring' },
+        { 's1n7ax/nvim-comment-frame', module = 'nvim-comment-frame' },
       },
     })
     -- }}}

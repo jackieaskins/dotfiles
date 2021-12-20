@@ -9,7 +9,6 @@ local source_menu_map = {
   nvim_lsp = 'LSP',
   buffer = 'Buff',
   path = 'Path',
-  calc = 'Calc',
 }
 
 vim.opt.completeopt = 'menu,menuone,noselect'
@@ -26,7 +25,6 @@ cmp.setup({
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
     { name = 'path' },
-    { name = 'calc' },
   }, {
     {
       name = 'buffer',

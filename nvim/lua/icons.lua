@@ -11,7 +11,7 @@ function M.get_file_icon(path, default)
   local extension = fn.fnamemodify(path, ':e')
 
   if filename == '' then
-    return ''
+    return nil
   end
 
   if filename == 'vimrc' then
@@ -21,7 +21,9 @@ function M.get_file_icon(path, default)
     filename = '.zshrc'
   end
 
-  return require('nvim-web-devicons').get_icon(filename, extension, { default = default }) or ''
+  local icon = require('nvim-web-devicons').get_icon(filename, extension, { default = default })
+
+  return icon == '' and nil or icon
 end
 
 return M

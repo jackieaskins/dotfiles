@@ -42,6 +42,8 @@ telescope.setup({
 
 telescope.load_extension('fzf')
 
+map('n', '<leader>ht', '<cmd>Telescope help_tags<CR>')
+
 map('n', '<C-p>', '<cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files<CR>')
 map('n', '<leader>ff', '<cmd>Telescope find_files find_command=rg,--no-ignore,--hidden,--files<CR>')
 map('n', '<leader>rg', ':Telescope grep_string search=')

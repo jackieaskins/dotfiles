@@ -41,9 +41,6 @@ augroup('colorcolumn', {
   { 'BufRead,BufNewFile', '*.lua', 'set colorcolumn=120' },
 })
 
--- Dashboard
-cmd('command! Dashboard lua require("dashboard").show()')
-
 -- Status Line
 augroup('statusline', {
   { 'BufEnter,WinEnter', '*', [[lua require('statusline').get_active()]] },
