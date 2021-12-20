@@ -40,12 +40,6 @@ return require('packer').startup({
     })
     use({ 'kyazdani42/nvim-web-devicons' })
     use({
-      'lambdalisue/glyph-palette.vim',
-      config = function()
-        require('plugins.glyph-palette')
-      end,
-    })
-    use({
       'norcalli/nvim-colorizer.lua',
       cmd = 'ColorizerToggle',
       config = function()
@@ -136,16 +130,11 @@ return require('packer').startup({
 
     -- File Navigation {{{
     use({
-      'lambdalisue/fern.vim',
-      requires = {
-        { 'lambdalisue/fern-hijack.vim' },
-        { 'lambdalisue/fern-git-status.vim', opt = true },
-        { 'lambdalisue/nerdfont.vim', after = 'fern.vim' },
-        { 'lambdalisue/fern-renderer-nerdfont.vim', after = 'fern.vim' },
-      },
-      cmd = { 'Fern' },
+      'kyazdani42/nvim-tree.lua',
+      requires = 'kyazdani42/nvim-web-devicons',
+      cmd = { 'NvimTreeToggle' },
       config = function()
-        require('plugins.fern')
+        require('plugins.tree')
       end,
     })
     use({
@@ -264,6 +253,5 @@ return require('packer').startup({
   end,
   config = {
     display = { prompt_border = 'rounded' },
-    profile = { enable = true },
   },
 })
