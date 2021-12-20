@@ -31,7 +31,7 @@ return require('packer').startup({
     -- }}}
 
     -- Appearance {{{
-    use({ 'sainnhe/edge' })
+    use({ 'rmehri01/onenord.nvim' })
     use({
       'SmiteshP/nvim-gps',
       config = function()
@@ -39,6 +39,13 @@ return require('packer').startup({
       end,
     })
     use({ 'kyazdani42/nvim-web-devicons' })
+    use({
+      'nvim-lualine/lualine.nvim',
+      requires = { 'kyazdani42/nvim-web-devicons' },
+      config = function()
+        require('plugins.lualine')
+      end,
+    })
     use({
       'norcalli/nvim-colorizer.lua',
       cmd = 'ColorizerToggle',
@@ -156,13 +163,7 @@ return require('packer').startup({
       end,
     })
     use({ 'jose-elias-alvarez/nvim-lsp-ts-utils' })
-    use({
-      'kosayoda/nvim-lightbulb',
-      config = function()
-        -- Explicitly assigning to avoid default highlight
-        vim.fn.sign_define('LightBulbSign', { text = '💡' })
-      end,
-    })
+    use({ 'kosayoda/nvim-lightbulb' })
     use({
       'neovim/nvim-lspconfig',
       config = function()

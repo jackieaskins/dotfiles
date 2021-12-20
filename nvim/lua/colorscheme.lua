@@ -1,60 +1,27 @@
-local cmd, g = vim.cmd, vim.g
 local colors = require('colors')
-local utils = require('utils')
-local get_highlight_string, augroup = utils.get_highlight_string, utils.augroup
+local success, onenord = pcall(require, 'onenord')
 
-local function highlight_autocmd(name, highlight)
-  return { 'ColorScheme', '*', get_highlight_string(name, highlight) }
+if success then
+  onenord.setup({
+    fade_nc = false,
+    styles = {
+      comments = 'italic',
+      diagnostics = 'undercurl',
+      keywords = 'italic',
+    },
+    custom_highlights = {
+      CursorLineNr = { fg = colors.blue, bg = colors.active },
+
+      QuickScopePrimary = { fg = colors.dark_blue, style = 'underline' },
+      QuickScopeSecondary = { fg = colors.purple, style = 'underline' },
+
+      TelescopeTitle = { fg = colors.blue },
+      TelescopeResultsDiffAdd = { fg = colors.diff_add },
+      TelescopeResultsDiffChange = { fg = colors.diff_change },
+      TelescopeResultsDiffDelete = { fg = colors.diff_remove },
+      TelescopeResultsDiffUntracked = { fg = colors.none },
+    },
+  })
 end
 
-local function highlight_link(name, to)
-  return { 'ColorScheme', '*', 'highlight link ' .. name .. ' ' .. to }
-end
-
-local lsp_types = {
-  Error = colors.red,
-  Hint = colors.cyan,
-  Info = colors.blue,
-  Warn = colors.yellow,
-}
-local lsp_highlights = {}
-for type, color in pairs(lsp_types) do
-  table.insert(lsp_highlights, highlight_autocmd('Diagnostic' .. type, { guifg = color }))
-  table.insert(lsp_highlights, highlight_autocmd('DiagnosticFloating' .. type, { guifg = color, guibg = colors.bg2 }))
-  table.insert(lsp_highlights, highlight_autocmd('DiagnosticSign' .. type, { guifg = color }))
-  table.insert(lsp_highlights, highlight_autocmd('DiagnosticUnderline' .. type, { gui = 'undercurl', guisp = color }))
-  table.insert(lsp_highlights, highlight_autocmd('DiagnoticVirtualText' .. type, { guifg = color }))
-end
-augroup('lsp_highlights', lsp_highlights)
-
-augroup('custom_highlights', {
-  highlight_autocmd('QuickScopePrimary', { gui = 'underline', guifg = 'NONE', guisp = colors.green }),
-  highlight_autocmd('QuickScopeSecondary', { gui = 'underline', guifg = 'NONE', guisp = colors.blue }),
-
-  highlight_autocmd('CursorLineNr', { guifg = colors.blue }),
-  highlight_autocmd('NormalFloat', { guifg = colors.fg, guibg = colors.bg0 }),
-
-  highlight_autocmd('TSPlaygroundFocus', { guibg = colors.bg4 }),
-
-  -- Current definition conflicts with quick-scope
-  highlight_autocmd('TSDefinition', { gui = 'reverse' }),
-
-  -- LSP Signature
-  highlight_autocmd('LspSignatureActiveParameter', { guifg = colors.green }),
-
-  -- Telescope
-  highlight_link('TelescopeSelection', 'CursorLine'),
-  highlight_autocmd('TelescopeResultsDiffAdd', { guifg = colors.green }),
-  highlight_autocmd('TelescopeResultsDiffChange', { guifg = colors.yellow }),
-  highlight_autocmd('TelescopeResultsDiffDelete', { guifg = colors.red }),
-  highlight_autocmd('TelescopeResultsDiffUntracked', { guifg = colors.blue }),
-
-  -- Used for preview window cursor highlight
-  { 'ColorScheme', '*', 'let g:terminal_color_8 = "' .. colors.bg1 .. '"' },
-})
-
-g.edge_style = 'default'
-g.edge_diagnostic_virtual_text = 'colored'
-g.edge_better_performance = 1
-
-cmd('silent! colorscheme edge')
+vim.cmd('silent! colorscheme onenord')

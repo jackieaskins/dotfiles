@@ -24,6 +24,7 @@ opt.splitright = true
 opt.splitbelow = true
 opt.diffopt:append({ 'vertical' })
 opt.termguicolors = true
+opt.showtabline = 2
 opt.tabline = require('tabline')
 
 augroup('spell', {
@@ -39,12 +40,6 @@ augroup('filetypes', {
 
 augroup('colorcolumn', {
   { 'BufRead,BufNewFile', '*.lua', 'set colorcolumn=120' },
-})
-
--- Status Line
-augroup('statusline', {
-  { 'BufEnter,WinEnter', '*', [[lua require('statusline').get_active()]] },
-  { 'BufLeave,WinLeave', '*', [[lua require('statusline').get_inactive()]] },
 })
 
 -- Folds

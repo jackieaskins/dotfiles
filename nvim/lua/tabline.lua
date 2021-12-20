@@ -1,6 +1,5 @@
 local fn = vim.fn
 local colors = require('colors')
-local modes = require('statusline.modes')
 local highlight = require('utils').highlight
 
 local function get_file_icon_component(filename)
@@ -8,19 +7,24 @@ local function get_file_icon_component(filename)
   return icon and icon .. ' ' or ''
 end
 
-function GetTabLine()
-  highlight('TabLineSel', { guifg = modes.get_color(), guibg = colors.bg1 })
-  highlight('TabLine', { guifg = colors.fg, guibg = colors.bg0 })
+local function get_bufnr(tabnr)
+  local winnr = fn.tabpagewinnr(tabnr)
+  local buflist = fn.tabpagebuflist(tabnr)
+  return buflist[winnr]
+end
 
+function GetTabLine()
+  highlight('TabLine', { guifg = colors.blue, guibg = colors.active })
+  highlight('TabLineSel', { guifg = colors.active, guibg = colors.blue })
+
+  local num_tabs = fn.tabpagenr('$')
   local current_tabnr = fn.tabpagenr()
   local tabline_components = {}
 
   local filenames = {}
 
-  for tabnr = 1, fn.tabpagenr('$') do
-    local winnr = fn.tabpagewinnr(tabnr)
-    local buflist = fn.tabpagebuflist(tabnr)
-    local bufnr = buflist[winnr]
+  for tabnr = 1, num_tabs do
+    local bufnr = get_bufnr(tabnr)
     local bufname = fn.fnamemodify(fn.bufname(bufnr), ':t')
 
     if bufname ~= '' then
@@ -29,24 +33,19 @@ function GetTabLine()
     end
   end
 
-  for tabnr = 1, fn.tabpagenr('$') do
-    local winnr = fn.tabpagewinnr(tabnr)
-    local buflist = fn.tabpagebuflist(tabnr)
-    local bufnr = buflist[winnr]
+  for tabnr = 1, num_tabs do
+    local bufnr = get_bufnr(tabnr)
 
     local filetype = fn.getbufvar(bufnr, '&filetype')
     local bufname = fn.bufname(bufnr)
     local filename = fn.fnamemodify(bufname, ':t')
 
     local function get_bufname()
-      if filetype == 'fzf' then
-        return '[FZF]'
+      if filetype == 'NvimTree' then
+        return '[Tree]'
       end
-      if filetype == 'my_dashboard' then
-        return '[Dashboard]'
-      end
-      if filetype == 'fern' then
-        return '[Fern]'
+      if filetype == 'TelescopePrompt' then
+        return '[Telescope]'
       end
       if bufname == '' then
         return '[No Name]'
@@ -59,7 +58,7 @@ function GetTabLine()
       return fn.pathshorten(fn.fnamemodify(bufname, ':~:.'))
     end
 
-    local modified = fn.getbufvar(bufnr, '&mod') == 1 and ' ' or ''
+    local modified = fn.getbufvar(bufnr, '&mod') == 1 and filetype ~= 'TelescopePrompt' and ' ' or ''
     local readonly = fn.getbufvar(bufnr, '&readonly') == 1 and ' ' or ''
 
     local function set_current_tab(current, other)
@@ -76,11 +75,20 @@ function GetTabLine()
       modified,
       readonly,
       ' ',
-      '%#TabLine#',
     }
+
+    if tabnr == current_tabnr then
+      table.insert(components, '%#TabLine#')
+    elseif tabnr + 1 == current_tabnr then
+      table.insert(components, '%#TabLineSel#')
+    elseif tabnr ~= num_tabs then
+      table.insert(components, '')
+    end
 
     table.insert(tabline_components, table.concat(components))
   end
+
+  table.insert(tabline_components, '%#TabLineFill#')
 
   return table.concat(tabline_components)
 end
