@@ -57,8 +57,6 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*" --glob
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
 export BAT_THEME="base16"
 
 export PATH=$PATH:$HOME/dotfiles/bin

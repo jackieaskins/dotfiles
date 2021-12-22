@@ -24,7 +24,6 @@ if RUBY_PLATFORM =~ /darwin/
 
   cask 'alfred'
   cask 'docker'
-  cask 'iterm2'
   cask 'kitty'
   cask 'monitorcontrol'
   cask 'rectangle'

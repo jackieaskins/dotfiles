@@ -1,16 +1,16 @@
 # My Dotfiles
-My dotfiles for Neovim 0.5, Vim, Zsh, and iTerm/Kitty.
+My dotfiles for Neovim 0.5, Vim, Zsh, and Kitty.
 
 ## Installation
 1. Clone this repo:
 
-   ```
+   ```bash
    git clone https://github.com/jackieaskins/dotfiles.git ~/dotfiles
    ```
 
 2. Run the install script:
 
-   ```
+   ```bash
    ./install.sh
    ```
 

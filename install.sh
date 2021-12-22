@@ -71,19 +71,6 @@ fi
 echo -e ""
 
 #--------------------------------------------------------------------#
-#                  iTerm Preferences Folder Config                   #
-#--------------------------------------------------------------------#
-if [ $is_mac = true ]; then
-  iterm_config=~/dotfiles/iterm
-  echo -e "Setting iTerm2 preferences folder..."
-  defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder 1
-  defaults write com.googlecode.iterm2 PrefsCustomFolder $iterm_config
-  success_echo "iTerm2 is configured to read from $iterm_config."
-else
-  echo -e "Not on MacOS, not configuring iTerm2 preferences folder.\n"
-fi
-
-#--------------------------------------------------------------------#
 #                         Global Git Config                          #
 #--------------------------------------------------------------------#
 echo -e "Configuring Global Gitignore..."
@@ -138,7 +125,6 @@ backup_and_symlink .vimrc                        vimrc                        vi
 backup_and_symlink .vim                          vim                          vim
 backup_and_symlink .config/nvim                  nvim                         nvim
 backup_and_symlink .config/kitty                 kitty                        kitty
-backup_and_symlink .iterm2_shell_integration.zsh iterm2_shell_integration.zsh iterm2_shell_integration.zsh
 backup_and_symlink .tmux.conf                    tmux.conf                    tmux.conf
 backup_and_symlink .gitignore_global             gitignore_global             gitignore_global
 success_echo "Dotfiles backed up and symlinked."
