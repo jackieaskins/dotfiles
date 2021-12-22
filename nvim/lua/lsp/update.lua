@@ -1,4 +1,53 @@
-local cmd, fn = vim.cmd, vim.fn
+local function install_jdtls(servers_dir)
+  local install_dir = servers_dir .. '/eclipse.jdt.ls'
+  local zip_file = 'jdt-language-server-latest.tar.gz'
+
+  return {
+    'rm -rf ' .. install_dir,
+    'mkdir ' .. install_dir,
+    'wget http://download.eclipse.org/jdtls/snapshots/' .. zip_file,
+    'tar -xf ' .. zip_file .. ' -C ' .. install_dir,
+    'rm ' .. zip_file,
+  }
+end
+
+local function install_sumneko_lua()
+  local install_path
+  if vim.fn.has('mac') == 1 then
+    install_path = 'compile/ninja/macos.ninja'
+  elseif vim.fn.has('unix') == 1 then
+    install_path = 'compile/ninja/linux.ninja'
+  else
+    print('Unsupported system for sumneko')
+  end
+
+  local language_server = 'lua-language-server'
+
+  return {
+    'rm -rf ' .. language_server,
+    'git clone https://github.com/sumneko/' .. language_server,
+    'cd ' .. language_server,
+    'git submodule update --init --recursive',
+    'cd 3rd/luamake',
+    'ninja -f ' .. install_path,
+    'cd ../..',
+    './3rd/luamake/luamake rebuild',
+  }
+end
+
+local install_commands = {
+  eslint = { 'npm', 'vscode-langservers-extracted' },
+  graphql = { 'npm', 'graphql-language-service-cli' },
+  html = { 'npm', 'vscode-langservers-extracted' },
+  jdtls = install_jdtls,
+  jsonls = { 'npm', 'vscode-langservers-extracted' },
+  pyright = { 'npm', 'pyright' },
+  solargraph = { 'gem', 'solargraph' },
+  sumneko_lua = install_sumneko_lua,
+  tsserver = { 'npm', 'typescript typescript-language-server' },
+  vimls = { 'npm', 'vim-language-server' },
+  yamlls = { 'npm', 'yaml-language-server' },
+}
 
 local function get_active_server_names()
   return vim.tbl_map(function(client)
@@ -9,66 +58,12 @@ end
 local function update_servers(server_list)
   server_list = server_list or get_active_server_names()
 
-  local generic_installs = {
-    npm = { cmd = 'npm install -g', servers = {}, packages = {} },
-    gem = { cmd = 'gem install --user-install', servers = {}, packages = {} },
-    cargo = { cmd = 'cargo install', servers = {}, packages = {} },
-  }
-
-  local servers_dir = fn.stdpath('data') .. '/lsp-servers'
-  local script_lines = {}
-
-  local function echo(text)
-    table.insert(script_lines, string.format('echo "%s"', text))
-  end
-
-  local function handle_install(server, update)
-    if type(update) == 'function' then
-      echo('Installing ' .. server)
-      for _, line in ipairs(update(servers_dir)) do
-        table.insert(script_lines, line)
-      end
-      table.insert(script_lines, 'cd ' .. servers_dir)
-      echo('')
-    elseif generic_installs[update[1]] ~= nil then
-      local install = generic_installs[update[1]]
-
-      table.insert(install.servers, server)
-      table.insert(install.packages, update[2])
-    elseif vim.tbl_islist(update) then
-      for _, up in ipairs(update) do
-        handle_install(server, up)
-      end
-    else
-      print('Invalid update function for ' .. server)
-    end
-  end
-
+  local server_commands = {}
   for _, server in ipairs(server_list) do
-    local ok, update = pcall(require, 'lsp.update.' .. server)
-
-    if not ok then
-      print('No update function for ' .. server)
-    else
-      handle_install(server, update)
-    end
+    server_commands[server] = install_commands[server]
   end
 
-  for _, info in pairs(generic_installs) do
-    if not vim.tbl_isempty(info.packages) then
-      echo(string.format('echo "Installing packages for %s"', table.concat(info.servers, ', ')))
-      table.insert(script_lines, string.format('%s %s', info.cmd, table.concat(info.packages, ' ')))
-      echo('')
-    end
-  end
-
-  local script = table.concat(script_lines, '\n')
-
-  cmd('LspStop')
-  os.execute('mkdir -p ' .. servers_dir)
-  cmd('new | startinsert')
-  fn.termopen({ 'sh', '-c', script }, { cwd = servers_dir })
-  cmd('LspStart')
+  require('installer').install(server_commands, vim.fn.stdpath('data') .. '/lsp-servers')
 end
 
 return {

@@ -1,24 +1,12 @@
 local fn = vim.fn
 
-local system_name
-local separator = '/'
-if fn.has('mac') == 1 then
-  system_name = 'macOS'
-elseif fn.has('unix') == 1 then
-  system_name = 'Linux'
-elseif fn.has('win32') == 1 then
-  system_name = 'Windows'
-  separator = '\\'
-else
-  print('Unsupported system for sumneko')
-end
+local separator = vim.fn.has('win32') == 1 and '\\' or '/'
 
 local lua_language_server_path = table.concat({
   fn.stdpath('data'),
   'lsp-servers',
   'lua-language-server',
   'bin',
-  system_name,
   'lua-language-server',
 }, separator)
 
