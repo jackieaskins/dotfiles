@@ -1,27 +1,13 @@
-local fn = vim.fn
-
 local M = {}
 
-function M.get_file_icon(path, default)
-  if default == nil then
-    default = true
-  end
+---Get the icon and color for a given file path
+---@param path string
+---@return string icon, string color
+function M.get_file_icon(path)
+  local filename = vim.fn.fnamemodify(path, ':t')
+  local extension = vim.fn.fnamemodify(path, ':e')
 
-  local filename = fn.fnamemodify(path, ':t')
-  local extension = fn.fnamemodify(path, ':e')
-
-  if filename == '' then
-    return nil
-  end
-
-  if filename == 'vimrc' then
-    filename = '.vimrc'
-  end
-  if filename == 'zshrc' then
-    filename = '.zshrc'
-  end
-
-  local icon = require('nvim-web-devicons').get_icon(filename, extension, { default = default })
+  local icon = require('nvim-web-devicons').get_icon(filename, extension)
 
   return icon == '' and nil or icon
 end

@@ -3,7 +3,7 @@ local colors = require('colors')
 local highlight = require('utils').highlight
 
 local function get_file_icon_component(filename)
-  local icon = require('icons').get_file_icon(filename, false)
+  local icon = require('icons').get_file_icon(filename)
   return icon and icon .. ' ' or ''
 end
 

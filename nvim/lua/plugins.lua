@@ -8,7 +8,12 @@ return require('packer').startup({
     -- Needed until https://github.com/neovim/neovim/issues/12587 is fixed
     use({ 'antoinemadec/FixCursorHold.nvim' })
     use({ 'lewis6991/impatient.nvim' })
-    use({ 'nathom/filetype.nvim' })
+    use({
+      'nathom/filetype.nvim',
+      config = function()
+        require('plugins.filetype')
+      end,
+    })
     use({ 'dstein64/vim-startuptime', cmd = 'StartupTime' })
     use({
       'stsewd/gx-extended.vim',
@@ -38,7 +43,12 @@ return require('packer').startup({
         require('plugins.gps')
       end,
     })
-    use({ 'kyazdani42/nvim-web-devicons' })
+    use({
+      'kyazdani42/nvim-web-devicons',
+      config = function()
+        require('plugins.web-devicons')
+      end,
+    })
     use({
       'nvim-lualine/lualine.nvim',
       requires = { 'kyazdani42/nvim-web-devicons' },
