@@ -6,11 +6,11 @@ vim.g.nvim_tree_group_empty = 1
 
 require('nvim-tree').setup({
   auto_close = false,
-  update_focused_file = {
-    enable = true,
-  },
   signcolumn = 'no',
   view = {
     width = 50,
+  },
+  git = {
+    ignore = false,
   },
 })

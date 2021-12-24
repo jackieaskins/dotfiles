@@ -3,7 +3,8 @@
 local telescope = require('telescope')
 local actions = require('telescope.actions')
 local action_layout = require('telescope.actions.layout')
-local map = require('utils').map
+
+require('packer').loader('telescope-fzf-native.nvim')
 
 telescope.setup({
   defaults = {
@@ -41,24 +42,3 @@ telescope.setup({
 })
 
 telescope.load_extension('fzf')
-
-map('n', '<leader>ht', '<cmd>Telescope help_tags<CR>')
-
-map('n', '<C-p>', '<cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files<CR>')
-map('n', '<leader>ff', '<cmd>Telescope find_files find_command=rg,--no-ignore,--hidden,--files<CR>')
-map('n', '<leader>rg', ':Telescope grep_string search=')
-map('n', '<leader>/', '<cmd>Telescope live_grep only_sort_text=true<CR>')
-map('n', '<leader>fw', '<cmd>Telescope grep_string<CR>')
-map('n', '<leader>gs', '<cmd>Telescope git_status<CR>')
-map('n', '<leader>bu', '<cmd>Telescope buffers sort_mru=true<CR>')
-map('n', '<leader>of', '<cmd>Telescope oldfiles cwd_only=true sort_lastused=true include_current_session=true<CR>')
-
-map('n', 'gi', '<cmd>Telescope lsp_implementations<CR>')
-map('n', 'gd', '<cmd>Telescope lsp_definitions<CR>')
-map('n', 'gr', '<cmd>Telescope lsp_references<CR>')
-
-map('n', '<leader>ca', '<cmd>Telescope lsp_code_actions<CR>')
-map('x', '<leader>ca', '<cmd>Telescope lsp_range_code_actions theme=cursor<CR>')
-
-map('n', '<leader>sw', '<cmd>Telescope lsp_dynamic_workspace_symbols<CR>')
-map('n', '<leader>sd', '<cmd>Telescope lsp_document_symbols<CR>')

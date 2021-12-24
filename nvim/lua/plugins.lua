@@ -42,6 +42,7 @@ return require('packer').startup({
       config = function()
         require('plugins.gps')
       end,
+      module = 'nvim-gps',
     })
     use({
       'kyazdani42/nvim-web-devicons',
@@ -138,7 +139,7 @@ return require('packer').startup({
       'lewis6991/gitsigns.nvim',
       requires = 'nvim-lua/plenary.nvim',
       config = function()
-        require('gitsigns').setup()
+        require('plugins.gitsigns')
       end,
     })
     use({ 'tpope/vim-fugitive', cmd = { 'Git', 'G', 'Gread' } })
@@ -148,7 +149,7 @@ return require('packer').startup({
     use({
       'kyazdani42/nvim-tree.lua',
       requires = 'kyazdani42/nvim-web-devicons',
-      cmd = { 'NvimTreeToggle' },
+      cmd = { 'NvimTreeToggle', 'NvimTreeFindFileToggle' },
       config = function()
         require('plugins.tree')
       end,
@@ -158,6 +159,7 @@ return require('packer').startup({
       config = function()
         require('plugins.telescope')
       end,
+      cmd = { 'Telescope' },
       requires = {
         { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
       },
@@ -173,7 +175,7 @@ return require('packer').startup({
       end,
     })
     use({ 'jose-elias-alvarez/nvim-lsp-ts-utils' })
-    use({ 'kosayoda/nvim-lightbulb' })
+    use({ 'kosayoda/nvim-lightbulb', module = 'nvim-lightbulb' })
     use({
       'neovim/nvim-lspconfig',
       config = function()
@@ -183,7 +185,7 @@ return require('packer').startup({
     use({
       'rmagatti/goto-preview',
       config = function()
-        require('goto-preview').setup({ default_mappings = true })
+        require('plugins.goto-preview')
       end,
       keys = { 'gpd', 'gpi', 'gpr', 'gP' },
     })
