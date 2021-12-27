@@ -1,3 +1,15 @@
+local function publishDiagnosticsHandler(err, result, ctx, config)
+  for _, diagnostic in ipairs(result.diagnostics) do
+    diagnostic.severity = 4
+    local code = diagnostic.code
+    if code and code ~= '' then
+      diagnostic.message = diagnostic.message .. ' [' .. code .. ']'
+    end
+  end
+
+  return vim.lsp.handlers['textDocument/publishDiagnostics'](err, result, ctx, config)
+end
+
 return function(config)
   config.root_dir = require('lspconfig').util.root_pattern('./node_modules/eslint')
   config.on_attach = function(client, bufnr)
@@ -6,6 +18,10 @@ return function(config)
     require('utils').map('n', '<leader>ef', '<Cmd>EslintFixAll<CR>')
   end
   config.flags = {}
+
+  config.handlers = {
+    ['textDocument/publishDiagnostics'] = publishDiagnosticsHandler,
+  }
 
   return config
 end

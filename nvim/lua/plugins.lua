@@ -110,6 +110,7 @@ return require('packer').startup({
         { 'hrsh7th/cmp-buffer' },
         { 'hrsh7th/cmp-path' },
         { 'hrsh7th/cmp-nvim-lsp' },
+        { 'hrsh7th/cmp-nvim-lsp-signature-help' },
         { 'hrsh7th/cmp-cmdline' },
       },
       config = function()
@@ -168,12 +169,6 @@ return require('packer').startup({
 
     -- LSP {{{
     use({ 'folke/lua-dev.nvim' })
-    use({
-      'ray-x/lsp_signature.nvim',
-      config = function()
-        require('plugins.lsp_signature')
-      end,
-    })
     use({ 'jose-elias-alvarez/nvim-lsp-ts-utils' })
     use({ 'kosayoda/nvim-lightbulb', module = 'nvim-lightbulb' })
     use({

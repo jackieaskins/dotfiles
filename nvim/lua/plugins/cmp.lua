@@ -9,6 +9,7 @@ local source_menu_map = {
   nvim_lsp = 'LSP',
   buffer = 'Buff',
   path = 'Path',
+  nvim_lsp_signature_help = 'Sig',
 }
 
 vim.opt.completeopt = 'menu,menuone,noselect'
@@ -25,6 +26,7 @@ cmp.setup({
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
     { name = 'path' },
+    { name = 'nvim_lsp_signature_help' },
   }, {
     {
       name = 'buffer',
@@ -60,12 +62,6 @@ cmp.setup({
       select = true,
       behavior = cmp.ConfirmBehavior.Replace,
     }),
-  },
-})
-
-cmp.setup.cmdline('/', {
-  sources = {
-    { name = 'buffer' },
   },
 })
 
