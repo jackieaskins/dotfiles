@@ -1,14 +1,17 @@
+-- https://github.com/nvim-lualine/lualine.nvim
+
 local colors = require('colors')
+local lsp_icons = require('lsp.icons')
 
 local custom_onenord = require('lualine.themes.onenord')
 custom_onenord.normal.a.bg = colors.blue
 custom_onenord.normal.b.fg = colors.blue
-custom_onenord.normal.a.gui = 'NONE'
-custom_onenord.insert.a.gui = 'NONE'
-custom_onenord.command.a.gui = 'NONE'
-custom_onenord.visual.a.gui = 'NONE'
-custom_onenord.replace.a.gui = 'NONE'
-custom_onenord.inactive.a.gui = 'NONE'
+custom_onenord.normal.a.gui = colors.none
+custom_onenord.insert.a.gui = colors.none
+custom_onenord.command.a.gui = colors.none
+custom_onenord.visual.a.gui = colors.none
+custom_onenord.replace.a.gui = colors.none
+custom_onenord.inactive.a.gui = colors.none
 
 local function lsp_clients()
   local buf_clients = vim.lsp.buf_get_clients(vim.fn.bufnr('%'))
@@ -24,6 +27,10 @@ local function lsp_clients()
 end
 
 local function gps_location()
+  if vim.bo.filetype == '' then
+    return ''
+  end
+
   local success, gps = pcall(require, 'nvim-gps')
   if success and gps.is_available() then
     local location = gps.get_location()
@@ -40,13 +47,15 @@ require('lualine').setup({
   options = {
     disabled_filetypes = { 'NvimTree' },
     theme = custom_onenord,
+    component_separators = { left = '', right = '' },
+    section_separators = { left = '', right = '' },
   },
   sections = {
     lualine_a = { 'mode' },
     lualine_b = {
       {
         'diagnostics',
-        symbols = { hint = ' ', info = ' ', warn = ' ', error = ' ' },
+        symbols = { hint = lsp_icons.Hint, info = lsp_icons.Info, warn = lsp_icons.Warn, error = lsp_icons.Error },
         update_in_insert = true,
       },
     },

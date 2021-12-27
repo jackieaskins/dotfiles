@@ -1,1 +1,1 @@
-return { Hint = '', Info = '', Warn = '', Error = '' }
+return { Hint = ' ', Info = ' ', Warn = ' ', Error = ' ' }

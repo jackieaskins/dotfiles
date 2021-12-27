@@ -77,14 +77,6 @@ function GetTabLine()
       ' ',
     }
 
-    if tabnr == current_tabnr then
-      table.insert(components, '%#TabLine#')
-    elseif tabnr + 1 == current_tabnr then
-      table.insert(components, '%#TabLineSel#')
-    elseif tabnr ~= num_tabs then
-      table.insert(components, '')
-    end
-
     table.insert(tabline_components, table.concat(components))
   end
 
