@@ -119,14 +119,15 @@ function backup_and_symlink() {
 }
 
 echo -e "Backing up and symlinking dotfiles..."
-#                  dotfile                       backup                       sym
-backup_and_symlink .zshrc                        zshrc                        zshrc
-backup_and_symlink .vimrc                        vimrc                        vimrc
-backup_and_symlink .vim                          vim                          vim
-backup_and_symlink .config/nvim                  nvim                         nvim
-backup_and_symlink .config/kitty                 kitty                        kitty
-backup_and_symlink .tmux.conf                    tmux.conf                    tmux.conf
-backup_and_symlink .gitignore_global             gitignore_global             gitignore_global
+#                  dotfile           backup           sym
+backup_and_symlink .zshrc            zshrc            zshrc
+backup_and_symlink .vimrc            vimrc            vimrc
+backup_and_symlink .vim              vim              vim
+backup_and_symlink .config/nvim      nvim             nvim
+backup_and_symlink .config/kitty     kitty            kitty
+backup_and_symlink .tmux.conf        tmux.conf        tmux.conf
+backup_and_symlink .gitignore_global gitignore_global gitignore_global
+#                  dotfile           backup           sym
 success_echo "Dotfiles backed up and symlinked."
 
 #--------------------------------------------------------------------#

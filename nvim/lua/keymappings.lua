@@ -39,7 +39,7 @@ end
 
 vim.api.nvim_exec(
   [[
-  command! FormatterUpdateAll lua require('plugins.formatter').update_all_servers()
+  command! FormatterUpdateAll lua require('plugins.formatter').update_all_formatters()
   command! -nargs=? -complete=custom,v:lua.GetFormatters FormatterUpdate lua require('plugins.formatter').update_formatters(<f-args>)
 ]],
   true
