@@ -19,9 +19,7 @@ local function ts_rename(new_name)
       range = ts_utils.node_to_lsp_range(node),
       newText = new_name,
     }
-  end, vim.tbl_values(
-    nodes_to_rename
-  ))
+  end, vim.tbl_values(nodes_to_rename))
 
   vim.lsp.util.apply_text_edits(edits, 0)
 end
@@ -159,29 +157,33 @@ return {
     end
 
     local current_name = get_node_text(node_to_refactor)
-    local new_name = fn.input('New name: ', current_name or '')
 
-    if not new_name or #new_name < 1 or current_name == new_name then
-      return
-    end
-
-    if #vim.lsp.buf_get_clients() == 0 then
-      return ts_rename(new_name)
-    end
-
-    local lsp_definition = get_definition_in_current_file()
-
-    if is_javascript_file() then
-      local successful = handle_javascript_rename(lsp_definition, new_name)
-      if successful then
+    vim.ui.input({
+      prompt = 'New name:',
+      default = current_name,
+    }, function(new_name)
+      if not new_name or #new_name < 1 or current_name == new_name then
         return
       end
-    end
 
-    if not lsp_definition then
-      ts_rename(new_name)
-    else
-      vim.lsp.buf.rename(new_name)
-    end
+      if #vim.lsp.buf_get_clients() == 0 then
+        return ts_rename(new_name)
+      end
+
+      local lsp_definition = get_definition_in_current_file()
+
+      if is_javascript_file() then
+        local successful = handle_javascript_rename(lsp_definition, new_name)
+        if successful then
+          return
+        end
+      end
+
+      if not lsp_definition then
+        ts_rename(new_name)
+      else
+        vim.lsp.buf.rename(new_name)
+      end
+    end)
   end,
 }

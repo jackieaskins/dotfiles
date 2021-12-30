@@ -36,6 +36,13 @@ return require('packer').startup({
     -- }}}
 
     -- Appearance {{{
+    use({ 'stevearc/dressing.nvim' })
+    use({
+      'rcarriga/nvim-notify',
+      config = function()
+        vim.notify = require('notify')
+      end,
+    })
     use({ 'rmehri01/onenord.nvim' })
     use({
       'SmiteshP/nvim-gps',
