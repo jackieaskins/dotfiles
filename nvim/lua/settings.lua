@@ -41,10 +41,6 @@ opt.foldmethod = 'expr'
 opt.foldexpr = 'nvim_treesitter#foldexpr()'
 opt.foldlevel = 99
 
--- Terminal
-cmd('command! -nargs=* T botright split | terminal <args>')
-cmd('command! -nargs=* VT botright vsplit | terminal <args>')
-
 -- Spaces & Tabs
 opt.shiftwidth = 2
 opt.tabstop = 2

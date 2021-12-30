@@ -15,16 +15,3 @@ for level, icon in pairs(icons) do
   local sign = 'DiagnosticSign' .. level
   vim.fn.sign_define(sign, { text = icon, texthl = sign })
 end
-
-function _G.GetServers()
-  return table.concat(require('lsp.servers'), '\n')
-end
-
-vim.api.nvim_exec(
-  [[
-  command! LspLog vsplit ~/.cache/nvim/lsp.log
-  command! LspUpdateAll lua require('lsp.update').update_all_servers()
-  command! -nargs=? -complete=custom,v:lua.GetServers LspUpdate lua require('lsp.update').update_servers(<f-args>)
-]],
-  true
-)

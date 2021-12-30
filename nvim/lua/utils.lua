@@ -9,11 +9,23 @@ local M = {}
 ---@param rhs string
 ---@param opts? table<string, boolean>
 function M.map(mode, lhs, rhs, opts)
-  local options = { noremap = true }
+  local options = { noremap = true, silent = true }
   if opts then
     options = vim.tbl_extend('force', options, opts)
   end
   vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+end
+
+---Define vim user command
+---@param name string
+---@param command string | function
+---@param opts? table
+function M.user_command(name, command, opts)
+  local options = { force = true }
+  if opts then
+    options = vim.tbl_extend('force', options, opts)
+  end
+  vim.api.nvim_add_user_command(name, command, options)
 end
 
 ---Replace terminal codes in strng with internal representation

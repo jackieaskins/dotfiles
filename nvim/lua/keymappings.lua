@@ -32,18 +32,6 @@ map('n', '<leader>rn', '<cmd>lua require("rename").smart_rename()<CR>')
 -- Comment Frame
 map('n', '<leader>cf', '<cmd>lua require("nvim-comment-frame").add_multiline_comment()<CR>')
 
--- Formatter
-function _G.GetFormatters()
-  return table.concat(vim.tbl_keys(require('plugins.formatter').formatters), '\n')
-end
-
-vim.api.nvim_exec(
-  [[
-  command! FormatterUpdateAll lua require('plugins.formatter').update_all_formatters()
-  command! -nargs=? -complete=custom,v:lua.GetFormatters FormatterUpdate lua require('plugins.formatter').update_formatters(<f-args>)
-]],
-  true
-)
 augroup('auto_format', {
   { 'BufWritePost', '*', 'lua require("plugins.formatter").format_on_save()' },
 })
