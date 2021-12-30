@@ -16,14 +16,13 @@ return function(config)
       eslint_enable_diagnostics = false,
     })
 
-    local function bsk(...)
-      vim.api.nvim_buf_set_keymap(bufnr, ...)
+    local function bsk(mode, lhs, rhs)
+      vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, { noremap = true, silent = true })
     end
-    local opts = { noremap = true, silent = true }
-    bsk('n', '<leader>oi', '<cmd>TSLspOrganize<CR>', opts)
-    bsk('n', '<leader>ia', '<cmd>TSLspImportAll<CR>', opts)
-    bsk('n', '<leader>ic', '<cmd>TSLspImportCurrent<CR>', opts)
-    bsk('n', '<leader>rf', '<cmd>TSLspRenameFile<CR>', opts)
+    bsk('n', '<leader>oi', '<cmd>TSLspOrganize<CR>')
+    bsk('n', '<leader>ia', '<cmd>TSLspImportAll<CR>')
+    bsk('n', '<leader>ic', '<cmd>TSLspImportCurrent<CR>')
+    bsk('n', '<leader>rf', '<cmd>TSLspRenameFile<CR>')
   end
 
   return config

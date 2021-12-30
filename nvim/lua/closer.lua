@@ -104,4 +104,4 @@ function _G.close()
   return t(table.concat(keys, ''))
 end
 
-map('i', '<CR>', 'v:lua.close()', { expr = true, silent = true })
+map('i', '<CR>', 'v:lua.close()', { expr = true })
