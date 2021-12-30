@@ -239,3 +239,5 @@ return require('packer').startup({
     display = { prompt_border = 'rounded' },
   },
 })
+
+-- vim:foldmethod=marker

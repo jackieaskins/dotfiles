@@ -1,4 +1,6 @@
 return function(config)
+  config.filetypes = { 'json', 'jsonc' }
+
   config.settings = {
     json = {
       -- https://www.schemastore.org

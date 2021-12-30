@@ -5,6 +5,7 @@ require('filetype').setup({
     literal = {
       Brewfile_personal = 'ruby',
       ['tmux.conf'] = 'tmux',
+      ['coc-settings.json'] = 'jsonc',
     },
     complex = {
       ['tmux/.*'] = 'tmux',

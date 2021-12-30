@@ -54,7 +54,7 @@ set directory=$HOME/.swp
 " SpellCheck {{{
 augroup my_spell
   autocmd!
-  autocmd BufRead,BufNewFile *.md setlocal spell
+  autocmd FileType markdown setlocal spell
 augroup END
 " }}}
 
@@ -69,15 +69,11 @@ augroup END
 " ColorColumn {{{
 augroup my_colorcolumn
   autocmd!
-  autocmd BufRead,BufNewFile *.lua set colorcolumn=120
+  autocmd FileType lua setlocal colorcolumn=120
 augroup END
 " }}}
 
 " Folds {{{
-augroup my_folds
-  autocmd!
-  autocmd FileType lua,sh,vim setlocal foldmethod=marker
-augroup END
 set foldlevel=99 " Start folds expanded by default
 " }}}
 
@@ -140,3 +136,5 @@ set ignorecase " use case insensitive search
 set smartcase " don't use insensitive search when using capital letters
 set path+=** " recursively search path
 " }}}
+
+" vim:foldmethod=marker

@@ -106,3 +106,5 @@ let g:lightline.tab = {
       \ 'inactive': ['tabnum', 'filename', 'modified']
       \ }
 " }}}
+
+" vim:foldmethod=marker

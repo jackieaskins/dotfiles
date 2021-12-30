@@ -94,3 +94,5 @@ Plug 'vim-test/vim-test'
 " }}}
 
 call plug#end()
+
+" vim:foldmethod=marker
