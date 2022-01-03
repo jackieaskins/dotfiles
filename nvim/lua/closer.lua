@@ -72,7 +72,7 @@ local function is_followed_by_close(rest_of_line, close_to_opens_map)
   return false
 end
 
-function _G.close()
+local function handle_close()
   local keys = { '<c-g>u<CR>' }
 
   local open_to_close_map, close_to_opens_map = require('closer.pairs').get_filetype_opts()
@@ -104,4 +104,4 @@ function _G.close()
   return t(table.concat(keys, ''))
 end
 
-map('i', '<CR>', 'v:lua.close()', { expr = true })
+map('i', '<CR>', '', { callback = handle_close, expr = true })

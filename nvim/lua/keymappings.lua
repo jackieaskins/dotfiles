@@ -1,6 +1,15 @@
 local utils = require('utils')
 local augroup, map = utils.augroup, utils.map
 
+-- Jumplist
+local function jump(key)
+  return function()
+    return vim.v.count > 1 and "m'" .. vim.v.count .. key or key
+  end
+end
+map('n', 'k', '', { callback = jump('k'), expr = true })
+map('n', 'j', '', { callback = jump('j'), expr = true })
+
 -- Window Management
 map('n', '<C-j>', '<C-w>j')
 map('n', '<C-k>', '<C-w>k')
@@ -43,7 +52,7 @@ map('n', '<leader>mt', '<cmd>MaximizerToggle<CR>')
 map('n', '<leader>ps', '<cmd>PackerSync<CR>')
 map('n', '<leader>pu', '<cmd>PackerUpdate<CR>')
 map('n', '<leader>pp', '<cmd>PackerProfile<CR>')
-map('n', '<leader>pl', ':PackerLoad ')
+map('n', '<leader>pl', ':PackerLoad ', { silent = false })
 
 -- Startup Time
 map('n', '<leader>su', '<cmd>StartupTime --tries 20<CR>')
@@ -54,7 +63,7 @@ map('n', '<leader>hi', '<cmd>Telescope highlights<CR>')
 
 map('n', '<C-p>', '<cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files<CR>')
 map('n', '<leader>ff', '<cmd>Telescope find_files find_command=rg,--no-ignore,--hidden,--files<CR>')
-map('n', '<leader>rg', ':Telescope grep_string search=')
+map('n', '<leader>rg', ':Telescope grep_string search=', { silent = false })
 map('n', '<leader>/', '<cmd>Telescope live_grep only_sort_text=true<CR>')
 map('n', '<leader>fw', '<cmd>Telescope grep_string<CR>')
 map('n', '<leader>gs', '<cmd>Telescope git_status<CR>')
