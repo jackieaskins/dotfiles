@@ -1,10 +1,6 @@
 local function publishDiagnosticsHandler(err, result, ctx, config)
   for _, diagnostic in ipairs(result.diagnostics) do
     diagnostic.severity = 4
-    local code = diagnostic.code
-    if code and code ~= '' then
-      diagnostic.message = diagnostic.message .. ' [' .. code .. ']'
-    end
   end
 
   return vim.lsp.handlers['textDocument/publishDiagnostics'](err, result, ctx, config)
@@ -18,7 +14,6 @@ return function(config)
     require('utils').map('n', '<leader>ef', '<Cmd>EslintFixAll<CR>')
   end
   config.flags = {}
-
   config.handlers = {
     ['textDocument/publishDiagnostics'] = publishDiagnosticsHandler,
   }

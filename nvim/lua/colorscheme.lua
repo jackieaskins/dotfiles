@@ -15,6 +15,7 @@ if success then
     },
     custom_highlights = {
       CursorLineNr = { fg = colors.blue, bg = colors.active, style = 'bold' },
+      Identifier = { fg = colors.blue, gui = 'bold' },
 
       QuickScopePrimary = { fg = colors.dark_blue, style = 'underline' },
       QuickScopeSecondary = { fg = colors.purple, style = 'underline' },
