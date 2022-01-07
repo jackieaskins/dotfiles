@@ -13,7 +13,7 @@ user_command('FormatterUpdate', function()
     or { formatter().formatter_by_filetype[vim.bo.filetype].name }
   formatter().update_formatters(formatter_names)
 end, {
-  nargs = '+',
+  nargs = '*',
   complete = function()
     return vim.tbl_keys(formatter().formatters)
   end,
@@ -27,7 +27,7 @@ end)
 user_command('LspUpdate', function(arg)
   require('lsp.update').update_servers(arg.args)
 end, {
-  nargs = '+',
+  nargs = '*',
   complete = function()
     return require('lsp.servers').server_names
   end,
