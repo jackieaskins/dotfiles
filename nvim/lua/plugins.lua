@@ -91,13 +91,6 @@ return require('packer').startup({
         require('plugins.Comment')
       end,
     })
-    use({
-      'mattn/emmet-vim',
-      keys = { { 'i', '<C-y>' } },
-      setup = function()
-        require('plugins.emmet')
-      end,
-    })
     use({ 'axelf4/vim-strip-trailing-whitespace' })
     use({
       'iamcco/markdown-preview.nvim',

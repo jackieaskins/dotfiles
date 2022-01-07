@@ -29,7 +29,7 @@ user_command('LspUpdate', function(arg)
 end, {
   nargs = '+',
   complete = function()
-    return require('lsp.servers')
+    return require('lsp.servers').server_names
   end,
 })
 
