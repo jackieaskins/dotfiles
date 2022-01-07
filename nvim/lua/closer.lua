@@ -1,6 +1,6 @@
 local fn = vim.fn
 local utils = require('utils')
-local map, t = utils.map, utils.t
+local map = utils.map
 
 local function at_eol()
   return fn.col('.') >= fn.col('$')
@@ -101,7 +101,7 @@ local function handle_close()
   end
 
   table.insert(keys, '<c-g>u')
-  return t(table.concat(keys, ''))
+  return table.concat(keys, '')
 end
 
-map('i', '<CR>', '', { callback = handle_close, expr = true })
+map('i', '<CR>', handle_close, { expr = true })

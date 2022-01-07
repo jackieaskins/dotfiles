@@ -13,10 +13,10 @@ require('luasnip/loaders/from_vscode').load({
   paths = { '~/dotfiles/vim-common' },
 })
 
-map('i', '<C-J>', '<cmd>lua require("luasnip").expand_or_jump()<CR>')
-map('i', '<C-K>', '<cmd>lua require("luasnip").jump(-1)<CR>')
-map('s', '<C-J>', '<cmd>lua require("luasnip").expand_or_jump()<CR>')
-map('s', '<C-K>', '<cmd>lua require("luasnip").jump(-1)<CR>')
+map({ 'i', 's' }, '<C-J>', luasnip.expand_or_jump)
+map({ 'i', 's' }, '<C-K>', function()
+  luasnip.jump(-1)
+end)
 
 luasnip.config.set_config({
   updateevents = 'TextChanged,TextChangedI',

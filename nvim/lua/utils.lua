@@ -6,14 +6,14 @@ local M = {}
 ---Define vim keymap
 ---@param mode string
 ---@param lhs string
----@param rhs string
+---@param rhs string | function
 ---@param opts? table<string, boolean>
 function M.map(mode, lhs, rhs, opts)
-  local options = { noremap = true, silent = true }
+  local options = { silent = true }
   if opts then
     options = vim.tbl_extend('force', options, opts)
   end
-  vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+  vim.keymap.set(mode, lhs, rhs, options)
 end
 
 ---Define vim user command

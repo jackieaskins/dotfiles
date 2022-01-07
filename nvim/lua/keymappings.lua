@@ -7,8 +7,8 @@ local function jump(key)
     return vim.v.count > 1 and "m'" .. vim.v.count .. key or key
   end
 end
-map('n', 'k', '', { callback = jump('k'), expr = true })
-map('n', 'j', '', { callback = jump('j'), expr = true })
+map('n', 'k', jump('k'), { expr = true })
+map('n', 'j', jump('j'), { expr = true })
 
 -- Window Management
 map('n', '<C-j>', '<C-w>j')
@@ -33,13 +33,19 @@ map('n', '[<C-l>', '<cmd>lpfile<CR>')
 map('n', ']<C-l>', '<cmd>lnfile<CR>')
 
 map('n', '<leader>so', '<cmd>luafile %<CR>')
-map('n', '<leader>rp', '<cmd>lua require("reload").reload_plugins()<CR>')
+map('n', '<leader>rp', function()
+  require('reload').reload_plugins()
+end)
 
-map('n', '<leader>rn', '<cmd>lua require("rename").smart_rename()<CR>')
+map('n', '<leader>rn', function()
+  require('rename').smart_rename()
+end)
 
 -- Plugins
 -- Comment Frame
-map('n', '<leader>cf', '<cmd>lua require("nvim-comment-frame").add_multiline_comment()<CR>')
+map('n', '<leader>cf', function()
+  require('nvim-comment-frame').add_multiline_comment()
+end)
 
 augroup('auto_format', {
   { 'BufWritePost', '*', 'lua require("plugins.formatter").format_on_save()' },
@@ -75,7 +81,7 @@ map('n', 'gd', '<cmd>Telescope lsp_definitions<CR>')
 map('n', 'gr', '<cmd>Telescope lsp_references<CR>')
 
 map('n', '<leader>ca', '<cmd>Telescope lsp_code_actions<CR>')
-map('x', '<leader>ca', '<cmd>Telescope lsp_range_code_actions theme=cursor<CR>')
+map('x', '<leader>ca', '<cmd>Telescope lsp_range_code_actions<CR>')
 
 map('n', '<leader>sw', '<cmd>Telescope lsp_dynamic_workspace_symbols<CR>')
 map('n', '<leader>sd', '<cmd>Telescope lsp_document_symbols<CR>')
