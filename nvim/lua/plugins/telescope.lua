@@ -4,7 +4,9 @@ local telescope = require('telescope')
 local actions = require('telescope.actions')
 local action_layout = require('telescope.actions.layout')
 
-require('packer').loader('telescope-fzf-native.nvim')
+local packer_loader = require('packer').loader
+packer_loader('telescope-env.nvim')
+packer_loader('telescope-fzf-native.nvim')
 
 telescope.setup({
   defaults = {
@@ -41,4 +43,5 @@ telescope.setup({
   },
 })
 
+telescope.load_extension('env')
 telescope.load_extension('fzf')
