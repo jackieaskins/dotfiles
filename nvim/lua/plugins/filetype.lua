@@ -9,6 +9,8 @@ require('filetype').setup({
     },
     complex = {
       ['tmux/.*'] = 'tmux',
+      ['kitty/.*.conf'] = 'kitty',
+      ['kitty/.*.session'] = 'kitty-session',
     },
   },
 })

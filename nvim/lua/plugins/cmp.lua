@@ -30,14 +30,16 @@ cmp.setup({
   }, {
     {
       name = 'buffer',
-      get_bufnrs = function()
-        -- Gets visible buffers
-        local bufs = {}
-        for _, win in ipairs(api.nvim_list_wins()) do
-          bufs[api.nvim_win_get_buf(win)] = true
-        end
-        return vim.tbl_keys(bufs)
-      end,
+      option = {
+        get_bufnrs = function()
+          -- Gets visible buffers
+          local bufs = {}
+          for _, win in ipairs(api.nvim_list_wins()) do
+            bufs[api.nvim_win_get_buf(win)] = true
+          end
+          return vim.tbl_keys(bufs)
+        end,
+      },
     },
   }),
   documentation = {
