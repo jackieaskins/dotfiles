@@ -1,6 +1,7 @@
 -- https://github.com/kyazdani42/nvim-web-devicons
 
 local web_devicons = require('nvim-web-devicons')
+local colors = require('colors')
 
 web_devicons.setup({
   default = false,
@@ -25,5 +26,10 @@ web_devicons.set_icon({
     icon = zsh_icon,
     color = zsh_color,
     name = 'Zsh',
+  },
+  NvimTree = {
+    icon = '',
+    color = colors.green,
+    name = 'NvimTree',
   },
 })

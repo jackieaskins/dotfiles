@@ -20,7 +20,7 @@ local function lsp_clients()
   end
 
   local client_names = {}
-  for _, client in ipairs(buf_clients) do
+  for _, client in ipairs(vim.tbl_values(buf_clients)) do
     client_names[client.name] = true
   end
   return '  ' .. table.concat(vim.tbl_keys(client_names), ' ')
@@ -47,8 +47,6 @@ require('lualine').setup({
   options = {
     disabled_filetypes = { 'NvimTree' },
     theme = custom_onenord,
-    component_separators = { left = '', right = '' },
-    section_separators = { left = '', right = '' },
   },
   sections = {
     lualine_a = { 'mode' },

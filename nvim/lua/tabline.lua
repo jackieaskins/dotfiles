@@ -42,13 +42,14 @@ function GetTabLine()
 
     local function get_bufname()
       if filetype == 'NvimTree' then
-        return '[Tree]'
+        return 'Tree'
       end
       if filetype == 'TelescopePrompt' then
-        return '[Telescope]'
+        return ' Telescope'
       end
+
       if bufname == '' then
-        return '[No Name]'
+        return '-'
       end
 
       if filenames[filename] == 1 then
@@ -76,6 +77,14 @@ function GetTabLine()
       readonly,
       ' ',
     }
+
+    if tabnr == current_tabnr then
+      table.insert(components, '%#TabLine#')
+    elseif tabnr + 1 == current_tabnr then
+      table.insert(components, '%#TabLineSel#')
+    elseif tabnr ~= num_tabs then
+      table.insert(components, '')
+    end
 
     table.insert(tabline_components, table.concat(components))
   end
