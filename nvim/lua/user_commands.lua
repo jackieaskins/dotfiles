@@ -36,3 +36,19 @@ end, {
 -- Terminal
 user_command('T', 'botright split | terminal <args>', { nargs = '*' })
 user_command('VT', 'botright vsplit | terminal <args>', { nargs = '*' })
+
+-- Dotfiles
+user_command('Dotfiles', function()
+  local dotfiles_repo = 'https://github.com/jackieaskins/dotfiles'
+  local dotfiles_path = vim.fn.getenv('HOME') .. '/dotfiles'
+  local cwd = vim.fn.getcwd()
+
+  if dotfiles_path == cwd then
+    local file_path = vim.split(vim.fn.expand('%'), cwd)[1]
+    if file_path ~= '' then
+      return vim.fn['gxext#browse'](dotfiles_repo .. '/blob/main/' .. file_path)
+    end
+  end
+
+  vim.fn['gxext#browse'](dotfiles_repo)
+end)
