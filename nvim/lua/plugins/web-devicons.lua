@@ -1,7 +1,6 @@
 -- https://github.com/kyazdani42/nvim-web-devicons
 
 local web_devicons = require('nvim-web-devicons')
-local colors = require('colors')
 
 web_devicons.setup({
   default = false,
@@ -29,7 +28,17 @@ web_devicons.set_icon({
   },
   NvimTree = {
     icon = '',
-    color = colors.green,
+    color = '#358a5b',
     name = 'NvimTree',
+  },
+  packer = {
+    icon = '',
+    color = '#dea584',
+    name = 'Packer',
+  },
+  ['[packer]'] = {
+    icon = '',
+    color = '#dea584',
+    name = 'PackerName',
   },
 })

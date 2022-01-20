@@ -41,6 +41,9 @@ function GetTabLine()
     local filename = fn.fnamemodify(bufname, ':t')
 
     local function get_bufname()
+      if filetype == 'packer' then
+        return 'Packer'
+      end
       if filetype == 'NvimTree' then
         return 'Tree'
       end

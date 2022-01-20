@@ -26,7 +26,6 @@ opt.splitright = true
 opt.splitbelow = true
 opt.diffopt:append({ 'vertical' })
 opt.termguicolors = true
-opt.showtabline = 2
 opt.tabline = require('tabline')
 
 augroup('spell', {
