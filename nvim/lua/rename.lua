@@ -21,7 +21,7 @@ local function ts_rename(new_name)
     }
   end, vim.tbl_values(nodes_to_rename))
 
-  vim.lsp.util.apply_text_edits(edits, 0)
+  vim.lsp.util.apply_text_edits(edits, 0, 'utf-8')
 end
 
 local function get_definition_in_current_file()

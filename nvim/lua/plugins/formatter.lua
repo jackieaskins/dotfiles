@@ -35,6 +35,8 @@ M.formatters = {
 }
 
 M.formatter_by_filetype = {
+  css = M.formatters.prettier,
+  html = M.formatters.prettier,
   javascript = M.formatters.prettier,
   javascriptreact = M.formatters.prettier,
   json = M.formatters.prettier,

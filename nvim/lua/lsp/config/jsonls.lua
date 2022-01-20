@@ -1,6 +1,4 @@
 return function(config)
-  config.filetypes = { 'json', 'jsonc' }
-
   config.settings = {
     json = {
       -- https://www.schemastore.org
@@ -14,6 +12,7 @@ return function(config)
           url = 'https://json.schemastore.org/eslintrc.json',
         },
         { fileMatch = { 'package.json' }, url = 'https://json.schemastore.org/package.json' },
+        { fileMatch = { 'jsconfig*.json' }, url = 'https://json.schemastore.org/jsconfig.json' },
         { fileMatch = { 'tsconfig*.json' }, url = 'https://json.schemastore.org/tsconfig.json' },
       },
     },
