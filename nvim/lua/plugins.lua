@@ -164,6 +164,7 @@ return require('packer').startup({
       requires = {
         { 'LinArcX/telescope-env.nvim', opt = true },
         { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', opt = true },
+        { 'nvim-telescope/telescope-file-browser.nvim', opt = true },
       },
     })
     -- }}}

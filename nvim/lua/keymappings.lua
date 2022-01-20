@@ -75,6 +75,7 @@ map('n', '<leader>fw', '<cmd>Telescope grep_string<CR>')
 map('n', '<leader>gs', '<cmd>Telescope git_status<CR>')
 map('n', '<leader>bu', '<cmd>Telescope buffers sort_mru=true<CR>')
 map('n', '<leader>of', '<cmd>Telescope oldfiles cwd_only=true sort_lastused=true include_current_session=true<CR>')
+map('n', '<leader>fb', '<cmd>Telescope file_browser<CR>')
 
 map('n', 'gi', '<cmd>Telescope lsp_implementations<CR>')
 map('n', 'gd', '<cmd>Telescope lsp_definitions<CR>')
