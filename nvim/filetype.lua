@@ -1,0 +1,13 @@
+vim.g.do_filetype_lua = 1
+vim.filetype.add({
+  filename = {
+    Brewfile = 'ruby',
+    Brewfile_personal = 'ruby',
+    ['tmux.conf'] = 'tmux',
+    ['coc-settings.json'] = 'jsonc',
+  },
+  pattern = {
+    ['tmux/.*%.conf'] = 'tmux',
+    ['tsconfig.*%.json'] = 'jsonc',
+  },
+})

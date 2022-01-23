@@ -8,12 +8,6 @@ return require('packer').startup({
     -- Needed until https://github.com/neovim/neovim/issues/12587 is fixed
     use({ 'antoinemadec/FixCursorHold.nvim' })
     use({ 'lewis6991/impatient.nvim' })
-    use({
-      'nathom/filetype.nvim',
-      config = function()
-        require('plugins.filetype')
-      end,
-    })
     use({ 'dstein64/vim-startuptime', cmd = 'StartupTime' })
     use({
       'stsewd/gx-extended.vim',
