@@ -51,6 +51,9 @@ augroup('auto_format', {
   { 'BufWritePost', '*', 'lua require("plugins.formatter").format_on_save()' },
 })
 
+-- Markdown Preview
+map('n', '<leader>mp', '<cmd>MarkdownPreview<CR>')
+
 -- Maximizer
 map('n', '<leader>mt', '<cmd>MaximizerToggle<CR>')
 
@@ -76,16 +79,6 @@ map('n', '<leader>gs', '<cmd>Telescope git_status<CR>')
 map('n', '<leader>bu', '<cmd>Telescope buffers sort_mru=true<CR>')
 map('n', '<leader>of', '<cmd>Telescope oldfiles cwd_only=true sort_lastused=true include_current_session=true<CR>')
 map('n', '<leader>fb', '<cmd>Telescope file_browser<CR>')
-
-map('n', 'gi', '<cmd>Telescope lsp_implementations<CR>')
-map('n', 'gd', '<cmd>Telescope lsp_definitions<CR>')
-map('n', 'gr', '<cmd>Telescope lsp_references<CR>')
-
-map('n', '<leader>ca', '<cmd>Telescope lsp_code_actions<CR>')
-map('x', '<leader>ca', '<cmd>Telescope lsp_range_code_actions<CR>')
-
-map('n', '<leader>sw', '<cmd>Telescope lsp_dynamic_workspace_symbols<CR>')
-map('n', '<leader>sd', '<cmd>Telescope lsp_document_symbols<CR>')
 
 -- Test
 map('n', '<leader>tn', '<cmd>TestNearest<CR>')
