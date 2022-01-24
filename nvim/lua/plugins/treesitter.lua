@@ -18,6 +18,7 @@ require('nvim-treesitter.configs').setup({
     'query',
     'ruby',
     'scss',
+    'toml',
     'tsx',
     'typescript',
     'vim',
@@ -53,7 +54,8 @@ require('nvim-treesitter.configs').setup({
     enable = true,
     keymaps = {
       ['.'] = 'textsubjects-smart',
-      [';'] = 'textsubjects-container-outer',
+      ['a;'] = 'textsubjects-container-outer',
+      ['i;'] = 'textsubjects-container-inner',
     },
   },
 })

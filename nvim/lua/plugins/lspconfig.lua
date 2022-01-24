@@ -13,7 +13,6 @@ if not configs.ls_emmet then
         'html',
         'javascript',
         'javascriptreact',
-        'typescript',
         'typescriptreact',
         'xml',
       },
