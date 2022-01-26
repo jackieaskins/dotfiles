@@ -180,6 +180,14 @@ return require('packer').startup({
       end,
       keys = { 'gpd', 'gpi', 'gpr', 'gP' },
     })
+    use({
+      'j-hui/fidget.nvim',
+      config = function()
+        require('fidget').setup({
+          text = { spinner = 'dots' },
+        })
+      end,
+    })
     -- }}}
 
     -- Movement {{{
