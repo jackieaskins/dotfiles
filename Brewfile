@@ -21,6 +21,10 @@ brew 'zsh-syntax-highlighting'
 if RUBY_PLATFORM =~ /darwin/
   tap 'homebrew/cask-fonts'
   cask 'font-hack-nerd-font'
+  cask 'font-jetbrains-mono-nerd-font'
+
+  tap 'homebrew/cask-versions'
+  cask 'iterm2-nightly'
 
   cask 'alfred'
   cask 'docker'
