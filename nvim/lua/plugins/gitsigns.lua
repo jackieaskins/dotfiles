@@ -1,4 +1,5 @@
 -- https://github.com/lewis6991/gitsigns.nvim
+
 local map = require('utils').map
 
 require('gitsigns').setup({
@@ -18,21 +19,22 @@ require('gitsigns').setup({
     bsk('n', '[c', "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'", { expr = true })
 
     -- Actions
-    bsk({ 'n', 'v' }, '<leader>hs', gs.stage_hunk)
-    bsk({ 'n', 'v' }, '<leader>hr', gs.reset_hunk)
-    bsk('n', '<leader>hS', gs.stage_buffer)
-    bsk('n', '<leader>hu', gs.undo_stage_hunk)
-    bsk('n', '<leader>hR', gs.reset_buffer)
-    bsk('n', '<leader>hp', gs.preview_hunk)
+    -- Using gs.[stage/reset]_hunk as rhs didn't allow partial hunk stages
+    bsk({ 'n', 'v' }, '<leader>hs', ':Gitsigns stage_hunk<CR>')
+    bsk({ 'n', 'v' }, '<leader>hr', ':Gitsigns reset_hunk<CR>')
+    bsk('n', '<leader>hu', gs.undo_stage_hunk, { desc = 'gs.undo_stage_hunk' })
+    bsk('n', '<leader>hp', gs.preview_hunk, { desc = 'gs.preview_hunk' })
+    bsk('n', '<leader>hS', gs.stage_buffer, { desc = 'gs.stage_buffer' })
+    bsk('n', '<leader>hR', gs.reset_buffer, { desc = 'gs.reset_buffer' })
     bsk('n', '<leader>hb', function()
       gs.blame_line({ full = true })
-    end)
-    bsk('n', '<leader>tb', gs.toggle_current_line_blame)
-    bsk('n', '<leader>hd', gs.diffthis)
+    end, { desc = 'gs.blame_line({ full = true })' })
+    bsk('n', '<leader>tb', gs.toggle_current_line_blame, { desc = 'gs.toggle_current_line_blame' })
+    bsk('n', '<leader>hd', gs.diffthis, { desc = 'gs.diffthis' })
     bsk('n', '<leader>hD', function()
       gs.diffthis('~')
-    end)
-    bsk('n', '<leader>td', gs.toggle_deleted)
+    end, { desc = 'gs.diffthis("~")' })
+    bsk('n', '<leader>td', gs.toggle_deleted, { desc = 'gs.toggle_deleted' })
 
     -- Text object
     bsk({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')

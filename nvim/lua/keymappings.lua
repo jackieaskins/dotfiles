@@ -42,11 +42,7 @@ map('n', '<leader>rn', function()
 end, { desc = 'Smart rename' })
 
 -- Plugins
--- Comment Frame
-map('n', '<leader>cf', function()
-  require('nvim-comment-frame').add_multiline_comment()
-end, { desc = 'Comment Frame' })
-
+-- Formatter
 augroup('auto_format', {
   { 'BufWritePost', '*', 'lua require("plugins.formatter").format_on_save()' },
 })

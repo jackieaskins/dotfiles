@@ -225,7 +225,12 @@ return require('packer').startup({
         { 'nvim-treesitter/nvim-treesitter-refactor' },
         { 'RRethy/nvim-treesitter-textsubjects' },
         { 'JoosepAlviste/nvim-ts-context-commentstring' },
-        { 's1n7ax/nvim-comment-frame', module = 'nvim-comment-frame' },
+        {
+          's1n7ax/nvim-comment-frame',
+          config = function()
+            require('plugins.comment-frame')
+          end,
+        },
       },
     })
     -- }}}
