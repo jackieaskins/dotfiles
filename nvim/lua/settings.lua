@@ -29,7 +29,7 @@ opt.termguicolors = true
 opt.tabline = require('tabline')
 
 augroup('spell', {
-  { 'FileType', 'markdown', 'setlocal spell' },
+  { 'FileType', 'gitcommit,markdown', 'setlocal spell' },
 })
 
 augroup('colorcolumn', {

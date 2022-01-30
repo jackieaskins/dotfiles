@@ -3,6 +3,7 @@
 local telescope = require('telescope')
 local actions = require('telescope.actions')
 local action_layout = require('telescope.actions.layout')
+local action_set = require('telescope.actions.set')
 
 local packer_loader = require('packer').loader
 packer_loader('telescope-env.nvim')
@@ -25,6 +26,12 @@ telescope.setup({
         ['<Tab>'] = actions.toggle_selection + actions.move_selection_next,
         ['<C-q>'] = actions.smart_send_to_qflist + actions.open_qflist,
         ['<Esc>'] = actions.close,
+        ['<C-j>'] = function(prompt_bufnr)
+          action_set.scroll_results(prompt_bufnr, 1)
+        end,
+        ['<C-k>'] = function(prompt_bufnr)
+          action_set.scroll_results(prompt_bufnr, -1)
+        end,
         ['<C-f>'] = actions.preview_scrolling_down,
         ['<C-b>'] = actions.preview_scrolling_up,
         ['<C-u>'] = false,
