@@ -1,26 +1,25 @@
+#--------------------------------------------------------------------#
+#                       Homebrew Configuration                       #
+#--------------------------------------------------------------------#
 if [[ -d /opt/homebrew ]] then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 else
   brew_path="$(which brew)"
   eval "$($brew_path shellenv)"
 fi
-
-[ -d ~/.cargo/bin ] && export PATH=$PATH:~/.cargo/bin
-[ -d ~/go/bin ] && export PATH=$PATH:~/go/bin
-
-zsh_config=$HOME/dotfiles/zsh
-export VISUAL='nvim'
-export EDITOR='nvim'
-
-# Vi Mode
-bindkey -v
-export KEYTIMEOUT=1
-
-bindkey "^A" vi-beginning-of-line
-bindkey "^E" vi-end-of-line
-
 fpath=($HOMEBREW_PREFIX/share/zsh/site-functions $fpath)
 
+#--------------------------------------------------------------------#
+#                                Path                                #
+#--------------------------------------------------------------------#
+[ -d $HOME/.cargo/bin ] && path+=($HOME/.cargo/bin)
+[ -d $HOME/go/bin ] && path+=($HOME/go/bin)
+path+=($HOME/dotfiles/bin)
+export PATH
+
+#--------------------------------------------------------------------#
+#                             Completion                             #
+#--------------------------------------------------------------------#
 # The following lines were added by compinstall
 zstyle ':completion:*' completer _expand _complete _ignored
 zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*'
@@ -30,16 +29,30 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
-# Pure Prompt
+#--------------------------------------------------------------------#
+#                               Prompt                               #
+#--------------------------------------------------------------------#
 autoload -U promptinit; promptinit
 prompt pure
 zstyle :prompt:pure:git:stash show yes
 
 RPROMPT='[%D{%L:%M:%S %p}]'
 
-# General Options
+#--------------------------------------------------------------------#
+#                       Settings and Bindings                        #
+#--------------------------------------------------------------------#
 setopt auto_cd
 setopt correct correctall
+
+# Neovim as default editor
+export VISUAL='nvim'
+export EDITOR='nvim'
+
+# Vi Mode
+bindkey -v
+export KEYTIMEOUT=1
+bindkey "^A" vi-beginning-of-line
+bindkey "^E" vi-end-of-line
 
 # History
 export HISTFILE=~/.zsh_history
@@ -51,17 +64,9 @@ setopt appendhistory histignorealldups sharehistory histreduceblanks
 # Color ls output
 export CLICOLOR="Yes"
 
-# Load zsh config files
-for f in $zsh_config/*; do source $f; done
-
-export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*" --glob "!*.class"'
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-export BAT_THEME="base16"
-
-export PATH=$PATH:$HOME/dotfiles/bin
-
+#--------------------------------------------------------------------#
+#                             Scrollback                             #
+#--------------------------------------------------------------------#
 function clear-scrollback-buffer {
   # Behavior of clear:
   # 1. clear scrollback if E3 cap is supported (terminal, platform specific)
@@ -75,11 +80,26 @@ function clear-scrollback-buffer {
   # https://github.com/Powerlevel9k/powerlevel9k/pull/1176#discussion_r299303453
   zle && zle .reset-prompt && zle -R
 }
-
 zle -N clear-scrollback-buffer
 bindkey '^L' clear-scrollback-buffer
 
-# Load plugins
+#--------------------------------------------------------------------#
+#                    External Tools Configuration                    #
+#--------------------------------------------------------------------#
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*" --glob "!*.class"'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export BAT_THEME="base16"
+
+#--------------------------------------------------------------------#
+#                      ZSH Configuration Files                       #
+#--------------------------------------------------------------------#
+for f in $HOME/dotfiles/zsh/*; do source $f; done
+
+#--------------------------------------------------------------------#
+#                              Plugins                               #
+#--------------------------------------------------------------------#
 source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
