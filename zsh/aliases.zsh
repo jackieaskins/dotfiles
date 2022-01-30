@@ -1,6 +1,7 @@
 # Ssh
 if type kitty &> /dev/null; then
   alias ssh='kitty +kitten ssh'
+  alias icat='kitty +kitten icat'
 fi
 
 # Directory Navigation

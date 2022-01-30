@@ -1,5 +1,7 @@
 # My Dotfiles
-My dotfiles for Neovim 0.5, Vim, Zsh, and Kitty.
+My dotfiles for Vim, Neovim, Zsh, Tmux, and Kitty.
+
+![Kitty terminal with Neovim editor inside Tmux session](https://github.com/jackieaskins/dotfiles/blob/media/kitty.png?raw=true)
 
 ## Installation
 1. Clone this repo:

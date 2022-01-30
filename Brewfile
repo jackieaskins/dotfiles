@@ -23,9 +23,6 @@ if RUBY_PLATFORM =~ /darwin/
   cask 'font-hack-nerd-font'
   cask 'font-jetbrains-mono-nerd-font'
 
-  tap 'homebrew/cask-versions'
-  cask 'iterm2-nightly'
-
   cask 'alfred'
   cask 'docker'
   cask 'kitty'
@@ -34,5 +31,6 @@ if RUBY_PLATFORM =~ /darwin/
   cask 'stats'
 
   brew 'awscli'
+  brew 'imagemagick'
   brew 'openjdk'
 end
