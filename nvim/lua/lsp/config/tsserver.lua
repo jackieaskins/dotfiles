@@ -1,3 +1,5 @@
+local map = require('utils').map
+
 return function(config)
   config.on_attach = function(client, bufnr)
     client.resolved_capabilities.document_formatting = false
@@ -17,7 +19,7 @@ return function(config)
     })
 
     local function bsk(mode, lhs, rhs)
-      vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, { noremap = true, silent = true })
+      map(mode, lhs, rhs, { buffer = bufnr })
     end
     bsk('n', '<leader>oi', '<cmd>TSLspOrganize<CR>')
     bsk('n', '<leader>ia', '<cmd>TSLspImportAll<CR>')

@@ -7,8 +7,8 @@ local function jump(key)
     return vim.v.count > 1 and "m'" .. vim.v.count .. key or key
   end
 end
-map('n', 'k', jump('k'), { expr = true })
-map('n', 'j', jump('j'), { expr = true })
+map('n', 'k', jump('k'), { desc = 'Jump [count] lines up', expr = true })
+map('n', 'j', jump('j'), { desc = 'Jump [count] lines down', expr = true })
 
 -- Window Management
 map('n', '<C-j>', '<C-w>j')
@@ -35,17 +35,17 @@ map('n', ']<C-l>', '<cmd>lnfile<CR>')
 map('n', '<leader>so', '<cmd>luafile %<CR>')
 map('n', '<leader>rp', function()
   require('reload').reload_plugins()
-end)
+end, { desc = 'Reload plugins' })
 
 map('n', '<leader>rn', function()
   require('rename').smart_rename()
-end)
+end, { desc = 'Smart rename' })
 
 -- Plugins
 -- Comment Frame
 map('n', '<leader>cf', function()
   require('nvim-comment-frame').add_multiline_comment()
-end)
+end, { desc = 'Comment Frame' })
 
 augroup('auto_format', {
   { 'BufWritePost', '*', 'lua require("plugins.formatter").format_on_save()' },

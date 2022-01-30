@@ -104,4 +104,4 @@ local function handle_close()
   return table.concat(keys, '')
 end
 
-map('i', '<CR>', handle_close, { expr = true })
+map('i', '<CR>', handle_close, { desc = 'Close any open pairs', expr = true })

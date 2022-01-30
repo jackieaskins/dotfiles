@@ -13,10 +13,10 @@ require('luasnip/loaders/from_vscode').load({
   paths = { '~/dotfiles/vim-common' },
 })
 
-map({ 'i', 's' }, '<C-J>', luasnip.expand_or_jump)
+map({ 'i', 's' }, '<C-J>', luasnip.expand_or_jump, { desc = 'Expand snippet or jump to next placeholder' })
 map({ 'i', 's' }, '<C-K>', function()
   luasnip.jump(-1)
-end)
+end, { desc = 'Jump to previous placeholder' })
 
 luasnip.config.set_config({
   updateevents = 'TextChanged,TextChangedI',
