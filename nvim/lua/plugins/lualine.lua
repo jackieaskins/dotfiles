@@ -4,8 +4,6 @@ local colors = require('colors')
 local lsp_icons = require('lsp.icons')
 
 local custom_onenord = require('lualine.themes.onenord')
-custom_onenord.normal.a.bg = colors.blue
-custom_onenord.normal.b.fg = colors.blue
 custom_onenord.normal.a.gui = colors.none
 custom_onenord.insert.a.gui = colors.none
 custom_onenord.command.a.gui = colors.none

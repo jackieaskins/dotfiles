@@ -6,6 +6,7 @@ else
 fi
 
 [ -d ~/.cargo/bin ] && export PATH=$PATH:~/.cargo/bin
+[ -d ~/go/bin ] && export PATH=$PATH:~/go/bin
 
 zsh_config=$HOME/dotfiles/zsh
 export VISUAL='nvim'
