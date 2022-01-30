@@ -12,11 +12,22 @@ local lua_language_server_path = table.concat({
 
 return function(config)
   local luaDevConfig = require('lua-dev').setup({
+    library = {
+      vimruntime = true,
+      types = true,
+      plugins = { 'nvim-treesitter' }, -- Limiting plugins to reduce server startup time
+    },
     lspconfig = {
       capabilities = config.capabilities,
       on_attach = config.on_attach,
       cmd = { lua_language_server_path },
-      settings = { Lua = { diagnostics = { globals = { 'packer_plugins' } } } },
+      settings = {
+        Lua = {
+          diagnostics = {
+            globals = { 'packer_plugins' },
+          },
+        },
+      },
     },
   })
 
