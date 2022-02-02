@@ -32,6 +32,11 @@ return require('packer').startup({
     -- Appearance {{{
     use({ 'stevearc/dressing.nvim' })
     use({
+      'rktjmp/shipwright.nvim',
+      module = 'shipwright',
+      cmd = 'Shipwright',
+    })
+    use({
       'rcarriga/nvim-notify',
       config = function()
         vim.notify = require('notify')

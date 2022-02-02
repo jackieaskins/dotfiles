@@ -1,3 +1,8 @@
+" Lightline Separators {{{
+let g:lightline.separator = { 'left': '', 'right': '' }
+let g:lightline.subseparator = { 'left': '', 'right': '' }
+" }}}
+
 " Lightline COC {{{
 let g:lightline#coc#indicator_errors = ' '
 let g:lightline#coc#indicator_warnings = ' '

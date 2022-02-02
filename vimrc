@@ -26,19 +26,8 @@ if has('termguicolors')
   set termguicolors
 endif
 
-augroup my_colorscheme
-  autocmd!
-  autocmd ColorScheme * highlight CursorLineNr guifg=#6cb6eb
-  autocmd ColorScheme * highlight NormalFloat guifg=#c5cdd9 guibg=#2b2d3a
-  autocmd ColorScheme * let g:terminal_ansi_colors[8] = '#333648'
-augroup END
-
-let g:edge_style = 'neon'
-let g:edge_diagnostic_virtual_text = 'colored'
-let g:edge_better_performance = 1
-
-let g:lightline = { 'colorscheme': 'edge' }
-silent! colorscheme edge
+let g:lightline = { 'colorscheme': 'onenord' }
+silent! colorscheme onenord
 " }}}
 
 " Backup/Swp/Undo {{{
