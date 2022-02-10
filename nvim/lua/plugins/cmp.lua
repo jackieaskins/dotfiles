@@ -15,6 +15,9 @@ local source_menu_map = {
 vim.opt.completeopt = 'menu,menuone,noselect'
 
 cmp.setup({
+  experimental = {
+    horizontal_search = true,
+  },
   preselect = cmp.PreselectMode.None,
   snippet = {
     expand = function(args)
@@ -67,10 +70,20 @@ cmp.setup({
   },
 })
 
+local cmdline_view = { entries = { name = 'wildmenu', separator = '  ' } }
+
 cmp.setup.cmdline(':', {
+  view = cmdline_view,
   sources = cmp.config.sources({
     { name = 'path' },
   }, {
     { name = 'cmdline' },
   }),
+})
+
+cmp.setup.cmdline('/', {
+  view = cmdline_view,
+  sources = {
+    { name = 'buffer' },
+  },
 })
