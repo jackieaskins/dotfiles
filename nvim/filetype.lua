@@ -5,6 +5,7 @@ vim.filetype.add({
     Brewfile_personal = 'ruby',
     ['tmux.conf'] = 'tmux',
     ['coc-settings.json'] = 'jsonc',
+    ['.eslintrc.json'] = 'jsonc',
     ['gitmux.conf'] = 'yaml',
   },
   pattern = {

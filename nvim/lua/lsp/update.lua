@@ -19,7 +19,7 @@ end
 
 return {
   update_servers = function(server_names)
-    update_servers(server_names and vim.split(server_names, ' ') or nil)
+    update_servers(server_names ~= '' and vim.split(server_names, ' ') or nil)
   end,
   update_all_servers = function()
     update_servers(lsp_servers.server_names)

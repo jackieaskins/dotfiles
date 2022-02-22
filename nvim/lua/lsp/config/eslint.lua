@@ -1,4 +1,4 @@
-local function publishDiagnosticsHandler(err, result, ctx, config)
+local function publish_diagnostics_handler(err, result, ctx, config)
   for _, diagnostic in ipairs(result.diagnostics) do
     diagnostic.severity = 4
   end
@@ -13,9 +13,8 @@ return function(config)
 
     require('utils').map('n', '<leader>ef', '<Cmd>EslintFixAll<CR>')
   end
-  config.flags = {}
   config.handlers = {
-    ['textDocument/publishDiagnostics'] = publishDiagnosticsHandler,
+    ['textDocument/publishDiagnostics'] = publish_diagnostics_handler,
   }
 
   return config

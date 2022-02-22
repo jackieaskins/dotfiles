@@ -149,7 +149,6 @@ return require('packer').startup({
     -- File Navigation {{{
     use({
       'kyazdani42/nvim-tree.lua',
-      commit = 'c8aa3c3e402fdbaeb2576fbb10c1718fa17da3e4',
       requires = 'kyazdani42/nvim-web-devicons',
       cmd = { 'NvimTreeToggle', 'NvimTreeFindFileToggle' },
       config = function()

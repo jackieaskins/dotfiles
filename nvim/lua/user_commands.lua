@@ -8,8 +8,8 @@ end
 user_command('FormatterUpdateAll', function()
   formatter().update_formatters(vim.tbl_keys(formatter().formatters))
 end)
-user_command('FormatterUpdate', function()
-  local formatter_names = arg.args and vim.split(arg.args, ' ')
+user_command('FormatterUpdate', function(arg)
+  local formatter_names = arg.args ~= '' and vim.split(arg.args, ' ')
     or { formatter().formatter_by_filetype[vim.bo.filetype].name }
   formatter().update_formatters(formatter_names)
 end, {

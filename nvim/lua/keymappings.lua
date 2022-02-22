@@ -65,6 +65,7 @@ map('n', '<leader>su', '<cmd>StartupTime --tries 20<CR>')
 -- Telescope
 map('n', '<leader>ht', '<cmd>Telescope help_tags<CR>')
 map('n', '<leader>hi', '<cmd>Telescope highlights<CR>')
+map('n', '<leader>km', '<cmd>Telescope keymaps<CR>')
 
 map('n', '<C-p>', '<cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files<CR>')
 map('n', '<leader>ff', '<cmd>Telescope find_files find_command=rg,--no-ignore,--hidden,--files<CR>')

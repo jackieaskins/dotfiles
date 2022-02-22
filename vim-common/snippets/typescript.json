@@ -63,5 +63,71 @@
     "body": [
       "expect(${1}).toHaveBeenCalledWith(${2});"
     ]
+  },
+  "CDK Construct": {
+    "prefix": "cdkc",
+    "body": [
+      "import { Construct } from \"constructs\";",
+      "",
+      "export class ${1}Construct extends Construct {",
+      "\tconstructor(scope: Construct, id: string) {",
+      "\t\tsuper(scope, id);",
+      "",
+      "\t\t${2}",
+      "\t}",
+      "}"
+    ]
+  },
+  "CDK Construct With Props": {
+    "prefix": "cdkcp",
+    "body": [
+      "import { Construct } from \"constructs\";",
+      "",
+      "export interface ${1}ConstructProps {",
+      "\t${2}",
+      "}",
+      "",
+      "export class $1Construct extends Construct {",
+      "\tconstructor(scope: Construct, id: string, ${3:props}: $1ConstructProps) {",
+      "\t\tsuper(scope, id);",
+      "",
+      "\t\t${4}",
+      "\t}",
+      "}"
+    ]
+  },
+  "CDK Stack": {
+    "prefix": "cdks",
+    "body": [
+      "import { Stack, StackProps } from \"aws-cdk-lib\";",
+      "import { Construct } from \"constructs\";",
+      "",
+      "export class ${1}Stack extends Stack {",
+      "\tconstructor(scope: Construct, id: string, props?: StackProps) {",
+      "\t\tsuper(scope, id, props);",
+      "",
+      "\t\t${2}",
+      "\t}",
+      "}"
+    ]
+  },
+  "CDK Stack With Props": {
+    "prefix": "cdksp",
+    "body": [
+      "import { Stack, StackProps } from \"aws-cdk-lib\";",
+      "import { Construct } from \"constructs\";",
+      "",
+      "export interface ${1}StackProps extends StackProps {",
+      "\t${2}",
+      "}",
+      "",
+      "export class $1Stack extends Stack {",
+      "\tconstructor(scope: Construct, id: string, props?: $1StackProps) {",
+      "\t\tsuper(scope, id, props);",
+      "",
+      "\t\t${3}",
+      "\t}",
+      "}"
+    ]
   }
 }

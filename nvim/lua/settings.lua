@@ -21,6 +21,7 @@ opt.number = true
 opt.relativenumber = true
 opt.cursorline = true
 opt.scrolloff = 5
+opt.showmode = false
 opt.signcolumn = 'yes'
 opt.splitright = true
 opt.splitbelow = true
