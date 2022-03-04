@@ -10,6 +10,8 @@ custom_onenord.command.a.gui = colors.none
 custom_onenord.visual.a.gui = colors.none
 custom_onenord.replace.a.gui = colors.none
 custom_onenord.inactive.a.gui = colors.none
+custom_onenord.inactive.a.bg = colors.float
+custom_onenord.inactive.b.bg = colors.float
 
 local function lsp_clients()
   local buf_clients = vim.lsp.buf_get_clients(vim.fn.bufnr('%'))
@@ -71,3 +73,5 @@ require('lualine').setup({
     lualine_x = { location },
   },
 })
+
+return { lualine_onenord = custom_onenord }

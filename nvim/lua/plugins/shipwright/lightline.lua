@@ -20,7 +20,12 @@ end
 
 local function to_lightline(lualine)
   local highlights = {}
-  for group, sections in pairs(lualine) do
+
+  local sorted_groups = vim.tbl_keys(lualine)
+  table.sort(sorted_groups)
+
+  for _, group in ipairs(sorted_groups) do
+    local sections = lualine[group]
     local left = {}
 
     table.insert(left, string.format("[ '%s', '%s' ]", sections.a.fg, sections.a.bg))
@@ -55,7 +60,7 @@ local function to_lightline(lualine)
 end
 
 return {
-  require('lualine.themes.onenord'),
+  require('plugins.lualine').lualine_onenord,
   to_lightline,
   prepend_file_header,
   { overwrite, vim.fn.expand('~/dotfiles/vim/autoload/lightline/colorscheme/onenord.vim') },

@@ -12,7 +12,12 @@ end
 local function to_vimscript(groups)
   local vimscript = {}
 
-  for group_name, hls in pairs(groups) do
+  local sorted_group_names = vim.tbl_keys(groups)
+  table.sort(sorted_group_names)
+
+  for _, group_name in pairs(sorted_group_names) do
+    local hls = groups[group_name]
+
     local style = hls.style or 'NONE'
     table.insert(
       vimscript,

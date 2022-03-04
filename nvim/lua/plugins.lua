@@ -42,7 +42,10 @@ return require('packer').startup({
         vim.notify = require('notify')
       end,
     })
-    use({ 'rmehri01/onenord.nvim' })
+    use({
+      'rmehri01/onenord.nvim',
+      run = ':Shipwright nvim/lua/plugins/shipwright.lua',
+    })
     use({
       'SmiteshP/nvim-gps',
       config = function()
