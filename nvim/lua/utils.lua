@@ -1,6 +1,3 @@
-local api = vim.api
-local fn = vim.fn
-
 local M = {}
 
 ---Define vim keymap
@@ -63,52 +60,32 @@ function M.highlight(name, highlight_map)
   vim.cmd(M.get_highlight_string(name, highlight_map))
 end
 
----Define a vim autogroup
+---Create augroup
 ---@param group_name string
----@param autocmds string[][]
----@param buf boolean
-local function define_augroup(group_name, autocmds, buf)
-  api.nvim_command('augroup my_' .. group_name)
-
-  local suffix = ''
-  if buf then
-    suffix = ' * <buffer>'
-  end
-  api.nvim_command('autocmd!' .. suffix)
+---@param autocmds any
+function M.augroup(group_name, autocmds)
+  vim.api.nvim_create_augroup(group_name, {})
 
   for _, autocmd in ipairs(autocmds) do
-    api.nvim_command('autocmd ' .. table.concat(autocmd, ' '))
+    local event = autocmd[1]
+    local opts = vim.tbl_extend('force', { group = group_name }, autocmd[2])
+
+    vim.api.nvim_create_autocmd(event, opts)
   end
-
-  api.nvim_command('augroup END')
-end
-
----Define a global vim autogroup
----@param group_name string
----@param autocmds string[][]
-function M.augroup(group_name, autocmds)
-  define_augroup(group_name, autocmds, false)
-end
-
----Define a buffer autogroup
----@param group_name string
----@param autocmds string[][]
-function M.augroup_buf(group_name, autocmds)
-  define_augroup(group_name, autocmds, true)
 end
 
 ---Determine if a file exists
 ---@param filename string
 ---@return boolean
 function M.file_exists(filename)
-  return fn.empty(fn.glob(filename)) == 0
+  return vim.fn.empty(vim.fn.glob(filename)) == 0
 end
 
 ---Determine if a provided path is ececutable
 ---@param path string
 ---@return boolean
 function M.is_executable(path)
-  return fn.executable(path) == 1
+  return vim.fn.executable(path) == 1
 end
 
 return M

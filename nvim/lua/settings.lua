@@ -12,7 +12,7 @@ map('n', '<space>', '<nop>')
 -- Disable auto-comments
 vim.cmd('filetype plugin on')
 augroup('no_auto_comment', {
-  { 'FileType', '*', 'setlocal formatoptions-=r formatoptions-=o' },
+  { 'FileType', { command = 'setlocal formatoptions-=r formatoptions-=o' } },
 })
 
 -- General
@@ -30,11 +30,11 @@ opt.termguicolors = true
 opt.tabline = require('tabline')
 
 augroup('spell', {
-  { 'FileType', 'gitcommit,markdown', 'setlocal spell' },
+  { 'FileType', { pattern = 'gitcommit,markdown', command = 'setlocal spell' } },
 })
 
 augroup('colorcolumn', {
-  { 'FileType', 'lua', 'setlocal colorcolumn=120' },
+  { 'FileType', { pattern = 'lua', command = 'setlocal colorcolumn=120' } },
 })
 
 -- Folds

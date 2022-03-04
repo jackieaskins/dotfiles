@@ -1,6 +1,6 @@
 return function(client, bufnr)
   local utils = require('utils')
-  local augroup_buf, map = utils.augroup_buf, utils.map
+  local augroup, map = utils.augroup, utils.map
 
   local function bsk(mode, lhs, rhs, opts)
     local options = { buffer = bufnr }
@@ -14,11 +14,15 @@ return function(client, bufnr)
   end
 
   if client.supports_method('textDocument/codeAction') then
-    augroup_buf('lightbulb', {
+    augroup('lightbulb', {
       {
         'CursorHold,CursorHoldI',
-        '<buffer>',
-        'lua require("nvim-lightbulb").update_lightbulb({ sign = { priority = 50 } })',
+        {
+          buffer = bufnr,
+          callback = function()
+            require('nvim-lightbulb').update_lightbulb({ sign = { priority = 50 } })
+          end,
+        },
       },
     })
   end

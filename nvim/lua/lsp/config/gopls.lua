@@ -1,9 +1,8 @@
 return function(config)
-  require('utils').augroup_buf('gopls_formatting', {
+  require('utils').augroup('gopls_formatting', {
     {
       'BufWritePre',
-      '<buffer>',
-      'lua vim.lsp.buf.formatting_sync()',
+      { buffer = 0, callback = vim.lsp.buf.formatting_sync },
     },
   })
 

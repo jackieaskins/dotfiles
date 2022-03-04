@@ -44,7 +44,7 @@ end, { desc = 'Smart rename' })
 -- Plugins
 -- Formatter
 augroup('auto_format', {
-  { 'BufWritePost', '*', 'lua require("plugins.formatter").format_on_save()' },
+  { 'BufWritePost', { command = 'lua require("plugins.formatter").format_on_save()' } },
 })
 
 -- Markdown Preview
