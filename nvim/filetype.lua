@@ -6,6 +6,7 @@ vim.filetype.add({
     ['tmux.conf'] = 'tmux',
     ['coc-settings.json'] = 'jsonc',
     ['.eslintrc.json'] = 'jsonc',
+    ['package.json'] = 'jsonc',
     ['gitmux.conf'] = 'yaml',
   },
   pattern = {

@@ -18,7 +18,7 @@ cmp.setup({
   experimental = {
     horizontal_search = true,
   },
-  preselect = cmp.PreselectMode.None,
+  preselect = cmp.PreselectMode.Item,
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body)

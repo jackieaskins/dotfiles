@@ -1,6 +1,5 @@
 -- https://github.com/kyazdani42/nvim-tree.lua
 
-vim.g.nvim_tree_quit_on_open = 1
 vim.g.nvim_tree_indent_markers = 1
 vim.g.nvim_tree_group_empty = 1
 
@@ -17,7 +16,9 @@ require('nvim-tree').setup({
     enable = true,
     show_on_dirs = true,
   },
-  update_focused_file = {
-    enable = true,
+  actions = {
+    open_file = {
+      quit_on_open = true,
+    },
   },
 })
