@@ -5,6 +5,8 @@ require('nvim-treesitter.configs').setup({
     'bash',
     'css',
     'dart',
+    'go',
+    'gomod',
     'graphql',
     'html',
     'java',
