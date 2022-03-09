@@ -174,7 +174,6 @@ return require('packer').startup({
 
     -- LSP {{{
     use({ 'folke/lua-dev.nvim' })
-    use({ 'jose-elias-alvarez/nvim-lsp-ts-utils' })
     use({ 'kosayoda/nvim-lightbulb', module = 'nvim-lightbulb' })
     use({
       'neovim/nvim-lspconfig',

@@ -15,7 +15,7 @@ return function(config)
     library = {
       vimruntime = true,
       types = true,
-      plugins = { 'nvim-treesitter' }, -- Limiting plugins to reduce server startup time
+      plugins = { 'nvim-treesitter', 'plenary.nvim' }, -- Limiting plugins to reduce server startup time
     },
     lspconfig = {
       capabilities = config.capabilities,
