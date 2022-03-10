@@ -9,7 +9,7 @@ local insert_node = luasnip.insert_node
 local text_node = luasnip.text_node
 local fmt = require('luasnip.extras.fmt').fmt
 
-require('luasnip/loaders/from_vscode').load({
+require('luasnip.loaders.from_vscode').lazy_load({
   paths = { '~/dotfiles/vim-common' },
 })
 
