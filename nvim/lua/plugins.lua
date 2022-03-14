@@ -98,7 +98,12 @@ return require('packer').startup({
       cmd = { 'Twilight', 'TwilightEnable', 'TwilightDisable' },
     })
     use({ 'tpope/vim-abolish' })
-    use({ 'tpope/vim-projectionist' })
+    use({
+      'tpope/vim-projectionist',
+      config = function()
+        require('plugins.projectionist')
+      end,
+    })
     use({ 'tpope/vim-repeat' })
     use({ 'tpope/vim-sleuth' })
     use({

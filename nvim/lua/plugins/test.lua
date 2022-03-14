@@ -1,7 +1,5 @@
 -- https://github.com/vim-test/vim-test
 
-local g = vim.g
-
-g['test#strategy'] = 'kitty'
-g['test#neovim#term_position'] = 'vert botright'
-g['test#javascript#jest#options'] = '--watch'
+vim.g['test#strategy'] = 'vimux'
+vim.g['test#neovim#term_position'] = 'vert botright'
+vim.g['test#javascript#jest#executable'] = 'npx jest'

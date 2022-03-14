@@ -78,11 +78,19 @@ map('n', '<leader>of', '<cmd>Telescope oldfiles cwd_only=true sort_lastused=true
 map('n', '<leader>fb', '<cmd>Telescope file_browser<CR>')
 
 -- Test
-map('n', '<leader>tn', '<cmd>TestNearest<CR>')
-map('n', '<leader>tf', '<cmd>TestFile<CR>')
-map('n', '<leader>ts', '<cmd>TestSuite<CR>')
-map('n', '<leader>tl', '<cmd>TestLast<CR>')
-map('n', '<leader>tv', '<cmd>TestVisit<CR>')
+local function wrap_test(cmd)
+  return function()
+    vim.g['test#project_root'] = require('lspconfig').util.root_pattern('jest.config.js', 'package.json')(
+      vim.fn.expand('%')
+    )
+    vim.fn.execute(cmd)
+  end
+end
+map('n', '<leader>tn', wrap_test('TestNearest'))
+map('n', '<leader>tf', wrap_test('TestFile'))
+map('n', '<leader>ts', wrap_test('TestSuite'))
+map('n', '<leader>tl', wrap_test('TestLast'))
+map('n', '<leader>tv', wrap_test('TestVisit'))
 
 -- Tree
 map('n', '<C-n>', '<cmd>NvimTreeToggle<CR>')
