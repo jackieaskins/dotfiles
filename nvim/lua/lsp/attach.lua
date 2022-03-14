@@ -19,9 +19,7 @@ return function(client, bufnr)
         'CursorHold,CursorHoldI',
         {
           buffer = bufnr,
-          callback = function()
-            require('nvim-lightbulb').update_lightbulb({ sign = { priority = 50 } })
-          end,
+          callback = require('nvim-lightbulb').update_lightbulb,
         },
       },
     })
@@ -31,7 +29,7 @@ return function(client, bufnr)
 
   bsk('n', 'gi', '<cmd>Telescope lsp_implementations<CR>')
   bsk('n', 'gd', '<cmd>Telescope lsp_definitions<CR>')
-  bsk('n', 'gr', '<cmd>Telescope lsp_references<CR>')
+  bsk('n', 'gr', '<cmd>Telescope lsp_references include_declaration=false<CR>')
 
   bsk('n', 'K', vim.lsp.buf.hover, { desc = 'Hover' })
   bsk({ 'i', 'n' }, '<C-S>', vim.lsp.buf.signature_help, { desc = 'Signature Help' })

@@ -1,4 +1,5 @@
 brew 'bat'
+brew 'fd'
 brew 'go'
 brew 'gradle'
 brew 'maven'

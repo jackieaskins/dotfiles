@@ -40,6 +40,16 @@
       "});"
     ]
   },
+  "Jest Async Test Case": {
+    "prefix": "ita",
+    "body": [
+      "it(\"${1}\", async () => {",
+      "\texpect.assertions(${2:1});",
+      "",
+      "\t${3}",
+      "});"
+    ]
+  },
   "Except To Equal": {
     "prefix": "ete",
     "body": [

@@ -41,15 +41,16 @@ return require('packer').startup({
         require('nvim-lastplace').setup({})
       end,
     })
-    -- }}}
-
-    -- Appearance {{{
-    use({ 'stevearc/dressing.nvim' })
     use({
       'rktjmp/shipwright.nvim',
       module = 'shipwright',
       cmd = 'Shipwright',
     })
+    use({ 'tpope/vim-scriptease', cmd = { 'Messages' } })
+    -- }}}
+
+    -- Appearance {{{
+    use({ 'stevearc/dressing.nvim' })
     use({
       'rcarriga/nvim-notify',
       config = function()
@@ -194,7 +195,13 @@ return require('packer').startup({
 
     -- LSP {{{
     use({ 'folke/lua-dev.nvim' })
-    use({ 'kosayoda/nvim-lightbulb', module = 'nvim-lightbulb' })
+    use({
+      'kosayoda/nvim-lightbulb',
+      module = 'nvim-lightbulb',
+      config = function()
+        require('plugins.lightbulb')
+      end,
+    })
     use({
       'neovim/nvim-lspconfig',
       config = function()
