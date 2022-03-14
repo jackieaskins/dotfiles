@@ -10,6 +10,20 @@ return require('packer').startup({
     use({ 'lewis6991/impatient.nvim' })
     use({ 'dstein64/vim-startuptime', cmd = 'StartupTime' })
     use({
+      'preservim/vimux',
+      config = function()
+        require('plugins.vimux')
+      end,
+      fn = { 'VimuxClearTerminalScreen', 'VimuxClearRunnerHistory', 'VimuxRunCommand', 'VimuxOpenRunner' },
+      cmd = { 'VimuxRunCommand', 'VimuxOpenRunner' },
+    })
+    use({
+      'alexghergh/nvim-tmux-navigation',
+      config = function()
+        require('plugins.tmux-navigation')
+      end,
+    })
+    use({
       'stsewd/gx-extended.vim',
       keys = 'gx',
       fn = 'gxext#browse',

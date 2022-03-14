@@ -87,3 +87,6 @@ map('n', '<leader>tv', '<cmd>TestVisit<CR>')
 -- Tree
 map('n', '<C-n>', '<cmd>NvimTreeToggle<CR>')
 map('n', '<leader>n', '<cmd>NvimTreeFindFileToggle<CR>')
+
+-- Vimux
+map('n', '<leader>vq', '<cmd>VimuxCloseRunner<CR>')
