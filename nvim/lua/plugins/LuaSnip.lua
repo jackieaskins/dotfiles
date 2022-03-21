@@ -22,20 +22,17 @@ luasnip.config.set_config({
   updateevents = 'TextChanged,TextChangedI',
 })
 
-local snippets = {}
-
-snippets.typescriptreact = {
+luasnip.add_snippets('typescriptreact', {
   snippet(
-    'us',
+    { trig = 'us', name = 'Use State', dscr = 'Use State' },
     fmt('const [{state}, set{State}] = useState{type}({init});', {
       state = insert_node(1),
       State = dynamic_node(2, function(args)
-        return snippet_node(nil, text_node(args[1][1]:gsub('^%l', string.upper)))
+        local set_string = args[1][1]:gsub('^%l', string.upper)
+        return snippet_node(nil, text_node(set_string))
       end, { 1 }),
       type = insert_node(3),
       init = insert_node(4),
     })
   ),
-}
-
-luasnip.snippets = snippets
+})

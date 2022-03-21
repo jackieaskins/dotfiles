@@ -23,7 +23,7 @@ local function import_current(client, bufnr)
     end
 
     local params = vim.lsp.util.make_range_params()
-    params.context = { diagnostics = vim.diagnostic.get(bufnr) }
+    params.context = { diagnostics = vim.diagnostic.get(bufnr, { lnum = vim.fn.line('.') - 1 }) }
     local response = client.request_sync('textDocument/codeAction', params, 1000, bufnr)
     if response.err then
       return vim.notify(response.err, vim.log.levels.ERROR)

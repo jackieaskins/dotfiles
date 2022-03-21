@@ -56,7 +56,7 @@
       "\t${2}",
       "};",
       "",
-      "const $1 = createContext<$1State>(${3:{}});",
+      "const $1 = createContext<$1State>(${3});",
       "",
       "export function ${4}Provider({ children }: { children: ReactNode }): JSX.Element {",
       "\t${5}",
