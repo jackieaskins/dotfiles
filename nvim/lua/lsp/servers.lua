@@ -8,6 +8,8 @@ local function install_jdtls(servers_dir)
     'wget http://download.eclipse.org/jdtls/snapshots/' .. zip_file,
     'tar -xf ' .. zip_file .. ' -C ' .. install_dir,
     'rm ' .. zip_file,
+    'cd ' .. install_dir,
+    'wget https://projectlombok.org/downloads/lombok.jar',
   }
 end
 

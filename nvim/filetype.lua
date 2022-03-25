@@ -12,6 +12,7 @@ vim.filetype.add({
     ['gitmux.conf'] = 'yaml',
   },
   pattern = {
+    ['jdt://.*'] = 'java',
     ['tmux/.*%.conf'] = 'tmux',
     ['tsconfig.*%.json'] = 'jsonc',
   },

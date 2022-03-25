@@ -1,5 +1,6 @@
 tap 'heroku/brew'
 brew 'heroku'
+brew 'openjdk@11', link: true
 
 if RUBY_PLATFORM =~ /darwin/
   cask 'dropbox'

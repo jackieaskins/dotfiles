@@ -12,11 +12,11 @@ GRADLE_HOME="$(which gradle)" "$(which java)" \
   -Declipse.application=org.eclipse.jdt.ls.core.id1 \
   -Dosgi.bundles.defaultStartLevel=4 \
   -Declipse.product=org.eclipse.jdt.ls.core.product \
+  -Dlog.protocl=true \
   -Dlog.level=ALL \
-  -noverify \
-  -Xmx1G \
-  -XX:+UseG1GC \
-  -XX:+UseStringDeduplication \
+  -javaagent:"$JDT_LS_ROOT/lombok.jar" \
+  -Xms1g \
+  -Xmx2G \
   -jar $(echo "$JAR") \
   -configuration "$JDT_LS_ROOT/config_$OS" \
   -data "${1:-$HOME/workspace}" \
