@@ -98,3 +98,4 @@ map('n', '<leader>n', '<cmd>NvimTreeFindFileToggle<CR>')
 
 -- Vimux
 map('n', '<leader>vq', '<cmd>VimuxCloseRunner<CR>')
+map('n', '<leader>vr', ':VimuxRunCommand ', { silent = false })

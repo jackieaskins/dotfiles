@@ -22,8 +22,6 @@ command! PD PlugDiff
 call plug#begin('~/.vim/plugged')
 
 " Appearance {{{
-Plug 'sainnhe/edge'
-
 Plug 'mhinz/vim-startify'
 
 Plug 'lambdalisue/nerdfont.vim'
