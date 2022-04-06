@@ -1,0 +1,19 @@
+# https://github.com/koekeishiya/yabai/wiki/Configuration#configuration-file
+
+yabai -m config layout bsp
+
+yabai -m config top_padding 5
+yabai -m config bottom_padding 5
+yabai -m config left_padding 5
+yabai -m config right_padding 5
+yabai -m config window_gap 5
+
+yabai -m config window_border on
+yabai -m config active_window_border_color 0xFF9EC183
+
+yabai -m config mouse_follows_focus on
+yabai -m config focus_follows_mouse autofocus
+yabai -m config window_origin_display cursor
+
+yabai -m rule --add app="^System Preferences$" manage=off
+yabai -m rule --add app="^Spotify$" manage=off

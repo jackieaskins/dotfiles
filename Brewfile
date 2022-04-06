@@ -2,6 +2,7 @@ brew 'bat'
 brew 'fd'
 brew 'go'
 brew 'gradle'
+brew 'jq'
 brew 'maven'
 brew 'neovim', args: ['HEAD']
 brew 'ninja'
@@ -26,7 +27,6 @@ if RUBY_PLATFORM =~ /darwin/
   cask 'font-jetbrains-mono-nerd-font'
 
   cask 'alfred'
-  cask 'amethyst'
   cask 'docker'
   cask 'kitty'
   cask 'monitorcontrol'
@@ -36,4 +36,6 @@ if RUBY_PLATFORM =~ /darwin/
   brew 'awscli'
   brew 'imagemagick'
   brew 'openjdk'
+  brew 'koekeishiya/formulae/skhd'
+  brew 'koekeishiya/formulae/yabai'
 end

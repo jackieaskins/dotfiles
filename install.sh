@@ -125,6 +125,8 @@ backup_and_symlink .vimrc            vimrc            vimrc
 backup_and_symlink .vim              vim              vim
 backup_and_symlink .config/nvim      nvim             nvim
 backup_and_symlink .config/kitty     kitty            kitty
+backup_and_symlink .config/skhd      skhd             skhd
+backup_and_symlink .config/yabai     yabai            yabai
 backup_and_symlink .tmux.conf        tmux.conf        tmux.conf
 backup_and_symlink .gitignore_global gitignore_global gitignore_global
 #                  dotfile           backup           sym
