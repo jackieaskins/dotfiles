@@ -37,6 +37,10 @@ augroup('colorcolumn', {
   { 'FileType', { pattern = 'lua', command = 'setlocal colorcolumn=120' } },
 })
 
+augroup('skhdrc', {
+  { 'BufWritePost', { pattern = 'skhdrc', command = '!skhd --reload' } },
+})
+
 -- Folds
 opt.foldmethod = 'expr'
 opt.foldexpr = 'nvim_treesitter#foldexpr()'
