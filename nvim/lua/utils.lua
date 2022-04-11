@@ -22,7 +22,7 @@ function M.user_command(name, command, opts)
   if opts then
     options = vim.tbl_extend('force', options, opts)
   end
-  vim.api.nvim_add_user_command(name, command, options)
+  vim.api.nvim_create_user_command(name, command, options)
 end
 
 ---Replace terminal codes in strng with internal representation
