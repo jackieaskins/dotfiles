@@ -15,9 +15,6 @@ local source_menu_map = {
 vim.opt.completeopt = 'menu,menuone,noselect'
 
 cmp.setup({
-  experimental = {
-    horizontal_search = true,
-  },
   preselect = cmp.PreselectMode.Item,
   snippet = {
     expand = function(args)
@@ -45,8 +42,9 @@ cmp.setup({
       },
     },
   }),
-  documentation = {
-    border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
+  window = {
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered(),
   },
   formatting = {
     format = function(entry, vim_item)
@@ -58,15 +56,20 @@ cmp.setup({
   mapping = {
     ['<C-B>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
     ['<C-F>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+    ['<C-N>'] = cmp.mapping(cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }), { 'i', 'c' }),
+    ['<C-P>'] = cmp.mapping(cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }), { 'i', 'c' }),
     ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
     ['<C-E>'] = cmp.mapping({
       i = cmp.mapping.abort(),
       c = cmp.mapping.close(),
     }),
-    ['<C-Y>'] = cmp.mapping.confirm({
-      select = true,
-      behavior = cmp.ConfirmBehavior.Replace,
-    }),
+    ['<C-Y>'] = cmp.mapping(
+      cmp.mapping.confirm({
+        select = true,
+        behavior = cmp.ConfirmBehavior.Replace,
+      }),
+      { 'i', 'c' }
+    ),
   },
 })
 

@@ -30,7 +30,10 @@ local function import_current(client, bufnr)
     end
 
     local import_code_actions = vim.tbl_filter(function(result)
-      return vim.startswith(result.title, 'Add import') or vim.startswith(result.title, 'Update import from')
+      return vim.startswith(result.title, 'Add import')
+        or vim.startswith(result.title, 'Update import from')
+        or vim.startswith(result.title, 'Import')
+        or string.find(result.title, 'to existing import')
     end, response.result)
 
     if #import_code_actions == 1 then
