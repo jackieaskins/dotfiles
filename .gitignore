@@ -2,6 +2,7 @@
 /vim/autoload/plug.vim*
 /vim/plugged
 
+/nvim/lua/custom/
 /nvim/lua/custom.lua
 /nvim/spell/
 

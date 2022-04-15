@@ -1,8 +1,14 @@
+local file_exists = require('utils').file_exists
+
 vim.cmd('packadd packer.nvim')
 
 return require('packer').startup({
   function(use)
     use({ 'wbthomason/packer.nvim', opt = true })
+
+    if file_exists('~/dotfiles/nvim/lua/custom/plugins.lua') then
+      require('custom.plugins')(use)
+    end
 
     -- Dev Tools {{{
     -- Needed until https://github.com/neovim/neovim/issues/12587 is fixed

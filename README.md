@@ -19,7 +19,10 @@ My dotfiles for Vim, Neovim, Zsh, Tmux, and Kitty.
 ## Customization
 To add machine-specific settings, create the files below. For:
 - Vim: `~/dotfiles/vim/custom.vim`
-- Neovim: `~/dotfiles/nvim/lua/custom.lua`
+- Neovim:
+    - `~/dotfiles/nvim/lua/custom.lua` - General settings
+    - `~/dotfiles/nvim/lua/custom/plugins.lua` - Custom plugins
+    - `~/dotfiles/nvim/lua/custom/lspconfig.lua` - Custom LSP configs
 - Tmux: `~/dotfiles/tmux/custom.conf`
 - Zsh: `~/dotfiles/zsh/custom.zsh`
 
