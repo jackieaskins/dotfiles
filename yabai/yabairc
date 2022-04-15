@@ -15,9 +15,16 @@ yabai -m config mouse_follows_focus off
 yabai -m config focus_follows_mouse off
 yabai -m config window_origin_display cursor
 
-yabai -m rule --add app="^System Preferences$" manage=off
+yabai -m rule --add app="^TV$" manage=off border=off
+yabai -m rule --add app="^System Preferences$" manage=off border=off
 yabai -m rule --add app="^Spotify$" manage=off
 yabai -m rule --add app="^Stats$" manage=off border=off
 yabai -m rule --add app="^Karabiner" manage=off
 
 yabai -m config external_bar all:34:0
+
+# https://github.com/koekeishiya/yabai/issues/719
+# focus window after active space changes
+yabai -m signal --add event=space_changed action="yabai -m window --focus \$(yabai -m query --windows --space | jq .[0].id)"
+# focus window after active display changes
+yabai -m signal --add event=display_changed action="yabai -m window --focus \$(yabai -m query --windows --space | jq .[0].id)"

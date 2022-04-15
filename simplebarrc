@@ -12,7 +12,7 @@
     "spacesBackgroundColorAsForeground": false,
     "widgetsBackgroundColorAsForeground": false,
     "font": "JetBrainsMono Nerd Font",
-    "fontSize": "10px",
+    "fontSize": "12px",
     "yabaiPath": "/opt/homebrew/bin/yabai",
     "shell": "sh",
     "slidingAnimationPace": 4,
@@ -41,7 +41,7 @@
   },
   "widgets": {
     "processWidget": true,
-    "weatherWidget": true,
+    "weatherWidget": false,
     "batteryWidget": true,
     "wifiWidget": false,
     "vpnWidget": false,
