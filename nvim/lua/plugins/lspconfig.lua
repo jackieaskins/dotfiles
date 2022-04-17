@@ -3,30 +3,9 @@
 local file_exists = require('utils').file_exists
 local servers = require('lsp.servers').server_names
 local lspconfig = require('lspconfig')
-local configs = require('lspconfig.configs')
 
 if file_exists('~/dotfiles/nvim/lua/custom/lspconfig.lua') then
   require('custom.lspconfig')
-end
-
-if not configs.ls_emmet then
-  configs.ls_emmet = {
-    default_config = {
-      cmd = { 'ls_emmet', '--stdio' },
-      filetypes = {
-        'css',
-        'html',
-        'javascript',
-        'javascriptreact',
-        'typescriptreact',
-        'xml',
-      },
-      root_dir = function()
-        return vim.loop.cwd()
-      end,
-      settings = {},
-    },
-  }
 end
 
 for _, server in ipairs(servers) do
