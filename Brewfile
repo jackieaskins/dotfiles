@@ -5,7 +5,6 @@ brew 'gradle'
 brew 'jq'
 brew 'maven'
 brew 'neovim', args: ['HEAD']
-brew 'ninja'
 brew 'node@12'
 brew 'node@14', link: true
 brew 'pure'

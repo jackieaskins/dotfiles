@@ -6,6 +6,7 @@ local M = {}
 function M.install(command_map, install_dir)
   local script_lines = {}
   local generic_installs = {
+    brew = { cmd = 'brew reinstall', names = {}, packages = {} },
     cargo = { cmd = 'cargo install', names = {}, packages = {} },
     gem = { cmd = 'gem install --user-install', names = {}, packages = {} },
     go = { cmd = 'go install', names = {}, packages = {} },
