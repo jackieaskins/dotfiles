@@ -63,7 +63,7 @@ local function get_definition_node(lsp_definition)
 end
 
 local function get_node_text(node)
-  return ts_utils.get_node_text(node)[1]
+  return vim.treesitter.query.get_node_text(node, 0)
 end
 
 local function add_alias_to_node(definition_node, new_name, alias_prefix)
