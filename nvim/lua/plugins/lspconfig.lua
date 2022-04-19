@@ -9,10 +9,16 @@ if file_exists('~/dotfiles/nvim/lua/custom/lspconfig.lua') then
 end
 
 for _, server in ipairs(servers) do
-  local base_config = require('lsp.base_config')()
+  if server ~= 'tsserver' then
+    local base_config = require('lsp.base_config')()
 
-  local ok, config_func = pcall(require, 'lsp.config.' .. server)
-  local config = ok and config_func(base_config) or base_config
+    local ok, config_func = pcall(require, 'lsp.config.' .. server)
+    local config = ok and config_func(base_config) or base_config
 
-  lspconfig[server].setup(config)
+    lspconfig[server].setup(config)
+  end
+end
+
+if vim.tbl_contains(servers, 'tsserver') then
+  require('lsp.config.tsserver')
 end

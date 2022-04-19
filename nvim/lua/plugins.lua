@@ -210,6 +210,7 @@ return require('packer').startup({
     })
     use({
       'neovim/nvim-lspconfig',
+      requires = { 'jose-elias-alvarez/typescript.nvim' },
       config = function()
         require('plugins.lspconfig')
       end,
