@@ -1,17 +1,19 @@
 local M = {}
 
+local pkg_managers = {
+  brew = 'brew reinstall',
+  cargo = 'cargo install',
+  gem = 'gem install --user-install',
+  go = 'go install',
+  npm = 'npm install -g',
+}
+
 ---Generic install command
 ---@param command_map table<string, string[] | fun(install_dir?:string)>
 ---@param install_dir? string
 function M.install(command_map, install_dir)
   local script_lines = {}
-  local generic_installs = {
-    brew = { cmd = 'brew reinstall', names = {}, packages = {} },
-    cargo = { cmd = 'cargo install', names = {}, packages = {} },
-    gem = { cmd = 'gem install --user-install', names = {}, packages = {} },
-    go = { cmd = 'go install', names = {}, packages = {} },
-    npm = { cmd = 'npm install -g', names = {}, packages = {} },
-  }
+  local common_packages = {}
 
   local function echo(text)
     table.insert(script_lines, string.format('echo "%s"', text))
@@ -25,22 +27,27 @@ function M.install(command_map, install_dir)
       end
       table.insert(script_lines, 'cd ' .. install_dir)
       echo('')
-    elseif generic_installs[command[1]] ~= nil then
-      local install = generic_installs[command[1]]
-
-      table.insert(install.names, name)
-      table.insert(install.packages, command[2])
+    elseif pkg_managers[command[1]] ~= nil then
+      local install = common_packages[command[1]] or {}
+      install[name] = command[2]
+      common_packages[command[1]] = install
     else
       print('Invalid update function for ' .. name)
     end
   end
 
-  for _, info in pairs(generic_installs) do
-    if not vim.tbl_isempty(info.packages) then
-      echo(string.format('echo "Installing packages for %s"', table.concat(info.names, ', ')))
-      table.insert(script_lines, string.format('%s %s', info.cmd, table.concat(info.packages, ' ')))
-      echo('')
+  for cmd, info in pairs(common_packages) do
+    local names = table.concat(vim.tbl_keys(info), ', ')
+
+    local unique_packages = {}
+    for _, package in pairs(info) do
+      unique_packages[package] = true
     end
+    local packages = table.concat(vim.tbl_keys(unique_packages), ' ')
+
+    echo(string.format('[%s] Installing packages for %s', cmd, names))
+    table.insert(script_lines, pkg_managers[cmd] .. ' ' .. packages)
+    echo('')
   end
 
   local script = table.concat(script_lines, '\n')

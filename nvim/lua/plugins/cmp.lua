@@ -75,10 +75,7 @@ cmp.setup({
   },
 })
 
-local cmdline_view = { entries = { name = 'wildmenu', separator = '  ' } }
-
 cmp.setup.cmdline(':', {
-  view = cmdline_view,
   sources = cmp.config.sources({
     { name = 'path' },
   }, {
@@ -87,7 +84,6 @@ cmp.setup.cmdline(':', {
 })
 
 cmp.setup.cmdline('/', {
-  view = cmdline_view,
   sources = {
     { name = 'buffer' },
   },
