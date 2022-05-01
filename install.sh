@@ -129,7 +129,6 @@ backup_and_symlink .config/skhd      skhd             skhd
 backup_and_symlink .config/yabai     yabai            yabai
 backup_and_symlink .tmux.conf        tmux.conf        tmux.conf
 backup_and_symlink .gitignore_global gitignore_global gitignore_global
-backup_and_symlink .simplebarrc      simplebarrc      simplebarrc
 #                  dotfile           backup           sym
 success_echo "Dotfiles backed up and symlinked."
 

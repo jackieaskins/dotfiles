@@ -30,7 +30,6 @@ if RUBY_PLATFORM =~ /darwin/
   cask 'kitty'
   cask 'monitorcontrol'
   cask 'stats'
-  cask 'ubersicht'
 
   brew 'awscli'
   brew 'imagemagick'
