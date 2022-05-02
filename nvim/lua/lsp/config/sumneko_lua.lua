@@ -11,7 +11,13 @@ return function(config)
       settings = {
         Lua = {
           diagnostics = {
-            globals = { 'packer_plugins' },
+            globals = { 'hs', 'packer_plugins' },
+          },
+          workspace = {
+            library = {
+              ['/Applications/Hammerspoon.app/Contents/Resources/extensions/hs/'] = true,
+              ['~/.hammerspoon/Spoons/EmmyLua.spoon/annotations'] = true,
+            },
           },
         },
       },

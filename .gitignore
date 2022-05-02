@@ -14,3 +14,5 @@
 .DS_Store
 
 /tmux/custom.conf
+
+/hammerspoon/Spoons/EmmyLua.spoon/annotations/

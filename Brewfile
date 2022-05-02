@@ -27,6 +27,7 @@ if RUBY_PLATFORM =~ /darwin/
 
   cask 'alfred'
   cask 'docker'
+  cask 'hammerspoon'
   cask 'kitty'
   cask 'monitorcontrol'
   cask 'stats'
@@ -34,6 +35,5 @@ if RUBY_PLATFORM =~ /darwin/
   brew 'awscli'
   brew 'imagemagick'
   brew 'openjdk'
-  brew 'koekeishiya/formulae/skhd'
   brew 'koekeishiya/formulae/yabai'
 end
