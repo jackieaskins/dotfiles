@@ -100,11 +100,8 @@ map('n', '<leader>n', '<cmd>NvimTreeFindFileToggle<CR>')
 map('n', '<leader>vq', '<cmd>VimuxCloseRunner<CR>')
 map('n', '<leader>vl', '<cmd>VimuxRunLastCommand<CR>')
 map('n', '<leader>vr', function()
-  vim.ui.input({ completion = 'shellcmd', prompt = 'Enter command' }, function(input)
-    if not input then
-      return
-    end
-
+  local input = vim.fn.input('Enter command: ', '', 'shellcmd')
+  if input and input ~= '' then
     vim.fn['VimuxRunCommand'](input)
-  end)
+  end
 end)
