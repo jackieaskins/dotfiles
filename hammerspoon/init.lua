@@ -53,9 +53,8 @@ local function focus_window()
   ):focus()
 end
 
-hs.spaces.watcher.new(focus_window):start()
-
-hs.window.filter.new():subscribe({
+SpacesWatcher = hs.spaces.watcher.new(focus_window):start()
+WindowWatcher = hs.window.filter.new():subscribe({
   hs.window.filter.windowMinimized,
   hs.window.filter.windowHidden,
   hs.window.filter.windowDestroyed,
@@ -64,6 +63,18 @@ hs.window.filter.new():subscribe({
 ----------------------------------------------------------------------
 --                             Keymaps                              --
 ----------------------------------------------------------------------
+local app_keys = {
+  b = 'Brave Browser',
+  i = 'Messages',
+  m = 'Spotify',
+  t = 'kitty',
+}
+for key, app in pairs(app_keys) do
+  hs.hotkey.bind({ 'option', 'ctrl' }, key, function()
+    hs.application.launchOrFocus(app)
+  end)
+end
+
 hs.hotkey.bind(MEH, 'r', 'Reloading Yabai', function()
   os.execute('launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"')
 end)
