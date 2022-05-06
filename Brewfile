@@ -28,9 +28,9 @@ if RUBY_PLATFORM =~ /darwin/
   cask 'alfred'
   cask 'docker'
   cask 'hammerspoon'
+  cask 'karabiner-elements'
   cask 'kitty'
   cask 'monitorcontrol'
-  cask 'stats'
 
   brew 'awscli'
   brew 'imagemagick'
