@@ -17,24 +17,12 @@ local function with_current_layout(cb)
   end)
 end
 
-local function set_left_padding(current_layout)
-  local stack_left_padding = tostring(
-    Stackline.config:get('appearance.offset.x') * 2 + Stackline.config:get('appearance.size')
-  )
-  yabai({ '-m', 'config', 'left_padding', current_layout == 'stack' and stack_left_padding or '6' })()
-end
-
 ----------------------------------------------------------------------
 --                              Reload                              --
 ----------------------------------------------------------------------
 hs.hotkey.bind(MEH, 'r', 'Reloading Yabai', function()
   os.execute('launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"')
 end)
-
-----------------------------------------------------------------------
---                             Watchers                             --
-----------------------------------------------------------------------
-hs.spaces.watcher.new(with_current_layout(set_left_padding)):start()
 
 ----------------------------------------------------------------------
 --                             Toggles                              --
@@ -47,7 +35,6 @@ hs.hotkey.bind(
   with_current_layout(function(current_layout)
     local next_layout = current_layout == 'bsp' and 'stack' or 'bsp'
     yabai({ '-m', 'space', '--layout', next_layout })()
-    set_left_padding(next_layout)
   end)
 )
 
