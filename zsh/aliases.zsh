@@ -1,5 +1,5 @@
 if type kitty &> /dev/null; then
-  alias ssh='kitty +kitten ssh'
+  alias kssh='kitty +kitten ssh'
   alias icat='kitty +kitten icat'
 fi
 
