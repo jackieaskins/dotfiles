@@ -5,7 +5,7 @@ vim.g.nvim_tree_group_empty = 1
 require('nvim-tree').setup({
   view = {
     signcolumn = 'no',
-    width = 50,
+    width = '30%',
   },
   renderer = {
     indent_markers = { enable = true },
