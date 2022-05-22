@@ -134,6 +134,10 @@ return require('packer').startup({
     use({
       'hrsh7th/nvim-cmp',
       requires = {
+        {
+          vim.g.is_personal_machine and '~/vim-plugins/cmp-emmet' or 'jackiaskins/cmp-emmet',
+          run = 'npm run release',
+        },
         { 'saadparwaiz1/cmp_luasnip' },
         { 'hrsh7th/cmp-buffer' },
         { 'hrsh7th/cmp-path' },

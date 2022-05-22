@@ -5,6 +5,7 @@ local cmp = require('cmp')
 local luasnip = require('luasnip')
 
 local source_menu_map = {
+  emmet = 'Emmet',
   luasnip = 'Snip',
   nvim_lsp = 'LSP',
   buffer = 'Buff',
@@ -25,6 +26,7 @@ cmp.setup({
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
+    { name = 'emmet' },
     { name = 'path' },
     { name = 'nvim_lsp_signature_help' },
   }, {
