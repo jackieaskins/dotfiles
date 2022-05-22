@@ -20,7 +20,6 @@ end, {
 })
 
 -- LSP
-user_command('LspLog', 'vsplit ' .. vim.lsp.get_log_path())
 user_command('LspUpdateAll', function()
   require('lsp.update').update_all_servers()
 end)

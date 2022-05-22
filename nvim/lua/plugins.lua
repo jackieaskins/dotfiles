@@ -48,6 +48,12 @@ return require('packer').startup({
       end,
     })
     use({
+      'luukvbaal/stabilize.nvim',
+      config = function()
+        require('stabilize').setup()
+      end,
+    })
+    use({
       'rktjmp/shipwright.nvim',
       module = 'shipwright',
       cmd = 'Shipwright',
@@ -65,7 +71,10 @@ return require('packer').startup({
     })
     use({
       'rmehri01/onenord.nvim',
-      run = ':Shipwright nvim/lua/plugins/shipwright.lua',
+      run = function()
+        require('packer').loader('shipwright.nvim')
+        require('shipwright').build('nvim/lua/plugins/shipwright.lua')
+      end,
     })
     use({
       'SmiteshP/nvim-gps',
