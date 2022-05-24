@@ -10,6 +10,10 @@ return function(config)
       on_attach = config.on_attach,
       settings = {
         Lua = {
+          completion = {
+            keywordSnippet = 'Replace',
+            callSnippet = 'Replace',
+          },
           diagnostics = {
             globals = { 'hs', 'packer_plugins', 'vim' },
           },

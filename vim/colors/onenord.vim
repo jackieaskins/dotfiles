@@ -146,7 +146,7 @@ highlight DiffDelete guifg=NONE guibg=#4D2B2E guisp= gui=NONE cterm=NONE term=NO
 highlight DiffText guifg=NONE guibg=#405D7E guisp= gui=NONE cterm=NONE term=NONE
 highlight Directory guifg=#81A1C1 guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
 highlight EndOfBuffer guifg=#2E3440 guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
-highlight Error guifg=#BF616A guibg=NONE guisp= gui=bold,underline cterm=bold,underline term=bold,underline
+highlight Error guifg=#BF616A guibg=NONE guisp=#BF616A gui=bold,underline cterm=bold,underline term=bold,underline
 highlight ErrorMsg guifg=#BF616A guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
 highlight Exception guifg=#B988B0 guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
 highlight FernBranchText guifg=#81A1C1 guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
@@ -173,7 +173,7 @@ highlight HopNextKey2 guifg=#B988B0 guibg=NONE guisp= gui=NONE cterm=NONE term=N
 highlight HopUnmatched guifg=#6C7A96 guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
 highlight Identifier guifg=#81A1C1 guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
 highlight Ignore guifg=#88C0D0 guibg=#2E3440 guisp= gui=bold cterm=bold term=bold
-highlight IncSearch guifg=#EBCB8B guibg=#4C566A guisp= gui=bold,underline cterm=bold,underline term=bold,underline
+highlight IncSearch guifg=#EBCB8B guibg=#4C566A guisp=#EBCB8B gui=bold,underline cterm=bold,underline term=bold,underline
 highlight Include guifg=#81A1C1 guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
 highlight IndentBlanklineChar guifg=#4C566A guibg=NONE guisp= gui=nocombine cterm=nocombine term=nocombine
 highlight IndentBlanklineContextChar guifg=#B988B0 guibg=NONE guisp= gui=nocombine cterm=nocombine term=nocombine
@@ -181,13 +181,13 @@ highlight InsertMode guifg=#A3BE8C guibg=NONE guisp= gui=reverse cterm=reverse t
 highlight Keyword guifg=#B988B0 guibg=NONE guisp= gui=italic cterm=italic term=italic
 highlight Label guifg=#B988B0 guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
 highlight LightspeedGreyWash guifg=#646A76 guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
-highlight LightspeedLabel guifg=#E85B7A guibg=NONE guisp= gui=bold,underline cterm=bold,underline term=bold,underline
-highlight LightspeedLabelDistant guifg=#88C0D0 guibg=NONE guisp= gui=bold,underline cterm=bold,underline term=bold,underline
-highlight LightspeedLabelDistantOverlapped guifg=#81A1C1 guibg=NONE guisp= gui=underline cterm=underline term=underline
-highlight LightspeedLabelOverlapped guifg=#E44675 guibg=NONE guisp= gui=underline cterm=underline term=underline
+highlight LightspeedLabel guifg=#E85B7A guibg=NONE guisp=#E85B7A gui=bold,underline cterm=bold,underline term=bold,underline
+highlight LightspeedLabelDistant guifg=#88C0D0 guibg=NONE guisp=#88C0D0 gui=bold,underline cterm=bold,underline term=bold,underline
+highlight LightspeedLabelDistantOverlapped guifg=#81A1C1 guibg=NONE guisp=#81A1C1 gui=underline cterm=underline term=underline
+highlight LightspeedLabelOverlapped guifg=#E44675 guibg=NONE guisp=#E44675 gui=underline cterm=underline term=underline
 highlight LightspeedMaskedChar guifg=#B48EAD guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
 highlight LightspeedOneCharMatch guifg=#EBCB8B guibg=NONE guisp= gui=bold,reverse cterm=bold,reverse term=bold,reverse
-highlight LightspeedShortcut guifg=#E5E9F0 guibg=#E85B7A guisp= gui=bold,underline cterm=bold,underline term=bold,underline
+highlight LightspeedShortcut guifg=#E5E9F0 guibg=#E85B7A guisp=#E5E9F0 gui=bold,underline cterm=bold,underline term=bold,underline
 highlight LightspeedUnlabeledMatch guifg=#E5E9F0 guibg=NONE guisp= gui=bold cterm=bold term=bold
 highlight LineDiagTruncateLine guifg=#3F4758 guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
 highlight LineNr guifg=#6C7A96 guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
@@ -288,7 +288,7 @@ highlight NvimTreeNormal guifg=#C8D0E0 guibg=#353B49 guisp= gui=NONE cterm=NONE 
 highlight NvimTreeOpenedFile guifg=NONE guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
 highlight NvimTreeOpenedFolderName guifg=#EBCB8B guibg=NONE guisp= gui=italic cterm=italic term=italic
 highlight NvimTreeRootFolder guifg=#A3BE8C guibg=NONE guisp= gui=bold cterm=bold term=bold
-highlight NvimTreeSpecialFile guifg=#D08F70 guibg=NONE guisp= gui=underline cterm=underline term=underline
+highlight NvimTreeSpecialFile guifg=#D08F70 guibg=NONE guisp=#D08F70 gui=underline cterm=underline term=underline
 highlight NvimTreeSymlink guifg=#88C0D0 guibg=NONE guisp= gui=bold cterm=bold term=bold
 highlight NvimTreeVertSplit guifg=#353B49 guibg=#353B49 guisp= gui=NONE cterm=NONE term=NONE
 highlight Operator guifg=#B988B0 guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
@@ -301,8 +301,8 @@ highlight PreProc guifg=#B988B0 guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
 highlight ProviderTruncateLine guifg=#3F4758 guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
 highlight Question guifg=#A3BE8C guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
 highlight QuickFixLine guifg=NONE guibg=#3B4252 guisp= gui=bold,italic cterm=bold,italic term=bold,italic
-highlight QuickScopePrimary guifg=#5E81AC guibg=NONE guisp= gui=underline cterm=underline term=underline
-highlight QuickScopeSecondary guifg=#B988B0 guibg=NONE guisp= gui=underline cterm=underline term=underline
+highlight QuickScopePrimary guifg=#5E81AC guibg=NONE guisp=#5E81AC gui=underline cterm=underline term=underline
+highlight QuickScopeSecondary guifg=#B988B0 guibg=NONE guisp=#B988B0 gui=underline cterm=underline term=underline
 highlight ReferencesCount guifg=#B988B0 guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
 highlight ReferencesIcon guifg=#81A1C1 guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
 highlight Repeat guifg=#B988B0 guibg=NONE guisp= gui=italic cterm=italic term=italic
@@ -380,7 +380,7 @@ highlight TSTextReference guifg=#B988B0 guibg=NONE guisp= gui=NONE cterm=NONE te
 highlight TSTitle guifg=#81A1C1 guibg=NONE guisp= gui=bold cterm=bold term=bold
 highlight TSType guifg=#EBCB8B guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
 highlight TSTypeBuiltin guifg=#D08F70 guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
-highlight TSURI guifg=#88C0D0 guibg=NONE guisp= gui=underline cterm=underline term=underline
+highlight TSURI guifg=#88C0D0 guibg=NONE guisp=#88C0D0 gui=underline cterm=underline term=underline
 highlight TSUnderline guifg=NONE guibg=NONE guisp= gui=underline cterm=underline term=underline
 highlight TSVariable guifg=#C8D0E0 guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
 highlight TSVariableBuiltin guifg=#D57780 guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
@@ -410,7 +410,7 @@ highlight TroubleNormal guifg=#C8D0E0 guibg=NONE guisp= gui=NONE cterm=NONE term
 highlight TroubleText guifg=#C8D0E0 guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
 highlight Type guifg=#EBCB8B guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
 highlight Typedef guifg=#B988B0 guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
-highlight Underlined guifg=#A3BE8C guibg=NONE guisp= gui=underline cterm=underline term=underline
+highlight Underlined guifg=#A3BE8C guibg=NONE guisp=#A3BE8C gui=underline cterm=underline term=underline
 highlight VertSplit guifg=#4C566A guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
 highlight Visual guifg=NONE guibg=#3F4758 guisp= gui=NONE cterm=NONE term=NONE
 highlight VisualMode guifg=#B988B0 guibg=NONE guisp= gui=reverse cterm=reverse term=reverse
@@ -440,7 +440,7 @@ highlight htmlH2 guifg=#D57780 guibg=NONE guisp= gui=bold cterm=bold term=bold
 highlight htmlH3 guifg=#A3BE8C guibg=NONE guisp= gui=bold cterm=bold term=bold
 highlight htmlH4 guifg=#EBCB8B guibg=NONE guisp= gui=bold cterm=bold term=bold
 highlight htmlH5 guifg=#B988B0 guibg=NONE guisp= gui=bold cterm=bold term=bold
-highlight htmlLink guifg=#A3BE8C guibg=NONE guisp= gui=underline cterm=underline term=underline
+highlight htmlLink guifg=#A3BE8C guibg=NONE guisp=#A3BE8C gui=underline cterm=underline term=underline
 highlight illuminatedCurWord guifg=NONE guibg=#3F4758 guisp= gui=NONE cterm=NONE term=NONE
 highlight illuminatedWord guifg=NONE guibg=#3F4758 guisp= gui=NONE cterm=NONE term=NONE
 highlight markdownBlockquote guifg=#6C7A96 guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
@@ -469,5 +469,5 @@ highlight markdownLinkText guifg=#B988B0 guibg=NONE guisp= gui=NONE cterm=NONE t
 highlight markdownListMarker guifg=#D57780 guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
 highlight markdownOrderedListMarker guifg=#D57780 guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
 highlight markdownRule guifg=#B988B0 guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
-highlight markdownUrl guifg=#88C0D0 guibg=NONE guisp= gui=underline cterm=underline term=underline
+highlight markdownUrl guifg=#88C0D0 guibg=NONE guisp=#88C0D0 gui=underline cterm=underline term=underline
 highlight qfLineNr guifg=#B988B0 guibg=NONE guisp= gui=NONE cterm=NONE term=NONE

@@ -14,16 +14,8 @@ local function get_bufnr(tabnr)
 end
 
 function GetTabLine()
-  local function define_highlights(name, fg, bg)
-    local prefix = 'TabLine' .. name
-
-    highlight(prefix, { guifg = fg, guibg = bg })
-    highlight(prefix .. 'PreArrow', { guifg = colors.active, guibg = bg })
-    highlight(prefix .. 'PostArrow', { guifg = bg, guibg = colors.active })
-  end
-
-  define_highlights('', colors.fg_light, colors.selection)
-  define_highlights('Sel', colors.active, colors.cyan)
+  highlight('TabLine', { guifg = colors.fg_light, guibg = colors.selection })
+  highlight('TabLineSel', { guifg = colors.active, guibg = colors.cyan })
 
   local num_tabs = fn.tabpagenr('$')
   local current_tabnr = fn.tabpagenr()
@@ -81,27 +73,13 @@ function GetTabLine()
       set_current_tab('%#TabLineSel#', '%#TabLine#'),
       ' ',
       tabnr,
-      '  ',
+      ' ',
       get_file_icon_component(filename),
       get_bufname(),
       modified,
       readonly,
       ' ',
     }
-
-    if tabnr ~= 1 then
-      if tabnr == current_tabnr then
-        table.insert(components, 1, '%#TabLineSelPreArrow#')
-      else
-        table.insert(components, 1, '%#TabLinePreArrow#')
-      end
-    end
-
-    if tabnr == current_tabnr then
-      table.insert(components, '%#TabLineSelPostArrow#')
-    else
-      table.insert(components, '%#TabLinePostArrow#')
-    end
 
     table.insert(tabline_components, table.concat(components))
   end

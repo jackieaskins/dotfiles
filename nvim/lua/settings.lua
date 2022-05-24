@@ -29,6 +29,14 @@ opt.diffopt:append({ 'vertical' })
 opt.termguicolors = true
 opt.tabline = require('tabline')
 
+function WinBar()
+  if vim.bo.filetype == 'NvimTree' then
+    return '%#NvimTreeNormal#'
+  end
+  return '%=%f'
+end
+opt.winbar = '%!luaeval("WinBar()")'
+
 augroup('spell', {
   { 'FileType', { pattern = 'gitcommit,markdown', command = 'setlocal spell' } },
 })

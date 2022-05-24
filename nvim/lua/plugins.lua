@@ -2,6 +2,11 @@ local file_exists = require('utils').file_exists
 
 vim.cmd('packadd packer.nvim')
 
+local function local_plugin(name)
+  local prefix = vim.g.is_personal_machine and '~/vim-plugins/' or 'jackieaskins/'
+  return prefix .. name
+end
+
 return require('packer').startup({
   function(use)
     use({ 'wbthomason/packer.nvim', opt = true })
@@ -20,7 +25,12 @@ return require('packer').startup({
       config = function()
         require('plugins.vimux')
       end,
-      fn = { 'VimuxClearTerminalScreen', 'VimuxClearRunnerHistory', 'VimuxRunCommand', 'VimuxOpenRunner' },
+      fn = {
+        'VimuxClearTerminalScreen',
+        'VimuxClearRunnerHistory',
+        'VimuxRunCommand',
+        'VimuxOpenRunner',
+      },
       cmd = { 'VimuxRunCommand', 'VimuxOpenRunner' },
     })
     use({
@@ -29,11 +39,7 @@ return require('packer').startup({
         require('plugins.tmux-navigation')
       end,
     })
-    use({
-      'stsewd/gx-extended.vim',
-      keys = 'gx',
-      fn = 'gxext#browse',
-    })
+    use({ 'stsewd/gx-extended.vim', keys = 'gx', fn = 'gxext#browse' })
     use({
       'szw/vim-maximizer',
       cmd = { 'MaximizerToggle' },
@@ -77,6 +83,12 @@ return require('packer').startup({
       end,
     })
     use({
+      'sunjon/Shade.nvim',
+      config = function()
+        require('shade').setup({ overlay_opacity = 45 })
+      end,
+    })
+    use({
       'SmiteshP/nvim-gps',
       config = function()
         require('plugins.gps')
@@ -106,13 +118,6 @@ return require('packer').startup({
     -- }}}
 
     -- Editing {{{
-    use({
-      'folke/twilight.nvim',
-      config = function()
-        require('plugins.twilight')
-      end,
-      cmd = { 'Twilight', 'TwilightEnable', 'TwilightDisable' },
-    })
     use({ 'tpope/vim-abolish' })
     use({
       'tpope/vim-projectionist',
@@ -143,10 +148,7 @@ return require('packer').startup({
     use({
       'hrsh7th/nvim-cmp',
       requires = {
-        {
-          vim.g.is_personal_machine and '~/vim-plugins/cmp-emmet' or 'jackieaskins/cmp-emmet',
-          run = 'npm run release',
-        },
+        { local_plugin('cmp-emmet'), run = 'npm run release' },
         { 'saadparwaiz1/cmp_luasnip' },
         { 'hrsh7th/cmp-buffer' },
         { 'hrsh7th/cmp-path' },
@@ -158,10 +160,7 @@ return require('packer').startup({
         require('plugins.cmp')
       end,
     })
-    use({
-      'mhartington/formatter.nvim',
-      module = 'formatter',
-    })
+    use({ 'mhartington/formatter.nvim', module = 'formatter' })
     -- }}}
 
     -- Surround {{{
