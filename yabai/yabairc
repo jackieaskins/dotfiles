@@ -15,10 +15,12 @@ yabai -m config mouse_follows_focus off
 yabai -m config focus_follows_mouse off
 yabai -m config window_origin_display cursor
 
-yabai -m rule --add app="^Google Chrome$" title="^Picture in Picture$" manage=off
-yabai -m rule --add app="^TV$" manage=off border=off
-yabai -m rule --add app="^System Preferences$" manage=off border=off
+yabai -m rule --add title="^Picture in Picture$" manage=off
+yabai -m rule --add app="^Alfred Preferences$" manage=off
+yabai -m rule --add app="^App Store$" manage=off
+yabai -m rule --add app="^FaceTime$" manage=off
+yabai -m rule --add app="^Karabiner" manage=off
 yabai -m rule --add app="^Spotify$" manage=off
 yabai -m rule --add app="^Stats$" manage=off border=off
-yabai -m rule --add app="^Karabiner" manage=off
-yabai -m rule --add app="^Alfred Preferences$" manage=off
+yabai -m rule --add app="^System Preferences$" manage=off border=off
+yabai -m rule --add app="^TV$" manage=off border=off

@@ -49,9 +49,9 @@ for key, val in pairs({
 }) do
   local win_dir, stack_dir = val[1], val[2]
 
-  hs.hotkey.bind(MEH, key, yabai({ '-m', 'window', '--warp', win_dir }))
+  hs.hotkey.bind(HYPER, key, yabai({ '-m', 'window', '--warp', win_dir }))
   hs.hotkey.bind(
-    HYPER,
+    MEH,
     key,
     with_current_layout(function(current_layout)
       if current_layout == 'bsp' then
