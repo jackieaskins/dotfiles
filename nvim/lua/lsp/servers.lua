@@ -34,7 +34,9 @@ local all_install_commands = vim.tbl_extend('force', install_commands, vim.g.add
 local supported_install_commands = {}
 if vim.g.supported_servers then
   for _, server_name in ipairs(vim.g.supported_servers) do
-    supported_install_commands[server_name] = all_install_commands[server_name]
+    if all_install_commands[server_name] then
+      supported_install_commands[server_name] = all_install_commands[server_name]
+    end
   end
 else
   supported_install_commands = all_install_commands

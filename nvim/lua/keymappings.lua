@@ -97,6 +97,7 @@ map('n', '<C-n>', '<cmd>NvimTreeToggle<CR>')
 map('n', '<leader>n', '<cmd>NvimTreeFindFileToggle<CR>')
 
 -- Vimux
+map('n', '<leader>vt', '<cmd>VimuxTogglePane<CR>')
 map('n', '<leader>vi', '<cmd>VimuxInterruptRunner<CR>')
 map('n', '<leader>vc', '<cmd>VimuxClearTerminalScreen<CR>')
 map('n', '<leader>vq', '<cmd>VimuxCloseRunner<CR>')

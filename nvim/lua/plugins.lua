@@ -48,12 +48,6 @@ return require('packer').startup({
       end,
     })
     use({
-      'ethanholz/nvim-lastplace',
-      config = function()
-        require('nvim-lastplace').setup({})
-      end,
-    })
-    use({
       'luukvbaal/stabilize.nvim',
       config = function()
         require('stabilize').setup()
@@ -83,12 +77,6 @@ return require('packer').startup({
       end,
     })
     use({
-      'sunjon/Shade.nvim',
-      config = function()
-        require('shade').setup({ overlay_opacity = 45 })
-      end,
-    })
-    use({
       'SmiteshP/nvim-gps',
       config = function()
         require('plugins.gps')
@@ -110,7 +98,7 @@ return require('packer').startup({
     })
     use({
       'norcalli/nvim-colorizer.lua',
-      cmd = 'ColorizerToggle',
+      cmd = 'ColorizerAttachToBuffer',
       config = function()
         require('colorizer').setup()
       end,

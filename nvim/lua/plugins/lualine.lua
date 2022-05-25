@@ -45,7 +45,6 @@ local location = '%l:%c'
 
 require('lualine').setup({
   options = {
-    globalstatus = true,
     disabled_filetypes = { 'NvimTree' },
     theme = custom_onenord,
   },
