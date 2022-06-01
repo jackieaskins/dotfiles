@@ -2,6 +2,14 @@ local fn = vim.fn
 local ts_utils = require('nvim-treesitter.ts_utils')
 local locals = require('nvim-treesitter.locals')
 
+local function lsp_rename(new_name)
+  vim.lsp.buf.rename(new_name, {
+    filter = function(client)
+      return client.supports_method('textDocument/rename')
+    end,
+  })
+end
+
 local function ts_rename(new_name)
   local node_to_rename = ts_utils.get_node_at_cursor()
   local definition, scope = locals.find_definition(node_to_rename, 0)
@@ -81,7 +89,7 @@ local function add_alias_to_node(definition_node, new_name, alias_prefix)
     fn.feedkeys('B')
   end
 
-  vim.lsp.buf.rename(new_name)
+  lsp_rename(new_name)
 
   return true
 end
@@ -182,7 +190,7 @@ return {
       if not lsp_definition then
         ts_rename(new_name)
       else
-        vim.lsp.buf.rename(new_name)
+        lsp_rename(new_name)
       end
     end)
   end,
