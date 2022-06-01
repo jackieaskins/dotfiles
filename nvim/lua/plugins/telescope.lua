@@ -8,18 +8,11 @@ local action_set = require('telescope.actions.set')
 local packer_loader = require('packer').loader
 packer_loader('telescope-env.nvim')
 packer_loader('telescope-fzf-native.nvim')
+packer_loader('telescope-packer.nvim')
 
 telescope.setup({
   defaults = {
-    layout_strategy = 'vertical',
-    layout_config = {
-      vertical = {
-        mirror = true,
-      },
-      prompt_position = 'top',
-    },
-    path_display = { 'truncate' },
-    sorting_strategy = 'ascending',
+    layout_strategy = 'flex',
     mappings = {
       i = {
         ['<Tab>'] = actions.toggle_selection + actions.move_selection_next,
@@ -53,3 +46,4 @@ telescope.setup({
 telescope.load_extension('env')
 telescope.load_extension('fzf')
 telescope.load_extension('notify')
+telescope.load_extension('packer')

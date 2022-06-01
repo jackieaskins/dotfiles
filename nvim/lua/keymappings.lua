@@ -66,7 +66,6 @@ map('n', '<leader>su', '<cmd>StartupTime --tries 20<CR>')
 map('n', '<leader>ht', '<cmd>Telescope help_tags<CR>')
 map('n', '<leader>hi', '<cmd>Telescope highlights<CR>')
 map('n', '<leader>km', '<cmd>Telescope keymaps<CR>')
-
 map('n', '<C-p>', '<cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files<CR>')
 map('n', '<leader>ff', '<cmd>Telescope find_files find_command=rg,--no-ignore,--hidden,--files<CR>')
 map('n', '<leader>rg', ':Telescope grep_string search=', { silent = false })
@@ -76,8 +75,12 @@ map('n', '<leader>gs', '<cmd>Telescope git_status<CR>')
 map('n', '<leader>bu', '<cmd>Telescope buffers sort_mru=true<CR>')
 map('n', '<leader>of', '<cmd>Telescope oldfiles cwd_only=true sort_lastused=true include_current_session=true<CR>')
 map('n', '<leader>z=', '<cmd>Telescope spell_suggest<CR>')
+map('n', '<leader>pp', '<cmd>Telescope packer<CR>')
 
 -- Test
+---Wrapper function to handle running tests in workspace directories
+---@param cmd string
+---@return function
 local function wrap_test(cmd)
   return function()
     vim.g['test#project_root'] = require('lspconfig').util.root_pattern('jest.config.js', 'package.json')(

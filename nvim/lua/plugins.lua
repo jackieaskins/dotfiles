@@ -164,6 +164,7 @@ return require('packer').startup({
     -- }}}
 
     -- Git {{{
+    use({ 'rhysd/committia.vim' })
     use({ 'rhysd/conflict-marker.vim' })
     use({
       'lewis6991/gitsigns.nvim',
@@ -194,6 +195,7 @@ return require('packer').startup({
       requires = {
         { 'LinArcX/telescope-env.nvim', opt = true },
         { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', opt = true },
+        { 'nvim-telescope/telescope-packer.nvim', opt = true },
       },
     })
     -- }}}

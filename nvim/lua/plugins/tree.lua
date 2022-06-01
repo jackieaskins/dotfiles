@@ -1,13 +1,12 @@
 -- https://github.com/kyazdani42/nvim-tree.lua
 
-vim.g.nvim_tree_group_empty = 1
-
 require('nvim-tree').setup({
   view = {
     signcolumn = 'no',
     width = '30%',
   },
   renderer = {
+    group_empty = true,
     indent_markers = { enable = true },
   },
   git = {
