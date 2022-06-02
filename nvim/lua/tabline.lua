@@ -14,8 +14,8 @@ local function get_bufnr(tabnr)
 end
 
 function GetTabLine()
-  highlight('TabLine', { guifg = colors.fg_light, guibg = colors.selection })
-  highlight('TabLineSel', { guifg = colors.active, guibg = colors.cyan })
+  highlight('TabLine', { fg = colors.fg_light, bg = colors.selection })
+  highlight('TabLineSel', { fg = colors.active, bg = colors.cyan })
 
   local num_tabs = fn.tabpagenr('$')
   local current_tabnr = fn.tabpagenr()
