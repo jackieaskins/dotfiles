@@ -39,7 +39,6 @@ return require('packer').startup({
         require('plugins.tmux-navigation')
       end,
     })
-    use({ 'stsewd/gx-extended.vim', keys = 'gx', fn = 'gxext#browse' })
     use({
       'szw/vim-maximizer',
       cmd = { 'MaximizerToggle' },

@@ -1,4 +1,5 @@
-local user_command = require('utils').user_command
+local utils = require('utils')
+local open_url, user_command = utils.open_url, utils.user_command
 
 -- Formatter
 local function formatter()
@@ -45,9 +46,9 @@ user_command('Dotfiles', function()
   if dotfiles_path == cwd then
     local file_path = vim.split(vim.fn.expand('%'), cwd)[1]
     if file_path ~= '' then
-      return vim.fn['gxext#browse'](dotfiles_repo .. '/blob/main/' .. file_path)
+      return open_url(dotfiles_repo .. '/blob/main/' .. file_path)
     end
   end
 
-  vim.fn['gxext#browse'](dotfiles_repo)
+  open_url(dotfiles_repo)
 end)
