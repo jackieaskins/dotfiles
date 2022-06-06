@@ -6,6 +6,9 @@ map('n', 'gx', function()
   require('gx').handle_url_under_cursor()
 end, { desc = 'Open url under cursor' })
 
+-- Yank to System Clipboard
+map({ 'n', 'v' }, '<leader>y', '"+y')
+
 -- Jumplist
 local function jump(key)
   return function()
@@ -41,10 +44,6 @@ map('n', '<leader>so', '<cmd>luafile %<CR>')
 map('n', '<leader>rp', function()
   require('reload').reload_plugins()
 end, { desc = 'Reload plugins' })
-
-map('n', '<leader>rn', function()
-  require('rename').smart_rename()
-end, { desc = 'Smart rename' })
 
 -- Plugins
 -- Formatter

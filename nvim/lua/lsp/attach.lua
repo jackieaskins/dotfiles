@@ -41,6 +41,7 @@ return function(client, bufnr)
   bsk('n', '[e', '<cmd>lua vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR })<CR>')
   bsk('n', ']e', '<cmd>lua vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR })<CR>')
 
+  bsk('n', '<leader>rn', vim.lsp.buf.rename, { desc = 'vim.lsp.buf.rename' })
   bsk('n', '<leader>bf', vim.lsp.buf.formatting, { desc = 'vim.lsp.buf.formatting' })
 
   bsk('n', '<leader>ca', vim.lsp.buf.code_action, { desc = 'vim.lsp.buf.code_action' })
