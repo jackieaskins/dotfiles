@@ -163,7 +163,12 @@ return require('packer').startup({
     -- }}}
 
     -- Git {{{
-    use({ 'rhysd/committia.vim' })
+    use({
+      'rhysd/committia.vim',
+      config = function()
+        require('plugins.committia')
+      end,
+    })
     use({ 'rhysd/conflict-marker.vim' })
     use({
       'lewis6991/gitsigns.nvim',
@@ -173,6 +178,11 @@ return require('packer').startup({
       end,
     })
     use({ 'tpope/vim-fugitive', cmd = { 'Git', 'G', 'Gread' } })
+    use({
+      'sindrets/diffview.nvim',
+      requires = 'nvim-lua/plenary.nvim',
+      cmd = { 'DiffviewOpen', 'DiffviewFileHistory' },
+    })
     -- }}}
 
     -- File Navigation {{{
