@@ -1,6 +1,5 @@
 -- https://github.com/hrsh7th/nvim-cmp
 
-local api = vim.api
 local cmp = require('cmp')
 local luasnip = require('luasnip')
 
@@ -32,16 +31,7 @@ cmp.setup({
   }, {
     {
       name = 'buffer',
-      option = {
-        get_bufnrs = function()
-          -- Gets visible buffers
-          local bufs = {}
-          for _, win in ipairs(api.nvim_list_wins()) do
-            bufs[api.nvim_win_get_buf(win)] = true
-          end
-          return vim.tbl_keys(bufs)
-        end,
-      },
+      option = { get_bufnrs = vim.api.nvim_list_bufs },
     },
   }),
   window = {
@@ -52,6 +42,7 @@ cmp.setup({
     format = function(entry, vim_item)
       local source = entry.source.name
       vim_item.menu = source_menu_map[source]
+      vim_item.abbr = string.sub(vim_item.abbr, 1, 50)
       return vim_item
     end,
   },
@@ -77,15 +68,22 @@ cmp.setup({
   },
 })
 
+local cmdline_view = {
+  entries = {
+    name = 'wildmenu',
+    separator = '  ',
+  },
+}
 cmp.setup.cmdline(':', {
-  sources = cmp.config.sources({
+  view = cmdline_view,
+  sources = {
     { name = 'path' },
-  }, {
     { name = 'cmdline' },
-  }),
+  },
 })
 
 cmp.setup.cmdline('/', {
+  view = cmdline_view,
   sources = {
     { name = 'buffer' },
   },
