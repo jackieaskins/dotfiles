@@ -3,6 +3,7 @@ pcall(require, 'impatient')
 require('globals')
 
 require('settings')
+require('autocmds')
 require('keymappings')
 require('user_commands')
 

@@ -1,5 +1,4 @@
-local utils = require('utils')
-local augroup, map = utils.augroup, utils.map
+local map = require('utils').map
 
 -- Extended gx
 map('n', 'gx', function()
@@ -46,11 +45,6 @@ map('n', '<leader>rp', function()
 end, { desc = 'Reload plugins' })
 
 -- Plugins
--- Formatter
-augroup('auto_format', {
-  { 'BufWritePost', { command = 'lua require("plugins.formatter").format_on_save()' } },
-})
-
 -- Markdown Preview
 map('n', '<leader>mp', '<cmd>MarkdownPreview<CR>')
 

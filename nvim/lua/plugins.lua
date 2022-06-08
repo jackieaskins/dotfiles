@@ -213,7 +213,6 @@ return require('packer').startup({
     use({ 'folke/lua-dev.nvim' })
     use({
       'kosayoda/nvim-lightbulb',
-      module = 'nvim-lightbulb',
       config = function()
         require('plugins.lightbulb')
       end,

@@ -1,6 +1,5 @@
-return function(client, bufnr)
-  local utils = require('utils')
-  local augroup, map = utils.augroup, utils.map
+return function(_, bufnr)
+  local map = require('utils').map
 
   local function bsk(mode, lhs, rhs, opts)
     local options = { buffer = bufnr }
@@ -9,23 +8,8 @@ return function(client, bufnr)
     end
     map(mode, lhs, rhs, options)
   end
-  local function bso(...)
-    vim.api.nvim_buf_set_option(bufnr, ...)
-  end
 
-  if client.supports_method('textDocument/codeAction') then
-    augroup('lightbulb', {
-      {
-        'CursorHold,CursorHoldI',
-        {
-          buffer = bufnr,
-          callback = require('nvim-lightbulb').update_lightbulb,
-        },
-      },
-    })
-  end
-
-  bso('omnifunc', 'v:lua.vim.lsp.omnifunc')
+  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   bsk('n', 'gi', '<cmd>Telescope lsp_implementations<CR>')
   bsk('n', 'gd', '<cmd>Telescope lsp_definitions<CR>')
