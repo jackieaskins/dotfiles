@@ -22,6 +22,7 @@ return require('packer').startup({
     use({ 'dstein64/vim-startuptime', cmd = 'StartupTime' })
     use({
       'preservim/vimux',
+      cmd = { 'VimuxRunCommand', 'VimuxOpenRunner' },
       config = function()
         require('plugins.vimux')
       end,
@@ -31,7 +32,6 @@ return require('packer').startup({
         'VimuxRunCommand',
         'VimuxOpenRunner',
       },
-      cmd = { 'VimuxRunCommand', 'VimuxOpenRunner' },
     })
     use({
       'alexghergh/nvim-tmux-navigation',
@@ -41,23 +41,16 @@ return require('packer').startup({
     })
     use({
       'szw/vim-maximizer',
-      cmd = { 'MaximizerToggle' },
+      cmd = 'MaximizerToggle',
       config = function()
         require('plugins.maximizer')
       end,
     })
     use({
-      'luukvbaal/stabilize.nvim',
-      config = function()
-        require('stabilize').setup()
-      end,
-    })
-    use({
       'rktjmp/shipwright.nvim',
-      module = 'shipwright',
       cmd = 'Shipwright',
+      module = 'shipwright',
     })
-    use({ 'tpope/vim-scriptease', cmd = { 'Messages' } })
     -- }}}
 
     -- Appearance {{{
@@ -90,10 +83,10 @@ return require('packer').startup({
     })
     use({
       'nvim-lualine/lualine.nvim',
-      requires = { 'kyazdani42/nvim-web-devicons' },
       config = function()
         require('plugins.lualine')
       end,
+      requires = 'kyazdani42/nvim-web-devicons',
     })
     use({
       'norcalli/nvim-colorizer.lua',
@@ -123,7 +116,7 @@ return require('packer').startup({
     use({ 'axelf4/vim-strip-trailing-whitespace' })
     use({
       'iamcco/markdown-preview.nvim',
-      ft = { 'markdown' },
+      ft = 'markdown',
       run = 'cd app && npm install',
     })
     use({
@@ -134,18 +127,18 @@ return require('packer').startup({
     })
     use({
       'hrsh7th/nvim-cmp',
-      requires = {
-        { local_plugin('cmp-emmet'), run = 'npm run release' },
-        { 'saadparwaiz1/cmp_luasnip' },
-        { 'hrsh7th/cmp-buffer' },
-        { 'hrsh7th/cmp-path' },
-        { 'hrsh7th/cmp-nvim-lsp' },
-        { 'hrsh7th/cmp-nvim-lsp-signature-help' },
-        { 'hrsh7th/cmp-cmdline' },
-      },
       config = function()
         require('plugins.cmp')
       end,
+      requires = {
+        { local_plugin('cmp-emmet'), run = 'npm run release' },
+        'hrsh7th/cmp-buffer',
+        'hrsh7th/cmp-cmdline',
+        'hrsh7th/cmp-nvim-lsp',
+        'hrsh7th/cmp-nvim-lsp-signature-help',
+        'hrsh7th/cmp-path',
+        'saadparwaiz1/cmp_luasnip',
+      },
     })
     use({ 'mhartington/formatter.nvim', module = 'formatter' })
     -- }}}
@@ -172,34 +165,34 @@ return require('packer').startup({
     use({ 'rhysd/conflict-marker.vim' })
     use({
       'lewis6991/gitsigns.nvim',
-      requires = 'nvim-lua/plenary.nvim',
       config = function()
         require('plugins.gitsigns')
       end,
+      requires = 'nvim-lua/plenary.nvim',
     })
     use({ 'tpope/vim-fugitive', cmd = { 'Git', 'G', 'Gread' } })
     use({
       'sindrets/diffview.nvim',
-      requires = 'nvim-lua/plenary.nvim',
       cmd = { 'DiffviewOpen', 'DiffviewFileHistory' },
+      requires = 'nvim-lua/plenary.nvim',
     })
     -- }}}
 
     -- File Navigation {{{
     use({
       'kyazdani42/nvim-tree.lua',
-      requires = 'kyazdani42/nvim-web-devicons',
       cmd = { 'NvimTreeToggle', 'NvimTreeFindFileToggle' },
       config = function()
         require('plugins.tree')
       end,
+      requires = 'kyazdani42/nvim-web-devicons',
     })
     use({
       'nvim-telescope/telescope.nvim',
       config = function()
         require('plugins.telescope')
       end,
-      cmd = { 'Telescope' },
+      cmd = 'Telescope',
       module = 'telescope',
       requires = {
         { 'LinArcX/telescope-env.nvim', opt = true },
@@ -219,10 +212,10 @@ return require('packer').startup({
     })
     use({
       'neovim/nvim-lspconfig',
-      requires = { 'jose-elias-alvarez/typescript.nvim' },
       config = function()
         require('plugins.lspconfig')
       end,
+      requires = 'jose-elias-alvarez/typescript.nvim',
     })
     use({
       'rmagatti/goto-preview',
@@ -234,9 +227,7 @@ return require('packer').startup({
     use({
       'j-hui/fidget.nvim',
       config = function()
-        require('fidget').setup({
-          text = { spinner = 'dots' },
-        })
+        require('plugins.fidget')
       end,
     })
     -- }}}
@@ -262,7 +253,6 @@ return require('packer').startup({
     use({ 'fladson/vim-kitty' })
     use({
       'nvim-treesitter/nvim-treesitter',
-      run = ':TSUpdate',
       config = function()
         require('plugins.treesitter')
       end,
@@ -271,17 +261,19 @@ return require('packer').startup({
           'nvim-treesitter/playground',
           cmd = { 'TSPlaygroundToggle', 'TSHighlightCapturesUnderCursor' },
         },
-        { 'jackieaskins/nvim-ts-autotag' },
-        { 'nvim-treesitter/nvim-treesitter-refactor' },
-        { 'RRethy/nvim-treesitter-textsubjects' },
-        { 'JoosepAlviste/nvim-ts-context-commentstring' },
+        'jackieaskins/nvim-ts-autotag',
+        'nvim-treesitter/nvim-treesitter-refactor',
+        'RRethy/nvim-treesitter-textsubjects',
+        'JoosepAlviste/nvim-ts-context-commentstring',
         {
           's1n7ax/nvim-comment-frame',
           config = function()
             require('plugins.comment-frame')
           end,
+          keys = { '<leader>cf', '<leader>cF' },
         },
       },
+      run = ':TSUpdate',
     })
     -- }}}
 

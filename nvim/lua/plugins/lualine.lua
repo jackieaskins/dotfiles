@@ -32,12 +32,7 @@ local function gps_location()
   end
 
   local success, gps = pcall(require, 'nvim-gps')
-  if success and gps.is_available() then
-    local location = gps.get_location()
-    return location == '' and '' or '> ' .. location
-  else
-    return ''
-  end
+  return success and gps.get_location() or ''
 end
 
 local filename = { 'filename', symbols = { modified = ' ', readonly = ' ' }, separator = '' }

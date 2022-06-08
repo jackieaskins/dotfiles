@@ -1,3 +1,5 @@
+-- https://github.com/tpope/vim-projectionist
+
 vim.g.projectionist_heuristics = {
   ['package.json'] = {
     ['*.ts'] = {

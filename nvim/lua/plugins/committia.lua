@@ -1,3 +1,5 @@
+-- https://github.com/rhysd/committia.vim
+
 local map = require('utils').map
 
 vim.g.committia_hooks = {

@@ -54,7 +54,6 @@ map('n', '<leader>mt', '<cmd>MaximizerToggle<CR>')
 -- Packer
 map('n', '<leader>ps', '<cmd>PackerSync<CR>')
 map('n', '<leader>pu', '<cmd>PackerUpdate<CR>')
-map('n', '<leader>pp', '<cmd>PackerProfile<CR>')
 map('n', '<leader>pl', ':PackerLoad ', { silent = false })
 
 -- Startup Time
