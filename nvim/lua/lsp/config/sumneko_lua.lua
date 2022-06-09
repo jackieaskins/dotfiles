@@ -1,9 +1,10 @@
 return function(config)
-  local luaDevConfig = require('lua-dev').setup({
+  local lua_dev_config = require('lua-dev').setup({
     library = {
       vimruntime = true,
       types = true,
-      plugins = { 'nvim-treesitter', 'plenary.nvim' }, -- Limiting plugins to reduce server startup time
+      -- Limiting plugins to reduce server startup time
+      plugins = { 'nvim-treesitter', 'plenary.nvim' },
     },
     lspconfig = {
       capabilities = config.capabilities,
@@ -17,16 +18,19 @@ return function(config)
           diagnostics = {
             globals = { 'hs', 'packer_plugins', 'vim' },
           },
-          workspace = {
-            library = {
-              '/Applications/Hammerspoon.app/Contents/Resources/extensions/hs/',
-              '~/.hammerspoon/Spoons/EmmyLua.spoon/annotations',
-            },
-          },
         },
       },
     },
   })
 
-  return luaDevConfig
+  local hammerspoon_libraries = {
+    '/Applications/Hammerspoon.app/Contents/Resources/extensions/hs',
+    '~/.hammerspoon/Spoons/EmmyLua.spoon/annotations',
+  }
+
+  for _, lib in ipairs(hammerspoon_libraries) do
+    table.insert(lua_dev_config.settings.Lua.workspace.library, lib)
+  end
+
+  return lua_dev_config
 end
