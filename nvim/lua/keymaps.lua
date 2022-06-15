@@ -51,6 +51,29 @@ map('n', '<leader>mp', '<cmd>MarkdownPreview<CR>')
 -- Maximizer
 map('n', '<leader>mt', '<cmd>MaximizerToggle<CR>')
 
+-- Neotest
+map('n', '<leader>tf', function()
+  require('neotest').run.run(vim.fn.expand('%'))
+end)
+map('n', '<leader>tn', function()
+  require('neotest').run.run()
+end)
+map('n', '<leader>tl', function()
+  require('neotest').run.run_last()
+end)
+map('n', '<leader>to', function()
+  require('neotest').output.open()
+end)
+map('n', '<leader>tO', function()
+  require('neotest').output.open({ enter = true })
+end)
+map('n', '<leader>tt', function()
+  require('neotest').summary.toggle()
+end)
+map('n', '<leader>ts', function()
+  require('neotest').run.stop()
+end)
+
 -- Packer
 map('n', '<leader>ps', '<cmd>PackerSync<CR>')
 map('n', '<leader>pu', '<cmd>PackerUpdate<CR>')
@@ -73,24 +96,6 @@ map('n', '<leader>bu', '<cmd>Telescope buffers sort_mru=true<CR>')
 map('n', '<leader>of', '<cmd>Telescope oldfiles cwd_only=true sort_lastused=true include_current_session=true<CR>')
 map('n', '<leader>z=', '<cmd>Telescope spell_suggest<CR>')
 map('n', '<leader>pp', '<cmd>Telescope packer<CR>')
-
--- Test
----Wrapper function to handle running tests in workspace directories
----@param cmd string
----@return function
-local function wrap_test(cmd)
-  return function()
-    vim.g['test#project_root'] = require('lspconfig').util.root_pattern('jest.config.js', 'package.json')(
-      vim.fn.expand('%')
-    )
-    vim.fn.execute(cmd)
-  end
-end
-map('n', '<leader>tn', wrap_test('TestNearest'))
-map('n', '<leader>tf', wrap_test('TestFile'))
-map('n', '<leader>ts', wrap_test('TestSuite'))
-map('n', '<leader>tl', wrap_test('TestLast'))
-map('n', '<leader>tv', wrap_test('TestVisit'))
 
 -- Tree
 map('n', '<C-n>', '<cmd>NvimTreeToggle<CR>')

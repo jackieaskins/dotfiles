@@ -279,11 +279,11 @@ return require('packer').startup({
 
     -- Testing {{{
     use({
-      'vim-test/vim-test',
-      cmd = { 'TestNearest', 'TestFile', 'TestSuite', 'TestLast', 'TestVisit' },
+      'nvim-neotest/neotest',
       config = function()
-        require('plugins.test')
+        require('plugins.neotest')
       end,
+      module = 'neotest',
     })
     -- }}}
   end,

@@ -32,6 +32,15 @@ if success then
       TelescopeResultsDiffChange = { fg = colors.diff_change },
       TelescopeResultsDiffDelete = { fg = colors.diff_remove },
       TelescopeResultsDiffUntracked = { fg = colors.none },
+
+      NeotestAdapterName = { fg = colors.purple },
+      NeotestDir = { fg = colors.cyan },
+      NeotestFile = { fg = colors.cyan },
+      NeotestNamespace = { fg = colors.blue },
+      NeotestFailed = { fg = colors.red },
+      NeotestPassed = { fg = colors.green },
+      NeotestRunning = { fg = colors.yellow },
+      NeotestSkipped = { fg = colors.cyan },
     },
   })
 
