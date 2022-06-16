@@ -29,6 +29,7 @@ end)
 ----------------------------------------------------------------------
 hs.hotkey.bind(MEH, 'f', yabai({ '-m', 'window', '--toggle', 'zoom-fullscreen' }))
 hs.hotkey.bind(MEH, 'p', yabai({ '-m', 'window', '--toggle', 'zoom-parent' }))
+hs.hotkey.bind(HYPER, 'f', yabai({ '-m', 'window', '--toggle', 'float' }))
 hs.hotkey.bind(
   MEH,
   's',
