@@ -1,5 +1,7 @@
 local lib = require('neotest.lib')
 
+-- TODO: Handle updating parents when running the nearest test
+
 ---@type neotest.Adapter
 local jest_adapter = { name = 'neotest-jest' }
 
@@ -21,16 +23,25 @@ end
 ---@async
 ---@return neotest.Tree | nil
 function jest_adapter.discover_positions(path)
-  -- TODO: Make this less fragile (i.e. currently only works with strings)
   local query = [[
     ((call_expression
       function: (identifier) @func_name (#match? @func_name "^describe")
-      arguments: (arguments (string (string_fragment) @namespace.name))
+      arguments: (arguments (_) @namespace.name (_))
+    )) @namespace.definition
+
+    ((call_expression
+      function: (call_expression) @func_name (#match? @func_name "^describe.each")
+      arguments: (arguments (_) @namespace.name (_))
     )) @namespace.definition
 
     ((call_expression
       function: (identifier) @func_name (#match? @func_name "^(it|test)")
-      arguments: (arguments (string (string_fragment) @test.name))
+      arguments: (arguments (_) @test.name (_))
+    )) @test.definition
+
+    ((call_expression
+      function: (call_expression) @func_name (#match? @func_name "^(it|test).each")
+      arguments: (arguments (_) @test.name (_))
     )) @test.definition
   ]]
 
@@ -79,6 +90,20 @@ local status_map = {
   unknown = 'skipped',
 }
 
+local function is_test_in_range(node_data, position)
+  local position_parts = {}
+  for part in vim.gsplit(position, ':') do
+    table.insert(position_parts, part)
+  end
+
+  local file, line, col = position_parts[1], tonumber(position_parts[2]), tonumber(position_parts[3])
+
+  local range = node_data.range
+  local start_line, start_col, end_line, end_col = range[1] + 1, range[2] + 1, range[3] + 1, range[4] + 1
+
+  return file == node_data.path and line >= start_line and line <= end_line and col >= start_col and col <= end_col
+end
+
 ---@async
 ---@param spec neotest.RunSpec
 ---@param _ neotest.StrategyResult
@@ -92,27 +117,48 @@ function jest_adapter.results(spec, _, tree)
 
   local jest_result = vim.json.decode(data, { luanil = { object = true } })
 
-  local results = {}
+  local test_results = {}
   for _, test_result in ipairs(jest_result.testResults) do
     for _, assertion_result in ipairs(test_result.assertionResults) do
-      -- TODO: Make this less fragile (i.e. currently only works with strings)
-      -- TODO: Handle .each tests
-      local test_name = table.concat(
-        vim.tbl_flatten({
-          test_result.name,
-          assertion_result.ancestorTitles,
-          assertion_result.title,
-        }),
-        '::'
-      )
+      local position = table.concat({
+        test_result.name,
+        assertion_result.location.line,
+        assertion_result.location.column,
+      }, ':')
+      local status = status_map[assertion_result.status]
 
-      if assertion_result.status ~= 'pending' then
-        results[test_name] = {
-          status = status_map[assertion_result.status],
-          errors = vim.tbl_map(function(err)
-            return { message = err }
-          end, assertion_result.failureMessages),
+      if status ~= 'pending' then
+        local position_results = test_results[position] or { status = 'passed', errors = {} }
+
+        local new_status = position_results.status
+
+        if new_status == 'passed' and (status == 'skipped' or status == 'failed') then
+          new_status = status
+        elseif new_status == 'skipped' and status == 'failed' then
+          new_status = status
+        end
+
+        test_results[position] = {
+          status = new_status,
+          errors = vim.tbl_flatten({ position_results.errors, assertion_result.failureMessages }),
         }
+      end
+    end
+  end
+
+  local results = {}
+  for _, node in tree:iter_nodes() do
+    local node_data = node:data()
+    if node_data.type == 'test' then
+      for position, result in pairs(test_results) do
+        if is_test_in_range(node_data, position) then
+          results[node_data.id] = {
+            status = result.status,
+            errors = vim.tbl_map(function(err)
+              return { message = err }
+            end, result.errors),
+          }
+        end
       end
     end
   end
