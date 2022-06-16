@@ -108,6 +108,14 @@ return require('packer').startup({
     use({ 'tpope/vim-repeat' })
     use({ 'tpope/vim-sleuth' })
     use({
+      's1n7ax/nvim-comment-frame',
+      config = function()
+        require('plugins.comment-frame')
+      end,
+      keys = { '<leader>cf', '<leader>cF' },
+      requires = 'nvim-treesitter',
+    })
+    use({
       'numToStr/Comment.nvim',
       config = function()
         require('plugins.Comment')
@@ -153,6 +161,12 @@ return require('packer').startup({
       keys = { 'gJ', 'gS' },
     })
     use({ 'tpope/vim-surround' })
+    use({
+      'windwp/nvim-autopairs',
+      config = function()
+        require('nvim-autopairs').setup({})
+      end,
+    })
     -- }}}
 
     -- Git {{{
@@ -265,13 +279,7 @@ return require('packer').startup({
         'nvim-treesitter/nvim-treesitter-refactor',
         'RRethy/nvim-treesitter-textsubjects',
         'JoosepAlviste/nvim-ts-context-commentstring',
-        {
-          's1n7ax/nvim-comment-frame',
-          config = function()
-            require('plugins.comment-frame')
-          end,
-          keys = { '<leader>cf', '<leader>cF' },
-        },
+        'RRethy/nvim-treesitter-endwise',
       },
       run = ':TSUpdate',
     })

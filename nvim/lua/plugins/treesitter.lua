@@ -42,6 +42,11 @@ require('nvim-treesitter.configs').setup({
     enable_autocmd = false,
   },
 
+  -- https://github.com/RRethy/nvim-treesitter-endwise
+  endwise = {
+    enable = true,
+  },
+
   -- https://github.com/nvim-treesitter/playground
   playground = { enable = true },
 
