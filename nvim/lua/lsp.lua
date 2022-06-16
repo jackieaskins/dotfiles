@@ -14,5 +14,5 @@ vim.diagnostic.config({
 
 for level, icon in pairs(icons) do
   local sign = 'DiagnosticSign' .. level
-  vim.fn.sign_define(sign, { text = icon, texthl = sign })
+  vim.fn.sign_define(sign, { text = icon, texthl = sign, numhl = sign })
 end

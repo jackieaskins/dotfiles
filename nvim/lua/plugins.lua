@@ -16,6 +16,7 @@ return require('packer').startup({
     end
 
     -- Dev Tools {{{
+    use({ 'milisims/nvim-luaref' })
     -- Needed until https://github.com/neovim/neovim/issues/12587 is fixed
     use({ 'antoinemadec/FixCursorHold.nvim' })
     use({ 'lewis6991/impatient.nvim' })
@@ -222,6 +223,13 @@ return require('packer').startup({
       'kosayoda/nvim-lightbulb',
       config = function()
         require('plugins.lightbulb')
+      end,
+    })
+    use({
+      'amrbashir/nvim-docs-view',
+      cmd = 'DocsViewToggle',
+      config = function()
+        require('docs-view').setup({})
       end,
     })
     use({
