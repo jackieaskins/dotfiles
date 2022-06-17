@@ -37,7 +37,7 @@ if success then
       NeotestDir = { fg = colors.cyan },
       NeotestFile = { fg = colors.cyan },
       NeotestNamespace = { fg = colors.blue },
-      NeotestFailed = { fg = colors.red },
+      NeotestFailed = { fg = colors.dark_red },
       NeotestPassed = { fg = colors.green },
       NeotestRunning = { fg = colors.yellow },
       NeotestSkipped = { fg = colors.cyan },

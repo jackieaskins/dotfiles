@@ -1,7 +1,7 @@
 -- https://github.com/nvim-lualine/lualine.nvim
 
 local colors = require('colors')
-local lsp_icons = require('lsp.icons')
+local diagnostic_icons = require('diagnostic.icons')
 
 local custom_onenord = require('lualine.themes.onenord')
 custom_onenord.normal.a.gui = colors.none
@@ -48,7 +48,12 @@ require('lualine').setup({
     lualine_b = {
       {
         'diagnostics',
-        symbols = { hint = lsp_icons.Hint, info = lsp_icons.Info, warn = lsp_icons.Warn, error = lsp_icons.Error },
+        symbols = {
+          hint = diagnostic_icons.Hint,
+          info = diagnostic_icons.Info,
+          warn = diagnostic_icons.Warn,
+          error = diagnostic_icons.Error,
+        },
         update_in_insert = true,
       },
     },

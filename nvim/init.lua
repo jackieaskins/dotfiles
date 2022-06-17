@@ -13,4 +13,5 @@ end
 
 require('plugins')
 require('lsp')
+require('diagnostic')
 require('colorscheme')

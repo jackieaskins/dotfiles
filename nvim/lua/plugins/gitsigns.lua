@@ -42,5 +42,6 @@ require('gitsigns').setup({
   preview_config = {
     border = 'rounded',
   },
+  sign_priority = require('sign_priorities').gitsigns,
   trouble = false,
 })
