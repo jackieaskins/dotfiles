@@ -175,4 +175,5 @@ setmetatable(jest_adapter, {
 require('neotest').setup({
   adapters = { jest_adapter },
   icons = { running = '' },
+  jump = { enabled = true },
 })
