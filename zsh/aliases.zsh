@@ -46,4 +46,5 @@ alias zshfuncs='nvim ~/dotfiles/zsh/functions.zsh'
 alias zshconfig='nvim ~/dotfiles/zshrc'
 alias zshcustom='nvim ~/dotfiles/zsh/custom.zsh'
 
+alias brave='open -a "Brave Browser"'
 alias chrome='open -a "Google Chrome"'
