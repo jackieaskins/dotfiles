@@ -18,7 +18,7 @@ return function(_, bufnr)
   bsk('n', 'K', vim.lsp.buf.hover, { desc = 'Hover' })
   bsk({ 'i', 'n' }, '<C-S>', vim.lsp.buf.signature_help, { desc = 'vim.lsp.buf.signature_help' })
 
-  bsk('n', '<leader>dg', '<cmd>Telescope diagnostics<CR>')
+  bsk('n', '<leader>wd', '<cmd>Telescope diagnostics<CR>')
   bsk('n', 'g?', '<cmd>lua vim.diagnostic.open_float(0, { scope = "cursor" })<CR>')
   bsk('n', '[g', vim.diagnostic.goto_prev, { desc = 'vim.diagnostic.goto_prev' })
   bsk('n', ']g', vim.diagnostic.goto_next, { desc = 'vim.diagnostic.goto_next' })

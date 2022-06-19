@@ -1,8 +1,10 @@
 local map = require('utils').map
 local opt = vim.opt
 
--- Flags
+-- Configuration Variables
 vim.g.is_personal_machine = false
+vim.g.additional_server_commands = {}
+vim.g.supported_servers = {}
 
 -- Map Leader to Space
 vim.g.mapleader = ' '

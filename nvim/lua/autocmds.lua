@@ -30,6 +30,18 @@ augroup('lastplace', {
   },
 })
 
+augroup('lsp_formatting', {
+  {
+    'BufWritePre',
+    {
+      pattern = '*.go',
+      callback = function()
+        vim.lsp.buf.format({ async = false })
+      end,
+    },
+  },
+})
+
 -- Plugins
 -- Formatter
 augroup('auto_format', {

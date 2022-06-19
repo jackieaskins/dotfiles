@@ -29,6 +29,15 @@ typescript.setup({
         end)
       end, { desc = 'Rename file' })
     end,
-    settings = { javascript = preferences, typescript = preferences },
+    settings = {
+      javascript = preferences,
+      typescript = preferences,
+      completions = { completeFunctionCalls = true },
+      diagnostics = {
+        ignoredCodes = {
+          80001, -- File is a CommonJS module; it may be converted to an ES module.
+        },
+      },
+    },
   },
 })

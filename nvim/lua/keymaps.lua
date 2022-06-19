@@ -45,9 +45,6 @@ map('n', '<leader>rp', function()
 end, { desc = 'Reload plugins' })
 
 -- Plugins
--- Docs View
-map('n', '<leader>dv', '<cmd>DocsViewToggle<CR>')
-
 -- Markdown Preview
 map('n', '<leader>mp', '<cmd>MarkdownPreview<CR>')
 
@@ -128,4 +125,4 @@ map('n', '<leader>vr', function()
   if input and input ~= '' then
     vim.fn['VimuxRunCommand'](input)
   end
-end)
+end, { desc = 'Vimux Runner' })

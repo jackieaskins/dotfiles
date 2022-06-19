@@ -163,9 +163,9 @@ return require('packer').startup({
     })
     use({ 'tpope/vim-surround' })
     use({
-      'windwp/nvim-autopairs',
+      'ZhiyuanLck/smart-pairs',
       config = function()
-        require('nvim-autopairs').setup({})
+        require('pairs'):setup()
       end,
     })
     -- }}}
@@ -223,13 +223,6 @@ return require('packer').startup({
       'kosayoda/nvim-lightbulb',
       config = function()
         require('plugins.lightbulb')
-      end,
-    })
-    use({
-      'amrbashir/nvim-docs-view',
-      cmd = 'DocsViewToggle',
-      config = function()
-        require('docs-view').setup({})
       end,
     })
     use({

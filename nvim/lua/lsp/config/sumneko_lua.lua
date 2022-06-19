@@ -4,7 +4,12 @@ return function(config)
       vimruntime = true,
       types = true,
       -- Limiting plugins to reduce server startup time
-      plugins = { 'nvim-treesitter', 'plenary.nvim' },
+      plugins = {
+        'neotest',
+        'nvim-treesitter',
+        'onenord',
+        'plenary.nvim',
+      },
     },
     lspconfig = {
       capabilities = config.capabilities,
