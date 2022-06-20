@@ -165,7 +165,7 @@ return require('packer').startup({
     use({
       'ZhiyuanLck/smart-pairs',
       config = function()
-        require('pairs'):setup()
+        require('plugins.smart-pairs')
       end,
     })
     -- }}}
