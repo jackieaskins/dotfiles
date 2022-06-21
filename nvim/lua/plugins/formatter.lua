@@ -76,7 +76,9 @@ end
 
 function M.format_on_save()
   local formatter = M.formatter_by_filetype[vim.bo.filetype]
-  if formatter and is_executable(formatter.exe) and require('lspconfig').util.root_pattern(formatter.required_file) then
+  local has_required_file = require('lspconfig').util.root_pattern(formatter.required_file)(vim.fn.bufname())
+
+  if formatter and is_executable(formatter.exe) and has_required_file then
     vim.cmd('FormatWrite')
   end
 end

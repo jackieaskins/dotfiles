@@ -159,7 +159,6 @@ return require('packer').startup({
       config = function()
         require('plugins.splitjoin')
       end,
-      keys = { 'gJ', 'gS' },
     })
     use({ 'tpope/vim-surround' })
     use({
@@ -204,10 +203,10 @@ return require('packer').startup({
     })
     use({
       'nvim-telescope/telescope.nvim',
+      cmd = 'Telescope',
       config = function()
         require('plugins.telescope')
       end,
-      cmd = 'Telescope',
       module = 'telescope',
       requires = {
         { 'LinArcX/telescope-env.nvim', opt = true },
