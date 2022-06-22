@@ -17,12 +17,6 @@ end
 map('n', 'k', jump('k'), { desc = 'Jump [count] lines up', expr = true })
 map('n', 'j', jump('j'), { desc = 'Jump [count] lines down', expr = true })
 
--- Window Management
-map('n', '<C-j>', '<C-w>j')
-map('n', '<C-k>', '<C-w>k')
-map('n', '<C-h>', '<C-w>h')
-map('n', '<C-l>', '<C-w>l')
-
 -- Navigate Quickfix
 map('n', '[q', '<cmd>cprevious<CR>')
 map('n', ']q', '<cmd>cnext<CR>')

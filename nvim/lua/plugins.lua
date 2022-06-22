@@ -275,7 +275,7 @@ return require('packer').startup({
           'nvim-treesitter/playground',
           cmd = { 'TSPlaygroundToggle', 'TSHighlightCapturesUnderCursor' },
         },
-        'jackieaskins/nvim-ts-autotag',
+        local_plugin('nvim-ts-autotag'),
         'nvim-treesitter/nvim-treesitter-refactor',
         'RRethy/nvim-treesitter-textsubjects',
         'JoosepAlviste/nvim-ts-context-commentstring',

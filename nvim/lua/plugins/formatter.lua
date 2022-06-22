@@ -10,7 +10,7 @@ local M = {}
 ---@field install_cmd string[]
 ---@field exe string
 ---@field args fun():string[]
----@field required_filed string
+---@field required_file string
 
 ---@type table<string, Formatter>
 M.formatters = {
@@ -76,9 +76,12 @@ end
 
 function M.format_on_save()
   local formatter = M.formatter_by_filetype[vim.bo.filetype]
-  local has_required_file = require('lspconfig').util.root_pattern(formatter.required_file)(vim.fn.bufname())
 
-  if formatter and is_executable(formatter.exe) and has_required_file then
+  if
+    formatter
+    and is_executable(formatter.exe)
+    and require('lspconfig').util.root_pattern(formatter.required_file)(vim.fn.expand('%:p'))
+  then
     vim.cmd('FormatWrite')
   end
 end
