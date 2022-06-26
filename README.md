@@ -1,7 +1,7 @@
 # My Dotfiles
-My dotfiles for Vim, Neovim, Zsh, Tmux, and Kitty.
+My dotfiles for Yabai, Karabner, Hammerspoon, SketchyBar, Vim, Neovim, Zsh, Tmux, and kitty.
 
-![Kitty terminal with Neovim editor inside Tmux session](https://github.com/jackieaskins/dotfiles/blob/media/kitty.png?raw=true)
+![Image showcasing current setup](https://github.com/jackieaskins/dotfiles/blob/media/setup.png?raw=true)
 
 ## Installation
 1. Clone this repo:
