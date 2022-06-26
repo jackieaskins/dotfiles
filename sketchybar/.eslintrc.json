@@ -1,0 +1,12 @@
+{
+  "env": { "node": true },
+  "extends": ["eslint:recommended", "plugin:import/recommended", "prettier"],
+  "parserOptions": { "ecmaVersion": "latest" },
+  "rules": {
+    "no-unused-vars": ["error", { "ignoreRestSiblings": true }],
+    "arrow-body-style": ["error", "as-needed"],
+    "no-debugger": ["error"],
+    "quotes": ["error", "double", { "avoidEscape": true }]
+  },
+  "reportUnusedDisableDirectives": true
+}

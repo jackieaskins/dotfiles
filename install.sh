@@ -119,19 +119,26 @@ function backup_and_symlink() {
 }
 
 echo -e "Backing up and symlinking dotfiles..."
-#                  dotfile           backup           sym
-backup_and_symlink .zshrc            zshrc            zshrc
-backup_and_symlink .vimrc            vimrc            vimrc
-backup_and_symlink .vim              vim              vim
-backup_and_symlink .hammerspoon      hammerspoon      hammerspoon
-backup_and_symlink .config/nvim      nvim             nvim
-backup_and_symlink .config/karabiner karabiner        karabiner
-backup_and_symlink .config/kitty     kitty            kitty
-backup_and_symlink .config/yabai     yabai            yabai
-backup_and_symlink .tmux.conf        tmux.conf        tmux.conf
-backup_and_symlink .gitignore_global gitignore_global gitignore_global
-#                  dotfile           backup           sym
+#                  dotfile            backup           sym
+backup_and_symlink .zshrc             zshrc            zshrc
+backup_and_symlink .vimrc             vimrc            vimrc
+backup_and_symlink .vim               vim              vim
+backup_and_symlink .hammerspoon       hammerspoon      hammerspoon
+backup_and_symlink .config/nvim       nvim             nvim
+backup_and_symlink .config/karabiner  karabiner        karabiner
+backup_and_symlink .config/kitty      kitty            kitty
+backup_and_symlink .config/sketchybar sketchybar       sketchybar
+backup_and_symlink .config/yabai      yabai            yabai
+backup_and_symlink .tmux.conf         tmux.conf        tmux.conf
+backup_and_symlink .gitignore_global  gitignore_global gitignore_global
+#                  dotfile            backup           sym
 success_echo "Dotfiles backed up and symlinked."
+
+#--------------------------------------------------------------------#
+#                            Brew Servies                            #
+#--------------------------------------------------------------------#
+brew services restart yabai
+brew services restart sketchybar
 
 #--------------------------------------------------------------------#
 #                           Neovim Config                            #

@@ -8,6 +8,8 @@ yabai -m config left_padding 14
 yabai -m config right_padding 14
 yabai -m config window_gap 10
 
+yabai -m config external_bar all:34:0
+
 yabai -m config window_border on
 yabai -m config active_window_border_color 0xFF9EC183
 

@@ -25,6 +25,9 @@ if RUBY_PLATFORM =~ /darwin/
   cask 'font-hack-nerd-font'
   cask 'font-jetbrains-mono-nerd-font'
 
+  tap 'FelixKratz/formulae'
+  brew 'sketchybar'
+
   cask 'alfred'
   cask 'docker'
   cask 'hammerspoon'

@@ -1,0 +1,101 @@
+#--------------------------------------------------------------------#
+#                             Variables                              #
+#--------------------------------------------------------------------#
+FONT="JetBrainsMono Nerd Font:Bold:13.0"
+LABEL_PADDING=7
+source ~/.config/sketchybar/utils/env.sh > /dev/null
+
+#--------------------------------------------------------------------#
+#                            Bar Settings                            #
+#--------------------------------------------------------------------#
+sketchybar --bar color=0x00 height=$ICON_SIZE display=all y_offset=$(expr 34 - $ICON_SIZE) \
+           --default background.border_color=$FG \
+                     background.border_width=1 \
+                     background.color=$BG \
+                     background.height=$ICON_SIZE \
+                     icon.align=center \
+                     icon.background.color=$GRAY \
+                     icon.background.height=$ICON_SIZE \
+                     icon.color=$BG \
+                     icon.font="$FONT" \
+                     icon.width=$ICON_SIZE \
+                     label.color=$FG \
+                     label.font="$FONT" \
+                     label.padding_left=$LABEL_PADDING \
+                     label.padding_right=$LABEL_PADDING \
+                     popup.y_offset=3
+
+#--------------------------------------------------------------------#
+#                               Events                               #
+#--------------------------------------------------------------------#
+sketchybar --add event any_space_change \
+           --add event audiodevice_change \
+           --add event battery_change \
+           --add event current_window_change \
+           --add event dnd_disabled _NSDoNotDisturbDisabledNotification \
+           --add event dnd_enabled _NSDoNotDisturbEnabledNotification \
+           --add event spotify_change com.spotify.client.PlaybackStateChanged
+
+#--------------------------------------------------------------------#
+#                                Left                                #
+#--------------------------------------------------------------------#
+sketchybar --add item window left \
+           --subscribe window current_window_change \
+           --set window drawing=off \
+                        script="~/.config/sketchybar/plugins/window.js" \
+           --add item spaces left \
+           --subscribe spaces any_space_change \
+           --set spaces script='~/.config/sketchybar/plugins/spaces.js' \
+                        label='Loading spaces...' \
+                        icon='􀏭'
+
+#--------------------------------------------------------------------#
+#                               Right                                #
+#--------------------------------------------------------------------#
+sketchybar --add item dnd right \
+           --subscribe dnd dnd_enabled dnd_disabled \
+           --set dnd background.border_color=$PURPLE \
+                     background.padding_left=$SPACER_SIZE \
+                     drawing=off \
+                     icon='􀆺' \
+                     icon.background.color=$PURPLE \
+                     label.drawing=off \
+                     script='~/.config/sketchybar/plugins/dnd.js' \
+           --add item datetime right \
+           --set datetime background.border_color=$CYAN \
+                          background.padding_left=$SPACER_SIZE \
+                          click_script='open -a Calendar' \
+                          icon.background.color=$CYAN \
+                          icon='' \
+                          script='~/.config/sketchybar/plugins/datetime.sh' \
+                          update_freq=1 \
+           --add item battery right \
+           --subscribe battery battery_change system_woke \
+           --set battery background.padding_left=$SPACER_SIZE \
+                         script='~/.config/sketchybar/plugins/battery.js' \
+           --add item audio right \
+           --subscribe audio audiodevice_change \
+           --set audio background.border_color=$BLUE \
+                       background.padding_left=$SPACER_SIZE \
+                       icon.background.color=$BLUE \
+                       icon='' \
+                       label.drawing=off \
+                       script='~/.config/sketchybar/plugins/audio.js' \
+           --add item spotify right \
+           --subscribe spotify spotify_change mouse.entered mouse.exited \
+           --set spotify background.border_color=$GREEN \
+                         background.padding_left=$SPACER_SIZE \
+                         icon.background.color=$GREEN \
+                         icon='' \
+                         label=Loading... \
+                         popup.align=right \
+                         script='~/.config/sketchybar/plugins/spotify.js' \
+           --add item spotify.now_playing popup.spotify \
+           --subscribe spotify.now_playing spotify_change \
+           --set spotify.now_playing icon.drawing=off \
+                                     script='~/.config/sketchybar/plugins/nowplaying.js'
+
+#--------------------------------------------------------------------#
+#                               Update                               #
+#--------------------------------------------------------------------#
+sketchybar --update

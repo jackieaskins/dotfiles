@@ -3,8 +3,12 @@
 ----------------------------------------------------------------------
 BREW_PREFIX = '/opt/homebrew'
 YABAI_PATH = BREW_PREFIX .. '/bin/yabai'
+SKETCHYBAR_PATH = BREW_PREFIX .. '/bin/sketchybar'
+
 MEH = { 'option', 'shift', 'ctrl' }
 HYPER = { 'option', 'shift', 'ctrl', 'cmd' }
+
+WF = hs.window.filter
 
 ----------------------------------------------------------------------
 --                              Spoons                              --
@@ -52,6 +56,7 @@ hs.hotkey.bind(MEH, 'o', hs.window.switcher.nextWindow)
 --                               Misc                               --
 ----------------------------------------------------------------------
 require('hs.ipc').cliInstall(BREW_PREFIX) -- Enables CLI
+require('sketchybar')
 require('yabai')
 
 hs.alert.show('Loaded HammerSpoon config')
