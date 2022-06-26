@@ -41,6 +41,10 @@ if success then
       NeotestPassed = { fg = colors.green },
       NeotestRunning = { fg = colors.yellow },
       NeotestSkipped = { fg = colors.cyan },
+
+      LspReferenceRead = { bg = colors.highlight, style = colors.none, sp = colors.none },
+      LspReferenceText = { bg = colors.highlight, style = colors.none, sp = colors.none },
+      LspReferenceWrite = { bg = colors.highlight, style = colors.none, sp = colors.none },
     },
   })
 

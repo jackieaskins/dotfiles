@@ -50,12 +50,6 @@ require('nvim-treesitter.configs').setup({
   -- https://github.com/nvim-treesitter/playground
   playground = { enable = true },
 
-  -- https://github.com/nvim-treesitter/nvim-treesitter-refactor
-  refactor = {
-    highlight_definitions = { enable = true },
-    navigation = { enable = true },
-  },
-
   -- https://github.com/RRethy/nvim-treesitter-textsubjects
   textsubjects = {
     enable = true,
