@@ -167,6 +167,12 @@ return require('packer').startup({
         require('plugins.smart-pairs')
       end,
     })
+    use({
+      'abecodes/tabout.nvim',
+      config = function()
+        require('tabout').setup()
+      end,
+    })
     -- }}}
 
     -- Git {{{

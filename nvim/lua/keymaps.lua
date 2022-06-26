@@ -1,4 +1,5 @@
-local map = require('utils').map
+local utils = require('utils')
+local map, t = utils.map, utils.t
 
 -- Extended gx
 map('n', 'gx', function()
@@ -6,7 +7,10 @@ map('n', 'gx', function()
 end, { desc = 'Open url under cursor' })
 
 -- Yank to System Clipboard
-map({ 'n', 'v' }, '<leader>y', '"+y')
+local yank_keys = { 'd', 'y', 'c' }
+for _, key in ipairs(yank_keys) do
+  map({ 'n', 'v' }, '<leader>' .. key, '"+' .. key)
+end
 
 -- Jumplist
 local function jump(key)
@@ -86,6 +90,16 @@ map('n', '<leader>ps', '<cmd>PackerSync<CR>')
 map('n', '<leader>pu', '<cmd>PackerUpdate<CR>')
 map('n', '<leader>pl', ':PackerLoad ', { silent = false })
 
+-- Smart Pairs
+map('i', '<CR>', function()
+  local tag_keys = require('closer.tags').handle_tags()
+  if tag_keys ~= nil then
+    vim.api.nvim_feedkeys(t('<CR>' .. tag_keys), 'n', false)
+  else
+    require('pairs.enter').type()
+  end
+end)
+
 -- Startup Time
 map('n', '<leader>su', '<cmd>StartupTime --tries 20<CR>')
 
@@ -114,6 +128,11 @@ map('n', '<leader>vi', '<cmd>VimuxInterruptRunner<CR>')
 map('n', '<leader>vc', '<cmd>VimuxClearTerminalScreen<CR>')
 map('n', '<leader>vq', '<cmd>VimuxCloseRunner<CR>')
 map('n', '<leader>vl', '<cmd>VimuxRunLastCommand<CR>')
+map('n', '<leader>vL', function()
+  vim.fn['VimuxInterruptRunner']()
+  vim.fn['VimuxRunLastCommand']()
+end)
+map('n', '<leader>vo', '<cmd>VimuxOpenRunner<CR>')
 map('n', '<leader>vr', function()
   local input = vim.fn.input('Enter command: ', '', 'shellcmd')
   if input and input ~= '' then
