@@ -20,6 +20,7 @@ require('nvim-treesitter.configs').setup({
     'query',
     'ruby',
     'scss',
+    'svelte',
     'toml',
     'tsx',
     'typescript',

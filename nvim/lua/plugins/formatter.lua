@@ -18,7 +18,7 @@ M.formatters = {
     name = 'prettier',
     exe = 'prettierd',
     args = function()
-      return { vim.api.nvim_buf_get_name(0) }
+      return { vim.fn.shellescape(vim.api.nvim_buf_get_name(0)) }
     end,
     required_file = './node_modules/.bin/prettier',
     install_cmd = { 'npm', '@fsouza/prettierd' },
@@ -43,6 +43,7 @@ M.formatter_by_filetype = {
   jsonc = M.formatters.prettier,
   lua = M.formatters.stylua,
   markdown = M.formatters.prettier,
+  svelte = M.formatters.prettier,
   typescript = M.formatters.prettier,
   typescriptreact = M.formatters.prettier,
 }

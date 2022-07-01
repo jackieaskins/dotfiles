@@ -7,6 +7,16 @@ local function publish_diagnostics_handler(err, result, ctx, config)
 end
 
 return function(config)
+  config.filetypes = {
+    'javascript',
+    'javascriptreact',
+    'javascript.jsx',
+    'svelte',
+    'typescript',
+    'typescriptreact',
+    'typescript.tsx',
+    'vue',
+  }
   config.root_dir = require('lspconfig').util.root_pattern('./node_modules/eslint')
   config.on_attach = function(client, bufnr)
     require('lsp.attach')(client, bufnr)
