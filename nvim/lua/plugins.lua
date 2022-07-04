@@ -57,12 +57,6 @@ return require('packer').startup({
     -- Appearance {{{
     use({ 'stevearc/dressing.nvim' })
     use({
-      'rcarriga/nvim-notify',
-      config = function()
-        vim.notify = require('notify')
-      end,
-    })
-    use({
       'rmehri01/onenord.nvim',
       run = function()
         require('packer').loader('shipwright.nvim')
@@ -91,7 +85,6 @@ return require('packer').startup({
     })
     use({
       'norcalli/nvim-colorizer.lua',
-      cmd = 'ColorizerAttachToBuffer',
       config = function()
         require('colorizer').setup()
       end,
