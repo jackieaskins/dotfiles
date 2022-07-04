@@ -2,25 +2,25 @@
   "Use Effect": {
     "prefix": "ue",
     "body": [
-      "useEffect(() => {",
-      "\t${1}",
-      "}, [${2}]);"
+      "useEffect${1}(() => {",
+      "\t${2}",
+      "}, [${3}]);"
     ]
   },
   "Use Callback": {
     "prefix": "uc",
     "body": [
-      "const ${1} = useCallback((${2}) => {",
-      "\t${3}",
-      "}, [${4}]);"
+      "const ${1} = useCallback${2}((${3}) => {",
+      "\t${4}",
+      "}, [${5}]);"
     ]
   },
   "Use Memo": {
     "prefix": "um",
     "body": [
-      "const ${1} = useMemo(() => {",
-      "\t${2}",
-      "}, [${3}]);"
+      "const ${1} = useMemo${2}(() => {",
+      "\t${3}",
+      "}, [${4}]);"
     ]
   },
   "React Function Component": {
@@ -67,25 +67,6 @@
       "export function use$4(): $1State {",
       "\treturn useContext($1);",
       "}"
-    ]
-  },
-  "Enzyme Test Setup": {
-    "prefix": "enz",
-    "body": [
-      "import { shallow } from \"enzyme\";",
-      "",
-      "import ${1:${TM_FILENAME_BASE}} from \"./$1\";",
-      "",
-      "describe(\"<$1 />\", () => {",
-      "\tconst renderComponent = (propOverrides = {}) =>",
-      "\t\tshallow(<$1 ${2}{...propOverrides} />);",
-      "",
-      "\tit(\"renders ${3:properly}\", () => {",
-      "\t\texpect(renderComponent()).toMatchSnapshot();",
-      "\t});",
-      "",
-      "\t${4}",
-      "});"
     ]
   }
 }
