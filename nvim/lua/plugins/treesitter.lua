@@ -48,6 +48,12 @@ require('nvim-treesitter.configs').setup({
     enable = true,
   },
 
+  -- https://github.com/andymass/vim-matchup
+  matchup = {
+    enable = true,
+    disable_virtual_text = true,
+  },
+
   -- https://github.com/nvim-treesitter/playground
   playground = { enable = true },
 

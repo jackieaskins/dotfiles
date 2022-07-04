@@ -153,7 +153,12 @@ return require('packer').startup({
     -- }}}
 
     -- Surround {{{
-    use({ 'airblade/vim-matchquote' })
+    use({
+      'andymass/vim-matchup',
+      config = function()
+        require('plugins.matchup')
+      end,
+    })
     use({
       'AndrewRadev/splitjoin.vim',
       config = function()
