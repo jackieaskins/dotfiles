@@ -290,6 +290,7 @@ return require('packer').startup({
         'RRethy/nvim-treesitter-textsubjects',
         'JoosepAlviste/nvim-ts-context-commentstring',
         'RRethy/nvim-treesitter-endwise',
+        'nvim-treesitter/nvim-treesitter-textobjects',
       },
       run = ':TSUpdate',
     })

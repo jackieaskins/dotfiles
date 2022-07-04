@@ -57,6 +57,56 @@ require('nvim-treesitter.configs').setup({
   -- https://github.com/nvim-treesitter/playground
   playground = { enable = true },
 
+  -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects
+  textobjects = {
+    move = {
+      enable = true,
+      set_jumps = true,
+      goto_next_start = {
+        [']m'] = { '@function.outer', '@class.outer' },
+      },
+      goto_previous_start = {
+        ['[m'] = { '@function.outer', '@class.outer' },
+      },
+      goto_next_end = {
+        [']M'] = { '@function.outer', '@class.outer' },
+      },
+      goto_previous_end = {
+        ['[M'] = { '@function.outer', '@class.outer' },
+      },
+    },
+    select = {
+      enable = true,
+      keymaps = {
+        ['aF'] = '@call.outer',
+        ['iF'] = '@call.inner',
+        ['af'] = '@function.outer',
+        ['if'] = '@function.inner',
+        ['ac'] = '@class.outer',
+        ['ic'] = '@class.inner',
+        ['al'] = '@loop.outer',
+        ['il'] = '@loop.inner',
+        ['ai'] = '@conditional.outer',
+        ['ii'] = '@conditional.inner',
+        ['aP'] = '@parameter.outer',
+        ['iP'] = '@parameter.inner',
+      },
+    },
+    swap = {
+      enable = true,
+      swap_next = {
+        ['<leader>a'] = {
+          '@parameter.inner',
+          '@argument.inner',
+        },
+        ['<leader>A'] = {
+          '@parameter.inner',
+          '@argument.inner',
+        },
+      },
+    },
+  },
+
   -- https://github.com/RRethy/nvim-treesitter-textsubjects
   textsubjects = {
     enable = true,
