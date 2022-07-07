@@ -26,15 +26,6 @@ local function lsp_clients()
   return '  ' .. table.concat(vim.tbl_keys(client_names), ' ')
 end
 
-local function gps_location()
-  if vim.bo.filetype == '' then
-    return ''
-  end
-
-  local success, gps = pcall(require, 'nvim-gps')
-  return success and gps.get_location() or ''
-end
-
 local filename = { 'filename', symbols = { modified = ' ', readonly = ' ' }, separator = '' }
 local location = '%l:%c'
 
@@ -59,7 +50,7 @@ require('lualine').setup({
     },
     lualine_c = {
       filename,
-      { gps_location, color = { fg = colors.light_gray }, padding = 0 },
+      { color = { fg = colors.light_gray }, padding = 0 },
     },
 
     lualine_x = {

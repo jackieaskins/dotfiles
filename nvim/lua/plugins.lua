@@ -64,11 +64,10 @@ return require('packer').startup({
       end,
     })
     use({
-      'SmiteshP/nvim-gps',
+      'nvim-treesitter/nvim-treesitter-context',
       config = function()
-        require('plugins.gps')
+        require('treesitter-context').setup()
       end,
-      module = 'nvim-gps',
     })
     use({
       'kyazdani42/nvim-web-devicons',
