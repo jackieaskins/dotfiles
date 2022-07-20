@@ -4,6 +4,7 @@ require('nvim-treesitter.configs').setup({
   ensure_installed = {
     'bash',
     'css',
+    'comment',
     'dart',
     'go',
     'gomod',
