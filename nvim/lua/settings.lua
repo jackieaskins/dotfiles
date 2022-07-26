@@ -12,6 +12,7 @@ map('n', '<space>', '<nop>')
 
 -- General
 opt.hidden = true
+opt.mouse = ''
 opt.number = true
 opt.relativenumber = true
 opt.cursorline = true
@@ -23,14 +24,6 @@ opt.splitbelow = true
 opt.diffopt:append({ 'vertical' })
 opt.termguicolors = true
 opt.tabline = require('tabline')
-
-function WinBar()
-  if vim.bo.filetype == 'NvimTree' then
-    return '%#NvimTreeNormal#'
-  end
-  return '%=%f'
-end
-opt.winbar = '%!luaeval("WinBar()")'
 
 -- Folds
 opt.foldmethod = 'expr'

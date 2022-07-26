@@ -26,12 +26,18 @@ local function lsp_clients()
   return '  ' .. table.concat(vim.tbl_keys(client_names), ' ')
 end
 
-local filename = { 'filename', symbols = { modified = ' ', readonly = ' ' }, separator = '' }
+local filename_symbols = { modified = ' ', readonly = ' ' }
+
+local statusline_filename = { 'filename', symbols = filename_symbols, separator = '' }
+local winbar_filename = { 'filename', symbols = filename_symbols, path = 1 }
 local location = '%l:%c'
 
 require('lualine').setup({
   options = {
-    disabled_filetypes = { 'NvimTree' },
+    disabled_filetypes = {
+      statusline = { 'NvimTree' },
+      winbar = { 'NvimTree' },
+    },
     theme = custom_onenord,
   },
   sections = {
@@ -49,7 +55,7 @@ require('lualine').setup({
       },
     },
     lualine_c = {
-      filename,
+      statusline_filename,
       { color = { fg = colors.light_gray }, padding = 0 },
     },
 
@@ -59,8 +65,12 @@ require('lualine').setup({
     lualine_y = { lsp_clients },
     lualine_z = { location },
   },
+  winbar = { lualine_x = { winbar_filename } },
+  inactive_winbar = {
+    lualine_x = { winbar_filename },
+  },
   inactive_sections = {
-    lualine_c = { filename },
+    lualine_c = { statusline_filename },
     lualine_x = { location },
   },
 })

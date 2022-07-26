@@ -14,8 +14,6 @@ if success then
       keywords = 'italic',
     },
     custom_highlights = {
-      WinBar = { fg = colors.light_gray },
-
       CursorLineNr = { fg = colors.blue, bg = colors.active, style = 'bold' },
       Identifier = { fg = colors.blue, gui = 'bold' },
 
