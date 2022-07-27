@@ -1,6 +1,7 @@
 const ICONS = {
   "Amazon Chime": "",
   "Brave Browser": "爵",
+  Calendar: "",
   FaceTime: "",
   Finder: "",
   Firefox: "",
