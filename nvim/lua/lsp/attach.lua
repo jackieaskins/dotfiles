@@ -1,4 +1,4 @@
-return function(client, bufnr)
+return function(_, bufnr)
   local map = require('utils').map
 
   local function bsk(mode, lhs, rhs, opts)
@@ -10,13 +10,6 @@ return function(client, bufnr)
   end
 
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-  if client.server_capabilities.documentHighlightProvider then
-    require('utils').augroup('document_highlight', {
-      { { 'CursorHold', 'CursorHoldI' }, { buffer = bufnr, callback = vim.lsp.buf.document_highlight } },
-      { { 'CursorMoved', 'CursorMovedI' }, { buffer = bufnr, callback = vim.lsp.buf.clear_references } },
-    })
-  end
 
   bsk('n', 'gi', '<cmd>Telescope lsp_implementations<CR>')
   bsk('n', 'gd', '<cmd>Telescope lsp_definitions<CR>')

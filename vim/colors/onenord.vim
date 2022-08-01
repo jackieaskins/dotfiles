@@ -176,7 +176,7 @@ highlight Ignore guifg=#88C0D0 guibg=#2E3440 guisp= gui=bold cterm=bold term=bol
 highlight IncSearch guifg=#EBCB8B guibg=#4C566A guisp= gui=bold,underline cterm=bold,underline term=bold,underline
 highlight Include guifg=#81A1C1 guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
 highlight IndentBlanklineChar guifg=#4C566A guibg=NONE guisp= gui=nocombine cterm=nocombine term=nocombine
-highlight IndentBlanklineContextChar guifg=#B988B0 guibg=NONE guisp= gui=nocombine cterm=nocombine term=nocombine
+highlight IndentBlanklineContextChar guifg=#5E81AC guibg=NONE guisp= gui=nocombine cterm=nocombine term=nocombine
 highlight InsertMode guifg=#A3BE8C guibg=NONE guisp= gui=reverse cterm=reverse term=reverse
 highlight Keyword guifg=#B988B0 guibg=NONE guisp= gui=italic cterm=italic term=italic
 highlight Label guifg=#B988B0 guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
@@ -218,9 +218,9 @@ highlight LspDiagnosticsVirtualTextWarning guifg=#D08F70 guibg=NONE guisp= gui=N
 highlight LspDiagnosticsWarning guifg=#D08F70 guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
 highlight LspFloatWinBorder guifg=#B988B0 guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
 highlight LspFloatWinNormal guifg=#C8D0E0 guibg=#2E3440 guisp= gui=NONE cterm=NONE term=NONE
-highlight LspReferenceRead guifg=NONE guibg=#3F4758 guisp=NONE gui=NONE cterm=NONE term=NONE
-highlight LspReferenceText guifg=NONE guibg=#3F4758 guisp=NONE gui=NONE cterm=NONE term=NONE
-highlight LspReferenceWrite guifg=NONE guibg=#3F4758 guisp=NONE gui=NONE cterm=NONE term=NONE
+highlight LspReferenceRead guifg=NONE guibg=NONE guisp=#EBCB8B gui=underline cterm=underline term=underline
+highlight LspReferenceText guifg=NONE guibg=NONE guisp=#EBCB8B gui=underline cterm=underline term=underline
+highlight LspReferenceWrite guifg=NONE guibg=NONE guisp=#EBCB8B gui=underline cterm=underline term=underline
 highlight LspSagaAutoPreview guifg=#D57780 guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
 highlight LspSagaBorderTitle guifg=#88C0D0 guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
 highlight LspSagaCodeActionBorder guifg=#81A1C1 guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
@@ -461,7 +461,7 @@ highlight WhichKeyGroup guifg=#88C0D0 guibg=NONE guisp= gui=NONE cterm=NONE term
 highlight WhichKeySeperator guifg=#A3BE8C guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
 highlight Whitespace guifg=#646A76 guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
 highlight WildMenu guifg=#EBCB8B guibg=NONE guisp= gui=bold cterm=bold term=bold
-highlight WinBar guifg=#6C7A96 guibg=#2E3440 guisp= gui=NONE cterm=NONE term=NONE
+highlight WinBar guifg=#C8D0E0 guibg=#2E3440 guisp= gui=NONE cterm=NONE term=NONE
 highlight WinBarNC guifg=#6C7A96 guibg=#2E3440 guisp= gui=NONE cterm=NONE term=NONE
 highlight cssAttributeSelector guifg=#81A1C1 guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
 highlight cssSelectorOp guifg=#5E81AC guibg=NONE guisp= gui=NONE cterm=NONE term=NONE

@@ -40,9 +40,7 @@ if success then
       NeotestRunning = { fg = colors.yellow },
       NeotestSkipped = { fg = colors.cyan },
 
-      LspReferenceRead = { sp = colors.none },
-      LspReferenceText = { sp = colors.none },
-      LspReferenceWrite = { sp = colors.none },
+      IndentBlanklineContextChar = { fg = colors.dark_blue },
     },
   })
 
