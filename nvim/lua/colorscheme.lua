@@ -41,6 +41,9 @@ if success then
       NeotestSkipped = { fg = colors.cyan },
 
       IndentBlanklineContextChar = { fg = colors.dark_blue },
+
+      WinBar = { fg = colors.blue, bg = colors.bg },
+      WinBarNC = { fg = colors.light_gray, bg = colors.bg },
     },
   })
 

@@ -1,6 +1,35 @@
 local config = require('onenord.config').options
-local colors = vim.tbl_deep_extend('force', require('colors'), config.custom_colors)
+local colors = vim.tbl_deep_extend('force', require('colors'), config.custom_colors) or {}
 local overwrite = require('shipwright.transform.overwrite')
+
+local statusline_colors = {
+  command = {
+    a = { bg = colors.yellow, fg = colors.bg, gui = colors.none },
+    b = { bg = colors.highlight, fg = colors.yellow },
+  },
+  inactive = {
+    a = { bg = colors.float, fg = colors.light_gray, gui = colors.none },
+    b = { bg = colors.float, fg = colors.light_gray },
+    c = { bg = colors.active, fg = colors.light_gray },
+  },
+  insert = {
+    a = { bg = colors.green, fg = colors.bg, gui = colors.none },
+    b = { bg = colors.highlight, fg = colors.green },
+  },
+  normal = {
+    a = { bg = colors.cyan, fg = colors.bg, gui = colors.none },
+    b = { bg = colors.highlight, fg = colors.cyan },
+    c = { bg = colors.active, fg = colors.fg },
+  },
+  replace = {
+    a = { bg = colors.red, fg = colors.bg, gui = colors.none },
+    b = { bg = colors.highlight, fg = colors.red },
+  },
+  visual = {
+    a = { bg = colors.purple, fg = colors.bg, gui = colors.none },
+    b = { bg = colors.highlight, fg = colors.purple },
+  },
+}
 
 local function prepend_file_header(highlights)
   local lines = {
@@ -60,7 +89,7 @@ local function to_lightline(lualine)
 end
 
 return {
-  require('plugins.lualine').lualine_onenord,
+  statusline_colors,
   to_lightline,
   prepend_file_header,
   { overwrite, vim.fn.expand('~/dotfiles/vim/autoload/lightline/colorscheme/onenord.vim') },

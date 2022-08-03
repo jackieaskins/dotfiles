@@ -76,11 +76,10 @@ return require('packer').startup({
       end,
     })
     use({
-      'nvim-lualine/lualine.nvim',
+      'feline-nvim/feline.nvim',
       config = function()
-        require('plugins.lualine')
+        require('plugins.feline')
       end,
-      requires = 'kyazdani42/nvim-web-devicons',
     })
     use({
       'norcalli/nvim-colorizer.lua',

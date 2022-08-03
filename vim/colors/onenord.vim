@@ -461,7 +461,7 @@ highlight WhichKeyGroup guifg=#88C0D0 guibg=NONE guisp= gui=NONE cterm=NONE term
 highlight WhichKeySeperator guifg=#A3BE8C guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
 highlight Whitespace guifg=#646A76 guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
 highlight WildMenu guifg=#EBCB8B guibg=NONE guisp= gui=bold cterm=bold term=bold
-highlight WinBar guifg=#C8D0E0 guibg=#2E3440 guisp= gui=NONE cterm=NONE term=NONE
+highlight WinBar guifg=#81A1C1 guibg=#2E3440 guisp= gui=NONE cterm=NONE term=NONE
 highlight WinBarNC guifg=#6C7A96 guibg=#2E3440 guisp= gui=NONE cterm=NONE term=NONE
 highlight cssAttributeSelector guifg=#81A1C1 guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
 highlight cssSelectorOp guifg=#5E81AC guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
