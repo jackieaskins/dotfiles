@@ -21,7 +21,7 @@ return function(config)
   config.on_attach = function(client, bufnr)
     require('lsp.attach')(client, bufnr)
 
-    require('utils').map('n', '<leader>ef', '<Cmd>EslintFixAll<CR>')
+    require('utils').map('n', '<leader>ef', vim.cmd.EslintFixAll)
   end
   config.handlers = {
     ['textDocument/publishDiagnostics'] = publish_diagnostics_handler,

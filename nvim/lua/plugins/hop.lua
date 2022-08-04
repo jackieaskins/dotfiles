@@ -4,5 +4,5 @@ local map = require('utils').map
 
 require('hop').setup({})
 
-map('n', '<leader><leader>', '<cmd>HopChar1<CR>')
-map('v', '<leader><leader>', '<cmd>HopChar1Visual<CR>')
+map('n', '<leader><leader>', vim.cmd.HopChar1)
+map('v', '<leader><leader>', vim.cmd.HopChar1Visual)

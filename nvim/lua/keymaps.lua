@@ -22,20 +22,20 @@ map('n', 'k', jump('k'), { desc = 'Jump [count] lines up', expr = true })
 map('n', 'j', jump('j'), { desc = 'Jump [count] lines down', expr = true })
 
 -- Navigate Quickfix
-map('n', '[q', '<cmd>cprevious<CR>')
-map('n', ']q', '<cmd>cnext<CR>')
-map('n', '[Q', '<cmd>cfirst<CR>')
-map('n', ']Q', '<cmd>clast<CR>')
-map('n', '[<C-q>', '<cmd>cpfile<CR>')
-map('n', ']<C-q>', '<cmd>cnfile<CR>')
+map('n', '[q', vim.cmd.cprevious)
+map('n', ']q', vim.cmd.cnext)
+map('n', '[Q', vim.cmd.cfirst)
+map('n', ']Q', vim.cmd.clast)
+map('n', '[<C-q>', vim.cmd.cpfile)
+map('n', ']<C-q>', vim.cmd.cnfile)
 
 -- Navigate Location List
-map('n', '[l', '<cmd>lprevious<CR>')
-map('n', ']l', '<cmd>lnext<CR>')
-map('n', '[L', '<cmd>lfirst<CR>')
-map('n', ']L', '<cmd>llast<CR>')
-map('n', '[<C-l>', '<cmd>lpfile<CR>')
-map('n', ']<C-l>', '<cmd>lnfile<CR>')
+map('n', '[l', vim.cmd.lprevious)
+map('n', ']l', vim.cmd.lnext)
+map('n', '[L', vim.cmd.lfirst)
+map('n', ']L', vim.cmd.llast)
+map('n', '[<C-l>', vim.cmd.lpfile)
+map('n', ']<C-l>', vim.cmd.lnfile)
 
 map('n', '<leader>so', '<cmd>luafile %<CR>')
 map('n', '<leader>rp', function()
@@ -44,10 +44,10 @@ end, { desc = 'Reload plugins' })
 
 -- Plugins
 -- Markdown Preview
-map('n', '<leader>mp', '<cmd>MarkdownPreview<CR>')
+map('n', '<leader>mp', vim.cmd.MarkdownPreview)
 
 -- Maximizer
-map('n', '<leader>mt', '<cmd>MaximizerToggle<CR>')
+map('n', '<leader>mt', vim.cmd.MaximizerToggle)
 
 -- Neotest
 map('n', ']t', function()
@@ -86,8 +86,8 @@ map('n', '<leader>ts', function()
 end, { desc = 'Stop currently running tests' })
 
 -- Packer
-map('n', '<leader>ps', '<cmd>PackerSync<CR>')
-map('n', '<leader>pu', '<cmd>PackerUpdate<CR>')
+map('n', '<leader>ps', vim.cmd.PackerSync)
+map('n', '<leader>pu', vim.cmd.PackerUpdate)
 map('n', '<leader>pl', ':PackerLoad ', { silent = false })
 
 -- Smart Pairs
@@ -119,23 +119,23 @@ map('n', '<leader>z=', '<cmd>Telescope spell_suggest<CR>')
 map('n', '<leader>pp', '<cmd>Telescope packer<CR>')
 
 -- Tree
-map('n', '<C-n>', '<cmd>NvimTreeToggle<CR>')
-map('n', '<leader>n', '<cmd>NvimTreeFindFileToggle<CR>')
+map('n', '<C-n>', vim.cmd.NvimTreeToggle)
+map('n', '<leader>n', vim.cmd.NvimTreeFindFileToggle)
 
 -- Vimux
-map('n', '<leader>vt', '<cmd>VimuxTogglePane<CR>')
-map('n', '<leader>vi', '<cmd>VimuxInterruptRunner<CR>')
-map('n', '<leader>vc', '<cmd>VimuxClearTerminalScreen<CR>')
-map('n', '<leader>vq', '<cmd>VimuxCloseRunner<CR>')
-map('n', '<leader>vl', '<cmd>VimuxRunLastCommand<CR>')
+map('n', '<leader>vt', vim.cmd.VimuxTogglePane)
+map('n', '<leader>vi', vim.cmd.VimuxInterruptRunner)
+map('n', '<leader>vc', vim.cmd.VimuxClearTerminalScreen)
+map('n', '<leader>vq', vim.cmd.VimuxCloseRunner)
+map('n', '<leader>vl', vim.cmd.VimuxRunLastCommand)
 map('n', '<leader>vL', function()
-  vim.fn['VimuxInterruptRunner']()
-  vim.fn['VimuxRunLastCommand']()
+  vim.fn.VimuxInterruptRunner()
+  vim.fn.VimuxRunLastCommand()
 end)
-map('n', '<leader>vo', '<cmd>VimuxOpenRunner<CR>')
+map('n', '<leader>vo', vim.cmd.VimuxOpenRunner)
 map('n', '<leader>vr', function()
   local input = vim.fn.input('Enter command: ', '', 'shellcmd')
   if input and input ~= '' then
-    vim.fn['VimuxRunCommand'](input)
+    vim.fn.VimuxRunCommand(input)
   end
 end, { desc = 'Vimux Runner' })

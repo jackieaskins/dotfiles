@@ -53,7 +53,8 @@ function M.install(command_map, install_dir)
   local script = table.concat(script_lines, '\n')
 
   os.execute('mkdir -p ' .. install_dir)
-  vim.cmd('new | startinsert')
+  vim.cmd.new()
+  vim.cmd.startinsert()
   vim.fn.termopen({ 'sh', '-c', script }, { cwd = install_dir })
 end
 

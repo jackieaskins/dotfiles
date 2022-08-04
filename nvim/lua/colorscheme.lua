@@ -47,5 +47,5 @@ if success then
     },
   })
 
-  vim.cmd('colorscheme onenord')
+  vim.cmd.colorscheme('onenord')
 end

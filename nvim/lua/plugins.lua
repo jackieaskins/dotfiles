@@ -1,6 +1,6 @@
 local file_exists = require('utils').file_exists
 
-vim.cmd('packadd packer.nvim')
+vim.cmd.packadd('packer.nvim')
 
 local function local_plugin(name)
   local prefix = vim.g.is_personal_machine and '~/vim-plugins/' or 'jackieaskins/'

@@ -83,7 +83,7 @@ function M.format_on_save()
     and is_executable(formatter.exe)
     and require('lspconfig').util.root_pattern(formatter.required_file)(vim.fn.expand('%:p'))
   then
-    vim.cmd('FormatWrite')
+    vim.cmd.FormatWrite()
   end
 end
 
