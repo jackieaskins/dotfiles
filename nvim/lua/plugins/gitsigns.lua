@@ -15,8 +15,17 @@ require('gitsigns').setup({
     end
 
     -- Navigation
-    bsk('n', ']c', "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'", { expr = true })
-    bsk('n', '[c', "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'", { expr = true })
+    local function go_to_hunk(key, dir)
+      bsk('n', key, function()
+        if vim.wo.diff then
+          return key
+        end
+        vim.schedule(dir)
+        return '<Ignore>'
+      end, { expr = true })
+    end
+    go_to_hunk(']c', gs.next_hunk)
+    go_to_hunk('[c', gs.prev_hunk)
 
     -- Actions
     -- Using gs.[stage/reset]_hunk as rhs didn't allow partial hunk stages

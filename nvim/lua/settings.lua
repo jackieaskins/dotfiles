@@ -14,6 +14,7 @@ map('n', '<space>', '<nop>')
 opt.hidden = true
 opt.mouse = ''
 opt.number = true
+opt.ruler = false
 opt.relativenumber = true
 opt.cursorline = true
 opt.scrolloff = 5
