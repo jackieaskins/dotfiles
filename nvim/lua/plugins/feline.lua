@@ -26,8 +26,8 @@ local function file_info_provider(fnamemodifier)
 end
 
 local disabled_filetypes = {
-  'NvimTree',
-  'DiffviewFiles',
+  '^neo.tree$',
+  '^DiffviewFiles$',
 }
 
 ----------------------------------------------------------------------

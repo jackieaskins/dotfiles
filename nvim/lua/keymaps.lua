@@ -43,6 +43,14 @@ map('n', '<leader>rp', function()
 end, { desc = 'Reload plugins' })
 
 -- Plugins
+-- Diff View
+map('n', '<leader>dv', function()
+  if vim.wo.diff or vim.bo.filetype == 'DiffviewFiles' then
+    vim.cmd.DiffviewClose()
+  else
+    vim.cmd.DiffviewOpen()
+  end
+end)
 -- Markdown Preview
 map('n', '<leader>mp', vim.cmd.MarkdownPreview)
 
@@ -85,6 +93,10 @@ map('n', '<leader>ts', function()
   require('neotest').run.stop()
 end, { desc = 'Stop currently running tests' })
 
+-- Neotree
+map('n', '<C-n>', '<cmd>Neotree toggle<CR>')
+map('n', '<leader>n', '<cmd>Neotree toggle reveal<CR>')
+
 -- Packer
 map('n', '<leader>ps', vim.cmd.PackerSync)
 map('n', '<leader>pu', vim.cmd.PackerUpdate)
@@ -117,10 +129,6 @@ map('n', '<leader>bu', '<cmd>Telescope buffers sort_mru=true<CR>')
 map('n', '<leader>of', '<cmd>Telescope oldfiles cwd_only=true sort_lastused=true include_current_session=true<CR>')
 map('n', '<leader>z=', '<cmd>Telescope spell_suggest<CR>')
 map('n', '<leader>pp', '<cmd>Telescope packer<CR>')
-
--- Tree
-map('n', '<C-n>', vim.cmd.NvimTreeToggle)
-map('n', '<leader>n', vim.cmd.NvimTreeFindFileToggle)
 
 -- Vimux
 map('n', '<leader>vt', vim.cmd.VimuxTogglePane)

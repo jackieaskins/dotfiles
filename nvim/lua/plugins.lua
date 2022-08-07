@@ -202,12 +202,12 @@ return require('packer').startup({
 
     -- File Navigation {{{
     use({
-      'kyazdani42/nvim-tree.lua',
-      cmd = { 'NvimTreeToggle', 'NvimTreeFindFileToggle' },
+      'nvim-neo-tree/neo-tree.nvim',
+      branch = 'v2.x',
       config = function()
-        require('plugins.tree')
+        require('plugins.neo-tree')
       end,
-      requires = 'kyazdani42/nvim-web-devicons',
+      requires = { 'nvim-lua/plenary.nvim', 'kyazdani42/nvim-web-devicons', 'MunifTanjim/nui.nvim' },
     })
     use({
       'nvim-telescope/telescope.nvim',

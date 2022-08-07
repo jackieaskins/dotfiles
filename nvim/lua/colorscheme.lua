@@ -44,6 +44,20 @@ if success then
 
       WinBar = { fg = colors.blue, bg = colors.bg },
       WinBarNC = { fg = colors.light_gray, bg = colors.bg },
+
+      NeoTreeDirectoryIcon = { link = 'NvimTreeFolderIcon' },
+      NeoTreeDirectoryName = { link = 'NvimTreeFolderName' },
+      NeoTreeSymbolicLinkTarget = { link = 'NvimTreeSymlink' },
+      NeoTreeRootName = { link = 'NvimTreeRootFolder' },
+      NeoTreeFileNameOpened = { link = 'NvimTreeOpenedFile' },
+
+      NeoTreeExpander = { fg = colors.selection }, -- Used for collapsed/expanded icons.
+      NeoTreeDotfile = { fg = colors.fg },
+
+      NeoTreeGitIgnored = { fg = colors.selection },
+      NeoTreeGitModified = { fg = colors.yellow },
+      NeoTreeGitUnstaged = { fg = colors.orange },
+      NeoTreeGitUntracked = { fg = colors.orange },
     },
   })
 
