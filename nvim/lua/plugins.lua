@@ -252,6 +252,14 @@ return require('packer').startup({
         require('plugins.fidget')
       end,
     })
+    use({
+      'mrshmllow/document-color.nvim',
+      config = function()
+        require('document-color').setup({})
+      end,
+      module = 'document-color',
+    })
+
     -- }}}
 
     -- Movement {{{

@@ -2,7 +2,7 @@ local M = {}
 
 ---Get the icon and color for a given file path
 ---@param path string
----@return string icon, string color
+---@return string|nil icon
 function M.get_file_icon(path)
   local filename = vim.fn.fnamemodify(path, ':t')
   local extension = vim.fn.fnamemodify(path, ':e')

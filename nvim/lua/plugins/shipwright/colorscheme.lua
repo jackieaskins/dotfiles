@@ -1,5 +1,5 @@
 local config = require('onenord.config').options
-local colors = vim.tbl_deep_extend('force', require('colors'), config.custom_colors)
+local colors = vim.tbl_deep_extend('force', require('colors'), config.custom_colors) or {}
 local overwrite = require('shipwright.transform.overwrite')
 
 local function get_onenord_highlights()

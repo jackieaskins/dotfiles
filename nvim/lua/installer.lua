@@ -9,7 +9,7 @@ local pkg_managers = {
 }
 
 ---Generic install command
----@param command_map table<string, string[] | fun(install_dir?:string)>
+---@param command_map table<string, string[] | fun(install_dir?:string):table>
 ---@param install_dir? string
 function M.install(command_map, install_dir)
   local script_lines = {}

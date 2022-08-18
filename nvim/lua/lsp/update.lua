@@ -3,7 +3,7 @@ local lsp_servers = require('lsp.servers')
 local function get_active_server_names()
   return vim.tbl_map(function(client)
     return client.name
-  end, vim.lsp.buf_get_clients(0))
+  end, vim.lsp.get_active_clients({ bufnr = 0 }))
 end
 
 local function update_servers(server_list)
