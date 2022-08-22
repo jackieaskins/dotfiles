@@ -1,3 +1,5 @@
+local neotree = require('neo-tree')
+
 vim.g.neo_tree_remove_legacy_commands = 1
 
 -- Rename Handler {{{
@@ -71,19 +73,7 @@ local function handle_rename(data)
 end
 -- }}}
 
-local function open_node(type)
-  return function(state)
-    local node = state.tree:get_node()
-    if require('neo-tree.utils').is_expandable(node) then
-      state.commands['toggle_node'](state)
-    else
-      state.commands[type](state)
-      vim.cmd.Neotree('close')
-    end
-  end
-end
-
-require('neo-tree').setup({
+neotree.setup({
   close_if_last_window = true,
   default_component_configs = {
     icon = { folder_empty = '' },
@@ -93,6 +83,12 @@ require('neo-tree').setup({
   event_handlers = {
     { event = 'file_renamed', handler = handle_rename },
     { event = 'file_moved', handler = handle_rename },
+    {
+      event = 'file_opened',
+      handler = function()
+        neotree.close_all()
+      end,
+    },
   },
   filesystem = {
     filtered_items = {
@@ -114,16 +110,13 @@ require('neo-tree').setup({
 
         -- New mappings
         m = { 'move', config = { show_path = 'relative' } },
-        o = open_node('open'),
-        ['<CR>'] = open_node('open'),
-        ['<C-v>'] = open_node('open_vsplit'),
-        ['<C-x>'] = open_node('open_split'),
+        o = 'open',
+        ['<CR>'] = 'open',
+        ['<C-v>'] = 'open_vsplit',
+        ['<C-x>'] = 'open_split',
         ['[c'] = 'prev_git_modified',
         [']c'] = 'next_git_modified',
-        ['<tab>'] = function(state)
-          state.commands['open'](state)
-          vim.cmd.Neotree('reveal')
-        end,
+        ['<tab>'] = 'toggle_preview',
       },
     },
   },

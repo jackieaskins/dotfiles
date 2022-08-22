@@ -147,6 +147,11 @@ return require('packer').startup({
       },
     })
     use({ 'mhartington/formatter.nvim', module = 'formatter' })
+    use({
+      'mizlan/iswap.nvim',
+      cmd = { 'ISwap', 'ISwapWith' },
+    })
+
     -- }}}
 
     -- Surround {{{
@@ -252,14 +257,6 @@ return require('packer').startup({
         require('plugins.fidget')
       end,
     })
-    use({
-      'mrshmllow/document-color.nvim',
-      config = function()
-        require('document-color').setup({})
-      end,
-      module = 'document-color',
-    })
-
     -- }}}
 
     -- Movement {{{

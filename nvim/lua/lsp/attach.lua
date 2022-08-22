@@ -1,4 +1,4 @@
-return function(client, bufnr)
+return function(_, bufnr)
   local map = require('utils').map
 
   local function bsk(mode, lhs, rhs, opts)
@@ -8,10 +8,6 @@ return function(client, bufnr)
       options = vim.tbl_extend('force', options, opts)
     end
     map(mode, lhs, rhs, options)
-  end
-
-  if client.server_capabilities.colorProvider then
-    require('document-color').buf_attach(bufnr)
   end
 
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
