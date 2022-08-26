@@ -3,6 +3,8 @@ if type kitty &> /dev/null; then
   alias icat='kitty +kitten icat'
 fi
 
+alias mux=tmuxinator
+
 # Directory Navigation
 alias -- -="cd -"
 alias ..='cd ..'
