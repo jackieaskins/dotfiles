@@ -53,7 +53,16 @@ cmp.setup({
     ['<S-Tab>'] = cmp.mapping(cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }), { 'c' }),
     ['<C-N>'] = cmp.mapping(cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }), { 'i', 'c' }),
     ['<C-P>'] = cmp.mapping(cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }), { 'i', 'c' }),
-    ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+    ['<C-Space>'] = cmp.mapping(
+      cmp.mapping.complete({
+        config = {
+          sources = {
+            { name = 'nvim_lsp' },
+          },
+        },
+      }),
+      { 'i', 'c' }
+    ),
     ['<C-E>'] = cmp.mapping({
       i = cmp.mapping.abort(),
       c = cmp.mapping.close(),

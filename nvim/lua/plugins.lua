@@ -82,9 +82,9 @@ return require('packer').startup({
       end,
     })
     use({
-      'norcalli/nvim-colorizer.lua',
+      'NvChad/nvim-colorizer.lua',
       config = function()
-        require('colorizer').setup()
+        require('plugins.colorizer')
       end,
     })
     use({
@@ -216,6 +216,7 @@ return require('packer').startup({
     })
     use({
       'nvim-telescope/telescope.nvim',
+      bufread = false,
       cmd = 'Telescope',
       config = function()
         require('plugins.telescope')

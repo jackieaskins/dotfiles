@@ -270,6 +270,22 @@ highlight NavicIconsTypeParameter guifg=#EBCB8B guibg=#353B49 guisp= gui=NONE ct
 highlight NavicIconsVariable guifg=#81A1C1 guibg=#353B49 guisp= gui=NONE cterm=NONE term=NONE
 highlight NavicSeparator guifg=#88C0D0 guibg=#353B49 guisp= gui=NONE cterm=NONE term=NONE
 highlight NavicText guifg=#C8D0E0 guibg=#353B49 guisp= gui=NONE cterm=NONE term=NONE
+highlight NeoTreeDirectoryIcon guifg=NONE guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
+highlight! link NeoTreeDirectoryIcon NvimTreeFolderIcon
+highlight NeoTreeDirectoryName guifg=NONE guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
+highlight! link NeoTreeDirectoryName NvimTreeFolderName
+highlight NeoTreeDotfile guifg=#C8D0E0 guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
+highlight NeoTreeExpander guifg=#4C566A guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
+highlight NeoTreeFileNameOpened guifg=NONE guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
+highlight! link NeoTreeFileNameOpened NvimTreeOpenedFile
+highlight NeoTreeGitIgnored guifg=#4C566A guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
+highlight NeoTreeGitModified guifg=#EBCB8B guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
+highlight NeoTreeGitUnstaged guifg=#D08F70 guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
+highlight NeoTreeGitUntracked guifg=#D08F70 guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
+highlight NeoTreeRootName guifg=NONE guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
+highlight! link NeoTreeRootName NvimTreeRootFolder
+highlight NeoTreeSymbolicLinkTarget guifg=NONE guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
+highlight! link NeoTreeSymbolicLinkTarget NvimTreeSymlink
 highlight NeogitBranch guifg=#B988B0 guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
 highlight NeogitDiffAddHighlight guifg=#A3BE8C guibg=#394E3D guisp= gui=NONE cterm=NONE term=NONE
 highlight NeogitDiffContextHighlight guifg=NONE guibg=#353B49 guisp= gui=NONE cterm=NONE term=NONE
