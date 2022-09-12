@@ -1,10 +1,10 @@
 local M = {}
 
 ---Define vim keymap
----@param mode string
+---@param mode string | table<string>
 ---@param lhs string
 ---@param rhs string | function
----@param opts? table<string, boolean>
+---@param opts? table
 function M.map(mode, lhs, rhs, opts)
   local options = { silent = true }
   if opts then

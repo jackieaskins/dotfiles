@@ -51,6 +51,7 @@ map('n', '<leader>dv', function()
     vim.cmd.DiffviewOpen()
   end
 end)
+
 -- Markdown Preview
 map('n', '<leader>mp', vim.cmd.MarkdownPreview)
 
@@ -110,6 +111,14 @@ map('i', '<CR>', function()
   else
     require('pairs.enter').type()
   end
+end)
+
+-- Spread
+map('n', 'gS', function()
+  require('spread').out()
+end)
+map('n', 'gJ', function()
+  require('spread').combine()
 end)
 
 -- Startup Time

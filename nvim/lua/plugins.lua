@@ -162,10 +162,9 @@ return require('packer').startup({
       end,
     })
     use({
-      'AndrewRadev/splitjoin.vim',
-      config = function()
-        require('plugins.splitjoin')
-      end,
+      'aarondiel/spread.nvim',
+      after = 'nvim-treesitter',
+      module = 'spread',
     })
     use({ 'tpope/vim-surround' })
     use({
