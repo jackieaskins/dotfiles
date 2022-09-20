@@ -177,6 +177,9 @@ highlight IncSearch guifg=#EBCB8B guibg=#4C566A guisp= gui=bold,underline cterm=
 highlight Include guifg=#81A1C1 guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
 highlight IndentBlanklineChar guifg=#4C566A guibg=NONE guisp= gui=nocombine cterm=nocombine term=nocombine
 highlight IndentBlanklineContextChar guifg=#5E81AC guibg=NONE guisp= gui=nocombine cterm=nocombine term=nocombine
+highlight IndentBlanklineContextStart guifg=NONE guibg=NONE guisp=#B988B0 gui=underline cterm=underline term=underline
+highlight IndentBlanklineSpaceChar guifg=#646A76 guibg=NONE guisp= gui=nocombine cterm=nocombine term=nocombine
+highlight IndentBlanklineSpaceCharBlankline guifg=#646A76 guibg=NONE guisp= gui=nocombine cterm=nocombine term=nocombine
 highlight InsertMode guifg=#A3BE8C guibg=NONE guisp= gui=reverse cterm=reverse term=reverse
 highlight Keyword guifg=#B988B0 guibg=NONE guisp= gui=italic cterm=italic term=italic
 highlight Label guifg=#B988B0 guibg=NONE guisp= gui=NONE cterm=NONE term=NONE

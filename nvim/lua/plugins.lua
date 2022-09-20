@@ -17,8 +17,6 @@ return require('packer').startup({
 
     -- Dev Tools {{{
     use({ 'milisims/nvim-luaref' })
-    -- Needed until https://github.com/neovim/neovim/issues/12587 is fixed
-    use({ 'antoinemadec/FixCursorHold.nvim' })
     use({ 'lewis6991/impatient.nvim' })
     use({ 'dstein64/vim-startuptime', cmd = 'StartupTime' })
     use({
@@ -267,13 +265,6 @@ return require('packer').startup({
       end,
     })
     use({ 'matze/vim-move' })
-    use({
-      'phaazon/hop.nvim',
-      config = function()
-        require('plugins.hop')
-      end,
-      keys = '<leader><leader>',
-    })
     -- }}}
 
     -- Syntax {{{
