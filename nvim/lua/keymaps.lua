@@ -113,14 +113,6 @@ map('i', '<CR>', function()
   end
 end)
 
--- Spread
-map('n', 'gS', function()
-  require('spread').out()
-end)
-map('n', 'gJ', function()
-  require('spread').combine()
-end)
-
 -- Startup Time
 map('n', '<leader>su', '<cmd>StartupTime --tries 20<CR>')
 

@@ -1,7 +1,6 @@
 -- https://github.com/mhartington/formatter.nvim
 
-local utils = require('utils')
-local file_exists, is_executable = utils.file_exists, utils.is_executable
+local is_executable = require('utils').is_executable
 
 local M = {}
 

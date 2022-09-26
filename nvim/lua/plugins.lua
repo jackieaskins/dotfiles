@@ -94,6 +94,12 @@ return require('packer').startup({
     -- }}}
 
     -- Editing {{{
+    use({
+      'axelvc/template-string.nvim',
+      config = function()
+        require('plugins.template-string')
+      end,
+    })
     use({ 'tpope/vim-abolish' })
     use({
       'tpope/vim-projectionist',
@@ -160,9 +166,10 @@ return require('packer').startup({
       end,
     })
     use({
-      'aarondiel/spread.nvim',
-      after = 'nvim-treesitter',
-      module = 'spread',
+      'AndrewRadev/splitjoin.vim',
+      config = function()
+        require('plugins.splitjoin')
+      end,
     })
     use({ 'tpope/vim-surround' })
     use({
