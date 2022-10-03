@@ -27,10 +27,12 @@ return function(_, bufnr)
   bsk('n', ']e', '<cmd>lua vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR })<CR>')
 
   bsk('n', '<leader>rn', vim.lsp.buf.rename, { desc = 'vim.lsp.buf.rename' })
-  bsk('n', '<leader>bf', vim.lsp.buf.formatting, { desc = 'vim.lsp.buf.formatting' })
+  bsk('n', '<leader>bf', function()
+    vim.lsp.buf.format({ async = true })
+  end, { desc = 'vim.lsp.buf.format' })
 
   bsk('n', '<leader>ca', vim.lsp.buf.code_action, { desc = 'vim.lsp.buf.code_action' })
-  bsk('x', '<leader>ca', vim.lsp.buf.range_code_action, { desc = 'vim.lsp.buf.range_code_action' })
+  bsk('x', '<leader>ca', vim.lsp.buf.code_action, { desc = 'vim.lsp.buf.range_code_action' })
 
   bsk('n', '<leader>sw', '<cmd>Telescope lsp_dynamic_workspace_symbols<CR>')
   bsk('n', '<leader>sd', '<cmd>Telescope lsp_document_symbols<CR>')

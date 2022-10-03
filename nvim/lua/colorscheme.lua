@@ -55,6 +55,7 @@ if success then
       NeoTreeDotfile = { fg = colors.fg },
 
       NeoTreeGitIgnored = { fg = colors.selection },
+      NeoTreeGitConflict = { fg = colors.orange, style = 'bold,italic' },
       NeoTreeGitModified = { fg = colors.yellow },
       NeoTreeGitUnstaged = { fg = colors.orange },
       NeoTreeGitUntracked = { fg = colors.orange },

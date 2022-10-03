@@ -153,7 +153,7 @@ return require('packer').startup({
     use({ 'mhartington/formatter.nvim', module = 'formatter' })
     use({
       'mizlan/iswap.nvim',
-      cmd = { 'ISwap', 'ISwapWith' },
+      cmd = { 'ISwap', 'ISwapWith', 'ISwapWithLeft', 'ISwapWithRight' },
     })
 
     -- }}}
