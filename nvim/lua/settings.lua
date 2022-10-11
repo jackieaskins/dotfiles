@@ -22,6 +22,7 @@ opt.showmode = false
 opt.signcolumn = 'yes'
 opt.splitright = true
 opt.splitbelow = true
+opt.splitkeep = 'screen'
 opt.diffopt:append({ 'vertical' })
 opt.termguicolors = true
 opt.tabline = require('tabline')

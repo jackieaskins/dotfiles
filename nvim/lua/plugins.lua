@@ -155,7 +155,13 @@ return require('packer').startup({
       'mizlan/iswap.nvim',
       cmd = { 'ISwap', 'ISwapWith', 'ISwapWithLeft', 'ISwapWithRight' },
     })
-
+    use({
+      'gaoDean/autolist.nvim',
+      ft = 'markdown',
+      config = function()
+        require('autolist').setup({})
+      end,
+    })
     -- }}}
 
     -- Surround {{{
