@@ -31,6 +31,7 @@ sketchybar --bar color=0x00 height=$ICON_SIZE display=all y_offset=$(expr 34 - $
 sketchybar --add event any_space_change \
            --add event audiodevice_change \
            --add event battery_change \
+           --add event volume_change \
            --add event current_window_change \
            --add event dnd_disabled _NSDoNotDisturbDisabledNotification \
            --add event dnd_enabled _NSDoNotDisturbEnabledNotification \
@@ -74,12 +75,11 @@ sketchybar --add item dnd right \
            --set battery background.padding_left=$SPACER_SIZE \
                          script='~/.config/sketchybar/plugins/battery.js' \
            --add item audio right \
-           --subscribe audio audiodevice_change \
+           --subscribe audio audiodevice_change volume_change \
            --set audio background.border_color=$BLUE \
                        background.padding_left=$SPACER_SIZE \
                        icon.background.color=$BLUE \
                        icon='' \
-                       label.drawing=off \
                        script='~/.config/sketchybar/plugins/audio.js' \
            --add item spotify right \
            --subscribe spotify spotify_change mouse.entered mouse.exited \

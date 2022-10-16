@@ -2,7 +2,7 @@
 
 // TODO: Show current volumne, change icon if muted
 const { spawnSync } = require("child_process");
-const { setSketchybarItem } = require("../utils/shell");
+const { setSketchybarItem, osa } = require("../utils/shell");
 
 const { stdout } = spawnSync("system_profiler", [
   "SPAudioDataType",
@@ -26,16 +26,19 @@ const {
 
 const icon = (() => {
   if (source === "External Headphones") return "􀑈";
-  if (source === "MacBook Pro Speakers") return "";
+  if (source === "MacBook Pro Speakers") return "􀊧";
 
   if (transport === "coreaudio_device_type_bluetooth") {
     const { device_productID: productId } =
       bluetoothData[0].device_connected[0][name];
-    if (productId === "0x200E") return "􀪷";
+
+    if (["0x200E", "0x2014"].includes(productId)) return "􀪷";
     if (productId === "0x2002") return "􀟥";
   }
 
   return "蓼";
 })();
 
-setSketchybarItem(process.env.NAME, { icon });
+const volume = osa("output volume of (get volume settings)");
+
+setSketchybarItem(process.env.NAME, { icon, label: `${volume}%` });
