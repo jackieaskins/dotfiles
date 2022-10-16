@@ -1,21 +1,17 @@
 # https://github.com/koekeishiya/yabai/wiki/Configuration#configuration-file
 
 yabai -m config layout bsp
-
-yabai -m config top_padding 14
-yabai -m config bottom_padding 14
-yabai -m config left_padding 14
-yabai -m config right_padding 14
-yabai -m config window_gap 10
-
 yabai -m config external_bar all:34:0
+yabai -m config top_padding 14 bottom_padding 14 left_padding 14 right_padding 14 window_gap 10
 
-yabai -m config window_border on
-yabai -m config active_window_border_color 0xFF9EC183
+yabai -m config window_border on \
+                window_border_width 2 \
+                window_border_hidpi off \
+                active_window_border_color 0xFF9EC183
 
-yabai -m config mouse_follows_focus off
-yabai -m config focus_follows_mouse off
-yabai -m config window_origin_display cursor
+yabai -m config mouse_follows_focus off \
+                focus_follows_mouse off \
+                window_origin_display cursor
 
 yabai -m rule --add title="^Picture in Picture$" manage=off
 yabai -m rule --add app="^Alfred Preferences$" manage=off
@@ -23,6 +19,5 @@ yabai -m rule --add app="^App Store$" manage=off
 yabai -m rule --add app="^FaceTime$" manage=off
 yabai -m rule --add app="^Karabiner" manage=off
 yabai -m rule --add app="^Spotify$" manage=off
-yabai -m rule --add app="^Stats$" manage=off border=off
-yabai -m rule --add app="^System Preferences$" manage=off border=off
+yabai -m rule --add app="^System Preferences$" manage=off
 yabai -m rule --add app="^TV$" manage=off border=off
