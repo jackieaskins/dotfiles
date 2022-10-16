@@ -50,6 +50,12 @@ return require('packer').startup({
       cmd = 'Shipwright',
       module = 'shipwright',
     })
+    use({
+      'AckslD/messages.nvim',
+      config = function()
+        require('messages').setup()
+      end,
+    })
     -- }}}
 
     -- Appearance {{{
@@ -241,7 +247,7 @@ return require('packer').startup({
     -- }}}
 
     -- LSP {{{
-    use({ 'folke/lua-dev.nvim' })
+    use({ 'folke/neodev.nvim' })
     use({
       'kosayoda/nvim-lightbulb',
       config = function()

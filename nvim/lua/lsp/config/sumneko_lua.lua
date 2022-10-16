@@ -1,4 +1,4 @@
-require('lua-dev').setup({
+require('neodev').setup({
   library = {
     plugins = {
       'neotest',
