@@ -103,16 +103,6 @@ map('n', '<leader>ps', vim.cmd.PackerSync)
 map('n', '<leader>pu', vim.cmd.PackerUpdate)
 map('n', '<leader>pl', ':PackerLoad ', { silent = false })
 
--- Smart Pairs
-map('i', '<CR>', function()
-  local tag_keys = require('closer.tags').handle_tags()
-  if tag_keys ~= nil then
-    vim.api.nvim_feedkeys(t('<CR>' .. tag_keys), 'n', false)
-  else
-    require('pairs.enter').type()
-  end
-end)
-
 -- Startup Time
 map('n', '<leader>su', '<cmd>StartupTime --tries 20<CR>')
 

@@ -191,9 +191,9 @@ return require('packer').startup({
     })
     use({ 'tpope/vim-surround' })
     use({
-      'ZhiyuanLck/smart-pairs',
+      'windwp/nvim-autopairs',
       config = function()
-        require('plugins.smart-pairs')
+        require('plugins.autopairs')
       end,
     })
     use({
