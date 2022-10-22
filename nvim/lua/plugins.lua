@@ -156,7 +156,13 @@ return require('packer').startup({
         'saadparwaiz1/cmp_luasnip',
       },
     })
-    use({ 'mhartington/formatter.nvim', module = 'formatter' })
+    use({
+      'sbdchd/neoformat',
+      config = function()
+        require('plugins.neoformat')
+      end,
+      cmd = 'Neoformat',
+    })
     use({
       'mizlan/iswap.nvim',
       cmd = { 'ISwap', 'ISwapWith', 'ISwapWithLeft', 'ISwapWithRight' },

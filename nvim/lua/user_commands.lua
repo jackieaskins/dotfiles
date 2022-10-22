@@ -1,22 +1,22 @@
 local utils = require('utils')
 local open_url, user_command = utils.open_url, utils.user_command
 
--- Formatter
-local function formatter()
-  return require('plugins.formatter')
+-- Neoformat
+local function neoformat()
+  return require('plugins.neoformat')
 end
 
 user_command('FormatterUpdateAll', function()
-  formatter().update_formatters(vim.tbl_keys(formatter().formatters))
+  neoformat().update_formatters(vim.tbl_keys(neoformat().formatters))
 end)
 user_command('FormatterUpdate', function(arg)
   local formatter_names = arg.args ~= '' and vim.split(arg.args, ' ')
-    or { formatter().formatter_by_filetype[vim.bo.filetype].name }
-  formatter().update_formatters(formatter_names)
+    or { neoformat().formatter_by_filetype[vim.bo.filetype].name }
+  neoformat().update_formatters(formatter_names)
 end, {
   nargs = '*',
   complete = function()
-    return vim.tbl_keys(formatter().formatters)
+    return vim.tbl_keys(neoformat().formatters)
   end,
 })
 

@@ -43,7 +43,11 @@ augroup('lsp_formatting', {
 })
 
 -- Plugins
--- Formatter
-augroup('auto_format', {
-  { 'BufWritePost', { command = 'lua require("plugins.formatter").format_on_save()' } },
+-- Neoformat
+augroup('format_on_save', {
+  { 'BufWritePre', {
+    callback = function()
+      require('plugins.neoformat').format_on_save()
+    end,
+  } },
 })
