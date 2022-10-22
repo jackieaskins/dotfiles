@@ -32,7 +32,7 @@ conf.paths.yabai = YABAI_PATH
 conf.appearance.showIcons = false
 conf.appearance.pillThinness = 6
 conf.appearance.offset.y = 6
-conf.appearance.offset.x = 6
+conf.appearance.offset.x = 8
 Stackline:init(conf)
 
 ----------------------------------------------------------------------
