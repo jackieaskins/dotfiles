@@ -1,5 +1,3 @@
--- https://github.com/kyazdani42/nvim-web-devicons
-
 local web_devicons = require('nvim-web-devicons')
 
 web_devicons.setup({

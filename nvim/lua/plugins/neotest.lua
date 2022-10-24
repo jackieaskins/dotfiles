@@ -92,7 +92,7 @@ local status_map = {
 
 local function is_test_in_range(node_data, position)
   local position_parts = {}
-  for part in vim.gsplit(position, ':') do
+  for part in vim.gsplit(position, ':', true) do
     table.insert(position_parts, part)
   end
 

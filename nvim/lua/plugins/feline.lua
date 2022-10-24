@@ -39,7 +39,7 @@ local active_vi_mode = {
   end,
   hl = mode_hl,
   right_sep = {
-    str = '',
+    str = 'right_filled',
     hl = function()
       return {
         fg = vi_mode.get_mode_color(),
@@ -56,7 +56,7 @@ local active_spacer = {
   end,
   hl = { bg = colors.float },
   right_sep = {
-    str = '',
+    str = 'right_filled',
     hl = { fg = colors.float, bg = colors.active },
   },
   enabled = require('feline.providers.lsp').diagnostics_exist,
@@ -74,6 +74,7 @@ local active_file_type = {
     },
   },
   hl = active_hl,
+  right_sep = { str = ' ', hl = active_hl },
   priority = -1,
 }
 
@@ -96,8 +97,12 @@ local active_lsp_client_names = {
     }
   end,
   left_sep = {
-    str = ' ',
+    str = 'left_filled',
     hl = { fg = colors.highlight, bg = colors.active },
+  },
+  right_sep = {
+    str = ' ',
+    hl = { bg = colors.highlight },
   },
   priority = -2,
 }
@@ -106,11 +111,11 @@ local active_position = {
   provider = { name = 'position', opts = { format = ' {line}:{col} ' } },
   hl = mode_hl,
   left_sep = {
-    str = ' ',
+    str = 'left_filled',
     hl = function()
       return {
         fg = vi_mode.get_mode_color(),
-        bg = #vim.lsp.get_active_clients({ bufnr = 0 }) > 0 and colors.float or colors.active,
+        bg = #vim.lsp.get_active_clients({ bufnr = 0 }) > 0 and colors.highlight or colors.active,
       }
     end,
   },
@@ -135,7 +140,13 @@ require('feline').setup({
       { active_file_type, active_lsp_client_names, active_position },
     },
     inactive = {
-      { { provider = file_info_provider(':t'), hl = inactive_hl } },
+      {
+        {
+          provider = file_info_provider(':t'),
+          hl = inactive_hl,
+          right_sep = { str = ' ', hl = inactive_hl },
+        },
+      },
       { { provider = 'position', hl = inactive_hl } },
     },
   },
@@ -169,15 +180,22 @@ require('feline').setup({
   },
 })
 
+local function winbar_file_info_provider(hl)
+  return {
+    provider = file_info_provider(':.'),
+    hl = hl,
+    right_sep = { str = ' ', hl = hl },
+  }
+end
 require('feline').winbar.setup({
   components = {
     active = {
       {},
-      { { provider = file_info_provider(':.'), hl = 'WinBar' } },
+      { winbar_file_info_provider('WinBar') },
     },
     inactive = {
       {},
-      { { provider = file_info_provider(':.'), hl = 'WinBarNC' } },
+      { winbar_file_info_provider('WinBarNC') },
     },
   },
   disable = { filetypes = disabled_filetypes },

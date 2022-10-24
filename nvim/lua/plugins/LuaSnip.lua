@@ -1,5 +1,3 @@
--- https://github.com/L3MON4D3/LuaSnip
-
 local map = require('utils').map
 local luasnip = require('luasnip')
 local snippet = luasnip.snippet
@@ -13,6 +11,7 @@ require('luasnip.loaders.from_vscode').lazy_load({
   paths = { '~/dotfiles/vim-common' },
 })
 
+map('i', '<C-Y>', luasnip.expand, { desc = 'Expand snippet' })
 map({ 'i', 's' }, '<C-J>', luasnip.expand_or_jump, { desc = 'Expand snippet or jump to next placeholder' })
 map({ 'i', 's' }, '<C-K>', function()
   luasnip.jump(-1)

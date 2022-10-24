@@ -1,5 +1,4 @@
 local map = require('utils').map
-local opt = vim.opt
 
 -- Configuration Variables
 vim.g.is_personal_machine = false
@@ -11,42 +10,42 @@ vim.g.mapleader = ' '
 map('n', '<space>', '<nop>')
 
 -- General
-opt.hidden = true
-opt.mouse = ''
-opt.number = true
-opt.ruler = false
-opt.relativenumber = true
-opt.cursorline = true
-opt.scrolloff = 5
-opt.showmode = false
-opt.signcolumn = 'yes'
-opt.splitright = true
-opt.splitbelow = true
-opt.splitkeep = 'screen'
-opt.diffopt:append({ 'vertical' })
-opt.termguicolors = true
-opt.tabline = require('tabline')
+vim.opt.hidden = true
+vim.opt.mouse = ''
+vim.opt.number = true
+vim.opt.ruler = false
+vim.opt.relativenumber = true
+vim.opt.cursorline = true
+vim.opt.scrolloff = 5
+vim.opt.showmode = false
+vim.opt.signcolumn = 'yes'
+vim.opt.splitright = true
+vim.opt.splitbelow = true
+vim.opt.splitkeep = 'screen'
+vim.opt.diffopt:append({ 'vertical' })
+vim.opt.termguicolors = true
+vim.opt.tabline = require('tabline')
 
 -- Folds
-opt.foldmethod = 'expr'
-opt.foldexpr = 'nvim_treesitter#foldexpr()'
-opt.foldlevel = 99
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
+vim.opt.foldlevel = 99
 
 -- Spaces & Tabs
-opt.shiftwidth = 2
-opt.tabstop = 2
-opt.softtabstop = 2
-opt.expandtab = true
-opt.list = true
-opt.listchars = 'tab:  ,trail:·'
+vim.opt.shiftwidth = 2
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
+vim.opt.expandtab = true
+vim.opt.list = true
+vim.opt.listchars = 'tab:  ,trail:·'
 
 -- Timeouts
-opt.ttimeoutlen = 10
-opt.updatetime = 100
+vim.opt.ttimeoutlen = 10
+vim.opt.updatetime = 100
 
 -- Searching
-opt.inccommand = 'nosplit'
-opt.hlsearch = false
-opt.ignorecase = true
-opt.smartcase = true
-opt.path:append({ '**' })
+vim.opt.inccommand = 'nosplit'
+vim.opt.hlsearch = false
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.path:append({ '**' })

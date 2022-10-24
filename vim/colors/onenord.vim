@@ -61,8 +61,8 @@ highlight @namespace guifg=#EBCB8B guibg=NONE guisp= gui=NONE cterm=NONE term=NO
 highlight @note guifg=#A3BE8C guibg=NONE guisp= gui=bold cterm=bold term=bold
 highlight @number guifg=#D08F70 guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
 highlight @operator guifg=#B988B0 guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
+highlight @parameter guifg=#D57780 guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
 highlight @parameter.reference guifg=#D57780 guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
-highlight @paramter guifg=#D57780 guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
 highlight @property guifg=#81A1C1 guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
 highlight @punctuation.bracket guifg=#5E81AC guibg=NONE guisp= gui=NONE cterm=NONE term=NONE
 highlight @punctuation.delimiter guifg=#5E81AC guibg=NONE guisp= gui=NONE cterm=NONE term=NONE

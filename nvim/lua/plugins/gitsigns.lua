@@ -1,5 +1,3 @@
--- https://github.com/lewis6991/gitsigns.nvim
-
 local map = require('utils').map
 
 require('gitsigns').setup({

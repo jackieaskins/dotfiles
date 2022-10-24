@@ -1,5 +1,3 @@
--- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-
 local file_exists = require('utils').file_exists
 local servers = require('lsp.servers').server_names
 local lspconfig = require('lspconfig')

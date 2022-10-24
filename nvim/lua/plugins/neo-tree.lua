@@ -104,6 +104,7 @@ neotree.setup({
         ['<BS>'] = 'none', -- Moves the root directory up a level
         s = 'none', -- Open in vertical split
         S = 'none', -- Open in horizontal split
+        t = 'none', -- Open in new tab
         ['[g'] = 'none', -- Go to previous git modified file
         [']g'] = 'none', -- Go to next git modified file
         ['/'] = 'none', -- Trigger fuzzy filtering
@@ -114,6 +115,7 @@ neotree.setup({
         ['<CR>'] = 'open',
         ['<C-v>'] = 'open_vsplit',
         ['<C-x>'] = 'open_split',
+        ['<C-t>'] = 'open_tabnew',
         ['[c'] = 'prev_git_modified',
         [']c'] = 'next_git_modified',
         ['<tab>'] = 'toggle_preview',

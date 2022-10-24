@@ -1,5 +1,5 @@
 local utils = require('utils')
-local map, t = utils.map, utils.t
+local map = utils.map
 
 -- Extended gx
 map('n', 'gx', function()
@@ -36,6 +36,12 @@ map('n', '[L', vim.cmd.lfirst)
 map('n', ']L', vim.cmd.llast)
 map('n', '[<C-l>', vim.cmd.lpfile)
 map('n', ']<C-l>', vim.cmd.lnfile)
+
+-- Navigate Files
+map('n', '[n', vim.cmd.previous)
+map('n', ']n', vim.cmd.next)
+map('n', '[N', vim.cmd.first)
+map('n', ']N', vim.cmd.last)
 
 map('n', '<leader>so', '<cmd>luafile %<CR>')
 map('n', '<leader>rp', function()
@@ -122,19 +128,30 @@ map('n', '<leader>z=', '<cmd>Telescope spell_suggest<CR>')
 map('n', '<leader>pp', '<cmd>Telescope packer<CR>')
 
 -- Vimux
-map('n', '<leader>vt', vim.cmd.VimuxTogglePane)
-map('n', '<leader>vi', vim.cmd.VimuxInterruptRunner)
-map('n', '<leader>vc', vim.cmd.VimuxClearTerminalScreen)
-map('n', '<leader>vq', vim.cmd.VimuxCloseRunner)
-map('n', '<leader>vl', vim.cmd.VimuxRunLastCommand)
+map('n', '<leader>vt', vim.cmd.VimuxTogglePane, { desc = 'VimuxTogglePane' })
+map('n', '<leader>vi', vim.cmd.VimuxInterruptRunner, { desc = 'VimuxInterruptRunner' })
+map('n', '<leader>vc', vim.cmd.VimuxClearTerminalScreen, { desc = 'VimuxClearTerminalScreen' })
+map('n', '<leader>vq', vim.cmd.VimuxCloseRunner, { desc = 'VimuxCloseRunner' })
+map('n', '<leader>vk', function()
+  vim.ui.input({ prompt = 'Enter keys:' }, function(input)
+    if input then
+      vim.fn.VimuxSendKeys(input)
+    end
+  end)
+end, { desc = 'VimuxSendKeys' })
+map('n', '<leader>vl', vim.cmd.VimuxRunLastCommand, { desc = 'VimuxRunLastCommand' })
 map('n', '<leader>vL', function()
   vim.fn.VimuxInterruptRunner()
   vim.fn.VimuxRunLastCommand()
-end)
-map('n', '<leader>vo', vim.cmd.VimuxOpenRunner)
+end, { desc = 'VimuxInterruptRunner | VimuxRunLastCommand' })
+map('n', '<leader>vo', vim.cmd.VimuxOpenRunner, { desc = 'VimuxOpenRunner' })
 map('n', '<leader>vr', function()
-  local input = vim.fn.input('Enter command: ', '', 'shellcmd')
-  if input and input ~= '' then
-    vim.fn.VimuxRunCommand(input)
-  end
-end, { desc = 'Vimux Runner' })
+  vim.ui.input({
+    prompt = 'Enter command:',
+    completion = 'shellcmd',
+  }, function(input)
+    if input then
+      vim.fn.VimuxRunCommand(input)
+    end
+  end)
+end, { desc = 'VimuxRunCommand' })

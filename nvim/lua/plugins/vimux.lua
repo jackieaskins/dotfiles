@@ -1,5 +1,3 @@
--- https://github.com/preservim/vimux
-
 local function set_vimux_orientation()
   vim.g.VimuxOrientation = vim.go.columns > 160 and 'h' or 'v'
 end
