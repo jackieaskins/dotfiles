@@ -327,6 +327,7 @@ return require('packer').startup({
   end,
   config = {
     display = { prompt_border = 'rounded' },
+    max_jobs = 10,
   },
 })
 
