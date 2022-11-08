@@ -25,18 +25,14 @@ if RUBY_PLATFORM =~ /darwin/
   cask 'font-hack-nerd-font'
   cask 'font-jetbrains-mono-nerd-font'
 
-  tap 'FelixKratz/formulae'
-  brew 'sketchybar'
-
   cask 'alfred'
   cask 'docker'
   cask 'hammerspoon'
   cask 'karabiner-elements'
   cask 'kitty'
-  cask 'monitorcontrol'
+  cask 'rectangle'
 
   brew 'awscli'
   brew 'imagemagick'
   brew 'openjdk'
-  brew 'koekeishiya/formulae/yabai'
 end

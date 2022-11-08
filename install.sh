@@ -127,8 +127,6 @@ backup_and_symlink .hammerspoon       hammerspoon      hammerspoon
 backup_and_symlink .config/nvim       nvim             nvim
 backup_and_symlink .config/karabiner  karabiner        karabiner
 backup_and_symlink .config/kitty      kitty            kitty
-backup_and_symlink .config/sketchybar sketchybar       sketchybar
-backup_and_symlink .config/yabai      yabai            yabai
 backup_and_symlink .tmux.conf         tmux.conf        tmux.conf
 backup_and_symlink .gitignore_global  gitignore_global gitignore_global
 #                  dotfile            backup           sym
