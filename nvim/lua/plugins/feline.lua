@@ -230,17 +230,13 @@ require('feline').winbar.setup({
       {
         winbar_file_info_provider(function()
           local cmp_colors = component_colors()
-          return { fg = cmp_colors.a.bg, bg = colors.base }
+          return { fg = cmp_colors.a.bg, bg = 'NONE' }
         end),
       },
     },
     inactive = {
       {},
-      {
-        winbar_file_info_provider(function()
-          return { fg = colors.overlay0, bg = colors.base }
-        end),
-      },
+      { winbar_file_info_provider({ fg = colors.overlay0, bg = '#292d40' }) },
     },
   },
   disable = { filetypes = disabled_filetypes },

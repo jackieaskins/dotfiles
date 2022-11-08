@@ -12,13 +12,11 @@ if success then
 
         NeoTreeNormal = { fg = colors.text, bg = colors.base },
 
-        QuickScopePrimary = { fg = colors.sapphire, style = { 'underline', 'bold' } },
-        QuickScopeSecondary = { fg = colors.pink, style = { 'underline' } },
+        QuickScopePrimary = { fg = colors.sapphire, sp = colors.sapphire, style = { 'underline', 'bold' } },
+        QuickScopeSecondary = { fg = colors.pink, sp = colors.pink, style = { 'underline' } },
 
         TabLine = { fg = colors.text, bg = colors.surface0 },
         TabLineSep = { fg = colors.surface0, bg = colors.base },
-        TabLineSel = { fg = colors.base, bg = colors.flamingo },
-        TabLineSelSep = { fg = colors.flamingo, bg = colors.base },
 
         TelescopeResultsDiffAdd = { fg = colors.green },
         TelescopeResultsDiffChange = { fg = colors.yellow },
@@ -27,12 +25,12 @@ if success then
         TelescopeSelectionCaret = telescope_selection,
         TelescopeSelection = telescope_selection,
 
-        TreesitterContext = { fg = colors.none, bg = colors.mantle },
+        TreesitterContext = { fg = 'NONE', bg = colors.mantle },
 
-        WinBar = { fg = colors.flamingo },
-        WinBarNC = { fg = colors.overlay0 },
+        WinBarNC = { fg = colors.overlay0, bg = '#292d40' },
       }
     end,
+    dim_inactive = { enabled = true, shade = 'light', percentage = 0.3 },
     integrations = {
       native_lsp = {
         enabled = true,
