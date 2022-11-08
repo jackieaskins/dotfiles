@@ -133,12 +133,6 @@ backup_and_symlink .gitignore_global  gitignore_global gitignore_global
 success_echo "Dotfiles backed up and symlinked."
 
 #--------------------------------------------------------------------#
-#                            Brew Servies                            #
-#--------------------------------------------------------------------#
-brew services restart yabai
-brew services restart sketchybar
-
-#--------------------------------------------------------------------#
 #                           Neovim Config                            #
 #--------------------------------------------------------------------#
 echo -e "Configuring Neovim..."

@@ -1,5 +1,5 @@
 # My Dotfiles
-My dotfiles for Yabai, Karabner, Hammerspoon, SketchyBar, Vim, Neovim, Zsh, Tmux, and kitty.
+My dotfiles for Karabiner, Hammerspoon, Vim, Neovim, Zsh, Tmux, and kitty.
 
 ![Image showcasing current setup](https://github.com/jackieaskins/dotfiles/blob/media/setup.png?raw=true)
 

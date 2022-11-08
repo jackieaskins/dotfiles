@@ -4,8 +4,6 @@ vim.filetype.add({
   filename = {
     Brewfile = 'ruby',
     Brewfile_personal = 'ruby',
-    sketchybarrc = 'sh',
-    yabairc = 'sh',
     ['tmux.conf'] = 'tmux',
     ['coc-settings.json'] = 'jsonc',
     ['.eslintrc.json'] = 'jsonc',
