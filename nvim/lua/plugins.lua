@@ -46,11 +46,6 @@ return require('packer').startup({
       end,
     })
     use({
-      'rktjmp/shipwright.nvim',
-      cmd = 'Shipwright',
-      module = 'shipwright',
-    })
-    use({
       'AckslD/messages.nvim',
       config = function()
         require('messages').setup()
@@ -60,13 +55,7 @@ return require('packer').startup({
 
     -- Appearance {{{
     use({ 'stevearc/dressing.nvim' })
-    use({
-      'rmehri01/onenord.nvim',
-      run = function()
-        require('packer').loader('shipwright.nvim')
-        require('shipwright').build('nvim/lua/plugins/shipwright.lua')
-      end,
-    })
+    use({ 'catppuccin/nvim', as = 'catppuccin' })
     use({
       'nvim-treesitter/nvim-treesitter-context',
       config = function()

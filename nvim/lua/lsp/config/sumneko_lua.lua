@@ -1,10 +1,10 @@
 require('neodev').setup({
   library = {
     plugins = {
+      'catppuccin',
       'neotest',
       'nvim-cmp',
       'nvim-treesitter',
-      'onenord',
       'plenary.nvim',
     },
   },

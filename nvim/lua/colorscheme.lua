@@ -1,66 +1,54 @@
-local colors = require('colors')
-local success, onenord = pcall(require, 'onenord')
-
-local function spell_hl(color)
-  return { fg = colors.none, bg = colors.none, style = 'italic,undercurl', sp = color }
-end
+local success, catppuccin = pcall(require, 'catppuccin')
 
 if success then
-  onenord.setup({
-    fade_nc = false,
-    styles = {
-      comments = 'italic',
-      diagnostics = 'undercurl',
-      keywords = 'italic',
-    },
-    custom_highlights = {
-      CursorLineNr = { fg = colors.blue, bg = colors.active, style = 'bold' },
-      Identifier = { fg = colors.blue, gui = 'bold' },
+  catppuccin.setup({
+    custom_highlights = function(colors)
+      local editor_highlights = require('catppuccin.groups.editor').get()
 
-      QuickScopePrimary = { fg = colors.dark_blue, sp = colors.dark_blue, style = 'underline' },
-      QuickScopeSecondary = { fg = colors.purple, sp = colors.purple, style = 'underline' },
+      local telescope_selection = vim.tbl_extend('force', editor_highlights.CursorLine, { fg = colors.peach })
 
-      SpellBad = spell_hl(colors.red),
-      SpellCap = spell_hl(colors.yellow),
-      SpellRare = spell_hl(colors.purple),
-      SpellLocal = spell_hl(colors.cyan),
+      return {
+        CursorLineNr = vim.tbl_extend('force', editor_highlights.CursorLine, editor_highlights.CursorLineNr),
 
-      TelescopeTitle = { fg = colors.blue },
-      TelescopeResultsDiffAdd = { fg = colors.diff_add },
-      TelescopeResultsDiffChange = { fg = colors.diff_change },
-      TelescopeResultsDiffDelete = { fg = colors.diff_remove },
-      TelescopeResultsDiffUntracked = { fg = colors.none },
+        NeoTreeNormal = { fg = colors.text, bg = colors.base },
 
-      NeotestAdapterName = { fg = colors.purple },
-      NeotestDir = { fg = colors.cyan },
-      NeotestFile = { fg = colors.cyan },
-      NeotestNamespace = { fg = colors.blue },
-      NeotestFailed = { fg = colors.dark_red },
-      NeotestPassed = { fg = colors.green },
-      NeotestRunning = { fg = colors.yellow },
-      NeotestSkipped = { fg = colors.cyan },
+        QuickScopePrimary = { fg = colors.sapphire, style = { 'underline', 'bold' } },
+        QuickScopeSecondary = { fg = colors.pink, style = { 'underline' } },
 
-      IndentBlanklineContextChar = { fg = colors.dark_blue },
+        TabLine = { fg = colors.text, bg = colors.surface0 },
+        TabLineSep = { fg = colors.surface0, bg = colors.base },
+        TabLineSel = { fg = colors.base, bg = colors.flamingo },
+        TabLineSelSep = { fg = colors.flamingo, bg = colors.base },
 
-      WinBar = { fg = colors.blue, bg = colors.bg },
-      WinBarNC = { fg = colors.light_gray, bg = colors.bg },
+        TelescopeResultsDiffAdd = { fg = colors.green },
+        TelescopeResultsDiffChange = { fg = colors.yellow },
+        TelescopeResultsDiffDelete = { fg = colors.red },
+        TelescopeResultsDiffUntracked = { fg = 'NONE' },
+        TelescopeSelectionCaret = telescope_selection,
+        TelescopeSelection = telescope_selection,
 
-      NeoTreeDirectoryIcon = { link = 'NvimTreeFolderIcon' },
-      NeoTreeDirectoryName = { link = 'NvimTreeFolderName' },
-      NeoTreeSymbolicLinkTarget = { link = 'NvimTreeSymlink' },
-      NeoTreeRootName = { link = 'NvimTreeRootFolder' },
-      NeoTreeFileNameOpened = { link = 'NvimTreeOpenedFile' },
+        TreesitterContext = { fg = colors.none, bg = colors.mantle },
 
-      NeoTreeExpander = { fg = colors.selection }, -- Used for collapsed/expanded icons.
-      NeoTreeDotfile = { fg = colors.fg },
-
-      NeoTreeGitIgnored = { fg = colors.selection },
-      NeoTreeGitConflict = { fg = colors.orange, style = 'bold,italic' },
-      NeoTreeGitModified = { fg = colors.yellow },
-      NeoTreeGitUnstaged = { fg = colors.orange },
-      NeoTreeGitUntracked = { fg = colors.orange },
+        WinBar = { fg = colors.flamingo },
+        WinBarNC = { fg = colors.overlay0 },
+      }
+    end,
+    integrations = {
+      native_lsp = {
+        enabled = true,
+        underlines = {
+          errors = { 'undercurl' },
+          hints = { 'undercurl' },
+          warnings = { 'undercurl' },
+          information = { 'undercurl' },
+        },
+      },
+      neotest = true,
+      neotree = true,
+      nvimtree = false,
+      treesitter_context = true,
     },
   })
 
-  vim.cmd.colorscheme('onenord')
+  vim.cmd.colorscheme('catppuccin')
 end

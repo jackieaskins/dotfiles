@@ -4,6 +4,7 @@ local map = require('utils').map
 vim.g.is_personal_machine = false
 vim.g.additional_server_commands = {}
 vim.g.supported_servers = {}
+vim.g.catppuccin_flavour = 'macchiato'
 
 -- Map Leader to Space
 vim.g.mapleader = ' '
@@ -24,7 +25,8 @@ vim.opt.splitbelow = true
 vim.opt.splitkeep = 'screen'
 vim.opt.diffopt:append({ 'vertical' })
 vim.opt.termguicolors = true
-vim.opt.tabline = require('tabline')
+vim.opt.laststatus = 3
+vim.opt.tabline = "%{%v:lua.require('tabline').get_tabline()%}"
 
 -- Folds
 vim.opt.foldmethod = 'expr'

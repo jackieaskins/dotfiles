@@ -1,5 +1,6 @@
-local fn = vim.fn
+local augroup = require('utils').augroup
 local colors = require('colors')
+local vi_mode = require('feline.providers.vi_mode')
 local highlight = require('utils').highlight
 
 local function get_file_icon_component(filename)
@@ -8,24 +9,30 @@ local function get_file_icon_component(filename)
 end
 
 local function get_bufnr(tabnr)
-  local winnr = fn.tabpagewinnr(tabnr)
-  local buflist = fn.tabpagebuflist(tabnr)
+  local winnr = vim.fn.tabpagewinnr(tabnr)
+  local buflist = vim.fn.tabpagebuflist(tabnr)
   return buflist[winnr]
 end
 
-function GetTabLine()
-  highlight('TabLine', { fg = colors.fg_light, bg = colors.selection })
-  highlight('TabLineSel', { fg = colors.active, bg = colors.cyan })
+augroup('tabline', {
+  { 'ModeChanged', { command = 'redrawtabline' } },
+})
 
-  local num_tabs = fn.tabpagenr('$')
-  local current_tabnr = fn.tabpagenr()
+local function get_tabline()
+  local mode_color = vi_mode.get_mode_color()
+
+  highlight('TabLineSel', { fg = colors.base, bg = mode_color })
+  highlight('tabLineSelSep', { fg = mode_color, bg = colors.base })
+
+  local num_tabs = vim.fn.tabpagenr('$')
+  local current_tabnr = vim.fn.tabpagenr()
   local tabline_components = {}
 
   local filenames = {}
 
   for tabnr = 1, num_tabs do
     local bufnr = get_bufnr(tabnr)
-    local bufname = fn.fnamemodify(fn.bufname(bufnr), ':t')
+    local bufname = vim.fn.fnamemodify(vim.fn.bufname(bufnr), ':t')
 
     if bufname ~= '' then
       local count = filenames[bufname] or 0
@@ -36,9 +43,9 @@ function GetTabLine()
   for tabnr = 1, num_tabs do
     local bufnr = get_bufnr(tabnr)
 
-    local filetype = fn.getbufvar(bufnr, '&filetype')
-    local bufname = fn.bufname(bufnr)
-    local filename = fn.fnamemodify(bufname, ':t')
+    local filetype = vim.fn.getbufvar(bufnr, '&filetype')
+    local bufname = vim.fn.bufname(bufnr)
+    local filename = vim.fn.fnamemodify(bufname, ':t')
 
     local function get_bufname()
       if filetype == 'packer' then
@@ -59,17 +66,19 @@ function GetTabLine()
         return filename
       end
 
-      return fn.pathshorten(fn.fnamemodify(bufname, ':~:.'))
+      return vim.fn.pathshorten(vim.fn.fnamemodify(bufname, ':~:.'))
     end
 
-    local modified = fn.getbufvar(bufnr, '&mod') == 1 and filetype ~= 'TelescopePrompt' and ' ' or ''
-    local readonly = fn.getbufvar(bufnr, '&readonly') == 1 and ' ' or ''
+    local modified = vim.fn.getbufvar(bufnr, '&mod') == 1 and filetype ~= 'TelescopePrompt' and ' ' or ''
+    local readonly = vim.fn.getbufvar(bufnr, '&readonly') == 1 and ' ' or ''
 
     local function set_current_tab(current, other)
       return tabnr == current_tabnr and current or other
     end
 
     local components = {
+      set_current_tab('%#TabLineSelSep#', '%#TabLineSep#'),
+      tabnr == 1 and '' or '',
       set_current_tab('%#TabLineSel#', '%#TabLine#'),
       ' ',
       tabnr,
@@ -79,6 +88,8 @@ function GetTabLine()
       modified,
       readonly,
       ' ',
+      set_current_tab('%#TabLineSelSep#', '%#TabLineSep#'),
+      '',
     }
 
     table.insert(tabline_components, table.concat(components))
@@ -89,4 +100,4 @@ function GetTabLine()
   return table.concat(tabline_components)
 end
 
-return '%!luaeval("GetTabLine()")'
+return { get_tabline = get_tabline }

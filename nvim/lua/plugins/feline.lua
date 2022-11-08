@@ -2,13 +2,41 @@ local colors = require('colors')
 local vi_mode = require('feline.providers.vi_mode')
 
 ----------------------------------------------------------------------
+--                        Statusline Colors                         --
+----------------------------------------------------------------------
+local function component_colors()
+  local mode_color = vi_mode.get_mode_color()
+
+  return {
+    a = { fg = colors.base, bg = mode_color },
+    b = { fg = mode_color, bg = colors.surface0 },
+    c = { fg = colors.text, bg = colors.base },
+  }
+end
+
+local function seperator_colors()
+  local cmp = component_colors()
+
+  return {
+    a = {
+      b = { fg = cmp.a.bg, bg = cmp.b.bg },
+      c = { fg = cmp.a.bg, bg = cmp.c.bg },
+    },
+    b = {
+      c = { fg = cmp.b.bg, bg = cmp.c.bg },
+    },
+  }
+end
+
+----------------------------------------------------------------------
 --                             Helpers                              --
 ----------------------------------------------------------------------
-local active_hl = { fg = colors.fg, bg = colors.active }
-local inactive_hl = { fg = colors.light_gray, bg = colors.active }
+local function diagnostics_exist()
+  return require('feline.providers.lsp').diagnostics_exist()
+end
 
-local function mode_hl()
-  return { fg = colors.bg, bg = vi_mode.get_mode_color(), style = 'bold' }
+local function has_lsp_client()
+  return #vim.lsp.get_active_clients({ bufnr = 0 }) > 0
 end
 
 local function file_info_provider(fnamemodifier)
@@ -25,6 +53,15 @@ local function file_info_provider(fnamemodifier)
   end
 end
 
+local function diagnostic_provider(provider, color)
+  return {
+    provider = 'diagnostic_' .. provider,
+    hl = function()
+      return { fg = color, bg = component_colors().b.bg }
+    end,
+  }
+end
+
 local disabled_filetypes = {
   '^neo.tree$',
   '^DiffviewFiles$',
@@ -37,14 +74,14 @@ local active_vi_mode = {
   provider = function()
     return ' ' .. vi_mode.get_vim_mode() .. ' '
   end,
-  hl = mode_hl,
+  hl = function()
+    return component_colors().a
+  end,
   right_sep = {
-    str = 'right_filled',
+    str = 'slant_right',
     hl = function()
-      return {
-        fg = vi_mode.get_mode_color(),
-        bg = require('feline.providers.lsp').diagnostics_exist() and colors.float or colors.active,
-      }
+      local sep = seperator_colors()
+      return diagnostics_exist() and sep.a.b or sep.a.c
     end,
   },
   update = { 'ModeChanged' },
@@ -54,15 +91,24 @@ local active_spacer = {
   provider = function()
     return ' '
   end,
-  hl = { bg = colors.float },
+  hl = function()
+    return component_colors().b
+  end,
   right_sep = {
-    str = 'right_filled',
-    hl = { fg = colors.float, bg = colors.active },
+    str = 'slant_right',
+    hl = function()
+      return seperator_colors().b.c
+    end,
   },
-  enabled = require('feline.providers.lsp').diagnostics_exist,
+  enabled = diagnostics_exist,
 }
 
-local active_file_info = { provider = file_info_provider(':t'), hl = active_hl }
+local active_file_info = {
+  provider = file_info_provider(':t'),
+  hl = function()
+    return component_colors().c
+  end,
+}
 
 local active_file_type = {
   provider = {
@@ -73,54 +119,62 @@ local active_file_type = {
       case = 'lowercase',
     },
   },
-  hl = active_hl,
-  right_sep = { str = ' ', hl = active_hl },
-  priority = -1,
+  hl = function()
+    return component_colors().c
+  end,
+  right_sep = {
+    str = ' ',
+    hl = function()
+      return component_colors().c
+    end,
+  },
 }
 
 local active_lsp_client_names = {
+  enabled = has_lsp_client,
   provider = function()
     local buf_clients = vim.lsp.get_active_clients({ bufnr = 0 })
     local client_names = {}
     for _, client in ipairs(vim.tbl_values(buf_clients)) do
       client_names[client.name] = true
     end
-    return '   ' .. table.concat(vim.tbl_keys(client_names), ' ')
-  end,
-  enabled = function()
-    return #vim.lsp.get_active_clients({ bufnr = 0 }) > 0
+    return '   ' .. table.concat(vim.tbl_keys(client_names), ' ') .. ' '
   end,
   hl = function()
-    return {
-      fg = vi_mode.get_mode_color(),
-      bg = colors.highlight,
-    }
+    return component_colors().b
   end,
   left_sep = {
-    str = 'left_filled',
-    hl = { fg = colors.highlight, bg = colors.active },
+    str = 'slant_left',
+    hl = function()
+      return seperator_colors().b.c
+    end,
   },
-  right_sep = {
-    str = ' ',
-    hl = { bg = colors.highlight },
-  },
-  priority = -2,
 }
 
 local active_position = {
   provider = { name = 'position', opts = { format = ' {line}:{col} ' } },
-  hl = mode_hl,
+  hl = function()
+    return component_colors().a
+  end,
   left_sep = {
-    str = 'left_filled',
+    str = 'slant_left',
     hl = function()
-      return {
-        fg = vi_mode.get_mode_color(),
-        bg = #vim.lsp.get_active_clients({ bufnr = 0 }) > 0 and colors.highlight or colors.active,
-      }
+      local sep = seperator_colors()
+      return has_lsp_client() and sep.a.b or sep.a.c
     end,
   },
-  priority = -1,
 }
+
+----------------------------------------------------------------------
+--                        Winbar Components                         --
+----------------------------------------------------------------------
+local function winbar_file_info_provider(hl)
+  return {
+    provider = file_info_provider(':.'),
+    hl = hl,
+    right_sep = { str = ' ', hl = hl },
+  }
+end
 
 ----------------------------------------------------------------------
 --                              Setup                               --
@@ -130,24 +184,14 @@ require('feline').setup({
     active = {
       {
         active_vi_mode,
-        { provider = 'diagnostic_errors', hl = { fg = colors.error, bg = colors.float } },
-        { provider = 'diagnostic_warnings', hl = { fg = colors.warn, bg = colors.float } },
-        { provider = 'diagnostic_hints', hl = { fg = colors.hint, bg = colors.float } },
-        { provider = 'diagnostic_info', hl = { fg = colors.info, bg = colors.float } },
+        diagnostic_provider('errors', colors.red),
+        diagnostic_provider('warnings', colors.yellow),
+        diagnostic_provider('hints', colors.teal),
+        diagnostic_provider('info', colors.sky),
         active_spacer,
         active_file_info,
       },
       { active_file_type, active_lsp_client_names, active_position },
-    },
-    inactive = {
-      {
-        {
-          provider = file_info_provider(':t'),
-          hl = inactive_hl,
-          right_sep = { str = ' ', hl = inactive_hl },
-        },
-      },
-      { { provider = 'position', hl = inactive_hl } },
     },
   },
   force_inactive = {
@@ -155,47 +199,48 @@ require('feline').setup({
     buftypes = {},
     bufnames = {},
   },
-  disable = { filetypes = disabled_filetypes },
   vi_mode_colors = {
-    NORMAL = colors.cyan,
-    OP = colors.cyan,
+    NORMAL = colors.flamingo,
+    OP = colors.flamingo,
 
-    VISUAL = colors.yellow,
-    LINES = colors.yellow,
-    BLOCK = colors.yellow,
-    SELECT = colors.yellow,
+    VISUAL = colors.teal,
+    LINES = colors.teal,
+    BLOCK = colors.teal,
+    SELECT = colors.teal,
 
     INSERT = colors.green,
 
-    REPLACE = colors.red,
-    ['V-REPLACE'] = colors.red,
+    REPLACE = colors.maroon,
+    ['V-REPLACE'] = colors.maroon,
 
-    ENTER = colors.purple,
-    MORE = colors.purple,
-    COMMAND = colors.purple,
-    SHELL = colors.purple,
-    TERM = colors.purple,
+    ENTER = colors.peach,
+    MORE = colors.peach,
+    COMMAND = colors.peach,
+    SHELL = colors.peach,
+    TERM = colors.peach,
 
-    NONE = colors.orange,
+    NONE = colors.mauve,
   },
 })
 
-local function winbar_file_info_provider(hl)
-  return {
-    provider = file_info_provider(':.'),
-    hl = hl,
-    right_sep = { str = ' ', hl = hl },
-  }
-end
 require('feline').winbar.setup({
   components = {
     active = {
       {},
-      { winbar_file_info_provider('WinBar') },
+      {
+        winbar_file_info_provider(function()
+          local cmp_colors = component_colors()
+          return { fg = cmp_colors.a.bg, bg = colors.base }
+        end),
+      },
     },
     inactive = {
       {},
-      { winbar_file_info_provider('WinBarNC') },
+      {
+        winbar_file_info_provider(function()
+          return { fg = colors.overlay0, bg = colors.base }
+        end),
+      },
     },
   },
   disable = { filetypes = disabled_filetypes },

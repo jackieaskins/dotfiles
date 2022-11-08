@@ -1,2 +1,2 @@
-local success, colors = pcall(require, 'onenord.colors')
-return success and colors.load() or {}
+local success, palette = pcall(require, 'catppuccin.palettes')
+return success and palette.get_palette() or {}

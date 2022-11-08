@@ -27,6 +27,8 @@ Plug 'mhinz/vim-startify'
 Plug 'lambdalisue/nerdfont.vim'
 Plug 'lambdalisue/glyph-palette.vim'
 
+Plug 'catppuccin/vim', { 'as': 'catppuccin' }
+
 Plug 'itchyny/lightline.vim'
 Plug 'josa42/vim-lightline-coc'
 " }}}
