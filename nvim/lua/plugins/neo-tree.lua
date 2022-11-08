@@ -1,4 +1,5 @@
 local neotree = require('neo-tree')
+local diagnostic_icons = require('diagnostic.icons')
 
 vim.g.neo_tree_remove_legacy_commands = 1
 
@@ -76,6 +77,30 @@ end
 neotree.setup({
   close_if_last_window = true,
   default_component_configs = {
+    diagnostics = {
+      symbols = {
+        hint = diagnostic_icons.Hint,
+        info = diagnostic_icons.Info,
+        warn = diagnostic_icons.Warn,
+        error = diagnostic_icons.Error,
+      },
+    },
+    git_status = {
+      symbols = {
+        -- Change type
+        added = '',
+        deleted = '',
+        modified = '',
+        renamed = '➜',
+
+        -- Status type
+        untracked = '★',
+        ignored = '◌',
+        unstaged = '✗',
+        staged = '✓',
+        conflict = '',
+      },
+    },
     icon = { folder_empty = '' },
     indent = { with_expanders = true },
     modified = { highlight = 'Normal' },

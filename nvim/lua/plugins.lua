@@ -16,7 +16,6 @@ return require('packer').startup({
     end
 
     -- Dev Tools {{{
-    use({ 'milisims/nvim-luaref' })
     use({ 'lewis6991/impatient.nvim' })
     use({ 'dstein64/vim-startuptime', cmd = 'StartupTime' })
     use({
@@ -208,7 +207,11 @@ return require('packer').startup({
       end,
       requires = 'nvim-lua/plenary.nvim',
     })
-    use({ 'tpope/vim-fugitive', cmd = { 'Git', 'G', 'Gread' } })
+    use({
+      'tpope/vim-fugitive',
+      bufread = false,
+      cmd = { 'Git', 'G', 'Gread' },
+    })
     use({
       'sindrets/diffview.nvim',
       cmd = { 'DiffviewOpen', 'DiffviewFileHistory' },

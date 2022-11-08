@@ -14,7 +14,7 @@ return function(_, bufnr)
 
   bsk('n', 'gi', '<cmd>Telescope lsp_implementations<CR>')
   bsk('n', 'gd', '<cmd>Telescope lsp_definitions<CR>')
-  bsk('n', 'gr', '<cmd>Telescope lsp_references include_declaration=false<CR>')
+  bsk('n', 'gr', '<cmd>Telescope lsp_references include_declaration=false jump_type=vsplit<CR>')
 
   bsk('n', 'K', vim.lsp.buf.hover, { desc = 'Hover' })
   bsk({ 'i', 'n' }, '<C-S>', vim.lsp.buf.signature_help, { desc = 'vim.lsp.buf.signature_help' })
