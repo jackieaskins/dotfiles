@@ -36,11 +36,6 @@
                                         ]
                                     }
                                 ],
-                                "to_if_alone": [
-                                    {
-                                        "key_code": "fn"
-                                    }
-                                ],
                                 "type": "basic"
                             }
                         ]
