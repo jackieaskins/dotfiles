@@ -58,6 +58,20 @@ map('n', '<leader>dv', function()
   end
 end)
 
+-- LuaSnip
+local function luasnip()
+  return require('luasnip')
+end
+map('i', '<C-Y>', function()
+  luasnip().expand()
+end, { desc = 'Expand snippet' })
+map({ 'i', 's' }, '<C-J>', function()
+  luasnip().expand_or_jump()
+end, { desc = 'Expand snippet or jump to next placeholder' })
+map({ 'i', 's' }, '<C-K>', function()
+  luasnip().jump(-1)
+end, { desc = 'Jump to previous placeholder' })
+
 -- Markdown Preview
 map('n', '<leader>mp', vim.cmd.MarkdownPreview)
 

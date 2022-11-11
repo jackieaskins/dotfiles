@@ -1,5 +1,4 @@
 local cmp = require('cmp')
-local luasnip = require('luasnip')
 
 local source_menu_map = {
   emmet = 'Emmet',
@@ -16,7 +15,7 @@ cmp.setup({
   preselect = cmp.PreselectMode.Item,
   snippet = {
     expand = function(args)
-      luasnip.lsp_expand(args.body)
+      require('luasnip').lsp_expand(args.body)
     end,
   },
   -- Order dictates priority

@@ -236,7 +236,7 @@ require('feline').winbar.setup({
     },
     inactive = {
       {},
-      { winbar_file_info_provider({ fg = colors.overlay0, bg = '#292d40' }) },
+      { winbar_file_info_provider('WinBarNC') },
     },
   },
   disable = { filetypes = disabled_filetypes },

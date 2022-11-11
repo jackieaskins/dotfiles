@@ -22,15 +22,14 @@ if success then
         TelescopeResultsDiffChange = { fg = colors.yellow },
         TelescopeResultsDiffDelete = { fg = colors.red },
         TelescopeResultsDiffUntracked = { fg = 'NONE' },
-        TelescopeSelectionCaret = telescope_selection,
         TelescopeSelection = telescope_selection,
+        TelescopeSelectionCaret = telescope_selection,
 
         TreesitterContext = { fg = 'NONE', bg = colors.mantle },
 
-        WinBarNC = { fg = colors.overlay0, bg = '#292d40' },
+        WinBarNC = { fg = colors.overlay0 },
       }
     end,
-    dim_inactive = { enabled = true, shade = 'light', percentage = 0.3 },
     integrations = {
       native_lsp = {
         enabled = true,
@@ -49,4 +48,9 @@ if success then
   })
 
   vim.cmd.colorscheme('catppuccin')
+
+  local ok, tint = pcall(require, 'tint')
+  if ok then
+    tint.refresh()
+  end
 end

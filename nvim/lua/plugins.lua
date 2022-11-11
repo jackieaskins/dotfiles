@@ -56,6 +56,12 @@ return require('packer').startup({
     use({ 'stevearc/dressing.nvim' })
     use({ 'catppuccin/nvim', as = 'catppuccin' })
     use({
+      'levouh/tint.nvim',
+      config = function()
+        require('plugins.tint')
+      end,
+    })
+    use({
       'nvim-treesitter/nvim-treesitter-context',
       config = function()
         require('treesitter-context').setup()
@@ -125,9 +131,11 @@ return require('packer').startup({
     })
     use({
       'L3MON4D3/LuaSnip',
+      bufread = false,
       config = function()
         require('plugins.LuaSnip')
       end,
+      module = 'luasnip',
     })
     use({
       'hrsh7th/nvim-cmp',
@@ -223,6 +231,7 @@ return require('packer').startup({
     use({
       'nvim-neo-tree/neo-tree.nvim',
       branch = 'v2.x',
+      cmd = 'Neotree',
       config = function()
         require('plugins.neo-tree')
       end,
@@ -292,11 +301,7 @@ return require('packer').startup({
         require('plugins.treesitter')
       end,
       requires = {
-        {
-          'nvim-treesitter/playground',
-          cmd = { 'TSPlaygroundToggle', 'TSHighlightCapturesUnderCursor' },
-          bufread = false,
-        },
+        'nvim-treesitter/playground',
         local_plugin('nvim-ts-autotag'),
         'RRethy/nvim-treesitter-textsubjects',
         'JoosepAlviste/nvim-ts-context-commentstring',
@@ -310,6 +315,7 @@ return require('packer').startup({
     -- Testing {{{
     use({
       'nvim-neotest/neotest',
+      bufread = false,
       config = function()
         require('plugins.neotest')
       end,

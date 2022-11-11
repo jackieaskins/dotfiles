@@ -1,4 +1,3 @@
-local map = require('utils').map
 local luasnip = require('luasnip')
 local snippet = luasnip.snippet
 local snippet_node = luasnip.snippet_node
@@ -10,12 +9,6 @@ local fmt = require('luasnip.extras.fmt').fmt
 require('luasnip.loaders.from_vscode').lazy_load({
   paths = { '~/dotfiles/vim-common' },
 })
-
-map('i', '<C-Y>', luasnip.expand, { desc = 'Expand snippet' })
-map({ 'i', 's' }, '<C-J>', luasnip.expand_or_jump, { desc = 'Expand snippet or jump to next placeholder' })
-map({ 'i', 's' }, '<C-K>', function()
-  luasnip.jump(-1)
-end, { desc = 'Jump to previous placeholder' })
 
 luasnip.config.set_config({
   updateevents = 'TextChanged,TextChangedI',
