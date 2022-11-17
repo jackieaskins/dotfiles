@@ -10,6 +10,8 @@ if success then
       return {
         CursorLineNr = vim.tbl_extend('force', editor_highlights.CursorLine, editor_highlights.CursorLineNr),
 
+        Folded = { fg = colors.blue, bg = colors.mantle },
+
         NeoTreeNormal = { fg = colors.text, bg = colors.base },
 
         QuickScopePrimary = { fg = colors.sapphire, sp = colors.sapphire, style = { 'underline', 'bold' } },

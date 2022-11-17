@@ -64,7 +64,7 @@ return require('packer').startup({
     use({
       'nvim-treesitter/nvim-treesitter-context',
       config = function()
-        require('treesitter-context').setup()
+        require('plugins.treesitter-context')
       end,
     })
     use({

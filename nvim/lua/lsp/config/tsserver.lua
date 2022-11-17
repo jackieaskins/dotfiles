@@ -11,10 +11,7 @@ typescript.setup({
         map(mode, lhs, rhs, vim.tbl_extend('keep', { buffer = bufnr }, opts or {}))
       end
 
-      -- Test new go to source definition function
-      bsk('n', 'gi', vim.cmd.TypescriptGoToSourceDefinition)
-
-      -- TODO: Handle import all
+      -- TODO: Handle single import
       bsk('n', '<leader>oi', typescript.actions.organizeImports, { desc = 'Organize imports' })
       bsk('n', '<leader>ia', function()
         typescript.actions.addMissingImports({ sync = true })

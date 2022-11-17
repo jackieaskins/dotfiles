@@ -40,10 +40,10 @@ web_devicons.set_icon({
     cterm_color = zsh_cterm_color,
     name = 'Zsh',
   },
-  NvimTree = {
+  ['neo-tree filesystem [1]'] = {
     icon = '',
     color = '#358a5b',
-    name = 'NvimTree',
+    name = 'NeoTree',
   },
   packer = {
     icon = '',

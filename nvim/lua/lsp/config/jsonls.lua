@@ -11,9 +11,18 @@ return function(config)
           fileMatch = { '.eslintrc', '.eslintrc.json' },
           url = 'https://json.schemastore.org/eslintrc.json',
         },
-        { fileMatch = { 'package.json' }, url = 'https://json.schemastore.org/package.json' },
-        { fileMatch = { 'jsconfig*.json' }, url = 'https://json.schemastore.org/jsconfig.json' },
-        { fileMatch = { 'tsconfig*.json' }, url = 'https://json.schemastore.org/tsconfig.json' },
+        {
+          fileMatch = { 'package.json' },
+          url = 'https://json.schemastore.org/package.json',
+        },
+        {
+          fileMatch = { 'jsconfig*.json' },
+          url = 'https://json.schemastore.org/jsconfig.json',
+        },
+        {
+          fileMatch = { 'tsconfig*.json' },
+          url = 'https://json.schemastore.org/tsconfig.json',
+        },
       },
     },
   }

@@ -4,7 +4,7 @@ require('tint').setup({
   highlight_ignore_patterns = {
     'EndOfBuffer',
     'IndentBlanklineChar',
-    'LineNr',
+    '^LineNr',
     'WinbarNC',
     'WinSeparator',
   },
