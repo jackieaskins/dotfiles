@@ -22,14 +22,13 @@ spoon.ReloadConfiguration:bindHotkeys({
 ----------------------------------------------------------------------
 --                             Keymaps                              --
 ----------------------------------------------------------------------
-local app_keys = {
+for key, app in pairs({
   b = 'Brave Browser',
   i = 'Messages',
   m = 'Spotify',
   t = 'kitty',
-}
-for key, app in pairs(app_keys) do
-  hs.hotkey.bind(MEH, key, function()
+}) do
+  hs.hotkey.bind({ 'option', 'control' }, key, function()
     hs.application.launchOrFocus(app)
   end)
 end
@@ -37,14 +36,38 @@ end
 hs.hotkey.bind(MEH, 'tab', hs.window.switcher.nextWindow)
 
 ----------------------------------------------------------------------
---                        Window Highlights                         --
+--                        Window Management                         --
 ----------------------------------------------------------------------
-hs.window.highlight.ui.frameColor = hs.drawing.color.asRGB({ hex = '#A6DA95', alpha = 1 })
-hs.window.highlight.ui.frameWidth = 2
-hs.window.highlight.ui.overlayColor = { 0, 0, 0, 0.01 }
-hs.window.highlight.ui.overlay = true
+hs.window.setShadows(false)
+hs.window.animationDuration = 0
 
-hs.window.highlight.start()
+twm = require('twm')
+twm.start()
+
+hs.hotkey.bind(MEH, 'f', twm.toggleFloat)
+hs.hotkey.bind(MEH, 'p', twm.showLayout)
+hs.hotkey.bind(MEH, 'c', twm.chooseLayout)
+
+hs.hotkey.bind(MEH, 'h', twm.focusWindowWest)
+hs.hotkey.bind(MEH, 'j', twm.focusWindowSouth)
+hs.hotkey.bind(MEH, 'k', twm.focusWindowNorth)
+hs.hotkey.bind(MEH, 'l', twm.focusWindowEast)
+
+hs.hotkey.bind(HYPER, 'h', twm.swapWindowWest)
+hs.hotkey.bind(HYPER, 'j', twm.swapWindowSouth)
+hs.hotkey.bind(HYPER, 'k', twm.swapWindowNorth)
+hs.hotkey.bind(HYPER, 'l', twm.swapWindowEast)
+
+function setLayout(layout)
+  return function()
+    twm.setLayout(layout)
+  end
+end
+hs.hotkey.bind(HYPER, 'f', setLayout('floating'))
+hs.hotkey.bind(MEH, 's', setLayout('monocle'))
+hs.hotkey.bind(HYPER, 's', setLayout('tall'))
+
+require('windowBorder')
 
 ----------------------------------------------------------------------
 --                               Misc                               --
