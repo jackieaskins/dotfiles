@@ -7,7 +7,12 @@ local M = {}
 -- Lifecyle {{{
 ---Start tiling windows on all spaces
 function M.start()
-  cache.windowFilter:subscribe({ hs.window.filter.windowsChanged }, M.tile)
+  cache.windowFilter:subscribe({
+    hs.window.filter.windowsChanged,
+    hs.window.filter.windowInCurrentSpace,
+    hs.window.filter.windowNotInCurrentSpace,
+    hs.window.filter.windowFocused,
+  }, M.tile)
   M.tile()
 end
 -- }}}

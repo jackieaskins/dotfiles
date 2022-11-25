@@ -6,11 +6,11 @@ return {
     .new()
     :setDefaultFilter()
     :setOverrideFilter({
-      visible = true,
-      fullscreen = false,
       allowRoles = { 'AXStandardWindow' },
+      visible = true,
     })
     :setFilters({
+      ['System Settings'] = false,
       ['Brave Browser'] = { rejectTitles = 'Picture in Picture' },
       ['Google Chrome'] = { rejectTitles = 'Picture in Picture' },
       ['Hammerspoon'] = { rejectTitles = 'Hammerspoon Console' },

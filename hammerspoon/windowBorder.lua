@@ -2,16 +2,27 @@ BORDER_SIZE = 1.0
 BORDER_RADIUS = 10.0
 FOCUSED_WINDOW_BORDER = nil
 
-FILE_WATCHER = hs.window.filter.new():setFilters({
-  Alfred = { rejectTitles = '' }, -- Ignore Alfred launcher
-})
+FILE_WATCHER = hs.window.filter
+  .new()
+  :setOverrideFilter({
+    allowRoles = { 'AXStandardWindow' },
+  })
+  :setFilters({
+    Alfred = { rejectTitles = '' }, -- Ignore Alfred launcher
+  })
 
 local function addFocusedWindowBorder()
   if FOCUSED_WINDOW_BORDER ~= nil then
     FOCUSED_WINDOW_BORDER:delete()
+    FOCUSED_WINDOW_BORDER = nil
   end
 
   local focusedWindow = hs.window.focusedWindow()
+
+  if not focusedWindow then
+    return
+  end
+
   local activeScreenFrame = focusedWindow:screen():fullFrame()
   local focusedWindowFrame = focusedWindow:frame()
 
