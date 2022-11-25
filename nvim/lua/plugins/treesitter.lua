@@ -1,12 +1,13 @@
 require('nvim-treesitter.configs').setup({
   ensure_installed = {
     'bash',
-    'css',
     'comment',
+    'css',
     'dart',
     'go',
     'gomod',
     'graphql',
+    'help',
     'html',
     'java',
     'javascript',
@@ -63,16 +64,28 @@ require('nvim-treesitter.configs').setup({
       enable = true,
       set_jumps = true,
       goto_next_start = {
-        [']m'] = { '@function.outer', '@class.outer' },
+        [']m'] = {
+          query = { '@function.outer', '@class.outer' },
+          desc = 'Go to start of next function/class',
+        },
       },
       goto_previous_start = {
-        ['[m'] = { '@function.outer', '@class.outer' },
+        ['[m'] = {
+          query = { '@function.outer', '@class.outer' },
+          desc = 'Go to start of previous function/class',
+        },
       },
       goto_next_end = {
-        [']M'] = { '@function.outer', '@class.outer' },
+        [']M'] = {
+          query = { '@function.outer', '@class.outer' },
+          desc = 'Go to end of next function/class',
+        },
       },
       goto_previous_end = {
-        ['[M'] = { '@function.outer', '@class.outer' },
+        ['[M'] = {
+          query = { '@function.outer', '@class.outer' },
+          desc = 'Go to end of previous function/class',
+        },
       },
     },
     select = {

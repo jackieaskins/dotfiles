@@ -141,6 +141,10 @@ map('n', '<leader>of', '<cmd>Telescope oldfiles cwd_only=true sort_lastused=true
 map('n', '<leader>z=', '<cmd>Telescope spell_suggest<CR>')
 map('n', '<leader>pp', '<cmd>Telescope packer<CR>')
 
+-- TreeSJ
+map('n', 'gJ', vim.cmd.TSJJoin)
+map('n', 'gS', vim.cmd.TSJSplit)
+
 -- Vimux
 map('n', '<leader>vt', vim.cmd.VimuxTogglePane, { desc = 'VimuxTogglePane' })
 map('n', '<leader>vi', vim.cmd.VimuxInterruptRunner, { desc = 'VimuxInterruptRunner' })

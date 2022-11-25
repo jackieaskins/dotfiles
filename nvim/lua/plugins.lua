@@ -68,7 +68,7 @@ return require('packer').startup({
       end,
     })
     use({
-      'kyazdani42/nvim-web-devicons',
+      'nvim-tree/nvim-web-devicons',
       config = function()
         require('plugins.web-devicons')
       end,
@@ -160,10 +160,6 @@ return require('packer').startup({
       cmd = 'Neoformat',
     })
     use({
-      'mizlan/iswap.nvim',
-      cmd = { 'ISwap', 'ISwapWith', 'ISwapWithLeft', 'ISwapWithRight' },
-    })
-    use({
       'gaoDean/autolist.nvim',
       ft = 'markdown',
       config = function()
@@ -180,9 +176,10 @@ return require('packer').startup({
       end,
     })
     use({
-      'AndrewRadev/splitjoin.vim',
+      'Wansmer/treesj',
+      cmd = { 'TSJJoin', 'TSJSplit' },
       config = function()
-        require('plugins.splitjoin')
+        require('plugins.treesj')
       end,
     })
     use({ 'tpope/vim-surround' })
@@ -235,7 +232,11 @@ return require('packer').startup({
       config = function()
         require('plugins.neo-tree')
       end,
-      requires = { 'nvim-lua/plenary.nvim', 'kyazdani42/nvim-web-devicons', 'MunifTanjim/nui.nvim' },
+      requires = {
+        'nvim-lua/plenary.nvim',
+        'nvim-tree/nvim-web-devicons',
+        'MunifTanjim/nui.nvim',
+      },
     })
     use({
       'nvim-telescope/telescope.nvim',
@@ -246,9 +247,9 @@ return require('packer').startup({
       end,
       module = 'telescope',
       requires = {
-        { 'LinArcX/telescope-env.nvim', opt = true },
         { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', opt = true },
         { 'nvim-telescope/telescope-packer.nvim', opt = true },
+        { 'danielvolchek/tailiscope.nvim', opt = true },
       },
     })
     -- }}}

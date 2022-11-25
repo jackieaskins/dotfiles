@@ -1,4 +1,11 @@
 return function(config)
+  config.on_attach = function(...)
+    require('lsp.attach')(...)
+
+    require('packer').loader('tailiscope.nvim')
+    require('telescope').load_extension('tailiscope')
+    require('utils').map('n', '<leader>tw', '<cmd>Telescope tailiscope<CR>')
+  end
   config.root_dir = require('lspconfig').util.root_pattern(
     'tailwind.config.js',
     'tailwind.config.ts',

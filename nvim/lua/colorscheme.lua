@@ -8,14 +8,17 @@ if success then
       local telescope_selection = vim.tbl_extend('force', editor_highlights.CursorLine, { fg = colors.peach })
 
       return {
-        CursorLineNr = vim.tbl_extend('force', editor_highlights.CursorLine, editor_highlights.CursorLineNr),
+        CursorLineNr = vim.tbl_extend('force', editor_highlights.CursorLine, {
+          fg = colors.lavender,
+          style = { 'bold' },
+        }),
 
         Folded = { fg = colors.blue, bg = colors.mantle },
 
-        NeoTreeNormal = { fg = colors.text, bg = colors.base },
+        NeoTreeNormal = { bg = colors.base },
 
-        QuickScopePrimary = { fg = colors.sapphire, sp = colors.sapphire, style = { 'underline', 'bold' } },
-        QuickScopeSecondary = { fg = colors.pink, sp = colors.pink, style = { 'underline' } },
+        QuickScopePrimary = { fg = colors.sapphire, style = { 'underline', 'bold' } },
+        QuickScopeSecondary = { fg = colors.pink, style = { 'underline' } },
 
         TabLine = { fg = colors.text, bg = colors.surface0 },
         TabLineSep = { fg = colors.surface0, bg = colors.base },
@@ -27,7 +30,7 @@ if success then
         TelescopeSelection = telescope_selection,
         TelescopeSelectionCaret = telescope_selection,
 
-        TreesitterContext = { fg = 'NONE', bg = colors.mantle },
+        TreesitterContext = { bg = colors.mantle },
 
         WinBarNC = { fg = colors.overlay0 },
       }

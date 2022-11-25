@@ -28,5 +28,6 @@ if vim.startswith(uri, 'jdt://') then
     return notify_err('An error occurred retrieving class file contents: ' .. err)
   end
 
-  vim.api.nvim_buf_set_lines(buf, 0, -1, false, vim.split(response.result, '\n', true))
+  local lines = vim.split(response.result, '\n', { plain = true })
+  vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
 end
