@@ -41,6 +41,11 @@ function M.chooseLayout()
   layout.choose()
 end
 
+---Get the current space layout
+function M.getLayout()
+  return layout.get()
+end
+
 ---Show an alert with the current space layout
 function M.showLayout()
   layout.show()

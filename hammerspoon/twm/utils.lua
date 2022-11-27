@@ -44,7 +44,7 @@ end
 function M.tileSpace(spaceId, windowsBySpace)
   local windows = M.getSortedSpaceWindows(
     ---@diagnostic disable-next-line: param-type-mismatch
-    hs.fnutils.filter(windowsBySpace[spaceId], function(window)
+    hs.fnutils.filter(windowsBySpace[spaceId] or {}, function(window)
       return not M.isFloating(window)
     end),
     cache.spaceWindows[spaceId] or {}

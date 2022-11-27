@@ -58,16 +58,33 @@ hs.hotkey.bind(HYPER, 'j', twm.swapWindowSouth)
 hs.hotkey.bind(HYPER, 'k', twm.swapWindowNorth)
 hs.hotkey.bind(HYPER, 'l', twm.swapWindowEast)
 
-function setLayout(layout)
-  return function()
-    twm.setLayout(layout)
-  end
-end
-hs.hotkey.bind(HYPER, 'f', setLayout('floating'))
-hs.hotkey.bind(MEH, 's', setLayout('monocle'))
-hs.hotkey.bind(HYPER, 's', setLayout('tall'))
+hs.hotkey.bind(HYPER, 'f', function()
+  twm.setLayout('floating')
+end)
+hs.hotkey.bind(MEH, 's', function()
+  local currentLayout = twm.getLayout()
+  twm.setLayout(currentLayout == 'monocle' and 'tall' or 'monocle')
+end)
 
-require('windowBorder')
+----------------------------------------------------------------------
+--                      Spotify Notifications                       --
+----------------------------------------------------------------------
+hs.hotkey.bind(HYPER, 's', hs.spotify.displayCurrentTrack)
+spotifyNotification = hs.distributednotifications.new(function()
+  if hs.spotify.isPlaying() then
+    hs.notify
+      .new(function()
+        hs.application.open('Spotify')
+      end, {
+        title = hs.spotify.getCurrentTrack(),
+        subTitle = hs.spotify.getCurrentArtist(),
+        informativeText = hs.spotify.getCurrentAlbum(),
+      })
+      :send()
+  end
+end, 'com.spotify.client.PlaybackStateChanged')
+
+spotifyNotification:start()
 
 ----------------------------------------------------------------------
 --                               Misc                               --

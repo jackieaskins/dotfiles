@@ -60,4 +60,5 @@ FILE_WATCHER:subscribe({
   hs.window.filter.windowFocused,
   hs.window.filter.windowMoved,
   hs.window.filter.windowsChanged,
+  hs.window.filter.windowDestroyed,
 }, addFocusedWindowBorder)

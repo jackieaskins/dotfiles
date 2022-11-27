@@ -32,6 +32,11 @@ function M.choose(spaceId)
     :show()
 end
 
+function M.get(spaceId)
+  local space = spaceId or hs.spaces.focusedSpace()
+  return cache.spaceLayouts[space]
+end
+
 function M.set(layout, spaceId)
   if not hs.fnutils.contains(M.list(), layout) then
     return
