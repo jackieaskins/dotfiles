@@ -71,25 +71,37 @@ end
 ---Change focus to the nearest window to the west
 ---@param win hs.window
 function M.focusWindowWest(win)
-  (win or hs.window.focusedWindow()):focusWindowWest()
+  local window = win or hs.window.focusedWindow()
+  if not window:focusWindowWest() then
+    utils.focusWindowToLeft(window)
+  end
 end
 
 ---Change focus to the nearest window to the south
 ---@param win hs.window
 function M.focusWindowSouth(win)
-  (win or hs.window.focusedWindow()):focusWindowSouth()
+  local window = win or hs.window.focusedWindow()
+  if not window:focusWindowSouth() then
+    utils.focusWindowToRight(window)
+  end
 end
 
 ---Change focus to the nearest window to the north
 ---@param win hs.window
 function M.focusWindowNorth(win)
-  (win or hs.window.focusedWindow()):focusWindowNorth()
+  local window = win or hs.window.focusedWindow()
+  if not window:focusWindowNorth() then
+    utils.focusWindowToLeft(window)
+  end
 end
 
 ---Change focus to the nearest window to the east
 ---@param win hs.window
 function M.focusWindowEast(win)
-  (win or hs.window.focusedWindow()):focusWindowEast()
+  local window = win or hs.window.focusedWindow()
+  if not window:focusWindowEast() then
+    utils.focusWindowToRight(window)
+  end
 end
 -- }}}
 

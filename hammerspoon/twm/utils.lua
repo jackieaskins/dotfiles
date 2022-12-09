@@ -68,7 +68,6 @@ function M.tileSpace(spaceId, windowsBySpace)
   if #windows == 1 then
     supportedLayouts.monocle(windows, screenFrame)
   else
-    print(currentLayout, supportedLayouts[currentLayout])
     supportedLayouts[currentLayout](windows, screenFrame)
   end
 end
@@ -83,6 +82,28 @@ function M.tile()
       end
     end
   end
+end
+
+---Focus the window to the left of the window in the space windows list
+---@param window hs.window
+function M.focusWindowToLeft(window)
+  local space = hs.spaces.windowSpaces(window)[1]
+  local windows = cache.getSpaceWindows(space) or {}
+  local windowIndex = hs.fnutils.indexOf(windows, window:id())
+  local nextWindowIndex = windowIndex == 1 and #windows or windowIndex - 1
+
+  hs.window.get(windows[nextWindowIndex]):focus()
+end
+
+---Focus the window to the right of the window in the space windows list
+---@param window hs.window
+function M.focusWindowToRight(window)
+  local space = hs.spaces.windowSpaces(window)[1]
+  local windows = cache.getSpaceWindows(space) or {}
+  local windowIndex = hs.fnutils.indexOf(windows, window:id())
+  local nextWindowIndex = windowIndex == #windows and 1 or windowIndex + 1
+
+  hs.window.get(windows[nextWindowIndex]):focus()
 end
 
 ---Get windows in direction

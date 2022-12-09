@@ -15,7 +15,6 @@ function M.setFloatingWindow(windowId, isFloating)
 end
 
 function M.getSpaceLayout(space)
-  print('Space layouts', hs.inspect(spaceLayouts))
   return spaceLayouts[tostring(space)]
 end
 
