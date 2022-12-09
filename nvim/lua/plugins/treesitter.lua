@@ -4,6 +4,8 @@ require('nvim-treesitter.configs').setup({
     'comment',
     'css',
     'dart',
+    'godot_resource',
+    'gdscript',
     'go',
     'gomod',
     'graphql',

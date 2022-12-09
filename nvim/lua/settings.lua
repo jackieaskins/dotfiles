@@ -39,7 +39,7 @@ vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 vim.opt.expandtab = true
 vim.opt.list = true
-vim.opt.listchars = 'tab:··,trail:·'
+vim.opt.listchars = 'tab:  ,trail:·'
 
 -- Timeouts
 vim.opt.ttimeoutlen = 10

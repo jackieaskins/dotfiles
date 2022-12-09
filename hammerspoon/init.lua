@@ -24,6 +24,7 @@ spoon.ReloadConfiguration:bindHotkeys({
 ----------------------------------------------------------------------
 for key, app in pairs({
   b = 'Brave Browser',
+  g = 'Godot',
   i = 'Messages',
   m = 'Spotify',
   t = 'kitty',

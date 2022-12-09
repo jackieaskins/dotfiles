@@ -16,6 +16,7 @@ end
 local install_commands = {
   cssls = { 'npm', 'vscode-langservers-extracted' },
   eslint = { 'npm', 'vscode-langservers-extracted' },
+  gdscript = { 'brew', 'godot' },
   gopls = { 'go', 'golang.org/x/tools/gopls@latest' },
   graphql = { 'npm', 'graphql-language-service-cli' },
   html = { 'npm', 'vscode-langservers-extracted' },
