@@ -1,4 +1,5 @@
 local cache = require('twm.cache')
+local windowFilter = require('twm.windowFilter')
 local supportedLayouts = require('twm.supportedLayouts')
 
 local M = {}
@@ -23,7 +24,7 @@ end
 function M.getWindowsBySpaceMap()
   local windowsBySpace = {}
 
-  for _, window in ipairs(cache.windowFilter:getWindows()) do
+  for _, window in ipairs(windowFilter:getWindows()) do
     local spaceIds = hs.spaces.windowSpaces(window)
     if not spaceIds or #spaceIds ~= 1 then
       print('Window is included on multiple screens, not tiling it')
@@ -47,14 +48,17 @@ function M.tileSpace(spaceId, windowsBySpace)
     hs.fnutils.filter(windowsBySpace[spaceId] or {}, function(window)
       return not M.isFloating(window)
     end),
-    cache.spaceWindows[spaceId] or {}
+    cache.getSpaceWindows(spaceId) or {}
   )
 
-  local currentLayout = cache.spaceLayouts[spaceId] or 'tall'
-  cache.spaceLayouts[spaceId] = currentLayout
-  cache.spaceWindows[spaceId] = hs.fnutils.map(windows, function(window)
-    return window:id()
-  end)
+  local currentLayout = cache.getSpaceLayout(spaceId) or 'tall'
+  cache.setSpaceLayout(spaceId, currentLayout)
+  cache.setSpaceWindows(
+    spaceId,
+    hs.fnutils.map(windows, function(window)
+      return window:id()
+    end)
+  )
 
   if #windows == 0 then
     return
@@ -64,6 +68,7 @@ function M.tileSpace(spaceId, windowsBySpace)
   if #windows == 1 then
     supportedLayouts.monocle(windows, screenFrame)
   else
+    print(currentLayout, supportedLayouts[currentLayout])
     supportedLayouts[currentLayout](windows, screenFrame)
   end
 end
@@ -71,7 +76,7 @@ end
 ---Tile windows on all screens
 function M.tile()
   local windowsBySpace = M.getWindowsBySpaceMap()
-  for _, spaceIds in pairs(hs.spaces.allSpaces()) do
+  for _, spaceIds in pairs(hs.spaces.allSpaces() or {}) do
     for _, spaceId in ipairs(spaceIds) do
       if hs.spaces.spaceType(spaceId) == 'user' then
         M.tileSpace(spaceId, windowsBySpace)
@@ -85,13 +90,13 @@ end
 ---@param dir 'west'|'south'|'north'|'east'
 function M.windowsToDir(window, dir)
   if dir == 'west' then
-    return cache.windowFilter:windowsToWest(window, false, true)
+    return windowFilter:windowsToWest(window, false, true)
   elseif dir == 'south' then
-    return cache.windowFilter:windowsToSouth(window, false, true)
+    return windowFilter:windowsToSouth(window, false, true)
   elseif dir == 'north' then
-    return cache.windowFilter:windowsToNorth(window, false, true)
+    return windowFilter:windowsToNorth(window, false, true)
   elseif dir == 'east' then
-    return cache.windowFilter:windowsToEast(window, false, true)
+    return windowFilter:windowsToEast(window, false, true)
   end
 end
 
@@ -103,9 +108,9 @@ function M.swapWindow(window, dir)
     return
   end
 
-  local windows = M.windowsToDir(window, dir)
+  local windows = M.windowsToDir(window, dir) or {}
   local spaceId = hs.spaces.windowSpaces(window)[1]
-  local spaceWindows = cache.spaceWindows[spaceId]
+  local spaceWindows = cache.getSpaceWindows(spaceId)
 
   for _, win in ipairs(windows) do
     if hs.fnutils.contains(spaceWindows, win:id()) then
@@ -113,8 +118,8 @@ function M.swapWindow(window, dir)
       local secondIndex = hs.fnutils.indexOf(spaceWindows, win:id())
 
       if firstIndex and secondIndex then
-        cache.spaceWindows[spaceId][firstIndex] = win:id()
-        cache.spaceWindows[spaceId][secondIndex] = window:id()
+        cache.setSpaceWindow(spaceId, firstIndex, win)
+        cache.setSpaceWindow(spaceId, secondIndex, window)
         M.tile()
       end
     end
@@ -132,7 +137,7 @@ end
 ---@param window hs.window
 ---@return boolean
 function M.isFloating(window)
-  return cache.floatingWindows[window:id()] or false
+  return cache.getFloatingWindow(window:id()) or false
 end
 
 return M

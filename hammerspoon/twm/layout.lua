@@ -14,7 +14,7 @@ end
 
 function M.show(spaceId)
   local space = spaceId or hs.spaces.focusedSpace()
-  hs.alert.show('Layout: ' .. cache.spaceLayouts[space])
+  hs.alert.show('Layout: ' .. cache.getSpaceLayout(space))
 end
 
 function M.choose(spaceId)
@@ -34,7 +34,7 @@ end
 
 function M.get(spaceId)
   local space = spaceId or hs.spaces.focusedSpace()
-  return cache.spaceLayouts[space]
+  return cache.getSpaceLayout(space)
 end
 
 function M.set(layout, spaceId)
@@ -43,7 +43,7 @@ function M.set(layout, spaceId)
   end
 
   local space = spaceId or hs.spaces.focusedSpace()
-  cache.spaceLayouts[space] = layout
+  cache.setSpaceLayout(space, layout)
   M.show(space)
   utils.tile()
 end

@@ -43,6 +43,9 @@ hs.window.animationDuration = 0
 
 twm = require('twm')
 twm.start()
+hs.shutdownCallback = function()
+  twm.stop()
+end
 
 hs.hotkey.bind(MEH, 'f', twm.toggleFloat)
 hs.hotkey.bind(MEH, 'p', twm.showLayout)

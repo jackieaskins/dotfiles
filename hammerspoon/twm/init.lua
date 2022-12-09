@@ -1,19 +1,28 @@
 local cache = require('twm.cache')
 local layout = require('twm.layout')
 local utils = require('twm.utils')
+local windowFilter = require('twm.windowFilter')
 
 local M = {}
 
 -- Lifecyle {{{
----Start tiling windows on all spaces
+---Load from cache and start tiling windows on all spaces
 function M.start()
-  cache.windowFilter:subscribe({
+  cache.restore()
+
+  windowFilter:subscribe({
     hs.window.filter.windowsChanged,
     hs.window.filter.windowInCurrentSpace,
     hs.window.filter.windowNotInCurrentSpace,
     hs.window.filter.windowFocused,
   }, M.tile)
+
   M.tile()
+end
+
+---Save current tiling cache
+function M.stop()
+  cache.save()
 end
 -- }}}
 
@@ -28,8 +37,8 @@ end
 function M.toggleFloat(win)
   local window = win or hs.window.focusedWindow()
 
-  local isFloating = cache.floatingWindows[window:id()] or false
-  cache.floatingWindows[window:id()] = not isFloating
+  local isFloating = cache.getFloatingWindow(window:id()) or false
+  cache.setFloatingWindow(window:id(), not isFloating)
 
   M.tile()
 end
