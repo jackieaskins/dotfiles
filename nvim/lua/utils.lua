@@ -60,7 +60,7 @@ function M.file_exists(filename)
   return vim.fn.empty(vim.fn.glob(filename)) == 0
 end
 
----Determine if a provided path is ececutable
+---Determine if a provided path is executable
 ---@param path string
 ---@return boolean
 function M.is_executable(path)

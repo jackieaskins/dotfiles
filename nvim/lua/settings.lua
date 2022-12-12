@@ -23,7 +23,7 @@ vim.opt.signcolumn = 'yes'
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 vim.opt.splitkeep = 'screen'
-vim.opt.diffopt:append({ 'vertical' })
+vim.opt.diffopt:append({ 'vertical', 'linematch:60' })
 vim.opt.termguicolors = true
 vim.opt.laststatus = 3
 vim.opt.tabline = "%{%v:lua.require('tabline').get_tabline()%}"

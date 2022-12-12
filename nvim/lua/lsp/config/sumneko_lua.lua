@@ -18,6 +18,7 @@ return function(config)
         globals = { 'hs', 'packer_plugins', 'vim' },
       },
       workspace = {
+        checkThirdParty = false,
         library = {
           '/Applications/Hammerspoon.app/Contents/Resources/extensions/hs',
           '~/.hammerspoon/Spoons/EmmyLua.spoon/annotations',

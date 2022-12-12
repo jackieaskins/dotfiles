@@ -21,6 +21,7 @@ require('nvim-treesitter.configs').setup({
     'perl',
     'python',
     'query',
+    'regex',
     'ruby',
     'scss',
     'svelte',

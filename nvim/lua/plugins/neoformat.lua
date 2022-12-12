@@ -17,10 +17,16 @@ M.formatters = {
     install_cmd = { 'cargo', 'stylua' },
     required_file = './stylua.toml',
   },
+  gdformat = {
+    name = 'gdformat',
+    install_cmd = { 'pip3', 'git+https://github.com/Scony/godot-gdscript-toolkit.git' },
+    required_file = 'project.godot',
+  },
 }
 
 M.formatter_by_filetype = {
   css = M.formatters.prettierd,
+  gdscript = M.formatters.gdformat,
   html = M.formatters.prettierd,
   javascript = M.formatters.prettierd,
   javascriptreact = M.formatters.prettierd,

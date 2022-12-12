@@ -8,6 +8,8 @@ if success then
       local telescope_selection = vim.tbl_extend('force', editor_highlights.CursorLine, { fg = colors.peach })
 
       return {
+        CurSearch = vim.tbl_extend('force', editor_highlights.IncSearch, { style = { 'bold' } }),
+
         CursorLineNr = vim.tbl_extend('force', editor_highlights.CursorLine, {
           fg = colors.lavender,
           style = { 'bold' },

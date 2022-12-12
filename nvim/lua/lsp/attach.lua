@@ -14,17 +14,10 @@ return function(_, bufnr)
 
   bsk('n', 'gi', '<cmd>Telescope lsp_implementations<CR>')
   bsk('n', 'gd', '<cmd>Telescope lsp_definitions<CR>')
-  bsk('n', 'gr', '<cmd>Telescope lsp_references include_declaration=false jump_type=vsplit<CR>')
+  bsk('n', 'gr', '<cmd>Telescope lsp_references include_declaration=false<CR>')
 
   bsk('n', 'K', vim.lsp.buf.hover, { desc = 'Hover' })
   bsk({ 'i', 'n' }, '<C-S>', vim.lsp.buf.signature_help, { desc = 'vim.lsp.buf.signature_help' })
-
-  bsk('n', '<leader>wd', '<cmd>Telescope diagnostics<CR>')
-  bsk('n', 'g?', '<cmd>lua vim.diagnostic.open_float(0, { scope = "cursor" })<CR>')
-  bsk('n', '[g', vim.diagnostic.goto_prev, { desc = 'vim.diagnostic.goto_prev' })
-  bsk('n', ']g', vim.diagnostic.goto_next, { desc = 'vim.diagnostic.goto_next' })
-  bsk('n', '[e', '<cmd>lua vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR })<CR>')
-  bsk('n', ']e', '<cmd>lua vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR })<CR>')
 
   bsk('n', '<leader>rn', vim.lsp.buf.rename, { desc = 'vim.lsp.buf.rename' })
   bsk('n', '<leader>bf', function()
@@ -38,5 +31,5 @@ return function(_, bufnr)
   bsk('n', '<leader>sd', '<cmd>Telescope lsp_document_symbols symbols=constant,function,method<CR>')
   bsk('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, { desc = 'vim.lsp.buf.add_workspace_folder' })
   bsk('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, { desc = 'vim.lsp.buf.remove_workspace_folder' })
-  bsk('n', '<leader>wl', '<cmd>lua Print(vim.lsp.buf.list_workspace_folders())<CR>')
+  bsk('n', '<leader>wl', '<cmd>lua =vim.lsp.buf.list_workspace_folders()<CR>')
 end

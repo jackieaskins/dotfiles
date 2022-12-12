@@ -1,6 +1,14 @@
 local utils = require('utils')
 local map = utils.map
 
+-- Diagnostics
+map('n', '<leader>wd', '<cmd>Telescope diagnostics<CR>')
+map('n', 'g?', '<cmd>lua vim.diagnostic.open_float(0, { scope = "cursor" })<CR>')
+map('n', '[g', vim.diagnostic.goto_prev, { desc = 'vim.diagnostic.goto_prev' })
+map('n', ']g', vim.diagnostic.goto_next, { desc = 'vim.diagnostic.goto_next' })
+map('n', '[e', '<cmd>lua vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR })<CR>')
+map('n', ']e', '<cmd>lua vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR })<CR>')
+
 -- Extended gx
 map('n', 'gx', function()
   require('gx').handle_url_under_cursor()
