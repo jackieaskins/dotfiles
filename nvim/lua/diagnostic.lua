@@ -1,7 +1,7 @@
 local icons = require('diagnostic.icons')
 
 vim.diagnostic.config({
-  float = { source = 'always', border = 'rounded' },
+  float = { source = 'always', border = vim.g.border_style },
   signs = {
     priority = require('sign_priorities').diagnostics,
   },

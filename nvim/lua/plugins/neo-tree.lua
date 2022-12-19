@@ -147,7 +147,7 @@ neotree.setup({
       },
     },
   },
-  popup_border_style = 'rounded',
+  popup_border_style = vim.g.border_style,
 })
 
 -- vim:foldmethod=marker foldlevel=0

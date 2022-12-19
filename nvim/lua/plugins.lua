@@ -167,7 +167,10 @@ return require('packer').startup({
     -- }}}
   end,
   config = {
-    display = { prompt_border = 'rounded' },
+    display = {
+      open_cmd = '95vnew \\[packer\\]',
+      prompt_border = vim.g.border_style,
+    },
     max_jobs = 10,
   },
 })

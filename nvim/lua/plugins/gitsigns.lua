@@ -46,9 +46,7 @@ require('gitsigns').setup({
     -- Text object
     bsk({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
   end,
-  preview_config = {
-    border = 'rounded',
-  },
+  preview_config = { border = vim.g.border_style },
   sign_priority = require('sign_priorities').gitsigns,
   trouble = false,
 })

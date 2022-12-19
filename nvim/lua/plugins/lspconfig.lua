@@ -2,6 +2,8 @@ local servers = require('lsp.servers')
 local map = require('utils').map
 local typescript = require('typescript')
 
+require('lspconfig.ui.windows').default_options.border = vim.g.border_style
+
 if require('utils').file_exists('~/dotfiles/nvim/lua/custom/lspconfig.lua') then
   require('custom.lspconfig')
 end
