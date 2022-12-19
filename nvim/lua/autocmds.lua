@@ -56,7 +56,7 @@ augroup('lsp_formatting', {
 -- Nvim-Lint
 augroup('lint', {
   {
-    { 'BufWritePost', 'InsertLeave' },
+    { 'BufWritePost', 'InsertLeave', 'TextChanged' },
     {
       pattern = '*.gd',
       callback = function()
@@ -68,9 +68,12 @@ augroup('lint', {
 
 -- Neoformat
 augroup('format_on_save', {
-  { 'BufWritePre', {
-    callback = function()
-      require('plugins.neoformat').format_on_save()
-    end,
-  } },
+  {
+    'BufWritePre',
+    {
+      callback = function()
+        require('plugins.neoformat').format_on_save()
+      end,
+    },
+  },
 })

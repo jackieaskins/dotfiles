@@ -41,6 +41,10 @@ end
 
 local function file_info_provider(fnamemodifier)
   return function()
+    if vim.bo.filetype == 'TelescopePrompt' then
+      return ' [Telescope]'
+    end
+
     local buf_name = vim.api.nvim_buf_get_name(0)
     local filename = buf_name == '' and '[No Name]' or vim.fn.fnamemodify(buf_name, fnamemodifier)
 

@@ -25,7 +25,7 @@ telescope.setup({
         ['<C-b>'] = actions.preview_scrolling_up,
         ['<C-d>'] = false,
         ['<C-u>'] = false,
-        ['<C-a>'] = { '<home>', type = 'command' },
+        ['<C-a>'] = actions.select_all,
         ['<C-e>'] = { '<end>', type = 'command' },
         ['<C-c>'] = action_layout.toggle_preview,
       },

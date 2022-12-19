@@ -149,6 +149,40 @@ map('n', '<leader>of', '<cmd>Telescope oldfiles cwd_only=true sort_lastused=true
 map('n', '<leader>z=', '<cmd>Telescope spell_suggest<CR>')
 map('n', '<leader>pp', '<cmd>Telescope packer<CR>')
 
+-- Treesitter
+local function goto_adjacent_usage(delta)
+  local bufnr = vim.api.nvim_get_current_buf()
+
+  local ts_utils = require('nvim-treesitter.ts_utils')
+  local locals = require('nvim-treesitter.locals')
+
+  local node_at_point = ts_utils.get_node_at_cursor()
+  if not node_at_point then
+    return
+  end
+
+  local def_node, scope = locals.find_definition(node_at_point, bufnr)
+  local usages = locals.find_usages(def_node, scope, bufnr)
+
+  local index = require('nvim-treesitter.utils').index_of(usages, node_at_point)
+  if not index then
+    return
+  end
+
+  local target_index = (index + delta + #usages - 1) % #usages + 1
+  ts_utils.goto_node(usages[target_index])
+end
+
+local function goto_next_usage()
+  return goto_adjacent_usage(1)
+end
+local function goto_previous_usage()
+  return goto_adjacent_usage(-1)
+end
+
+map('n', '<M-*>', goto_next_usage, { desc = 'Treesitter go to next usage' })
+map('n', '<M-#>', goto_previous_usage, { desc = 'Treesitter go to previous usage' })
+
 -- TreeSJ
 map('n', 'gJ', vim.cmd.TSJJoin)
 map('n', 'gS', vim.cmd.TSJSplit)

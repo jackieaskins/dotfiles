@@ -19,6 +19,8 @@ if success then
 
         NeoTreeNormal = { bg = colors.base },
 
+        NormalFloat = { bg = colors.base },
+
         QuickScopePrimary = { fg = colors.sapphire, style = { 'underline', 'bold' } },
         QuickScopeSecondary = { fg = colors.pink, style = { 'underline' } },
 
@@ -55,9 +57,4 @@ if success then
   })
 
   vim.cmd.colorscheme('catppuccin')
-
-  local ok, tint = pcall(require, 'tint')
-  if ok then
-    tint.refresh()
-  end
 end

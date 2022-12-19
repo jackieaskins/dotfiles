@@ -22,14 +22,24 @@ return require('packer').startup({
       'preservim/vimux',
       cmd = { 'VimuxRunCommand', 'VimuxOpenRunner' },
       config = 'require("plugins.vimux")',
-      fn = { 'VimuxClearTerminalScreen', 'VimuxClearRunnerHistory', 'VimuxRunCommand', 'VimuxOpenRunner' },
+      fn = {
+        'VimuxClearTerminalScreen',
+        'VimuxClearRunnerHistory',
+        'VimuxRunCommand',
+        'VimuxOpenRunner',
+      },
     })
     use({ 'alexghergh/nvim-tmux-navigation', config = 'require("plugins.tmux-navigation")' })
-    use({ 'szw/vim-maximizer', cmd = 'MaximizerToggle', config = 'require("plugins.maximizer")' })
-    use({ 'AckslD/messages.nvim', config = 'require("messages").setup()' })
+    use({
+      'szw/vim-maximizer',
+      cmd = 'MaximizerToggle',
+      config = 'require("plugins.maximizer")',
+    })
+    use({ 'AckslD/messages.nvim', cmd = 'Messages', config = 'require("messages").setup()' })
     use({
       'bennypowers/nvim-regexplainer',
       config = 'require("regexplainer").setup()',
+      keys = 'gR',
       requires = { 'nvim-treesitter/nvim-treesitter', 'MunifTanjim/nui.nvim' },
     })
     -- }}}
@@ -38,17 +48,22 @@ return require('packer').startup({
     use({ 'stevearc/dressing.nvim' })
     use({ 'catppuccin/nvim', as = 'catppuccin' })
     use({ 'levouh/tint.nvim', config = 'require("plugins.tint")' })
-    use({ 'nvim-treesitter/nvim-treesitter-context', config = 'require("plugins.treesitter-context")' })
+    use({
+      'nvim-treesitter/nvim-treesitter-context',
+      config = 'require("plugins.treesitter-context")',
+    })
     use({ 'nvim-tree/nvim-web-devicons', config = 'require("plugins.web-devicons")' })
     use({ 'feline-nvim/feline.nvim', config = 'require("plugins.feline")' })
     use({ 'NvChad/nvim-colorizer.lua', config = 'require("plugins.colorizer")' })
-    use({ 'lukas-reineke/indent-blankline.nvim', config = 'require("plugins.indent-blankline")' })
-    use({ 'anuvyklack/pretty-fold.nvim', config = 'require("pretty-fold").setup()' })
+    use({
+      'lukas-reineke/indent-blankline.nvim',
+      config = 'require("plugins.indent-blankline")',
+    })
     -- }}}
 
     -- Editing {{{
     use({ 'axelvc/template-string.nvim', config = 'require("plugins.template-string")' })
-    use({ 'johmsalas/text-case.nvim', config = 'require("textcase").setup({})' })
+    use({ 'tpope/vim-abolish' })
     use({ 'tpope/vim-projectionist', config = 'require("plugins.projectionist")' })
     use({ 'tpope/vim-repeat' })
     use({ 'tpope/vim-sleuth' })
@@ -61,7 +76,12 @@ return require('packer').startup({
     use({ 'numToStr/Comment.nvim', config = 'require("plugins.Comment")' })
     use({ 'axelf4/vim-strip-trailing-whitespace' })
     use({ 'iamcco/markdown-preview.nvim', ft = 'markdown', run = 'cd app && npm install' })
-    use({ 'L3MON4D3/LuaSnip', bufread = false, config = 'require("plugins.LuaSnip")', module = 'luasnip' })
+    use({
+      'L3MON4D3/LuaSnip',
+      bufread = false,
+      config = 'require("plugins.LuaSnip")',
+      module = 'luasnip',
+    })
     use({
       'hrsh7th/nvim-cmp',
       config = 'require("plugins.cmp")',
@@ -77,7 +97,11 @@ return require('packer').startup({
     })
     use({ 'sbdchd/neoformat', cmd = 'Neoformat', config = 'require("plugins.neoformat")' })
     use({ 'mfussenegger/nvim-lint', config = 'require("plugins.lint")', module = 'lint' })
-    use({ 'gaoDean/autolist.nvim', config = 'require("autolist").setup({})', ft = 'markdown' })
+    use({
+      'gaoDean/autolist.nvim',
+      config = 'require("autolist").setup({})',
+      ft = 'markdown',
+    })
     use({
       'narutoxy/dim.lua',
       config = 'require("dim").setup({})',
@@ -87,7 +111,11 @@ return require('packer').startup({
 
     -- Surround {{{
     use({ 'andymass/vim-matchup', config = 'require("plugins.matchup")' })
-    use({ 'Wansmer/treesj', cmd = { 'TSJJoin', 'TSJSplit' }, config = 'require("plugins.treesj")' })
+    use({
+      'Wansmer/treesj',
+      cmd = { 'TSJJoin', 'TSJSplit' },
+      config = 'require("plugins.treesj")',
+    })
     use({ 'tpope/vim-surround' })
     use({ 'windwp/nvim-autopairs', config = 'require("plugins.autopairs")' })
     use({ 'abecodes/tabout.nvim', config = 'require("tabout").setup()' })
@@ -96,7 +124,11 @@ return require('packer').startup({
     -- Git {{{
     use({ 'rhysd/committia.vim', config = 'require("plugins.committia")' })
     use({ 'rhysd/conflict-marker.vim' })
-    use({ 'lewis6991/gitsigns.nvim', config = 'require("plugins.gitsigns")', requires = 'nvim-lua/plenary.nvim' })
+    use({
+      'lewis6991/gitsigns.nvim',
+      config = 'require("plugins.gitsigns")',
+      requires = 'nvim-lua/plenary.nvim',
+    })
     use({ 'tpope/vim-fugitive', bufread = false, cmd = { 'Git', 'G', 'Gread' } })
     use({
       'sindrets/diffview.nvim',
@@ -111,7 +143,11 @@ return require('packer').startup({
       branch = 'v2.x',
       cmd = 'Neotree',
       config = 'require("plugins.neo-tree")',
-      requires = { 'nvim-lua/plenary.nvim', 'nvim-tree/nvim-web-devicons', 'MunifTanjim/nui.nvim' },
+      requires = {
+        'nvim-lua/plenary.nvim',
+        'nvim-tree/nvim-web-devicons',
+        'MunifTanjim/nui.nvim',
+      },
     })
     use({
       'nvim-telescope/telescope.nvim',
@@ -128,20 +164,23 @@ return require('packer').startup({
     -- }}}
 
     -- LSP {{{
-    use({ 'folke/neodev.nvim' })
     use({ 'kosayoda/nvim-lightbulb', config = 'require("plugins.lightbulb")' })
     use({
       'neovim/nvim-lspconfig',
       config = 'require("plugins.lspconfig")',
       requires = { 'jose-elias-alvarez/typescript.nvim', 'folke/neodev.nvim' },
     })
-    use({ 'rmagatti/goto-preview', config = 'require("plugins.goto-preview")', keys = { 'gpd', 'gpi', 'gpr', 'gP' } })
+    use({
+      'rmagatti/goto-preview',
+      config = 'require("plugins.goto-preview")',
+      keys = { 'gpd', 'gpi', 'gpr', 'gP' },
+    })
     use({ 'j-hui/fidget.nvim', config = 'require("plugins.fidget")' })
     -- }}}
 
     -- Movement {{{
     use({ 'unblevable/quick-scope', config = 'require("plugins.quick-scope")' })
-    use({ 'matze/vim-move' })
+    use({ 'matze/vim-move', keys = { '<M-h>', '<M-j>', '<M-k>', '<M-l>' } })
     -- }}}
 
     -- Syntax {{{
@@ -163,7 +202,12 @@ return require('packer').startup({
     -- }}}
 
     -- Testing {{{
-    use({ 'nvim-neotest/neotest', bufread = false, config = 'require("plugins.neotest")', module = 'neotest' })
+    use({
+      'nvim-neotest/neotest',
+      bufread = false,
+      config = 'require("plugins.neotest")',
+      module = 'neotest',
+    })
     -- }}}
   end,
   config = {
