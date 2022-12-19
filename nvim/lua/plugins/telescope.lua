@@ -23,6 +23,7 @@ telescope.setup({
         end,
         ['<C-f>'] = actions.preview_scrolling_down,
         ['<C-b>'] = actions.preview_scrolling_up,
+        ['<C-d>'] = false,
         ['<C-u>'] = false,
         ['<C-a>'] = { '<home>', type = 'command' },
         ['<C-e>'] = { '<end>', type = 'command' },

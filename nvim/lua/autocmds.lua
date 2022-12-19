@@ -1,6 +1,5 @@
 local augroup = require('utils').augroup
 
--- Disable auto-comments
 augroup('no_auto_comment', {
   { 'FileType', { command = 'setlocal formatoptions-=r formatoptions-=o' } },
 })
@@ -11,6 +10,17 @@ augroup('spell', {
 
 augroup('colorcolumn', {
   { 'FileType', { pattern = 'lua', command = 'setlocal colorcolumn=120' } },
+})
+
+augroup('yank_highlight', {
+  {
+    'TextYankPost',
+    {
+      callback = function()
+        vim.highlight.on_yank()
+      end,
+    },
+  },
 })
 
 augroup('lastplace', {

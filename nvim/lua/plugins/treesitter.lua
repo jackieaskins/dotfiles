@@ -33,6 +33,15 @@ require('nvim-treesitter.configs').setup({
   },
   highlight = { enable = true },
   indent = { enable = true },
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      init_selection = '<C-Space>',
+      node_incremental = '<C-Space>',
+      scope_incremental = '<C-S>',
+      node_decremental = '<C-Backspace>',
+    },
+  },
 
   -- https://github.com/jackieaskins/nvim-ts-autotag
   autotag = {
@@ -93,7 +102,10 @@ require('nvim-treesitter.configs').setup({
     },
     select = {
       enable = true,
+      lookahead = true,
       keymaps = {
+        ['aa'] = '@parameter.outer',
+        ['ia'] = '@parameter.inner',
         ['aF'] = '@call.outer',
         ['iF'] = '@call.inner',
         ['af'] = '@function.outer',
@@ -104,22 +116,12 @@ require('nvim-treesitter.configs').setup({
         ['il'] = '@loop.inner',
         ['ai'] = '@conditional.outer',
         ['ii'] = '@conditional.inner',
-        ['aP'] = '@parameter.outer',
-        ['iP'] = '@parameter.inner',
       },
     },
     swap = {
       enable = true,
-      swap_next = {
-        ['<leader>a'] = {
-          '@parameter.inner',
-          '@argument.inner',
-        },
-        ['<leader>A'] = {
-          '@parameter.inner',
-          '@argument.inner',
-        },
-      },
+      swap_next = { ['<leader>a'] = '@parameter.inner' },
+      swap_previous = { ['<leader>A'] = '@parameter.inner' },
     },
   },
 

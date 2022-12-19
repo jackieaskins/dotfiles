@@ -9,7 +9,7 @@ vim.g.border_style = 'rounded'
 
 -- Map Leader to Space
 vim.g.mapleader = ' '
-map('n', '<space>', '<nop>')
+map({ 'n', 'v' }, '<space>', '<nop>')
 
 -- General
 vim.opt.hidden = true
