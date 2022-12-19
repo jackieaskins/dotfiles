@@ -133,7 +133,7 @@ return require('packer').startup({
     use({
       'neovim/nvim-lspconfig',
       config = 'require("plugins.lspconfig")',
-      requires = 'jose-elias-alvarez/typescript.nvim',
+      requires = { 'jose-elias-alvarez/typescript.nvim', 'folke/neodev.nvim' },
     })
     use({ 'rmagatti/goto-preview', config = 'require("plugins.goto-preview")', keys = { 'gpd', 'gpi', 'gpr', 'gP' } })
     use({ 'j-hui/fidget.nvim', config = 'require("plugins.fidget")' })

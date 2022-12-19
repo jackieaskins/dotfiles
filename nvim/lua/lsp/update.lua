@@ -9,12 +9,12 @@ end
 local function update_servers(server_list)
   server_list = server_list or get_active_server_names()
 
-  local server_commands = {}
+  local install_commands = {}
   for _, server in ipairs(server_list) do
-    server_commands[server] = lsp_servers.install_commands[server]
+    install_commands[server] = lsp_servers[server].install
   end
 
-  require('installer').install(server_commands, vim.fn.stdpath('data') .. '/lsp-servers')
+  require('installer').install(install_commands, vim.fn.stdpath('data') .. '/lsp-servers')
 end
 
 return {
