@@ -6,8 +6,6 @@
 /nvim/lua/custom.lua
 /nvim/spell/
 
-/nvim/plugin/packer_compiled.*
-
 /zsh/custom.zsh
 /Brewfile*.lock.json
 

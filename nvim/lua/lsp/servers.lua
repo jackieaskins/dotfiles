@@ -121,9 +121,7 @@ local servers = {
       config.settings = {
         Lua = {
           completion = { keywordSnippet = 'Replace', callSnippet = 'Replace' },
-          diagnostics = {
-            globals = { 'hs', 'packer_plugins', 'vim' },
-          },
+          diagnostics = { globals = { 'hs', 'vim' } },
           workspace = {
             checkThirdParty = false,
             library = {
@@ -163,8 +161,6 @@ local servers = {
     config = function(config)
       config.on_attach = function(...)
         require('lsp.attach')(...)
-
-        require('packer').loader('tailiscope.nvim')
         require('telescope').load_extension('tailiscope')
         require('utils').map('n', '<leader>tw', '<cmd>Telescope tailiscope<CR>')
       end

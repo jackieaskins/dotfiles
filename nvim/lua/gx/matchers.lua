@@ -11,7 +11,7 @@ return {
     end,
   },
   {
-    file_pattern = [[plugins\.lua$]],
+    file_pattern = [[plugins.*\.lua$]],
     pattern = [[.*'\([a-zA-Z0-9_.-]\+\/[a-zA-Z0-9_.-]\+\)']],
     handler = function(match)
       return 'https://github.com/' .. match[2]
@@ -29,31 +29,6 @@ return {
     pattern = [[.* @plugin '\([a-zA-Z0-9_.-]\+\/[a-zA-Z0-9_.-]\+\)']],
     handler = function(match)
       return 'https://github.com/' .. match[2]
-    end,
-  },
-  {
-    file_pattern = '[packer]',
-    pattern = [[^\s\+\(\x\{7}\)\s.*\(.*\)$]],
-    handler = function(match)
-      local commit_hash = match[2]
-      local line_nr = vim.fn.line('.') - 1
-
-      while line_nr > 3 do
-        local line = vim.fn.getline(line_nr)
-        local matchlist = vim.fn.matchlist(line, [[URL:\s\(\S\+\)]])
-
-        if #matchlist > 0 then
-          return table.concat({
-            matchlist[2],
-            'commit',
-            commit_hash,
-          }, '/')
-        end
-
-        line_nr = line_nr - 1
-      end
-
-      return nil
     end,
   },
   {

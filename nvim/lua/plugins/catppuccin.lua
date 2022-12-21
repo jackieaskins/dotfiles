@@ -1,7 +1,7 @@
-local success, catppuccin = pcall(require, 'catppuccin')
+local M = { 'catppuccin/nvim', name = 'catppuccin' }
 
-if success then
-  catppuccin.setup({
+function M.config()
+  require('catppuccin').setup({
     custom_highlights = function(colors)
       local editor_highlights = require('catppuccin.groups.editor').get()
 
@@ -58,3 +58,5 @@ if success then
 
   vim.cmd.colorscheme('catppuccin')
 end
+
+return M

@@ -51,29 +51,3 @@ augroup('lsp_formatting', {
     },
   },
 })
-
--- Plugins
--- Nvim-Lint
-augroup('lint', {
-  {
-    { 'BufWritePost', 'InsertLeave', 'TextChanged' },
-    {
-      pattern = '*.gd',
-      callback = function()
-        require('lint').try_lint()
-      end,
-    },
-  },
-})
-
--- Neoformat
-augroup('format_on_save', {
-  {
-    'BufWritePre',
-    {
-      callback = function()
-        require('plugins.neoformat').format_on_save()
-      end,
-    },
-  },
-})

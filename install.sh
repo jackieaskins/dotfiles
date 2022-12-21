@@ -136,18 +136,8 @@ success_echo "Dotfiles backed up and symlinked."
 #                           Neovim Config                            #
 #--------------------------------------------------------------------#
 echo -e "Configuring Neovim..."
-std_data_path=${XDG_CONFIG_HOME:-"$HOME/.local/share/nvim"}
-install_path="$std_data_path/site/pack/packer/opt/packer.nvim"
-if [ ! -d "$install_path" ]; then
-  echo -e "Installing Packer.nvim..."
-  git clone "https://github.com/wbthomason/packer.nvim" "$install_path"
-else
-  echo -e "Packer.nvim already exists."
-fi
-rm ./nvim/plugin/packer_compiled.*
-
-echo -e "Running PackerSync, this may take a while..."
-nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+echo -e "Running Lazy sync, this may take a while..."
+nvim --headless "+Lazy! sync" +qa
 echo -e ""
 success_echo "Done configuring Neovim."
 

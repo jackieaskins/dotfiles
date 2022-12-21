@@ -1,21 +1,17 @@
-local tint = require('tint')
+local M = { 'levouh/tint.nvim' }
 
-tint.setup({
-  tint = -45,
-  saturation = 0.6,
-  highlight_ignore_patterns = {
-    'EndOfBuffer',
-    'IndentBlanklineChar',
-    '^LineNr',
-    'WinbarNC',
-    'WinSeparator',
-  },
-})
+function M.config()
+  require('tint').setup({
+    tint = -45,
+    saturation = 0.6,
+    highlight_ignore_patterns = {
+      'EndOfBuffer',
+      'IndentBlanklineChar',
+      '^LineNr',
+      'WinbarNC',
+      'WinSeparator',
+    },
+  })
+end
 
-require('utils').augroup('tint_colorscheme', {
-  { 'ColorScheme', {
-    callback = function()
-      tint.refresh()
-    end,
-  } },
-})
+return M
