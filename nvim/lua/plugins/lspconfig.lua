@@ -10,7 +10,7 @@ end
 
 require('neodev').setup({
   library = {
-    plugins = { 'catppuccin', 'neotest', 'nvim-cmp', 'nvim-treesitter', 'plenary.nvim' },
+    plugins = { 'catppuccin', 'nvim-treesitter', 'plenary.nvim' },
   },
 })
 
@@ -22,7 +22,7 @@ for server_name, server in pairs(servers) do
   end
 end
 
-if vim.tbl_contains(servers, 'tsserver') then
+if servers.tsserver ~= nil then
   local preferences = { format = { indentSize = 2 } }
   typescript.setup({
     server = {

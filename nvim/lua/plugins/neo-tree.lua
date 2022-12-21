@@ -130,6 +130,7 @@ neotree.setup({
         s = 'none', -- Open in vertical split
         S = 'none', -- Open in horizontal split
         t = 'none', -- Open in new tab
+        z = 'none', -- Close all nodes in tree
         ['[g'] = 'none', -- Go to previous git modified file
         [']g'] = 'none', -- Go to next git modified file
         ['/'] = 'none', -- Trigger fuzzy filtering
