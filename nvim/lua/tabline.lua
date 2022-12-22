@@ -48,11 +48,14 @@ local function get_tabline()
     local filename = vim.fn.fnamemodify(bufname, ':t')
 
     local function get_bufname()
-      if filetype == 'NvimTree' then
+      if filetype == 'neo-tree' then
         return 'Tree'
       end
       if filetype == 'TelescopePrompt' then
         return ' Telescope'
+      end
+      if filetype == 'checkhealth' then
+        return 'checkhealth'
       end
 
       if bufname == '' then

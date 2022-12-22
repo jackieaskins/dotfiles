@@ -40,6 +40,7 @@ function M.config()
       }
     end,
     integrations = {
+      indent_blankline = { enabled = true, colored_indent_levels = false },
       native_lsp = {
         enabled = true,
         underlines = {

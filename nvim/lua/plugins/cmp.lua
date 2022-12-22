@@ -86,14 +86,7 @@ function M.config()
     },
   })
 
-  local cmdline_view = {
-    entries = {
-      name = 'wildmenu',
-      separator = '  ',
-    },
-  }
   cmp.setup.cmdline(':', {
-    view = cmdline_view,
     sources = {
       { name = 'path' },
       { name = 'cmdline' },
@@ -101,7 +94,6 @@ function M.config()
   })
 
   cmp.setup.cmdline('/', {
-    view = cmdline_view,
     sources = {
       { name = 'buffer' },
     },
