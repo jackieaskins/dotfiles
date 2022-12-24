@@ -13,6 +13,7 @@ vim.opt.runtimepath:prepend(lazypath)
 
 require('lazy').setup('plugins', {
   change_detection = { notify = false },
+  checker = { enabled = true },
   dev = {
     path = '~/vim-plugins',
     patterns = vim.g.is_personal_machine and { 'jackieaskins' } or {},

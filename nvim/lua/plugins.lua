@@ -1,32 +1,17 @@
 local map = require('utils').map
 
 return {
-  {
-    'AckslD/messages.nvim',
-    cmd = 'Messages',
-    config = function()
-      require('messages').setup()
-    end,
-  },
+  { 'AckslD/messages.nvim', cmd = 'Messages', config = true },
   {
     'NvChad/nvim-colorizer.lua',
-    config = function()
-      require('colorizer').setup({ user_default_options = { AARRGGBB = true, names = false, tailwind = 'lsp' } })
-    end,
+    config = { user_default_options = { AARRGGBB = true, names = false, tailwind = 'lsp' } },
   },
   {
     'abecodes/tabout.nvim',
-    config = function()
-      require('tabout').setup()
-    end,
+    config = true,
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
   },
-  {
-    'andymass/vim-matchup',
-    config = function()
-      vim.g.matchup_matchparen_offscreen = {}
-    end,
-  },
+  { 'airblade/vim-matchquote', dependencies = { 'andymass/vim-matchup' } },
   {
     'dstein64/vim-startuptime',
     cmd = 'StartupTime',
@@ -35,12 +20,7 @@ return {
     end,
   },
   { 'fladson/vim-kitty' },
-  {
-    'gaoDean/autolist.nvim',
-    config = function()
-      require('autolist').setup({})
-    end,
-  },
+  { 'gaoDean/autolist.nvim', config = true },
   {
     'iamcco/markdown-preview.nvim',
     build = 'cd app && npm install',
@@ -49,13 +29,23 @@ return {
     end,
     ft = 'markdown',
   },
+  { 'j-hui/fidget.nvim', config = { text = { spinner = 'dots' } } },
+  { 'lukas-reineke/indent-blankline.nvim', config = { show_current_context = true } },
+  { 'matze/vim-move', keys = { '<M-h>', '<M-j>', '<M-k>', '<M-l>' } },
   {
-    'lukas-reineke/indent-blankline.nvim',
+    'nvim-treesitter/playground',
+    cmd = 'TSPlaygroundToggle',
     config = function()
-      require('indent_blankline').setup({ show_current_context = true })
+      require('nvim-treesitter.configs').setup({ playground = { enable = true } })
+    end,
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+  },
+  {
+    'rcarriga/nvim-notify',
+    config = function()
+      vim.notify = require('notify')
     end,
   },
-  { 'matze/vim-move', keys = { '<M-h>', '<M-j>', '<M-k>', '<M-l>' } },
   { 'rhysd/conflict-marker.vim' },
   { 'stevearc/dressing.nvim', event = 'VeryLazy' },
   {
@@ -73,15 +63,9 @@ return {
   { 'tpope/vim-surround' },
   {
     'unblevable/quick-scope',
-    config = function()
+    init = function()
       vim.g.qs_buftype_blacklist = { 'terminal' }
       vim.g.qs_filetype_blacklist = { 'neo-tree' }
-    end,
-  },
-  {
-    'vigoux/notifier.nvim',
-    config = function()
-      require('notifier').setup({})
     end,
   },
 }

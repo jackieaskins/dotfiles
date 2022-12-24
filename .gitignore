@@ -4,6 +4,7 @@
 
 /nvim/lua/custom/
 /nvim/lua/custom.lua
+/nvim/lua/plugins/custom-*.lua
 /nvim/spell/
 
 /zsh/custom.zsh

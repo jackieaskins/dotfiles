@@ -24,7 +24,7 @@ To add machine-specific settings, create the files below. For:
 - Vim: `~/dotfiles/vim/custom.vim`
 - Neovim:
     - General settings: `~/dotfiles/nvim/lua/custom.lua`
-    - Custom plugins: `~/dotfiles/nvim/lua/custom/plugins.lua`
+    - Custom plugins: `~/dotfiles/nvim/lua/plugins/custom-[plugin-name].lua`
     - Custom LSP configs: `~/dotfiles/nvim/lua/custom/lspconfig.lua`
 - Tmux: `~/dotfiles/tmux/custom.conf`
 - Zsh: `~/dotfiles/zsh/custom.zsh`

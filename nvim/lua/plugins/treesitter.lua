@@ -2,9 +2,8 @@ local M = {
   'nvim-treesitter/nvim-treesitter',
   dependencies = {
     'jackieaskins/nvim-ts-autotag',
-    'nvim-treesitter/playground',
-    'RRethy/nvim-treesitter-textsubjects',
     'RRethy/nvim-treesitter-endwise',
+    'RRethy/nvim-treesitter-textsubjects',
     'nvim-treesitter/nvim-treesitter-textobjects',
   },
   build = ':TSUpdate',
@@ -68,25 +67,10 @@ function M.config()
       skip_close_shortcut = '\\>',
     },
 
-    -- https://github.com/JoosepAlviste/nvim-ts-context-commentstring
-    context_commentstring = {
-      enable = true,
-      enable_autocmd = false,
-    },
-
     -- https://github.com/RRethy/nvim-treesitter-endwise
     endwise = {
       enable = true,
     },
-
-    -- https://github.com/andymass/vim-matchup
-    matchup = {
-      enable = true,
-      disable_virtual_text = true,
-    },
-
-    -- https://github.com/nvim-treesitter/playground
-    playground = { enable = true },
 
     -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects
     textobjects = {

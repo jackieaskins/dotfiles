@@ -1,4 +1,4 @@
-local M = { 'L3MON4D3/LuaSnip' }
+local M = { 'L3MON4D3/LuaSnip', lazy = true }
 
 function M.init()
   local map = require('utils').map

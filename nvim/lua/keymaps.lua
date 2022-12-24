@@ -13,8 +13,8 @@ map('n', 'gx', function()
   require('gx').handle_url_under_cursor()
 end, { desc = 'Open url under cursor' })
 
--- Yank to System Clipboard
-local yank_keys = { 'd', 'y', 'c' }
+-- Yank to/from System Clipboard
+local yank_keys = { 'c', 'd', 'p', 'y' }
 for _, key in ipairs(yank_keys) do
   map({ 'n', 'v' }, '<leader>' .. key, '"+' .. key)
 end
