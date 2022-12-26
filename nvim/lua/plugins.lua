@@ -30,7 +30,11 @@ return {
     ft = 'markdown',
   },
   { 'j-hui/fidget.nvim', config = { text = { spinner = 'dots' } } },
-  { 'lukas-reineke/indent-blankline.nvim', config = { show_current_context = true } },
+  {
+    'lukas-reineke/indent-blankline.nvim',
+    config = { show_current_context = true },
+    dependencies = { 'catppuccin' },
+  },
   { 'matze/vim-move', keys = { '<M-h>', '<M-j>', '<M-k>', '<M-l>' } },
   {
     'nvim-treesitter/playground',
