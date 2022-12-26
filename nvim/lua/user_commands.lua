@@ -10,7 +10,7 @@ user_command('LspUpdate', function(arg)
 end, {
   nargs = '*',
   complete = function()
-    return require('lsp.servers').server_names
+    return vim.tbl_keys(require('lsp.servers'))
   end,
 })
 
