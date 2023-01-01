@@ -19,23 +19,36 @@ git clone https://github.com/jackieaskins/dotfiles.git ~/dotfiles
 ```
 
 ## Customization
+ 
+### Hammerspoon
 
-To add machine-specific settings, create the files below. For:
-- Vim: `~/dotfiles/vim/custom.vim`
-- Neovim:
-    - General settings: `~/dotfiles/nvim/lua/custom.lua`
-    - Custom plugins: `~/dotfiles/nvim/lua/plugins/custom-[plugin-name].lua`
-    - Custom LSP configs: `~/dotfiles/nvim/lua/custom/lspconfig.lua`
-- Tmux: `~/dotfiles/tmux/custom.conf`
-- Zsh: `~/dotfiles/zsh/custom.zsh`
+Return a `table` in `~/dotfiles/hammerspoon/custom.lua`, the following keys can be provided:
+- `brew_prefix` - `string`
+- `app_keys` - `table<string, string>`
+- `twm_window_filters` - `table<string, boolean | table>`
+    - See [setFilters](https://www.hammerspoon.org/docs/hs.window.filter.html#setFilters)
 
-These files are automatically sourced and ignored by Git.
+### Neovim
 
-### Overriding Supported LSP Servers
+Use the following files to customize Neovim:
+- General settings: `~/dotfiles/nvim/lua/custom.lua`
+- Custom plugins: `~/dotfiles/nvim/lua/plugins/custom-[plugin-name].lua`
+- Custom LSP configs: `~/dotfiles/nvim/lua/custom/lspconfig.lua`
 
-The following global variables can be used to override the list of supported LSP servers:
+#### Overriding Supported LSP Servers
 
+To override the list of supported LSP servers, add the following global variables to `~/dotfiles/nvim/lua/custom.lua`:
 - `vim.g.additional_server_commands` - Table from server name to install command, used to add support for installing additional servers. See `~/dotfiles/nvim/lua/lsp/servers.lua` for install command references.
 - `vim.g.supported_servers` - List of server names to override the default list of supported servers. Ensure any additional servers are added to this list.
 
-These variables can be added to `~/dotfiles/nvim/lua/custom.lua`.
+### Tmux
+
+`~/dotfiles/tmux/custom.conf`
+
+### Vim
+
+`~/dotfiles/vim/custom.vim`
+ 
+### Zsh
+ 
+`~/dotfiles/zsh/custom.zsh`

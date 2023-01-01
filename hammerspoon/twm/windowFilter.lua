@@ -1,3 +1,13 @@
+local mergeTables = require('utils').mergeTables
+
+local window_filters = mergeTables({
+  ['System Preferences'] = false,
+  ['System Settings'] = false,
+  ['Brave Browser'] = { rejectTitles = 'Picture in Picture' },
+  ['Google Chrome'] = { rejectTitles = 'Picture in Picture' },
+  ['Hammerspoon'] = { rejectTitles = 'Hammerspoon Console' },
+}, CUSTOM.twm_window_filters or {})
+
 return hs.window.filter
   .new()
   :setDefaultFilter()
@@ -5,11 +15,4 @@ return hs.window.filter
     allowRoles = { 'AXStandardWindow' },
     visible = true,
   })
-  :setFilters({
-    godot = false,
-    Godot = false,
-    ['System Settings'] = false,
-    ['Brave Browser'] = { rejectTitles = 'Picture in Picture' },
-    ['Google Chrome'] = { rejectTitles = 'Picture in Picture' },
-    ['Hammerspoon'] = { rejectTitles = 'Hammerspoon Console' },
-  })
+  :setFilters(window_filters)

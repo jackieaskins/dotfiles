@@ -1,7 +1,15 @@
+local utils = require('utils')
+
+----------------------------------------------------------------------
+--                              Custom                              --
+----------------------------------------------------------------------
+local ok, custom = pcall(require, 'custom')
+CUSTOM = ok and custom or {}
+
 ----------------------------------------------------------------------
 --                            Constants                             --
 ----------------------------------------------------------------------
-BREW_PREFIX = '/opt/homebrew'
+BREW_PREFIX = CUSTOM.brew_prefix or '/opt/homebrew'
 
 MEH = { 'option', 'shift', 'ctrl' }
 HYPER = { 'option', 'shift', 'ctrl', 'cmd' }
@@ -22,13 +30,9 @@ spoon.ReloadConfiguration:bindHotkeys({
 ----------------------------------------------------------------------
 --                             Keymaps                              --
 ----------------------------------------------------------------------
-for key, app in pairs({
-  b = 'Brave Browser',
-  g = 'Godot',
-  i = 'Messages',
-  m = 'Spotify',
-  t = 'kitty',
-}) do
+local app_keys = utils.mergeTables({ m = 'Spotify', n = 'Notes', t = 'kitty' }, CUSTOM.app_keys or {})
+
+for key, app in pairs(app_keys) do
   hs.hotkey.bind({ 'option', 'control' }, key, function()
     hs.application.launchOrFocus(app)
   end)
