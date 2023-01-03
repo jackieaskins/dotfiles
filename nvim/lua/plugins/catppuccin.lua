@@ -1,4 +1,4 @@
-local M = { 'catppuccin/nvim', name = 'catppuccin' }
+local M = { 'catppuccin/nvim', lazy = false, name = 'catppuccin', priority = 1000 }
 
 function M.config()
   require('catppuccin').setup({

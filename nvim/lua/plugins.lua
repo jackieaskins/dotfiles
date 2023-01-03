@@ -12,15 +12,8 @@ return {
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
   },
   { 'airblade/vim-matchquote', dependencies = { 'andymass/vim-matchup' } },
-  {
-    'dstein64/vim-startuptime',
-    cmd = 'StartupTime',
-    init = function()
-      map('n', '<leader>su', '<cmd>StartupTime --tries 20<CR>')
-    end,
-  },
   { 'fladson/vim-kitty' },
-  { 'gaoDean/autolist.nvim', config = true },
+  { 'gaoDean/autolist.nvim', config = true, pin = true },
   {
     'iamcco/markdown-preview.nvim',
     build = 'cd app && npm install',
@@ -30,11 +23,7 @@ return {
     ft = 'markdown',
   },
   { 'j-hui/fidget.nvim', config = { text = { spinner = 'dots' } } },
-  {
-    'lukas-reineke/indent-blankline.nvim',
-    config = { show_current_context = true },
-    dependencies = { 'catppuccin' },
-  },
+  { 'lukas-reineke/indent-blankline.nvim', config = { show_current_context = true } },
   { 'matze/vim-move', keys = { '<M-h>', '<M-j>', '<M-k>', '<M-l>' } },
   {
     'nvim-treesitter/playground',

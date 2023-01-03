@@ -3,6 +3,7 @@ local M = {
   dependencies = {
     { 'jackieaskins/cmp-emmet', build = 'npm run release' },
     'hrsh7th/cmp-buffer',
+    'hrsh7th/cmp-calc',
     'hrsh7th/cmp-cmdline',
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-nvim-lsp-signature-help',
@@ -15,6 +16,7 @@ function M.config()
   local cmp = require('cmp')
 
   local source_menu_map = {
+    calc = 'Calc',
     emmet = 'Emmet',
     luasnip = 'Snip',
     nvim_lsp = 'LSP',
@@ -39,6 +41,7 @@ function M.config()
       { name = 'emmet' },
       { name = 'path' },
       { name = 'nvim_lsp_signature_help' },
+      { name = 'calc' },
     }, {
       {
         name = 'buffer',

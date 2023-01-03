@@ -3,6 +3,11 @@ local M = {
   dependencies = { 'nvim-tree/nvim-web-devicons' },
 }
 
+local file_type_map = {
+  TelescopePrompt = '[Telescope]',
+  ['neo-tree'] = '[Neo-Tree]',
+}
+
 function M.config()
   local colors = require('colors')
   local vi_mode = require('feline.providers.vi_mode')
@@ -44,8 +49,9 @@ function M.config()
 
   local function file_info_provider(fnamemodifier)
     return function()
-      if vim.bo.filetype == 'TelescopePrompt' then
-        return ' [Telescope]'
+      local ft_override = file_type_map[vim.bo.filetype]
+      if ft_override then
+        return ' ' .. ft_override
       end
 
       local buf_name = vim.api.nvim_buf_get_name(0)
