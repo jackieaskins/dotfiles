@@ -52,6 +52,7 @@ function M.config()
       },
       neotest = true,
       neotree = true,
+      notify = true,
       nvimtree = false,
       treesitter_context = true,
     },

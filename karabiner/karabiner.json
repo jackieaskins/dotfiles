@@ -18,9 +18,9 @@
                     {
                         "manipulators": [
                             {
-                                "description": "Change fn to control+option+shift.",
+                                "description": "Change left_control to control+option+shift.",
                                 "from": {
-                                    "key_code": "fn",
+                                    "key_code": "left_control",
                                     "modifiers": {
                                         "optional": [
                                             "any"
@@ -191,7 +191,7 @@
                     },
                     "to": [
                         {
-                            "key_code": "left_control"
+                            "key_code": "right_control"
                         }
                     ]
                 }
