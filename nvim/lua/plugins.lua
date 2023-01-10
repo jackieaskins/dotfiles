@@ -13,7 +13,6 @@ return {
   },
   { 'airblade/vim-matchquote', dependencies = { 'andymass/vim-matchup' } },
   { 'fladson/vim-kitty' },
-  { 'gaoDean/autolist.nvim', config = true, pin = true },
   {
     'iamcco/markdown-preview.nvim',
     build = 'cd app && npm install',
