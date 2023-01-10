@@ -1,19 +1,6 @@
 local utils = require('utils')
 local open_url, user_command = utils.open_url, utils.user_command
 
--- LSP
-user_command('LspUpdateAll', function()
-  require('lsp.update').update_all_servers()
-end)
-user_command('LspUpdate', function(arg)
-  require('lsp.update').update_servers(arg.args)
-end, {
-  nargs = '*',
-  complete = function()
-    return vim.tbl_keys(require('lsp.servers'))
-  end,
-})
-
 -- Terminal
 user_command('T', 'botright split | terminal <args>', { nargs = '*' })
 user_command('VT', 'botright vsplit | terminal <args>', { nargs = '*' })

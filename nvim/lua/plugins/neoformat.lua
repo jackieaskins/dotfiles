@@ -1,3 +1,6 @@
+local utils = require('utils')
+local augroup, filter_table_by_keys = utils.augroup, utils.filter_table_by_keys
+
 local M = { 'sbdchd/neoformat', cmd = 'Neoformat' }
 
 local formatters = {
@@ -18,51 +21,32 @@ local formatters = {
   },
 }
 
+local supported_formatters = vim.g.supported_formatters and filter_table_by_keys(formatters, vim.g.supported_formatters)
+  or formatters
+
 local formatter_by_filetype = {
-  css = formatters.prettierd,
-  gdscript = formatters.gdformat,
-  html = formatters.prettierd,
-  javascript = formatters.prettierd,
-  javascriptreact = formatters.prettierd,
-  json = formatters.prettierd,
-  jsonc = formatters.prettierd,
-  lua = formatters.stylua,
-  markdown = formatters.prettierd,
-  svelte = formatters.prettierd,
-  typescript = formatters.prettierd,
-  typescriptreact = formatters.prettierd,
+  css = supported_formatters.prettierd,
+  gdscript = supported_formatters.gdformat,
+  html = supported_formatters.prettierd,
+  javascript = supported_formatters.prettierd,
+  javascriptreact = supported_formatters.prettierd,
+  json = supported_formatters.prettierd,
+  jsonc = supported_formatters.prettierd,
+  lua = supported_formatters.stylua,
+  markdown = supported_formatters.prettierd,
+  svelte = supported_formatters.prettierd,
+  typescript = supported_formatters.prettierd,
+  typescriptreact = supported_formatters.prettierd,
 }
 
-local function update_formatters(formatter_names)
-  local install_cmds = {}
-
-  for _, name in ipairs(formatter_names) do
-    install_cmds[name] = formatters[name].install_cmd
-  end
-
-  require('installer').install(install_cmds, vim.fn.stdpath('data') .. '/formatters')
-end
-
 function M.init()
-  local utils = require('utils')
+  local install_cmds = {}
+  for formatter, data in pairs(supported_formatters) do
+    install_cmds[formatter] = data.install_cmd
+  end
+  require('installer').register('formatter', install_cmds, vim.fn.stdpath('data') .. '/formatters')
 
-  utils.user_command('FormatterUpdateAll', function()
-    update_formatters(vim.tbl_keys(formatters))
-  end)
-
-  utils.user_command('FormatterUpdate', function(arg)
-    local ft_formatter = { formatter_by_filetype[vim.bo.filetype].name }
-    local formatter_names = arg.args ~= '' and vim.split(arg.args, ' ') or ft_formatter
-
-    update_formatters(formatter_names)
-  end, {
-    nargs = '*',
-    complete = function()
-      return vim.tbl_keys(formatters)
-    end,
-  })
-
-  utils.augroup('format_on_save', {
+  augroup('format_on_save', {
     {
       'BufWritePre',
       {

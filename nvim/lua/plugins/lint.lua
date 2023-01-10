@@ -1,16 +1,13 @@
+local filter_table_by_keys = require('utils').filter_table_by_keys
+
 local M = { 'mfussenegger/nvim-lint', lazy = true }
 
-local linters = {
-  gdlint = { 'pip3', 'git+https://github.com/Scony/godot-gdscript-toolkit.git' },
-}
-local linters_by_filetype = {
-  gdscript = { 'gdlint' },
-}
+local linters = { gdlint = { 'pip3', 'git+https://github.com/Scony/godot-gdscript-toolkit.git' } }
+local supported_linters = vim.g.supported_linters and filter_table_by_keys(linters, vim.g.supported_linters) or linters
+local linters_by_filetype = { gdscript = { 'gdlint' } }
 
 function M.init()
-  local utils = require('utils')
-
-  utils.augroup('lint', {
+  require('utils').augroup('lint', {
     {
       { 'BufWritePost', 'InsertLeave', 'TextChanged' },
       {
@@ -22,29 +19,7 @@ function M.init()
     },
   })
 
-  local function update_linters(linter_names)
-    local install_cmds = {}
-
-    for _, name in ipairs(linter_names) do
-      install_cmds[name] = linters[name]
-    end
-
-    require('installer').install(install_cmds, vim.fn.stdpath('data') .. '/linters')
-  end
-
-  utils.user_command('LinterUpdateAll', function()
-    update_linters(vim.tbl_keys(linters))
-  end)
-
-  utils.user_command('LinterUpdate', function(arg)
-    local linter_names = arg.args ~= '' and vim.split(arg.args, ' ') or linters_by_filetype[vim.bo.filetype]
-    update_linters(linter_names)
-  end, {
-    nargs = '*',
-    complete = function()
-      return vim.tbl_keys(linters)
-    end,
-  })
+  require('installer').register('linter', supported_linters, vim.fn.stdpath('data') .. '/linters')
 end
 
 function M.config()

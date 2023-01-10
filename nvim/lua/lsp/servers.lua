@@ -195,6 +195,14 @@ else
   supported_servers = all_servers
 end
 
+local install_cmds = {}
+for server, data in pairs(supported_servers) do
+  if data.install then
+    install_cmds[server] = data.install
+  end
+end
+require('installer').register('lsp', install_cmds, vim.fn.stdpath('data') .. '/lsp-servers')
+
 return supported_servers
 
 -- vim:foldmethod=marker foldlevel=0

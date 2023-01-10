@@ -1,3 +1,6 @@
+local utils = require('utils')
+local filter_table_by_keys, user_command = utils.filter_table_by_keys, utils.user_command
+
 local M = {}
 
 local pkg_managers = {
@@ -8,6 +11,27 @@ local pkg_managers = {
   npm = 'npm install -g',
   pip3 = 'pip3 install',
 }
+
+---Register install group with installation directory and commands
+---@param group_name string
+---@param commands table<string, string[] | fun(install_dir?:string):table>
+---@param install_dir string
+function M.register(group_name, commands, install_dir)
+  user_command(group_name:gsub('^%l', string.upper) .. 'Install', function(arg)
+    local cmd_keys = arg.fargs
+
+    if #cmd_keys > 0 then
+      M.install(filter_table_by_keys(commands, cmd_keys), install_dir)
+    else
+      M.install(commands, install_dir)
+    end
+  end, {
+    nargs = '*',
+    complete = function()
+      return vim.tbl_keys(commands)
+    end,
+  })
+end
 
 ---Generic install command
 ---@param command_map table<string, string[] | fun(install_dir?:string):table>

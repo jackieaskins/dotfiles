@@ -74,4 +74,16 @@ function M.open_url(url)
   vim.fn.system(open_cmd .. ' ' .. vim.fn.shellescape(url))
 end
 
+---Filter key-value table based on key
+---@param table table<string, any>
+---@param keys string[]
+---@return table<string, any>
+function M.filter_table_by_keys(table, keys)
+  local rv = {}
+  for _, key in ipairs(keys) do
+    rv[key] = table[key]
+  end
+  return rv
+end
+
 return M
