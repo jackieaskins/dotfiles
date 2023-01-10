@@ -34,6 +34,7 @@ Use the following files to customize Neovim:
 - General settings: `~/dotfiles/nvim/lua/custom.lua`
 - Custom plugins: `~/dotfiles/nvim/lua/plugins/custom-[plugin-name].lua`
 - Custom LSP configs: `~/dotfiles/nvim/lua/custom/lspconfig.lua`
+- Custom GX matchers: `~/dotfiles/nvim/lua/custom/gx-matchers.lua` 
 
 #### Overriding Supported LSP Servers
 
