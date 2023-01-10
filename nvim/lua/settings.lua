@@ -52,11 +52,3 @@ vim.opt.inccommand = 'nosplit'
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.path:append({ '**' })
-
--- Auto hlsearch
-vim.on_key(function(char)
-  if vim.fn.mode() == 'n' then
-    local hlsearch_keys = { '<CR>', 'n', 'N', '*', '#', '?', '/' }
-    vim.opt.hlsearch = vim.tbl_contains(hlsearch_keys, vim.fn.keytrans(char))
-  end
-end, vim.api.nvim_create_namespace('auto_hlsearch'))

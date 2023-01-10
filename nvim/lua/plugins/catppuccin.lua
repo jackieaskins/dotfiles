@@ -17,6 +17,8 @@ function M.config()
 
         Folded = { fg = colors.blue, bg = colors.mantle },
 
+        HlSearchLens = editor_highlights.Search,
+
         NeoTreeNormal = { bg = colors.base },
 
         NormalFloat = { bg = colors.base },
