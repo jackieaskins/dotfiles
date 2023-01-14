@@ -6,6 +6,7 @@ local M = {
 local file_type_map = {
   TelescopePrompt = '[Telescope]',
   ['neo-tree'] = '[Neo-Tree]',
+  NvimTree = '[Tree]',
 }
 
 function M.config()
@@ -76,6 +77,7 @@ function M.config()
   end
 
   local disabled_filetypes = {
+    'NvimTree',
     '^neo.tree$',
     '^DiffviewFiles$',
   }

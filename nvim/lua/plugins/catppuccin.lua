@@ -19,9 +19,24 @@ function M.config()
 
         HlSearchLens = editor_highlights.Search,
 
-        NeoTreeNormal = { bg = colors.base },
-
         NormalFloat = { bg = colors.base },
+
+        NvimTreeEmptyFolderName = { fg = colors.blue },
+        NvimTreeFolderIcon = { fg = colors.blue },
+        NvimTreeFolderName = { fg = colors.blue },
+        NvimTreeGitDeleted = { fg = colors.red },
+        NvimTreeGitDirty = { fg = colors.yellow },
+        NvimTreeGitNew = { fg = colors.blue },
+        NvimTreeImageFile = { fg = colors.text },
+        NvimTreeIndentMarker = { fg = colors.overlay0 },
+        NvimTreeNormal = { fg = colors.text, bg = colors.base },
+        NvimTreeOpenedFile = { fg = colors.pink },
+        NvimTreeOpenedFolderName = { fg = colors.blue },
+        NvimTreeRootFolder = { fg = colors.lavender, style = { 'bold' } },
+        NvimTreeSpecialFile = { fg = colors.flamingo },
+        NvimTreeStatuslineNc = { fg = colors.mantle, bg = colors.mantle },
+        NvimTreeSymlink = { fg = colors.pink },
+        NvimTreeWinSeparator = { fg = colors.surface1, bg = 'NONE' },
 
         QuickScopePrimary = { fg = colors.sapphire, style = { 'underline', 'bold' } },
         QuickScopeSecondary = { fg = colors.pink, style = { 'underline' } },
@@ -53,7 +68,6 @@ function M.config()
         },
       },
       neotest = true,
-      neotree = true,
       notify = true,
       nvimtree = false,
       treesitter_context = true,
