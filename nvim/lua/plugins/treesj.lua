@@ -7,6 +7,7 @@ return {
       langs = {
         jsonc = require('treesj.langs.json'),
       },
+      max_join_length = 999, -- Setting to arbitrarilty large number to avoid enforcing a max length
     })
   end,
   keys = {

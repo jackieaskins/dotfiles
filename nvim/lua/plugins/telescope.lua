@@ -31,7 +31,7 @@ function M.config()
 
   telescope.setup({
     defaults = {
-      layout_strategy = 'flex',
+      layout_strategy = 'vertical',
       mappings = {
         i = {
           ['<Tab>'] = actions.toggle_selection + actions.move_selection_next,
@@ -64,6 +64,7 @@ function M.config()
   })
 
   telescope.load_extension('fzf')
+  telescope.load_extension('notify')
 end
 
 return M

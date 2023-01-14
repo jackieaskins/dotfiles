@@ -14,9 +14,9 @@ return function(client, bufnr)
 
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-  bsk('n', 'gi', '<cmd>Telescope lsp_implementations<CR>')
-  bsk('n', 'gd', '<cmd>Telescope lsp_definitions<CR>')
-  bsk('n', 'gr', '<cmd>Telescope lsp_references include_declaration=false<CR>')
+  bsk('n', 'gi', '<cmd>Telescope lsp_implementations jump_type=never<CR>')
+  bsk('n', 'gd', '<cmd>Telescope lsp_definitions jump_type=never<CR>')
+  bsk('n', 'gr', '<cmd>Telescope lsp_references include_declaration=false jump_type=never<CR>')
 
   bsk('n', 'K', vim.lsp.buf.hover, { desc = 'Hover' })
   bsk({ 'i', 'n' }, '<C-S>', vim.lsp.buf.signature_help, { desc = 'vim.lsp.buf.signature_help' })

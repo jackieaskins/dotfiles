@@ -10,6 +10,7 @@ return {
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
   },
   { 'airblade/vim-matchquote', dependencies = { 'andymass/vim-matchup' } },
+  { 'antonk52/markdowny.nvim', config = true },
   { 'fladson/vim-kitty' },
   {
     'iamcco/markdown-preview.nvim',
