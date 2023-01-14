@@ -2,7 +2,7 @@
 return {
   'numToStr/Comment.nvim',
   branch = 'jsx',
-  config = {
+  opts = {
     pre_hook = function(ctx)
       return require('Comment.jsx').calculate(ctx)
     end,

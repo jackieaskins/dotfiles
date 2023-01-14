@@ -1,7 +1,6 @@
-local M = { 'lewis6991/gitsigns.nvim', dependencies = { 'nvim-lua/plenary.nvim' } }
-
-function M.config()
-  require('gitsigns').setup({
+return {
+  'lewis6991/gitsigns.nvim',
+  opts = {
     on_attach = function(bufnr)
       local gs = package.loaded.gitsigns
 
@@ -50,7 +49,5 @@ function M.config()
     preview_config = { border = vim.g.border_style },
     sign_priority = require('sign_priorities').gitsigns,
     trouble = false,
-  })
-end
-
-return M
+  },
+}

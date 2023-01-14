@@ -1,10 +1,8 @@
-local map = require('utils').map
-
 return {
   { 'AckslD/messages.nvim', cmd = 'Messages', config = true },
   {
     'NvChad/nvim-colorizer.lua',
-    config = { user_default_options = { AARRGGBB = true, names = false, tailwind = 'lsp' } },
+    opts = { user_default_options = { AARRGGBB = true, names = false, tailwind = 'lsp' } },
   },
   {
     'abecodes/tabout.nvim',
@@ -16,13 +14,11 @@ return {
   {
     'iamcco/markdown-preview.nvim',
     build = 'cd app && npm install',
-    config = function()
-      map('n', '<leader>mp', vim.cmd.MarkdownPreview)
-    end,
     ft = 'markdown',
+    keys = { { '<leader>mp', vim.cmd.MarkdownPreview, desc = 'MarkdownPreview' } },
   },
-  { 'j-hui/fidget.nvim', config = { text = { spinner = 'dots' } } },
-  { 'lukas-reineke/indent-blankline.nvim', config = { show_current_context = true } },
+  { 'j-hui/fidget.nvim', opts = { text = { spinner = 'dots' } } },
+  { 'lukas-reineke/indent-blankline.nvim', opts = { show_current_context = true } },
   { 'matze/vim-move', keys = { '<M-h>', '<M-j>', '<M-k>', '<M-l>' } },
   {
     'nvim-treesitter/playground',
@@ -39,14 +35,13 @@ return {
     end,
   },
   { 'rhysd/conflict-marker.vim' },
-  { 'stevearc/dressing.nvim', event = 'VeryLazy' },
+  { 'stevearc/dressing.nvim' },
   {
     'szw/vim-maximizer',
-    cmd = 'MaximizerToggle',
     init = function()
       vim.g.maximizer_set_default_mapping = 0
-      map('n', '<leader>mt', vim.cmd.MaximizerToggle)
     end,
+    keys = { { '<leader>mt', vim.cmd.MaximizerToggle, desc = 'MaximizerToggle' } },
   },
   { 'tpope/vim-abolish' },
   { 'tpope/vim-fugitive', cmd = { 'Git', 'G', 'Gread' } },

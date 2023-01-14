@@ -1,6 +1,6 @@
 return {
   'Wansmer/treesj',
-  cmd = { 'TSJJoin', 'TSJSplit' },
+  dependencies = { 'nvim-treesitter/nvim-treesitter' },
   config = function()
     require('treesj').setup({
       use_default_keymaps = false,
@@ -9,10 +9,8 @@ return {
       },
     })
   end,
-  init = function()
-    local map = require('utils').map
-
-    map('n', 'gJ', vim.cmd.TSJJoin)
-    map('n', 'gS', vim.cmd.TSJSplit)
-  end,
+  keys = {
+    { 'gJ', vim.cmd.TSJJoin, desc = 'TSJJoin' },
+    { 'gS', vim.cmd.TSJSplit, desc = 'TSJSplit' },
+  },
 }

@@ -6,25 +6,22 @@ local M = {
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
     { 'danielvolchek/tailiscope.nvim' },
   },
+  keys = {
+    { '<leader>ht', '<cmd>Telescope help_tags<CR>' },
+    { '<leader>hi', '<cmd>Telescope highlights<CR>' },
+    { '<leader>km', '<cmd>Telescope keymaps<CR>' },
+    { '<C-p>', '<cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files<CR>' },
+    { '<leader>ff', '<cmd>Telescope find_files find_command=rg,--no-ignore,--hidden,--files<CR>' },
+    { '<leader>rg', ':Telescope grep_string search=', { silent = false } },
+    { '<leader>/', '<cmd>Telescope live_grep only_sort_text=true<CR>' },
+    { '<leader>fw', '<cmd>Telescope grep_string<CR>' },
+    { '<leader>gs', '<cmd>Telescope git_status<CR>' },
+    { '<leader>bu', '<cmd>Telescope buffers sort_mru=true<CR>' },
+    { '<leader>of', '<cmd>Telescope oldfiles cwd_only=true sort_lastused=true include_current_session=true<CR>' },
+    { '<leader>wd', '<cmd>Telescope diagnostics<CR>' },
+    { '<leader>z=', '<cmd>Telescope spell_suggest<CR>' },
+  },
 }
-
-function M.init()
-  local map = require('utils').map
-
-  map('n', '<leader>ht', '<cmd>Telescope help_tags<CR>')
-  map('n', '<leader>hi', '<cmd>Telescope highlights<CR>')
-  map('n', '<leader>km', '<cmd>Telescope keymaps<CR>')
-  map('n', '<C-p>', '<cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files<CR>')
-  map('n', '<leader>ff', '<cmd>Telescope find_files find_command=rg,--no-ignore,--hidden,--files<CR>')
-  map('n', '<leader>rg', ':Telescope grep_string search=', { silent = false })
-  map('n', '<leader>/', '<cmd>Telescope live_grep only_sort_text=true<CR>')
-  map('n', '<leader>fw', '<cmd>Telescope grep_string<CR>')
-  map('n', '<leader>gs', '<cmd>Telescope git_status<CR>')
-  map('n', '<leader>bu', '<cmd>Telescope buffers sort_mru=true<CR>')
-  map('n', '<leader>of', '<cmd>Telescope oldfiles cwd_only=true sort_lastused=true include_current_session=true<CR>')
-  map('n', '<leader>wd', '<cmd>Telescope diagnostics<CR>')
-  map('n', '<leader>z=', '<cmd>Telescope spell_suggest<CR>')
-end
 
 function M.config()
   local telescope = require('telescope')

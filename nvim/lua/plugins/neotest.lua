@@ -1,45 +1,33 @@
-local M = { 'nvim-neotest/neotest', lazy = true }
-
-function M.init()
-  local map = require('utils').map
-
-  map('n', ']t', function()
-    require('neotest').jump.next()
-  end, { desc = 'Go to next test' })
-  map('n', '[t', function()
-    require('neotest').jump.prev()
-  end, { desc = 'Go to previous test' })
-  map('n', ']f', function()
-    require('neotest').jump.next({ status = 'failed' })
-  end, { desc = 'Go to next failed test' })
-  map('n', '[f', function()
-    require('neotest').jump.prev({ status = 'failed' })
-  end, { desc = 'Go to previous failed test' })
-
-  map('n', '<leader>tf', function()
-    require('neotest').run.run(vim.fn.expand('%'))
-  end, { desc = 'Run tests in file' })
-  map('n', '<leader>tn', function()
-    require('neotest').run.run()
-  end, { desc = 'Run nearest test/namespace' })
-  map('n', '<leader>tl', function()
-    require('neotest').run.run_last()
-  end, { desc = 'Run last test command' })
-  map('n', '<leader>ts', function()
-    require('neotest').run.stop()
-  end, { desc = 'Stop currently running tests' })
-
-  map('n', '<leader>to', function()
-    require('neotest').output.open()
-  end, { desc = 'Open nearest test output' })
-  map('n', '<leader>tO', function()
-    require('neotest').output.open({ enter = true })
-  end, { desc = 'Open and enter nearest test output' })
-
-  map('n', '<leader>tt', function()
-    require('neotest').summary.toggle()
-  end, { desc = 'Open test summary window' })
+local function create_key(map)
+  return {
+    map[1],
+    function()
+      require('neotest')[module][map[2]](map[3])
+    end,
+    desc = map[4],
+  }
 end
+
+local M = {
+  'nvim-neotest/neotest',
+  dependencies = { 'nvim-lua/plenary.nvim', 'nvim-treesitter/nvim-treesitter' },
+  keys = vim.tbl_map(create_key, {
+    { ']t', 'jump', 'next', nil, 'Go to next test' },
+    { '[t', 'jump', 'prev', nil, 'Go to previous test' },
+    { ']f', 'jump', 'next', { status = 'failed' }, 'Go to next failed test' },
+    { '[f', 'jump', 'prev', { status = 'failed' }, 'Go to previous failed test' },
+
+    { '<leader>tf', 'run', 'run', vim.fn.expand('%'), 'Run tests in file' },
+    { '<leader>tn', 'run', 'run', nil, 'Run nearest test/namespace' },
+    { '<leader>tl', 'run', 'run_last', nil, 'Run last test command' },
+    { '<leader>ts', 'run', 'stop', nil, 'Stop currently running tests' },
+
+    { '<leader>to', 'output', 'open', nil, 'Open nearest test output' },
+    { '<leader>tO', 'output', 'open', { enter = true }, 'Open and enter nearest test output' },
+
+    { '<leader>tt', 'summary', 'toggle', nil, 'Open test summary window' },
+  }),
+}
 
 function M.config()
   local lib = require('neotest.lib')

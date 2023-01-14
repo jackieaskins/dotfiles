@@ -1,20 +1,17 @@
 local M = {
   'nvim-neo-tree/neo-tree.nvim',
   branch = 'v2.x',
-  cmd = 'Neotree',
   dependencies = {
     'nvim-lua/plenary.nvim',
     'nvim-tree/nvim-web-devicons',
     'MunifTanjim/nui.nvim',
   },
+  enabled = false,
+  keys = {
+    { '<C-n>', '<cmd>Neotree toggle<CR>' },
+    { '<leader>n', '<cmd>Neotree toggle reveal<CR>' },
+  },
 }
-
-function M.init()
-  local map = require('utils').map
-
-  map('n', '<C-n>', '<cmd>Neotree toggle<CR>')
-  map('n', '<leader>n', '<cmd>Neotree toggle reveal<CR>')
-end
 
 function M.config()
   local neotree = require('neo-tree')

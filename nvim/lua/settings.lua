@@ -28,7 +28,6 @@ vim.opt.diffopt:append({ 'vertical', 'linematch:60' })
 vim.opt.termguicolors = true
 vim.opt.laststatus = 3
 vim.opt.tabline = "%{%v:lua.require('tabline').get_tabline()%}"
-vim.opt.shortmess:append('sI') -- Temporarily disabling because lazy causes flash
 
 -- Folds
 vim.opt.foldmethod = 'expr'
