@@ -24,9 +24,8 @@ return {
         indent_markers = { enable = true },
       },
       view = {
-        adaptive_size = true,
         centralize_selection = true,
-        width = '30%',
+        width = { max = 50 },
       },
     })
 

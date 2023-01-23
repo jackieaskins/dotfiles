@@ -3,6 +3,7 @@ local M = {
   cmd = 'Telescope',
   dependencies = {
     { 'nvim-lua/plenary.nvim' },
+    { 'benfowler/telescope-luasnip.nvim' },
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
     { 'danielvolchek/tailiscope.nvim' },
   },
@@ -20,6 +21,7 @@ local M = {
     { '<leader>of', '<cmd>Telescope oldfiles cwd_only=true sort_lastused=true include_current_session=true<CR>' },
     { '<leader>wd', '<cmd>Telescope diagnostics<CR>' },
     { '<leader>z=', '<cmd>Telescope spell_suggest<CR>' },
+    { '<leader>sn', '<cmd>Telescope luasnip<CR>' },
   },
 }
 
@@ -64,6 +66,7 @@ function M.config()
   })
 
   telescope.load_extension('fzf')
+  telescope.load_extension('luasnip')
   telescope.load_extension('notify')
 end
 

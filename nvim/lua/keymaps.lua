@@ -14,7 +14,7 @@ map('n', 'gx', function()
 end, { desc = 'Open url under cursor' })
 
 -- Yank to/from System Clipboard
-local yank_keys = { 'c', 'd', 'p', 'y' }
+local yank_keys = { 'c', 'C', 'd', 'D', 'p', 'P', 'y', 'Y' }
 for _, key in ipairs(yank_keys) do
   map({ 'n', 'v' }, '<leader>' .. key, '"+' .. key)
 end

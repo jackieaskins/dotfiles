@@ -19,6 +19,8 @@ function M.config()
 
         HlSearchLens = editor_highlights.Search,
 
+        IndentBlanklineContextChar = { fg = colors.blue },
+
         NormalFloat = { bg = colors.base },
 
         NvimTreeEmptyFolderName = { fg = colors.blue },
