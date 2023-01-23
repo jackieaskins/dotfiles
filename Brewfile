@@ -33,5 +33,4 @@ if RUBY_PLATFORM =~ /darwin/
 
   brew 'awscli'
   brew 'imagemagick'
-  brew 'openjdk'
 end
