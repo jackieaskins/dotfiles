@@ -1,5 +1,6 @@
 brew 'bat'
 brew 'fd'
+brew 'fzf'
 brew 'go'
 brew 'gradle'
 brew 'jq'
