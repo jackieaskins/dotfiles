@@ -4,7 +4,7 @@ local window_filters = mergeTables({
   ['System Preferences'] = false,
   ['System Settings'] = false,
   ['Brave Browser'] = { rejectTitles = 'Picture in Picture' },
-  Finder = { rejectTitles = ' Info$' },
+  Finder = false,
   ['Google Chrome'] = { rejectTitles = 'Picture in Picture' },
   Hammerspoon = { rejectTitles = 'Hammerspoon Console' },
   ['Karabiner-Elements'] = false,

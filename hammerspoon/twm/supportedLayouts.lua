@@ -71,4 +71,32 @@ function M.rtall(windows, screenFrame)
   end
 end
 
+---Grid
+---@param windows hs.window[]
+---@param screenFrame hs.geometry
+function M.grid(windows, screenFrame)
+  if #windows <= 2 then
+    return M.tall(windows, screenFrame)
+  end
+
+  local numRows = math.ceil(math.sqrt(#windows))
+  local numCols = math.ceil(#windows / numRows)
+
+  local winHeight = screenFrame.h / numRows
+  local winWidth = screenFrame.w / numCols
+
+  for index, window in ipairs(windows) do
+    local x = screenFrame.x + math.floor((index - 1) / numRows) * winWidth
+    local y = screenFrame.y + ((index - 1) % numRows) * winHeight
+
+    window:setFrame({
+      x = x,
+      y = y,
+      -- Make last window fill remaining height
+      h = index == #windows and (screenFrame.y + screenFrame.h) - y or winHeight,
+      w = winWidth,
+    })
+  end
+end
+
 return M
