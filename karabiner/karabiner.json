@@ -43,6 +43,10 @@
                                         "identifiers": [
                                             {
                                                 "vendor_id": 1452,
+                                                "product_id": 832
+                                            },
+                                            {
+                                                "vendor_id": 1452,
                                                 "product_id": 834
                                             }
                                         ]
