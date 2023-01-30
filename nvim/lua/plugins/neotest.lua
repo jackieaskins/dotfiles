@@ -2,9 +2,9 @@ local function create_key(map)
   return {
     map[1],
     function()
-      require('neotest')[module][map[2]](map[3])
+      require('neotest')[map[2]][map[3]](type(map[4]) == 'function' and map[4]() or map[4])
     end,
-    desc = map[4],
+    desc = map[5],
   }
 end
 
@@ -17,7 +17,15 @@ local M = {
     { ']f', 'jump', 'next', { status = 'failed' }, 'Go to next failed test' },
     { '[f', 'jump', 'prev', { status = 'failed' }, 'Go to previous failed test' },
 
-    { '<leader>tf', 'run', 'run', vim.fn.expand('%'), 'Run tests in file' },
+    {
+      '<leader>tf',
+      'run',
+      'run',
+      function()
+        return vim.fn.expand('%')
+      end,
+      'Run tests in file',
+    },
     { '<leader>tn', 'run', 'run', nil, 'Run nearest test/namespace' },
     { '<leader>tl', 'run', 'run_last', nil, 'Run last test command' },
     { '<leader>ts', 'run', 'stop', nil, 'Stop currently running tests' },
@@ -34,7 +42,6 @@ function M.config()
 
   -- TODO: Handle updating parents when running the nearest test
 
-  ---@type neotest.Adapter
   local jest_adapter = { name = 'neotest-jest' }
 
   jest_adapter.root = lib.files.match_root_pattern('package.json')
@@ -147,7 +154,7 @@ function M.config()
       return {}
     end
 
-    local jest_result = vim.json.decode(data, { luanil = { object = true } })
+    local jest_result = vim.json.decode(data, { luanil = { object = true } }) or {}
 
     local test_results = {}
     for _, test_result in ipairs(jest_result.testResults) do
@@ -204,11 +211,7 @@ function M.config()
     end,
   })
 
-  require('neotest').setup({
-    adapters = { jest_adapter },
-    icons = { running = '' },
-    jump = { enabled = true },
-  })
+  require('neotest').setup({ adapters = { jest_adapter } })
 end
 
 return M
