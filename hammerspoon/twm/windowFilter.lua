@@ -1,6 +1,7 @@
 local mergeTables = require('utils').mergeTables
 
 local window_filters = mergeTables({
+  ['Alfred Preferences'] = false,
   ['System Preferences'] = false,
   ['System Settings'] = false,
   ['Brave Browser'] = { rejectTitles = 'Picture in Picture' },
