@@ -7,6 +7,7 @@ local servers = {
   html = { install = { 'npm', 'vscode-langservers-extracted' } },
   jdtls = require('lsp.servers.jdtls'),
   jsonls = require('lsp.servers.jsonls'),
+  omnisharp = require('lsp.servers.omnisharp'),
   pyright = { install = { 'npm', 'pyright' } },
   solargraph = { install = { 'gem', 'solargraph' } },
   sumneko_lua = require('lsp.servers.sumneko_lua'),

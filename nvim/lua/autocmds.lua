@@ -44,7 +44,7 @@ augroup('lsp_formatting', {
   {
     'BufWritePre',
     {
-      pattern = '*.go',
+      pattern = '*.go,*.cs',
       callback = function()
         vim.lsp.buf.format({ async = false })
       end,

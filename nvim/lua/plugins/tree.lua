@@ -26,7 +26,11 @@ return {
         enable = true,
         show_on_dirs = true,
       },
-      filters = { custom = { '^.git$' } },
+      filters = {
+        custom = {
+          '*.meta',
+        },
+      },
       git = { ignore = false },
       renderer = {
         full_name = true,
