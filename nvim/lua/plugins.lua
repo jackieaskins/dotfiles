@@ -19,6 +19,7 @@ return {
     keys = { { '<leader>mp', vim.cmd.MarkdownPreview, desc = 'MarkdownPreview' } },
   },
   { 'j-hui/fidget.nvim', opts = { text = { spinner = 'dots' } } },
+  { 'kylechui/nvim-surround', config = true },
   { 'lukas-reineke/indent-blankline.nvim', opts = { show_current_context = true } },
   { 'matze/vim-move', keys = { '<M-h>', '<M-j>', '<M-k>', '<M-l>' } },
   {
@@ -48,7 +49,6 @@ return {
   { 'tpope/vim-fugitive', cmd = { 'Git', 'G', 'Gread' } },
   { 'tpope/vim-repeat' },
   { 'tpope/vim-sleuth' },
-  { 'tpope/vim-surround' },
   {
     'unblevable/quick-scope',
     init = function()
