@@ -28,11 +28,14 @@ vim.opt.diffopt:append({ 'vertical', 'linematch:60' })
 vim.opt.termguicolors = true
 vim.opt.laststatus = 3
 vim.opt.tabline = "%{%v:lua.require('tabline').get_tabline()%}"
+vim.opt.shortmess:append('I') -- Disable intro scene as nvim-ufo causes screen flash
 
 -- Folds
-vim.opt.foldmethod = 'expr'
-vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
+vim.opt.foldcolumn = '1'
 vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99
+vim.opt.foldmethod = 'expr'
+vim.opt.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 
 -- Spaces & Tabs
 vim.opt.shiftwidth = 2
