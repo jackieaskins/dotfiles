@@ -10,10 +10,7 @@ function M.config()
       return {
         CurSearch = vim.tbl_extend('force', editor_highlights.IncSearch, { style = { 'bold' } }),
 
-        CursorLineNr = vim.tbl_extend('force', editor_highlights.CursorLine, {
-          fg = colors.lavender,
-          style = { 'bold' },
-        }),
+        CursorLineNr = { fg = colors.blue, style = { 'bold' } },
 
         Folded = { fg = colors.blue, bg = colors.mantle },
 
