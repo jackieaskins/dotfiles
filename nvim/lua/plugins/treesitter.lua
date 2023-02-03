@@ -13,35 +13,32 @@ function M.init()
   local map = require('utils').map
 
   local function goto_adjacent_usage(delta)
-    local bufnr = vim.api.nvim_get_current_buf()
+    return function()
+      local bufnr = vim.api.nvim_get_current_buf()
 
-    local ts_utils = require('nvim-treesitter.ts_utils')
-    local locals = require('nvim-treesitter.locals')
+      local ts_utils = require('nvim-treesitter.ts_utils')
+      local locals = require('nvim-treesitter.locals')
 
-    local node_at_point = ts_utils.get_node_at_cursor()
-    if not node_at_point then
-      return
+      local node_at_point = ts_utils.get_node_at_cursor()
+      if not node_at_point then
+        return
+      end
+
+      local def_node, scope = locals.find_definition(node_at_point, bufnr)
+      local usages = locals.find_usages(def_node, scope, bufnr)
+
+      local index = require('nvim-treesitter.utils').index_of(usages, node_at_point)
+      if not index then
+        return
+      end
+
+      local target_index = (index + delta + #usages - 1) % #usages + 1
+      ts_utils.goto_node(usages[target_index])
     end
-
-    local def_node, scope = locals.find_definition(node_at_point, bufnr)
-    local usages = locals.find_usages(def_node, scope, bufnr)
-
-    local index = require('nvim-treesitter.utils').index_of(usages, node_at_point)
-    if not index then
-      return
-    end
-
-    local target_index = (index + delta + #usages - 1) % #usages + 1
-    ts_utils.goto_node(usages[target_index])
   end
 
-  map('n', '<M-*>', function()
-    return goto_adjacent_usage(1)
-  end, { desc = 'Treesitter go to next usage' })
-
-  map('n', '<M-#>', function()
-    return goto_adjacent_usage(-1)
-  end, { desc = 'Treesitter go to previous usage' })
+  map('n', '<M-8>', goto_adjacent_usage(1), { desc = 'Treesitter go to next usage' })
+  map('n', '<M-3>', goto_adjacent_usage(-1), { desc = 'Treesitter go to previous usage' })
 end
 
 function M.config()
@@ -116,8 +113,6 @@ function M.config()
           ['ic'] = '@class.inner',
           ['al'] = '@loop.outer',
           ['il'] = '@loop.inner',
-          ['ai'] = '@conditional.outer',
-          ['ii'] = '@conditional.inner',
         },
       },
       swap = {

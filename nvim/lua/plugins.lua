@@ -10,7 +10,9 @@ return {
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
   },
   { 'airblade/vim-matchquote', dependencies = { 'andymass/vim-matchup' } },
+  { 'akinsho/git-conflict.nvim', config = true },
   { 'antonk52/markdowny.nvim', config = true },
+  { 'chrisgrieser/nvim-various-textobjs', opts = { useDefaultKeymaps = true } },
   { 'fladson/vim-kitty' },
   {
     'iamcco/markdown-preview.nvim',
@@ -36,7 +38,6 @@ return {
       vim.notify = require('notify')
     end,
   },
-  { 'rhysd/conflict-marker.vim' },
   { 'stevearc/dressing.nvim' },
   {
     'szw/vim-maximizer',
