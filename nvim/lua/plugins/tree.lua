@@ -2,20 +2,8 @@ return {
   'nvim-tree/nvim-tree.lua',
   dependencies = { 'nvim-tree/nvim-web-devicons' },
   keys = {
-    {
-      '<C-n>',
-      function()
-        require('nvim-tree.api').tree.toggle(false)
-      end,
-      desc = 'NvimTreeToggle',
-    },
-    {
-      '<leader>n',
-      function()
-        require('nvim-tree.api').tree.toggle(true)
-      end,
-      desc = 'NvimTreeFindFileToggle',
-    },
+    { '<C-n>', vim.cmd.NvimTreeToggle, desc = 'NvimTreeToggle' },
+    { '<leader>n', vim.cmd.NvimTreeFindFileToggle, desc = 'NvimTreeFindFileToggle' },
   },
   config = function()
     require('nvim-tree').setup({

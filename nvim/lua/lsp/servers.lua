@@ -10,7 +10,7 @@ local servers = {
   omnisharp = require('lsp.servers.omnisharp'),
   pyright = { install = { 'npm', 'pyright' } },
   solargraph = { install = { 'gem', 'solargraph' } },
-  sumneko_lua = require('lsp.servers.sumneko_lua'),
+  lua_ls = require('lsp.servers.lua_ls'),
   svelte = require('lsp.servers.svelte'),
   tailwindcss = require('lsp.servers.tailwindcss'),
   tsserver = { install = { 'npm', 'typescript typescript-language-server' }, skip_lspconfig = false },
