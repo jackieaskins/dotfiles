@@ -12,7 +12,7 @@ function M.config()
 
         CursorLineNr = { fg = colors.blue, style = { 'bold' } },
 
-        Folded = { fg = colors.blue, bg = colors.mantle },
+        Folded = { fg = colors.blue, bg = colors.surface0 },
 
         HlSearchLens = editor_highlights.Search,
 
