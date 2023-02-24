@@ -11,7 +11,7 @@ return {
   },
   { 'airblade/vim-matchquote', dependencies = { 'andymass/vim-matchup' } },
   { 'akinsho/git-conflict.nvim', config = true },
-  { 'antonk52/markdowny.nvim', config = true },
+  { 'antonk52/markdowny.nvim', config = true, ft = 'markdown' },
   { 'chrisgrieser/nvim-various-textobjs', opts = { useDefaultKeymaps = true } },
   { 'fladson/vim-kitty' },
   {

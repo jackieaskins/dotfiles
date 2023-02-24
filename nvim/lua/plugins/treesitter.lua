@@ -44,7 +44,7 @@ end
 function M.config()
   require('nvim-treesitter.configs').setup({
     auto_install = true,
-    ensure_installed = { 'bash', 'git_rebase', 'gitcommit', 'markdown_inline', 'regex' },
+    ensure_installed = { 'bash', 'comment', 'git_rebase', 'gitcommit', 'markdown_inline', 'regex' },
     highlight = { enable = true },
     indent = { enable = true },
     incremental_selection = {

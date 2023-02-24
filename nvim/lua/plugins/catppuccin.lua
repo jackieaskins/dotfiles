@@ -18,6 +18,8 @@ function M.config()
 
         IndentBlanklineContextChar = { fg = colors.blue },
 
+        MarkerCodeFence = { bg = colors.mantle },
+
         NormalFloat = { bg = colors.base },
 
         NvimTreeNormal = { fg = colors.text, bg = colors.base },
@@ -25,6 +27,8 @@ function M.config()
 
         QuickScopePrimary = { fg = colors.sapphire, style = { 'underline', 'bold' } },
         QuickScopeSecondary = { fg = colors.pink, style = { 'underline' } },
+
+        StatusColSep = { fg = colors.surface2 },
 
         TabLine = { fg = colors.text, bg = colors.surface0 },
         TabLineSep = { fg = colors.surface0, bg = colors.base },
