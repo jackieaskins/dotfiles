@@ -17,6 +17,7 @@ return {
     dependencies = { 'nvim-lua/plenary.nvim', 'nvim-tree/nvim-tree.lua' },
     config = true,
   },
+  { 'axelvc/template-string.nvim', config = true },
   { 'aznhe21/actions-preview.nvim', lazy = true },
   { 'chrisgrieser/nvim-various-textobjs', opts = { useDefaultKeymaps = true } },
   { 'fladson/vim-kitty' },
