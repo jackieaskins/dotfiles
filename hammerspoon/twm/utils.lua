@@ -13,6 +13,11 @@ function M.getSortedSpaceWindows(windows, cachedWindowIds)
     local aIndex = hs.fnutils.indexOf(cachedWindowIds, a:id())
     local bIndex = hs.fnutils.indexOf(cachedWindowIds, b:id())
 
+    -- Unstable sort fn was being returned when object compared against itself
+    if aIndex == bIndex then
+      return false
+    end
+
     return (aIndex and bIndex) and (aIndex < bIndex) or not bIndex
   end)
 
