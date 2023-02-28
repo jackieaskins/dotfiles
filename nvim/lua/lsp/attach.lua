@@ -35,6 +35,9 @@ return function(client, bufnr)
 
   bsk('n', '<leader>ca', vim.lsp.buf.code_action, { desc = 'vim.lsp.buf.code_action' })
   bsk('x', '<leader>ca', vim.lsp.buf.code_action, { desc = 'vim.lsp.buf.range_code_action' })
+  bsk({ 'n', 'v' }, '<leader>cA', function()
+    require('actions-preview').code_actions()
+  end, { desc = 'Code action preview' })
 
   bsk('n', '<leader>sw', '<cmd>Telescope lsp_dynamic_workspace_symbols<CR>')
   bsk('n', '<leader>sd', '<cmd>Telescope lsp_document_symbols symbols=constant,function,method<CR>')
