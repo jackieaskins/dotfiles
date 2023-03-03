@@ -21,11 +21,7 @@ return function(client, bufnr)
   bsk('n', 'gr', '<cmd>Telescope lsp_references include_declaration=false<CR>')
   bsk('n', 'gpr', '<cmd>Telescope lsp_references include_declaration=false jump_type=never<CR>')
 
-  bsk('n', 'K', function()
-    if not require('ufo').peekFoldedLinesUnderCursor() then
-      vim.lsp.buf.hover()
-    end
-  end, { desc = 'Hover' })
+  bsk('n', 'K', vim.lsp.buf.hover, { desc = 'Hover' })
   bsk({ 'i', 'n' }, '<C-S>', vim.lsp.buf.signature_help, { desc = 'vim.lsp.buf.signature_help' })
 
   bsk('n', '<leader>rn', vim.lsp.buf.rename, { desc = 'vim.lsp.buf.rename' })
