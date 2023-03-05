@@ -1,5 +1,6 @@
 return {
   'nvim-treesitter/nvim-treesitter-context',
+  dependencies = { 'nvim-treesitter/nvim-treesitter' },
   opts = {
     patterns = {
       default = {
@@ -23,5 +24,4 @@ return {
       typescriptreact = { 'arrow_function', 'export_statement' },
     },
   },
-  dependencies = { 'nvim-treesitter/nvim-treesitter' },
 }

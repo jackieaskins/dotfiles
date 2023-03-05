@@ -1,5 +1,6 @@
 return {
   'neovim/nvim-lspconfig',
+  dependencies = { 'folke/neodev.nvim', 'hrsh7th/nvim-cmp' },
   config = function()
     local servers = require('lsp.servers')
 
@@ -23,5 +24,4 @@ return {
       end
     end
   end,
-  dependencies = { 'folke/neodev.nvim', 'hrsh7th/nvim-cmp' },
 }

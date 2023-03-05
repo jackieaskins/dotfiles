@@ -1,12 +1,12 @@
 local M = {
   'nvim-telescope/telescope.nvim',
-  cmd = 'Telescope',
   dependencies = {
     { 'nvim-lua/plenary.nvim' },
     { 'benfowler/telescope-luasnip.nvim' },
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
     { 'danielvolchek/tailiscope.nvim' },
   },
+  cmd = 'Telescope',
   keys = {
     { '<leader>ht', '<cmd>Telescope help_tags<CR>' },
     { '<leader>hi', '<cmd>Telescope highlights<CR>' },

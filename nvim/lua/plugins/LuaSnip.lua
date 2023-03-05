@@ -1,31 +1,23 @@
+local function key_map(map)
+  local key, fn, args, desc, mode = unpack(map)
+
+  return {
+    key,
+    function()
+      require('luasnip')[fn](args)
+    end,
+    desc = desc,
+    mode = mode,
+  }
+end
+
 return {
   'L3MON4D3/LuaSnip',
-  keys = {
-    {
-      '<C-Y>',
-      function()
-        require('luasnip').expand()
-      end,
-      desc = 'Expand snippet',
-      mode = 'i',
-    },
-    {
-      '<C-J>',
-      function()
-        require('luasnip').expand_or_jump()
-      end,
-      mode = { 'i', 's' },
-      desc = 'Expand snippet or jump to next placeholder',
-    },
-    {
-      '<C-K>',
-      function()
-        require('luasnip').jump(-1)
-      end,
-      mode = { 'i', 's' },
-      desc = 'Jump to previous placeholder',
-    },
-  },
+  keys = vim.tbl_map(key_map, {
+    { '<C-y>', 'expand', nil, 'Expand snippet', 'i' },
+    { '<C-j>', 'expand_or_jump', nil, 'Expand snippet or jump to next placeholder', { 'i', 's' } },
+    { '<C-k>', 'jump', -1, 'Jump to previous placeholder', { 'i', 's' } },
+  }),
   config = function()
     local luasnip = require('luasnip')
     local snippet = luasnip.snippet
