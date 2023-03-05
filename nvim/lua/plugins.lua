@@ -20,7 +20,6 @@ return {
   },
   { 'axelvc/template-string.nvim', config = true },
   { 'aznhe21/actions-preview.nvim', lazy = true },
-  { 'chrisgrieser/nvim-various-textobjs', opts = { useDefaultKeymaps = true } },
   { 'fladson/vim-kitty' },
   {
     'iamcco/markdown-preview.nvim',
