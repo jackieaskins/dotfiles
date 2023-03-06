@@ -17,6 +17,7 @@ local M = {
     'nvim-lua/plenary.nvim',
     'nvim-treesitter/nvim-treesitter',
     'jackieaskins/neotest-jest',
+    'antoinemadec/FixCursorHold.nvim',
   },
   keys = vim.tbl_map(create_key, {
     { ']t', 'jump', 'next', nil, 'Go to next test' },

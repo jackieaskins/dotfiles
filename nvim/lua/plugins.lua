@@ -11,7 +11,6 @@ return {
   },
   { 'airblade/vim-matchquote', dependencies = { 'andymass/vim-matchup' } },
   { 'akinsho/git-conflict.nvim', config = true },
-  { 'antoinemadec/FixCursorHold.nvim' },
   { 'antonk52/markdowny.nvim', config = true, ft = 'markdown' },
   {
     'antosha417/nvim-lsp-file-operations',
