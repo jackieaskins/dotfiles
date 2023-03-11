@@ -99,4 +99,36 @@ function M.grid(windows, screenFrame)
   end
 end
 
+---Columns
+---@param windows hs.window[]
+---@param screenFrame hs.geometry
+function M.columns(windows, screenFrame)
+  local winWidth = screenFrame.w / #windows
+
+  for index, window in ipairs(windows) do
+    window:setFrame({
+      x = screenFrame.x + (index - 1) * winWidth,
+      y = screenFrame.y,
+      w = winWidth,
+      h = screenFrame.h,
+    })
+  end
+end
+
+---Rows
+---@param windows hs.window[]
+---@param screenFrame hs.geometry
+function M.rows(windows, screenFrame)
+  local winHeight = screenFrame.h / #windows
+
+  for index, window in ipairs(windows) do
+    window:setFrame({
+      x = screenFrame.x,
+      y = screenFrame.y + (index - 1) * winHeight,
+      w = screenFrame.w,
+      h = winHeight,
+    })
+  end
+end
+
 return M

@@ -56,4 +56,8 @@ function M.restore()
   spaceWindows = cache.spaceWindows or {}
 end
 
+function M.reset()
+  hs.settings.clear(CACHE_KEY)
+end
+
 return M

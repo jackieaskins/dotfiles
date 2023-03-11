@@ -7,6 +7,19 @@ local ok, custom = pcall(require, 'custom')
 CUSTOM = ok and custom or {}
 
 ----------------------------------------------------------------------
+--                             Globals                              --
+----------------------------------------------------------------------
+function Print(...)
+  local inspectTypes = { 'thread', 'userdata', 'table', 'function' }
+
+  local mappedArgs = hs.fnutils.imap({ ... }, function(arg)
+    return hs.fnutils.contains(inspectTypes, type(arg)) and hs.inspect(arg) or arg
+  end)
+
+  print(table.unpack(mappedArgs))
+end
+
+----------------------------------------------------------------------
 --                            Constants                             --
 ----------------------------------------------------------------------
 BREW_PREFIX = CUSTOM.brew_prefix or '/opt/homebrew'
@@ -47,10 +60,13 @@ hs.window.setShadows(false)
 hs.window.animationDuration = 0
 
 twm = require('twm')
+
 twm.start()
 hs.shutdownCallback = function()
   twm.stop()
 end
+
+hs.hotkey.bind(MEH, 't', twm.tile)
 
 hs.hotkey.bind(MEH, 'f', twm.toggleFloat)
 hs.hotkey.bind(MEH, 'p', twm.showLayout)
