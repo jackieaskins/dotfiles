@@ -12,12 +12,10 @@ function M.init()
   require('utils').augroup('lint', {
     {
       { 'BufWritePost', 'InsertLeave', 'TextChanged' },
-      {
-        pattern = '*.gd',
-        callback = function()
-          require('lint').try_lint()
-        end,
-      },
+      pattern = '*.gd',
+      callback = function()
+        require('lint').try_lint()
+      end,
     },
   })
 

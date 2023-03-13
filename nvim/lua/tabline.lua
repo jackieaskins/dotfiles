@@ -15,7 +15,7 @@ local function get_bufnr(tabnr)
 end
 
 augroup('tabline', {
-  { 'ModeChanged', { command = 'redrawtabline' } },
+  { 'ModeChanged', command = 'redrawtabline' },
 })
 
 local function get_tabline()

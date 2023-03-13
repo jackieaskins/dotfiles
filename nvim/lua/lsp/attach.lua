@@ -1,15 +1,13 @@
 local lightbulb_namespace = vim.api.nvim_create_namespace('lightbulb')
 
 return function(client, bufnr)
-  local map = require('utils').map
-
   local function bsk(mode, lhs, rhs, opts)
-    ---@type table|nil
     local options = { buffer = bufnr }
     if opts then
       options = vim.tbl_extend('force', options, opts)
     end
-    map(mode, lhs, rhs, options)
+
+    require('utils').map(mode, lhs, rhs, options)
   end
 
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
@@ -45,28 +43,26 @@ return function(client, bufnr)
     require('utils').augroup('lightbulb', {
       {
         { 'CursorHold', 'CursorHoldI' },
-        {
-          callback = function()
-            local params = vim.lsp.util.make_range_params()
-            params.context = { diagnostics = vim.lsp.diagnostic.get_line_diagnostics(bufnr, nil, nil, nil) }
+        callback = function()
+          local params = vim.lsp.util.make_range_params()
+          params.context = { diagnostics = vim.lsp.diagnostic.get_line_diagnostics(bufnr, nil, nil, nil) }
 
-            vim.lsp.buf_request_all(bufnr, 'textDocument/codeAction', params, function(response)
-              vim.api.nvim_buf_clear_namespace(bufnr, lightbulb_namespace, 0, -1) -- 0, -1 clears entire buffer
+          vim.lsp.buf_request_all(bufnr, 'textDocument/codeAction', params, function(response)
+            vim.api.nvim_buf_clear_namespace(bufnr, lightbulb_namespace, 0, -1) -- 0, -1 clears entire buffer
 
-              local has_code_actions = #vim.tbl_filter(function(resp)
-                return resp.result and #resp.result > 0
-              end, response) > 0
+            local has_code_actions = #vim.tbl_filter(function(resp)
+              return resp.result and #resp.result > 0
+            end, response) > 0
 
-              if has_code_actions then
-                vim.api.nvim_buf_set_extmark(bufnr, lightbulb_namespace, params.range.start.line, -1, {
-                  virt_text = { { '💡' } },
-                  hl_mode = 'combine',
-                })
-              end
-            end)
-          end,
-          buffer = bufnr,
-        },
+            if has_code_actions then
+              vim.api.nvim_buf_set_extmark(bufnr, lightbulb_namespace, params.range.start.line, -1, {
+                virt_text = { { '💡' } },
+                hl_mode = 'combine',
+              })
+            end
+          end)
+        end,
+        buffer = bufnr,
       },
     })
   end

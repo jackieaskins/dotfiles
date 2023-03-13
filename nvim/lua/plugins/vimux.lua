@@ -6,7 +6,7 @@ return {
     end
 
     require('utils').augroup('vimux', {
-      { 'VimResized', { callback = set_vimux_orientation } },
+      { 'VimResized', callback = set_vimux_orientation },
     })
 
     vim.g.VimuxHeight = '40'

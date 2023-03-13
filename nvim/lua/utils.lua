@@ -47,7 +47,8 @@ function M.augroup(group_name, autocmds)
 
   for _, autocmd in ipairs(autocmds) do
     local event = autocmd[1]
-    local opts = vim.tbl_extend('force', { group = group }, autocmd[2])
+    local opts = vim.tbl_extend('force', { group = group }, autocmd)
+    table.remove(opts, 1)
 
     vim.api.nvim_create_autocmd(event, opts)
   end

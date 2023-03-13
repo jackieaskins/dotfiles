@@ -49,15 +49,13 @@ function M.init()
   augroup('format_on_save', {
     {
       'BufWritePre',
-      {
-        callback = function()
-          local formatter = formatter_by_filetype[vim.bo.filetype]
+      callback = function()
+        local formatter = formatter_by_filetype[vim.bo.filetype]
 
-          if formatter and require('lspconfig').util.root_pattern(formatter.required_file)(vim.fn.expand('%:p')) then
-            vim.cmd.Neoformat(formatter.name)
-          end
-        end,
-      },
+        if formatter and require('lspconfig').util.root_pattern(formatter.required_file)(vim.fn.expand('%:p')) then
+          vim.cmd.Neoformat(formatter.name)
+        end
+      end,
     },
   })
 end

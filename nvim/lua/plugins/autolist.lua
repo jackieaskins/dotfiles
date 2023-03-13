@@ -19,11 +19,9 @@ return {
     require('utils').augroup('autolist', {
       {
         'TextChanged',
-        {
-          callback = function()
-            vim.cmd.normal({ autolist.force_recalculate(nil, nil), bang = false })
-          end,
-        },
+        callback = function()
+          vim.cmd.normal({ autolist.force_recalculate(nil, nil), bang = false })
+        end,
       },
     })
   end,
