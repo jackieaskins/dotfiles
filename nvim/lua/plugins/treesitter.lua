@@ -27,9 +27,12 @@ function M.init()
       local def_node, scope = locals.find_definition(node_at_point, bufnr)
       local usages = locals.find_usages(def_node, scope, bufnr)
 
-      local index = require('nvim-treesitter.utils').index_of(usages, node_at_point)
-      if not index then
-        return
+      local index = nil
+      for i, node in ipairs(usages) do
+        if node == node_at_point then
+          index = i
+          break
+        end
       end
 
       local target_index = (index + delta + #usages - 1) % #usages + 1
