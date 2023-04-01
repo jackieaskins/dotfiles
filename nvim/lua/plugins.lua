@@ -19,6 +19,7 @@ return {
   },
   { 'axelvc/template-string.nvim', config = true },
   { 'aznhe21/actions-preview.nvim', lazy = true },
+  { 'chaoren/vim-wordmotion' },
   { 'fladson/vim-kitty' },
   {
     'iamcco/markdown-preview.nvim',
@@ -27,16 +28,15 @@ return {
     keys = { { '<leader>mp', vim.cmd.MarkdownPreview, desc = 'MarkdownPreview' } },
   },
   { 'j-hui/fidget.nvim', opts = { text = { spinner = 'dots' } } },
-  { 'kylechui/nvim-surround', config = true },
   { 'lukas-reineke/indent-blankline.nvim', opts = { show_current_context = true } },
   { 'matze/vim-move', keys = { '<M-h>', '<M-j>', '<M-k>', '<M-l>' } },
   {
     'nvim-treesitter/playground',
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
     cmd = 'TSPlaygroundToggle',
     config = function()
       require('nvim-treesitter.configs').setup({ playground = { enable = true } })
     end,
-    dependencies = { 'nvim-treesitter/nvim-treesitter' },
   },
   {
     'rcarriga/nvim-notify',
@@ -56,11 +56,17 @@ return {
   { 'tpope/vim-fugitive', cmd = { 'Git', 'G', 'Gread' } },
   { 'tpope/vim-repeat' },
   { 'tpope/vim-sleuth' },
+  { 'tpope/vim-surround' },
   {
     'unblevable/quick-scope',
     init = function()
       vim.g.qs_buftype_blacklist = { 'terminal' }
       vim.g.qs_filetype_blacklist = { 'neo-tree', 'NvimTree' }
     end,
+  },
+  {
+    'wintermute-cell/gitignore.nvim',
+    requires = 'nvim-telescope/telescope.nvim',
+    cmd = 'Gitignore',
   },
 }

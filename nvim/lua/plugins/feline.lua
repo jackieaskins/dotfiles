@@ -1,5 +1,5 @@
 local M = {
-  'feline-nvim/feline.nvim',
+  'freddiehaddad/feline.nvim',
   dependencies = { 'nvim-tree/nvim-web-devicons' },
 }
 
