@@ -4,6 +4,7 @@ function M.config()
   require('catppuccin').setup({
     custom_highlights = function(colors)
       local editor_highlights = require('catppuccin.groups.editor').get()
+      local headline_highlights = require('catppuccin.groups.integrations.headlines').get()
 
       local telescope_selection = vim.tbl_extend('force', editor_highlights.CursorLine, { fg = colors.peach })
 
@@ -13,6 +14,13 @@ function M.config()
         CursorLineNr = { fg = colors.blue, bg = editor_highlights.CursorLine.bg, style = { 'bold' } },
 
         Folded = { fg = colors.blue, bg = colors.surface0 },
+
+        Headline1Reverse = { fg = headline_highlights.Headline1.fg },
+        Headline2Reverse = { fg = headline_highlights.Headline2.fg },
+        Headline3Reverse = { fg = headline_highlights.Headline3.fg },
+        Headline4Reverse = { fg = headline_highlights.Headline4.fg },
+        Headline5Reverse = { fg = headline_highlights.Headline5.fg },
+        Headline6Reverse = { fg = headline_highlights.Headline6.fg },
 
         HlSearchLens = editor_highlights.Search,
 
@@ -46,6 +54,7 @@ function M.config()
       }
     end,
     integrations = {
+      headlines = true,
       indent_blankline = { enabled = true, colored_indent_levels = false },
       native_lsp = {
         enabled = true,

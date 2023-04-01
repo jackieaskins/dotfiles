@@ -51,5 +51,5 @@ To override the list of supported LSP servers, add the following global variable
 `~/dotfiles/vim/custom.vim`
  
 ### Zsh
- 
+
 `~/dotfiles/zsh/custom.zsh`
