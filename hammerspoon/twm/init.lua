@@ -20,6 +20,11 @@ function M.start()
   M.tile()
 end
 
+function M.reset()
+  cache.reset()
+  M.tile()
+end
+
 ---Save current tiling cache
 function M.stop()
   cache.save()

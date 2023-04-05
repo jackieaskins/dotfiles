@@ -66,6 +66,7 @@ hs.shutdownCallback = function()
   twm.stop()
 end
 
+hs.hotkey.bind(HYPER, 'r', twm.reset)
 hs.hotkey.bind(MEH, 't', twm.tile)
 
 hs.hotkey.bind(MEH, 'f', twm.toggleFloat)
