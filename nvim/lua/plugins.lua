@@ -10,7 +10,12 @@ return {
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
   },
   { 'airblade/vim-matchquote', dependencies = { 'andymass/vim-matchup' } },
-  { 'akinsho/git-conflict.nvim', config = true },
+  {
+    'akinsho/git-conflict.nvim',
+    opts = {
+      default_mappings = { ours = 'co', theirs = 'ct', none = 'c0', both = 'cb', next = ']x', prev = '[x' },
+    },
+  },
   { 'antonk52/markdowny.nvim', config = true, ft = 'markdown' },
   {
     'antosha417/nvim-lsp-file-operations',
@@ -19,7 +24,7 @@ return {
   },
   { 'axelvc/template-string.nvim', config = true },
   { 'aznhe21/actions-preview.nvim', lazy = true },
-  { 'chaoren/vim-wordmotion' },
+  { 'chrisgrieser/nvim-early-retirement', config = true, event = 'VeryLazy' },
   { 'fladson/vim-kitty' },
   {
     'iamcco/markdown-preview.nvim',
@@ -43,6 +48,7 @@ return {
     config = function()
       vim.notify = require('notify')
     end,
+    event = 'VeryLazy',
   },
   { 'stevearc/dressing.nvim' },
   {
