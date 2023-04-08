@@ -8,12 +8,12 @@
 /nvim/lua/plugins/custom-*.lua
 /nvim/spell/
 
+/wezterm/custom.lua
+
 /zsh/custom.zsh
 /Brewfile*.lock.json
 
 .DS_Store
-
-/tmux/custom.conf
 
 /hammerspoon/Spoons/EmmyLua.spoon/annotations/
 /hammerspoon/custom.lua

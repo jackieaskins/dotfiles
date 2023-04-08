@@ -25,13 +25,6 @@ local matchers = {
     end,
   },
   {
-    file_pattern = [[tmux\.conf$]],
-    pattern = [[.* @plugin '\([a-zA-Z0-9_.-]\+\/[a-zA-Z0-9_.-]\+\)']],
-    handler = function(match)
-      return 'https://github.com/' .. match[2]
-    end,
-  },
-  {
     file_pattern = [[package\.json$]],
     pattern = [[^\s*"\(\S\+\)"]],
     handler = function(match)

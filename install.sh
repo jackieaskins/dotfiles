@@ -81,6 +81,15 @@ git config --global rebase.autoStash true
 success_echo "Configured Global Gitignore."
 
 #--------------------------------------------------------------------#
+#                              WezTerm                               #
+#--------------------------------------------------------------------#
+# Install terminfo to get support for undercurl and the like
+tempfile=$(mktemp)
+curl -o $tempfile https://raw.githubusercontent.com/wez/wezterm/main/termwiz/data/wezterm.terminfo
+tic -x -o ~/.terminfo $tempfile
+rm $tempfile
+
+#--------------------------------------------------------------------#
 #                    Dotfiles Backup & Symlinking                    #
 #--------------------------------------------------------------------#
 timestamp=$(date +%Y%m%d%H%M%S) # timestamp for backup
@@ -126,8 +135,7 @@ backup_and_symlink .vim               vim              vim
 backup_and_symlink .hammerspoon       hammerspoon      hammerspoon
 backup_and_symlink .config/nvim       nvim             nvim
 backup_and_symlink .config/karabiner  karabiner        karabiner
-backup_and_symlink .config/kitty      kitty            kitty
-backup_and_symlink .tmux.conf         tmux.conf        tmux.conf
+backup_and_symlink .config/wezterm    wezterm          wezterm
 backup_and_symlink .gitignore_global  gitignore_global gitignore_global
 #                  dotfile            backup           sym
 success_echo "Dotfiles backed up and symlinked."
