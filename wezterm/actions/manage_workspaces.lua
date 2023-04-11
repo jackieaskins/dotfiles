@@ -20,7 +20,9 @@ local function create_workspace(window, pane, id)
       tab, pn = win:spawn_tab({ cwd = cwd or tab_config.cwd })
     end
 
-    -- TODO: Run command in tab
+    if tab_config.cmd then
+      pn:send_text(tab_config.cmd .. '\n')
+    end
 
     tab:set_title(tab_config.title)
   end
