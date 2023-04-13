@@ -8,5 +8,6 @@ vim.filetype.add({
   pattern = {
     ['jdt://.*'] = 'java',
     ['tsconfig.*%.json'] = 'jsonc',
+    ['%.env.*'] = 'sh',
   },
 })

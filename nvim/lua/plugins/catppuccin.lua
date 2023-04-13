@@ -17,7 +17,8 @@ function M.config()
 
         Headline1Reverse = { fg = headline_highlights.Headline1.fg },
         Headline2Reverse = { fg = headline_highlights.Headline2.fg },
-        Headline3Reverse = { fg = headline_highlights.Headline3.fg },
+        Headline3 = { bg = colors.surface0, fg = colors.maroon },
+        Headline3Reverse = { fg = colors.maroon },
         Headline4Reverse = { fg = headline_highlights.Headline4.fg },
         Headline5Reverse = { fg = headline_highlights.Headline5.fg },
         Headline6Reverse = { fg = headline_highlights.Headline6.fg },
@@ -47,8 +48,6 @@ function M.config()
         TelescopeResultsDiffUntracked = { fg = 'NONE' },
         TelescopeSelection = telescope_selection,
         TelescopeSelectionCaret = telescope_selection,
-
-        TreesitterContext = { bg = colors.mantle },
 
         WinBarNC = { fg = colors.overlay0 },
       }
