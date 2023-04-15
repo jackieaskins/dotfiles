@@ -7,7 +7,6 @@ local wezterm = require('wezterm')
 local config = {}
 
 config.term = 'wezterm'
-config.leader = { key = 'a', mods = 'CTRL' }
 require('nvim_user_vars')
 
 -- Keys

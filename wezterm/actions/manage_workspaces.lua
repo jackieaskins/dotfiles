@@ -14,9 +14,9 @@ local function create_workspace(window, pane, id)
     local pn = nil
 
     if index == 1 then
-      tab, pn, win = wezterm.mux.spawn_window({ workspace = id, cwd = cwd or tab_config.cwd })
+      tab, pn, win = wezterm.mux.spawn_window({ workspace = id, cwd = tab_config.cwd or cwd })
     else
-      tab, pn = win:spawn_tab({ cwd = cwd or tab_config.cwd })
+      tab, pn = win:spawn_tab({ cwd = tab_config.cwd or cwd })
     end
 
     if tab_config.cmd then
