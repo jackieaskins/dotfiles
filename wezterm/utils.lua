@@ -41,4 +41,18 @@ function utils.tbl_extend(...)
   return new_tbl
 end
 
+---Get all of the values from a map-like table
+---@generic T
+---@param tbl table<string, T>
+---@return T[]
+function utils.tbl_values(tbl)
+  local values = {}
+
+  for _, value in pairs(tbl) do
+    table.insert(values, value)
+  end
+
+  return values
+end
+
 return utils

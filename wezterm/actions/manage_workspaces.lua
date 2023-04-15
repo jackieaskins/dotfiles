@@ -36,14 +36,20 @@ local function get_all_workspaces(existing_workspaces)
   local active_workspace = wezterm.mux.get_active_workspace()
 
   for workspace, _ in pairs(workspaces) do
-    all_workspaces[workspace] = { label = workspace, exists = false }
+    all_workspaces[workspace] = { id = workspace, label = workspace, exists = false }
   end
 
   for _, workspace in ipairs(existing_workspaces) do
-    all_workspaces[workspace] = { label = workspace, exists = true, active = workspace == active_workspace }
+    all_workspaces[workspace] =
+      { id = workspace, label = workspace, exists = true, active = workspace == active_workspace }
   end
 
-  return all_workspaces
+  local workspace_arr = utils.tbl_values(all_workspaces)
+  table.sort(workspace_arr, function(ws1, ws2)
+    return ws1.label < ws2.label
+  end)
+
+  return workspace_arr
 end
 
 local function get_choices(existing_workspaces)
@@ -51,8 +57,8 @@ local function get_choices(existing_workspaces)
 
   local choices = {}
 
-  for id, val in pairs(all_workspaces) do
-    local label, exists, active = val.label, val.exists, val.active
+  for _, val in ipairs(all_workspaces) do
+    local id, label, exists, active = val.id, val.label, val.exists, val.active
 
     table.insert(choices, {
       id = id,
