@@ -60,31 +60,3 @@ map('n', '<leader>lp', '<cmd>Lazy profile<CR>')
 map('n', '<leader>ls', '<cmd>Lazy sync<CR>')
 map('n', '<leader>lu', '<cmd>Lazy update<CR>')
 map('n', '<leader>lx', '<cmd>Lazy clean<CR>')
-
--- Runner
-local function runner(fn)
-  return function()
-    require('wezterm')[fn]()
-  end
-end
-
-map('n', '<leader>vo', runner('open_runner'))
-map('n', '<leader>vq', runner('close_runner'), { desc = 'CloseRunner' })
-map('n', '<leader>vt', runner('toggle_runner'), { desc = 'ToggleRunner' })
-
-map('n', '<leader>vi', runner('interrupt_runner'), { desc = 'InterruptRunner' })
-map('n', '<leader>vc', runner('clear_terminal_screen'), { desc = { 'ClearTerminalScreen' } })
-
-map('n', '<leader>vr', function()
-  vim.ui.input({ prompt = 'Enter command: ', completion = 'shellcmd' }, function(input)
-    if input then
-      require('wezterm').run_command(input)
-    end
-  end)
-end, { desc = 'RunCommand' })
-
-map('n', '<leader>vl', runner('run_last_command'), { desc = 'RunLastCommand' })
-map('n', '<leader>vL', function()
-  require('wezterm').interrupt_runner()
-  require('wezterm').run_last_command()
-end, { desc = 'InterruptRunner | RunLastCommand' })

@@ -25,6 +25,7 @@ return {
   { 'axelvc/template-string.nvim', config = true },
   { 'aznhe21/actions-preview.nvim', lazy = true },
   { 'chrisgrieser/nvim-early-retirement', config = true },
+  { 'fladson/vim-kitty' },
   {
     'iamcco/markdown-preview.nvim',
     build = 'cd app && npm install',

@@ -43,11 +43,7 @@ spoon.ReloadConfiguration:bindHotkeys({
 ----------------------------------------------------------------------
 --                             Keymaps                              --
 ----------------------------------------------------------------------
-local app_keys = utils.mergeTables({
-  m = 'Spotify',
-  n = 'Notes',
-  t = 'wezterm',
-}, CUSTOM.app_keys or {})
+local app_keys = utils.mergeTables({ m = 'Spotify', n = 'Notes', t = 'kitty' }, CUSTOM.app_keys or {})
 
 for key, app in pairs(app_keys) do
   hs.hotkey.bind({ 'option', 'control' }, key, function()
