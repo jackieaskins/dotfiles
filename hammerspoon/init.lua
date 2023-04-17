@@ -22,7 +22,7 @@ end
 ----------------------------------------------------------------------
 --                            Constants                             --
 ----------------------------------------------------------------------
-BREW_PREFIX = CUSTOM.brew_prefix or '/opt/homebrew'
+BREW_PREFIX = CUSTOM.brewPrefix or '/opt/homebrew'
 
 MEH = { 'option', 'shift', 'ctrl' }
 HYPER = { 'option', 'shift', 'ctrl', 'cmd' }
@@ -40,12 +40,18 @@ spoon.ReloadConfiguration:bindHotkeys({
   reloadConfiguration = { MEH, 'r' },
 })
 
+spoon.SpoonInstall:asyncUpdateAllRepos()
+
 ----------------------------------------------------------------------
 --                             Keymaps                              --
 ----------------------------------------------------------------------
-local app_keys = utils.mergeTables({ m = 'Spotify', n = 'Notes', t = 'kitty' }, CUSTOM.app_keys or {})
+local appKeys = utils.mergeTables({
+  m = 'Spotify',
+  n = 'Notes',
+  t = 'kitty',
+}, CUSTOM.appKeys or {})
 
-for key, app in pairs(app_keys) do
+for key, app in pairs(appKeys) do
   hs.hotkey.bind({ 'option', 'control' }, key, function()
     hs.application.launchOrFocus(app)
   end)

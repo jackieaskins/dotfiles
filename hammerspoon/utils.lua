@@ -6,8 +6,8 @@ local M = {}
 function M.mergeTables(...)
   local rv = {}
 
-  for _, table in ipairs({ ... }) do
-    for key, value in pairs(table) do
+  for _, tbl in ipairs({ ... }) do
+    for key, value in pairs(tbl) do
       rv[key] = value
     end
   end

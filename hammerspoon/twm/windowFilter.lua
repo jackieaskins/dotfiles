@@ -1,6 +1,7 @@
 local mergeTables = require('utils').mergeTables
 
-local window_filters = mergeTables({
+local windowFilters = mergeTables({
+  [''] = false,
   ['Alfred Preferences'] = false,
   ['System Preferences'] = false,
   ['System Settings'] = false,
@@ -10,7 +11,7 @@ local window_filters = mergeTables({
   Hammerspoon = { rejectTitles = 'Hammerspoon Console' },
   ['Karabiner-Elements'] = false,
   ['Keychain Access'] = false,
-}, CUSTOM.twm_window_filters or {})
+}, CUSTOM.twmWindowFilters or {})
 
 return hs.window.filter
   .new()
@@ -19,4 +20,4 @@ return hs.window.filter
     allowRoles = { 'AXStandardWindow' },
     visible = true,
   })
-  :setFilters(window_filters)
+  :setFilters(windowFilters)

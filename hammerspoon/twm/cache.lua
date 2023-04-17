@@ -48,8 +48,8 @@ function M.save()
 end
 
 function M.restore()
-  local cached_settings = hs.settings.get(CACHE_KEY)
-  local cache = cached_settings and hs.json.decode(cached_settings) or {}
+  local cachedSettings = hs.settings.get(CACHE_KEY)
+  local cache = cachedSettings and hs.json.decode(cachedSettings) or {}
 
   floatingWindows = cache.floatingWindows or {}
   spaceLayouts = cache.spaceLayouts or {}
