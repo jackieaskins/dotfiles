@@ -20,3 +20,6 @@ user_command('Dotfiles', function()
 
   open_url(dotfiles_repo)
 end)
+
+-- Treesitter Inspect Tree
+user_command('TSInspect', vim.treesitter.inspect_tree)

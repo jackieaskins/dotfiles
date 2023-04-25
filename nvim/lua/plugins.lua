@@ -23,7 +23,6 @@ return {
     config = true,
   },
   { 'axelvc/template-string.nvim', config = true },
-  { 'aznhe21/actions-preview.nvim', lazy = true },
   { 'chrisgrieser/nvim-early-retirement', config = true },
   { 'fladson/vim-kitty' },
   {
@@ -36,11 +35,9 @@ return {
   { 'lukas-reineke/indent-blankline.nvim', opts = { show_current_context = true } },
   { 'matze/vim-move', keys = { '<M-h>', '<M-j>', '<M-k>', '<M-l>' } },
   {
-    'nvim-treesitter/playground',
-    dependencies = { 'nvim-treesitter/nvim-treesitter' },
-    cmd = 'TSPlaygroundToggle',
+    'nvim-lua/plenary.nvim',
     config = function()
-      require('nvim-treesitter.configs').setup({ playground = { enable = true } })
+      require('plenary.filetype').add_file('extra')
     end,
   },
   {
