@@ -60,3 +60,35 @@ map('n', '<leader>lp', '<cmd>Lazy profile<CR>')
 map('n', '<leader>ls', '<cmd>Lazy sync<CR>')
 map('n', '<leader>lu', '<cmd>Lazy update<CR>')
 map('n', '<leader>lx', '<cmd>Lazy clean<CR>')
+
+-- Runner
+vim.tbl_map(function(value)
+  local key, fn = value[1], value[2]
+
+  map('n', key, function()
+    require('runner')[fn]()
+  end, { desc = 'runner - ' .. fn })
+end, {
+  { '<leader>vo', 'open_runner' },
+  { '<leader>vt', 'toggle_pane' },
+  { '<leader>vq', 'close_runner' },
+  { '<leader>vi', 'interrupt_runner' },
+  { '<leader>vl', 'run_last_command' },
+  { '<leader>vc', 'clear_terminal_screen' },
+})
+
+map('n', '<leader>vr', function()
+  vim.ui.input({
+    prompt = 'Enter command: ',
+    completion = 'shellcmd',
+  }, function(input)
+    if input then
+      require('runner').run_command(input)
+    end
+  end)
+end, { desc = 'runner - run_command' })
+
+map('n', '<leader>vL', function()
+  require('runner').interrupt_runner()
+  require('runner').run_last_command()
+end, { desc = 'runner - interrupt_runner_and_run_last_command' })

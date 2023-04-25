@@ -13,6 +13,7 @@ end
 
 return {
   'L3MON4D3/LuaSnip',
+  lazy = false,
   keys = vim.tbl_map(key_map, {
     { '<C-y>', 'expand', nil, 'Expand snippet', 'i' },
     { '<C-j>', 'expand_or_jump', nil, 'Expand snippet or jump to next placeholder', { 'i', 's' } },

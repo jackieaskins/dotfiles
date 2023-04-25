@@ -1,6 +1,6 @@
 # My Dotfiles
 
-My dotfiles for Karabiner, Hammerspoon, Vim, Neovim, Zsh, Tmux, and kitty.
+My dotfiles for Hammerspoon, Karabiner, kitty, Neovim, Vim, Tmux, WezTerm, and Zsh.
 
 ![Image showcasing current setup](https://github.com/jackieaskins/dotfiles/blob/media/setup.png?raw=true)
 
@@ -49,7 +49,11 @@ To override the list of supported LSP servers, add the following global variable
 ### Vim
 
 `~/dotfiles/vim/custom.vim`
- 
+
+### WezTerm
+Return a table in  `~/dotfiles/wezterm/custom.lua`, the following keys can be provided:
+- `workspaces` - `table<string, Workspace>`
+
 ### Zsh
 
 `~/dotfiles/zsh/custom.zsh`
