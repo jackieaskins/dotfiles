@@ -7,18 +7,11 @@ function M.config()
     default = false,
   })
 
-  local brewfile_icon, brewfile_color, brewfile_cterm_color = web_devicons.get_icon_color('Brewfile')
   local vim_icon, vim_color, vim_cterm_color = web_devicons.get_icon_color('vim')
   local zsh_icon, zsh_color, zsh_cterm_color = web_devicons.get_icon_color('zsh')
   local go_icon, go_color, go_cterm_color = web_devicons.get_icon_color('go')
 
   web_devicons.set_icon({
-    Brewfile_personal = {
-      icon = brewfile_icon,
-      color = brewfile_color,
-      cterm_color = brewfile_cterm_color,
-      name = 'Brewfile_personal',
-    },
     gomod = {
       icon = go_icon,
       color = go_color,

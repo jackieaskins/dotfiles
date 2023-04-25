@@ -1,6 +1,6 @@
 local matchers = {
   {
-    file_pattern = [[\(Brewfile\|Brewfile_personal\)$]],
+    file_pattern = [[Brewfile$]],
     pattern = [[\s*\(brew\|cask\)\s\+'\([a-zA-Z0-9_.-]\+\)']],
     handler = function(match)
       return table.concat({

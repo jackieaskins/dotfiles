@@ -60,11 +60,11 @@ else
   [ -d /opt/homebrew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 echo -e "Bundling Homebrew packages..."
-brew bundle --file ./Brewfile
+brew bundle --file ./brew/Brewfile
 
 if [ $is_personal_machine = true ]; then
   echo -e "Bundling personal machine Homebrew packages..."
-  brew bundle --file ./Brewfile_personal
+  brew bundle --file ./brew/personal/Brewfile
 else
   echo -e "Not on personal machine, not installing personal machine Homebrew packages."
 fi
