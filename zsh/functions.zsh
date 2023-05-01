@@ -7,3 +7,8 @@ function mk() {
 function cp2m() {
   xargs -n 1 cp -v $1 <<< "${@:2}"
 }
+
+# Change into a lazy plugin's directory
+function plug() {
+  cd ~/.local/share/nvim/lazy/$1
+}

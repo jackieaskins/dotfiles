@@ -9,10 +9,11 @@
 /nvim/spell/
 
 /zsh/custom.zsh
-/Brewfile*.lock.json
+Brewfile.lock.json
 
 .DS_Store
 
+/wezterm/custom.lua
 /tmux/custom.conf
 
 /hammerspoon/Spoons/EmmyLua.spoon/annotations/
