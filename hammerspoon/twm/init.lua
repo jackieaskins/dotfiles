@@ -17,6 +17,18 @@ function M.start()
     hs.window.filter.windowFocused,
   }, M.tile)
 
+  windowFilter:subscribe({
+    hs.window.filter.windowMinimized,
+    hs.window.filter.windowDestroyed,
+  }, function()
+    for _, window in ipairs(hs.window.filter.defaultCurrentSpace:getWindows()) do
+      if window:isVisible() then
+        window:focus()
+        return
+      end
+    end
+  end)
+
   M.tile()
 end
 
