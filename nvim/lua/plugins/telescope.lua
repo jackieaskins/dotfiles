@@ -36,15 +36,20 @@ function M.config()
   local action_layout = require('telescope.actions.layout')
   local action_set = require('telescope.actions.set')
 
-  local default_file_ignore_patterns = {
-    '.git/*',
-    'dist/*',
-  }
+  local default_file_ignore_patterns = { '.git/', 'build/', 'dist/' }
 
   telescope.setup({
     defaults = {
+      dynamic_preview_title = true,
       file_ignore_patterns = default_file_ignore_patterns,
-      layout_strategy = 'vertical',
+      layout_config = {
+        flex = {
+          flip_columns = 105,
+        },
+        prompt_position = 'top',
+        vertical = { mirror = true },
+      },
+      layout_strategy = 'flex',
       mappings = {
         i = {
           ['<Tab>'] = actions.toggle_selection + actions.move_selection_next,
@@ -65,6 +70,11 @@ function M.config()
           ['<C-c>'] = action_layout.toggle_preview,
         },
       },
+      path_display = { 'truncate' },
+      prompt_prefix = '   ',
+      entry_prefix = '  ',
+      selection_caret = ' ',
+      sorting_strategy = 'ascending',
     },
     extensions = {
       fzf = {

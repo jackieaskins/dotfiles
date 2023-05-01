@@ -6,7 +6,7 @@ function M.config()
       local editor_highlights = require('catppuccin.groups.editor').get()
       local headline_highlights = require('catppuccin.groups.integrations.headlines').get()
 
-      local telescope_selection = vim.tbl_extend('force', editor_highlights.CursorLine, { fg = colors.peach })
+      local telescope_selection = vim.tbl_extend('force', editor_highlights.CursorLine, { fg = colors.blue })
 
       return {
         CurSearch = vim.tbl_extend('force', editor_highlights.IncSearch, { style = { 'bold' } }),
@@ -42,6 +42,7 @@ function M.config()
         TabLine = { fg = colors.text, bg = colors.surface0 },
         TabLineSep = { fg = colors.surface0, bg = colors.base },
 
+        TelescopePromptPrefix = { fg = colors.blue },
         TelescopeResultsDiffAdd = { fg = colors.green },
         TelescopeResultsDiffChange = { fg = colors.yellow },
         TelescopeResultsDiffDelete = { fg = colors.red },
