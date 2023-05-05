@@ -52,3 +52,6 @@ vim.opt.inccommand = 'nosplit'
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.path:append({ '**' })
+
+-- Vim globals
+vim.g.c_syntax_for_h = 1

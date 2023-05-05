@@ -8,4 +8,7 @@ if RUBY_PLATFORM =~ /darwin/
   cask 'dropbox'
   cask 'google-chrome'
   cask 'spotify'
+
+  tap 'homebrew/cask-drivers'
+  cask 'qmk-toolbox'
 end
