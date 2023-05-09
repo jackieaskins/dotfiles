@@ -62,7 +62,7 @@ function M.config()
         ' ',
         filename:gsub('%%', '%%%%'), -- escape status line characters
         vim.bo.readonly and ' ' or '',
-        vim.bo.modified and ' ' or '',
+        vim.bo.modified and ' ' or '',
       })
     end
   end

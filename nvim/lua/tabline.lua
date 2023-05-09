@@ -69,7 +69,7 @@ local function get_tabline()
       return vim.fn.pathshorten(vim.fn.fnamemodify(bufname, ':~:.'))
     end
 
-    local modified = vim.fn.getbufvar(bufnr, '&mod') == 1 and filetype ~= 'TelescopePrompt' and ' ' or ''
+    local modified = vim.fn.getbufvar(bufnr, '&mod') == 1 and filetype ~= 'TelescopePrompt' and ' ' or ''
     local readonly = vim.fn.getbufvar(bufnr, '&readonly') == 1 and ' ' or ''
 
     local function set_current_tab(current, other)
