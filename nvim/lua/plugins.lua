@@ -2,14 +2,11 @@ return {
   { 'AckslD/messages.nvim', cmd = 'Messages', config = true },
   {
     'NvChad/nvim-colorizer.lua',
-    opts = { user_default_options = { AARRGGBB = true, names = false, tailwind = 'lsp' } },
+    opts = {
+      user_default_options = { AARRGGBB = true, names = false, tailwind = 'lsp' },
+    },
   },
-  {
-    'abecodes/tabout.nvim',
-    config = true,
-    dependencies = { 'nvim-treesitter/nvim-treesitter' },
-  },
-  { 'airblade/vim-matchquote', dependencies = { 'andymass/vim-matchup' } },
+  { 'abecodes/tabout.nvim', config = true, dependencies = 'nvim-treesitter/nvim-treesitter' },
   {
     'akinsho/git-conflict.nvim',
     opts = {
@@ -17,13 +14,9 @@ return {
     },
   },
   { 'antonk52/markdowny.nvim', config = true, ft = 'markdown' },
-  {
-    'antosha417/nvim-lsp-file-operations',
-    dependencies = { 'nvim-lua/plenary.nvim', 'nvim-tree/nvim-tree.lua' },
-    config = true,
-  },
   { 'axelvc/template-string.nvim', config = true },
   { 'chrisgrieser/nvim-early-retirement', config = true },
+  { 'dawsers/edit-code-block.nvim', config = true, cmd = 'EditCodeBlock' },
   { 'fladson/vim-kitty' },
   {
     'iamcco/markdown-preview.nvim',
@@ -40,6 +33,7 @@ return {
       require('plenary.filetype').add_file('extra')
     end,
   },
+  { 'nvim-treesitter/nvim-treesitter-context', config = true },
   {
     'rcarriga/nvim-notify',
     config = function()

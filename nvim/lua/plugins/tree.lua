@@ -1,6 +1,13 @@
 return {
   'nvim-tree/nvim-tree.lua',
-  dependencies = { 'nvim-tree/nvim-web-devicons' },
+  dependencies = {
+    'nvim-tree/nvim-web-devicons',
+    {
+      'antosha417/nvim-lsp-file-operations',
+      config = true,
+      dependencies = 'nvim-lua/plenary.nvim',
+    },
+  },
   keys = {
     { '<C-n>', vim.cmd.NvimTreeToggle, desc = 'NvimTreeToggle' },
     { '<leader>n', vim.cmd.NvimTreeFindFileToggle, desc = 'NvimTreeFindFileToggle' },

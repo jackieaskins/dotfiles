@@ -12,7 +12,6 @@ end
 
 local M = {
   'nvim-neotest/neotest',
-  lazy = false,
   dependencies = {
     'nvim-lua/plenary.nvim',
     'nvim-treesitter/nvim-treesitter',
