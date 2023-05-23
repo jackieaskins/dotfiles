@@ -14,10 +14,6 @@ return {
 
     require('lspconfig.ui.windows').default_options.border = vim.g.border_style
 
-    if has_vtsls() then
-      require('lspconfig.configs').vtsls = require('vtsls').lspconfig
-    end
-
     if require('utils').file_exists('~/dotfiles/nvim/lua/custom/lspconfig.lua') then
       require('custom.lspconfig')
     end

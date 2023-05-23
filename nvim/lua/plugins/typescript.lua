@@ -8,7 +8,19 @@ local M = {
     end
 
     local typescript = require('typescript')
-    local preferences = { format = { indentSize = 2 } }
+    local preferences = {
+      format = { indentSize = 2 },
+      inlayHints = {
+        includeInlayEnumMemberValueHints = true,
+        includeInlayFunctionLikeReturnTypeHints = false,
+        includeInlayFunctionParameterTypeHints = true,
+        includeInlayParameterNameHints = 'all',
+        includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+        includeInlayPropertyDeclarationTypeHints = true,
+        includeInlayVariableTypeHints = false,
+        includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+      },
+    }
 
     local config = vim.tbl_extend('force', require('lsp.base_config')(), {
       on_attach = function(client, bufnr)
