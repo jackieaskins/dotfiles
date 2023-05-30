@@ -31,22 +31,6 @@ local M = {
 }
 
 function M.config()
-  local utils = require('utils')
-  local augroup, t = utils.augroup, utils.t
-
-  -- Attempt to fix telescope entering file in insert mode
-  -- https://github.com/nvim-telescope/telescope.nvim/issues/2027#issuecomment-1510001730
-  augroup('telescope_leave', {
-    {
-      'WinLeave',
-      callback = function()
-        if vim.bo.ft == 'TelescopePrompt' and vim.fn.mode() == 'i' then
-          vim.api.nvim_feedkeys(t('<Esc>'), 'i', false)
-        end
-      end,
-    },
-  })
-
   local telescope = require('telescope')
   local actions = require('telescope.actions')
   local action_layout = require('telescope.actions.layout')
