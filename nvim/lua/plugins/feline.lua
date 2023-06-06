@@ -75,12 +75,6 @@ function M.config()
       end,
     }
   end
-
-  local disabled_filetypes = {
-    'NvimTree',
-    '^neo.tree$',
-    '^DiffviewFiles$',
-  }
   -- }}}
 
   -- Status Line Components {{{
@@ -190,16 +184,6 @@ function M.config()
   }
   -- }}}
 
-  -- Winbar Components {{{
-  local function winbar_file_info_provider(hl)
-    return {
-      provider = file_info_provider(':.'),
-      hl = hl,
-      right_sep = { str = ' ', hl = hl },
-    }
-  end
-  -- }}}
-
   require('feline').setup({
     components = {
       active = {
@@ -239,22 +223,6 @@ function M.config()
 
       NONE = colors.mauve,
     },
-  })
-
-  require('feline').winbar.setup({
-    components = {
-      active = {
-        {},
-        {
-          winbar_file_info_provider(function()
-            local cmp_colors = component_colors()
-            return { fg = cmp_colors.a.bg, bg = 'NONE' }
-          end),
-        },
-      },
-      inactive = { {}, { winbar_file_info_provider('WinBarNC') } },
-    },
-    disable = { filetypes = disabled_filetypes },
   })
 end
 

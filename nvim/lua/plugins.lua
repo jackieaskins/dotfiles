@@ -33,7 +33,6 @@ return {
       require('plenary.filetype').add_file('extra')
     end,
   },
-  { 'nvim-treesitter/nvim-treesitter-context', config = true },
   {
     'rcarriga/nvim-notify',
     config = function()

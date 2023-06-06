@@ -48,8 +48,6 @@ function M.config()
         TelescopeResultsDiffUntracked = { fg = 'NONE' },
         TelescopeSelection = telescope_selection,
         TelescopeSelectionCaret = telescope_selection,
-
-        WinBarNC = { fg = colors.overlay0 },
       }
     end,
     integrations = {
@@ -67,7 +65,6 @@ function M.config()
       neotest = true,
       notify = true,
       nvimtree = true,
-      treesitter_context = true,
     },
   })
 
