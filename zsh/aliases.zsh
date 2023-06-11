@@ -5,6 +5,8 @@ fi
 
 alias mux=tmuxinator
 
+alias plugs="cd ~/.local/share/nvim/lazy/"
+
 # Directory Navigation
 alias -- -="cd -"
 alias ..='cd ..'
