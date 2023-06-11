@@ -24,15 +24,14 @@ return {
     ft = 'markdown',
     keys = { { '<leader>mp', vim.cmd.MarkdownPreview, desc = 'MarkdownPreview' } },
   },
-  { 'j-hui/fidget.nvim', opts = { text = { spinner = 'dots' } } },
+  {
+    'j-hui/fidget.nvim',
+    opts = { text = { spinner = 'dots' } },
+    -- https://github.com/j-hui/fidget.nvim/issues/131
+    tag = 'legacy',
+  },
   { 'lukas-reineke/indent-blankline.nvim', opts = { show_current_context = true } },
   { 'matze/vim-move', keys = { '<M-h>', '<M-j>', '<M-k>', '<M-l>' } },
-  {
-    'nvim-lua/plenary.nvim',
-    config = function()
-      require('plenary.filetype').add_file('extra')
-    end,
-  },
   {
     'rcarriga/nvim-notify',
     config = function()
@@ -52,6 +51,7 @@ return {
   { 'tpope/vim-repeat' },
   { 'tpope/vim-sleuth' },
   { 'tpope/vim-surround' },
+  { 'tzachar/highlight-undo.nvim', opts = { hlgroup = 'IncSearch' } },
   {
     'unblevable/quick-scope',
     init = function()
