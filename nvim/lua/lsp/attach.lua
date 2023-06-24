@@ -27,6 +27,13 @@ return function(client, bufnr)
     vim.lsp.buf.format({ async = true })
   end, { desc = 'vim.lsp.buf.format' })
 
+  if client.supports_method('textDocument/inlayHint') then
+    vim.lsp.buf.inlay_hint(bufnr, true)
+    bsk('n', '<leader>ih', function()
+      vim.lsp.buf.inlay_hint(bufnr, nil)
+    end, { desc = 'vim.lsp.buf.inlay_hint toggle' })
+  end
+
   bsk('n', '<leader>ca', vim.lsp.buf.code_action, { desc = 'vim.lsp.buf.code_action' })
   bsk('x', '<leader>ca', vim.lsp.buf.code_action, { desc = 'vim.lsp.buf.range_code_action' })
 
