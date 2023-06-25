@@ -5,9 +5,5 @@ return function()
     lineFoldingOnly = true,
   }
 
-  return {
-    capabilities = capabilities,
-    on_attach = require('lsp.attach'),
-    flags = { debounce_text_changes = 150 },
-  }
+  return { capabilities = capabilities }
 end

@@ -30,6 +30,15 @@ return {
     -- https://github.com/j-hui/fidget.nvim/issues/131
     tag = 'legacy',
   },
+  {
+    'kosayoda/nvim-lightbulb',
+    dependencies = { 'antoinemadec/FixCursorHold.nvim' },
+    opts = {
+      autocmd = { enabled = true },
+      sign = { enabled = false },
+      virtual_text = { enabled = true, hl_mode = 'combine' },
+    },
+  },
   { 'lukas-reineke/indent-blankline.nvim', opts = { show_current_context = true } },
   { 'matze/vim-move', keys = { '<M-h>', '<M-j>', '<M-k>', '<M-l>' } },
   {

@@ -1,5 +1,5 @@
 local utils = require('utils')
-local map = utils.map
+local augroup, map = utils.augroup, utils.map
 
 -- Diagnostics
 map('n', 'g?', '<cmd>lua vim.diagnostic.open_float(0, { scope = "cursor" })<CR>')
@@ -7,6 +7,30 @@ map('n', '[g', vim.diagnostic.goto_prev, { desc = 'vim.diagnostic.goto_prev' })
 map('n', ']g', vim.diagnostic.goto_next, { desc = 'vim.diagnostic.goto_next' })
 map('n', '[e', '<cmd>lua vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR })<CR>')
 map('n', ']e', '<cmd>lua vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR })<CR>')
+
+-- LSP
+augroup('lsp_keymaps', {
+  {
+    'LspAttach',
+    callback = function(args)
+      local bsk = utils.buffer_map(args.buf)
+      bsk('n', 'K', vim.lsp.buf.hover, { desc = 'Hover' })
+      bsk({ 'i', 'n' }, '<C-S>', vim.lsp.buf.signature_help, { desc = 'vim.lsp.buf.signature_help' })
+
+      bsk('n', '<leader>rn', vim.lsp.buf.rename, { desc = 'vim.lsp.buf.rename' })
+      bsk('n', '<leader>bf', function()
+        vim.lsp.buf.format({ async = true })
+      end, { desc = 'vim.lsp.buf.format' })
+
+      bsk('n', '<leader>ca', vim.lsp.buf.code_action, { desc = 'vim.lsp.buf.code_action' })
+      bsk('x', '<leader>ca', vim.lsp.buf.code_action, { desc = 'vim.lsp.buf.range_code_action' })
+
+      bsk('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, { desc = 'vim.lsp.buf.add_workspace_folder' })
+      bsk('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, { desc = 'vim.lsp.buf.remove_workspace_folder' })
+      bsk('n', '<leader>wl', '<cmd>lua =vim.lsp.buf.list_workspace_folders()<CR>')
+    end,
+  },
+})
 
 -- Extended gx
 map('n', 'gx', function()

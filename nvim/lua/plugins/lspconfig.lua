@@ -1,20 +1,18 @@
-local function has_vtsls()
-  return vim.g.supported_servers and vim.tbl_contains(vim.g.supported_servers, 'vtsls')
-end
+local utils = require('utils')
 
 return {
   'neovim/nvim-lspconfig',
   dependencies = {
     'folke/neodev.nvim',
     'hrsh7th/nvim-cmp',
-    { 'yioneko/nvim-vtsls', enabled = has_vtsls() },
+    { 'yioneko/nvim-vtsls', enabled = utils.is_lsp_server_supported('vtsls') },
   },
   config = function()
     local servers = require('lsp.servers')
 
     require('lspconfig.ui.windows').default_options.border = vim.g.border_style
 
-    if require('utils').file_exists('~/dotfiles/nvim/lua/custom/lspconfig.lua') then
+    if utils.file_exists('~/dotfiles/nvim/lua/custom/lspconfig.lua') then
       require('custom.lspconfig')
     end
 

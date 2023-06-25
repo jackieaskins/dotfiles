@@ -1,7 +1,9 @@
+local utils = require('utils')
+
 local M = {
   'jose-elias-alvarez/typescript.nvim',
   dependencies = { 'neovim/nvim-lspconfig' },
-  enabled = not vim.g.supported_servers or vim.tbl_contains(vim.g.supported_servers, 'tsserver'),
+  enabled = utils.is_lsp_server_supported('tsserver'),
   config = function()
     if require('lsp.servers').tsserver == nil then
       return
@@ -23,11 +25,9 @@ local M = {
     }
 
     local config = vim.tbl_extend('force', require('lsp.base_config')(), {
-      on_attach = function(client, bufnr)
-        require('lsp.attach')(client, bufnr)
-
+      on_attach = function(_, bufnr)
         local function bsk(mode, lhs, rhs, opts)
-          require('utils').map(mode, lhs, rhs, vim.tbl_extend('keep', { buffer = bufnr }, opts or {}))
+          utils.map(mode, lhs, rhs, vim.tbl_extend('keep', { buffer = bufnr }, opts or {}))
         end
 
         -- TODO: Handle single import

@@ -1,9 +1,8 @@
 return {
   config = function(config)
-    config.on_attach = function(...)
-      require('lsp.attach')(...)
+    config.on_attach = function(_, bufnr)
       require('telescope').load_extension('tailiscope')
-      require('utils').map('n', '<leader>tw', '<cmd>Telescope tailiscope<CR>')
+      require('utils').buffer_map(bufnr)('n', '<leader>tw', '<cmd>Telescope tailiscope<CR>')
     end
     config.root_dir = require('lspconfig').util.root_pattern(
       'tailwind.config.js',

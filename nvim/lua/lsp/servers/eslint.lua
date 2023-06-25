@@ -1,10 +1,8 @@
 return {
   config = function(config)
     config.root_dir = require('lspconfig').util.root_pattern('./node_modules/eslint')
-    config.on_attach = function(client, bufnr)
-      require('lsp.attach')(client, bufnr)
-
-      require('utils').map('n', '<leader>ef', vim.cmd.EslintFixAll)
+    config.on_attach = function(_, bufnr)
+      require('utils').buffer_map(bufnr)('n', '<leader>ef', vim.cmd.EslintFixAll)
     end
     config.handlers = {
       ['textDocument/publishDiagnostics'] = function(err, result, ctx, conf)

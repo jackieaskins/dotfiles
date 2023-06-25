@@ -1,16 +1,28 @@
 local M = {}
 
+---@alias map_fn fun(mode: string | table<string>, lhs: string, rhs: string | function, opts?: table)
+
 ---Define vim keymap
----@param mode string | table<string>
----@param lhs string
----@param rhs string | function
----@param opts? table
+---@type map_fn
 function M.map(mode, lhs, rhs, opts)
   local options = { silent = true }
   if opts then
     options = vim.tbl_extend('force', options, opts)
   end
   vim.keymap.set(mode, lhs, rhs, options)
+end
+
+---Define vim keymap for buffer
+---@param bufnr number | boolean
+---@return map_fn
+function M.buffer_map(bufnr)
+  return function(mode, lhs, rhs, opts)
+    local options = { buffer = bufnr }
+    if opts then
+      options = vim.tbl_extend('force', options, opts)
+    end
+    M.map(mode, lhs, rhs, options)
+  end
 end
 
 ---Define vim user command
@@ -85,6 +97,13 @@ function M.filter_table_by_keys(table, keys)
     rv[key] = table[key]
   end
   return rv
+end
+
+---Return whether the provided lsp server is supported
+---@param server string
+---@return boolean
+function M.is_lsp_server_supported(server)
+  return not vim.g.supported_servers or vim.tbl_contains(vim.g.supported_servers, server)
 end
 
 return M

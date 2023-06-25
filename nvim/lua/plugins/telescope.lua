@@ -27,8 +27,32 @@ local M = {
     { '<leader>gs', '<cmd>Telescope git_status<CR>' },
     { '<leader>gl', '<cmd>Telescope git_commits<CR>' },
     { '<leader>gL', '<cmd>Telescope git_bcommits<CR>' },
+
+    -- Workspace diagnostics
+    { '<leader>sw', '<cmd>Telescope lsp_dynamic_workspace_symbols<CR>' },
+    { '<leader>sd', '<cmd>Telescope lsp_document_symbols symbols=constant,function,method<CR>' },
   },
 }
+
+local function configure_lsp_keymaps()
+  local utils = require('utils')
+
+  utils.augroup('telescope_lsp_attach', {
+    {
+      'LspAttach',
+      callback = function(args)
+        local bsk = utils.buffer_map(args.buf)
+
+        bsk('n', 'gi', '<cmd>Telescope lsp_implementations<CR>')
+        bsk('n', 'gpi', '<cmd>Telescope lsp_implementations jump_type=never<CR>')
+        bsk('n', 'gd', '<cmd>Telescope lsp_definitions<CR>')
+        bsk('n', 'gpd', '<cmd>Telescope lsp_definitions jump_type=never<CR>')
+        bsk('n', 'gr', '<cmd>Telescope lsp_references include_declaration=false<CR>')
+        bsk('n', 'gpr', '<cmd>Telescope lsp_references include_declaration=false jump_type=never<CR>')
+      end,
+    },
+  })
+end
 
 function M.config()
   local telescope = require('telescope')
@@ -96,6 +120,8 @@ function M.config()
   telescope.load_extension('lazy')
   telescope.load_extension('luasnip')
   telescope.load_extension('notify')
+
+  configure_lsp_keymaps()
 end
 
 return M

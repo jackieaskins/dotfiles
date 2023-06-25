@@ -1,7 +1,6 @@
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
-require('globals')
 require('settings')
 
 if require('utils').file_exists('~/dotfiles/nvim/lua/custom.lua') then

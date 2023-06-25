@@ -1,9 +1,7 @@
 return {
   install = { 'npm', '@vtsls/language-server' },
   config = function(config)
-    config.on_attach = function(client, bufnr)
-      require('lsp.attach')(client, bufnr)
-
+    config.on_attach = function(_, bufnr)
       local vtsls = require('vtsls')
       local function bsk(mode, lhs, rhs, opts)
         require('utils').map(mode, lhs, rhs, vim.tbl_extend('keep', { buffer = bufnr }, opts or {}))

@@ -5,9 +5,8 @@ return {
       'dotnet',
       vim.fn.stdpath('data') .. '/lsp-servers/omnisharp-roslyn/OmniSharp.dll',
     }
-    config.on_attach = function(client, bufnr)
+    config.on_attach = function(client)
       client.server_capabilities.semanticTokensProvider = nil
-      require('lsp.attach')(client, bufnr)
     end
     return config
   end,

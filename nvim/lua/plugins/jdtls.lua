@@ -1,8 +1,10 @@
+local utils = require('utils')
+
 return {
   'mfussenegger/nvim-jdtls',
-  enabled = not vim.g.supported_servers or vim.tbl_contains(vim.g.supported_servers, 'jdtls'),
+  enabled = utils.is_lsp_server_supported('jdtls'),
   config = function()
-    require('utils').augroup('jdtls', {
+    utils.augroup('jdtls', {
       {
         'FileType',
         pattern = 'java',
