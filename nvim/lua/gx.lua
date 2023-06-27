@@ -1,5 +1,4 @@
 local function matchstrpos_cursor(pattern)
-  ---@diagnostic disable-next-line: param-type-mismatch
   local line = vim.fn.getline('.')
   local col = vim.fn.col('.') - 1
 

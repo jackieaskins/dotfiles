@@ -41,11 +41,6 @@ function M.config()
       color = '#358a5b',
       name = 'NeoTree',
     },
-    lazy = {
-      icon = '',
-      color = '#dea584',
-      name = 'Lazy',
-    },
   })
 end
 

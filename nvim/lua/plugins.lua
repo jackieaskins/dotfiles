@@ -7,12 +7,6 @@ return {
     },
   },
   { 'abecodes/tabout.nvim', config = true, dependencies = 'nvim-treesitter/nvim-treesitter' },
-  {
-    'akinsho/git-conflict.nvim',
-    opts = {
-      default_mappings = { ours = 'co', theirs = 'ct', none = 'c0', both = 'cb', next = ']x', prev = '[x' },
-    },
-  },
   { 'antonk52/markdowny.nvim', config = true, ft = 'markdown' },
   { 'axelvc/template-string.nvim', config = true },
   { 'chrisgrieser/nvim-early-retirement', config = true },

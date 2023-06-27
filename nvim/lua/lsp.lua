@@ -19,7 +19,7 @@ end
 
 require('utils').augroup('inlay_hints', {
   {
-    'BufReadPost',
+    'LspAttach',
     callback = function(args)
       enable_hints_for_buffer(args.buf)
     end,
