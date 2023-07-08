@@ -99,11 +99,4 @@ function M.filter_table_by_keys(table, keys)
   return rv
 end
 
----Return whether the provided lsp server is supported
----@param server string
----@return boolean
-function M.is_lsp_server_supported(server)
-  return not vim.g.supported_servers or vim.tbl_contains(vim.g.supported_servers, server)
-end
-
 return M

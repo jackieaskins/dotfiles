@@ -1,6 +1,6 @@
 local servers = {
   cssls = { install = { 'npm', 'vscode-langservers-extracted' } },
-  emmet_language_server = { install = { 'npm', '@olrtg/emmet-language-server' } },
+  emmet_language_server = { display = 'emmet-ls', install = { 'npm', '@olrtg/emmet-language-server' } },
   eslint = require('lsp.servers.eslint'),
   gdscript = { install = { 'brew', 'godot' } },
   gopls = { install = { 'go', 'golang.org/x/tools/gopls@latest' } },
@@ -15,6 +15,7 @@ local servers = {
   svelte = require('lsp.servers.svelte'),
   tailwindcss = require('lsp.servers.tailwindcss'),
   tsserver = { install = { 'npm', 'typescript typescript-language-server' }, skip_lspconfig = true },
+  ['typescript-tools'] = { display = 'ts-tools', install = { 'npm', 'typescript' }, skip_lspconfig = true },
   vimls = { install = { 'npm', 'vim-language-server' } },
   vtsls = require('lsp.servers.vtsls'),
   yamlls = { install = { 'npm', 'yaml-language-server' } },

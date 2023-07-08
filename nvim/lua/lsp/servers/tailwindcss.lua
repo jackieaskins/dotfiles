@@ -1,4 +1,5 @@
 return {
+  display = 'tailwind',
   config = function(config)
     config.on_attach = function(_, bufnr)
       require('telescope').load_extension('tailiscope')

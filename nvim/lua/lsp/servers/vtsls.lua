@@ -16,15 +16,22 @@ return {
       end, { desc = 'Add and sort missing imports' })
     end
 
+    local ih = require('lsp.utils').typescript_inlay_hint_settings
     local lang_settings = {
       suggest = { completeFunctionCalls = true },
       inlayHints = {
-        enumMemberValues = { enabled = true },
-        functionLikeReturnTypes = { enabled = false },
-        parameterNames = { enabled = 'all', suppressWhenArgumentMatchesName = false },
-        parameterTypes = { enabled = true },
-        propertyDeclarationTypes = { enabled = true },
-        variableTypes = { enabled = false, suppressWhenTypeMatchesName = false },
+        enumMemberValues = { enabled = ih.includeInlayEnumMemberValueHints },
+        functionLikeReturnTypes = { enabled = ih.includeInlayFunctionLikeReturnTypeHints },
+        parameterNames = {
+          enabled = ih.includeInlayParameterNameHints,
+          suppressWhenArgumentMatchesName = not ih.includeInlayParameterNameHintsWhenArgumentMatchesName,
+        },
+        parameterTypes = { enabled = ih.includeInlayFunctionParameterTypeHints },
+        propertyDeclarationTypes = { enabled = ih.includeInlayPropertyDeclarationTypeHints },
+        variableTypes = {
+          enabled = ih.includeInlayVariableTypeHints,
+          suppressWhenTypeMatchesName = not ih.includeInlayVariableTypeHintsWhenTypeMatchesName,
+        },
       },
       tsserver = {
         experimental = { enableProjectDiagnostics = true },

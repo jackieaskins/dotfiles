@@ -1,18 +1,16 @@
-local utils = require('utils')
-
 return {
   'neovim/nvim-lspconfig',
   dependencies = {
     'folke/neodev.nvim',
     'hrsh7th/nvim-cmp',
-    { 'yioneko/nvim-vtsls', enabled = utils.is_lsp_server_supported('vtsls') },
+    { 'yioneko/nvim-vtsls', enabled = require('lsp.utils').is_server_supported('vtsls') },
   },
   config = function()
     local servers = require('lsp.servers')
 
     require('lspconfig.ui.windows').default_options.border = vim.g.border_style
 
-    if utils.file_exists('~/dotfiles/nvim/lua/custom/lspconfig.lua') then
+    if require('utils').file_exists('~/dotfiles/nvim/lua/custom/lspconfig.lua') then
       require('custom.lspconfig')
     end
 

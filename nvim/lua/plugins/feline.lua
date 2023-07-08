@@ -144,7 +144,7 @@ function M.config()
       local buf_clients = vim.lsp.get_active_clients({ bufnr = 0 })
       local client_names = {}
       for _, client in ipairs(vim.tbl_values(buf_clients)) do
-        client_names[client.name] = true
+        client_names[require('lsp.utils').get_server_display_name(client.name)] = true
       end
       return '   ' .. table.concat(vim.tbl_keys(client_names), ' ') .. ' '
     end,

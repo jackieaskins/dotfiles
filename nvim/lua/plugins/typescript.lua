@@ -1,9 +1,9 @@
-local utils = require('utils')
+local lsp_utils = require('lsp.utils')
 
 local M = {
   'jose-elias-alvarez/typescript.nvim',
   dependencies = { 'neovim/nvim-lspconfig' },
-  enabled = utils.is_lsp_server_supported('tsserver'),
+  enabled = lsp_utils.is_server_supported('tsserver'),
   config = function()
     if require('lsp.servers').tsserver == nil then
       return
@@ -12,22 +12,13 @@ local M = {
     local typescript = require('typescript')
     local preferences = {
       format = { indentSize = 2 },
-      inlayHints = {
-        includeInlayEnumMemberValueHints = true,
-        includeInlayFunctionLikeReturnTypeHints = false,
-        includeInlayFunctionParameterTypeHints = true,
-        includeInlayParameterNameHints = 'all',
-        includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-        includeInlayPropertyDeclarationTypeHints = true,
-        includeInlayVariableTypeHints = false,
-        includeInlayVariableTypeHintsWhenTypeMatchesName = false,
-      },
+      inlayHints = lsp_utils.typescript_inlay_hint_settings,
     }
 
     local config = vim.tbl_extend('force', require('lsp.base_config')(), {
       on_attach = function(_, bufnr)
         local function bsk(mode, lhs, rhs, opts)
-          utils.map(mode, lhs, rhs, vim.tbl_extend('keep', { buffer = bufnr }, opts or {}))
+          require('utils').map(mode, lhs, rhs, vim.tbl_extend('keep', { buffer = bufnr }, opts or {}))
         end
 
         -- TODO: Handle single import

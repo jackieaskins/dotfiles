@@ -52,8 +52,16 @@ function M.config()
     formatting = {
       format = function(entry, vim_item)
         local source = entry.source.name
+
         vim_item.menu = source_menu_map[source]
+        if source == 'nvim_lsp' then
+          pcall(function()
+            vim_item.menu = require('lsp.utils').get_server_display_name(entry.source.source.client.name)
+          end)
+        end
+
         vim_item.abbr = string.sub(vim_item.abbr, 1, 50)
+
         return vim_item
       end,
     },
