@@ -1,5 +1,6 @@
 local servers = {
   cssls = { install = { 'npm', 'vscode-langservers-extracted' } },
+  emmet_language_server = { install = { 'npm', '@olrtg/emmet-language-server' } },
   eslint = require('lsp.servers.eslint'),
   gdscript = { install = { 'brew', 'godot' } },
   gopls = { install = { 'go', 'golang.org/x/tools/gopls@latest' } },

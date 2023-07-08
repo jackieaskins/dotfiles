@@ -1,7 +1,6 @@
 local M = {
   'hrsh7th/nvim-cmp',
   dependencies = {
-    { 'jackieaskins/cmp-emmet', build = 'npm run release' },
     'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-calc',
     'hrsh7th/cmp-cmdline',
@@ -17,7 +16,6 @@ function M.config()
 
   local source_menu_map = {
     calc = 'Calc',
-    emmet = 'Emmet',
     luasnip = 'Snip',
     nvim_lsp = 'LSP',
     buffer = 'Buff',
@@ -38,7 +36,6 @@ function M.config()
     sources = cmp.config.sources({
       { name = 'luasnip' },
       { name = 'nvim_lsp' },
-      { name = 'emmet' },
       { name = 'path' },
       { name = 'nvim_lsp_signature_help' },
       { name = 'calc' },
