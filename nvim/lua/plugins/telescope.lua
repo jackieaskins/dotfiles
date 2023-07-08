@@ -23,12 +23,14 @@ local M = {
     { '<leader>z=', '<cmd>Telescope spell_suggest<CR>' },
     { '<leader>sn', '<cmd>Telescope luasnip<CR>' },
 
+    { '<leader>la', '<cmd>Telescope lazy<CR>' },
+
     -- Git commands
     { '<leader>gs', '<cmd>Telescope git_status<CR>' },
     { '<leader>gl', '<cmd>Telescope git_commits<CR>' },
     { '<leader>gL', '<cmd>Telescope git_bcommits<CR>' },
 
-    -- Workspace diagnostics
+    -- Workspace symbols
     { '<leader>sw', '<cmd>Telescope lsp_dynamic_workspace_symbols<CR>' },
     { '<leader>sd', '<cmd>Telescope lsp_document_symbols symbols=constant,function,method<CR>' },
   },
