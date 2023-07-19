@@ -5,7 +5,7 @@ local servers = {
   gdscript = { install = { 'brew', 'godot' } },
   gopls = { install = { 'go', 'golang.org/x/tools/gopls@latest' } },
   graphql = require('lsp.servers.graphql'),
-  html = { install = { 'npm', 'vscode-langservers-extracted' } },
+  html = require('lsp.servers.html'),
   jdtls = require('lsp.servers.jdtls'),
   jsonls = require('lsp.servers.jsonls'),
   omnisharp = require('lsp.servers.omnisharp'),
