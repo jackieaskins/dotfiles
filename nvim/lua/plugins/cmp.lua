@@ -1,6 +1,11 @@
 local M = {
   'hrsh7th/nvim-cmp',
   dependencies = {
+    {
+      'jackieaskins/cmp-emmet',
+      enabled = not require('lsp.utils').is_server_supported('emmet_language_server'),
+      build = 'npm run release',
+    },
     'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-calc',
     'hrsh7th/cmp-cmdline',
@@ -15,12 +20,13 @@ function M.config()
   local cmp = require('cmp')
 
   local source_menu_map = {
-    calc = 'Calc',
-    luasnip = 'Snip',
-    nvim_lsp = 'LSP',
-    buffer = 'Buff',
-    path = 'Path',
-    nvim_lsp_signature_help = 'Sig',
+    calc = 'calc',
+    emmet = 'emmet',
+    luasnip = 'snip',
+    nvim_lsp = 'lsp',
+    buffer = 'buff',
+    path = 'path',
+    nvim_lsp_signature_help = 'sig',
   }
 
   vim.opt.completeopt = 'menu,menuone,noselect'
@@ -36,14 +42,12 @@ function M.config()
     sources = cmp.config.sources({
       { name = 'luasnip' },
       { name = 'nvim_lsp' },
+      { name = 'emmet' },
       { name = 'path' },
       { name = 'nvim_lsp_signature_help' },
       { name = 'calc' },
     }, {
-      {
-        name = 'buffer',
-        option = { get_bufnrs = vim.api.nvim_list_bufs },
-      },
+      { name = 'buffer', option = { get_bufnrs = vim.api.nvim_list_bufs } },
     }),
     window = {
       completion = cmp.config.window.bordered(),
@@ -73,39 +77,19 @@ function M.config()
       ['<C-N>'] = cmp.mapping(cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }), { 'i', 'c' }),
       ['<C-P>'] = cmp.mapping(cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }), { 'i', 'c' }),
       ['<C-Space>'] = cmp.mapping(
-        cmp.mapping.complete({
-          config = {
-            sources = { { name = 'nvim_lsp' } },
-          },
-        }),
+        cmp.mapping.complete({ config = { sources = { { name = 'nvim_lsp' } } } }),
         { 'i', 'c' }
       ),
-      ['<C-E>'] = cmp.mapping({
-        i = cmp.mapping.abort(),
-        c = cmp.mapping.close(),
-      }),
+      ['<C-E>'] = cmp.mapping({ i = cmp.mapping.abort(), c = cmp.mapping.close() }),
       ['<C-Y>'] = cmp.mapping(
-        cmp.mapping.confirm({
-          select = true,
-          behavior = cmp.ConfirmBehavior.Replace,
-        }),
+        cmp.mapping.confirm({ select = true, behavior = cmp.ConfirmBehavior.Replace }),
         { 'i', 'c' }
       ),
     },
   })
 
-  cmp.setup.cmdline(':', {
-    sources = {
-      { name = 'path' },
-      { name = 'cmdline' },
-    },
-  })
-
-  cmp.setup.cmdline('/', {
-    sources = {
-      { name = 'buffer' },
-    },
-  })
+  cmp.setup.cmdline(':', { sources = { { name = 'cmdline' } } })
+  cmp.setup.cmdline('/', { sources = { { name = 'buffer' } } })
 end
 
 return M
