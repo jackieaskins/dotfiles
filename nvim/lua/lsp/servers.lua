@@ -14,10 +14,8 @@ local servers = {
   lua_ls = require('lsp.servers.lua_ls'),
   svelte = require('lsp.servers.svelte'),
   tailwindcss = require('lsp.servers.tailwindcss'),
-  tsserver = { install = { 'npm', 'typescript typescript-language-server' }, skip_lspconfig = true },
   ['typescript-tools'] = { display = 'ts-tools', install = { 'npm', 'typescript' }, skip_lspconfig = true },
   vimls = { install = { 'npm', 'vim-language-server' } },
-  vtsls = require('lsp.servers.vtsls'),
   yamlls = { install = { 'npm', 'yaml-language-server' } },
 }
 
