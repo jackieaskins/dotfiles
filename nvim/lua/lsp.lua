@@ -9,7 +9,7 @@ vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.s
 local should_enable_hints = true
 
 local function enable_hints_for_buffer(bufnr)
-  for _, client in ipairs(vim.lsp.get_active_clients({ bufnr = bufnr })) do
+  for _, client in ipairs(vim.lsp.get_clients({ bufnr = bufnr })) do
     if client.supports_method('textDocument/inlayHint') then
       vim.lsp.inlay_hint(bufnr, should_enable_hints)
       return

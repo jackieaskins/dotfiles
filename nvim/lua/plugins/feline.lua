@@ -45,7 +45,7 @@ function M.config()
   end
 
   local function has_lsp_client()
-    return #vim.lsp.get_active_clients({ bufnr = 0 }) > 0
+    return #vim.lsp.get_clients({ bufnr = 0 }) > 0
   end
 
   local function file_info_provider(fnamemodifier)
@@ -141,7 +141,7 @@ function M.config()
   local active_lsp_client_names = {
     enabled = has_lsp_client,
     provider = function()
-      local buf_clients = vim.lsp.get_active_clients({ bufnr = 0 })
+      local buf_clients = vim.lsp.get_clients({ bufnr = 0 })
       local client_names = {}
       for _, client in ipairs(vim.tbl_values(buf_clients)) do
         client_names[require('lsp.utils').get_server_display_name(client.name)] = true
