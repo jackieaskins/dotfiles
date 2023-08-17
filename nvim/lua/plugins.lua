@@ -29,7 +29,7 @@ return {
     opts = {
       autocmd = { enabled = true },
       sign = { enabled = false },
-      virtual_text = { enabled = true, hl_mode = 'combine' },
+      virtual_text = { enabled = true, hl = 'LightBulbVirtText' },
     },
   },
   { 'lukas-reineke/indent-blankline.nvim', opts = { show_current_context = true } },

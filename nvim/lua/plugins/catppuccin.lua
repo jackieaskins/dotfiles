@@ -26,6 +26,8 @@ function M.config()
 
         IndentBlanklineContextChar = { fg = colors.blue },
 
+        LightBulbVirtText = { bg = 'NONE' },
+
         MarkerCodeFence = { bg = colors.mantle },
 
         NormalFloat = { bg = colors.base },
