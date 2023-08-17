@@ -64,6 +64,7 @@ function M.config()
           information = { 'undercurl' },
         },
       },
+      neogit = true,
       neotest = true,
       notify = true,
       nvimtree = true,

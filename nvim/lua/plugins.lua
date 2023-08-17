@@ -1,5 +1,6 @@
 return {
   { 'AckslD/messages.nvim', cmd = 'Messages', config = true },
+  { 'FabijanZulj/blame.nvim', cmd = 'ToggleBlame' },
   {
     'NvChad/nvim-colorizer.lua',
     opts = {
@@ -49,7 +50,6 @@ return {
     keys = { { '<leader>mt', vim.cmd.MaximizerToggle, desc = 'MaximizerToggle' } },
   },
   { 'tpope/vim-abolish' },
-  { 'tpope/vim-fugitive', cmd = { 'Git', 'G', 'Gread' } },
   { 'tpope/vim-repeat' },
   { 'tpope/vim-sleuth' },
   { 'tpope/vim-surround' },
