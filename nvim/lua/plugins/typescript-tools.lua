@@ -7,6 +7,7 @@ return {
   config = function()
     require('typescript-tools').setup({
       settings = {
+        complete_function_calls = true,
         tsserver_file_preferences = {
           includeInlayEnumMemberValueHints = true,
           includeInlayFunctionLikeReturnTypeHints = false,
