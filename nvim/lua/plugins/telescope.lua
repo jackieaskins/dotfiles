@@ -8,6 +8,7 @@ local M = {
     { 'tsakirist/telescope-lazy.nvim' },
   },
   cmd = 'Telescope',
+  event = 'LspAttach',
   keys = {
     { '<leader>ht', '<cmd>Telescope help_tags<CR>' },
     { '<leader>hi', '<cmd>Telescope highlights<CR>' },
