@@ -7,10 +7,9 @@
 #define SPLIT_TRANSPORT_MIRROR
 #define SPLIT_LAYER_STATE_ENABLE
 #define MASTER_LEFT
-#define IGNORE_MOD_TAP_INTERRUPT // Deprecated, will become the default soon
 
-/* RGB settings */
-#define RGB_DI_PIN GP1
+#define WS2812_PIO_USE_PIO1 // Force the usage of PIO1 peripheral, by default the WS2812 implementation uses the PIO0 peripheral
+
 #define RGB_MATRIX_SPLIT { 40, 40 }
 #define RGB_MATRIX_LED_COUNT 80
 
@@ -23,17 +22,9 @@
 #define RGB_MATRIX_KEYPRESSES
 #define RGB_MATRIX_FRAMEBUFFER_EFFECTS
 
-/* Debounce reduces chatter (unintended double-presses) - set 0 if debouncing is not needed */
-#define DEBOUNCE 5
-
 /* Double-tap reset button parameters */
 #define RP2040_BOOTLOADER_DOUBLE_TAP_RESET
 #define RP2040_BOOTLOADER_DOUBLE_TAP_RESET_LED GP17
 #define RP2040_BOOTLOADER_DOUBLE_TAP_RESET_TIMEOUT 1000U
 
-// fix for device detection after cold boot
-// https://github.com/qmk/qmk_firmware/issues/18511#issuecomment-1264604610
-// https://github.com/qmk/qmk_firmware/issues/8990#issuecomment-851055637
-#undef SPLIT_USB_DETECT
-//https://www.reddit.com/r/ErgoMechKeyboards/comments/11qevf9/comment/jc5y8ux/?context=3
 #define USB_VBUS_PIN GP19

@@ -18,7 +18,12 @@
         "console": false,
         "extrakey": true,
         "mousekey": true,
-        "nkro": false
+        "nkro": false,
+        "rgb_matrix": true
+    },
+    "ws2812": {
+        "pin": "GP1",
+        "driver": "vendor"
     },
     "matrix_pins": {
         "cols": ["GP9", "GP26", "GP22", "GP20", "GP29", "GP4", "GP5"],
@@ -30,6 +35,7 @@
     },
     "diode_direction": "ROW2COL",
     "rgb_matrix": {
+        "driver": "ws2812",
         "animations": {
             "alphas_mods": true,
             "gradient_up_down": true,
