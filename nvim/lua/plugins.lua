@@ -55,7 +55,7 @@ return {
   { 'tpope/vim-surround' },
   { 'tzachar/highlight-undo.nvim', opts = { hlgroup = 'IncSearch' } },
   {
-    'unblevable/quick-scope',
+    'jackieaskins/quick-scope',
     init = function()
       vim.g.qs_buftype_blacklist = { 'terminal' }
       vim.g.qs_filetype_blacklist = { 'neo-tree', 'NvimTree' }
