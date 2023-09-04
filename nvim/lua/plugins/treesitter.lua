@@ -45,6 +45,7 @@ function M.init()
 end
 
 function M.config()
+  ---@diagnostic disable-next-line: missing-fields
   require('nvim-treesitter.configs').setup({
     auto_install = true,
     ensure_installed = { 'bash', 'comment', 'git_rebase', 'gitcommit', 'markdown_inline', 'regex' },
@@ -65,6 +66,12 @@ function M.config()
       enable = true,
       enable_rename = 'false', -- Rename causes issues
       skip_close_shortcut = '\\>',
+    },
+
+    -- https://github.com/JoosepAlviste/nvim-ts-context-commentstring
+    context_commentstring = {
+      enable = true,
+      enable_autocmd = false,
     },
 
     -- https://github.com/RRethy/nvim-treesitter-endwise
