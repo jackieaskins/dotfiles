@@ -7,8 +7,16 @@ return {
       user_default_options = { AARRGGBB = true, names = false, tailwind = 'lsp' },
     },
   },
-  { 'abecodes/tabout.nvim', config = true, dependencies = 'nvim-treesitter/nvim-treesitter' },
-  { 'antonk52/markdowny.nvim', config = true, ft = 'markdown' },
+  {
+    'altermo/ultimate-autopair.nvim',
+    event = { 'InsertEnter', 'CmdlineEnter' },
+    opts = {
+      close = { enable = true },
+      space2 = { enable = true },
+      tabout = { enable = true, hopout = true, map = '<Tab>' },
+    },
+  },
+  { 'antonk52/markdowny.nvim', config = true },
   { 'axelvc/template-string.nvim', config = true },
   { 'chrisgrieser/nvim-early-retirement', config = true },
   { 'dawsers/edit-code-block.nvim', config = true, cmd = 'EditCodeBlock' },
