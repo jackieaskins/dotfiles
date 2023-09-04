@@ -143,9 +143,25 @@ backup_and_symlink .gitignore_global  gitignore_global gitignore_global
 success_echo "Dotfiles backed up and symlinked."
 
 #--------------------------------------------------------------------#
-#                           Neovim Config                            #
+#                    Neovim Installation & Config                    #
 #--------------------------------------------------------------------#
-echo -e "Configuring Neovim..."
+echo -e "Checking if Neovim is installed from source..."
+if [ "$(command -v nvim)" != "/usr/local/bin/nvim" ]; then
+  echo -e "Neovim is not installed from source. Installing it..."
+  cd ~
+  git clone https://github.com/neovim/neovim
+  cd -
+  cd ~/neovim
+else
+  echo -e "Neovim is installed from source. Updating it..."
+  cd ~/neovim
+  git pull
+fi
+make CMAKE_BUILD_TYPE=RelWithDebInfo
+sudo make install
+cd -
+success_echo "Neovim is up to date. Starting Neovim configuration..."
+
 echo -e "Running Lazy sync, this may take a while..."
 nvim --headless "+Lazy! sync" +qa
 echo -e ""

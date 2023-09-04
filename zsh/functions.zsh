@@ -7,3 +7,11 @@ function mk() {
 function cp2m() {
   xargs -n 1 cp -v $1 <<< "${@:2}"
 }
+
+# Update Neovim installed from source
+function update_neovim() {
+  cd $HOME/neovim
+  make CMAKE_BUILD_TYPE=RelWithDebInfo
+  sudo make install
+  cd -
+}

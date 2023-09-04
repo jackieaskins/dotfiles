@@ -1,6 +1,5 @@
 tap 'heroku/brew'
 brew 'heroku'
-brew 'node'
 brew 'openjdk@17', link: true
 
 if RUBY_PLATFORM =~ /darwin/
