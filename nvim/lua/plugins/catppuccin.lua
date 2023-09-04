@@ -22,6 +22,8 @@ function M.config()
         Headline5Reverse = { fg = headline_highlights.Headline5.fg },
         Headline6Reverse = { fg = headline_highlights.Headline6.fg },
 
+        HighlightUndo = { link = 'IncSearch' },
+
         HlSearchLens = editor_highlights.Search,
 
         IndentBlanklineContextChar = { fg = colors.blue },

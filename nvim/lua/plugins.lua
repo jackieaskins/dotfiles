@@ -19,7 +19,6 @@ return {
   { 'antonk52/markdowny.nvim', config = true },
   { 'axelvc/template-string.nvim', config = true },
   { 'chrisgrieser/nvim-early-retirement', config = true },
-  { 'dawsers/edit-code-block.nvim', config = true, cmd = 'EditCodeBlock' },
   { 'fladson/vim-kitty' },
   {
     'iamcco/markdown-preview.nvim',
@@ -61,7 +60,7 @@ return {
   { 'tpope/vim-repeat' },
   { 'tpope/vim-sleuth' },
   { 'tpope/vim-surround' },
-  { 'tzachar/highlight-undo.nvim', opts = { hlgroup = 'IncSearch' } },
+  { 'tzachar/highlight-undo.nvim', config = true },
   {
     'jackieaskins/quick-scope',
     init = function()
