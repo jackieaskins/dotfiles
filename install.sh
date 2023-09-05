@@ -68,26 +68,28 @@ if [ $is_personal_machine = true ]; then
 else
   echo -e "Not on personal machine, not installing personal machine Homebrew packages."
 fi
-echo -e ""
+success_echo "Succesfully set up Homebrew."
 
 #--------------------------------------------------------------------#
 #                         Global Git Config                          #
 #--------------------------------------------------------------------#
-echo -e "Configuring Global Gitignore..."
+echo -e "Configuring Git..."
 git config --global core.excludesfile ~/.gitignore_global
 git config --global pull.rebase true
 git config --global rerere.enabled true
 git config --global rebase.autoStash true
-success_echo "Configured Global Gitignore."
+success_echo "Configured Git."
 
 #--------------------------------------------------------------------#
 #                              WezTerm                               #
 #--------------------------------------------------------------------#
+echo -e "Installing WezTerm terminfo..."
 # Install terminfo to get support for undercurl and the like
 tempfile=$(mktemp)
 curl -o $tempfile https://raw.githubusercontent.com/wez/wezterm/main/termwiz/data/wezterm.terminfo
 tic -x -o ~/.terminfo $tempfile
 rm $tempfile
+success_echo "Successfully installed WezTerm terminfo."
 
 #--------------------------------------------------------------------#
 #                    Dotfiles Backup & Symlinking                    #
