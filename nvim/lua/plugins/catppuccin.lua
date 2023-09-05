@@ -13,6 +13,8 @@ function M.config()
 
         CursorLineNr = { fg = colors.blue, bg = editor_highlights.CursorLine.bg, style = { 'bold' } },
 
+        DropBarModified = { fg = colors.green },
+
         Folded = { fg = colors.blue, bg = colors.surface0 },
 
         Headline1Reverse = { fg = headline_highlights.Headline1.fg },
