@@ -3,9 +3,7 @@ return {
   { 'FabijanZulj/blame.nvim', cmd = 'ToggleBlame' },
   {
     'NvChad/nvim-colorizer.lua',
-    opts = {
-      user_default_options = { AARRGGBB = true, names = false, tailwind = 'lsp' },
-    },
+    opts = { user_default_options = { AARRGGBB = true, names = false, tailwind = 'lsp' } },
   },
   {
     'altermo/ultimate-autopair.nvim',
@@ -31,6 +29,13 @@ return {
     opts = { text = { spinner = 'dots' } },
     -- https://github.com/j-hui/fidget.nvim/issues/131
     tag = 'legacy',
+  },
+  {
+    'jackieaskins/quick-scope',
+    init = function()
+      vim.g.qs_buftype_blacklist = { 'terminal' }
+      vim.g.qs_filetype_blacklist = { 'neo-tree', 'NvimTree' }
+    end,
   },
   {
     'kosayoda/nvim-lightbulb',
@@ -61,13 +66,6 @@ return {
   { 'tpope/vim-sleuth' },
   { 'tpope/vim-surround' },
   { 'tzachar/highlight-undo.nvim', config = true },
-  {
-    'jackieaskins/quick-scope',
-    init = function()
-      vim.g.qs_buftype_blacklist = { 'terminal' }
-      vim.g.qs_filetype_blacklist = { 'neo-tree', 'NvimTree' }
-    end,
-  },
   {
     'wintermute-cell/gitignore.nvim',
     requires = 'nvim-telescope/telescope.nvim',
