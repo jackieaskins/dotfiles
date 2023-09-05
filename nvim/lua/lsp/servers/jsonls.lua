@@ -1,3 +1,4 @@
+---@type LspServer
 return {
   config = function(config)
     config.settings = {

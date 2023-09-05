@@ -1,3 +1,4 @@
+---@type LspServer
 return {
   config = function(config)
     config.organize_imports_on_format = true

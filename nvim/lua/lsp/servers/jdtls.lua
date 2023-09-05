@@ -1,3 +1,4 @@
+---@type LspServer
 return {
   install = function(servers_dir)
     local install_dir = servers_dir .. '/eclipse.jdt.ls'

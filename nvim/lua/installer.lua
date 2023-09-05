@@ -1,3 +1,5 @@
+---@alias InstallCommand string[] | fun(install_dir?:string):table
+
 local utils = require('utils')
 local filter_table_by_keys, user_command = utils.filter_table_by_keys, utils.user_command
 
@@ -34,7 +36,7 @@ function M.register(group_name, commands, install_dir)
 end
 
 ---Generic install command
----@param command_map table<string, string[] | fun(install_dir?:string):table>
+---@param command_map table<string, InstallCommand>
 ---@param install_dir? string
 function M.install(command_map, install_dir)
   local script_lines = {}

@@ -1,6 +1,13 @@
+---@class LspServer
+---@field config function?
+---@field display string?
+---@field install InstallCommand
+---@field skip_lspconfig boolean?
+
+---@type table<string, LspServer>
 local servers = {
   cssls = { install = { 'npm', 'vscode-langservers-extracted' } },
-  emmet_language_server = { display = 'emmet-ls', install = { 'npm', '@olrtg/emmet-language-server' } },
+  emmet_language_server = require('lsp.servers.emmet_language_server'),
   eslint = require('lsp.servers.eslint'),
   gdscript = { install = { 'brew', 'godot' } },
   gopls = { install = { 'go', 'golang.org/x/tools/gopls@latest' } },
@@ -14,7 +21,7 @@ local servers = {
   lua_ls = require('lsp.servers.lua_ls'),
   svelte = require('lsp.servers.svelte'),
   tailwindcss = require('lsp.servers.tailwindcss'),
-  ['typescript-tools'] = { display = 'ts-tools', install = { 'npm', 'typescript' }, skip_lspconfig = true },
+  ['typescript-tools'] = require('lsp.servers.typescript-tools'),
   vimls = { install = { 'npm', 'vim-language-server' } },
   yamlls = { install = { 'npm', 'yaml-language-server' } },
 }

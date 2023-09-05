@@ -1,3 +1,4 @@
+---@type LspServer
 return {
   display = 'tailwind',
   config = function(config)

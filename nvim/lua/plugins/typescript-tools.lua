@@ -4,8 +4,8 @@ return {
   'pmizio/typescript-tools.nvim',
   enabled = lsp_utils.is_server_supported('typescript-tools'),
   dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
-  config = function()
-    require('typescript-tools').setup({
+  opts = function()
+    return {
       settings = {
         complete_function_calls = true,
         tsserver_file_preferences = {
@@ -18,6 +18,7 @@ return {
           includeInlayVariableTypeHints = false,
           includeInlayVariableTypeHintsWhenTypeMatchesName = false,
         },
+        tsserver_plugins = { 'typescript-svelte-plugin' },
       },
       handlers = {
         ['textDocument/publishDiagnostics'] = require('typescript-tools.api').filter_diagnostics({
@@ -30,6 +31,6 @@ return {
         bsk('n', '<leader>oi', '<cmd>TSToolsOrganizeImports<CR>')
         bsk('n', '<leader>ia', '<cmd>TSToolsAddMissingImports<CR>')
       end,
-    })
+    }
   end,
 }
