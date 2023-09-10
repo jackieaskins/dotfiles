@@ -11,6 +11,8 @@ function cp2m() {
 # Update Neovim installed from source
 function update_neovim() {
   cd $HOME/neovim
+  git pull
+  rm -rf build
   make CMAKE_BUILD_TYPE=RelWithDebInfo
   sudo make install
   cd -
