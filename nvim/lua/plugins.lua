@@ -7,9 +7,11 @@ return {
   },
   {
     'altermo/ultimate-autopair.nvim',
+    enabled = vim.g.use_ultimate_pairs,
     event = { 'InsertEnter', 'CmdlineEnter' },
     opts = {
       close = { enable = true },
+      cr = { enable = true, autoclose = true },
       space2 = { enable = true },
       tabout = { enable = true, hopout = true, map = '<Tab>' },
     },
@@ -50,6 +52,7 @@ return {
   {
     'rcarriga/nvim-notify',
     config = function()
+      require('notify').setup({ timeout = 3000 })
       vim.notify = require('notify')
     end,
   },

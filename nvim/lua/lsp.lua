@@ -6,7 +6,7 @@ vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.s
   border = vim.g.border_style,
 })
 
-local should_enable_hints = true
+local should_enable_hints = false
 
 local function enable_hints_for_buffer(bufnr)
   for _, client in ipairs(vim.lsp.get_clients({ bufnr = bufnr })) do

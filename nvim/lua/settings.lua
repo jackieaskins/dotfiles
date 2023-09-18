@@ -6,6 +6,7 @@ vim.g.additional_server_commands = {}
 vim.g.supported_servers = {}
 vim.g.catppuccin_flavour = 'macchiato'
 vim.g.border_style = 'rounded'
+vim.g.use_ultimate_pairs = false
 
 -- Map Leader to Space
 vim.g.mapleader = ' '
