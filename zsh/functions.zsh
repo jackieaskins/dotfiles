@@ -12,7 +12,7 @@ function cp2m() {
 function update_neovim() {
   cd $HOME/neovim
   git pull
-  rm -rf build
+  sudo rm -rf build
   make CMAKE_BUILD_TYPE=RelWithDebInfo
   sudo make install
   cd -
