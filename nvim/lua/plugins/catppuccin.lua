@@ -28,7 +28,7 @@ function M.config()
 
         HlSearchLens = editor_highlights.Search,
 
-        IndentBlanklineContextChar = { fg = colors.blue },
+        IblScope = { fg = colors.blue },
 
         LightBulbVirtText = { bg = 'NONE' },
 
