@@ -1,6 +1,10 @@
 return {
   'neovim/nvim-lspconfig',
-  dependencies = { 'folke/neodev.nvim', 'hrsh7th/nvim-cmp' },
+  dependencies = {
+    'folke/neodev.nvim',
+    'hrsh7th/nvim-cmp',
+    { 'yioneko/nvim-vtsls', enabled = require('lsp.utils').is_server_supported('vtsls') },
+  },
   config = function()
     local servers = require('lsp.servers')
 

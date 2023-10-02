@@ -23,6 +23,7 @@ local servers = {
   tailwindcss = require('lsp.servers.tailwindcss'),
   ['typescript-tools'] = require('lsp.servers.typescript-tools'),
   vimls = { install = { 'npm', 'vim-language-server' } },
+  vtsls = require('lsp.servers.vtsls'),
   yamlls = { install = { 'npm', 'yaml-language-server' } },
 }
 
