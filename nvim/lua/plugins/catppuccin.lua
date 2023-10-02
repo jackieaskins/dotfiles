@@ -28,8 +28,6 @@ function M.config()
 
         HlSearchLens = editor_highlights.Search,
 
-        IblScope = { fg = colors.blue },
-
         LightBulbVirtText = { bg = 'NONE' },
 
         MarkerCodeFence = { bg = colors.mantle },
@@ -58,7 +56,11 @@ function M.config()
     end,
     integrations = {
       headlines = true,
-      indent_blankline = { enabled = true, colored_indent_levels = false },
+      indent_blankline = {
+        enabled = true,
+        colored_indent_levels = false,
+        scope_color = 'blue',
+      },
       native_lsp = {
         enabled = true,
         underlines = {

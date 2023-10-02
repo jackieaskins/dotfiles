@@ -5,9 +5,9 @@ return {
     saturation = 0.6,
     highlight_ignore_patterns = {
       '@comment',
+      '@ibl.indent.char.1',
       'Comment',
       'EndOfBuffer',
-      'IndentBlanklineChar',
       '^LineNr',
       'WinbarNC',
       'WinSeparator',

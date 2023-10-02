@@ -47,7 +47,6 @@ return {
       virtual_text = { enabled = true, hl = 'LightBulbVirtText' },
     },
   },
-  { 'lukas-reineke/indent-blankline.nvim', main = 'ibl', opts = { scope = { show_start = false } } },
   { 'matze/vim-move', keys = { '<M-h>', '<M-j>', '<M-k>', '<M-l>' } },
   {
     'rcarriga/nvim-notify',
