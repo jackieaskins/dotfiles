@@ -1,4 +1,4 @@
-local mergeTables = require('utils').mergeTables
+local mergeTables = require('fnutils').mergeTables
 
 local windowFilters = mergeTables({
   [''] = false,

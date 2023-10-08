@@ -1,4 +1,5 @@
-local utils = require('utils')
+local fnutils = require('fnutils')
+local hotkeyStore = require('hotkeyStore')
 
 ----------------------------------------------------------------------
 --                              Custom                              --
@@ -39,25 +40,34 @@ spoon.ReloadConfiguration:start()
 spoon.ReloadConfiguration:bindHotkeys({
   reloadConfiguration = { MEH, 'r' },
 })
+hotkeyStore.annotate('Reload Configuration', 'Reload Hammerspoon Configuration', MEH, 'r')
 
 spoon.SpoonInstall:asyncUpdateAllRepos()
 
 ----------------------------------------------------------------------
---                             Keymaps                              --
+--                             Hotkeys                              --
 ----------------------------------------------------------------------
-local appKeys = utils.mergeTables({
+-- Application launcher
+local appKeyMods = { 'option', 'control' }
+local appKeys = fnutils.mergeTables({
   m = 'Spotify',
   n = 'Notes',
   t = 'kitty',
 }, CUSTOM.appKeys or {})
 
 for key, app in pairs(appKeys) do
-  hs.hotkey.bind({ 'option', 'control' }, key, function()
+  hotkeyStore.register('Application Launchers', 'Open ' .. app, appKeyMods, key, function()
     hs.application.launchOrFocus(app)
   end)
 end
 
-hs.hotkey.bind(MEH, 'tab', hs.window.switcher.nextWindow)
+-- Window switcher
+local registerWindowSwitcherHotKey = hotkeyStore.registerGroup('Window Switcher')
+registerWindowSwitcherHotKey('Next window', appKeyMods, 'tab', hs.window.switcher.nextWindow)
+registerWindowSwitcherHotKey('Previous window', MEH, 'tab', hs.window.switcher.previousWindow)
+
+-- Hotkey store
+hotkeyStore.register('Hotkeys', 'Show hotkeys alert', MEH, 'm', hotkeyStore.show)
 
 ----------------------------------------------------------------------
 --                        Window Management                         --
@@ -72,27 +82,29 @@ hs.shutdownCallback = function()
   twm.stop()
 end
 
-hs.hotkey.bind(HYPER, 'r', twm.reset)
-hs.hotkey.bind(MEH, 't', twm.tile)
+local registerTwmHotkey = hotkeyStore.registerGroup('TWM')
 
-hs.hotkey.bind(MEH, 'f', twm.toggleFloat)
-hs.hotkey.bind(MEH, 'p', twm.showLayout)
-hs.hotkey.bind(MEH, 'c', twm.chooseLayout)
+registerTwmHotkey('Reset tiling', HYPER, 'r', twm.reset)
+registerTwmHotkey('Tile', MEH, 't', twm.tile)
 
-hs.hotkey.bind(MEH, 'h', twm.focusWindowWest)
-hs.hotkey.bind(MEH, 'j', twm.focusWindowSouth)
-hs.hotkey.bind(MEH, 'k', twm.focusWindowNorth)
-hs.hotkey.bind(MEH, 'l', twm.focusWindowEast)
+registerTwmHotkey('Toggle float', MEH, 'f', twm.toggleFloat)
+registerTwmHotkey('Show layout', MEH, 'p', twm.showLayout)
+registerTwmHotkey('Choose layout', MEH, 'c', twm.chooseLayout)
 
-hs.hotkey.bind(HYPER, 'h', twm.swapWindowWest)
-hs.hotkey.bind(HYPER, 'j', twm.swapWindowSouth)
-hs.hotkey.bind(HYPER, 'k', twm.swapWindowNorth)
-hs.hotkey.bind(HYPER, 'l', twm.swapWindowEast)
+registerTwmHotkey('Focus window west', MEH, 'h', twm.focusWindowWest)
+registerTwmHotkey('Focus window south', MEH, 'j', twm.focusWindowSouth)
+registerTwmHotkey('Focus window north', MEH, 'k', twm.focusWindowNorth)
+registerTwmHotkey('Focus window east', MEH, 'l', twm.focusWindowEast)
 
-hs.hotkey.bind(HYPER, 'f', function()
+registerTwmHotkey('Swap window west', HYPER, 'h', twm.swapWindowWest)
+registerTwmHotkey('Swap window south', HYPER, 'j', twm.swapWindowSouth)
+registerTwmHotkey('Swap window north', HYPER, 'k', twm.swapWindowNorth)
+registerTwmHotkey('Swap window north', HYPER, 'l', twm.swapWindowEast)
+
+registerTwmHotkey('Set layout to floating', HYPER, 'f', function()
   twm.setLayout('floating')
 end)
-hs.hotkey.bind(MEH, 's', function()
+registerTwmHotkey('Set layout to tall or monocle', MEH, 's', function()
   local currentLayout = twm.getLayout()
   twm.setLayout(currentLayout == 'monocle' and 'tall' or 'monocle')
 end)
@@ -100,7 +112,7 @@ end)
 ----------------------------------------------------------------------
 --                      Spotify Notifications                       --
 ----------------------------------------------------------------------
-hs.hotkey.bind(HYPER, 's', hs.spotify.displayCurrentTrack)
+hotkeyStore.register('Spotify', 'Show currently playing song', HYPER, 's', hs.spotify.displayCurrentTrack)
 spotifyNotification = hs.distributednotifications.new(function()
   if hs.spotify.isPlaying() then
     hs.notify
@@ -121,5 +133,6 @@ spotifyNotification:start()
 --                               Misc                               --
 ----------------------------------------------------------------------
 require('hs.ipc').cliInstall(BREW_PREFIX) -- Enables CLI
+hotkeyStore.verify()
 
 hs.alert.show('Loaded HammerSpoon config')

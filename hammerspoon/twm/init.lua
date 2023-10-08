@@ -32,6 +32,7 @@ function M.start()
   M.tile()
 end
 
+---Reset tiling cache and re-tile
 function M.reset()
   cache.reset()
   M.tile()
