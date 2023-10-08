@@ -1,8 +1,6 @@
 local utils = require('utils')
 local augroup, filter_table_by_keys = utils.augroup, utils.filter_table_by_keys
 
-local M = { 'sbdchd/neoformat', cmd = 'Neoformat' }
-
 local formatters = {
   prettierd = {
     name = 'prettierd',
@@ -39,25 +37,29 @@ local formatter_by_filetype = {
   typescriptreact = supported_formatters.prettierd,
 }
 
-function M.init()
-  local install_cmds = {}
-  for formatter, data in pairs(supported_formatters) do
-    install_cmds[formatter] = data.install_cmd
-  end
-  require('installer').register('formatter', install_cmds, vim.fn.stdpath('data') .. '/formatters')
+return {
+  'stevearc/conform.nvim',
+  lazy = true,
+  config = true,
+  init = function()
+    local install_cmds = {}
 
-  augroup('format_on_save', {
-    {
-      'BufWritePre',
-      callback = function()
-        local formatter = formatter_by_filetype[vim.bo.filetype]
+    for formatter, data in pairs(supported_formatters) do
+      install_cmds[formatter] = data.install_cmd
+    end
+    require('installer').register('formatter', install_cmds, vim.fn.stdpath('data') .. '/formatters')
 
-        if formatter and require('lspconfig').util.root_pattern(formatter.required_file)(vim.fn.expand('%:p')) then
-          vim.cmd.Neoformat(formatter.name)
-        end
-      end,
-    },
-  })
-end
+    augroup('format_on_save', {
+      {
+        'BufWritePre',
+        callback = function(args)
+          local formatter = formatter_by_filetype[vim.bo.filetype]
 
-return M
+          if formatter and require('lspconfig').util.root_pattern(formatter.required_file)(vim.fn.expand('%:p')) then
+            require('conform').format({ bufnr = args.buf, formatters = { formatter.name } })
+          end
+        end,
+      },
+    })
+  end,
+}
