@@ -99,4 +99,19 @@ function M.filter_table_by_keys(table, keys)
   return rv
 end
 
+---Debounce a function for ms
+---@param fn function
+---@param ms number
+---@return function
+function M.debounce(fn, ms)
+  local timer = vim.loop.new_timer()
+  return function(...)
+    local argv = { ... }
+    timer:start(ms, 0, function()
+      timer:stop()
+      vim.schedule_wrap(fn)(unpack(argv))
+    end)
+  end
+end
+
 return M

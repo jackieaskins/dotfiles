@@ -1,4 +1,4 @@
-local icons = require('diagnostic.icons')
+local sign_hls = require('diagnostic.sign_hls')
 
 vim.diagnostic.config({
   float = { source = 'always', border = vim.g.border_style },
@@ -10,7 +10,8 @@ vim.diagnostic.config({
   virtual_text = false,
 })
 
-for level, _ in pairs(icons) do
-  local sign = 'DiagnosticSign' .. level
-  vim.fn.sign_define(sign, { texthl = sign, numhl = sign })
+for _, sign in ipairs(sign_hls) do
+  vim.fn.sign_define(sign, { text = '', texthl = sign, numhl = sign })
 end
+
+require('diagnostic.virtual_text')

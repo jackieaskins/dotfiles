@@ -40,8 +40,14 @@ function M.config()
   -- }}}
 
   -- Helpers {{{
-  local function diagnostics_exist()
-    return require('feline.providers.lsp').diagnostics_exist()
+  local function git_diff_exists()
+    local statuses = vim.b.gitsigns_status_dict
+    return statuses
+      and (
+        (statuses.added and statuses.added > 0)
+        or (statuses.changed and statuses.changed > 0)
+        or (statuses.removed and statuses.removed > 0)
+      )
   end
 
   local function has_lsp_client()
@@ -56,7 +62,7 @@ function M.config()
       end
 
       local buf_name = vim.api.nvim_buf_get_name(0)
-      local filename = buf_name == '' and '[No Name]' or vim.fn.fnamemodify(buf_name, fnamemodifier)
+      local filename = vim.fn.fnamemodify(buf_name, fnamemodifier) or '[No Name]'
 
       return table.concat({
         ' ',
@@ -67,9 +73,9 @@ function M.config()
     end
   end
 
-  local function diagnostic_provider(provider, color)
+  local function git_diff_provider(provider, color)
     return {
-      provider = 'diagnostic_' .. provider,
+      provider = 'git_diff_' .. provider,
       hl = function()
         return { fg = color, bg = component_colors().b.bg }
       end,
@@ -89,7 +95,7 @@ function M.config()
       str = 'slant_right',
       hl = function()
         local sep = seperator_colors()
-        return diagnostics_exist() and sep.a.b or sep.a.c
+        return git_diff_exists() and sep.a.b or sep.a.c
       end,
     },
     update = { 'ModeChanged' },
@@ -108,7 +114,7 @@ function M.config()
         return seperator_colors().b.c
       end,
     },
-    enabled = diagnostics_exist,
+    enabled = git_diff_exists,
   }
 
   local active_file_info = {
@@ -189,10 +195,9 @@ function M.config()
       active = {
         {
           active_vi_mode,
-          diagnostic_provider('errors', colors.red),
-          diagnostic_provider('warnings', colors.yellow),
-          diagnostic_provider('hints', colors.teal),
-          diagnostic_provider('info', colors.sky),
+          git_diff_provider('added', colors.green),
+          git_diff_provider('changed', colors.yellow),
+          git_diff_provider('removed', colors.red),
           active_spacer,
           active_file_info,
           active_lazy_updates,
