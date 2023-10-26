@@ -1,33 +1,13 @@
 return {
   { 'AckslD/messages.nvim', cmd = 'Messages', config = true },
-  { 'FabijanZulj/blame.nvim', cmd = 'ToggleBlame' },
   {
     'NvChad/nvim-colorizer.lua',
     opts = { user_default_options = { AARRGGBB = true, names = false, tailwind = 'lsp' } },
-  },
-  {
-    'altermo/ultimate-autopair.nvim',
-    enabled = vim.g.use_ultimate_pairs,
-    event = { 'InsertEnter', 'CmdlineEnter' },
-    opts = {
-      close = { enable = true },
-      cr = { enable = true, autoclose = true },
-      space2 = { enable = true },
-      tabout = { enable = true, hopout = true, map = '<Tab>' },
-    },
   },
   { 'antonk52/markdowny.nvim', config = true },
   { 'axelvc/template-string.nvim', config = true },
   { 'chrisgrieser/nvim-early-retirement', config = true },
   { 'fladson/vim-kitty' },
-  {
-    'iamcco/markdown-preview.nvim',
-    build = function()
-      vim.fn['mkdp#util#install']()
-    end,
-    ft = 'markdown',
-    keys = { { '<leader>mp', vim.cmd.MarkdownPreview, desc = 'MarkdownPreview' } },
-  },
   {
     'j-hui/fidget.nvim',
     opts = { text = { spinner = 'dots' } },

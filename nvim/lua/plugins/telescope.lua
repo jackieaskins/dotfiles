@@ -21,6 +21,7 @@ local M = {
     { '<leader>bu', '<cmd>Telescope buffers sort_mru=true<CR>' },
     { '<leader>of', '<cmd>Telescope oldfiles cwd_only=true sort_lastused=true include_current_session=true<CR>' },
     { '<leader>wd', '<cmd>Telescope diagnostics<CR>' },
+    { '<leader>we', '<cmd>Telescope diagnostics severity_limit=' .. vim.diagnostic.severity.E .. '<CR>' },
     { '<leader>z=', '<cmd>Telescope spell_suggest<CR>' },
     { '<leader>sn', '<cmd>Telescope luasnip<CR>' },
 

@@ -62,7 +62,8 @@ function M.config()
       end
 
       local buf_name = vim.api.nvim_buf_get_name(0)
-      local filename = vim.fn.fnamemodify(buf_name, fnamemodifier) or '[No Name]'
+      local fname = vim.fn.fnamemodify(buf_name, fnamemodifier)
+      local filename = fname == '' and '[No Name]' or fname
 
       return table.concat({
         ' ',

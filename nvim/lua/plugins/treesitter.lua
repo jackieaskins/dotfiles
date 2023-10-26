@@ -49,7 +49,23 @@ function M.config()
   require('nvim-treesitter.configs').setup({
     auto_install = true,
     ensure_installed = { 'bash', 'comment', 'git_rebase', 'gitcommit', 'markdown_inline', 'regex' },
-    highlight = { enable = true },
+    highlight = {
+      enable = true,
+      disable = function(_, bufnr)
+        if vim.api.nvim_buf_line_count(bufnr) > 1000 then
+          return true
+        end
+
+        local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
+        for _, line in ipairs(lines) do
+          if #line > 300 then
+            return true
+          end
+        end
+
+        return false
+      end,
+    },
     indent = { enable = true },
     incremental_selection = {
       enable = true,
