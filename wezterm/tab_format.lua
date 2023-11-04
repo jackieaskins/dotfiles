@@ -21,9 +21,11 @@ wezterm.on('format-tab-title', function(tab)
     { Background = { Color = edge_background } },
     { Foreground = { Color = edge_foreground } },
     { Text = wezterm.nerdfonts.ple_upper_right_triangle },
+
     { Background = { Color = background } },
     { Foreground = { Color = foreground } },
     { Text = ' ' .. (tab.tab_index + 1) .. ' ' .. get_tab_title(tab) .. ' ' },
+
     { Background = { Color = edge_background } },
     { Foreground = { Color = edge_foreground } },
     { Text = wezterm.nerdfonts.ple_lower_left_triangle },

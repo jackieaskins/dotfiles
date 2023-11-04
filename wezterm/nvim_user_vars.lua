@@ -14,7 +14,8 @@ local nvim_events = {
   ['nvim-interrupt'] = interrupt_handler,
 }
 
-wezterm.on('user-var-changed', function(window, _pane, name, value)
+-- https://wezfurlong.org/wezterm/config/lua/window-events/user-var-changed.html?h=user+var
+wezterm.on('user-var-changed', function(window, _, name, value)
   local handler = nvim_events[name]
 
   if not handler then

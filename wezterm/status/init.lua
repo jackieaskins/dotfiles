@@ -5,10 +5,7 @@ local components = require('status.components')
 wezterm.on('update-status', function(window, pane)
   local right_status = {}
 
-  for _, part in ipairs({
-    components.git_branch(pane),
-    components.hostname(),
-  }) do
+  for _, part in ipairs({ components.git_branch(pane), components.hostname() }) do
     for _, line in ipairs(part) do
       table.insert(right_status, line)
     end

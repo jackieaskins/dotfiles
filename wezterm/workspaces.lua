@@ -3,8 +3,8 @@ local home_path, tbl_extend = utils.home_path, utils.tbl_extend
 
 ---@class Tab
 ---@field title string
----@field cmd string
----@field cwd string
+---@field cmd? string
+---@field cwd? string
 
 ---@class Workspace
 ---@field cwd string
@@ -14,7 +14,9 @@ local home_path, tbl_extend = utils.home_path, utils.tbl_extend
 local workspaces = {
   dotfiles = {
     cwd = home_path({ 'dotfiles' }),
-    tabs = { { title = 'editor' } },
+    tabs = {
+      { title = 'editor' },
+    },
   },
 }
 
