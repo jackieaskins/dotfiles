@@ -1,6 +1,16 @@
 local utils = require('utils')
 local augroup, map = utils.augroup, utils.map
 
+-- Auto-indent
+-- https://www.reddit.com/r/neovim/comments/17mrka2/comment/k7n3d9b
+map('n', 'i', function()
+  if #vim.fn.getline('.') == 0 then
+    return [["_cc]]
+  else
+    return 'i'
+  end
+end, { expr = true, desc = 'Properly indent empty line on insert' })
+
 -- Diagnostics
 map('n', 'g?', '<cmd>lua vim.diagnostic.open_float(0, { scope = "cursor" })<CR>')
 map('n', '[g', vim.diagnostic.goto_prev, { desc = 'vim.diagnostic.goto_prev' })
