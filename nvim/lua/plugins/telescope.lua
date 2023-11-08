@@ -66,16 +66,17 @@ function M.config()
 
   local default_file_ignore_patterns = { '.git/', 'build/', 'dist/' }
 
+  local layout_col_cutoff = 110
+
   telescope.setup({
     defaults = {
       dynamic_preview_title = true,
       file_ignore_patterns = default_file_ignore_patterns,
       layout_config = {
-        flex = {
-          flip_columns = 105,
-        },
+        flex = { flip_columns = layout_col_cutoff },
         prompt_position = 'top',
         vertical = { mirror = true },
+        horizontal = { preview_cutoff = layout_col_cutoff },
       },
       layout_strategy = 'flex',
       mappings = {
