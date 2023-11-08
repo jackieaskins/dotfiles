@@ -83,8 +83,7 @@ end
 ---Open url in browser
 ---@param url string
 function M.open_url(url)
-  local open_cmd = vim.fn.has('mac') == 1 and 'open' or 'xdg-open'
-  vim.fn.system(open_cmd .. ' ' .. vim.fn.shellescape(url))
+  vim.ui.open(url)
 end
 
 ---Filter key-value table based on key
