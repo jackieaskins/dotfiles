@@ -4,16 +4,11 @@ return {
     'NvChad/nvim-colorizer.lua',
     opts = { user_default_options = { AARRGGBB = true, names = false, tailwind = 'lsp' } },
   },
-  { 'antonk52/markdowny.nvim', config = true },
+  { 'antonk52/markdowny.nvim', config = true, ft = 'markdown' },
   { 'axelvc/template-string.nvim', config = true },
   { 'chrisgrieser/nvim-early-retirement', config = true },
-  { 'fladson/vim-kitty' },
-  {
-    'j-hui/fidget.nvim',
-    opts = { text = { spinner = 'dots' } },
-    -- https://github.com/j-hui/fidget.nvim/issues/131
-    tag = 'legacy',
-  },
+  { 'fladson/vim-kitty', ft = { 'kitty', 'kitty-session' } },
+  { 'j-hui/fidget.nvim', opts = {} },
   {
     'jackieaskins/quick-scope',
     init = function()
@@ -49,7 +44,7 @@ return {
   { 'tpope/vim-repeat' },
   { 'tpope/vim-sleuth' },
   { 'tpope/vim-surround' },
-  { 'tzachar/highlight-undo.nvim', config = true },
+  { 'tzachar/highlight-undo.nvim', config = true, keys = { '<C-r>', 'u' } },
   {
     'wintermute-cell/gitignore.nvim',
     requires = 'nvim-telescope/telescope.nvim',

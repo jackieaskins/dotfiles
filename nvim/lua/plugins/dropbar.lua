@@ -1,11 +1,6 @@
 return {
   'Bekaboo/dropbar.nvim',
   opts = {
-    icons = {
-      ui = {
-        bar = { separator = '  ' },
-      },
-    },
     sources = {
       path = {
         modified = function(sym)
