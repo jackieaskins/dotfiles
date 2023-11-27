@@ -7,8 +7,9 @@ return {
   opts = function()
     return {
       settings = {
-        complete_function_calls = true,
+        complete_function_calls = false,
         include_completions_with_insert_text = true,
+        jsx_close_tag = { enable = true },
         tsserver_file_preferences = {
           includeInlayEnumMemberValueHints = true,
           includeInlayFunctionLikeReturnTypeHints = false,

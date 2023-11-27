@@ -1,7 +1,6 @@
 local M = {
   'nvim-treesitter/nvim-treesitter',
   dependencies = {
-    'jackieaskins/nvim-ts-autotag',
     'RRethy/nvim-treesitter-endwise',
     'RRethy/nvim-treesitter-textsubjects',
     'nvim-treesitter/nvim-treesitter-textobjects',
@@ -75,13 +74,6 @@ function M.config()
         scope_incremental = '<C-S>',
         node_decremental = '<C-Backspace>',
       },
-    },
-
-    -- https://github.com/jackieaskins/nvim-ts-autotag
-    autotag = {
-      enable = true,
-      enable_rename = 'false', -- Rename causes issues
-      skip_close_shortcut = '\\>',
     },
 
     -- https://github.com/JoosepAlviste/nvim-ts-context-commentstring
