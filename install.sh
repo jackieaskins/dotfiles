@@ -44,8 +44,6 @@ else
   echo -e "Not on MacOS, not checking for Xcode Command Line Tools.\n"
 fi
 
-# TODO: Configure MacOS System Preferences
-
 #--------------------------------------------------------------------#
 #                   Homebrew Installation & Bundle                   #
 #--------------------------------------------------------------------#
@@ -69,6 +67,15 @@ else
   echo -e "Not on personal machine, not installing personal machine Homebrew packages."
 fi
 success_echo "Succesfully set up Homebrew."
+
+#--------------------------------------------------------------------#
+#                          System Settings                           #
+#--------------------------------------------------------------------#
+echo -e "Configuring System Settings..."
+defaults write digital.twisted.noTunes replacement /Applications/Spotify.app
+success_echo "Configured System Settings."
+
+# TODO: Configure MacOS System Preferences
 
 #--------------------------------------------------------------------#
 #                         Global Git Config                          #

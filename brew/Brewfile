@@ -35,6 +35,7 @@ if RUBY_PLATFORM =~ /darwin/
   cask 'hammerspoon'
   cask 'karabiner-elements'
   cask 'kitty'
+  cask 'notunes'
   cask 'wezterm-nightly'
 
   brew 'awscli'
