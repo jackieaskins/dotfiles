@@ -22,7 +22,6 @@ local function get_tabline()
   local mode_color = vi_mode.get_mode_color()
 
   highlight('TabLineSel', { fg = colors.base, bg = mode_color })
-  highlight('tabLineSelSep', { fg = mode_color, bg = colors.base })
 
   local num_tabs = vim.fn.tabpagenr('$')
   local current_tabnr = vim.fn.tabpagenr()
@@ -77,8 +76,6 @@ local function get_tabline()
     end
 
     local components = {
-      set_current_tab('%#TabLineSelSep#', '%#TabLineSep#'),
-      tabnr == 1 and '' or '',
       set_current_tab('%#TabLineSel#', '%#TabLine#'),
       ' ',
       tabnr,
@@ -88,8 +85,6 @@ local function get_tabline()
       modified,
       readonly,
       ' ',
-      set_current_tab('%#TabLineSelSep#', '%#TabLineSep#'),
-      '',
     }
 
     table.insert(tabline_components, table.concat(components))

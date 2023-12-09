@@ -13,5 +13,3 @@ vim.diagnostic.config({
 for _, sign in ipairs(sign_hls) do
   vim.fn.sign_define(sign, { text = '', texthl = sign, numhl = sign })
 end
-
-require('diagnostic.virtual_text')

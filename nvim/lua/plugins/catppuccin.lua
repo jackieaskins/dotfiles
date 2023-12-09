@@ -13,8 +13,6 @@ function M.config()
 
         CursorLineNr = { fg = colors.blue, bg = editor_highlights.CursorLine.bg, style = { 'bold' } },
 
-        DropBarModified = { fg = colors.green },
-
         Folded = { fg = colors.blue, bg = colors.surface0 },
 
         Headline1Reverse = { fg = headline_highlights.Headline1.fg },
@@ -39,8 +37,6 @@ function M.config()
 
         QuickScopePrimary = { fg = colors.sapphire, style = { 'underline', 'bold' } },
         QuickScopeSecondary = { fg = colors.pink, style = { 'underline' } },
-
-        StatusColSep = { fg = colors.surface2 },
 
         TabLine = { fg = colors.text, bg = colors.surface0 },
         TabLineSep = { fg = colors.surface0, bg = colors.base },
@@ -74,6 +70,7 @@ function M.config()
       neotest = true,
       notify = true,
       nvimtree = true,
+      treesitter_context = true,
     },
   })
 

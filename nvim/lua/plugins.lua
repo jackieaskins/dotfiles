@@ -25,6 +25,7 @@ return {
     },
   },
   { 'matze/vim-move', keys = { '<M-h>', '<M-j>', '<M-k>', '<M-l>' } },
+  { 'nvim-treesitter/nvim-treesitter-context' },
   {
     'rcarriga/nvim-notify',
     config = function()
