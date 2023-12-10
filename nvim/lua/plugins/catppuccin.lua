@@ -52,6 +52,7 @@ function M.config()
     end,
     integrations = {
       headlines = true,
+      fidget = true,
       indent_blankline = {
         enabled = true,
         colored_indent_levels = false,

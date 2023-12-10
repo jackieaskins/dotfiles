@@ -10,13 +10,21 @@ local function create_key(map)
   }
 end
 
-local M = {
+return {
   'nvim-neotest/neotest',
   dependencies = {
     'nvim-lua/plenary.nvim',
     'jackieaskins/neotest-jest',
     'antoinemadec/FixCursorHold.nvim',
   },
+  opts = function()
+    return {
+      adapters = { require('neotest-jest') },
+      floating = { border = vim.g.border_style },
+      output = { open_on_run = false },
+      quickfix = { open = false },
+    }
+  end,
   keys = vim.tbl_map(create_key, {
     { ']t', 'jump', 'next', nil, 'Go to next test' },
     { '[t', 'jump', 'prev', nil, 'Go to previous test' },
@@ -42,13 +50,3 @@ local M = {
     { '<leader>tt', 'summary', 'toggle', nil, 'Open test summary window' },
   }),
 }
-
-function M.config()
-  require('neotest').setup({
-    adapters = { require('neotest-jest') },
-    output = { open_on_run = false },
-    quickfix = { open = false },
-  })
-end
-
-return M

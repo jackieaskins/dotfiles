@@ -58,6 +58,17 @@ local function configure_lsp_keymaps()
   })
 end
 
+local function get_border()
+  local bs = vim.g.border_style
+
+  if type(bs) ~= 'table' then
+    vim.notify('Telescope border style could not be configured, falling back to default')
+    return nil
+  end
+
+  return { bs[2], bs[4], bs[6], bs[8], bs[1], bs[3], bs[5], bs[7] }
+end
+
 function M.config()
   local telescope = require('telescope')
   local actions = require('telescope.actions')
@@ -70,6 +81,7 @@ function M.config()
 
   telescope.setup({
     defaults = {
+      borderchars = get_border(),
       dynamic_preview_title = true,
       file_ignore_patterns = default_file_ignore_patterns,
       layout_config = {

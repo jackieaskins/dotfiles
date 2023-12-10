@@ -8,7 +8,10 @@ return {
   { 'axelvc/template-string.nvim', config = true },
   { 'chrisgrieser/nvim-early-retirement', config = true },
   { 'fladson/vim-kitty', ft = { 'kitty', 'kitty-session' } },
-  { 'j-hui/fidget.nvim', opts = {} },
+  {
+    'j-hui/fidget.nvim',
+    opts = { notification = { window = { border = vim.g.border_style } } },
+  },
   {
     'jackieaskins/quick-scope',
     init = function()
@@ -27,13 +30,12 @@ return {
   { 'matze/vim-move', keys = { '<M-h>', '<M-j>', '<M-k>', '<M-l>' } },
   { 'nvim-treesitter/nvim-treesitter-context' },
   {
-    'rcarriga/nvim-notify',
-    config = function()
-      require('notify').setup({ timeout = 3000 })
-      vim.notify = require('notify')
-    end,
+    'stevearc/dressing.nvim',
+    opts = {
+      input = { border = vim.g.border_style },
+      select = { telescope = { layout_config = { width = 80, height = 20 } } },
+    },
   },
-  { 'stevearc/dressing.nvim' },
   {
     'szw/vim-maximizer',
     init = function()
