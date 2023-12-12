@@ -29,12 +29,13 @@ vim.opt.diffopt:append({ 'vertical', 'linematch:60' })
 vim.opt.termguicolors = true
 vim.opt.laststatus = 3
 vim.opt.tabline = "%{%v:lua.require('tabline').get_tabline()%}"
+vim.opt.matchpairs:append({ '<:>' })
 
 -- Folds
 vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
 vim.opt.foldmethod = 'expr'
-vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
+vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 
 -- Spaces & Tabs
 vim.opt.shiftwidth = 2

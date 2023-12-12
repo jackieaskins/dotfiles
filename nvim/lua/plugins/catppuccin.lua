@@ -4,54 +4,53 @@ function M.config()
   require('catppuccin').setup({
     custom_highlights = function(colors)
       local editor_highlights = require('catppuccin.groups.editor').get()
-      local headline_highlights = require('catppuccin.groups.integrations.headlines').get()
 
-      local telescope_selection = vim.tbl_extend('force', editor_highlights.CursorLine, { fg = colors.blue })
+      local telescope_selection = vim.tbl_extend('force', editor_highlights.CursorLine, {
+        fg = colors.blue,
+      })
 
       return {
-        CurSearch = vim.tbl_extend('force', editor_highlights.IncSearch, { style = { 'bold' } }),
-
-        CursorLineNr = { fg = colors.blue, bg = editor_highlights.CursorLine.bg, style = { 'bold' } },
-
+        -- Default Highlights
+        CurSearch = vim.tbl_extend('force', editor_highlights.IncSearch, {
+          style = { 'bold' },
+        }),
+        CursorLineNr = { fg = colors.blue, bg = editor_highlights.CursorLine.bg, style = {
+          'bold',
+        } },
         Folded = { fg = colors.blue, bg = colors.surface0 },
-
-        Headline1Reverse = { fg = headline_highlights.Headline1.fg },
-        Headline2Reverse = { fg = headline_highlights.Headline2.fg },
-        Headline3Reverse = { fg = headline_highlights.Headline3.fg },
-        Headline4Reverse = { fg = headline_highlights.Headline4.fg },
-        Headline5Reverse = { fg = headline_highlights.Headline5.fg },
-        Headline6Reverse = { fg = headline_highlights.Headline6.fg },
-
-        HighlightUndo = { link = 'IncSearch' },
-
-        HlSearchLens = editor_highlights.Search,
-
-        LightBulbVirtText = { bg = 'NONE' },
-
-        MarkerCodeFence = { bg = colors.mantle },
-
         NormalFloat = { bg = colors.base },
-
-        NvimTreeNormal = { fg = colors.text, bg = colors.base },
-        NvimTreeWinSeparator = { fg = colors.surface1, bg = 'NONE' },
-
-        QuickScopePrimary = { fg = colors.sapphire, style = { 'underline', 'bold' } },
-        QuickScopeSecondary = { fg = colors.pink, style = { 'underline' } },
-
         TabLine = { fg = colors.text, bg = colors.surface0 },
         TabLineSep = { fg = colors.surface0, bg = colors.base },
 
+        -- Plugin Highlights
+        -- highlight-undo.nvim
+        HighlightUndo = { link = 'IncSearch' },
+
+        -- nvim-hlslens
+        HlSearchLens = editor_highlights.Search,
+
+        -- nvim-lightbulb
+        LightBulbVirtText = { bg = colors.none },
+
+        -- nvim-tree.lua
+        NvimTreeNormal = { fg = colors.text, bg = colors.base },
+        NvimTreeWinSeparator = { fg = colors.surface1, bg = colors.none },
+
+        -- quick-scope
+        QuickScopePrimary = { fg = colors.sapphire, style = { 'underline', 'bold' } },
+        QuickScopeSecondary = { fg = colors.pink, style = { 'underline' } },
+
+        -- telescope.lua
         TelescopePromptPrefix = { fg = colors.blue },
         TelescopeResultsDiffAdd = { fg = colors.green },
         TelescopeResultsDiffChange = { fg = colors.yellow },
         TelescopeResultsDiffDelete = { fg = colors.red },
-        TelescopeResultsDiffUntracked = { fg = 'NONE' },
+        TelescopeResultsDiffUntracked = { fg = colors.none },
         TelescopeSelection = telescope_selection,
         TelescopeSelectionCaret = telescope_selection,
       }
     end,
     integrations = {
-      headlines = true,
       fidget = true,
       indent_blankline = {
         enabled = true,

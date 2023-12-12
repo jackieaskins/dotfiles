@@ -1,5 +1,5 @@
 return {
-  { 'AckslD/messages.nvim', cmd = 'Messages', config = true },
+  { 'FabijanZulj/blame.nvim', cmd = 'ToggleBlame' },
   {
     'NvChad/nvim-colorizer.lua',
     opts = { user_default_options = { AARRGGBB = true, names = false, tailwind = 'lsp' } },
@@ -48,9 +48,5 @@ return {
   { 'tpope/vim-sleuth' },
   { 'tpope/vim-surround' },
   { 'tzachar/highlight-undo.nvim', config = true, keys = { '<C-r>', 'u' } },
-  {
-    'wintermute-cell/gitignore.nvim',
-    requires = 'nvim-telescope/telescope.nvim',
-    cmd = 'Gitignore',
-  },
+  { 'wintermute-cell/gitignore.nvim', cmd = 'Gitignore' },
 }
