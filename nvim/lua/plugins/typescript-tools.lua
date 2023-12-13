@@ -6,10 +6,12 @@ return {
   dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
   opts = function()
     return {
+      capabilities = require('lsp.capabilities')(),
       settings = {
         complete_function_calls = false,
         include_completions_with_insert_text = true,
-        jsx_close_tag = { enable = true },
+        -- Disable jsx_close_tag in favor of my own handling, default handling breaks emmet completion
+        jsx_close_tag = { enable = false },
         tsserver_file_preferences = {
           includeInlayEnumMemberValueHints = true,
           includeInlayFunctionLikeReturnTypeHints = false,
@@ -32,6 +34,21 @@ return {
 
         bsk('n', '<leader>oi', '<cmd>TSToolsOrganizeImports<CR>')
         bsk('n', '<leader>ia', '<cmd>TSToolsAddMissingImports<CR>')
+
+        if vim.tbl_contains({ 'javascriptreact', 'typescriptreact' }, vim.bo.filetype) then
+          bsk('i', '>', function()
+            vim.schedule(function()
+              require('typescript-tools.api').jsx_close_tag(
+                bufnr,
+                vim.lsp.util.make_position_params(),
+                function() end,
+                nil
+              )
+            end)
+
+            return '>'
+          end, { expr = true })
+        end
       end,
     }
   end,

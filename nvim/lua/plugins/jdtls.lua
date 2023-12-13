@@ -9,7 +9,8 @@ return {
         callback = function()
           local jdtls_path = vim.fn.stdpath('data') .. '/lsp-servers/eclipse.jdt.ls'
 
-          local config = vim.tbl_extend('force', require('lsp.base_config')(), {
+          require('jdtls').start_or_attach({
+            capabilities = require('lsp.capabilities')(),
             cmd = { jdtls_path .. '/bin/jdtls' },
             init_options = {
               bundles = {
@@ -18,8 +19,6 @@ return {
             },
             root_dir = vim.fs.dirname(vim.fs.find({ '.gradlew', '.git', 'mvnw' }, { upward = true })[1]),
           })
-
-          require('jdtls').start_or_attach(config)
         end,
       },
     })

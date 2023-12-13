@@ -22,7 +22,7 @@ return {
 
     for server_name, server in pairs(servers) do
       if not server.skip_lspconfig then
-        local base_config = require('lsp.base_config')()
+        local base_config = { capabilities = require('lsp.capabilities')() }
         local config = server.config and server.config(base_config) or base_config
         require('lspconfig')[server_name].setup(config)
       end
