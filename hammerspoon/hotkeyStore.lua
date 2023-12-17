@@ -6,6 +6,7 @@ local cmd = '⌘'
 local alt = '⌥'
 local ctrl = '⌃'
 local shift = '⇧'
+local meh = '⌽' -- Hammerspoon doesn't have a symbol defined for meh
 local hyper = '✧'
 
 local modMap = { cmd = cmd, command = cmd, ctrl = ctrl, control = ctrl, alt = alt, option = alt, shift = shift }
@@ -116,13 +117,22 @@ function M.show()
   for groupName, descs in pairs(hotkeysByGroup) do
     table.insert(dialogText, groupName)
     for key, desc in pairs(descs) do
-      table.insert(dialogText, desc .. ' - ' .. key)
+      -- Handles switching key combo for meh key into meh symbol
+      table.insert(dialogText, desc .. ' - ' .. key:gsub(ctrl .. alt .. shift, meh))
     end
     table.insert(dialogText, '')
   end
+
   table.insert(
     dialogText,
-    cmd .. ': command ' .. ctrl .. ': control ' .. alt .. ': option ' .. shift .. ': shift ' .. hyper .. ': hyper'
+    table.concat({
+      cmd .. ': command ',
+      ctrl .. ': control ',
+      alt .. ': option ',
+      shift .. ': shift ',
+      meh .. ': meh',
+      hyper .. ': hyper',
+    }, ' ')
   )
 
   hs.dialog.alert(
