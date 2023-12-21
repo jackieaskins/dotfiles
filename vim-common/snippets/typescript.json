@@ -11,7 +11,7 @@
     "prefix": "mmra",
     "body": [
       "jest.mock(\"${1}\", () => ({",
-      "\t...jest.requireActual<any>(\"$1\"),",
+      "\t...jest.requireActual(\"$1\"),",
       "\t${2}",
       "}));"
     ]
@@ -44,31 +44,35 @@
     "prefix": "ita",
     "body": [
       "it(\"${1}\", async () => {",
-      "\texpect.assertions(${2:1});",
-      "",
-      "\t${3}",
+      "\t${2}",
       "});"
     ]
   },
-  "Except To Equal": {
+  "Jest Expect To Be": {
+    "prefix": "etb",
+    "body": [
+      "expect(${1}).toBe(${2});"
+    ]
+  },
+  "Jest Expect To Equal": {
     "prefix": "ete",
     "body": [
       "expect(${1}).toEqual(${2});"
     ]
   },
-  "Except To Match Snapshot": {
+  "Jest Expect To Match Snapshot": {
     "prefix": "etms",
     "body": [
       "expect(${1}).toMatchSnapshot();"
     ]
   },
-  "Except To Have Been Called": {
+  "Jest Expect To Have Been Called": {
     "prefix": "ethbc",
     "body": [
       "expect(${1}).toHaveBeenCalled();"
     ]
   },
-  "Expect To Have Been Called With": {
+  "Jest Expect To Have Been Called With": {
     "prefix": "ethbcw",
     "body": [
       "expect(${1}).toHaveBeenCalledWith(${2});"
