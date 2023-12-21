@@ -1,13 +1,6 @@
 return {
   'windwp/nvim-autopairs',
   enabled = not vim.g.use_ultimate_pairs,
-  dependencies = {
-    {
-      'abecodes/tabout.nvim',
-      config = true,
-      dependencies = 'nvim-treesitter/nvim-treesitter',
-    },
-  },
   config = function()
     local Rule = require('nvim-autopairs.rule')
     local autopairs = require('nvim-autopairs')

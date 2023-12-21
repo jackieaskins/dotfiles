@@ -40,10 +40,22 @@ local formatter_by_filetype = {
   typescriptreact = supported_formatters.prettierd,
 }
 
+local function get_formatter_for_filetype(filetype)
+  local formatter = formatter_by_filetype[filetype]
+  local root_pattern = require('lspconfig').util.root_pattern
+
+  if formatter and root_pattern(formatter.required_file)(vim.fn.expand('%:p')) then
+    return formatter
+  end
+
+  return nil
+end
+
 return {
   'stevearc/conform.nvim',
   lazy = true,
   config = true,
+  get_formatter_for_filetype = get_formatter_for_filetype,
   init = function()
     local install_cmds = {}
 
@@ -56,9 +68,8 @@ return {
       {
         'BufWritePre',
         callback = function(args)
-          local formatter = formatter_by_filetype[vim.bo.filetype]
-
-          if formatter and require('lspconfig').util.root_pattern(formatter.required_file)(vim.fn.expand('%:p')) then
+          local formatter = get_formatter_for_filetype(vim.bo.filetype)
+          if formatter then
             require('conform').format({ bufnr = args.buf, formatters = { formatter.name } })
           end
         end,

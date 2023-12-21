@@ -4,7 +4,7 @@ return {
     vim.g.projectionist_heuristics = {
       ['package.json'] = {
         ['*.ts'] = {
-          alternate = { '{}.test.ts', '{}.spec.ts' },
+          alternate = { '{}.test.ts', '{}.spec.ts', '{}.test.tsx', '{}.spec.tsx' },
           type = 'source',
         },
         ['*.spec.ts'] = {
@@ -21,11 +21,11 @@ return {
           type = 'source',
         },
         ['*.spec.tsx'] = {
-          alternate = '{}.tsx',
+          alternate = { '{}.tsx', '{}.ts' },
           type = 'test',
         },
         ['*.test.tsx'] = {
-          alternate = '{}.tsx',
+          alternate = { '{}.tsx', '{}.ts' },
           type = 'test',
         },
       },

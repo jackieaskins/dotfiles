@@ -4,13 +4,24 @@ return {
     'NvChad/nvim-colorizer.lua',
     opts = { user_default_options = { AARRGGBB = true, names = false, tailwind = 'lsp' } },
   },
+  { 'abecodes/tabout.nvim', config = true, dependencies = 'nvim-treesitter/nvim-treesitter' },
   { 'antonk52/markdowny.nvim', config = true, ft = 'markdown' },
   { 'axelvc/template-string.nvim', config = true },
   { 'chrisgrieser/nvim-early-retirement', config = true },
   { 'fladson/vim-kitty', ft = { 'kitty', 'kitty-session' } },
   {
+    'hedyhli/outline.nvim',
+    cmd = { 'Outline', 'OutlineOpen' },
+    opts = {
+      outline_window = { auto_jump = true, hide_cursor = true },
+    },
+  },
+  {
     'j-hui/fidget.nvim',
-    opts = { notification = { window = { border = vim.g.border_style } } },
+    opts = {
+      notification = { window = { border = vim.g.border_style } },
+      integration = { ['nvim-tree'] = { enable = false } },
+    },
   },
   {
     'jackieaskins/quick-scope',
@@ -28,7 +39,7 @@ return {
     },
   },
   { 'matze/vim-move', keys = { '<M-h>', '<M-j>', '<M-k>', '<M-l>' } },
-  { 'nvim-treesitter/nvim-treesitter-context' },
+  { 'nvim-treesitter/nvim-treesitter-context', opts = { multiline_threshold = 1 } },
   {
     'stevearc/dressing.nvim',
     opts = {

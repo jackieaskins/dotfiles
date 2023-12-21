@@ -9,6 +9,7 @@ return {
       'Comment',
       'EndOfBuffer',
       '^LineNr',
+      'Whitespace',
       'WinbarNC',
       'WinSeparator',
     },

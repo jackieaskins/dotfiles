@@ -7,6 +7,5 @@ return {
     cmap = false,
     cr = { enable = true, autoclose = true },
     space2 = { enable = true },
-    tabout = { enable = true, hopout = true, map = '<Tab>' },
   },
 }

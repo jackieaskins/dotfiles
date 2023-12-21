@@ -56,29 +56,19 @@ return {
     })
     -- }}}
 
-    -- Git Diff {{{
-    local function git_diff_hl(fg)
-      return { fg = fg, bg = colors.surface0 }
+    -- Lazy Package Updates {{{
+    local function lazy_package_hl()
+      return {
+        fg = require('feline.providers.vi_mode').get_mode_color(),
+        bg = colors.surface0,
+      }
     end
     table.insert(active_left, {
-      provider = 'git_diff_added',
-      hl = git_diff_hl(colors.green),
-    })
-    table.insert(active_left, {
-      provider = 'git_diff_changed',
-      hl = git_diff_hl(colors.yellow),
-    })
-    table.insert(active_left, {
-      provider = 'git_diff_removed',
-      hl = git_diff_hl(colors.red),
-    })
-    table.insert(active_left, {
-      provider = ' ',
-      hl = git_diff_hl(nil),
-      enabled = function()
-        local status = vim.b.gitsigns_status
-        return status and status ~= ''
-      end,
+      provider = require('lazy.status').updates,
+      enabled = require('lazy.status').has_updates,
+      hl = lazy_package_hl,
+      left_sep = { str = ' ', hl = lazy_package_hl },
+      right_sep = { str = ' ', hl = lazy_package_hl },
     })
     -- }}}
 
@@ -112,8 +102,8 @@ return {
     })
     -- }}}
 
-    -- LSP Clients {{{
-    local lsp_clients_hl = function()
+    -- Active LSP Clients, Linters, Formatters {{{
+    local active_nodes_hl = function()
       return {
         fg = require('feline.providers.vi_mode').get_mode_color(),
         bg = colors.surface0,
@@ -121,16 +111,36 @@ return {
     end
     table.insert(active_right, {
       provider = function()
-        local buf_clients = vim.lsp.get_clients({ bufnr = 0 })
+        local all_names = {}
+        local filetype = vim.bo.filetype
+
         local client_names = {}
+        local buf_clients = vim.lsp.get_clients({ bufnr = 0 })
         for _, client in ipairs(vim.tbl_values(buf_clients)) do
-          client_names[require('lsp.utils').get_server_display_name(client.name)] = true
+          table.insert(client_names, require('lsp.utils').get_server_display_name(client.name))
         end
-        return table.concat(vim.tbl_keys(client_names), ' ')
+        if #client_names > 0 then
+          table.insert(all_names, table.concat(client_names, ' '))
+        end
+
+        local linter_names = {}
+        for _, linter in ipairs(require('lint').linters_by_ft[filetype] or {}) do
+          table.insert(linter_names, linter)
+        end
+        if #linter_names > 0 then
+          table.insert(all_names, table.concat(linter_names, ' '))
+        end
+
+        local formatter = require('plugins.conform').get_formatter_for_filetype(filetype)
+        if formatter then
+          table.insert(all_names, formatter.name)
+        end
+
+        return table.concat(all_names, '|')
       end,
-      hl = lsp_clients_hl,
+      hl = active_nodes_hl,
       icon = '  ',
-      right_sep = { str = ' ', hl = lsp_clients_hl },
+      right_sep = { str = ' ', hl = active_nodes_hl },
     })
     -- }}}
 
@@ -190,10 +200,26 @@ return {
         -- }}}
         -- Diagnostics {{{
         {
-          { provider = 'diagnostic_errors', hl = diagnostic_hl(colors.red) },
-          { provider = 'diagnostic_warnings', hl = diagnostic_hl(colors.yellow) },
-          { provider = 'diagnostic_hints', hl = diagnostic_hl(colors.teal) },
-          { provider = 'diagnostic_info', hl = diagnostic_hl(colors.sky) },
+          {
+            provider = 'diagnostic_errors',
+            hl = diagnostic_hl(colors.red),
+            update = { 'DiagnosticChanged' },
+          },
+          {
+            provider = 'diagnostic_warnings',
+            hl = diagnostic_hl(colors.yellow),
+            update = { 'DiagnosticChanged' },
+          },
+          {
+            provider = 'diagnostic_hints',
+            hl = diagnostic_hl(colors.teal),
+            update = { 'DiagnosticChanged' },
+          },
+          {
+            provider = 'diagnostic_info',
+            hl = diagnostic_hl(colors.sky),
+            update = { 'DiagnosticChanged' },
+          },
           { provider = ' ', hl = { bg = bg } },
         },
         -- }}}
