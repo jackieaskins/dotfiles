@@ -2,10 +2,16 @@ local map = require('utils').map
 
 -- Configuration Variables
 vim.g.is_personal_machine = false
-vim.g.additional_server_commands = {}
+
+vim.g.supported_debuggers = {}
+vim.g.supported_formatters = {}
+vim.g.supported_linters = {}
 vim.g.supported_servers = {}
+vim.g.additional_server_commands = {}
+
 vim.g.catppuccin_flavour = 'macchiato'
 vim.g.border_style = { '╔', '═', '╗', '║', '╝', '═', '╚', '║' }
+
 vim.g.use_ultimate_pairs = false
 
 -- Map Leader to Space

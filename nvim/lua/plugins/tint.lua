@@ -7,6 +7,7 @@ return {
       '@comment',
       '@ibl.indent.char.1',
       'Comment',
+      'DapUIUnavailable',
       'EndOfBuffer',
       '^LineNr',
       'Whitespace',
