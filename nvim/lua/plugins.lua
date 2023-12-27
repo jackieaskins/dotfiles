@@ -8,6 +8,7 @@ return {
   { 'antonk52/markdowny.nvim', config = true, ft = 'markdown' },
   { 'axelvc/template-string.nvim', config = true },
   { 'chrisgrieser/nvim-early-retirement', config = true },
+  { 'dmmulroy/tsc.nvim', cmd = 'TSC', config = true },
   { 'fladson/vim-kitty', ft = { 'kitty', 'kitty-session' } },
   {
     'hedyhli/outline.nvim',
