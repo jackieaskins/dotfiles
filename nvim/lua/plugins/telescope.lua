@@ -3,6 +3,7 @@ local M = {
   dependencies = {
     { 'nvim-lua/plenary.nvim' },
     { 'benfowler/telescope-luasnip.nvim' },
+    { 'nvim-telescope/telescope-dap.nvim' },
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
     { 'danielvolchek/tailiscope.nvim' },
     { 'tsakirist/telescope-lazy.nvim' },
@@ -134,6 +135,7 @@ function M.config()
     },
   })
 
+  telescope.load_extension('dap')
   telescope.load_extension('fzf')
   telescope.load_extension('lazy')
   telescope.load_extension('luasnip')
