@@ -12,7 +12,7 @@ vim.g.additional_server_commands = {}
 vim.g.catppuccin_flavour = 'macchiato'
 vim.g.border_style = { '╔', '═', '╗', '║', '╝', '═', '╚', '║' }
 
-vim.g.use_ultimate_pairs = false
+vim.g.use_ultimate_pairs = true
 
 -- Map Leader to Space
 vim.g.mapleader = ' '
