@@ -26,6 +26,10 @@ local M = {}
 ---@param commands table<string, InstallCommand>
 ---@param install_dir string
 function M.register(group_name, commands, install_dir)
+  if #commands == 0 then
+    return
+  end
+
   local capitalized_group_name = group_name:gsub('^%l', string.upper)
 
   registered_commands[capitalized_group_name] = { commands = commands, install_dir = install_dir }
