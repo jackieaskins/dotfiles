@@ -3,8 +3,6 @@
 local utils = require('utils')
 local filter_table_by_keys, user_command = utils.filter_table_by_keys, utils.user_command
 
-local M = {}
-
 local pkg_managers = {
   brew = 'brew reinstall',
   cargo = 'cargo install',
@@ -14,18 +12,31 @@ local pkg_managers = {
   pip3 = 'pip3 install',
 }
 
+---@class RegisteredCommands
+---@field commands table<string, InstallCommand>
+---@field install_dir string
+
+---@type table<string, RegisteredCommands>
+local registered_commands = {}
+
+local M = {}
+
 ---Register install group with installation directory and commands
 ---@param group_name string
----@param commands table<string, string[] | fun(install_dir?:string):table>
+---@param commands table<string, InstallCommand>
 ---@param install_dir string
 function M.register(group_name, commands, install_dir)
-  user_command(group_name:gsub('^%l', string.upper) .. 'Install', function(arg)
+  local capitalized_group_name = group_name:gsub('^%l', string.upper)
+
+  registered_commands[capitalized_group_name] = { commands = commands, install_dir = install_dir }
+
+  user_command(capitalized_group_name .. 'Install', function(arg)
     local cmd_keys = arg.fargs
 
     if #cmd_keys > 0 then
-      M.install(filter_table_by_keys(commands, cmd_keys), install_dir)
+      M.install(capitalized_group_name, filter_table_by_keys(commands, cmd_keys), install_dir)
     else
-      M.install(commands, install_dir)
+      M.install(capitalized_group_name, commands, install_dir)
     end
   end, {
     nargs = '*',
@@ -36,9 +47,10 @@ function M.register(group_name, commands, install_dir)
 end
 
 ---Generic install command
----@param command_map table<string, InstallCommand>
+---@param group_name string
+---@param commands table<string, InstallCommand>
 ---@param install_dir? string
-function M.install(command_map, install_dir)
+function M.install(group_name, commands, install_dir)
   local script_lines = {}
   local common_packages = {}
 
@@ -46,7 +58,9 @@ function M.install(command_map, install_dir)
     table.insert(script_lines, string.format('echo "%s"', text))
   end
 
-  for name, command in pairs(command_map) do
+  echo('[' .. group_name .. '] Starting installation\n')
+
+  for name, command in pairs(commands) do
     if type(command) == 'function' then
       echo('Installing ' .. name)
       for _, line in ipairs(command(install_dir)) do
@@ -84,5 +98,12 @@ function M.install(command_map, install_dir)
   vim.cmd.startinsert()
   vim.fn.termopen({ 'sh', '-c', script }, { cwd = install_dir })
 end
+
+-- TODO: Make this better
+user_command('InstallAll', function()
+  for group_name, group in pairs(registered_commands) do
+    M.install(group_name, group.commands, group.install_dir)
+  end
+end)
 
 return M
