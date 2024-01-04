@@ -26,7 +26,7 @@ local M = {}
 ---@param commands table<string, InstallCommand>
 ---@param install_dir string
 function M.register(group_name, commands, install_dir)
-  if #commands == 0 then
+  if vim.tbl_isempty(commands) then
     return
   end
 
