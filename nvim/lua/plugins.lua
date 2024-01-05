@@ -4,7 +4,6 @@ return {
     'NvChad/nvim-colorizer.lua',
     opts = { user_default_options = { AARRGGBB = true, names = false, tailwind = 'lsp' } },
   },
-  { 'abecodes/tabout.nvim', config = true, dependencies = 'nvim-treesitter/nvim-treesitter' },
   { 'antonk52/markdowny.nvim', config = true, ft = 'markdown' },
   { 'axelvc/template-string.nvim', config = true },
   { 'chrisgrieser/nvim-early-retirement', config = true },
@@ -31,6 +30,7 @@ return {
       vim.g.qs_filetype_blacklist = { 'neo-tree', 'NvimTree' }
     end,
   },
+  { 'kawre/neotab.nvim', config = true },
   {
     'kosayoda/nvim-lightbulb',
     opts = {
