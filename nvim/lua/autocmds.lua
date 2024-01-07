@@ -47,5 +47,5 @@ augroup('lsp_formatting', {
 })
 
 augroup('no_modify', {
-  { 'BufRead', pattern = 'node_modules/*', command = 'setlocal nomodifiable' },
+  { 'BufRead', pattern = '**/node_modules/**', command = 'setlocal nomodifiable' },
 })
