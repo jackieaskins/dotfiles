@@ -78,6 +78,14 @@
       "expect(${1}).toHaveBeenCalledWith(${2});"
     ]
   },
+  "Playwright Test Case": {
+    "prefix": "ptest",
+    "body": [
+      "test(\"${1}\", async ({ page${2} }) => {",
+      "\t${3}",
+      "});"
+    ]
+  },
   "CDK Construct": {
     "prefix": "cdkc",
     "body": [
