@@ -2,6 +2,9 @@ local cache = require('twm.cache')
 local windowFilter = require('twm.windowFilter')
 local supportedLayouts = require('twm.supportedLayouts')
 
+local SCREEN_PADDING = 10
+local WINDOW_GAP = 10
+
 local M = {}
 
 ---Sort the new windows based on the current order
@@ -70,10 +73,17 @@ function M.tileSpace(spaceId, windowsBySpace)
   end
 
   local screenFrame = windows[1]:screen():frame()
+  local screenFrameWithPadding = {
+    x = screenFrame.x + SCREEN_PADDING,
+    y = screenFrame.y + SCREEN_PADDING,
+    w = screenFrame.w - (SCREEN_PADDING * 2),
+    h = screenFrame.h - (SCREEN_PADDING * 2),
+  }
+
   if #windows == 1 then
-    supportedLayouts.monocle(windows, screenFrame)
+    supportedLayouts.monocle(windows, screenFrameWithPadding, WINDOW_GAP)
   else
-    supportedLayouts[currentLayout](windows, screenFrame)
+    supportedLayouts[currentLayout](windows, screenFrameWithPadding, WINDOW_GAP)
   end
 end
 

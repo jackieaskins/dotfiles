@@ -6,6 +6,7 @@ local windowFilters = mergeTables({
   ['System Preferences'] = false,
   ['System Settings'] = false,
   ['Brave Browser'] = { rejectTitles = 'Picture in Picture' },
+  FaceTime = false,
   Finder = false,
   ['Google Chrome'] = { rejectTitles = 'Picture in Picture' },
   Hammerspoon = { rejectTitles = 'Hammerspoon Console' },
