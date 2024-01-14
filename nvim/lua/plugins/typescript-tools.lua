@@ -4,7 +4,6 @@ return {
   'pmizio/typescript-tools.nvim',
   enabled = lsp_utils.is_server_supported('typescript-tools'),
   dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
-  commit = '13d9dda2fc1ff82ca5a8ced0e1b46e93debac792',
   opts = function()
     return {
       capabilities = require('lsp.capabilities')(),
@@ -35,6 +34,7 @@ return {
 
         bsk('n', '<leader>oi', '<cmd>TSToolsOrganizeImports<CR>')
         bsk('n', '<leader>ia', '<cmd>TSToolsAddMissingImports<CR>')
+        bsk('n', '<leader>ri', '<cmd>TSToolsRemoveUnusedImports<CR>')
 
         if vim.tbl_contains({ 'javascriptreact', 'typescriptreact' }, vim.bo.filetype) then
           bsk('i', '>', function()
