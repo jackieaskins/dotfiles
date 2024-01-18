@@ -4,7 +4,15 @@ local hotkeyStore = require('hotkeyStore')
 ----------------------------------------------------------------------
 --                              Custom                              --
 ----------------------------------------------------------------------
+---@class Custom
+---@field appKeys? table<string, string>
+---@field brewPrefix? string
+---@field twmScreenPadding? number
+---@field twmWindowFilters? table<string, boolean>
+---@field twmWindowGap? number
+
 local ok, custom = pcall(require, 'custom')
+---@type Custom
 CUSTOM = ok and custom or {}
 
 ----------------------------------------------------------------------

@@ -23,10 +23,12 @@ git clone https://github.com/jackieaskins/dotfiles.git ~/dotfiles
 ### Hammerspoon
 
 Return a `table` in `~/dotfiles/hammerspoon/custom.lua`, the following keys can be provided:
-- `brew_prefix` - `string`
-- `app_keys` - `table<string, string>`
-- `twm_window_filters` - `table<string, boolean | table>`
+- `brewPrefix` - `string`
+- `appKeys` - `table<string, string>`
+- `twmWindowFilters` - `table<string, boolean | table>`
     - See [setFilters](https://www.hammerspoon.org/docs/hs.window.filter.html#setFilters)
+- `twmScreenPadding` - `number`
+- `twmWindowGap` - `number`
 
 ### Neovim
 
