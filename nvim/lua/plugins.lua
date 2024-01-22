@@ -42,13 +42,6 @@ return {
   { 'matze/vim-move', keys = { '<M-h>', '<M-j>', '<M-k>', '<M-l>' } },
   { 'nvim-treesitter/nvim-treesitter-context', opts = { multiline_threshold = 1 } },
   {
-    'stevearc/dressing.nvim',
-    opts = {
-      input = { border = vim.g.border_style },
-      select = { telescope = { layout_config = { width = 80, height = 20 } } },
-    },
-  },
-  {
     'szw/vim-maximizer',
     init = function()
       vim.g.maximizer_set_default_mapping = 0
