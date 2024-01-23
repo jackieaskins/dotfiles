@@ -78,6 +78,7 @@ return {
         neotest = true,
         notify = true,
         nvimtree = true,
+        symbols_outline = true,
         treesitter_context = true,
       },
     })
