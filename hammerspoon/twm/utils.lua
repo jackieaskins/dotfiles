@@ -176,4 +176,19 @@ function M.isFloating(window)
   return cache.getFloatingWindow(window:id()) or false
 end
 
+---Get spaceId for the provided desktopNum
+---@param desktopNum number
+---@return string | nil
+function M.getSpaceId(desktopNum)
+  for _, spaces in pairs(hs.spaces.missionControlSpaceNames() or {}) do
+    for spaceId, desktopName in pairs(spaces) do
+      if string.match(desktopName, '%d+') == tostring(desktopNum) then
+        return spaceId
+      end
+    end
+  end
+
+  return nil
+end
+
 return M

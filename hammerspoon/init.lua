@@ -109,6 +109,10 @@ registerTwmHotkey('Swap window south', HYPER, 'j', twm.swapWindowSouth)
 registerTwmHotkey('Swap window north', HYPER, 'k', twm.swapWindowNorth)
 registerTwmHotkey('Swap window north', HYPER, 'l', twm.swapWindowEast)
 
+for i = 1, 9, 1 do
+  registerTwmHotkey('Move window to space ' .. i, MEH, tostring(i), twm.moveWindowToSpace(i))
+end
+
 registerTwmHotkey('Set layout to floating', HYPER, 'f', function()
   twm.setLayout('floating')
 end)
