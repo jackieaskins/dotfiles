@@ -7,6 +7,14 @@
       "}, [${3}]);"
     ]
   },
+  "Use Effect Log": {
+    "prefix": "uel",
+    "body": [
+      "useEffect(() => {",
+      "\tconsole.log(${2});",
+      "}, [$2]);"
+    ]
+  },
   "Use Callback": {
     "prefix": "uc",
     "body": [

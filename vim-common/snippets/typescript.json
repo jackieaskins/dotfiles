@@ -1,4 +1,20 @@
 {
+  "Callback": {
+    "prefix": "cb",
+    "body": [
+      "(${1}) => {",
+      "\t${2}",
+      "}"
+    ]
+  },
+  "Object Return Callback": {
+    "prefix": "cbo",
+    "body": [
+      "(${1}) => ({",
+      "\t${2}",
+      "})"
+    ]
+  },
   "Jest Module Mock": {
     "prefix": "mm",
     "body": [
