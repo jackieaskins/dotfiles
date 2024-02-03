@@ -13,11 +13,13 @@ fpath=($HOMEBREW_PREFIX/share/zsh/site-functions $fpath)
 #                                Path                                #
 #--------------------------------------------------------------------#
 [ -d $HOME/.cargo/bin ] && path+=($HOME/.cargo/bin)
+[ -d $HOME/dotfiles/bin ] && path+=($HOME/dotfiles/bin)
 
 if [ -d $HOME/go ]; then
   export GOPATH=$HOME/go
   path+=($GOPATH/bin)
 fi
+
 export PATH
 
 #--------------------------------------------------------------------#

@@ -1,11 +1,8 @@
 local augroup = require('utils').augroup
-local colors = require('colors')
-local vi_mode = require('feline.providers.vi_mode')
 local highlight = require('utils').highlight
 
 local function get_file_icon_component(filename)
-  local icon = require('icons').get_file_icon(filename)
-  return icon and icon .. ' ' or ''
+  return require('icons').get_file_icon(filename) .. ' '
 end
 
 local function get_bufnr(tabnr)
@@ -19,9 +16,8 @@ augroup('tabline', {
 })
 
 local function get_tabline()
-  local mode_color = vi_mode.get_mode_color()
-
-  highlight('TabLineSel', { fg = colors.base, bg = mode_color })
+  local colors = require('colors').get_colors()
+  highlight('TabLineSel', { fg = colors.base, bg = require('modes').get_color() })
 
   local num_tabs = vim.fn.tabpagenr('$')
   local current_tabnr = vim.fn.tabpagenr()

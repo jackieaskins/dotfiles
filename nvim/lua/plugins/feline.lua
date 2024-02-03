@@ -1,6 +1,12 @@
+local function set_theme()
+  require('feline').use_theme(require('colors').get_colors())
+end
+
 return {
   'freddiehaddad/feline.nvim',
+  enabled = false,
   dependencies = { 'nvim-tree/nvim-web-devicons' },
+  set_theme = set_theme,
   config = function()
     local file_modified_icon = ''
     local file_readonly_icon = ' '
@@ -8,30 +14,28 @@ return {
     ----------------------------------------------------------------------
     --                              Colors                              --
     ----------------------------------------------------------------------
-    local colors = require('colors')
-
     -- Vi Mode Colors {{{
     local vi_mode_colors = {
-      NORMAL = colors.blue,
-      OP = colors.blue,
+      NORMAL = 'blue',
+      OP = 'blue',
 
-      VISUAL = colors.teal,
-      LINES = colors.teal,
-      BLOCK = colors.teal,
-      SELECT = colors.teal,
+      VISUAL = 'teal',
+      LINES = 'teal',
+      BLOCK = 'teal',
+      SELECT = 'teal',
 
-      INSERT = colors.green,
+      INSERT = 'green',
 
-      REPLACE = colors.maroon,
-      ['V-REPLACE'] = colors.maroon,
+      REPLACE = 'maroon',
+      ['V-REPLACE'] = 'maroon',
 
-      ENTER = colors.peach,
-      MORE = colors.peach,
-      COMMAND = colors.peach,
-      SHELL = colors.peach,
-      TERM = colors.peach,
+      ENTER = 'peach',
+      MORE = 'peach',
+      COMMAND = 'peach',
+      SHELL = 'peach',
+      TERM = 'peach',
 
-      NONE = colors.mauve,
+      NONE = 'mauve',
     }
     -- }}}
 
@@ -43,7 +47,7 @@ return {
     -- Vi Mode {{{
     local function vi_mode_hl()
       return {
-        fg = colors.base,
+        fg = 'base',
         bg = require('feline.providers.vi_mode').get_mode_color(),
         style = 'bold',
       }
@@ -60,7 +64,7 @@ return {
     local function lazy_package_hl()
       return {
         fg = require('feline.providers.vi_mode').get_mode_color(),
-        bg = colors.surface0,
+        bg = 'surface0',
       }
     end
     table.insert(active_left, {
@@ -73,7 +77,9 @@ return {
     -- }}}
 
     -- File Info {{{
-    local file_info_hl = { fg = colors.text, bg = colors.base }
+    local function file_info_hl()
+      return { fg = 'text', bg = 'base' }
+    end
     table.insert(active_left, {
       provider = {
         name = 'file_info',
@@ -91,7 +97,9 @@ return {
     local active_right = {}
 
     -- File Type {{{
-    local file_type_hl = { fg = colors.text, bg = colors.base }
+    local function file_type_hl()
+      return { fg = 'text', bg = 'base' }
+    end
     table.insert(active_right, {
       provider = {
         name = 'file_type',
@@ -103,10 +111,10 @@ return {
     -- }}}
 
     -- Active LSP Clients, Linters, Formatters {{{
-    local active_nodes_hl = function()
+    local function active_nodes_hl()
       return {
         fg = require('feline.providers.vi_mode').get_mode_color(),
-        bg = colors.surface0,
+        bg = 'surface0',
       }
     end
     table.insert(active_right, {
@@ -147,7 +155,7 @@ return {
     -- Position {{{
     local position_hl = function()
       return {
-        fg = colors.base,
+        fg = 'base',
         bg = require('feline.providers.vi_mode').get_mode_color(),
         style = 'bold',
       }
@@ -169,9 +177,14 @@ return {
     --                        Winbar Components                         --
     ----------------------------------------------------------------------
     local function get_winbar_components(active)
-      local bg = colors.base
+      local bg = 'base'
       local function diagnostic_hl(fg)
-        return { fg = active and fg or colors.overlay1, bg = bg }
+        return function()
+          return { fg = active and fg or 'overlay1', bg = bg }
+        end
+      end
+      local function default_hl()
+        return { bg = bg }
       end
 
       return {
@@ -188,10 +201,10 @@ return {
                 type = 'relative',
               },
             },
-            left_sep = { str = ' ', hl = { bg = bg } },
+            left_sep = { str = ' ', hl = default_hl },
             hl = function()
               return {
-                fg = active and require('feline.providers.vi_mode').get_mode_color() or colors.overlay1,
+                fg = active and require('feline.providers.vi_mode').get_mode_color() or 'overlay1',
                 bg = bg,
               }
             end,
@@ -202,25 +215,25 @@ return {
         {
           {
             provider = 'diagnostic_errors',
-            hl = diagnostic_hl(colors.red),
+            hl = diagnostic_hl('red'),
             update = { 'DiagnosticChanged' },
           },
           {
             provider = 'diagnostic_warnings',
-            hl = diagnostic_hl(colors.yellow),
+            hl = diagnostic_hl('yellow'),
             update = { 'DiagnosticChanged' },
           },
           {
             provider = 'diagnostic_hints',
-            hl = diagnostic_hl(colors.teal),
+            hl = diagnostic_hl('teal'),
             update = { 'DiagnosticChanged' },
           },
           {
             provider = 'diagnostic_info',
-            hl = diagnostic_hl(colors.sky),
+            hl = diagnostic_hl('sky'),
             update = { 'DiagnosticChanged' },
           },
-          { provider = ' ', hl = { bg = bg } },
+          { provider = ' ', hl = default_hl },
         },
         -- }}}
       }
@@ -233,6 +246,8 @@ return {
       components = { active = { active_left, active_right } },
       force_inactive = { filetypes = {}, buftypes = {}, bufnames = {} },
       vi_mode_colors = vi_mode_colors,
+      -- highlight_reset_triggers = { 'SessionLoadPost' },
+      theme = require('colors').get_colors(),
     })
     require('feline').winbar.setup({
       components = {

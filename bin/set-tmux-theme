@@ -1,0 +1,7 @@
+#!/bin/bash
+
+theme=$1
+
+rm -rf ~/dotfiles/tmux/active_theme.conf
+ln -s ~/dotfiles/tmux/themes/$1.conf ~/dotfiles/tmux/active_theme.conf
+tmux source ~/.tmux.conf

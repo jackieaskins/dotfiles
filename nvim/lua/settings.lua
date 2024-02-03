@@ -9,7 +9,6 @@ vim.g.supported_linters = {}
 vim.g.supported_servers = {}
 vim.g.additional_server_commands = {}
 
-vim.g.catppuccin_flavour = 'macchiato'
 vim.g.border_style = { '╔', '═', '╗', '║', '╝', '═', '╚', '║' }
 
 vim.g.use_ultimate_pairs = true
@@ -32,9 +31,10 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 vim.opt.splitkeep = 'screen'
 vim.opt.diffopt:append({ 'vertical', 'linematch:60' })
-vim.opt.termguicolors = true
 vim.opt.laststatus = 3
+vim.opt.statusline = "%{%v:lua.require('statusline').get_statusline()%}"
 vim.opt.tabline = "%{%v:lua.require('tabline').get_tabline()%}"
+vim.opt.winbar = "%{%v:lua.require('winbar').get_winbar()%}"
 vim.opt.matchpairs:append({ '<:>' })
 
 -- Folds

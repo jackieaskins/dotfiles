@@ -5,6 +5,7 @@ return {
   priority = 1000,
   config = function()
     require('catppuccin').setup({
+      background = { light = 'latte', dark = 'macchiato' },
       custom_highlights = function(colors)
         local editor_highlights = require('catppuccin.groups.editor').get()
 
@@ -24,8 +25,13 @@ return {
           },
           Folded = { fg = colors.blue, bg = colors.surface0 },
           NormalFloat = { bg = colors.base },
+          StatusLine = { fg = colors.text, bg = colors.base },
           TabLine = { fg = colors.text, bg = colors.surface0 },
           TabLineSep = { fg = colors.surface0, bg = colors.base },
+          WinBarDiagnosticError = { fg = colors.red, bg = colors.base },
+          WinBarDiagnosticWarn = { fg = colors.yellow, bg = colors.base },
+          WinBarDiagnosticHint = { fg = colors.teal, bg = colors.base },
+          WinBarDiagnosticInfo = { fg = colors.sky, bg = colors.base },
 
           -- Treesitter Highlights
           ['@tag.attribute.tsx'] = { link = '@tag.attribute' },
@@ -41,6 +47,7 @@ return {
           LightBulbVirtText = { bg = colors.none },
 
           -- nvim-tree.lua
+          NvimTreeExecFile = { style = { 'underline', 'bold' } },
           NvimTreeNormal = { fg = colors.text, bg = colors.base },
           NvimTreeWinSeparator = { fg = colors.surface1, bg = colors.none },
 
