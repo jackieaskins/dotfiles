@@ -25,3 +25,5 @@ Brewfile.lock.json
 /kitty/current-theme.conf
 
 /theme
+
+/tmux/active_theme.conf
