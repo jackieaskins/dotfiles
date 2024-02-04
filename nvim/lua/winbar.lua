@@ -22,8 +22,8 @@ local function get_filename_display()
   end
 
   local filename = vim.bo.filetype == 'help' and 'doc/' .. vim.fn.fnamemodify(bufname, ':t') or bufname
-
-  local parts = vim.split(vim.fn.fnamemodify(filename, ':~:.:h'):gsub('\\', '/'), '/')
+  local head = vim.fn.fnamemodify(filename, ':~:.:h'):gsub('\\', '/')
+  local parts = head == '.' and {} or vim.split(head, '/')
   local tail = table.concat({
     vim.bo.readonly and readonly_icon or '',
     vim.fn.fnamemodify(filename, ':t'),
