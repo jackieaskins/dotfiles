@@ -1,10 +1,6 @@
 local augroup = require('utils').augroup
 local highlight = require('utils').highlight
 
-local function get_file_icon_component(filename)
-  return require('icons').get_file_icon(filename) .. ' '
-end
-
 local function get_bufnr(tabnr)
   local winnr = vim.fn.tabpagewinnr(tabnr)
   local buflist = vim.fn.tabpagebuflist(tabnr)
@@ -76,7 +72,7 @@ local function get_tabline()
       ' ',
       tabnr,
       ' ',
-      get_file_icon_component(filename),
+      require('icons').get_filetype_icon(vim.bo.filetype),
       get_bufname(),
       modified,
       readonly,

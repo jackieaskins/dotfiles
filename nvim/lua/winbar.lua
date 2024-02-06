@@ -61,7 +61,7 @@ function M.get_winbar()
   return table.concat({
     get_hl('WinBarFile'),
     ' ',
-    require('icons').get_file_icon(vim.api.nvim_buf_get_name(0)),
+    require('icons').get_filetype_icon(vim.bo.filetype),
     ' ',
     get_filename_display(),
 

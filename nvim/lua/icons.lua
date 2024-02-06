@@ -7,4 +7,8 @@ function M.get_file_icon(path)
   return require('nvim-web-devicons').get_icon(path, nil, { default = true })
 end
 
+function M.get_filetype_icon(filetype)
+  return require('nvim-web-devicons').get_icon_by_filetype(filetype, { default = true })
+end
+
 return M

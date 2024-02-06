@@ -53,7 +53,7 @@ function M.get_statusline()
 
   local bufname = vim.api.nvim_buf_get_name(0)
   local filename = bufname and bufname ~= '' and vim.fn.fnamemodify(bufname, ':t') or '[No Name]'
-  local filetype_icon = require('icons').get_file_icon(vim.api.nvim_buf_get_name(0))
+  local filetype = vim.bo.filetype
 
   return table.concat({
     statusline_component('StatusLineMode', ' ' .. modes.get_label()),
@@ -72,8 +72,8 @@ function M.get_statusline()
     statusline_component(
       'StatusLine',
       table.concat({
-        require('icons').get_file_icon(vim.api.nvim_buf_get_name(0)),
-        vim.bo.filetype,
+        require('icons').get_filetype_icon(filetype),
+        filetype,
       }, ' ')
     ),
     statusline_component('StatusLineSection', active_clients()),
