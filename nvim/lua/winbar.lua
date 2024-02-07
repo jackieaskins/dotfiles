@@ -15,13 +15,21 @@ require('utils').augroup('winbar', {
 })
 
 local function get_filename_display()
+  local filetype = vim.bo.filetype
+
+  if filetype == 'qf' then
+    local quickfix_title = vim.w.quickfix_title
+    local suffix = quickfix_title and ' ' .. quickfix_title or ''
+    return '[Quickfix]' .. suffix
+  end
+
   local bufname = vim.api.nvim_buf_get_name(0)
 
   if not bufname or bufname == '' then
     return '[No Name]'
   end
 
-  local filename = vim.bo.filetype == 'help' and 'doc/' .. vim.fn.fnamemodify(bufname, ':t') or bufname
+  local filename = filetype == 'help' and 'doc/' .. vim.fn.fnamemodify(bufname, ':t') or bufname
   local head = vim.fn.fnamemodify(filename, ':~:.:h'):gsub('\\', '/')
   local parts = head == '.' and {} or vim.split(head, '/')
   local tail = table.concat({

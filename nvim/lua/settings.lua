@@ -32,6 +32,7 @@ vim.opt.splitbelow = true
 vim.opt.splitkeep = 'screen'
 vim.opt.diffopt:append({ 'vertical', 'linematch:60' })
 vim.opt.laststatus = 3
+vim.g.qf_disable_statusline = true
 vim.opt.statusline = "%{%v:lua.require('statusline').get_statusline()%}"
 vim.opt.tabline = "%{%v:lua.require('tabline').get_tabline()%}"
 vim.opt.winbar = "%{%v:lua.require('winbar').get_winbar()%}"

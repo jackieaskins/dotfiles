@@ -39,6 +39,10 @@ local function get_tabline()
     local filename = vim.fn.fnamemodify(bufname, ':t')
 
     local function get_bufname()
+      if filetype == 'qf' then
+        return '[Quickfix]'
+      end
+
       if bufname == '' then
         return '[No Name]'
       end

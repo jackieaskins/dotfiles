@@ -42,6 +42,18 @@ local function statusline_component(hl, component, condition)
   return hl_str
 end
 
+local function get_filename()
+  local bufname = vim.api.nvim_buf_get_name(0)
+
+  if vim.bo.filetype == 'qf' then
+    local quickfix_title = vim.w.quickfix_title
+    local suffix = quickfix_title and ' ' .. quickfix_title or ''
+    return '[Quickfix]' .. suffix
+  end
+
+  return bufname and bufname ~= '' and vim.fn.fnamemodify(bufname, ':t') or '[No Name]'
+end
+
 local M = {}
 
 function M.get_statusline()
@@ -51,8 +63,6 @@ function M.get_statusline()
   highlight('StatusLineMode', { fg = colors.base, bg = mode_color, bold = true })
   highlight('StatusLineSection', { fg = mode_color, bg = colors.surface0 })
 
-  local bufname = vim.api.nvim_buf_get_name(0)
-  local filename = bufname and bufname ~= '' and vim.fn.fnamemodify(bufname, ':t') or '[No Name]'
   local filetype = vim.bo.filetype
 
   return table.concat({
@@ -62,7 +72,7 @@ function M.get_statusline()
       'StatusLine',
       table.concat({
         vim.bo.readonly and readonly_icon or '',
-        filename,
+        get_filename(),
         vim.bo.modified and modified_icon or '',
       })
     ),
@@ -72,7 +82,7 @@ function M.get_statusline()
     statusline_component(
       'StatusLine',
       table.concat({
-        require('icons').get_filetype_icon(filetype),
+        filetype == '' and '' or require('icons').get_filetype_icon(filetype),
         filetype,
       }, ' ')
     ),
