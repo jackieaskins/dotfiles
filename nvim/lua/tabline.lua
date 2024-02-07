@@ -39,18 +39,8 @@ local function get_tabline()
     local filename = vim.fn.fnamemodify(bufname, ':t')
 
     local function get_bufname()
-      if filetype == 'neo-tree' then
-        return 'Tree'
-      end
-      if filetype == 'TelescopePrompt' then
-        return ' Telescope'
-      end
-      if filetype == 'checkhealth' then
-        return 'checkhealth'
-      end
-
       if bufname == '' then
-        return '-'
+        return '[No Name]'
       end
 
       if filenames[filename] == 1 then
@@ -72,7 +62,7 @@ local function get_tabline()
       ' ',
       tabnr,
       ' ',
-      require('icons').get_filetype_icon(vim.bo.filetype),
+      require('icons').get_filetype_icon(filetype) .. ' ',
       get_bufname(),
       modified,
       readonly,
