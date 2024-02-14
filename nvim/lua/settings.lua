@@ -11,8 +11,6 @@ vim.g.additional_server_commands = {}
 
 vim.g.border_style = { '╔', '═', '╗', '║', '╝', '═', '╚', '║' }
 
-vim.g.use_ultimate_pairs = true
-
 -- Map Leader to Space
 vim.g.mapleader = ' '
 map({ 'n', 'v' }, '<space>', '<nop>')

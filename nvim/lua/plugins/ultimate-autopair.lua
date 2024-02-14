@@ -1,6 +1,5 @@
 return {
   'altermo/ultimate-autopair.nvim',
-  enabled = vim.g.use_ultimate_pairs,
   event = { 'InsertEnter', 'CmdlineEnter' },
   opts = {
     -- Mapping to get newline to work properly for html tags
