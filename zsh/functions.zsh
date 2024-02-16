@@ -8,13 +8,17 @@ function cp2m() {
   xargs -n 1 cp -v $1 <<< "${@:2}"
 }
 
+function install_neovim() {
+  sudo rm -rf build
+  make CMAKE_BUILD_TYPE=RelWithDebInfo
+  sudo make install
+}
+
 # Update Neovim installed from source
 function update_neovim() {
   cd $HOME/neovim
   git pull
-  sudo rm -rf build
-  make CMAKE_BUILD_TYPE=RelWithDebInfo
-  sudo make install
+  install_neovim
   cd -
 }
 
