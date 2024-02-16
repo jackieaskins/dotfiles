@@ -33,9 +33,6 @@ return {
           WinBarDiagnosticHint = { fg = colors.teal, bg = colors.base },
           WinBarDiagnosticInfo = { fg = colors.sky, bg = colors.base },
 
-          -- Treesitter Highlights
-          ['@tag.attribute.tsx'] = { link = '@tag.attribute' },
-
           -- Plugin Highlights
           -- highlight-undo.nvim
           HighlightUndo = { link = 'IncSearch' },
