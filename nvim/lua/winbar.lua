@@ -72,9 +72,11 @@ function M.get_winbar()
     require('icons').get_filetype_icon(vim.bo.filetype),
     ' ',
     get_filename_display(),
+    ' ',
 
     '%=',
 
+    vim.tbl_isempty(diagnostic_counts) and '' or ' ',
     get_diagnostic('WinBarDiagnosticError', diagnostic_counts, vim.diagnostic.severity.ERROR),
     get_diagnostic('WinBarDiagnosticWarn', diagnostic_counts, vim.diagnostic.severity.WARN),
     get_diagnostic('WinBarDiagnosticInfo', diagnostic_counts, vim.diagnostic.severity.INFO),
