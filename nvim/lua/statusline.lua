@@ -18,7 +18,7 @@ local function active_clients()
   end
 
   local linter_names = {}
-  for _, linter in ipairs(require('lint').linters_by_ft[filetype] or {}) do
+  for _, linter in ipairs(require('plugins.lint').get_linters_for_filetype(filetype)) do
     table.insert(linter_names, linter)
   end
   if #linter_names > 0 then
@@ -33,9 +33,9 @@ local function active_clients()
   return table.concat(all_names, '|')
 end
 
-local function statusline_component(hl, component, condition)
+local function statusline_component(hl, component)
   local hl_str = '%#' .. hl .. '#'
-  if condition ~= false and component and component ~= '' then
+  if component and component ~= '' then
     return hl_str .. ' ' .. component .. ' '
   end
 
@@ -54,6 +54,11 @@ local function get_filename()
   return bufname and bufname ~= '' and vim.fn.fnamemodify(bufname, ':t') or '[No Name]'
 end
 
+local function lazy_updates()
+  local ok, status = pcall(require, 'lazy.status')
+  return ok and status.updates() or ''
+end
+
 local M = {}
 
 function M.get_statusline()
@@ -67,7 +72,7 @@ function M.get_statusline()
 
   return table.concat({
     statusline_component('StatusLineMode', ' ' .. modes.get_label()),
-    statusline_component('StatusLineSection', require('lazy.status').updates(), require('lazy.status').has_updates()),
+    statusline_component('StatusLineSection', lazy_updates()),
     statusline_component(
       'StatusLine',
       table.concat({

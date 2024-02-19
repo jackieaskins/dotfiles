@@ -5,12 +5,17 @@ local linters = {
 }
 local supported_linters = vim.g.supported_linters and filter_table_by_keys(linters, vim.g.supported_linters) or linters
 local linters_by_filetype = {
-  gdscript = { supported_linters.gdlint and 'gdlint' or nil },
+  gdscript = supported_linters.gdlint and nil or { 'gdlint' },
 }
+
+local function get_linters_for_filetype(filetype)
+  return linters_by_filetype[filetype] or {}
+end
 
 return {
   'mfussenegger/nvim-lint',
   lazy = true,
+  get_linters_for_filetype = get_linters_for_filetype,
   init = function()
     require('utils').augroup('lint', {
       {
