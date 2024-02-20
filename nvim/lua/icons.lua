@@ -22,7 +22,11 @@ function M.get_filetype_icon(filetype)
   local ok, icons = pcall(require, 'nvim-web-devicons')
 
   if ok then
-    return icons.get_icon_by_filetype(filetype, { default = true })
+    local icon, hl = icons.get_icon_by_filetype(filetype, { default = false })
+    if icon then
+      return icon, hl
+    end
+    return icons.get_icon(filetype, filetype, { default = true })
   end
 
   return default_icon, '#fff'

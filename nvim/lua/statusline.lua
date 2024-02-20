@@ -1,8 +1,19 @@
-local highlight = require('utils').highlight
+local utils = require('utils')
+local augroup, highlight = utils.augroup, utils.highlight
 local modes = require('modes')
 
-local modified_icon = ' '
-local readonly_icon = ' '
+augroup('statusline_redraw', {
+  { 'User', pattern = 'LazyCheck', command = 'redrawstatus' },
+})
+
+local function statusline_component(hl, component)
+  local hl_str = '%#' .. hl .. '#'
+  if component and component ~= '' then
+    return hl_str .. ' ' .. component .. ' '
+  end
+
+  return hl_str
+end
 
 local function active_clients()
   local all_names = {}
@@ -33,67 +44,48 @@ local function active_clients()
   return table.concat(all_names, '|')
 end
 
-local function statusline_component(hl, component)
-  local hl_str = '%#' .. hl .. '#'
-  if component and component ~= '' then
-    return hl_str .. ' ' .. component .. ' '
-  end
-
-  return hl_str
-end
-
 local function get_filename()
-  local bufname = vim.api.nvim_buf_get_name(0)
-
-  if vim.bo.filetype == 'qf' then
-    local quickfix_title = vim.w.quickfix_title
-    local suffix = quickfix_title and ' ' .. quickfix_title or ''
-    return '[Quickfix]' .. suffix
-  end
-
-  return bufname and bufname ~= '' and vim.fn.fnamemodify(bufname, ':t') or '[No Name]'
+  return require('line_components.filename').get_filename_display(
+    vim.api.nvim_buf_get_name(0),
+    vim.fn.bufnr(),
+    vim.w.quickfix_title,
+    function(filename)
+      return vim.fn.fnamemodify(filename, ':t')
+    end
+  )
 end
 
-local function lazy_updates()
+local function get_lazy_updates()
   local ok, status = pcall(require, 'lazy.status')
   return ok and status.updates() or ''
 end
 
-local M = {}
+return {
+  get_statusline = function()
+    local colors = require('colors').get_colors()
+    local mode_color = modes.get_color()
 
-function M.get_statusline()
-  local colors = require('colors').get_colors()
-  local mode_color = modes.get_color()
+    highlight('StatusLineMode', { fg = colors.base, bg = mode_color, bold = true })
+    highlight('StatusLineSection', { fg = mode_color, bg = colors.surface0 })
 
-  highlight('StatusLineMode', { fg = colors.base, bg = mode_color, bold = true })
-  highlight('StatusLineSection', { fg = mode_color, bg = colors.surface0 })
+    local filetype = vim.bo.filetype
 
-  local filetype = vim.bo.filetype
+    return table.concat({
+      statusline_component('StatusLineMode', ' ' .. modes.get_label()),
+      statusline_component('StatusLineSection', get_lazy_updates()),
+      statusline_component('StatusLine', get_filename()),
 
-  return table.concat({
-    statusline_component('StatusLineMode', ' ' .. modes.get_label()),
-    statusline_component('StatusLineSection', lazy_updates()),
-    statusline_component(
-      'StatusLine',
-      table.concat({
-        vim.bo.readonly and readonly_icon or '',
-        get_filename(),
-        vim.bo.modified and modified_icon or '',
-      })
-    ),
+      '%=',
 
-    '%=',
-
-    statusline_component(
-      'StatusLine',
-      table.concat({
-        filetype == '' and '' or require('icons').get_filetype_icon(filetype),
-        filetype,
-      }, ' ')
-    ),
-    statusline_component('StatusLineSection', active_clients()),
-    statusline_component('StatusLineMode', '%l:%c|%p%%'),
-  })
-end
-
-return M
+      statusline_component(
+        'StatusLine',
+        table.concat({
+          filetype == '' and '' or require('icons').get_filetype_icon(filetype),
+          filetype,
+        }, ' ')
+      ),
+      statusline_component('StatusLineSection', active_clients()),
+      statusline_component('StatusLineMode', '%l:%c|%p%%'),
+    })
+  end,
+}
