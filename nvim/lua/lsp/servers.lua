@@ -21,6 +21,7 @@ local servers = {
   lua_ls = require('lsp.servers.lua_ls'),
   svelte = require('lsp.servers.svelte'),
   tailwindcss = require('lsp.servers.tailwindcss'),
+  ['tmux-language-server'] = require('lsp.servers.tmux-language-server'),
   ['typescript-tools'] = require('lsp.servers.typescript-tools'),
   vimls = { install = { 'npm', 'vim-language-server' } },
   yamlls = { install = { 'npm', 'yaml-language-server' } },
