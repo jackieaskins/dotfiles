@@ -28,7 +28,8 @@ return {
           NormalFloat = { bg = colors.base },
           StatusLine = { fg = colors.text, bg = colors.base },
           TabLine = { fg = colors.text, bg = colors.surface0 },
-          TabLineSep = { fg = colors.surface0, bg = colors.base },
+
+          -- Custom Highlights
           WinBarDiagnosticError = { fg = colors.red, bg = colors.base },
           WinBarDiagnosticWarn = { fg = colors.yellow, bg = colors.base },
           WinBarDiagnosticHint = { fg = colors.teal, bg = colors.base },
@@ -82,7 +83,6 @@ return {
             information = { 'undercurl' },
           },
         },
-        neogit = true,
         neotest = true,
         notify = true,
         nvimtree = true,
