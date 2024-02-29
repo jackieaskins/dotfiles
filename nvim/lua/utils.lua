@@ -103,7 +103,7 @@ end
 ---@param ms number
 ---@return function
 function M.debounce(fn, ms)
-  local timer = vim.loop.new_timer()
+  local timer = vim.uv.new_timer()
   return function(...)
     local argv = { ... }
     timer:start(ms, 0, function()
