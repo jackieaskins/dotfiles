@@ -17,6 +17,7 @@ map({ 'n', 'v' }, '<space>', '<nop>')
 
 -- General
 vim.opt.hidden = true
+vim.opt.mouse = ''
 vim.opt.number = true
 vim.opt.ruler = false
 vim.opt.relativenumber = true
