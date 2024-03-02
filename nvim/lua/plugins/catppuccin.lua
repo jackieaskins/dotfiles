@@ -2,28 +2,40 @@ return {
   'catppuccin/nvim',
   lazy = false,
   name = 'catppuccin',
-  commit = '9703f227bfab20d04bcee62d2f08f1795723b4ae',
   priority = 1000,
   config = function()
     require('catppuccin').setup({
       background = { light = 'latte', dark = 'macchiato' },
       custom_highlights = function(colors)
-        local editor_highlights = require('catppuccin.groups.editor').get()
+        local utils = require('catppuccin.utils.colors')
 
-        local telescope_selection = vim.tbl_extend('force', editor_highlights.CursorLine, {
+        -- This used to referenced highlights with require('catppuccin.groups.editor').get()
+        -- but that was broken in https://github.com/catppuccin/nvim/issues/664
+        -- For details and workaround: https://github.com/catppuccin/nvim/issues/667
+        -- Unfortunately the workaround can't be used here
+        -- This hard-codes the highlights I was referencing until there's a better solution
+        local cursor_line = {
+          bg = utils.vary_color({
+            latte = utils.lighten(colors.mantle, 0.70, colors.base),
+          }, utils.darken(colors.surface0, 0.64, colors.base)),
+        }
+        local inc_search = {
+          bg = utils.darken(colors.sky, 0.90, colors.base),
+          fg = colors.mantle,
+        }
+        local search = {
+          bg = utils.darken(colors.sky, 0.30, colors.base),
+          fg = colors.text,
+        }
+
+        local telescope_selection = vim.tbl_extend('force', cursor_line, {
           fg = colors.blue,
         })
 
         return {
           -- Default Highlights
-          CurSearch = vim.tbl_extend('force', editor_highlights.IncSearch, {
-            style = { 'bold' },
-          }),
-          CursorLineNr = {
-            fg = colors.blue,
-            bg = editor_highlights.CursorLine.bg,
-            style = { 'bold' },
-          },
+          CurSearch = vim.tbl_extend('force', inc_search, { style = { 'bold' } }),
+          CursorLineNr = { fg = colors.blue, bg = cursor_line.bg, style = { 'bold' } },
           Folded = { fg = colors.blue, bg = colors.surface0 },
           NormalFloat = { bg = colors.base },
           StatusLine = { fg = colors.text, bg = colors.base },
@@ -40,7 +52,7 @@ return {
           HighlightUndo = { link = 'IncSearch' },
 
           -- nvim-hlslens
-          HlSearchLens = editor_highlights.Search,
+          HlSearchLens = search,
 
           -- nvim-lightbulb
           LightBulbVirtText = { bg = colors.none },
