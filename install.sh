@@ -85,6 +85,8 @@ git config --global core.excludesfile ~/.gitignore_global
 git config --global pull.rebase true
 git config --global rerere.enabled true
 git config --global rebase.autoStash true
+git config --global column.ui auto
+git config --global branch.sort -committerdate
 success_echo "Configured Git."
 
 #--------------------------------------------------------------------#
