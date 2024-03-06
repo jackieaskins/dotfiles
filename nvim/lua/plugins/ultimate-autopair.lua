@@ -1,6 +1,6 @@
 return {
   'altermo/ultimate-autopair.nvim',
-  event = { 'InsertEnter', 'CmdlineEnter' },
+  event = { 'InsertEnter' },
   opts = {
     -- Mapping to get newline to work properly for html tags
     {
