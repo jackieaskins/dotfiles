@@ -13,7 +13,7 @@ return {
       vimrc = all_icons.vim,
       zshrc = all_icons.zsh,
       TelescopePrompt = { icon = '', name = 'Telescope' },
-      NvimTree = { icon = '', name = 'NvimTree' },
+      NvimTree = { icon = '󰙅', name = 'NvimTree' },
     })
   end,
 }
