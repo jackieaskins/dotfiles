@@ -1,5 +1,5 @@
 vim.diagnostic.config({
-  float = { source = 'always', border = vim.g.border_style },
+  float = { source = true, border = vim.g.border_style },
   signs = {
     priority = require('sign_priorities').diagnostics,
     text = {
