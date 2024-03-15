@@ -21,8 +21,6 @@ local function watch_for_theme_change()
     {},
     vim.schedule_wrap(function()
       set_background(true)
-      watcher:stop()
-      watch_for_theme_change()
     end)
   )
 end
