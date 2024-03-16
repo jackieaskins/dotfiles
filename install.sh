@@ -144,6 +144,7 @@ backup_and_symlink .zshrc             zshrc            zshrc
 backup_and_symlink .vimrc             vimrc            vimrc
 backup_and_symlink .vim               vim              vim
 backup_and_symlink .hammerspoon       hammerspoon      hammerspoon
+backup_and_symlink .config/bat        bat              bat
 backup_and_symlink .config/nvim       nvim             nvim
 backup_and_symlink .config/karabiner  karabiner        karabiner
 backup_and_symlink .config/wezterm    wezterm          wezterm
@@ -152,6 +153,13 @@ backup_and_symlink .tmux.conf         tmux.conf        tmux.conf
 backup_and_symlink .gitignore_global  gitignore_global gitignore_global
 #                  dotfile            backup           sym
 success_echo "Dotfiles backed up and symlinked."
+
+#--------------------------------------------------------------------#
+#                                Bat                                 #
+#--------------------------------------------------------------------#
+echo -e "Configuring Bat..."
+bat cache --build
+success_echo "Bat configured."
 
 #--------------------------------------------------------------------#
 #                    Neovim Installation & Config                    #

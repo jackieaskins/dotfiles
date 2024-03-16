@@ -105,7 +105,8 @@ export FZF_DEFAULT_OPTS=" \
 source "$HOMEBREW_PREFIX/opt/fzf/shell/key-bindings.zsh"
 
 # BAT
-export BAT_THEME="base16"
+# TODO: Update when light mode is enabled
+export BAT_THEME="Catppuccin Macchiato"
 
 #--------------------------------------------------------------------#
 #                      ZSH Configuration Files                       #
