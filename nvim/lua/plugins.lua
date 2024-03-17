@@ -1,5 +1,4 @@
 return {
-  { 'FabijanZulj/blame.nvim', cmd = 'ToggleBlame' },
   {
     'NvChad/nvim-colorizer.lua',
     opts = { user_default_options = { AARRGGBB = true, names = false, tailwind = 'lsp' } },
@@ -49,6 +48,7 @@ return {
     keys = { { '<leader>mt', vim.cmd.MaximizerToggle, desc = 'MaximizerToggle' } },
   },
   { 'tpope/vim-abolish' },
+  { 'tpope/vim-fugitive' },
   { 'tpope/vim-repeat' },
   { 'tpope/vim-sleuth' },
   { 'tpope/vim-surround' },

@@ -7,6 +7,7 @@ local M = {
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
     { 'danielvolchek/tailiscope.nvim' },
     { 'tsakirist/telescope-lazy.nvim' },
+    { 'isak102/telescope-git-file-history.nvim', dependencies = 'tpope/vim-fugitive' },
   },
   cmd = 'Telescope',
   event = 'LspAttach',
@@ -33,6 +34,7 @@ local M = {
     { '<leader>gs', '<cmd>Telescope git_status<CR>' },
     { '<leader>gl', '<cmd>Telescope git_commits<CR>' },
     { '<leader>gL', '<cmd>Telescope git_bcommits<CR>' },
+    { '<leader>gh', '<cmd>Telescope git_file_history<CR>' },
 
     -- Workspace symbols
     { '<leader>sw', '<cmd>Telescope lsp_dynamic_workspace_symbols<CR>' },
@@ -137,6 +139,7 @@ function M.config()
 
   telescope.load_extension('dap')
   telescope.load_extension('fzf')
+  telescope.load_extension('git_file_history')
   telescope.load_extension('lazy')
   telescope.load_extension('luasnip')
   telescope.load_extension('notify')
