@@ -14,6 +14,7 @@ return {
   'nvim-neotest/neotest',
   dependencies = {
     'nvim-lua/plenary.nvim',
+    'nvim-neotest/nvim-nio',
     'jackieaskins/neotest-jest',
     'antoinemadec/FixCursorHold.nvim',
   },

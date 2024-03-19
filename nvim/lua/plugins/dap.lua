@@ -55,7 +55,11 @@ return {
         adapters = { 'pwa-node', 'pwa-chrome' },
       },
     },
-    { 'rcarriga/nvim-dap-ui', opts = { floating = { border = vim.g.border_style } } },
+    {
+      'rcarriga/nvim-dap-ui',
+      dependencies = 'nvim-neotest/nvim-nio',
+      opts = { floating = { border = vim.g.border_style } },
+    },
     { 'theHamsta/nvim-dap-virtual-text', config = true },
   },
   config = function()
