@@ -38,6 +38,11 @@ return {
       virtual_text = { enabled = true, hl = 'LightBulbVirtText' },
     },
   },
+  {
+    'luckasRanarison/tailwind-tools.nvim',
+    config = true,
+    ft = { 'css', 'hmtl', 'javascript', 'javascriptreact', 'svelte', 'typescriptreact', 'tsx' },
+  },
   { 'matze/vim-move', keys = { '<M-h>', '<M-j>', '<M-k>', '<M-l>' } },
   { 'mcauley-penney/visual-whitespace.nvim', config = true },
   { 'nvim-treesitter/nvim-treesitter-context', opts = { multiline_threshold = 1 } },
