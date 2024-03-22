@@ -1,5 +1,11 @@
 return {
   {
+    'MeanderingProgrammer/markdown.nvim',
+    dependencies = 'nvim-treesitter/nvim-treesitter',
+    config = true,
+    ft = 'markdown',
+  },
+  {
     'NvChad/nvim-colorizer.lua',
     opts = { user_default_options = { AARRGGBB = true, names = false, tailwind = 'lsp' } },
   },
