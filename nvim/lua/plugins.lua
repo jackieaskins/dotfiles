@@ -66,4 +66,5 @@ return {
   { 'tpope/vim-surround' },
   { 'tzachar/highlight-undo.nvim', config = true, keys = { '<C-r>', 'u' } },
   { 'wintermute-cell/gitignore.nvim', cmd = 'Gitignore' },
+  { 'zeioth/garbage-day.nvim', dependencies = 'neovim/nvim-lspconfig', event = 'VeryLazy', config = true },
 }
