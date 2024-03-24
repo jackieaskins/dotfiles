@@ -11,7 +11,7 @@ local function get_hl(hl)
 end
 
 local function get_filename_display()
-  return require('line_components.filename').get_filename_display(
+  return require('status_components.filename').get_filename_display(
     vim.api.nvim_buf_get_name(0),
     vim.fn.bufnr(),
     vim.w.quickfix_title,

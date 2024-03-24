@@ -36,7 +36,7 @@ return {
       local bufnr = get_bufnr(tabnr)
 
       local function get_bufname()
-        return require('line_components.filename').get_filename_display(
+        return require('status_components.filename').get_filename_display(
           vim.fn.bufname(bufnr),
           bufnr,
           vim.fn.gettabwinvar(tabnr, vim.fn.tabpagewinnr(tabnr) or 0, 'quickfix_title'),
