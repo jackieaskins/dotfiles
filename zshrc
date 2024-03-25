@@ -104,10 +104,6 @@ export FZF_DEFAULT_OPTS=" \
 [[ $- == *i* ]] && source "$HOMEBREW_PREFIX/opt/fzf/shell/completion.zsh" 2> /dev/null
 source "$HOMEBREW_PREFIX/opt/fzf/shell/key-bindings.zsh"
 
-# BAT
-# TODO: Update when light mode is enabled
-export BAT_THEME="Catppuccin Macchiato"
-
 #--------------------------------------------------------------------#
 #                      ZSH Configuration Files                       #
 #--------------------------------------------------------------------#

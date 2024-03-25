@@ -27,3 +27,5 @@ Brewfile.lock.json
 /theme
 
 /tmux/active_theme.conf
+
+/bat/config

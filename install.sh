@@ -159,6 +159,9 @@ success_echo "Dotfiles backed up and symlinked."
 #--------------------------------------------------------------------#
 echo -e "Configuring Bat..."
 bat cache --build
+if [ ! -f "$dotfiles_dir/bat/config" ]; then
+  echo '--theme="Catppuccin Macchiato"' > "$dotfiles_dir/bat/config"
+fi
 success_echo "Bat configured."
 
 #--------------------------------------------------------------------#
