@@ -1,17 +1,19 @@
 local M = {
   'nvim-telescope/telescope.nvim',
   dependencies = {
-    { 'nvim-lua/plenary.nvim' },
     { 'benfowler/telescope-luasnip.nvim' },
+    { 'catgoose/telescope-helpgrep.nvim' },
+    { 'danielvolchek/tailiscope.nvim' },
+    { 'isak102/telescope-git-file-history.nvim', dependencies = 'tpope/vim-fugitive' },
+    { 'nvim-lua/plenary.nvim' },
     { 'nvim-telescope/telescope-dap.nvim' },
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
-    { 'danielvolchek/tailiscope.nvim' },
     { 'tsakirist/telescope-lazy.nvim' },
-    { 'isak102/telescope-git-file-history.nvim', dependencies = 'tpope/vim-fugitive' },
   },
   cmd = 'Telescope',
   event = 'LspAttach',
   keys = {
+    -- Built-in
     { '<leader>ht', '<cmd>Telescope help_tags<CR>' },
     { '<leader>hi', '<cmd>Telescope highlights<CR>' },
     { '<leader>km', '<cmd>Telescope keymaps<CR>' },
@@ -26,19 +28,15 @@ local M = {
     { '<leader>wd', '<cmd>Telescope diagnostics<CR>' },
     { '<leader>we', '<cmd>Telescope diagnostics severity_limit=' .. vim.diagnostic.severity.E .. '<CR>' },
     { '<leader>z=', '<cmd>Telescope spell_suggest<CR>' },
-    { '<leader>sn', '<cmd>Telescope luasnip<CR>' },
-
-    { '<leader>la', '<cmd>Telescope lazy<CR>' },
-
-    -- Git commands
     { '<leader>gs', '<cmd>Telescope git_status<CR>' },
     { '<leader>gl', '<cmd>Telescope git_commits<CR>' },
     { '<leader>gL', '<cmd>Telescope git_bcommits<CR>' },
-    { '<leader>gh', '<cmd>Telescope git_file_history<CR>' },
 
-    -- Workspace symbols
-    { '<leader>sw', '<cmd>Telescope lsp_dynamic_workspace_symbols<CR>' },
-    { '<leader>sd', '<cmd>Telescope lsp_document_symbols symbols=constant,function,method<CR>' },
+    -- Extensions
+    { '<leader>gh', '<cmd>Telescope git_file_history<CR>' },
+    { '<leader>hg', '<cmd>Telescope helpgrep<CR>' },
+    { '<leader>la', '<cmd>Telescope lazy<CR>' },
+    { '<leader>sn', '<cmd>Telescope luasnip<CR>' },
   },
 }
 
@@ -57,6 +55,9 @@ local function configure_lsp_keymaps()
         bsk('n', 'gpd', '<cmd>Telescope lsp_definitions jump_type=never<CR>')
         bsk('n', 'gr', '<cmd>Telescope lsp_references include_declaration=false<CR>')
         bsk('n', 'gpr', '<cmd>Telescope lsp_references include_declaration=false jump_type=never<CR>')
+
+        bsk('n', '<leader>sw', '<cmd>Telescope lsp_dynamic_workspace_symbols<CR>')
+        bsk('n', '<leader>sd', '<cmd>Telescope lsp_document_symbols symbols=constant,function,method<CR>')
       end,
     },
   })
@@ -128,6 +129,9 @@ function M.config()
         override_file_sorter = true,
         case_mode = 'smart_case',
       },
+      helpgrep = {
+        ignore_paths = { vim.fn.stdpath('state') .. '/lazy/readme' },
+      },
     },
     pickers = {
       find_files = {
@@ -140,6 +144,7 @@ function M.config()
   telescope.load_extension('dap')
   telescope.load_extension('fzf')
   telescope.load_extension('git_file_history')
+  telescope.load_extension('helpgrep')
   telescope.load_extension('lazy')
   telescope.load_extension('luasnip')
   telescope.load_extension('notify')
