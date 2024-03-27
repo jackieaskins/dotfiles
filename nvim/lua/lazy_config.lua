@@ -18,5 +18,5 @@ require('lazy').setup('plugins', {
     path = '~/vim-plugins',
     patterns = vim.g.is_personal_machine and { 'jackieaskins' } or {},
   },
-  ui = { border = vim.g.border_style },
+  ui = { backdrop = 100, border = vim.g.border_style },
 })
