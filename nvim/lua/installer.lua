@@ -9,7 +9,7 @@ local pkg_managers = {
   gem = 'gem install --user-install',
   go = 'go install',
   npm = 'npm install -g',
-  pip3 = 'pip3 install',
+  pip = 'pipx install',
 }
 
 ---@class RegisteredCommands

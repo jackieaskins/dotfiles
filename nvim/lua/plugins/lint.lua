@@ -1,7 +1,7 @@
 local filter_table_by_keys = require('utils').filter_table_by_keys
 
 local linters = {
-  gdlint = { 'pip3', 'git+https://github.com/Scony/godot-gdscript-toolkit.git' },
+  gdlint = { 'pip', 'git+https://github.com/Scony/godot-gdscript-toolkit.git' },
 }
 local supported_linters = vim.g.supported_linters and filter_table_by_keys(linters, vim.g.supported_linters) or linters
 local linters_by_filetype = {

@@ -14,7 +14,7 @@ local formatters = {
   },
   gdformat = {
     name = 'gdformat',
-    install_cmd = { 'pip3', 'git+https://github.com/Scony/godot-gdscript-toolkit.git' },
+    install_cmd = { 'pip', 'git+https://github.com/Scony/godot-gdscript-toolkit.git' },
     required_file = 'project.godot',
   },
 }
