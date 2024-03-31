@@ -15,7 +15,7 @@ local function statusline_component(hl, component)
   return hl_str
 end
 
-local function active_clients()
+local function get_active_clients()
   local all_names = {}
   local filetype = vim.bo.filetype
 
@@ -41,7 +41,9 @@ local function active_clients()
     table.insert(all_names, formatter.name)
   end
 
-  return table.concat(all_names, '|')
+  local client_str = table.concat(all_names, '|')
+
+  return #client_str > 0 and '󰣖 ' .. client_str or ''
 end
 
 local function get_filename()
@@ -84,7 +86,7 @@ return {
           filetype,
         }, ' ')
       ),
-      statusline_component('StatusLineSection', active_clients()),
+      statusline_component('StatusLineSection', get_active_clients()),
       statusline_component('StatusLineMode', '%l:%c|%p%%'),
     })
   end,
