@@ -51,6 +51,10 @@ return {
           -- highlight-undo.nvim
           HighlightUndo = { link = 'IncSearch' },
 
+          -- nvim-cmp
+          CmpItemAbbrMatch = { fg = colors.blue, style = { 'bold' } },
+          CmpItemAbbrMatchFuzzy = { fg = colors.blue, style = { 'bold' } },
+
           -- nvim-hlslens
           HlSearchLens = search,
 

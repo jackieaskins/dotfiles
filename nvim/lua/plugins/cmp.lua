@@ -36,6 +36,7 @@ return {
           require('luasnip').lsp_expand(args.body)
         end,
       },
+      view = { entries = { follow_cursor = true } },
       -- Order dictates priority
       sources = cmp.config.sources({
         { name = 'luasnip' },
@@ -59,7 +60,7 @@ return {
           if source == 'nvim_lsp' then
             pcall(function()
               local utils = require('lsp.utils')
-              vim_item.menu = utils.get_server_display_name(entry.source.source.client.name)
+              vim_item.menu = '[' .. utils.get_server_display_name(entry.source.source.client.name) .. ']'
             end)
           end
 
