@@ -1,5 +1,9 @@
 local augroup = require('utils').augroup
 
+augroup('conceal', {
+  { 'FileType', pattern = 'html,svelte', command = 'setlocal conceallevel=2' },
+})
+
 augroup('no_auto_comment', {
   { 'FileType', command = 'setlocal formatoptions-=r formatoptions-=o' },
 })
