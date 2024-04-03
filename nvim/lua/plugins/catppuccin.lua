@@ -51,6 +51,15 @@ return {
           -- highlight-undo.nvim
           HighlightUndo = { link = 'IncSearch' },
 
+          -- markdown.nvim
+          CodeBlock = { bg = colors.crust },
+          markdownH1 = { fg = colors.base, bg = colors.red },
+          markdownH2 = { fg = colors.base, bg = colors.peach },
+          markdownH3 = { fg = colors.base, bg = colors.yellow },
+          markdownH4 = { fg = colors.base, bg = colors.green },
+          markdownH5 = { fg = colors.base, bg = colors.sapphire },
+          markdownH6 = { fg = colors.base, bg = colors.lavender },
+
           -- nvim-cmp
           CmpItemAbbrMatch = { fg = colors.blue, style = { 'bold' } },
           CmpItemAbbrMatchFuzzy = { fg = colors.blue, style = { 'bold' } },
