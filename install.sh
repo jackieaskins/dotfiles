@@ -117,7 +117,7 @@ success_echo "Backup directory created at $backup_dir."
 function backup_and_symlink() {
   local dotfile_path="$HOME/$1"
   local backup_path="$backup_dir/$2"
-  local sym_path="$dotfiles_dir/$3"
+  local sym_path="$dotfiles_dir/$2"
 
   # Check if file or directory exists at $dotfile_path
   if [ -f "$dotfile_path" ] || [ -d "$dotfile_path" ]; then
@@ -139,19 +139,19 @@ function backup_and_symlink() {
 }
 
 echo -e "Backing up and symlinking dotfiles..."
-#                  dotfile            backup           sym
-backup_and_symlink .zshrc             zshrc            zshrc
-backup_and_symlink .vimrc             vimrc            vimrc
-backup_and_symlink .vim               vim              vim
-backup_and_symlink .hammerspoon       hammerspoon      hammerspoon
-backup_and_symlink .config/bat        bat              bat
-backup_and_symlink .config/nvim       nvim             nvim
-backup_and_symlink .config/karabiner  karabiner        karabiner
-backup_and_symlink .config/wezterm    wezterm          wezterm
-backup_and_symlink .config/kitty      kitty            kitty
-backup_and_symlink .tmux.conf         tmux.conf        tmux.conf
-backup_and_symlink .gitignore_global  gitignore_global gitignore_global
-#                  dotfile            backup           sym
+#                  dotfile            backup
+backup_and_symlink .zshrc             zshrc
+backup_and_symlink .vimrc             vimrc
+backup_and_symlink .vim               vim
+backup_and_symlink .hammerspoon       hammerspoon
+backup_and_symlink .config/bat        bat
+backup_and_symlink .config/nvim       nvim
+backup_and_symlink .config/karabiner  karabiner
+backup_and_symlink .config/wezterm    wezterm
+backup_and_symlink .config/kitty      kitty
+backup_and_symlink .tmux.conf         tmux.conf
+backup_and_symlink .gitignore_global  gitignore_global
+#                  dotfile            backup
 success_echo "Dotfiles backed up and symlinked."
 
 #--------------------------------------------------------------------#
