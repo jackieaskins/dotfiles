@@ -60,10 +60,6 @@ return {
           markdownH5 = { fg = colors.base, bg = colors.sapphire },
           markdownH6 = { fg = colors.base, bg = colors.lavender },
 
-          -- nvim-cmp
-          CmpItemAbbrMatch = { fg = colors.blue, style = { 'bold' } },
-          CmpItemAbbrMatchFuzzy = { fg = colors.blue, style = { 'bold' } },
-
           -- nvim-hlslens
           HlSearchLens = search,
 
