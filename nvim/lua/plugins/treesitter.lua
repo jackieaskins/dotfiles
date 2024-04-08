@@ -76,12 +76,6 @@ function M.config()
       },
     },
 
-    -- https://github.com/JoosepAlviste/nvim-ts-context-commentstring
-    context_commentstring = {
-      enable = true,
-      enable_autocmd = false,
-    },
-
     -- https://github.com/RRethy/nvim-treesitter-endwise
     endwise = {
       enable = true,
