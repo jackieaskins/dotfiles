@@ -40,10 +40,7 @@ local matchers = {
   },
 }
 
-local ok, custom_matchers = pcall(require, 'custom.gx-matchers')
-if ok then
-  vim.list_extend(matchers, custom_matchers)
-end
+vim.list_extend(matchers, vim.g.custom_matchers)
 
 local default_matcher = {
   file_pattern = [[.*]],

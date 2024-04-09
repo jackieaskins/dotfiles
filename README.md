@@ -34,15 +34,11 @@ Return a `table` in `~/dotfiles/hammerspoon/custom.lua`, the following keys can 
 
 Use the following files to customize Neovim:
 - General settings: `~/dotfiles/nvim/lua/custom.lua`
-- Custom plugins: `~/dotfiles/nvim/lua/plugins/custom-[plugin-name].lua`
-- Custom LSP configs: `~/dotfiles/nvim/lua/custom/lspconfig.lua`
-- Custom GX matchers: `~/dotfiles/nvim/lua/custom/gx-matchers.lua` 
+- Custom plugins: `~/dotfiles/nvim/lua/plugins/custom.lua`
 
-#### Overriding Supported LSP Servers
-
-To override the list of supported LSP servers, add the following global variables to `~/dotfiles/nvim/lua/custom.lua`:
-- `vim.g.additional_server_commands` - Table from server name to install command, used to add support for installing additional servers. See `~/dotfiles/nvim/lua/lsp/servers.lua` for install command references.
-- `vim.g.supported_servers` - List of server names to override the default list of supported servers. Ensure any additional servers are added to this list.
+#### Configuration Variables
+- The list of supported configuration variables can be found at the top of `~/dotfiles/nvim/lua/settings.lua`
+    - To override the default values of these settings, set them in `~/dotfiles/nvim/lua/custom.lua`
 
 ### Tmux
 

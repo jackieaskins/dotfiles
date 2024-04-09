@@ -6,8 +6,9 @@ vim.g.is_personal_machine = false
 vim.g.supported_debuggers = {}
 vim.g.supported_formatters = {}
 vim.g.supported_linters = {}
-vim.g.supported_servers = {}
 vim.g.additional_server_commands = {}
+vim.g.supported_servers = {}
+vim.g.custom_matchers = {}
 
 vim.g.border_style = { '╔', '═', '╗', '║', '╝', '═', '╚', '║' }
 
