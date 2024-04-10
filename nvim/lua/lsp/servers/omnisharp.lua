@@ -1,7 +1,11 @@
 ---@type LspServer
 return {
   config = function(config)
-    config.organize_imports_on_format = true
+    config.settings = {
+      FormattingOptions = {
+        OrganizeImports = true,
+      },
+    }
     config.cmd = {
       'dotnet',
       vim.fn.stdpath('data') .. '/lsp-servers/omnisharp-roslyn/OmniSharp.dll',
