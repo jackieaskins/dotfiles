@@ -1,3 +1,9 @@
+---@class GxMatcher
+---@field file_pattern string
+---@field pattern string
+---@field handler fun(match: string[]): string
+
+---@type GxMatcher[]
 local matchers = {
   {
     file_pattern = [[Brewfile$]],

@@ -18,11 +18,17 @@ return {
       }
     end
 
+    for server_name, config in pairs(vim.g.additional_servers) do
+      if not configs[server_name] then
+        configs[server_name] = config.lspconfig
+      end
+    end
+
     require('lspconfig.ui.windows').default_options.border = vim.g.border_style
 
     require('neodev').setup({
       library = {
-        plugins = { 'catppuccin', 'nvim-treesitter', 'plenary.nvim' },
+        plugins = { 'catppuccin', 'nvim-treesitter', 'plenary.nvim', 'nvim-lspconfig' },
       },
     })
 

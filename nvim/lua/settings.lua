@@ -1,15 +1,29 @@
 local map = require('utils').map
 
 -- Configuration Variables
+---@type boolean
 vim.g.is_personal_machine = false
 
-vim.g.supported_debuggers = {}
-vim.g.supported_formatters = {}
-vim.g.supported_linters = {}
-vim.g.additional_server_commands = {}
+---@class AdditionalServer
+---@field lspconfig lspconfig.Config
+---@field server LspServer
+
+---@type table<string, AdditionalServer>
+vim.g.additional_servers = {}
+---@type string[]
 vim.g.supported_servers = {}
+
+---@type string[]
+vim.g.supported_debuggers = {}
+---@type string[]
+vim.g.supported_formatters = {}
+---@type string[]
+vim.g.supported_linters = {}
+
+---@type GxMatcher[]
 vim.g.custom_matchers = {}
 
+---@type string[]
 vim.g.border_style = { '╔', '═', '╗', '║', '╝', '═', '╚', '║' }
 
 -- Map Leader to Space

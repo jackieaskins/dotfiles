@@ -27,17 +27,19 @@ local servers = {
   yamlls = { install = { 'npm', 'yaml-language-server' } },
 }
 
-local all_servers = vim.tbl_extend('force', servers, vim.g.additional_server_commands or {})
+for server_name, config in pairs(vim.g.additional_servers) do
+  servers[server_name] = config.server
+end
 
 local supported_servers = {}
 if vim.g.supported_servers then
   for _, server_name in ipairs(vim.g.supported_servers) do
-    if all_servers[server_name] then
-      supported_servers[server_name] = all_servers[server_name]
+    if servers[server_name] then
+      supported_servers[server_name] = servers[server_name]
     end
   end
 else
-  supported_servers = all_servers
+  supported_servers = servers
 end
 
 local install_cmds = {}
