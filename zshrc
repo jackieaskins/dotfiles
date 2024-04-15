@@ -9,11 +9,15 @@ else
 fi
 fpath=($HOMEBREW_PREFIX/share/zsh/site-functions $fpath)
 
+. $(brew --prefix asdf)/libexec/asdf.sh
+
 #--------------------------------------------------------------------#
 #                                Path                                #
 #--------------------------------------------------------------------#
 [ -d $HOME/.cargo/bin ] && path+=($HOME/.cargo/bin)
 [ -d $HOME/dotfiles/bin ] && path+=($HOME/dotfiles/bin)
+[ -d $HOME/.local/bin ] && path+=($HOME/.local/bin)
+path+=("$(ruby -e 'puts Gem.user_dir')/bin")
 
 if [ -d $HOME/go ]; then
   export GOPATH=$HOME/go
