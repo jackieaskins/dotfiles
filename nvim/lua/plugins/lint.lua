@@ -2,10 +2,12 @@ local filter_table_by_keys = require('utils').filter_table_by_keys
 
 local linters = {
   gdlint = { 'pip', 'git+https://github.com/Scony/godot-gdscript-toolkit.git' },
+  swiftlint = { 'brew', 'swiftlint' },
 }
 local supported_linters = vim.g.supported_linters and filter_table_by_keys(linters, vim.g.supported_linters) or linters
 local linters_by_filetype = {
-  gdscript = supported_linters.gdlint and nil or { 'gdlint' },
+  gdscript = supported_linters.gdlint and { 'gdlint' } or nil,
+  swift = supported_linters.swiftlint and { 'swiftlint' } or nil,
 }
 
 local function get_linters_for_filetype(filetype)
@@ -19,8 +21,8 @@ return {
   init = function()
     require('utils').augroup('lint', {
       {
-        { 'BufWritePost', 'InsertLeave', 'TextChanged' },
-        pattern = '*.gd',
+        { 'BufReadPost', 'BufWritePost', 'InsertLeave', 'TextChanged' },
+        pattern = '*.gd,*.swift',
         callback = function()
           require('lint').try_lint()
         end,

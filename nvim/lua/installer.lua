@@ -14,7 +14,7 @@ local pkg_managers = {
 
 ---@class RegisteredCommands
 ---@field commands table<string, InstallCommand>
----@field install_dir string
+---@field install_dir? string
 
 ---@type table<string, RegisteredCommands>
 local registered_commands = {}
@@ -24,7 +24,7 @@ local M = {}
 ---Register install group with installation directory and commands
 ---@param group_name string
 ---@param commands table<string, InstallCommand>
----@param install_dir string
+---@param install_dir? string
 function M.register(group_name, commands, install_dir)
   if vim.tbl_isempty(commands) then
     return
@@ -97,10 +97,18 @@ function M.install(group_name, commands, install_dir)
 
   local script = table.concat(script_lines, '\n')
 
-  os.execute('mkdir -p ' .. install_dir)
+  if install_dir then
+    os.execute('mkdir -p ' .. install_dir)
+  end
+
   vim.cmd.new()
   vim.cmd.startinsert()
-  vim.fn.termopen({ 'sh', '-c', script }, { cwd = install_dir })
+
+  if install_dir then
+    vim.fn.termopen({ 'sh', '-c', script }, { cwd = install_dir })
+  else
+    vim.fn.termopen({ 'sh', '-c', script })
+  end
 end
 
 -- TODO: Make this better

@@ -17,6 +17,10 @@ local formatters = {
     install_cmd = { 'pip', 'git+https://github.com/Scony/godot-gdscript-toolkit.git' },
     required_file = 'project.godot',
   },
+  swiftformat = {
+    name = 'swiftformat',
+    install_cmd = { 'brew', 'swiftformat' },
+  },
 }
 
 local supported_formatters = vim.g.supported_formatters and filter_table_by_keys(formatters, vim.g.supported_formatters)
@@ -36,6 +40,7 @@ local formatter_by_filetype = {
   markdown = supported_formatters.prettierd,
   scss = supported_formatters.prettierd,
   svelte = supported_formatters.prettierd,
+  swift = supported_formatters.swiftformat,
   typescript = supported_formatters.prettierd,
   typescriptreact = supported_formatters.prettierd,
 }
@@ -44,7 +49,7 @@ local function get_formatter_for_filetype(filetype)
   local formatter = formatter_by_filetype[filetype]
   local root_pattern = require('lspconfig').util.root_pattern
 
-  if formatter and root_pattern(formatter.required_file)(vim.fn.expand('%:p')) then
+  if formatter and (not formatter.required_file or root_pattern(formatter.required_file)(vim.fn.expand('%:p'))) then
     return formatter
   end
 

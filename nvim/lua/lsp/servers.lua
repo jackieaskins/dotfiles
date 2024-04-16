@@ -1,7 +1,7 @@
 ---@class LspServer
 ---@field config function?
 ---@field display string?
----@field install InstallCommand
+---@field install InstallCommand?
 ---@field skip_lspconfig boolean?
 
 ---@type table<string, LspServer>
@@ -15,10 +15,11 @@ local servers = {
   html = require('lsp.servers.html'),
   jdtls = require('lsp.servers.jdtls'),
   jsonls = require('lsp.servers.jsonls'),
+  lua_ls = require('lsp.servers.lua_ls'),
   omnisharp = require('lsp.servers.omnisharp'),
   pyright = { install = { 'npm', 'pyright' } },
   solargraph = { install = { 'gem', 'solargraph' } },
-  lua_ls = require('lsp.servers.lua_ls'),
+  sourcekit = {},
   svelte = require('lsp.servers.svelte'),
   tailwindcss = require('lsp.servers.tailwindcss'),
   ['tmux-language-server'] = require('lsp.servers.tmux-language-server'),

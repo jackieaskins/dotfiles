@@ -21,6 +21,10 @@
       {
         "language": "cs",
         "path": "./snippets/unity.json"
+      },
+      {
+        "language": "swift",
+        "path": "./snippets/swift.json"
       }
     ]
   }

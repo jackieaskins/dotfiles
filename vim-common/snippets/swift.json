@@ -1,0 +1,18 @@
+{
+	"UIView": {
+		"prefix": "view",
+		"body": [
+			"import SwiftUI",
+			"",
+			"struct ${1:$TM_FILENAME_BASE}: View {",
+			"\tvar body: some View {",
+			"\t\tText(\"Hello, world!\")",
+			"\t}",
+			"}",
+			"",
+			"#Preview {",
+			"\t$1()",
+			"}"
+		]
+	}
+}
