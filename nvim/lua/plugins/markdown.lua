@@ -16,5 +16,6 @@ return {
         },
       },
     },
+    render_modes = { 'n', 'c', 'v', 'V' },
   },
 }
