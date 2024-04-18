@@ -52,7 +52,6 @@ return {
           HighlightUndo = { link = 'IncSearch' },
 
           -- markdown.nvim
-          CodeBlock = { bg = colors.crust },
           markdownH1 = { fg = colors.base, bg = colors.red },
           markdownH2 = { fg = colors.base, bg = colors.peach },
           markdownH3 = { fg = colors.base, bg = colors.yellow },

@@ -4,7 +4,6 @@ return {
   ft = 'markdown',
   opts = {
     highlights = {
-      code = 'CodeBlock',
       heading = {
         backgrounds = {
           'markdownH1',
