@@ -9,7 +9,8 @@ else
 fi
 fpath=($HOMEBREW_PREFIX/share/zsh/site-functions $fpath)
 
-. $(brew --prefix asdf)/libexec/asdf.sh
+asdf_prefix="$(brew --prefix asdf)"
+[ -d $asdf_prefix ] && . $asdf_prefix/libexec/asdf.sh
 
 #--------------------------------------------------------------------#
 #                                Path                                #
