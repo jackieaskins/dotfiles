@@ -12,7 +12,7 @@ local should_enable_hints = false
 local function enable_hints_for_buffer(bufnr)
   for _, client in ipairs(vim.lsp.get_clients({ bufnr = bufnr })) do
     if client.supports_method('textDocument/inlayHint') then
-      vim.lsp.inlay_hint.enable(bufnr, should_enable_hints)
+      vim.lsp.inlay_hint.enable(should_enable_hints, { bufnr = bufnr })
       return
     end
   end
