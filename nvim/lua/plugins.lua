@@ -60,4 +60,5 @@ return {
   { 'tpope/vim-surround' },
   { 'tzachar/highlight-undo.nvim', config = true, keys = { '<C-r>', 'u' } },
   { 'wintermute-cell/gitignore.nvim', cmd = 'Gitignore' },
+  { 'yorickpeterse/nvim-tree-pairs', config = true, dependencies = 'nvim-treesitter/nvim-treesitter' },
 }
