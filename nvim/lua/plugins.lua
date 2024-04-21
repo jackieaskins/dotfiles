@@ -17,13 +17,6 @@ return {
     },
   },
   {
-    'j-hui/fidget.nvim',
-    opts = {
-      notification = { window = { border = vim.g.border_style } },
-      integration = { ['nvim-tree'] = { enable = false } },
-    },
-  },
-  {
     'jackieaskins/quick-scope',
     init = function()
       vim.g.qs_buftype_blacklist = { 'terminal' }
