@@ -30,9 +30,6 @@ return {
     local select_behavior = { behavior = cmp.SelectBehavior.Insert }
 
     cmp.setup({
-      experimental = {
-        ghost_text = true,
-      },
       preselect = cmp.PreselectMode.Item,
       snippet = {
         expand = function(args)
