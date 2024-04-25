@@ -16,12 +16,14 @@ return {
       pymobiledevice3 = { 'pip', 'pymobiledevice3' },
     })
   end,
+  ft = 'swift',
   keys = {
     { '<leader>X', '<cmd>XcodebuildPicker<CR>' },
     { '<leader>xf', '<cmd>XcodebuildProjectManager<CR>' },
     { '<leader>xb', '<cmd>XcodebuildBuild<CR>' },
-    { '<leader>xB', '<cmd>XcodebuildBuildForTesting<CR>' },
+    { '<leader>xB', '<cmd>XcodebuildCleanBuild<CR>' },
     { '<leader>xr', '<cmd>XcodebuildBuildRun<CR>' },
+    { '<leader>xR', '<cmd>XcodebuildRun<CR>' },
     { '<leader>xl', '<cmd>XcodebuildToggleLogs<CR>' },
     { '<leader>xd', '<cmd>XcodebuildSelectDevice<CR>' },
     { '<leader>xx', '<cmd>XcodebuildQuickfixLine<CR>' },
