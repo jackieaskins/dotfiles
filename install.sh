@@ -81,12 +81,13 @@ success_echo "Configured System Settings."
 #                         Global Git Config                          #
 #--------------------------------------------------------------------#
 echo -e "Configuring Git..."
+git config --global advice.skippedCherryPicks false
+git config --global branch.sort -committerdate
+git config --global column.ui auto
 git config --global core.excludesfile ~/.gitignore_global
 git config --global pull.rebase true
-git config --global rerere.enabled true
 git config --global rebase.autoStash true
-git config --global column.ui auto
-git config --global branch.sort -committerdate
+git config --global rerere.enabled true
 success_echo "Configured Git."
 
 #--------------------------------------------------------------------#
