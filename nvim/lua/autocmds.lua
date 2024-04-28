@@ -53,3 +53,8 @@ augroup('lsp_formatting', {
 augroup('no_modify', {
   { 'BufRead', pattern = '**/node_modules/**', command = 'setlocal nomodifiable' },
 })
+
+-- Borrowed from https://github.com/Abstract-IDE/abstract-autocmds
+augroup('vim_window_resize', {
+  { 'VimResized', command = 'tabdo wincmd =' },
+})
