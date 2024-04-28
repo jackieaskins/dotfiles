@@ -138,3 +138,8 @@ end)
 map('n', '<leader>ql', function()
   require('runner').run_command('qmk lint')
 end)
+
+-- Borrowed from https://github.com/Abstract-IDE/abstract-autocmds
+-- Keep selection after indenting
+map('v', '<', '<gv')
+map('v', '>', '>gv')
