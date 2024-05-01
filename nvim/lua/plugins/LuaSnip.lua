@@ -19,6 +19,9 @@ return {
     { '<C-j>', 'expand_or_jump', nil, 'Expand snippet or jump to next placeholder', { 'i', 's' } },
     { '<C-k>', 'jump', -1, 'Jump to previous placeholder', { 'i', 's' } },
   }),
+  dependencies = {
+    'rafamadriz/friendly-snippets',
+  },
   config = function()
     local luasnip = require('luasnip')
     local snippet = luasnip.snippet
@@ -28,9 +31,7 @@ return {
     local text_node = luasnip.text_node
     local fmt = require('luasnip.extras.fmt').fmt
 
-    require('luasnip.loaders.from_vscode').lazy_load({
-      paths = { '~/dotfiles/vim-common' },
-    })
+    require('luasnip.loaders.from_vscode').lazy_load()
 
     luasnip.config.set_config({
       updateevents = 'TextChanged,TextChangedI',
