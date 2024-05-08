@@ -1,5 +1,4 @@
 local utils = require('utils')
-local augroup, filter_table_by_keys = utils.augroup, utils.filter_table_by_keys
 
 local formatters = {
   prettierd = {
@@ -23,7 +22,8 @@ local formatters = {
   },
 }
 
-local supported_formatters = vim.g.supported_formatters and filter_table_by_keys(formatters, vim.g.supported_formatters)
+local supported_formatters = vim.g.supported_formatters
+    and utils.filter_table_by_keys(formatters, vim.g.supported_formatters)
   or formatters
 
 local formatter_by_filetype = {
@@ -69,16 +69,27 @@ return {
     end
     require('installer').register('formatter', install_cmds, vim.fn.stdpath('data') .. '/formatters')
 
-    augroup('format_on_save', {
+    utils.augroup('format_on_save', {
       {
         'BufWritePre',
-        callback = function(args)
+        callback = function()
           local formatter = get_formatter_for_filetype(vim.bo.filetype)
           if formatter then
-            require('conform').format({ bufnr = args.buf, formatters = { formatter.name } })
+            require('conform').format({ formatters = { formatter.name } })
           end
         end,
       },
     })
+
+    utils.user_command('Format', function()
+      local formatter = formatter_by_filetype[vim.bo.filetype]
+
+      if formatter then
+        require('conform').format({ formatters = { formatter.name } })
+        vim.cmd.write()
+      else
+        vim.notify('No formatter defined for filetype', vim.log.levels.ERROR)
+      end
+    end)
   end,
 }
