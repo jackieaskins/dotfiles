@@ -12,6 +12,7 @@ return {
           vim.cmd.DiffviewOpen()
         end
       end,
+      desc = 'DiffviewToggle',
     },
   },
 }

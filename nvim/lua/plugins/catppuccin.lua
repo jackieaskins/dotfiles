@@ -47,6 +47,9 @@ return {
           WinBarDiagnosticHint = { fg = colors.teal, bg = colors.base },
           WinBarDiagnosticInfo = { fg = colors.sky, bg = colors.base },
 
+          -- Treesitter Highlights
+          ['@string.special.url'] = { fg = colors.sky },
+
           -- Plugin Highlights
           -- highlight-undo.nvim
           HighlightUndo = { link = 'IncSearch' },
@@ -88,6 +91,7 @@ return {
         }
       end,
       integrations = {
+        diffview = true,
         fidget = true,
         indent_blankline = {
           enabled = true,

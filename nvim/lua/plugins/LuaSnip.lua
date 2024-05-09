@@ -19,9 +19,7 @@ return {
     { '<C-j>', 'expand_or_jump', nil, 'Expand snippet or jump to next placeholder', { 'i', 's' } },
     { '<C-k>', 'jump', -1, 'Jump to previous placeholder', { 'i', 's' } },
   }),
-  dependencies = {
-    'rafamadriz/friendly-snippets',
-  },
+  dependencies = { 'rafamadriz/friendly-snippets' },
   config = function()
     local luasnip = require('luasnip')
     local snippet = luasnip.snippet
@@ -36,6 +34,9 @@ return {
     luasnip.config.set_config({
       updateevents = 'TextChanged,TextChangedI',
     })
+
+    luasnip.filetype_extend('typescript', { 'tsdoc', 'javascript' })
+    luasnip.filetype_extend('typescriptreact', { 'tsdoc' })
 
     luasnip.add_snippets('typescriptreact', {
       snippet(
