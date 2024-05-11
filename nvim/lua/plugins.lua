@@ -39,6 +39,7 @@ return {
   { 'matze/vim-move', keys = { '<M-h>', '<M-j>', '<M-k>', '<M-l>' } },
   { 'mcauley-penney/visual-whitespace.nvim', config = true },
   { 'nvim-treesitter/nvim-treesitter-context', opts = { multiline_threshold = 1 } },
+  { 'nvim-zh/colorful-winsep.nvim', config = true, event = 'WinNew' },
   {
     'szw/vim-maximizer',
     init = function()
