@@ -91,7 +91,7 @@ return {
         }
       end,
       integrations = {
-        colorful_winsep = { enabled = true, color = 'mauve' },
+        colorful_winsep = { enabled = true, color = 'blue' },
         diffview = true,
         fidget = true,
         indent_blankline = {
