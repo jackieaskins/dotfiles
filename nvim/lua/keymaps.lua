@@ -13,8 +13,8 @@ end, { expr = true, desc = 'Properly indent empty line on insert' })
 
 -- Diagnostics
 map('n', 'g?', '<cmd>lua vim.diagnostic.open_float(0, { scope = "cursor" })<CR>')
-map('n', '[g', '<cmd>lua vim.diagnostic.goto_prev({ severity = { min = vim.diagnostic.severity.HINT } })<CR>')
-map('n', ']g', '<cmd>lua vim.diagnostic.goto_next({ severity = { min = vim.diagnostic.severity.HINT } })<CR>')
+map('n', '[g', vim.diagnostic.goto_prev, { desc = 'vim.diagnostic.goto_prev' })
+map('n', ']g', vim.diagnostic.goto_next, { desc = 'vim.diagnostic.goto_next' })
 map('n', '[e', '<cmd>lua vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR })<CR>')
 map('n', ']e', '<cmd>lua vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR })<CR>')
 
