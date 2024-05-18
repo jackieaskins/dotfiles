@@ -28,18 +28,6 @@ fi
 export PATH
 
 #--------------------------------------------------------------------#
-#                             Completion                             #
-#--------------------------------------------------------------------#
-# The following lines were added by compinstall
-zstyle ':completion:*' completer _expand _complete _ignored
-zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*'
-zstyle :compinstall filename '${HOME}/dotfiles/zshrc'
-
-autoload -Uz compinit
-compinit
-# End of lines added by compinstall
-
-#--------------------------------------------------------------------#
 #                               Prompt                               #
 #--------------------------------------------------------------------#
 autoload -U promptinit; promptinit
