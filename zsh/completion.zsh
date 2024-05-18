@@ -19,6 +19,7 @@ zstyle ':completion:*' group-name ''
 zstyle ':completion:*' squeeze-slashes true
 zstyle ':completion:*' complete-options true
 
+zmodload zsh/complist
 bindkey -M menuselect '^c' undo
 
 autoload -U compinit; compinit
