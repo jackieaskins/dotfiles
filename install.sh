@@ -71,11 +71,19 @@ success_echo "Succesfully set up Homebrew."
 #--------------------------------------------------------------------#
 #                          System Settings                           #
 #--------------------------------------------------------------------#
-echo -e "Configuring System Settings..."
-defaults write digital.twisted.noTunes replacement /Applications/Spotify.app
-success_echo "Configured System Settings."
+if [ $is_mac = true ]; then
+  echo -e "Configuring System Settings..."
 
-# TODO: Configure MacOS System Preferences
+  defaults write digital.twisted.noTunes replacement /Applications/Spotify.app
+
+  # Reduce spacing between status bar icons
+  defaults -currentHost write -globalDomain NSStatusItemSpacing -int 6
+  defaults -currentHost write -globalDomain NSStatusItemSelectionPadding -int 12
+
+  # TODO: Configure MacOS System Preferences
+
+  success_echo "Configured System Settings."
+fi
 
 #--------------------------------------------------------------------#
 #                         Global Git Config                          #

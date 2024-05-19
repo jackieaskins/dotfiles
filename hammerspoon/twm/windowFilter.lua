@@ -12,6 +12,7 @@ local windowFilters = mergeTables({
   Hammerspoon = { rejectTitles = 'Hammerspoon Console' },
   ['Karabiner-Elements'] = false,
   ['Keychain Access'] = false,
+  Raycast = false,
 }, CUSTOM.twmWindowFilters or {})
 
 return hs.window.filter
