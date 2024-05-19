@@ -1,13 +1,16 @@
 local watcher = vim.uv.new_fs_event()
 local theme_file = vim.fn.expand('~/dotfiles/theme')
 
-local function set_background(reload_tint)
+local function set_background(is_reload)
   local file = io.open(theme_file, 'r')
   local background = file and file:read() or 'dark'
   vim.opt.background = background
 
-  if reload_tint then
+  if is_reload then
     vim.cmd('Lazy reload tint.nvim')
+    local colors = require('colors').get_colors()
+    colors.base = nil
+    require('tiny-devicons-auto-colors').apply(colors)
   end
 end
 
