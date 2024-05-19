@@ -1,6 +1,5 @@
 return {
   'echasnovski/mini.splitjoin',
-  enabled = false,
   version = false,
   keys = { 'gJ', 'gS' },
   opts = function()

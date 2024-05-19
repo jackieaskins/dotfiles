@@ -1,5 +1,6 @@
 return {
   'Wansmer/treesj',
+  enabled = false,
   opts = function()
     return {
       use_default_keymaps = false,
