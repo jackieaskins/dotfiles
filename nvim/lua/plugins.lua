@@ -7,13 +7,6 @@ return {
   { 'dmmulroy/tsc.nvim', cmd = 'TSC', opts = { pretty_errors = false } },
   { 'fladson/vim-kitty', ft = { 'kitty', 'kitty-session' } },
   {
-    'hedyhli/outline.nvim',
-    cmd = { 'Outline', 'OutlineOpen' },
-    opts = {
-      outline_window = { auto_jump = true, hide_cursor = true },
-    },
-  },
-  {
     'jackieaskins/quick-scope',
     init = function()
       vim.g.qs_buftype_blacklist = { 'terminal' }
@@ -33,21 +26,12 @@ return {
     config = true,
     ft = { 'css', 'hmtl', 'javascript', 'javascriptreact', 'svelte', 'typescriptreact', 'tsx' },
   },
-  { 'matze/vim-move', keys = { '<M-h>', '<M-j>', '<M-k>', '<M-l>' } },
   { 'mcauley-penney/visual-whitespace.nvim', config = true },
   { 'nvim-treesitter/nvim-treesitter-context', opts = { multiline_threshold = 1 } },
-  {
-    'szw/vim-maximizer',
-    init = function()
-      vim.g.maximizer_set_default_mapping = 0
-    end,
-    keys = { { '<leader>mt', vim.cmd.MaximizerToggle, desc = 'MaximizerToggle' } },
-  },
   { 'tpope/vim-abolish' },
   { 'tpope/vim-fugitive' },
   { 'tpope/vim-repeat' },
   { 'tpope/vim-sleuth' },
   { 'tpope/vim-surround' },
   { 'tzachar/highlight-undo.nvim', config = true, keys = { '<C-r>', 'u' } },
-  { 'wintermute-cell/gitignore.nvim', cmd = 'Gitignore' },
 }
