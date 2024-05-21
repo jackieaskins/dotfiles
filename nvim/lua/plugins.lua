@@ -6,6 +6,7 @@ return {
   { 'chrisgrieser/nvim-early-retirement', config = true },
   { 'dmmulroy/tsc.nvim', cmd = 'TSC', opts = { pretty_errors = false } },
   { 'fladson/vim-kitty', ft = { 'kitty', 'kitty-session' } },
+  { 'folke/ts-comments.nvim', config = true, event = 'VeryLazy' },
   {
     'jackieaskins/quick-scope',
     init = function()
