@@ -2,7 +2,7 @@ return {
   'akinsho/git-conflict.nvim',
   lazy = false,
   keys = {
-    { '<leader>cq', vim.cmd.GitConflictListQf, 'GitConflictListQf' },
+    { '<leader>gc', vim.cmd.GitConflictListQf, 'GitConflictListQf', desc = 'GitConflictListQf' },
   },
   opts = {
     default_mappings = {

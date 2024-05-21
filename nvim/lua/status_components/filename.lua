@@ -1,5 +1,5 @@
 local modified_icon = ' '
-local readonly_icon = ' '
+local readonly_icon = ' '
 
 local filetype_displays = {
   NvimTree = '[NvimTree]',

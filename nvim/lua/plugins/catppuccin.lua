@@ -49,18 +49,14 @@ return {
 
           -- Treesitter Highlights
           ['@string.special.url'] = { fg = colors.sky },
+          ['@markup.link.label.markdown_inline'] = {
+            fg = colors.blue,
+            style = { 'underline' },
+          },
 
           -- Plugin Highlights
           -- highlight-undo.nvim
           HighlightUndo = { link = 'IncSearch' },
-
-          -- markdown.nvim
-          markdownH1 = { fg = colors.base, bg = colors.red },
-          markdownH2 = { fg = colors.base, bg = colors.peach },
-          markdownH3 = { fg = colors.base, bg = colors.yellow },
-          markdownH4 = { fg = colors.base, bg = colors.green },
-          markdownH5 = { fg = colors.base, bg = colors.sapphire },
-          markdownH6 = { fg = colors.base, bg = colors.lavender },
 
           -- nvim-hlslens
           HlSearchLens = search,

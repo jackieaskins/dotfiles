@@ -1,29 +1,38 @@
 local border_config = { border = vim.g.border_style, winhighlight = 'FloatBorder:FloatBorder' }
 local source_menu_map = {
-  calc = 'calc',
-  emmet = 'emmet',
-  luasnip = 'snip',
-  nvim_lsp = 'lsp',
   buffer = 'buff',
-  path = 'path',
+  calc = 'calc',
+  nvim_lsp = 'lsp',
   nvim_lsp_signature_help = 'sig',
+  path = 'path',
+  snippets = 'snip',
 }
 
 return {
   'hrsh7th/nvim-cmp',
   dependencies = {
-    {
-      'jackieaskins/cmp-emmet',
-      enabled = not require('lsp.utils').is_server_supported('emmet_language_server'),
-      build = 'npm run release',
-    },
     'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-calc',
     'hrsh7th/cmp-cmdline',
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-nvim-lsp-signature-help',
     'hrsh7th/cmp-path',
-    'saadparwaiz1/cmp_luasnip',
+    {
+      'garymjr/nvim-snippets',
+      keys = {
+        { '<C-j>', '<cmd>lua vim.snippet.jump(1)<CR>', mode = { 'i', 's' } },
+        { '<C-k>', '<cmd>lua vim.snippet.jump(-1)<CR>', mode = { 'i', 's' } },
+      },
+      opts = {
+        create_cmp_source = true,
+        search_paths = { vim.fn.expand('~/dotfiles/vim-common/snippets') },
+        extended_filetypes = {
+          javascript = { 'javascriptreact' },
+          javascriptreact = { 'javascript' },
+          typescriptreact = { 'typescript' },
+        },
+      },
+    },
   },
   config = function()
     local cmp = require('cmp')
@@ -33,15 +42,14 @@ return {
       preselect = cmp.PreselectMode.Item,
       snippet = {
         expand = function(args)
-          require('luasnip').lsp_expand(args.body)
+          vim.snippet.expand(args.body)
         end,
       },
       view = { entries = { follow_cursor = true } },
       -- Order dictates priority
       sources = cmp.config.sources({
-        { name = 'luasnip' },
+        { name = 'snippets' },
         { name = 'nvim_lsp' },
-        { name = 'emmet' },
         { name = 'path' },
         { name = 'nvim_lsp_signature_help' },
         { name = 'calc' },

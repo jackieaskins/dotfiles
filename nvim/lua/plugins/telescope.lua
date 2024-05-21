@@ -1,7 +1,6 @@
 local M = {
   'nvim-telescope/telescope.nvim',
   dependencies = {
-    { 'benfowler/telescope-luasnip.nvim' },
     { 'catgoose/telescope-helpgrep.nvim' },
     { 'danielvolchek/tailiscope.nvim' },
     { 'isak102/telescope-git-file-history.nvim', dependencies = 'tpope/vim-fugitive' },
@@ -36,7 +35,6 @@ local M = {
     { '<leader>gh', '<cmd>Telescope git_file_history<CR>' },
     { '<leader>hg', '<cmd>Telescope helpgrep<CR>' },
     { '<leader>la', '<cmd>Telescope lazy<CR>' },
-    { '<leader>sn', '<cmd>Telescope luasnip<CR>' },
   },
 }
 
@@ -146,7 +144,6 @@ function M.config()
   telescope.load_extension('git_file_history')
   telescope.load_extension('helpgrep')
   telescope.load_extension('lazy')
-  telescope.load_extension('luasnip')
   telescope.load_extension('notify')
 
   configure_lsp_keymaps()
