@@ -1,6 +1,10 @@
 local utils = require('utils')
 local augroup, map = utils.augroup, utils.map
 
+-- Mouse
+-- Disable mouse click (but keep scrolling)
+map('n', '<LeftMouse>', '<nop>')
+
 -- Auto-indent
 -- https://www.reddit.com/r/neovim/comments/17mrka2/comment/k7n3d9b
 map('n', 'i', function()
