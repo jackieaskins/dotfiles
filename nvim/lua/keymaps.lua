@@ -23,7 +23,6 @@ augroup('lsp_keymaps', {
     'LspAttach',
     callback = function(args)
       local bsk = utils.buffer_map(args.buf)
-      bsk('n', 'K', vim.lsp.buf.hover, { desc = 'Hover' })
       bsk({ 'i', 'n' }, '<C-S>', vim.lsp.buf.signature_help, { desc = 'vim.lsp.buf.signature_help' })
 
       bsk('n', '<leader>rn', vim.lsp.buf.rename, { desc = 'vim.lsp.buf.rename' })
