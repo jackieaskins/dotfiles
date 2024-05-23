@@ -1,5 +1,10 @@
 local augroup = require('utils').augroup
 
+augroup('mouse', {
+  { 'FocusLost', command = 'map <LeftMouse> <nop>' },
+  { 'FocusGained', command = 'unmap <LeftMouse>' },
+})
+
 augroup('conceal', {
   { 'FileType', pattern = 'html,svelte', command = 'setlocal conceallevel=2' },
 })
