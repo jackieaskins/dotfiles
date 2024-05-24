@@ -15,12 +15,12 @@ return {
       require('utils').buffer_map(bufnr)('n', '<leader>ef', vim.cmd.EslintFixAll)
     end
     config.handlers = {
-      ['textDocument/publishDiagnostics'] = function(err, result, ctx, conf)
-        for _, diagnostic in ipairs(result.diagnostics) do
-          diagnostic.severity = 4
+      ['textDocument/diagnostic'] = function(err, result, ctx, conf)
+        for _, item in ipairs(result.items) do
+          item.severity = 4
         end
 
-        return vim.lsp.handlers['textDocument/publishDiagnostics'](err, result, ctx, conf)
+        return vim.lsp.handlers['textDocument/diagnostic'](err, result, ctx, conf)
       end,
     }
 
