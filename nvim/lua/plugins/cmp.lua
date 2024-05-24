@@ -17,6 +17,7 @@ return {
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-nvim-lsp-signature-help',
     'hrsh7th/cmp-path',
+    'onsails/lspkind.nvim',
     {
       'garymjr/nvim-snippets',
       keys = {
@@ -61,21 +62,23 @@ return {
         documentation = cmp.config.window.bordered(border_config),
       },
       formatting = {
-        format = function(entry, vim_item)
-          local source = entry.source.name
+        format = require('lspkind').cmp_format({
+          before = function(entry, vim_item)
+            local source = entry.source.name
 
-          vim_item.menu = source_menu_map[source]
-          if source == 'nvim_lsp' then
-            pcall(function()
-              local utils = require('lsp.utils')
-              vim_item.menu = '[' .. utils.get_server_display_name(entry.source.source.client.name) .. ']'
-            end)
-          end
+            vim_item.menu = source_menu_map[source]
+            if source == 'nvim_lsp' then
+              pcall(function()
+                local utils = require('lsp.utils')
+                vim_item.menu = '[' .. utils.get_server_display_name(entry.source.source.client.name) .. ']'
+              end)
+            end
 
-          vim_item.abbr = string.sub(vim_item.abbr, 1, 50)
+            vim_item.abbr = string.sub(vim_item.abbr, 1, 50)
 
-          return vim_item
-        end,
+            return vim_item
+          end,
+        }),
       },
       mapping = {
         ['<C-B>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
