@@ -1,7 +1,20 @@
 return {
   'echasnovski/mini.splitjoin',
   version = false,
-  keys = { 'gJ', 'gS' },
+  keys = {
+    {
+      'gJ',
+      function()
+        require('splitjoin.join').join()
+      end,
+    },
+    {
+      'gS',
+      function()
+        require('splitjoin.split').split()
+      end,
+    },
+  },
   opts = function()
     local gen_hook = require('mini.splitjoin').gen_hook
 
@@ -15,7 +28,7 @@ return {
       detect = {
         brackets = { '%b()', '%b<>', '%b[]', '%b{}' },
       },
-      mappings = { toggle = '', split = 'gS', join = 'gJ' },
+      mappings = { toggle = '', split = '', join = '' },
       split = { hooks_post = { add_comma } },
       join = { hooks_post = { del_comma, pad_curly } },
     }
