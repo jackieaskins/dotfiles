@@ -7,8 +7,6 @@ local function set_background(is_reload)
   vim.opt.background = background
 
   if is_reload then
-    local colors = require('colors').get_colors()
-    require('tiny-devicons-auto-colors').apply(colors)
     require('tint').refresh()
   end
 end
