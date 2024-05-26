@@ -10,6 +10,7 @@ return {
         'Comment',
         'DapUIUnavailable',
         'EndOfBuffer',
+        'FoldColumn',
         '^LineNr',
         'Whitespace',
         'WinbarNC',
