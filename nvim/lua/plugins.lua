@@ -2,7 +2,10 @@ return {
   { 'abecodes/tabout.nvim', config = true, dependencies = 'nvim-treesitter/nvim-treesitter' },
   { 'antonk52/markdowny.nvim', config = true, ft = 'markdown' },
   { 'axelvc/template-string.nvim', config = true },
-  { 'brenoprata10/nvim-highlight-colors', opts = { enable_tailwind = true } },
+  {
+    'brenoprata10/nvim-highlight-colors',
+    opts = { enable_tailwind = true, enable_named_colors = false },
+  },
   { 'chrisgrieser/nvim-early-retirement', config = true },
   { 'dmmulroy/tsc.nvim', cmd = 'TSC', opts = { pretty_errors = false } },
   { 'fladson/vim-kitty', ft = { 'kitty', 'kitty-session' } },

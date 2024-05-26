@@ -53,9 +53,8 @@ return {
         { name = 'nvim_lsp' },
         { name = 'path' },
         { name = 'nvim_lsp_signature_help' },
-        { name = 'calc' },
-      }, {
         { name = 'buffer', option = { get_bufnrs = vim.api.nvim_list_bufs } },
+        { name = 'calc' },
       }),
       window = {
         completion = cmp.config.window.bordered(border_config),

@@ -61,6 +61,12 @@ return {
       opts = { floating = { border = vim.g.border_style } },
     },
     { 'theHamsta/nvim-dap-virtual-text', config = true },
+    {
+      'nvim-telescope/telescope-dap.nvim',
+      config = function()
+        require('telescope').load_extension('dap')
+      end,
+    },
   },
   config = function()
     local dap = require('dap')

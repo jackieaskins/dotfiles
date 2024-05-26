@@ -5,7 +5,6 @@ local M = {
     { 'danielvolchek/tailiscope.nvim' },
     { 'isak102/telescope-git-file-history.nvim', dependencies = 'tpope/vim-fugitive' },
     { 'nvim-lua/plenary.nvim' },
-    { 'nvim-telescope/telescope-dap.nvim' },
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
     { 'tsakirist/telescope-lazy.nvim' },
   },
@@ -139,7 +138,6 @@ function M.config()
     },
   })
 
-  telescope.load_extension('dap')
   telescope.load_extension('fzf')
   telescope.load_extension('git_file_history')
   telescope.load_extension('helpgrep')
