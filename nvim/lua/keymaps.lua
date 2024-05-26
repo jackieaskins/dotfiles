@@ -18,6 +18,11 @@ map('n', '[e', '<cmd>lua vim.diagnostic.goto_prev({ severity = vim.diagnostic.se
 map('n', ']e', '<cmd>lua vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR })<CR>')
 
 -- LSP
+-- Unmap some of the default LSP mappings
+vim.keymap.del('n', 'grn')
+vim.keymap.del('n', 'grr')
+vim.keymap.del({ 'n', 'x' }, 'gra')
+
 augroup('lsp_keymaps', {
   {
     'LspAttach',
