@@ -33,29 +33,37 @@ map({ 'n', 'v' }, '<space>', '<nop>')
 -- General
 vim.opt.hidden = true
 vim.opt.number = true
-vim.opt.ruler = false
+vim.opt.signcolumn = 'yes'
 vim.opt.relativenumber = true
 vim.opt.cursorline = true
 vim.opt.scrolloff = 5
+vim.opt.linebreak = true
+vim.opt.breakindent = true
+vim.opt.breakindentopt = 'shift:1,min:0'
 vim.opt.showmode = false
-vim.opt.signcolumn = 'yes'
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 vim.opt.splitkeep = 'screen'
 vim.opt.diffopt:append({ 'vertical', 'linematch:60' })
+vim.opt.matchpairs:append({ '<:>' })
+vim.opt.jumpoptions = 'stack'
+vim.opt.undofile = true
+
+-- Statusline, Tabline, Winbar
 vim.opt.laststatus = 3
 vim.g.qf_disable_statusline = true
 vim.opt.statusline = "%{%v:lua.require('statusline').get_statusline()%}"
 vim.opt.tabline = "%{%v:lua.require('tabline').get_tabline()%}"
 vim.opt.winbar = "%{%v:lua.require('winbar').get_winbar()%}"
-vim.opt.matchpairs:append({ '<:>' })
 
 -- Folds
+vim.opt.foldcolumn = '1'
 vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
 vim.opt.foldmethod = 'expr'
 vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 vim.opt.foldtext = ''
+vim.opt.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 
 -- Spaces & Tabs
 vim.opt.shiftwidth = 2

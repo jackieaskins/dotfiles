@@ -35,7 +35,7 @@ return {
         return {
           -- Default Highlights
           CurSearch = vim.tbl_extend('force', inc_search, { style = { 'bold' } }),
-          CursorLineNr = { fg = colors.blue, bg = cursor_line.bg, style = { 'bold' } },
+          CursorLineNr = { fg = colors.blue, style = { 'bold' } },
           FoldColumn = { fg = colors.surface1 },
           Folded = { bg = colors.surface0 },
           NormalFloat = { bg = colors.base },
