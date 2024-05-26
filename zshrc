@@ -34,7 +34,7 @@ autoload -U promptinit; promptinit
 prompt pure
 zstyle :prompt:pure:git:stash show yes
 
-RPROMPT='[%D{%L:%M:%S %p}]'
+RPROMPT='%F{'#6E738D'}[%D{%L:%M:%S %p}]'
 
 #--------------------------------------------------------------------#
 #                       Settings and Bindings                        #
