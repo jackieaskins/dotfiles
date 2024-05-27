@@ -78,7 +78,6 @@ vim.opt.ttimeoutlen = 10
 vim.opt.updatetime = 100
 
 -- Searching
-vim.opt.hlsearch = false
 vim.opt.inccommand = 'nosplit'
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
@@ -86,3 +85,16 @@ vim.opt.path:append({ '**' })
 
 -- Vim globals
 vim.g.c_syntax_for_h = 1
+
+-- Auto hlsearch - https://www.reddit.com/r/neovim/comments/zc720y/comment/iyvcdf0
+local hlsearch_keys = { '<CR>', 'n', 'N', '*', '#', '?', '/' }
+vim.on_key(function(char)
+  if vim.fn.mode() == 'n' then
+    local new_hlsearch = vim.tbl_contains(hlsearch_keys, vim.fn.keytrans(char))
+
+    ---@diagnostic disable-next-line: undefined-field
+    if vim.opt.hlsearch:get() ~= new_hlsearch then
+      vim.opt.hlsearch = new_hlsearch
+    end
+  end
+end, vim.api.nvim_create_namespace('auto_hlsearch'))

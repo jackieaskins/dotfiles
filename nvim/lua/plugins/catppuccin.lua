@@ -23,10 +23,6 @@ return {
           bg = utils.darken(colors.sky, 0.90, colors.base),
           fg = colors.mantle,
         }
-        local search = {
-          bg = utils.darken(colors.sky, 0.30, colors.base),
-          fg = colors.text,
-        }
 
         local telescope_selection = vim.tbl_extend('force', cursor_line, {
           fg = colors.blue,
@@ -58,9 +54,6 @@ return {
           -- Plugin Highlights
           -- highlight-undo.nvim
           HighlightUndo = { link = 'IncSearch' },
-
-          -- nvim-hlslens
-          HlSearchLens = search,
 
           -- nvim-lightbulb
           LightBulbVirtText = { bg = colors.none },
