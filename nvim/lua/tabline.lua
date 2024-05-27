@@ -1,10 +1,3 @@
-local utils = require('utils')
-local augroup, highlight = utils.augroup, utils.highlight
-
-augroup('tabline', {
-  { 'ModeChanged', command = 'redrawtabline' },
-})
-
 local function get_bufnr(tabnr)
   local winnr = vim.fn.tabpagewinnr(tabnr)
   local buflist = vim.fn.tabpagebuflist(tabnr)
@@ -13,9 +6,6 @@ end
 
 return {
   get_tabline = function()
-    local colors = require('colors').get_colors()
-    highlight('TabLineSel', { fg = colors.base, bg = require('modes').get_color() })
-
     local num_tabs = vim.fn.tabpagenr('$')
     local current_tabnr = vim.fn.tabpagenr()
     local tabline_components = {}
@@ -51,7 +41,7 @@ return {
       end
 
       local components = {
-        tabnr == current_tabnr and '%#TabLineSel#' or '%#TabLine#',
+        '%#' .. (tabnr == current_tabnr and 'TabLineSel' or 'TabLine') .. '#',
         ' ',
         tabnr,
         ' ',

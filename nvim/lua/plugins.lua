@@ -32,6 +32,7 @@ return {
   },
   { 'mcauley-penney/visual-whitespace.nvim', config = true },
   { 'nvim-treesitter/nvim-treesitter-context', opts = { multiline_threshold = 1 } },
+  { 'nvim-zh/colorful-winsep.nvim', config = true },
   { 'tpope/vim-abolish' },
   { 'tpope/vim-fugitive' },
   { 'tpope/vim-repeat' },

@@ -1,5 +1,15 @@
 local augroup = require('utils').augroup
 
+augroup('mode_highlights', {
+  {
+    'ModeChanged',
+    callback = function()
+      require('modes').relink_highlights()
+      require('tint').refresh()
+    end,
+  },
+})
+
 augroup('mouse', {
   { 'FocusLost', command = 'map <LeftMouse> <nop>' },
   { 'FocusGained', command = 'unmap <LeftMouse>' },

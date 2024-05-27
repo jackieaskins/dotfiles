@@ -32,7 +32,7 @@ return {
           fg = colors.blue,
         })
 
-        return {
+        local custom_highlights = {
           -- Default Highlights
           CurSearch = vim.tbl_extend('force', inc_search, { style = { 'bold' } }),
           CursorLineNr = { fg = colors.blue, style = { 'bold' } },
@@ -86,6 +86,8 @@ return {
           TelescopeSelection = telescope_selection,
           TelescopeSelectionCaret = telescope_selection,
         }
+
+        return vim.tbl_extend('force', custom_highlights, require('modes').get_initial_highlights(colors))
       end,
       integrations = {
         colorful_winsep = { enabled = true, color = 'blue' },

@@ -1,13 +1,9 @@
-local utils = require('utils')
-local augroup, highlight = utils.augroup, utils.highlight
-
-augroup('winbar_redraw', {
+require('utils').augroup('winbar_redraw', {
   { 'DiagnosticChanged', command = 'redrawstatus' },
 })
 
 local function get_hl(hl)
-  local is_active = tostring(vim.g.actual_curwin) == tostring(vim.api.nvim_get_current_win())
-  return '%#' .. (is_active and hl or 'WinBarInactive') .. '#'
+  return '%#' .. hl .. '#'
 end
 
 local function get_filename_display()
@@ -46,12 +42,6 @@ end
 
 return {
   get_winbar = function()
-    local colors = require('colors').get_colors()
-    local mode_color = require('modes').get_color()
-
-    highlight('WinBarInactive', { fg = colors.overlay1, bg = colors.base })
-    highlight('WinBarFile', { fg = mode_color, bg = colors.base })
-
     local diagnostic_counts = vim.diagnostic.count(0)
 
     return table.concat({

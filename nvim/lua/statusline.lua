@@ -1,8 +1,4 @@
-local utils = require('utils')
-local augroup, highlight = utils.augroup, utils.highlight
-local modes = require('modes')
-
-augroup('statusline_redraw', {
+require('utils').augroup('statusline_redraw', {
   { 'User', pattern = 'LazyCheck', command = 'redrawstatus' },
 })
 
@@ -64,11 +60,7 @@ end
 
 return {
   get_statusline = function()
-    local colors = require('colors').get_colors()
-    local mode_color = modes.get_color()
-
-    highlight('StatusLineMode', { fg = colors.base, bg = mode_color, bold = true })
-    highlight('StatusLineSection', { fg = mode_color, bg = colors.surface0 })
+    local modes = require('modes')
 
     local filetype = vim.bo.filetype
 
