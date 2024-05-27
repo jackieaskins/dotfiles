@@ -78,6 +78,7 @@ vim.opt.ttimeoutlen = 10
 vim.opt.updatetime = 100
 
 -- Searching
+vim.opt.hlsearch = false
 vim.opt.inccommand = 'nosplit'
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
