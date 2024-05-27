@@ -29,3 +29,5 @@ Brewfile.lock.json
 /tmux/active_theme.conf
 
 /bat/config
+
+cached_icons.lua
