@@ -1,3 +1,5 @@
+local diagnostic_icons = require('diagnostic.icons')
+
 return {
   'nvim-tree/nvim-tree.lua',
   dependencies = {
@@ -16,7 +18,16 @@ return {
     actions = {
       open_file = { quit_on_open = true },
     },
-    diagnostics = { enable = true, show_on_dirs = true },
+    diagnostics = {
+      enable = true,
+      show_on_dirs = true,
+      icons = {
+        hint = diagnostic_icons.HINT,
+        info = diagnostic_icons.INFO,
+        warning = diagnostic_icons.WARN,
+        error = diagnostic_icons.ERROR,
+      },
+    },
     filters = {
       custom = { '*.meta' },
     },

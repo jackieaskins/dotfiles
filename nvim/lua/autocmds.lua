@@ -44,6 +44,10 @@ augroup('lastplace', {
   {
     'BufReadPost',
     callback = function()
+      if vim.bo.filetype == 'gitcommit' then
+        return
+      end
+
       local test_line_data = vim.api.nvim_buf_get_mark(0, '"')
       local test_line = test_line_data[1]
       local last_line = vim.api.nvim_buf_line_count(0)

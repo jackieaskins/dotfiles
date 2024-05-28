@@ -108,7 +108,7 @@ function M.config()
           ['<C-b>'] = actions.preview_scrolling_up,
           ['<C-d>'] = false,
           ['<C-u>'] = false,
-          ['<C-a>'] = actions.select_all,
+          ['<C-a>'] = actions.toggle_all,
           ['<C-e>'] = { '<end>', type = 'command' },
           ['<C-c>'] = action_layout.toggle_preview,
         },
