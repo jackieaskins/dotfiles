@@ -1,7 +1,7 @@
-local error_icon = ' '
-local warn_icon = ' '
-local info_icon = ' '
-local hint_icon = ' '
+local error_icon = '󰅚'
+local warn_icon = '󰀪'
+local info_icon = '󰋽'
+local hint_icon = '󰗖'
 
 return {
   error_icon,

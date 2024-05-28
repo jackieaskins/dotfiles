@@ -1,21 +1,17 @@
+local icons = require('diagnostic.icons')
+
 vim.diagnostic.config({
   float = { source = true, border = vim.g.border_style },
   signs = {
     priority = require('sign_priorities').diagnostics,
-    text = {
-      [vim.diagnostic.severity.ERROR] = '',
-      [vim.diagnostic.severity.WARN] = '',
-      [vim.diagnostic.severity.HINT] = '',
-      [vim.diagnostic.severity.INFO] = '',
-    },
-    numhl = {
-      [vim.diagnostic.severity.ERROR] = 'DiagnosticSignError',
-      [vim.diagnostic.severity.WARN] = 'DiagnosticSignWarn',
-      [vim.diagnostic.severity.INFO] = 'DiagnosticSignInfo',
-      [vim.diagnostic.severity.HINT] = 'DiagnosticSignHint',
-    },
+    text = icons,
   },
   severity_sort = true,
-  update_in_insert = true,
-  virtual_text = false,
+  update_in_insert = false,
+  virtual_text = {
+    prefix = function(diagnostic)
+      return icons[diagnostic.severity]
+    end,
+    spacing = 0,
+  },
 })

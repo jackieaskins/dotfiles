@@ -35,6 +35,7 @@ local function get_diagnostic(hl, counts, severity)
   return table.concat({
     get_hl(hl),
     require('diagnostic.icons')[sev],
+    ' ',
     count,
     ' ',
   })
