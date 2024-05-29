@@ -1,5 +1,4 @@
 return {
-  { 'abecodes/tabout.nvim', opts = { completion = false }, dependencies = 'nvim-treesitter/nvim-treesitter' },
   { 'antonk52/markdowny.nvim', config = true, ft = 'markdown' },
   { 'axelvc/template-string.nvim', config = true },
   {
