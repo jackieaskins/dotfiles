@@ -20,3 +20,9 @@ user_command('Dotfiles', function()
 
   open_url(dotfiles_repo)
 end)
+
+-- File Writes
+user_command('W', function()
+  vim.notify('Saving since you probably meant :w')
+  vim.cmd.write()
+end)
