@@ -32,7 +32,6 @@ if RUBY_PLATFORM =~ /darwin/
   cask 'font-hack-nerd-font'
   cask 'font-jetbrains-mono-nerd-font'
 
-  cask 'alfred'
   cask 'docker'
   cask 'hammerspoon'
   cask 'karabiner-elements'
