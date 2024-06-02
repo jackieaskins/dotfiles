@@ -1,6 +1,6 @@
 return {
   'neovim/nvim-lspconfig',
-  dependencies = { 'folke/neodev.nvim', 'hrsh7th/nvim-cmp' },
+  dependencies = { 'hrsh7th/nvim-cmp' },
   config = function()
     local servers = require('lsp.servers')
     local lspconfig = require('lspconfig')
@@ -25,12 +25,6 @@ return {
     end
 
     require('lspconfig.ui.windows').default_options.border = vim.g.border_style
-
-    require('neodev').setup({
-      library = {
-        plugins = { 'catppuccin', 'nvim-treesitter', 'plenary.nvim', 'nvim-lspconfig' },
-      },
-    })
 
     for server_name, server in pairs(servers) do
       if not server.skip_lspconfig then
