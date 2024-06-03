@@ -2,6 +2,7 @@ local border_config = { border = vim.g.border_style, winhighlight = 'FloatBorder
 local source_menu_map = {
   buffer = 'buff',
   calc = 'calc',
+  lazydev = 'lazy',
   nvim_lsp = 'lsp',
   nvim_lsp_signature_help = 'sig',
   path = 'path',
@@ -18,6 +19,7 @@ return {
     'hrsh7th/cmp-nvim-lsp-signature-help',
     'hrsh7th/cmp-path',
     'onsails/lspkind.nvim',
+    'folke/lazydev.nvim',
     {
       'garymjr/nvim-snippets',
       keys = {
@@ -55,6 +57,7 @@ return {
         { name = 'nvim_lsp_signature_help' },
         { name = 'buffer', option = { get_bufnrs = vim.api.nvim_list_bufs } },
         { name = 'calc' },
+        { name = 'lazydev', group_index = 0 },
       }),
       window = {
         completion = cmp.config.window.bordered(border_config),

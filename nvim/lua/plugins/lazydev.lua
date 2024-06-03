@@ -12,9 +12,9 @@ return {
         return client.root_dir ~= vim.fn.expand('~/dotfiles/hammerspoon')
       end,
       library = {
-        vim.env.LAZY .. '/luvit-meta/library',
-        vim.env.LAZY .. '/catppuccin',
-        vim.env.LAZY .. '/nvim-lspconfig',
+        'luvit-meta/library',
+        'catppuccin',
+        'nvim-lspconfig',
       },
     },
   },

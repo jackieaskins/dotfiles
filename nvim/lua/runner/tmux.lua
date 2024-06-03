@@ -1,6 +1,7 @@
 vim.cmd.Lazy('load vimux')
 
 ---@type Runner
+---@diagnostic disable-next-line: missing-fields
 local tmux = {}
 
 function tmux.open_runner()
