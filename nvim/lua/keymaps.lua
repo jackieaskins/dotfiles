@@ -12,8 +12,6 @@ map('n', 'i', function()
 end, { expr = true, desc = 'Properly indent empty line on insert' })
 
 -- Diagnostics
-map('n', '[d', '<cmd>lua vim.diagnostic.jump({ count = -1 })<CR>')
-map('n', ']d', '<cmd>lua vim.diagnostic.jump({ count = 1 })<CR>')
 map('n', '[e', '<cmd>lua vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR })<CR>')
 map('n', ']e', '<cmd>lua vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR })<CR>')
 
