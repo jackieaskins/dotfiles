@@ -33,7 +33,7 @@ map({ 'n', 'v' }, '<space>', '<nop>')
 -- General
 vim.opt.hidden = true
 vim.opt.number = true
-vim.opt.signcolumn = 'yes'
+vim.opt.signcolumn = 'yes:2'
 vim.opt.relativenumber = true
 vim.opt.cursorline = true
 vim.opt.scrolloff = 5
