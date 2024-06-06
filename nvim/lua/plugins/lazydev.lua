@@ -4,15 +4,15 @@ return {
     'folke/lazydev.nvim',
     ft = 'lua',
     opts = {
-      enabled = function(client)
+      enabled = function(root_dir)
         if vim.g.lazydev_enabled ~= nil then
           return vim.g.lazydev_enabled
         end
 
-        return client.root_dir ~= vim.fn.expand('~/dotfiles/hammerspoon')
+        return root_dir ~= vim.fn.expand('~/dotfiles/hammerspoon')
       end,
       library = {
-        'luvit-meta/library',
+        'luvit-meta/library/uv.lua',
         'catppuccin',
         'nvim-lspconfig',
       },
