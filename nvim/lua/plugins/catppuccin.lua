@@ -3,6 +3,9 @@ return {
   lazy = false,
   name = 'catppuccin',
   priority = 1000,
+  build = function()
+    require('plugins.web-devicons').load_icons(true)
+  end,
   config = function()
     require('catppuccin').setup({
       background = { light = 'latte', dark = 'macchiato' },
