@@ -38,6 +38,8 @@ local function load_icons(force_reload)
     cache_file:write('return' .. vim.inspect(colored_icons):gsub('%s', ''))
     cache_file:close()
   end
+
+  vim.notify('Updated web-devicon colors')
 end
 
 return {
@@ -53,7 +55,7 @@ return {
     require('utils').augroup('devicons_reload', {
       {
         'BufWritePost',
-        pattern = vim.fn.expand('%:p'),
+        pattern = 'web-devicons.lua,cterm_colors.lua',
         callback = function()
           load_icons(true)
           require('tint').refresh()
