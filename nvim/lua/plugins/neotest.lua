@@ -21,6 +21,7 @@ return {
   opts = function()
     return {
       adapters = { require('neotest-jest') },
+      diagnostic = { enabled = false },
       floating = { border = vim.g.border_style },
       output = { open_on_run = false },
       quickfix = { open = false },
