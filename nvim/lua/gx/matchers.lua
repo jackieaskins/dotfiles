@@ -7,7 +7,8 @@
 local matchers = {
   {
     file_pattern = [[Brewfile$]],
-    pattern = [[\s*\(brew\|cask\)\s\+'\([a-zA-Z0-9_.-]\+\)']],
+    -- Switched to single quotes because strings can't end with ]]]
+    pattern = '\\(brew\\|cask\\)\\s\\+[\'"]\\([a-zA-Z0-9_.-]\\+\\)[\'"]',
     handler = function(match)
       return table.concat({
         'https://formulae.brew.sh',
@@ -18,28 +19,28 @@ local matchers = {
   },
   {
     file_pattern = [[plugins.*\.lua$]],
-    pattern = [[.*'\([a-zA-Z0-9_.-]\+\/[a-zA-Z0-9_.-]\+\)']],
+    pattern = '[\'"]\\([a-zA-Z0-9_.-]\\+\\/[a-zA-Z0-9_.-]\\+\\)[\'"]',
     handler = function(match)
       return 'https://github.com/' .. match[2]
     end,
   },
   {
     file_pattern = [[plugins\.vim$]],
-    pattern = [[Plug '\([a-zA-Z0-9_.-]\+\/[a-zA-Z0-9_.-]\+\)']],
+    pattern = 'Plug [\'"]\\([a-zA-Z0-9_.-]\\+\\/[a-zA-Z0-9_.-]\\+\\)[\'"]',
     handler = function(match)
       return 'https://github.com/' .. match[2]
     end,
   },
   {
     file_pattern = [[tmux\.conf$]],
-    pattern = [[.* @plugin '\([a-zA-Z0-9_.-]\+\/[a-zA-Z0-9_.-]\+\)']],
+    pattern = '@plugin [\'"]\\([a-zA-Z0-9_.-]\\+\\/[a-zA-Z0-9_.-]\\+\\)[\'"]',
     handler = function(match)
       return 'https://github.com/' .. match[2]
     end,
   },
   {
     file_pattern = [[package\.json$]],
-    pattern = [[^\s*"\(\S\+\)"]],
+    pattern = [["\(\S\+\)":\s*".*"]],
     handler = function(match)
       return 'https://npmjs.com/package/' .. match[2]
     end,
