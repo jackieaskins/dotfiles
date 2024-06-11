@@ -9,13 +9,7 @@ return {
   { 'dmmulroy/tsc.nvim', cmd = 'TSC', opts = { pretty_errors = false } },
   { 'fladson/vim-kitty', ft = { 'kitty', 'kitty-session' } },
   { 'folke/ts-comments.nvim', config = true, event = 'VeryLazy' },
-  {
-    'jackieaskins/quick-scope',
-    init = function()
-      vim.g.qs_buftype_blacklist = { 'terminal' }
-      vim.g.qs_filetype_blacklist = { 'neo-tree', 'NvimTree' }
-    end,
-  },
+  { 'jinh0/eyeliner.nvim', opts = { highlight_on_key = true, dim = true } },
   {
     'kosayoda/nvim-lightbulb',
     opts = {
