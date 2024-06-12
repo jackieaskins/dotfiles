@@ -16,7 +16,7 @@ Brewfile.lock.json
 /wezterm/custom.lua
 /tmux/custom.conf
 
-/hammerspoon/Spoons/EmmyLua.spoon/annotations/
+/hammerspoon/Spoons/
 /hammerspoon/custom.lua
 /karabiner/automatic_backups
 
