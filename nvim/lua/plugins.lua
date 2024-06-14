@@ -9,7 +9,6 @@ return {
   { 'dmmulroy/tsc.nvim', cmd = 'TSC', opts = { pretty_errors = false } },
   { 'fladson/vim-kitty', ft = { 'kitty', 'kitty-session' } },
   { 'folke/ts-comments.nvim', config = true, event = 'VeryLazy' },
-  { 'jinh0/eyeliner.nvim', opts = { highlight_on_key = true, dim = true } },
   {
     'kosayoda/nvim-lightbulb',
     opts = {

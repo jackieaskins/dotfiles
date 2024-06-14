@@ -69,10 +69,6 @@ return {
           -- nvim-treesitter-context
           TreesitterContext = { fg = colors.text, bg = colors.mantle },
 
-          -- quick-scope
-          QuickScopePrimary = { fg = colors.sapphire, style = { 'underline', 'bold' } },
-          QuickScopeSecondary = { fg = colors.pink, style = { 'underline' } },
-
           -- telescope.lua
           TelescopePromptPrefix = { fg = colors.blue },
           TelescopeResultsDiffAdd = { fg = colors.green },
