@@ -3,6 +3,8 @@ brew 'heroku'
 brew 'openjdk@17', link: true
 
 if RUBY_PLATFORM =~ /darwin/
+  brew 'pam-reattach'
+
   cask 'brave-browser'
   cask 'dropbox'
   cask 'google-chrome'
