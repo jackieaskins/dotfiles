@@ -32,6 +32,10 @@ return {
       custom = { '*.meta' },
     },
     git = { ignore = false },
+    on_attach = function(bufnr)
+      require('nvim-tree.api').config.mappings.default_on_attach(bufnr)
+      vim.keymap.del('n', '<C-K>', { buffer = bufnr })
+    end,
     renderer = {
       full_name = true,
       group_empty = true,
