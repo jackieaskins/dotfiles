@@ -23,6 +23,13 @@ return {
     ft = { 'css', 'hmtl', 'javascript', 'javascriptreact', 'svelte', 'typescriptreact', 'tsx' },
   },
   { 'mcauley-penney/visual-whitespace.nvim', config = true },
+  {
+    'mfussenegger/nvim-treehopper',
+    keys = {
+      { '.', ":<C-U>lua require('tsht').nodes()<CR>", mode = 'o', remap = true },
+      { '.', ":lua require('tsht').nodes()<CR>", mode = 'x' },
+    },
+  },
   { 'nvim-treesitter/nvim-treesitter-context', opts = { multiline_threshold = 1 } },
   { 'nvim-zh/colorful-winsep.nvim', config = true },
   { 'tpope/vim-abolish' },

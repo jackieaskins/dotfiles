@@ -2,7 +2,6 @@ local M = {
   'nvim-treesitter/nvim-treesitter',
   dependencies = {
     'RRethy/nvim-treesitter-endwise',
-    'RRethy/nvim-treesitter-textsubjects',
     'nvim-treesitter/nvim-treesitter-textobjects',
   },
   build = ':TSUpdate',
@@ -131,16 +130,6 @@ function M.config()
         enable = true,
         swap_next = { ['<leader>a'] = '@parameter.inner' },
         swap_previous = { ['<leader>A'] = '@parameter.inner' },
-      },
-    },
-
-    -- https://github.com/RRethy/nvim-treesitter-textsubjects
-    textsubjects = {
-      enable = true,
-      keymaps = {
-        ['.'] = 'textsubjects-smart',
-        ['a;'] = 'textsubjects-container-outer',
-        ['i;'] = 'textsubjects-container-inner',
       },
     },
   })

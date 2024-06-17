@@ -66,6 +66,9 @@ return {
           NvimTreeNormal = { fg = colors.text, bg = colors.base },
           NvimTreeWinSeparator = { fg = colors.surface1, bg = colors.none },
 
+          -- nvim-treehopper.lua
+          TSNodeKey = { fg = colors.mauve, style = { 'bold' } },
+
           -- nvim-treesitter-context
           TreesitterContext = { fg = colors.text, bg = colors.mantle },
 
