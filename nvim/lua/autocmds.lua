@@ -74,6 +74,11 @@ augroup('document_highlight_attach', {
     'LspAttach',
     callback = function(args)
       local bufnr = args.buf
+      local client = vim.lsp.get_client_by_id(args.data.client_id)
+
+      if not client or not client.supports_method('textDocument/documentHighlight') then
+        return
+      end
 
       augroup('document_highlight', {
         {
