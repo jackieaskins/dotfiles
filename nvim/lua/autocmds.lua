@@ -69,6 +69,28 @@ augroup('lsp_formatting', {
   },
 })
 
+augroup('document_highlight_attach', {
+  {
+    'LspAttach',
+    callback = function(args)
+      local bufnr = args.buf
+
+      augroup('document_highlight', {
+        {
+          { 'CursorHold', 'CursorHoldI' },
+          callback = vim.lsp.buf.document_highlight,
+          buffer = bufnr,
+        },
+        {
+          { 'CursorMoved', 'CursorMovedI' },
+          callback = vim.lsp.buf.clear_references,
+          buffer = bufnr,
+        },
+      })
+    end,
+  },
+})
+
 augroup('no_modify', {
   { 'BufRead', pattern = '**/node_modules/**', command = 'setlocal nomodifiable' },
 })
