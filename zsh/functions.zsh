@@ -25,7 +25,7 @@ function update_neovim() {
 # In the event that Neovim fails to update, this will do a full clean first
 function reinstall_neovim() {
   cd $HOME/neovim
-  sudo git -xdf
+  sudo git clean -xdf
   cd -
 
   update_neovim
