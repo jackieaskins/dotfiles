@@ -10,7 +10,9 @@ return {
   { 'fladson/vim-kitty', ft = { 'kitty', 'kitty-session' } },
   { 'folke/ts-comments.nvim', config = true, event = 'VeryLazy' },
   {
-    'kosayoda/nvim-lightbulb',
+    -- Switching to the lvim-tech fork until original is updated
+    -- 'kosayoda/nvim-lightbulb',
+    'lvim-tech/nvim-lightbulb',
     opts = {
       autocmd = { enabled = true },
       sign = { enabled = false },
