@@ -64,6 +64,43 @@ setopt appendhistory histignorealldups sharehistory histreduceblanks
 export CLICOLOR="Yes"
 
 #--------------------------------------------------------------------#
+#                              Plugins                               #
+#--------------------------------------------------------------------#
+# https://github.com/zsh-users/zsh-autosuggestions
+source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# https://github.com/zsh-users/zsh-syntax-highlighting
+source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# https://github.com/zsh-users/zsh-history-substring-search
+# History substring search must come after syntax highlighting
+source $HOMEBREW_PREFIX/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
+
+# https://github.com/marlonrichert/zsh-autocomplete
+source $HOMEBREW_PREFIX/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+# Tab and Shift-Tab move the selection in the menu
+bindkey              '^I' menu-select
+bindkey "$terminfo[kcbt]" menu-select
+# Make Ctrl-N and Ctrl-P behave like Tab/Shift-Tab
+bindkey -M menuselect '^N' menu-complete
+bindkey -M menuselect '^P' reverse-menu-complete
+bindkey '^N' menu-complete
+bindkey '^P' reverse-menu-complete
+bindkey '^N' menu-select
+bindkey '^P' menu-select
+# Left and Right Arrows always move cursor in comand line
+bindkey -M menuselect '^[[D' .backward-char '^[OD' .backward-char
+bindkey -M menuselect '^[[C' .forward-char '^[OC' .forward-char
+# Enter always submits the command line
+bindkey -M menuselect '^M' .accept-line
+# Match all substrings, not just prefixes
+zstyle ':completion:*' matcher-list 'r:|?=**'
+
+#--------------------------------------------------------------------#
 #                             Scrollback                             #
 #--------------------------------------------------------------------#
 function clear-scrollback-buffer {
@@ -101,40 +138,3 @@ source "$HOMEBREW_PREFIX/opt/fzf/shell/key-bindings.zsh"
 #                      ZSH Configuration Files                       #
 #--------------------------------------------------------------------#
 for f in $HOME/dotfiles/zsh/*; do source $f; done
-
-#--------------------------------------------------------------------#
-#                              Plugins                               #
-#--------------------------------------------------------------------#
-# https://github.com/zsh-users/zsh-autosuggestions
-source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-
-# https://github.com/zsh-users/zsh-syntax-highlighting
-source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-# https://github.com/zsh-users/zsh-history-substring-search
-# History substring search must come after syntax highlighting
-source $HOMEBREW_PREFIX/share/zsh-history-substring-search/zsh-history-substring-search.zsh
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
-bindkey -M vicmd 'k' history-substring-search-up
-bindkey -M vicmd 'j' history-substring-search-down
-
-# https://github.com/marlonrichert/zsh-autocomplete
-source $HOMEBREW_PREFIX/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
-# Tab and Shift-Tab move the selection in the menu
-bindkey              '^I' menu-select
-bindkey "$terminfo[kcbt]" menu-select
-# Make Ctrl-N and Ctrl-P behave like Tab/Shift-Tab
-bindkey -M menuselect '^N' menu-complete
-bindkey -M menuselect '^P' reverse-menu-complete
-bindkey '^N' menu-complete
-bindkey '^P' reverse-menu-complete
-bindkey '^N' menu-select
-bindkey '^P' menu-select
-# Left and Right Arrows always move cursor in comand line
-bindkey -M menuselect '^[[D' .backward-char '^[OD' .backward-char
-bindkey -M menuselect '^[[C' .forward-char '^[OC' .forward-char
-# Enter always submits the command line
-bindkey -M menuselect '^M' .accept-line
-# Match all substrings, not just prefixes
-zstyle ':completion:*' matcher-list 'r:|?=**'
