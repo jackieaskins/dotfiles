@@ -41,6 +41,12 @@ return {
           StatusLine = { fg = colors.text, bg = colors.base },
           TabLine = { fg = colors.text, bg = colors.surface0 },
 
+          DiagnosticVirtualTextOk = { link = 'DiagnosticSignOk' },
+          DiagnosticVirtualTextError = { link = 'DiagnosticSignError' },
+          DiagnosticVirtualTextWarn = { link = 'DiagnosticSignWarn' },
+          DiagnosticVirtualTextHint = { link = 'DiagnosticSignHint' },
+          DiagnosticVirtualTextInfo = { link = 'DiagnosticSignInfo' },
+
           -- Custom Highlights
           WinBarDiagnosticError = { fg = colors.red, bg = colors.base },
           WinBarDiagnosticWarn = { fg = colors.yellow, bg = colors.base },
