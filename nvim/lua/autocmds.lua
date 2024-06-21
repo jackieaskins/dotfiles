@@ -82,12 +82,12 @@ augroup('document_highlight_attach', {
 
       augroup('document_highlight', {
         {
-          { 'CursorHold', 'CursorHoldI' },
+          { 'CursorHold' },
           callback = vim.lsp.buf.document_highlight,
           buffer = bufnr,
         },
         {
-          { 'CursorMoved', 'CursorMovedI' },
+          { 'CursorMoved', 'InsertEnter' },
           callback = vim.lsp.buf.clear_references,
           buffer = bufnr,
         },
