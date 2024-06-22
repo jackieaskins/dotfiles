@@ -1,8 +1,5 @@
 {
-    "Lua.diagnostics.disable": [
-        "lowercase-global"
-    ],
-    "Lua.workspace.library": [
-        "~/.hammerspoon/Spoons/EmmyLua.spoon/annotations"
-    ]
+  "$schema": "https://raw.githubusercontent.com/LuaLS/vscode-lua/master/setting/schema.json",
+  "diagnostics.disable": ["lowercase-global"],
+  "runtime.version": "Lua 5.4",
 }
