@@ -8,6 +8,7 @@ return {
   end,
   config = function()
     require('catppuccin').setup({
+      term_colors = true, -- Setting for baleia.nvim
       background = { light = 'latte', dark = 'macchiato' },
       custom_highlights = function(colors)
         local utils = require('catppuccin.utils.colors')

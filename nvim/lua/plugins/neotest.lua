@@ -12,6 +12,7 @@ end
 
 return {
   'nvim-neotest/neotest',
+  enabled = vim.g.test_plugin == 'neotest',
   dependencies = {
     'nvim-lua/plenary.nvim',
     'nvim-neotest/nvim-nio',

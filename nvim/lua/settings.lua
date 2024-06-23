@@ -26,6 +26,9 @@ vim.g.custom_matchers = {}
 ---@type string[]
 vim.g.border_style = { '╔', '═', '╗', '║', '╝', '═', '╚', '║' }
 
+---@type 'quicktest' | 'neotest'
+vim.g.test_plugin = 'neotest'
+
 -- Map Leader to Space
 vim.g.mapleader = ' '
 map({ 'n', 'v' }, '<space>', '<nop>')
