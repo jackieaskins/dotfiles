@@ -1,0 +1,5 @@
+repos:
+  - repo: https://github.com/opensource-nepal/commitlint
+    rev: v1.0.0
+    hooks:
+      - id: commitlint

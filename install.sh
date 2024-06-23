@@ -199,4 +199,8 @@ echo -e ""
 success_echo "Done configuring Neovim."
 
 success_echo "Congratulations, everything is done installing!"
+
+cd $dotfiles_dir
+pre-commit install --hook-type commit-msg
+
 exec /bin/zsh
