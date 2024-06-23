@@ -40,7 +40,7 @@ return {
       preselect = cmp.PreselectMode.Item,
       snippet = {
         expand = function(args)
-          vim.snippet.expand(args.body)
+          require('utils').snippet_expand(args.body)
         end,
       },
       view = { entries = { follow_cursor = true } },

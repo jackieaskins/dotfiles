@@ -17,7 +17,7 @@ return {
               vim.tbl_extend('force', vim.lsp.util.make_position_params(), { kind = 'autoClose' }),
               function(_, result)
                 if result then
-                  require('luasnip').lsp_expand(result)
+                  require('utils').snippet_expand(result)
                 end
               end,
               bufnr

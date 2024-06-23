@@ -2,6 +2,12 @@ local M = {}
 
 ---@alias map_fn fun(mode: string | table<string>, lhs: string, rhs: string | function, opts?: table)
 
+--- Expand snippet using current snippet engine
+---@param input string
+function M.snippet_expand(input)
+  vim.snippet.expand(input)
+end
+
 ---Define vim keymap
 ---@type map_fn
 function M.map(mode, lhs, rhs, opts)
