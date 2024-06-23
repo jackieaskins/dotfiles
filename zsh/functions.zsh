@@ -9,6 +9,7 @@ function cp2m() {
 }
 
 function install_neovim() {
+  git pull
   make CMAKE_BUILD_TYPE="${1:-RelWithDebInfo}"
   sudo make install
 }
@@ -17,7 +18,6 @@ function install_neovim() {
 function update_neovim() {
   cd $HOME/neovim
   sudo rm -rf build
-  git pull
   install_neovim "$1"
   cd -
 }
