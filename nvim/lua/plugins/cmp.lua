@@ -29,11 +29,6 @@ return {
       opts = {
         create_cmp_source = true,
         search_paths = { vim.fn.expand('~/dotfiles/vim-common/snippets') },
-        extended_filetypes = {
-          javascript = { 'javascriptreact' },
-          javascriptreact = { 'javascript' },
-          typescriptreact = { 'typescript' },
-        },
       },
     },
   },

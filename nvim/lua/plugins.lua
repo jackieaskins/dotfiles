@@ -6,6 +6,7 @@ return {
     opts = { enable_tailwind = true, enable_named_colors = false },
   },
   { 'chrisgrieser/nvim-early-retirement', config = true },
+  { 'danymat/neogen', opts = { snippet_engine = 'nvim' }, cmd = 'Neogen' },
   { 'dmmulroy/tsc.nvim', cmd = 'TSC', opts = { pretty_errors = false } },
   { 'fladson/vim-kitty', ft = { 'kitty', 'kitty-session' } },
   { 'folke/ts-comments.nvim', config = true, event = 'VeryLazy' },
@@ -25,13 +26,6 @@ return {
     ft = { 'css', 'hmtl', 'javascript', 'javascriptreact', 'svelte', 'typescriptreact', 'tsx' },
   },
   { 'mcauley-penney/visual-whitespace.nvim', config = true },
-  {
-    'mfussenegger/nvim-treehopper',
-    keys = {
-      { '.', ":<C-U>lua require('tsht').nodes()<CR>", mode = 'o', remap = true },
-      { '.', ":lua require('tsht').nodes()<CR>", mode = 'x' },
-    },
-  },
   { 'nvim-treesitter/nvim-treesitter-context', opts = { multiline_threshold = 1 } },
   { 'nvim-zh/colorful-winsep.nvim', config = true },
   { 'tpope/vim-abolish' },

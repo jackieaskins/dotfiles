@@ -12,7 +12,7 @@ return {
       custom_highlights = function(colors)
         local utils = require('catppuccin.utils.colors')
 
-        -- This used to referenced highlights with require('catppuccin.groups.editor').get()
+        -- This used to reference highlights with require('catppuccin.groups.editor').get()
         -- but that was broken in https://github.com/catppuccin/nvim/issues/664
         -- For details and workaround: https://github.com/catppuccin/nvim/issues/667
         -- Unfortunately the workaround can't be used here
@@ -71,9 +71,6 @@ return {
           NvimTreeExecFile = { style = { 'underline', 'bold' } },
           NvimTreeNormal = { fg = colors.text, bg = colors.base },
           NvimTreeWinSeparator = { fg = colors.surface1, bg = colors.none },
-
-          -- nvim-treehopper.lua
-          TSNodeKey = { fg = colors.mauve, style = { 'bold' } },
 
           -- nvim-treesitter-context
           TreesitterContext = { fg = colors.text, bg = colors.mantle },

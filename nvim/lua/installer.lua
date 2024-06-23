@@ -34,7 +34,7 @@ function M.register(group_name, commands, install_dir)
 
   registered_commands[capitalized_group_name] = { commands = commands, install_dir = install_dir }
 
-  user_command(capitalized_group_name .. 'Install', function(arg)
+  user_command('Install' .. capitalized_group_name, function(arg)
     local cmd_keys = arg.fargs
 
     if #cmd_keys > 0 then

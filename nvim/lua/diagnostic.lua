@@ -15,5 +15,6 @@ vim.diagnostic.config({
     end,
     spacing = 0,
     virt_text_pos = 'right_align',
+    virt_text_hide = true,
   },
 })
