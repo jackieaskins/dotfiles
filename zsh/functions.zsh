@@ -9,7 +9,6 @@ function cp2m() {
 }
 
 function install_neovim() {
-  git pull
   make CMAKE_BUILD_TYPE="${1:-RelWithDebInfo}"
   sudo make install
 }
@@ -17,6 +16,7 @@ function install_neovim() {
 # Update Neovim installed from source
 function update_neovim() {
   cd $HOME/neovim
+  git pull
   sudo rm -rf build
   install_neovim "$1"
   cd -
@@ -25,7 +25,7 @@ function update_neovim() {
 # In the event that Neovim fails to update, this will do a full clean first
 function reinstall_neovim() {
   cd $HOME/neovim
-  sudo git clean -xdf
+  make distclean
   install_neovim "$1"
   cd -
 }
