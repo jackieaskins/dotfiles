@@ -29,7 +29,7 @@ return {
       },
     })
 
-    require('installer').register('linter', supported_linters, vim.fn.stdpath('data') .. '/linters')
+    require('installer').register('linters', supported_linters, vim.fn.stdpath('data') .. '/linters')
   end,
   config = function()
     require('lint').linters_by_ft = linters_by_filetype

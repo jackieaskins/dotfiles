@@ -36,7 +36,7 @@ return {
   'mfussenegger/nvim-dap',
   cmd = { 'DapContinue', 'DapShowLog', 'DapToggleBreakpoint' },
   init = function()
-    require('installer').register('debugger', supported_debuggers, debuggers_path)
+    require('installer').register('debuggers', supported_debuggers, debuggers_path)
   end,
   keys = {
     dap_key_map('<F8>', 'toggle_breakpoint'),

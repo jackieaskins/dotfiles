@@ -67,7 +67,7 @@ return {
     for formatter, data in pairs(supported_formatters) do
       install_cmds[formatter] = data.install_cmd
     end
-    require('installer').register('formatter', install_cmds, vim.fn.stdpath('data') .. '/formatters')
+    require('installer').register('formatters', install_cmds, vim.fn.stdpath('data') .. '/formatters')
 
     utils.augroup('format_on_save', {
       {
