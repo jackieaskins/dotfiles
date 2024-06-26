@@ -4,12 +4,12 @@ local utils = require('utils')
 local filter_table_by_keys, user_command = utils.filter_table_by_keys, utils.user_command
 
 local pkg_managers = {
-  brew = 'brew reinstall',
-  cargo = 'cargo install',
-  gem = 'gem install --user-install',
-  go = 'go install',
-  npm = 'npm install -g',
-  pip = 'pipx install',
+  brew = 'brew reinstall %s',
+  cargo = 'cargo install %s',
+  gem = 'gem install --user-install %s',
+  go = 'go install %s',
+  npm = 'npm install -g %s',
+  pip = 'pipx upgrade %s || pipx install %s',
 }
 
 ---@class RegisteredCommands
@@ -56,6 +56,7 @@ end
 ---@param install_dir? string
 function M.install(group_name, commands, install_dir)
   local script_lines = {}
+  ---@type table<string, string[]>
   local common_packages = {}
 
   local function echo(text)
@@ -91,7 +92,8 @@ function M.install(group_name, commands, install_dir)
     local packages = table.concat(vim.tbl_keys(unique_packages), ' ')
 
     echo(string.format('[%s] Installing packages for %s', cmd, names))
-    table.insert(script_lines, pkg_managers[cmd] .. ' ' .. packages)
+    local cmd_install = pkg_managers[cmd]:gsub('%%s', packages)
+    table.insert(script_lines, cmd_install)
     echo('')
   end
 
