@@ -11,7 +11,7 @@ return {
 
           require('jdtls').start_or_attach({
             capabilities = require('lsp.capabilities')(),
-            cmd = { jdtls_path .. '/bin/jdtls' },
+            cmd = { 'run_jdtls.sh' },
             init_options = {
               bundles = {
                 jdtls_path .. '/plugins/lombok.jar',
