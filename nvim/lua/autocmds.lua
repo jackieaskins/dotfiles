@@ -87,7 +87,7 @@ augroup('document_highlight_attach', {
           buffer = bufnr,
         },
         {
-          { 'CursorMoved', 'InsertEnter' },
+          { 'CursorMoved', 'InsertEnter', 'BufLeave' },
           callback = vim.lsp.buf.clear_references,
           buffer = bufnr,
         },
