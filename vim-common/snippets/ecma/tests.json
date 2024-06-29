@@ -1,0 +1,302 @@
+{
+  "afterAll(fn, timeout)": {
+    "prefix": "aa",
+    "body": [
+      "afterAll(${1|,async |}() => {",
+      "\t$0",
+      "});"
+    ]
+  },
+  "afterEach(fn, timeout)": {
+    "prefix": "ae",
+    "body": [
+      "afterEach(${1|,async |}() => {",
+      "\t$0",
+      "});"
+    ]
+  },
+  "beforeAll(fn, timeout)": {
+    "prefix": "ba",
+    "body": [
+      "beforeAll(${1|,async |}() => {",
+      "\t$0",
+      "});"
+    ]
+  },
+  "beforeEach(fn, timeout)": {
+    "prefix": "be",
+    "body": [
+      "beforeEach(${1|,async |}() => {",
+      "\t$0",
+      "});"
+    ]
+  },
+
+  "describe(name, fn)": {
+    "prefix": "desc",
+    "body": [
+      "describe(\"$1\", () => {",
+      "\t$0",
+      "});"
+    ]
+  },
+  "describe.each(table)(name, fn, timeout)": {
+    "prefix": "desce",
+    "body": [
+      "describe.each([$1])(\"$2\", ($3) => {",
+      "\t$0",
+      "});"
+    ]
+  },
+  "it(name, fn, timeout)": {
+    "prefix": "it",
+    "body": [
+      "it(\"$1\", ${2|,async |}() => {",
+      "\t$0",
+      "});"
+    ]
+  },
+  "it.each(table)(name, fn, timeout)": {
+    "prefix": "ite",
+    "body": [
+      "it.each([$1])(\"$2\", ${3|,async |}($4) => {",
+      "\t$0",
+      "});"
+    ]
+  },
+  "test(name, fn, timeout)": {
+    "prefix": "test",
+    "body": [
+      "test(\"$1\", ${2|,async |}() => {",
+      "\t$0",
+      "});"
+    ]
+  },
+  "test.each(table)(name, fn, timeout)": {
+    "prefix": "teste",
+    "body": [
+      "test.each([",
+      "\t$1",
+      "])(\"$2\", ${3|,async |}($4) => {",
+      "\t$0",
+      "});"
+    ]
+  },
+
+  "expect.toBe(value)": {
+    "prefix": "etb",
+    "body": ["expect($1).${2|,not.|}toBe($0);"]
+  },
+  "expect.toHaveBeenCalled()": {
+    "prefix": "ethbc",
+    "body": ["expect($1).${0|,not.|}toHaveBeenCalled();"]
+  },
+  "expect.toHaveBeenCalledTimes(number)": {
+    "prefix": "ethbct",
+    "body": ["expect($1).${2|,not.|}toHaveBeenCalledTimes($0);"]
+  },
+  "expect.toHaveBeenCalledWith(...)": {
+    "prefix": "ethbcw",
+    "body": ["expect($1).${2|,not.|}toHaveBeenCalledWith($0);"]
+  },
+  "expect.toHaveBeenLastCalledWith(...)": {
+    "prefix": "ethblcw",
+    "body": ["expect($1).${2|,not.|}toHaveBeenLastCalledWith($0);"]
+  },
+  "expect.toHaveBeenNthCalledWith(nthCall, ...)": {
+    "prefix": "ethbncw",
+    "body": ["expect($1).${2|,not.|}toHaveBeenNthCalledWith($0);"]
+  },
+  "expect.toHaveReturned()": {
+    "prefix": "ethr",
+    "body": ["expect($1).${0|,not.|}toHaveReturned();"]
+  },
+  "expect.toHaveReturnedTimes(number)": {
+    "prefix": "ethrt",
+    "body": ["expect($1).${2|,not.|}toHaveReturnedTimes($0);"]
+  },
+  "expect.toHaveReturnedWith(value)": {
+    "prefix": "ethrw",
+    "body": ["expect($1).${2|,not.|}toHaveReturnedWith($0);"]
+  },
+  "expect.toHaveLastReturnedWith(value)": {
+    "prefix": "ethlrw",
+    "body": ["expect($1).${2|,not.|}toHaveLastReturnedWith($0);"]
+  },
+  "expect.toHaveNthReturnedWith(nthCall, value)": {
+    "prefix": "ethnrw",
+    "body": ["expect($1).${2|,not.|}toHaveNthReturnedWith($0);"]
+  },
+  "expect.toHaveLength(number)": {
+    "prefix": "ethl",
+    "body": ["expect($1).${2|,not.|}toHaveLength($0);"]
+  },
+  "expect.toHaveProperty(keyPath, value?)": {
+    "prefix": "ethp",
+    "body": ["expect($1).${2|,not.|}toHaveProperty($0);"]
+  },
+  "expect.toBeCloseTo(number, numDigits?)": {
+    "prefix": "etbct",
+    "body": ["expect($1).${2|,not.|}toBeCloseTo($0);"]
+  },
+  "expect.toBeDefined()": {
+    "prefix": "etbd",
+    "body": ["expect($1).${0|,not.|}toBeDefined();"]
+  },
+  "expect.toBeFalsy()": {
+    "prefix": "etbf",
+    "body": ["expect($1).${0|,not.|}toBeFalsy();"]
+  },
+  "expect.toBeGreaterThan(number)": {
+    "prefix": "etbgt",
+    "body": ["expect($1).${2|,not.|}toBeGreaterThan($0);"]
+  },
+  "expect.toBeGreaterThanOrEqual(number)": {
+    "prefix": "etbgtoe",
+    "body": ["expect($1).${2|,not.|}toBeGreaterThanOrEqual($0);"]
+  },
+  "expect.toBeLessThan(number)": {
+    "prefix": "etblt",
+    "body": ["expect($1).${2|,not.|}toBeLessThan($0);"]
+  },
+  "expect.toBeLessThanOrEqual(number)": {
+    "prefix": "etbltoe",
+    "body": ["expect($1).${2|,not.|}toBeLessThanOrEqual($0);"]
+  },
+  "expect.toBeInstanceOf(Class)": {
+    "prefix": "etbio",
+    "body": ["expect($1).${2|,not.|}toBeInstanceOf($0);"]
+  },
+  "expect.toBeNull()": {
+    "prefix": "etbn",
+    "body": ["expect($1).${0|,not.|}toBeNull();"]
+  },
+  "expect.toBeTruthy()": {
+    "prefix": "etbt",
+    "body": ["expect($1).${0|,not.|}toBeTruthy();"]
+  },
+  "expect.toBeUndefined()": {
+    "prefix": "etbu",
+    "body": ["expect($1).${0|,not.|}toBeUndefined();"]
+  },
+  "expect.toBeNaN()": {
+    "prefix": "etbnan",
+    "body": ["expect($1).${0|,not.|}toBeNaN();"]
+  },
+  "expect.toContain(item)": {
+    "prefix": "etc",
+    "body": ["expect($1).${2|,not.|}toContain($0);"]
+  },
+  "expect.toContainEqual(item)": {
+    "prefix": "etce",
+    "body": ["expect($1).${2|,not.|}toContainEqual($0);"]
+  },
+  "expect.toEqual(value)": {
+    "prefix": "ete",
+    "body": ["expect($1).${2|,not.|}toEqual($0);"]
+  },
+  "expect.toMatch(regexp | string)": {
+    "prefix": "etm",
+    "body": ["expect($1).${2|,not.|}toMatch($0);"]
+  },
+  "expect.toMatchObject(object)": {
+    "prefix": "etmo",
+    "body": ["expect($1).${2|,not.|}toMatchObject($0);"]
+  },
+  "expect.toMatchSnapshot()": {
+    "prefix": "etms",
+    "body": ["expect($1).${0|,not.|}toMatchSnapshot();"]
+  },
+  "expect.toMatchInlineSnapshot()": {
+    "prefix": "etmis",
+    "body": ["expect($1).${0|,not.|}toMatchInlineSnapshot();"]
+  },
+  "expect.toStrictEqual(value)": {
+    "prefix": "etse",
+    "body": ["expect($1).${2|,not.|}toStrictEqual($0);"]
+  },
+  "expect.toThrow(error?)": {
+    "prefix": "ett",
+    "body": ["expect($1).${2|,not.|}toThrow($0);"]
+  },
+  "expect.toThrowErrorMatchingSnapshot()": {
+    "prefix": "ettems",
+    "body": ["expect($1).${0|,not.|}toThrowErrorMatchingSnapshot();"]
+  },
+  "expect.toThrowErrorMatchingInlineSnapshot()": {
+    "prefix": "ettemis",
+    "body": ["expect($1).${0|,not.|}toThrowErrorMatchingInlineSnapshot();"]
+  },
+
+  "expect.anything()": {
+    "prefix": "eat",
+    "body": ["expect.anything();"]
+  },
+  "expect.any(constructor)": {
+    "prefix": "ea",
+    "body": ["expect.any($0);"]
+  },
+  "expect.arrayContaining(array)": {
+    "prefix": "eac",
+    "body": ["expect.${1|,not.|}arrayContaining($0);"]
+  },
+  "expect.closeTo(number, numDigits?)": {
+    "prefix": "ect",
+    "body": ["expect.closeTo($0);"]
+  },
+  "expect.objectContaining(object)": {
+    "prefix": "eoc",
+    "body": ["expect.${1|,not.|}objectContaining($0);"]
+  },
+  "expect.stringContaining(string)": {
+    "prefix": "esc",
+    "body": ["expect.${1|,not.|}stringContaining($0);"]
+  },
+  "expect.stringMatching(string | regexp)": {
+    "prefix": "esm",
+    "body": ["expect.${1|,not.|}stringMatching($0);"]
+  },
+  "expect.assertions(number)": {
+    "prefix": "eas",
+    "body": ["expect.assertions($0);"]
+  },
+  "expect.hasAssertions()": {
+    "prefix": "eha",
+    "body": ["expect.hasAssertions();"]
+  },
+
+  "jest.mock(moduleName)": {
+    "prefix": "jamm",
+    "body": ["jest.mock($0);"]
+  },
+  "jest.mock(moduleName, factory)": {
+    "prefix": "jmm",
+    "body": [
+      "jest.mock($1, () => ({",
+      "\t$0",
+      "}));"
+    ]
+  },
+  "jest.mock(moduleName, requireActual)": {
+    "prefix": "jmmra",
+    "body": [
+      "jest.mock($1, () => ({",
+      "\t...jest.requireActual($1),",
+      "\t$0",
+      "}));"
+    ]
+  },
+  "jest.mock(moduleName, defaultFactory)": {
+    "prefix": "jmdm",
+    "body": [
+      "jest.mock($1, () => ({",
+      "\t__esModule: true,",
+      "\tdefault: $0",
+      "}));"
+    ]
+  },
+  "jest.fn(implementation?)": {
+    "prefix": "jmfn",
+    "body": ["jest.fn$1($2)$0;"]
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "useCallback(cb, deps)": {
+    "prefix": "ucb",
+    "body": [
+      "const $1 = useCallback$2(($3) => $0, [$4]);"
+    ]
+  },
+  "useContext(Context)": {
+    "prefix": "uco",
+    "body": ["const $1 = useContext$2($0);"]
+  },
+  "useDeferredValue(value, initialVal?)": {
+    "prefix": "ud",
+    "body": ["const $1 = useDeferredValue$2($0);"]
+  },
+  "useEffect(cb, deps)": {
+    "prefix": "ue",
+    "body": [
+      "useEffect$1(() => {",
+      "\t$0",
+      "}, [$2]);"
+    ]
+  },
+  "useLayoutEffect(cb, deps)": {
+    "prefix": "ule",
+    "body": [
+      "useLayoutEffect$1(() => {",
+      "\t$0",
+      "}, [$2]);"
+    ]
+  },
+  "useMemo(cb, deps)": {
+    "prefix": "um",
+    "body": [
+      "const $1 = useMemo$2(() => $0, [$3]);"
+    ]
+  },
+  "useReducer(red, initialVal)": {
+    "prefix": "ured",
+    "body": ["const [$1, ${2:dispatch}] = useReducer$3(${4:reducer}, $0);"]
+  },
+  "useRef(ref)": {
+    "prefix": "uref",
+    "body": ["const $1 = useRef$2($0);"]
+  },
+  "useState(initialVal)": {
+    "prefix": "us",
+    "body": ["const [$1, use${1/(.*)/${1:/capitalize}/}] = useState$3($0);"]
+  },
+
+  "function Component()": {
+    "prefix": "rfc",
+    "body": [
+      "${1|,export default ,export |}function ${2:$TM_FILENAME_BASE}()${3:: JSX.Element} {",
+      "\treturn ${0:<div />;}",
+      "}"
+    ]
+  },
+  "function Component(props)": {
+    "prefix": "rfcp",
+    "body": [
+      "${1|,export |}type ${2:$TM_FILENAME_BASE}Props = {",
+      "\t$5",
+      "}",
+      "",
+      "${3|,export default ,export |}function $2(${6:props}: $2Props)${4:: JSX.Element} {",
+      "\treturn ${0:<div />;}",
+      "}"
+    ]
+  }
+}

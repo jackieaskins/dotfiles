@@ -146,5 +146,5 @@ end)
 
 -- Borrowed from https://github.com/Abstract-IDE/abstract-autocmds
 -- Keep selection after indenting
-map('v', '<', '<gv')
-map('v', '>', '>gv')
+map('x', '<', '<gv')
+map('x', '>', '>gv')

@@ -6,7 +6,11 @@ return {
     opts = { enable_tailwind = true, enable_named_colors = false },
   },
   { 'chrisgrieser/nvim-early-retirement', config = true },
-  { 'danymat/neogen', opts = { snippet_engine = 'nvim' }, cmd = 'Neogen' },
+  {
+    'danymat/neogen',
+    opts = { snippet_engine = require('utils').get_snippet_engine() },
+    cmd = 'Neogen',
+  },
   { 'dmmulroy/tsc.nvim', cmd = 'TSC', opts = { pretty_errors = false } },
   { 'fladson/vim-kitty', ft = { 'kitty', 'kitty-session' } },
   { 'folke/ts-comments.nvim', config = true, event = 'VeryLazy' },

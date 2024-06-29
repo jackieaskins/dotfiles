@@ -2,12 +2,6 @@ local M = {}
 
 ---@alias map_fn fun(mode: string | table<string>, lhs: string, rhs: string | function, opts?: table)
 
---- Expand snippet using current snippet engine
----@param input string
-function M.snippet_expand(input)
-  vim.snippet.expand(input)
-end
-
 ---Define vim keymap
 ---@type map_fn
 function M.map(mode, lhs, rhs, opts)
@@ -135,6 +129,22 @@ function M.debounce(fn, ms)
       timer:stop()
       vim.schedule_wrap(fn)(unpack(argv))
     end)
+  end
+end
+
+---Get the current snippet engine
+---@return 'luasnip' | 'nvim'
+function M.get_snippet_engine()
+  return 'luasnip'
+end
+
+--- Expand snippet using current snippet engine
+---@param input string
+function M.snippet_expand(input)
+  if M.get_snippet_engine() == 'nvim' then
+    vim.snippet.expand(input)
+  else
+    require('luasnip').lsp_expand(input)
   end
 end
 

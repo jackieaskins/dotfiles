@@ -1,0 +1,22 @@
+{
+  "arr.filter(val, index, arr)": {
+    "prefix": "filter",
+    "body": ["$1.filter(($3) => $0)${2|,\\,,;|}"]
+  },
+  "arr.flatMap(val, index, arr)": {
+    "prefix": "flatMap",
+    "body": ["$1.flatMap(($3) => $0)${2|,\\,,;|}"]
+  },
+  "arr.forEach(val, index, arr)": {
+    "prefix": "each",
+    "body": [
+      "$1.forEach(($3) => {",
+      "\t$0",
+      "})${2|,\\,,;|}"
+    ]
+  },
+  "arr.map(val, index, arr)": {
+    "prefix": "map",
+    "body": ["$1.map(($3) => $0)${2|,\\,,;|}"]
+  }
+}

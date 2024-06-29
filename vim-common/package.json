@@ -2,30 +2,12 @@
   "name": "my-snippets",
   "contributes": {
     "snippets": [
-      {
-        "language": "javascriptreact",
-        "path": "./snippets/javascriptreact.json"
-      },
-      {
-        "language": ["javascript", "javascriptreact"],
-        "path": "./snippets/javascript.json"
-      },
-      {
-        "language": "typescriptreact",
-        "path": "./snippets/typescriptreact.json"
-      },
-      {
-        "language": ["typescript", "typescriptreact"],
-        "path": "./snippets/typescript.json"
-      },
-      {
-        "language": "cs",
-        "path": "./snippets/unity.json"
-      },
-      {
-        "language": "swift",
-        "path": "./snippets/swift.json"
-      }
+      { "path": "./snippets/ecma/tests.json", "language": ["javascript", "javascriptreact", "typescript", "typescriptreact"] },
+      { "path": "./snippets/ecma/react.json", "language": ["javascript", "javascriptreact", "typescriptreact"] },
+      { "path": "./snippets/ecma/collections.json", "language": ["javascript", "javascriptreact", "typescript", "typescriptreact"] },
+      { "path": "./snippets/json.json", "language": ["json", "jsonc"] },
+      { "path": "./snippets/unity.json", "language": "cs" },
+      { "path": "./snippets/swift.json", "language": "swift" }
     ]
   }
 }
