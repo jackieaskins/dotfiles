@@ -24,11 +24,5 @@ require('lazy').setup('plugins', {
 vim.diagnostic.config({
   jump = { float = false },
   underline = false,
-  virtual_text = {
-    virt_text_pos = 'eol',
-    prefix = function(diagnostic)
-      return require('diagnostic.icons')[diagnostic.severity]
-    end,
-    spacing = 0,
-  },
+  virtual_text = { spacing = 1 },
 }, require('lazy.core.config').ns)
