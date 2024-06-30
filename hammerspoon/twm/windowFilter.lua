@@ -17,7 +17,6 @@ local windowFilters = mergeTables({
 
 return hs.window.filter
   .new()
-  :setDefaultFilter()
   :setOverrideFilter({
     allowRoles = { 'AXStandardWindow' },
     visible = true,

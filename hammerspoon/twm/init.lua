@@ -2,6 +2,9 @@ local cache = require('twm.cache')
 local layout = require('twm.layout')
 local utils = require('twm.utils')
 local windowFilter = require('twm.windowFilter')
+local menubar = require('twm.menubar')
+
+local wf = hs.window.filter
 
 local M = {}
 
@@ -11,25 +14,14 @@ function M.start()
   cache.restore()
 
   windowFilter:subscribe({
-    hs.window.filter.windowsChanged,
-    hs.window.filter.windowInCurrentSpace,
-    hs.window.filter.windowNotInCurrentSpace,
-    hs.window.filter.windowFocused,
+    wf.windowsChanged,
+    wf.windowInCurrentSpace,
+    wf.windowNotInCurrentSpace,
+    wf.windowFocused,
   }, M.tile)
 
-  windowFilter:subscribe({
-    hs.window.filter.windowMinimized,
-    hs.window.filter.windowDestroyed,
-  }, function()
-    for _, window in ipairs(hs.window.filter.defaultCurrentSpace:getWindows()) do
-      if window:isVisible() then
-        window:focus()
-        return
-      end
-    end
-  end)
-
   M.tile()
+  menubar.init()
 end
 
 ---Reset tiling cache and re-tile

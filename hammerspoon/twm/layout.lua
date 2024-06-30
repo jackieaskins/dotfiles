@@ -1,6 +1,7 @@
 local cache = require('twm.cache')
 local supportedLayouts = require('twm.supportedLayouts')
 local utils = require('twm.utils')
+local menubar = require('twm.menubar')
 
 local M = {}
 
@@ -46,6 +47,8 @@ function M.set(layout, spaceId)
   cache.setSpaceLayout(space, layout)
   M.show(space)
   utils.tile()
+
+  menubar.update()
 end
 
 return M
