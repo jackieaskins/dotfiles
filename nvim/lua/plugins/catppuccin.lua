@@ -39,6 +39,7 @@ return {
           FoldColumn = { fg = colors.surface1 },
           Folded = { bg = colors.surface0 },
           NormalFloat = { bg = colors.base },
+          FloatBorder = { fg = colors.blue, bg = colors.base },
           StatusLine = { fg = colors.text, bg = colors.base },
           TabLine = { fg = colors.text, bg = colors.surface0 },
 
