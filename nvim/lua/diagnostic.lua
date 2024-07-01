@@ -16,11 +16,15 @@ local ns = vim.api.nvim_create_namespace('CurlineDiag')
 local opts = { spacing = 1 }
 require('utils').augroup('curline_diagnostic_vt', {
   {
-    { 'CursorHold', 'DiagnosticChanged' },
+    { 'CursorHold', 'DiagnosticChanged', 'ModeChanged' },
     callback = function(args)
       local bufnr = args.buf
 
       pcall(vim.api.nvim_buf_clear_namespace, bufnr, ns, 0, -1)
+
+      if vim.startswith(vim.fn.mode(), 'i') then
+        return
+      end
 
       local lnum = vim.fn.line('.') - 1
       local diagnostics = vim.diagnostic.get(bufnr, { lnum = lnum })
@@ -28,7 +32,7 @@ require('utils').augroup('curline_diagnostic_vt', {
       -- This will eventually break when neovim stops exporting _get_virt_text_chunks
       local virt_text = vim.diagnostic._get_virt_text_chunks(diagnostics, opts)
       if virt_text then
-        vim.api.nvim_buf_set_extmark(bufnr, ns, lnum, 0, {
+        pcall(vim.api.nvim_buf_set_extmark, bufnr, ns, lnum, 0, {
           hl_mode = 'combine',
           virt_text = virt_text,
           virt_text_pos = 'eol',
