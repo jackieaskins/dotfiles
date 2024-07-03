@@ -1,8 +1,8 @@
-local cache = require('twm.cache')
-local layout = require('twm.layout')
-local utils = require('twm.utils')
-local windowFilter = require('twm.windowFilter')
-local menubar = require('twm.menubar')
+local cache = require('config.twm.cache')
+local layout = require('config.twm.layout')
+local utils = require('config.twm.utils')
+local windowFilter = require('config.twm.windowFilter')
+local menubar = require('config.twm.menubar')
 
 local wf = hs.window.filter
 

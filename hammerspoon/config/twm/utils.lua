@@ -1,6 +1,6 @@
-local cache = require('twm.cache')
-local windowFilter = require('twm.windowFilter')
-local supportedLayouts = require('twm.supportedLayouts')
+local cache = require('config.twm.cache')
+local windowFilter = require('config.twm.windowFilter')
+local supportedLayouts = require('config.twm.supportedLayouts')
 
 local SCREEN_PADDING = CUSTOM.twmScreenPadding or 10
 local WINDOW_GAP = CUSTOM.twmWindowGap or 10

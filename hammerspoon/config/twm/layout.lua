@@ -1,7 +1,7 @@
-local cache = require('twm.cache')
-local supportedLayouts = require('twm.supportedLayouts')
-local utils = require('twm.utils')
-local menubar = require('twm.menubar')
+local cache = require('config.twm.cache')
+local supportedLayouts = require('config.twm.supportedLayouts')
+local utils = require('config.twm.utils')
+local menubar = require('config.twm.menubar')
 
 local M = {}
 

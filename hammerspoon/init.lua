@@ -1,5 +1,5 @@
-local fnutils = require('fnutils')
-local hotkeyStore = require('hotkeyStore')
+local fnutils = require('config.fnutils')
+local hotkeyStore = require('config.hotkeyStore')
 
 ----------------------------------------------------------------------
 --                              Custom                              --
@@ -40,17 +40,26 @@ HYPER = { 'option', 'shift', 'ctrl', 'cmd' }
 --                              Spoons                              --
 ----------------------------------------------------------------------
 hs.loadSpoon('SpoonInstall')
-
 spoon.SpoonInstall:andUse('EmmyLua')
-
-spoon.SpoonInstall:andUse('ReloadConfiguration')
-spoon.ReloadConfiguration:start()
-spoon.ReloadConfiguration:bindHotkeys({
-  reloadConfiguration = { MEH, 'r' },
-})
-hotkeyStore.annotate('Reload Configuration', 'Reload Hammerspoon Configuration', MEH, 'r')
-
 spoon.SpoonInstall:asyncUpdateAllRepos()
+
+----------------------------------------------------------------------
+--                              Reload                              --
+----------------------------------------------------------------------
+local configPaths = { '/config', '/init.lua', '/custom.lua' }
+
+reloadWatchers = {}
+
+for _, configPath in ipairs(configPaths) do
+  reloadWatchers[#reloadWatchers + 1] = hs.pathwatcher
+    .new(hs.configdir .. configPath, function(paths)
+      print('Reloading for ' .. table.concat(paths, ', '))
+      hs.reload()
+    end)
+    :start()
+end
+
+hotkeyStore.register('Reload', 'Reload Configuration', MEH, 'r', hs.reload)
 
 ----------------------------------------------------------------------
 --                             Hotkeys                              --
@@ -83,7 +92,7 @@ hotkeyStore.register('Hotkeys', 'Show hotkeys alert', MEH, 'm', hotkeyStore.show
 hs.window.setShadows(false)
 hs.window.animationDuration = 0
 
-twm = require('twm')
+twm = require('config.twm')
 
 twm.start()
 hs.shutdownCallback = function()
@@ -125,7 +134,7 @@ end)
 --                        Dark Mode Triggers                        --
 ----------------------------------------------------------------------
 darkModeNotification = hs.distributednotifications.new(function()
-  require('darkMode').configureSystemColors()
+  require('config.darkMode').configureSystemColors()
 end, 'AppleInterfaceThemeChangedNotification')
 
 darkModeNotification:start()
