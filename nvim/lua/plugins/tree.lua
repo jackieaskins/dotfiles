@@ -3,7 +3,7 @@ local diagnostic_icons = require('diagnostic.icons')
 return {
   'nvim-tree/nvim-tree.lua',
   dependencies = {
-    'nvim-tree/nvim-web-devicons',
+    { 'nvim-tree/nvim-web-devicons', optional = true },
     {
       'antosha417/nvim-lsp-file-operations',
       config = true,

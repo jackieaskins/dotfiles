@@ -1,35 +1,17 @@
 local M = {}
 
-local default_icon = ''
-
----Get the icon and color for a given file path
----@param path string
----@return string, string
-function M.get_file_icon(path)
-  local ok, icons = pcall(require, 'nvim-web-devicons')
-
-  if ok then
-    return icons.get_icon(path, nil, { default = true })
-  end
-
-  return default_icon, '#fff'
-end
-
 ---Get the icon and color for a given filetype
 ---@param filetype string
 ---@return string, string
 function M.get_filetype_icon(filetype)
-  local ok, icons = pcall(require, 'nvim-web-devicons')
+  local ok, icon, color = pcall(MiniIcons.get, 'filetype', filetype)
 
   if ok then
-    local icon, hl = icons.get_icon_by_filetype(filetype, { default = false })
-    if icon then
-      return icon, hl
-    end
-    return icons.get_icon(filetype, filetype, { default = true })
+    ---@diagnostic disable-next-line: return-type-mismatch
+    return icon, color
   end
 
-  return default_icon, '#fff'
+  return '', 'MiniIconsGrey'
 end
 
 return M

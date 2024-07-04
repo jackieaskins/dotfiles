@@ -7,7 +7,6 @@ local function set_background(is_reload)
   vim.opt.background = background
 
   if is_reload then
-    require('plugins.web-devicons').load_icons(true)
     require('tint').refresh()
   end
 end

@@ -45,7 +45,10 @@ return {
         ' ',
         tabnr,
         ' ',
-        require('icons').get_filetype_icon(vim.fn.getbufvar(bufnr, '&filetype')) .. ' ',
+        require('icons').get_filetype_icon(vim.api.nvim_get_option_value('filetype', {
+          buf = bufnr,
+        })),
+        ' ',
         get_bufname(),
         ' ',
       }

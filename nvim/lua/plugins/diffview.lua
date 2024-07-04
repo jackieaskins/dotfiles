@@ -1,7 +1,10 @@
 return {
   'sindrets/diffview.nvim',
   cmd = { 'DiffviewOpen', 'DiffviewFileHistory' },
-  dependencies = { 'nvim-lua/plenary.nvim' },
+  dependencies = {
+    'nvim-lua/plenary.nvim',
+    { 'nvim-tree/nvim-web-devicons', optional = true },
+  },
   keys = {
     {
       '<leader>dv',

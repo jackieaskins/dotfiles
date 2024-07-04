@@ -15,6 +15,7 @@ return {
         'luvit-meta/library/uv.lua',
         'catppuccin',
         'nvim-lspconfig',
+        'mini.icons',
       },
     },
   },

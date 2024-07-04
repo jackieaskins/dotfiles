@@ -7,6 +7,7 @@ local M = {
     { 'nvim-lua/plenary.nvim' },
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
     { 'tsakirist/telescope-lazy.nvim' },
+    { 'nvim-tree/nvim-web-devicons', optional = true },
   },
   cmd = 'Telescope',
   event = 'LspAttach',

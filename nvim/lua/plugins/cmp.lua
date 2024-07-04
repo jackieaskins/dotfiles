@@ -1,4 +1,7 @@
-local border_config = { border = vim.g.border_style, winhighlight = 'FloatBorder:FloatBorder' }
+local border_config = {
+  border = vim.g.border_style,
+  winhighlight = 'FloatBorder:FloatBorder',
+}
 local source_menu_map = {
   buffer = 'buff',
   calc = 'calc',
@@ -18,7 +21,10 @@ return {
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-nvim-lsp-signature-help',
     'hrsh7th/cmp-path',
-    'onsails/lspkind.nvim',
+    {
+      'onsails/lspkind.nvim',
+      dependencies = { 'nvim-tree/nvim-web-devicons', optional = true },
+    },
     'folke/lazydev.nvim',
     'saadparwaiz1/cmp_luasnip',
     { 'jackieaskins/cmp-luasnip-choice', config = true },

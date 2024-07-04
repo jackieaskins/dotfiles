@@ -3,9 +3,6 @@ return {
   lazy = false,
   name = 'catppuccin',
   priority = 1000,
-  build = function()
-    require('plugins.web-devicons').load_icons(true)
-  end,
   config = function()
     require('catppuccin').setup({
       term_colors = true, -- Setting for baleia.nvim
@@ -59,6 +56,9 @@ return {
           -- Plugin Highlights
           -- highlight-undo.nvim
           HighlightUndo = { link = 'IncSearch' },
+
+          -- mini.icons
+          MiniIconsGrey = { fg = colors.overlay0 },
 
           -- nvim-lightbulb
           LightBulbVirtText = { bg = colors.none },
