@@ -75,16 +75,27 @@ function M.getMenu()
   local windowsBySpaceId = getWindowsBySpaceId()
   local focusedWindow = hs.window.focusedWindow()
 
-  ---@type hs.screen[]
-  local screens = hs.screen.allScreens() or {}
+  -- Not sure if this is actually in order, but from limited testing it seems so
+  local allScreenInfo = hs.fnutils.map(hs.spaces.data_managedDisplaySpaces(), function(screen)
+    return {
+      uuid = screen['Display Identifier'],
+      spaceIds = hs.fnutils.map(screen['Spaces'], function(space)
+        return space['ManagedSpaceID']
+      end),
+    }
+  end)
+  local screensByUUID = {}
+  for _, screen in ipairs(hs.screen.allScreens()) do
+    screensByUUID[screen:getUUID()] = screen
+  end
 
-  ---@type table<string, string[]>
-  local allSpaces = hs.spaces.allSpaces() or {}
-  for i, screen in ipairs(screens) do
-    local screenUUID = screen:getUUID()
+  for i, screenInfo in ipairs(allScreenInfo) do
+    local screenUUID = screenInfo['uuid']
+    local screen = screensByUUID[screenUUID]
+
     table.insert(menu, { title = screen:name(), disabled = true })
 
-    local spaceIds = allSpaces[screenUUID] or {}
+    local spaceIds = screenInfo['spaceIds']
     for _, spaceId in ipairs(spaceIds) do
       local spaceType = hs.spaces.spaceType(spaceId)
 
@@ -129,7 +140,7 @@ function M.getMenu()
       end
     end
 
-    if i < #screens then
+    if i < #allScreenInfo then
       table.insert(menu, { title = '-' })
     end
   end
