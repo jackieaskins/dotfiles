@@ -13,8 +13,11 @@ local M = {}
 function M.update()
   local currentLayout = require('config.twm.layout').get()
 
+  local currentSpaceId = hs.spaces.focusedSpace()
   local icon = currentLayout == 'monocle' and '􀏭' or '􀇵'
-  local currentSpaceWindows = utils.menubarCurrentWF:getWindows() or {}
+  local currentSpaceWindows = hs.fnutils.filter(utils.menubarCurrentWF:getWindows(), function(window)
+    return hs.fnutils.contains(hs.spaces.windowSpaces(window), currentSpaceId)
+  end)
 
   if menubar then
     menubar:setTitle(icon .. ' ' .. tostring(#currentSpaceWindows))
@@ -28,6 +31,7 @@ function M.init()
 
   utils.menubarCurrentWF:subscribe({
     hs.window.filter.windowsChanged,
+    hs.window.filter.windowFocused,
   }, M.update)
 
   utils.menubarWF:subscribe({
