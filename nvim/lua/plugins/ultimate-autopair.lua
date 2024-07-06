@@ -16,6 +16,11 @@ return {
         close = { enable = true },
         cmap = false,
         cr = { enable = true, autoclose = true },
+        fastwarp = {
+          multi = true,
+          {},
+          { faster = true, map = '<C-M-e>', cmap = '<C-M-e>' },
+        },
         space2 = { enable = true },
         tabout = { enable = true, hopout = true, map = '<Tab>' },
       }),

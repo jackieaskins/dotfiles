@@ -10,12 +10,9 @@ return {
       file = {
         vimrc = { glyph = '', hl = 'MiniIconsGreen' },
         zshrc = { glyph = '', hl = 'MiniIconsGreen' },
+        ['init.lua'] = { glyph = '󰢱', hl = 'MiniIconsAzure' },
       },
       filetype = {
-        TelescopePrompt = { glyph = '', hl = 'MiniIconsBlue' },
-
-        -- Workaround: Mini lowercases filetype
-        nvimtree = { glyph = '󰙅', hl = 'MiniIconsGreen' },
         telescopeprompt = { glyph = '', hl = 'MiniIconsBlue' },
       },
     })

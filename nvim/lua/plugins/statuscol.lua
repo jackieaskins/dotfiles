@@ -7,11 +7,11 @@ return {
       ft_ignore = { 'NvimTree' },
       segments = {
         { -- Gitsigns
-          sign = { namespace = { 'gitsigns' }, wrap = true, auto = false },
+          sign = { namespace = { 'gitsigns' }, wrap = true, auto = false, foldclosed = true },
           click = 'v:lua.ScSa',
         },
         { -- Other signs
-          sign = { name = { '.*' }, namespace = { '.*' }, auto = false },
+          sign = { name = { '.*' }, namespace = { '.*' }, auto = false, foldclosed = true },
           click = 'v:lua.ScSa',
         },
         { text = { builtin.lnumfunc } }, -- Line number

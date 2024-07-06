@@ -95,17 +95,14 @@ return {
 
     dap.listeners.after.event_initialized.my_config = function()
       require('dapui').open()
-      vim.opt.mouse = 'nv'
     end
     dap.listeners.before.event_terminated.my_config = function()
       require('dap').clear_breakpoints()
       require('dapui').close()
-      vim.opt.mouse = ''
     end
     dap.listeners.before.event_exited.my_config = function()
       require('dap').clear_breakpoints()
       require('dapui').close()
-      vim.opt.mouse = ''
     end
 
     ----------------------------------------------------------------------

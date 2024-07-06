@@ -13,7 +13,6 @@ return {
 
     local function paste()
       return {
-        ---@diagnostic disable-next-line: param-type-mismatch
         vim.fn.split(vim.fn.getreg(''), '\n'),
         vim.fn.getregtype(''),
       }

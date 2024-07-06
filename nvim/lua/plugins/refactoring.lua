@@ -20,6 +20,6 @@ return {
     refactor_key('n', '<leader>rI', 'Inline Function'),
     refactor_key({ 'n', 'x' }, '<leader>ri', 'Inline Variable'),
     refactor_key('n', '<leader>rb', 'Extract Block'),
-    refactor_key('n', '<leader>rbf', 'Extract Block To File'),
+    refactor_key('n', '<leader>rB', 'Extract Block To File'),
   },
 }
