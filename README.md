@@ -37,8 +37,9 @@ Use the following files to customize Neovim:
 - Custom plugins: `~/dotfiles/nvim/lua/plugins/custom.lua`
 
 #### Configuration Variables
-- The list of supported configuration variables can be found at the top of `~/dotfiles/nvim/lua/settings.lua`
-    - To override the default values of these settings, set them in `~/dotfiles/nvim/lua/custom.lua`
+
+The list of supported configuration variables can be found at the top of `~/dotfiles/nvim/lua/config_variables.lua`
+- To override the default values of these settings, set them in `~/dotfiles/nvim/lua/custom.lua`
 
 ### Tmux
 
@@ -49,6 +50,7 @@ Use the following files to customize Neovim:
 `~/dotfiles/vim/custom.vim`
 
 ### WezTerm
+
 Return a table in  `~/dotfiles/wezterm/custom.lua`, the following keys can be provided:
 - `workspaces` - `table<string, Workspace>`
 

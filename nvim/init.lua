@@ -2,6 +2,7 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
 require('dark_mode')
+require('config_variables')
 require('settings')
 
 if require('utils').file_exists('~/dotfiles/nvim/lua/custom.lua') then
