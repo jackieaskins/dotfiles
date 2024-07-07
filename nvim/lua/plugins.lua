@@ -6,6 +6,7 @@ return {
     opts = { enable_tailwind = true, enable_named_colors = false },
   },
   { 'chrisgrieser/nvim-early-retirement', config = true },
+  { 'chrisgrieser/nvim-origami', event = 'BufReadPost', opts = {} },
   {
     'danymat/neogen',
     opts = { snippet_engine = require('utils').get_snippet_engine() },
