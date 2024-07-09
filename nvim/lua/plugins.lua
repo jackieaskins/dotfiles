@@ -5,7 +5,10 @@ return {
     'brenoprata10/nvim-highlight-colors',
     opts = { enable_tailwind = true, enable_named_colors = false },
   },
-  { 'chrisgrieser/nvim-early-retirement', config = true },
+  {
+    'chrisgrieser/nvim-early-retirement',
+    opts = { notificationOnAutoClose = true, deleteBufferWhenFileDeleted = true },
+  },
   { 'chrisgrieser/nvim-origami', event = 'BufReadPost', opts = {} },
   {
     'danymat/neogen',
