@@ -29,6 +29,8 @@ return {
           fg = colors.blue,
         })
 
+        local anchor_link_hl = { fg = colors.blue, style = { 'underline' } }
+
         local custom_highlights = {
           -- Default Highlights
           CurSearch = vim.tbl_extend('force', inc_search, { style = { 'bold' } }),
@@ -47,11 +49,9 @@ return {
           WinBarDiagnosticInfo = { fg = colors.sky, bg = colors.base },
 
           -- Treesitter Highlights
-          ['@string.special.url'] = { fg = colors.sky },
-          ['@markup.link.label.markdown_inline'] = {
-            fg = colors.blue,
-            style = { 'underline' },
-          },
+          ['@markup.link.label.markdown_inline'] = anchor_link_hl,
+          ['@markup.raw.markdown_inline'] = { bg = colors.surface1 },
+          ['@string.special.url'] = anchor_link_hl,
 
           -- Plugin Highlights
           -- highlight-undo.nvim
