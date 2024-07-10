@@ -1,4 +1,5 @@
 brew 'asdf'
+brew 'autossh'
 brew 'bat'
 brew 'cmake' # Neovim dependency
 brew 'fd'
