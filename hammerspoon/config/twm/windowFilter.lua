@@ -9,7 +9,9 @@ local windowFilters = mergeTables({
   FaceTime = false,
   Finder = false,
   ['Google Chrome'] = { rejectTitles = 'Picture in Picture' },
-  Hammerspoon = { rejectTitles = 'Hammerspoon Console' },
+  Hammerspoon = {
+    rejectTitles = hs.dockIcon() and {} or 'Hammerspoon Console',
+  },
   ['Karabiner-Elements'] = false,
   ['Keychain Access'] = false,
   Raycast = false,

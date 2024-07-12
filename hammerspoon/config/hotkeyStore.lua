@@ -6,7 +6,7 @@ local cmd = '⌘'
 local alt = '⌥'
 local ctrl = '⌃'
 local shift = '⇧'
-local meh = '⌽' -- Hammerspoon doesn't have a symbol defined for meh
+local meh = '􀋀' -- Hammerspoon doesn't have a symbol defined for meh
 local hyper = '✧'
 
 local modMap = { cmd = cmd, command = cmd, ctrl = ctrl, control = ctrl, alt = alt, option = alt, shift = shift }
