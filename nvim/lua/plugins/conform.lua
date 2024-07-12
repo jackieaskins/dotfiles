@@ -20,6 +20,9 @@ local formatters = {
     name = 'swiftformat',
     install_cmd = { 'brew', 'swiftformat' },
   },
+  ['format-queries'] = {
+    name = 'format-queries',
+  },
 }
 
 local supported_formatters = vim.g.supported_formatters
@@ -38,6 +41,7 @@ local formatter_by_filetype = {
   less = supported_formatters.prettierd,
   lua = supported_formatters.stylua,
   markdown = supported_formatters.prettierd,
+  query = supported_formatters['format-queries'],
   scss = supported_formatters.prettierd,
   svelte = supported_formatters.prettierd,
   swift = supported_formatters.swiftformat,
@@ -63,10 +67,12 @@ return {
   get_formatter_for_filetype = get_formatter_for_filetype,
   init = function()
     local install_cmds = {}
-
     for formatter, data in pairs(supported_formatters) do
-      install_cmds[formatter] = data.install_cmd
+      if data.install_cmd then
+        install_cmds[formatter] = data.install_cmd
+      end
     end
+
     require('installer').register('formatters', install_cmds, vim.fn.stdpath('data') .. '/formatters')
 
     utils.augroup('format_on_save', {
