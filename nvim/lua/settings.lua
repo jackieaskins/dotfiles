@@ -20,7 +20,6 @@ vim.opt.diffopt:append({ 'vertical', 'linematch:60' })
 vim.opt.matchpairs:append({ '<:>' })
 vim.opt.jumpoptions = 'stack'
 vim.opt.undofile = true
-vim.opt.startofline = true
 
 -- Statusline, Tabline, Winbar
 vim.opt.laststatus = 3
@@ -31,6 +30,7 @@ vim.opt.winbar = "%{%v:lua.require('winbar').get_winbar()%}"
 
 -- Folds
 vim.opt.foldcolumn = '1'
+vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
 vim.opt.foldmethod = 'expr'
 vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'

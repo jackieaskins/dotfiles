@@ -9,7 +9,6 @@ return {
     'chrisgrieser/nvim-early-retirement',
     opts = { notificationOnAutoClose = true, deleteBufferWhenFileDeleted = true },
   },
-  { 'chrisgrieser/nvim-origami', event = 'BufReadPost', opts = {} },
   {
     'danymat/neogen',
     opts = { snippet_engine = require('utils').get_snippet_engine() },
