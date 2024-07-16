@@ -91,6 +91,8 @@ bindkey -M menuselect '^[[C' .forward-char '^[OC' .forward-char
 bindkey -M menuselect '^M' .accept-line
 # Match all substrings, not just prefixes
 zstyle ':completion:*' matcher-list 'r:|?=**'
+bindkey '\e[A' .history-search-backward
+bindkey '\e[B' .history-search-forward
 
 #--------------------------------------------------------------------#
 #                             Scrollback                             #
