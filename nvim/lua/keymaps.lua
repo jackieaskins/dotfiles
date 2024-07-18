@@ -1,6 +1,13 @@
 local utils = require('utils')
 local augroup, map = utils.augroup, utils.map
 
+-- Mappings from https://www.reddit.com/r/neovim/comments/1e1dmpw/what_are_the_keymaps_that_you_replaced_default/
+-- Don't overwrite clipboard on `x`
+map('n', 'x', '"_x"')
+-- Swap blockwise selection
+map('n', 'v', '<C-v>')
+map('n', '<C-v>', 'v')
+
 -- Auto-indent
 -- https://www.reddit.com/r/neovim/comments/17mrka2/comment/k7n3d9b
 map('n', 'i', function()
