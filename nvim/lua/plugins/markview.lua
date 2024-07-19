@@ -3,19 +3,21 @@ local list_item = { add_padding = true, text = '', hl = 'Function' }
 ---@type table<string, any>
 local headings = { shift_width = 2 }
 for level, config in ipairs({
-  { icon = '󰼏 ', sign = '󰉫', color = 'red' },
-  { icon = '󰼐 ', sign = '󰉬', color = 'orange' },
-  { icon = '󰼑 ', sign = '󰉭', color = 'yellow' },
-  { icon = '󰼒 ', sign = '󰉮', color = 'green' },
-  { icon = '󰼓 ', sign = '󰉯', color = 'blue' },
-  { icon = '󰼔 ', sign = '󰉰', color = 'mauve' },
+  { icon = '󰼏 ', sign = '󰉫' },
+  { icon = '󰼐 ', sign = '󰉬' },
+  { icon = '󰼑 ', sign = '󰉭' },
+  { icon = '󰼒 ', sign = '󰉮' },
+  { icon = '󰼓 ', sign = '󰉯' },
+  { icon = '󰼔 ', sign = '󰉰' },
 }) do
-  headings['heading_' .. tostring(level)] = {
+  local level_str = tostring(level)
+
+  headings['heading_' .. level_str] = {
     style = 'icon',
     icon = config.icon,
-    hl = 'markview_' .. config.color,
+    hl = 'MarkviewCol' .. level_str,
     sign = config.sign,
-    sign_hl = 'markview_' .. config.color .. '_fg',
+    sign_hl = 'MarkviewCol' .. level_str .. 'Fg',
   }
 end
 
@@ -26,12 +28,13 @@ return {
   dependencies = { 'nvim-tree/nvim-web-devicons', optional = true },
   opts = {
     checkboxes = {
-      checked = { text = '󰱒' },
-      unchecked = { text = '󰄱' },
+      checked = { text = '󰄵', hl = 'markviewCol4Fg' },
+      unchecked = { text = '󰄱', hl = 'markviewCol1Fg' },
+      pending = { text = '󰴲', hl = 'MarkviewCol3Fg' },
     },
     code_blocks = {
       style = 'language',
-      hl = 'dark',
+      hl = '@markup.raw.block.markdown',
       min_width = 60,
       language_direction = 'right',
       sign = true,

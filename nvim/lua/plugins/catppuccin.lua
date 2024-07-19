@@ -50,6 +50,7 @@ return {
 
           -- Treesitter Highlights
           ['@markup.link.label.markdown_inline'] = anchor_link_hl,
+          ['@markup.raw.block.markdown'] = { bg = colors.crust },
           ['@markup.raw.markdown_inline'] = { bg = colors.surface1 },
           ['@string.special.url'] = anchor_link_hl,
 
