@@ -1,7 +1,7 @@
 ---@class ClientConfig: lspconfig.Config
 ---@field root_dir string | function
 
----@class LspServer
+---@class (exact) LspServer
 ---@field config? fun(config: ClientConfig): ClientConfig
 ---@field display? string
 ---@field install? InstallCommand

@@ -40,6 +40,7 @@ return {
           require('utils').snippet_expand(args.body)
         end,
       },
+      ---@diagnostic disable-next-line: missing-fields
       view = { entries = { follow_cursor = true } },
       -- Order dictates priority
       sources = cmp.config.sources({
@@ -55,6 +56,7 @@ return {
         completion = cmp.config.window.bordered(border_config),
         documentation = cmp.config.window.bordered(border_config),
       },
+      ---@diagnostic disable-next-line: missing-fields
       formatting = {
         format = require('lspkind').cmp_format({
           before = function(entry, vim_item)

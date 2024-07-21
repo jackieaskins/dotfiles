@@ -1,7 +1,7 @@
 ---@type boolean
 vim.g.is_personal_machine = false
 
----@class AdditionalServer
+---@class (exact) AdditionalServer
 ---@field lspconfig lspconfig.Config
 ---@field server LspServer
 

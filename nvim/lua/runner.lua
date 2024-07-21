@@ -1,9 +1,9 @@
----@class Runner
+---@class (exact) TerminalRunner
 ---@field open_runner fun()
 ---@field toggle_pane fun()
 ---@field close_runner fun()
 ---@field interrupt_runner fun()
----@field run_command fun(command: string): nil
+---@field run_command fun(command: string)
 ---@field run_last_command fun()
 ---@field clear_terminal_screen fun()
 

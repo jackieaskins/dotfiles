@@ -64,8 +64,7 @@ local function ensure_runner_exists()
   end
 end
 
----@type Runner
----@diagnostic disable-next-line: missing-fields
+---@class TerminalRunner
 local wezterm = {}
 
 function wezterm.open_runner()

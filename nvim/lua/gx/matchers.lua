@@ -1,4 +1,4 @@
----@class GxMatcher
+---@class (exact) GxMatcher
 ---@field file_pattern string
 ---@field pattern string
 ---@field handler fun(match: string[]): string

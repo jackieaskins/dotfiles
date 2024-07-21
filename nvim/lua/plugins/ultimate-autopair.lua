@@ -24,6 +24,7 @@ return {
         space2 = { enable = true },
         tabout = { enable = true, hopout = true, map = '<Tab>' },
       }),
+      ---@diagnostic disable-next-line: assign-type-mismatch
       { profile = require('ultimate-autopair.experimental.cmpair').init },
     })
   end,
