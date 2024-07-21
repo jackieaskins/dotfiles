@@ -55,6 +55,12 @@ return {
           ['@string.special.url'] = anchor_link_hl,
 
           -- Plugin Highlights
+          -- LuaSnip
+          LuasnipChoiceNodeActive = { link = 'Visual' },
+          LuasnipChoiceNodePassive = { link = 'Visual' },
+          LuasnipInsertNodeActive = { link = 'Visual' },
+          LuasnipInsertNodePassive = { link = 'Visual' },
+
           -- highlight-undo.nvim
           HighlightUndo = { link = 'IncSearch' },
 
