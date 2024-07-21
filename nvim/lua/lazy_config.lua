@@ -26,3 +26,13 @@ vim.diagnostic.config({
   underline = false,
   virtual_text = { spacing = 1 },
 }, require('lazy.core.config').ns)
+
+local map = require('utils').map
+map('n', '<leader>lc', '<cmd>Lazy check<CR>')
+map('n', '<leader>li', '<cmd>Lazy install<CR>')
+map('n', '<leader>ll', '<cmd>Lazy show<CR>')
+map('n', '<leader>lp', '<cmd>Lazy profile<CR>')
+map('n', '<leader>ls', '<cmd>Lazy sync<CR>')
+map('n', '<leader>lu', '<cmd>Lazy update<CR>')
+map('n', '<leader>lx', '<cmd>Lazy clean<CR>')
+map('n', '<leader>lr', ':Lazy reload ', { silent = false })

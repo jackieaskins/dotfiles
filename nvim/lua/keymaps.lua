@@ -1,14 +1,33 @@
 local utils = require('utils')
 local augroup, map = utils.augroup, utils.map
 
--- Mappings from https://www.reddit.com/r/neovim/comments/1e1dmpw/what_are_the_keymaps_that_you_replaced_default/
+-- Append semicolons and commas {{{
+map('n', '<leader>;', 'A;<Esc>')
+map('n', '<leader>,', 'A,<Esc>')
+-- }}}
+
+-- Clipboard and visual select {{{
+-- Yank to/from System Clipboard
+local yank_keys = { 'c', 'C', 'd', 'D', 'p', 'P', 'y', 'Y' }
+for _, key in ipairs(yank_keys) do
+  map({ 'n', 'v' }, '<leader>' .. key, '"+' .. key)
+end
+
+-- Borrowed from https://github.com/Abstract-IDE/abstract-autocmds
+-- Keep selection after indenting
+map('x', '<', '<gv')
+map('x', '>', '>gv')
+
+-- Below mappings from https://www.reddit.com/r/neovim/comments/1e1dmpw/what_are_the_keymaps_that_you_replaced_default/
 -- Don't overwrite clipboard on `x`
 map('n', 'x', '"_x"')
+
 -- Swap blockwise selection
 map('n', 'v', '<C-v>')
 map('n', '<C-v>', 'v')
+-- }}}
 
--- Auto-indent
+-- Auto-indent {{{
 -- https://www.reddit.com/r/neovim/comments/17mrka2/comment/k7n3d9b
 map('n', 'i', function()
   if #vim.fn.getline('.') == 0 then
@@ -17,12 +36,14 @@ map('n', 'i', function()
     return 'i'
   end
 end, { expr = true, desc = 'Properly indent empty line on insert' })
+-- }}}
 
--- Diagnostics
+-- Diagnostics {{{
 map('n', '[e', '<cmd>lua vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR })<CR>')
 map('n', ']e', '<cmd>lua vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR })<CR>')
+-- }}}
 
--- LSP
+-- LSP {{{
 -- Unmap some of the default LSP mappings
 vim.keymap.del('n', 'grn')
 vim.keymap.del('n', 'grr')
@@ -64,19 +85,15 @@ augroup('lsp_keymaps', {
     end,
   },
 })
+-- }}}
 
--- Extended gx
+-- Extended gx {{{
 map('n', 'gx', function()
   require('gx').handle_url_under_cursor()
 end, { desc = 'Open url under cursor' })
+-- }}}
 
--- Yank to/from System Clipboard
-local yank_keys = { 'c', 'C', 'd', 'D', 'p', 'P', 'y', 'Y' }
-for _, key in ipairs(yank_keys) do
-  map({ 'n', 'v' }, '<leader>' .. key, '"+' .. key)
-end
-
--- Jumplist
+-- Jumplist {{{
 local function jump(key)
   return function()
     return vim.v.count > 1 and "m'" .. vim.v.count .. key or key
@@ -84,7 +101,9 @@ local function jump(key)
 end
 map('n', 'k', jump('k'), { desc = 'Jump [count] lines up', expr = true })
 map('n', 'j', jump('j'), { desc = 'Jump [count] lines down', expr = true })
+-- }}}
 
+-- Unimpaired {{{
 -- Navigate Quickfix
 map('n', '[q', vim.cmd.cprevious)
 map('n', ']q', vim.cmd.cnext)
@@ -106,20 +125,9 @@ map('n', '[n', vim.cmd.previous)
 map('n', ']n', vim.cmd.next)
 map('n', '[N', vim.cmd.first)
 map('n', ']N', vim.cmd.last)
+-- }}}
 
-map('n', '<leader>so', '<cmd>luafile %<CR>')
-
--- Lazy
-map('n', '<leader>lc', '<cmd>Lazy check<CR>')
-map('n', '<leader>li', '<cmd>Lazy install<CR>')
-map('n', '<leader>ll', '<cmd>Lazy show<CR>')
-map('n', '<leader>lp', '<cmd>Lazy profile<CR>')
-map('n', '<leader>ls', '<cmd>Lazy sync<CR>')
-map('n', '<leader>lu', '<cmd>Lazy update<CR>')
-map('n', '<leader>lx', '<cmd>Lazy clean<CR>')
-map('n', '<leader>lr', ':Lazy reload ', { silent = false })
-
--- Runner
+-- Runner {{{
 vim.tbl_map(function(value)
   local key, fn = value[1], value[2]
 
@@ -150,19 +158,6 @@ map('n', '<leader>vL', function()
   require('runner').interrupt_runner()
   require('runner').run_last_command()
 end, { desc = 'runner - interrupt_runner_and_run_last_command' })
+-- }}}
 
--- QMK
-map('n', '<leader>qf', function()
-  require('runner').run_command('qmk flash')
-end)
-map('n', '<leader>qc', function()
-  require('runner').run_command('qmk compile')
-end)
-map('n', '<leader>ql', function()
-  require('runner').run_command('qmk lint')
-end)
-
--- Borrowed from https://github.com/Abstract-IDE/abstract-autocmds
--- Keep selection after indenting
-map('x', '<', '<gv')
-map('x', '>', '>gv')
+-- vim:foldmethod=marker foldlevel=0
