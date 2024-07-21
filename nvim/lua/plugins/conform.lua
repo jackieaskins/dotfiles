@@ -23,6 +23,10 @@ local formatters = {
   ['format-queries'] = {
     name = 'format-queries',
   },
+  ['clang-format'] = {
+    name = 'clang-format',
+    install_cmd = { 'brew', 'clang-format' },
+  },
 }
 
 local supported_formatters = vim.g.supported_formatters
@@ -30,6 +34,7 @@ local supported_formatters = vim.g.supported_formatters
   or formatters
 
 local formatter_by_filetype = {
+  c = supported_formatters['clang-format'],
   css = supported_formatters.prettierd,
   gdscript = supported_formatters.gdformat,
   graphql = supported_formatters.prettierd,
@@ -63,7 +68,7 @@ end
 return {
   'stevearc/conform.nvim',
   lazy = true,
-  config = true,
+  opts = { undojoin = true },
   get_formatter_for_filetype = get_formatter_for_filetype,
   init = function()
     local install_cmds = {}

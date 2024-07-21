@@ -1,3 +1,5 @@
+local curly = { brackets = { '%b{}' } }
+
 return {
   'echasnovski/mini.splitjoin',
   version = false,
@@ -15,22 +17,64 @@ return {
       end,
     },
   },
+  init = function()
+    require('utils').augroup('splitjoin_overrides', {
+      {
+        'FileType',
+        pattern = 'lua',
+        callback = function()
+          local gen_hook = require('mini.splitjoin').gen_hook
+
+          vim.b.minisplitjoin_config = {
+            split = {
+              hooks_post = {
+                gen_hook.add_trailing_separator(curly),
+              },
+            },
+            join = {
+              hooks_post = {
+                gen_hook.del_trailing_separator(curly),
+                gen_hook.pad_brackets(curly),
+              },
+            },
+          }
+        end,
+      },
+      {
+        'FileType',
+        pattern = 'json',
+        callback = function()
+          vim.b.minisplitjoin_config = {
+            split = { hooks_post = {} },
+            join = {
+              hooks_post = {
+                require('mini.splitjoin').gen_hook.pad_brackets(curly),
+              },
+            },
+          }
+        end,
+      },
+    })
+  end,
   opts = function()
     local gen_hook = require('mini.splitjoin').gen_hook
-
-    local curly = { '%b{}' }
-
-    local pad_curly = gen_hook.pad_brackets({ brackets = curly })
-    local add_comma = gen_hook.add_trailing_separator()
-    local del_comma = gen_hook.del_trailing_separator()
 
     return {
       detect = {
         brackets = { '%b()', '%b<>', '%b[]', '%b{}' },
       },
       mappings = { toggle = '', split = '', join = '' },
-      split = { hooks_post = { add_comma } },
-      join = { hooks_post = { del_comma, pad_curly } },
+      split = {
+        hooks_post = {
+          gen_hook.add_trailing_separator(),
+        },
+      },
+      join = {
+        hooks_post = {
+          gen_hook.del_trailing_separator(),
+          gen_hook.pad_brackets(curly),
+        },
+      },
     }
   end,
 }

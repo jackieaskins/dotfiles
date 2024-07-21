@@ -5,10 +5,7 @@ return {
     'brenoprata10/nvim-highlight-colors',
     opts = { enable_tailwind = true, enable_named_colors = false },
   },
-  {
-    'chrisgrieser/nvim-early-retirement',
-    opts = { notificationOnAutoClose = true, deleteBufferWhenFileDeleted = true },
-  },
+  { 'chrisgrieser/nvim-early-retirement', opts = { notificationOnAutoClose = true } },
   {
     'danymat/neogen',
     opts = { snippet_engine = require('utils').get_snippet_engine() },
@@ -32,9 +29,16 @@ return {
     config = true,
     ft = { 'css', 'hmtl', 'javascript', 'javascriptreact', 'svelte', 'typescriptreact', 'tsx' },
   },
+  { 'm00qek/baleia.nvim' },
   { 'mcauley-penney/visual-whitespace.nvim', config = true },
   { 'nvim-treesitter/nvim-treesitter-context', opts = { multiline_threshold = 1 } },
   { 'nvim-zh/colorful-winsep.nvim', opts = { only_line_seq = false } },
+  {
+    'tomiis4/hypersonic.nvim',
+    keys = { { '<leader>rx', '<cmd>Hypersonic<CR>' } },
+    cmd = 'Hypersonic',
+    opts = { border = vim.g.border_style },
+  },
   { 'tpope/vim-abolish' },
   { 'tpope/vim-fugitive' },
   { 'tpope/vim-repeat' },
