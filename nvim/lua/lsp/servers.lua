@@ -1,11 +1,15 @@
+---@class ClientConfig: lspconfig.Config
+---@field root_dir string | function
+
 ---@class LspServer
----@field config function?
----@field display string?
----@field install InstallCommand?
----@field skip_lspconfig boolean?
+---@field config? fun(config: ClientConfig): ClientConfig
+---@field display? string
+---@field install? InstallCommand
+---@field skip_lspconfig? boolean
 
 ---@type table<string, LspServer>
 local servers = {
+  clangd = { install = { 'brew', 'llvm' } },
   cssls = { install = { 'npm', 'vscode-langservers-extracted' } },
   emmet_language_server = require('lsp.servers.emmet_language_server'),
   eslint = require('lsp.servers.eslint'),
@@ -19,7 +23,7 @@ local servers = {
   omnisharp = require('lsp.servers.omnisharp'),
   pyright = { install = { 'npm', 'pyright' } },
   solargraph = { install = { 'gem', 'solargraph' } },
-  sourcekit = {},
+  sourcekit = require('lsp.servers.sourcekit'),
   svelte = require('lsp.servers.svelte'),
   tailwindcss = require('lsp.servers.tailwindcss'),
   ['tmux-language-server'] = require('lsp.servers.tmux-language-server'),

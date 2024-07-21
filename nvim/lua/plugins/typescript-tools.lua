@@ -36,7 +36,13 @@ return {
         bsk('n', '<leader>ia', '<cmd>TSToolsAddMissingImports<CR>')
         bsk('n', '<leader>ri', '<cmd>TSToolsRemoveUnusedImports<CR>')
 
-        if vim.tbl_contains({ 'javascriptreact', 'typescriptreact' }, vim.bo.filetype) then
+        if
+          vim.tbl_contains({
+            'javascript',
+            'javascriptreact',
+            'typescriptreact',
+          }, vim.bo.filetype)
+        then
           bsk('i', '>', function()
             vim.schedule(function()
               require('typescript-tools.api').jsx_close_tag(
