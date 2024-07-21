@@ -51,7 +51,7 @@
   "function Component()": {
     "prefix": "rfc",
     "body": [
-      "${1|,export default ,export |}function ${2:$TM_FILENAME_BASE}()${3:: JSX.Element} {",
+      "${1|export default ,export ,|}function ${2:$TM_FILENAME_BASE}()${3:: JSX.Element} {",
       "\treturn ${0:<div />;}",
       "}"
     ]
@@ -59,11 +59,11 @@
   "function Component(props)": {
     "prefix": "rfcp",
     "body": [
-      "${1|,export |}type ${2:$TM_FILENAME_BASE}Props = {",
+      "${1|export ,|}type ${2:$TM_FILENAME_BASE}Props = {",
       "\t$5",
       "}",
       "",
-      "${3|,export default ,export |}function $2(${6:props}: $2Props)${4:: JSX.Element} {",
+      "${3|export default ,export ,|}function $2(${6:props}: $2Props)${4:: JSX.Element} {",
       "\treturn ${0:<div />;}",
       "}"
     ]
