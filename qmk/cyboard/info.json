@@ -1,5 +1,5 @@
 {
-    "$schema": "../../data/schemas/keyboard.jsonschema",
+    "$schema": "~/qmk_firmware/data/schemas/keyboard.jsonschema",
     "manufacturer": "Cyboard",
     "maintainer": "@Cyboard-DigitalTailor",
     "url": "https://cyboard.digital",

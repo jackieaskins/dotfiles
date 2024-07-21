@@ -1,4 +1,5 @@
 {
+    "$schema": "~/qmk_firmware/data/schemas/keyboard.jsonschema",
     "keyboard_name": "Dactyl USB-C",
     "usb": {
         "vid": "0x4359",
