@@ -1,0 +1,79 @@
+{
+    "$schema": "../../data/schemas/keyboard.jsonschema",
+    "manufacturer": "Cyboard",
+    "maintainer": "@Cyboard-DigitalTailor",
+    "url": "https://cyboard.digital",
+    "processor": "RP2040",
+    "bootloader": "rp2040",
+    "diode_direction": "ROW2COL",
+    "split": {
+        "enabled": true,
+        "transport": {
+            "sync": {
+                "layer_state": true
+            }
+        }
+    },
+    "features": {
+        "bootmagic": true,
+        "command": false,
+        "console": false,
+        "extrakey": true,
+        "mousekey": true,
+        "nkro": true,
+        "rgb_matrix": true,
+    },
+    "rgb_matrix": {
+        "driver": "ws2812",
+        "max_brightness": 120,
+        "default": {
+            "animation": "rainbow_pinwheels",
+            "hue": 33,
+            "sat": 255,
+            "speed": 50,
+        },
+        "sleep": true,
+        "timeout": 300000,
+        "animations": {
+            "alpha_mods": true,
+            "breathing": true,
+            "colorband_pinwheel_sat": true,
+            "colorband_pinwheel_val": true,
+            "colorband_sat": true,
+            "colorband_spiral_sat": true,
+            "colorband_spiral_val": true,
+            "colorband_val": true,
+            "cycle_all": true,
+            "cycle_left_right": true,
+            "cycle_out_in": true,
+            "cycle_out_in_dual": true,
+            "cycle_pinwheel": true,
+            "cycle_spiral": true,
+            "cycle_up_down": true,
+            "digital_rain": true,
+            "dual_beacon": true,
+            "gradient_left_right": true,
+            "gradient_up_down": true,
+            "hue_breathing": true,
+            "hue_pendulum": true,
+            "hue_wave": true,
+            "jellybean_raindrops": true,
+            "pixel_flow": true,
+            "pixel_fractal": true,
+            "pixel_rain": true,
+            "rainbow_beacon": true,
+            "rainbow_moving_chevron": true,
+            "rainbow_pinwheels": true,
+            "raindrops": true,
+            "solid_color": true,
+            "solid_reactive": true,
+            "solid_reactive_cross": true,
+            "solid_reactive_nexus": true,
+            "solid_reactive_simple": true,
+            "solid_reactive_wide": true,
+            "solid_splash": true,
+            "splash": true,
+            "typing_heatmap": true
+        }
+    }
+}

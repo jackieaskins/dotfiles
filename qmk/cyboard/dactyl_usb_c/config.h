@@ -5,7 +5,8 @@
 #pragma once
 
 /* Split keyboard settings */
-#define SOFT_SERIAL_PIN GP0
+#define SERIAL_USART_TX_PIN GP28
+#define SPLIT_HAND_PIN GP0
 
 /* RGB settings */
 #ifdef RGB_MATRIX_ENABLE
@@ -21,4 +22,4 @@
 #define RP2040_BOOTLOADER_DOUBLE_TAP_RESET_LED GP17
 #define RP2040_BOOTLOADER_DOUBLE_TAP_RESET_TIMEOUT 1000U
 
-#define USB_VBUS_PIN GP19
+#define USB_VBUS_PIN GP27
