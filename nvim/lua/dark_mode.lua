@@ -7,7 +7,10 @@ local function set_background(is_reload)
   vim.opt.background = background
 
   if is_reload then
-    require('tint').refresh()
+    local ok, tint = pcall(require, 'tint')
+    if ok then
+      tint.refresh()
+    end
   end
 end
 

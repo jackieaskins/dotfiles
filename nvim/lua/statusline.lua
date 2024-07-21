@@ -25,16 +25,22 @@ local function get_active_clients()
   end
 
   local linter_names = {}
-  for _, linter in ipairs(require('plugins.lint').get_linters_for_filetype(filetype)) do
-    table.insert(linter_names, linter)
-  end
-  if #linter_names > 0 then
-    table.insert(all_names, table.concat(linter_names, ' '))
+  local lint_ok, lint_plugin = pcall(require, 'plugins.lint')
+  if lint_ok then
+    for _, linter in ipairs(lint_plugin.get_linters_for_filetype(filetype)) do
+      table.insert(linter_names, linter)
+    end
+    if #linter_names > 0 then
+      table.insert(all_names, table.concat(linter_names, ' '))
+    end
   end
 
-  local formatter = require('plugins.conform').get_formatter_for_filetype(filetype)
-  if formatter then
-    table.insert(all_names, formatter.name)
+  local format_ok, format_plugin = pcall(require, 'plugins.conform')
+  if format_ok then
+    local formatter = format_plugin.get_formatter_for_filetype(filetype)
+    if formatter then
+      table.insert(all_names, formatter.name)
+    end
   end
 
   local client_str = table.concat(all_names, '|')
