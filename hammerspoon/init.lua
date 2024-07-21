@@ -49,7 +49,7 @@ HYPER = { 'option', 'shift', 'ctrl', 'cmd' }
 --                              Spoons                              --
 ----------------------------------------------------------------------
 hs.loadSpoon('SpoonInstall')
-spoon.SpoonInstall:andUse('EmmyLua')
+require('config.annotations')
 spoon.SpoonInstall:asyncUpdateAllRepos()
 
 ----------------------------------------------------------------------

@@ -16,6 +16,7 @@ Brewfile.lock.json
 /wezterm/custom.lua
 /tmux/custom.conf
 
+/hammerspoon/generatedAnnotations
 /hammerspoon/Spoons/*
 !/hammerspoon/Spoons/SpoonInstall.spoon/
 /hammerspoon/custom.lua

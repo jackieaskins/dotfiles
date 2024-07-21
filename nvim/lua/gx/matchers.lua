@@ -45,6 +45,21 @@ local matchers = {
       return 'https://npmjs.com/package/' .. match[2]
     end,
   },
+  {
+    file_pattern = [[\.json$]],
+    pattern = [["\(hs\.\S\+\)"]],
+    handler = function(match)
+      local parts = vim.split(match[2], ':')
+      if #parts > 1 then
+        return 'https://www.hammerspoon.org/docs/' .. parts[1] .. '.html#' .. parts[2]
+      end
+
+      local module = match[2]:match('^(.*)%.[%w_]+$')
+      local fn = match[2]:match('%.([%w_]+)$')
+
+      return 'https://www.hammerspoon.org/docs/' .. module .. '.html#' .. fn
+    end,
+  },
 }
 
 vim.list_extend(matchers, vim.g.custom_matchers)
