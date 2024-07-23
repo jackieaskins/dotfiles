@@ -2,6 +2,7 @@ local modified_icon = ' '
 local readonly_icon = ' '
 
 local filetype_displays = {
+  fugitiveblame = '[Git Blame]',
   NvimTree = '[NvimTree]',
   TelescopePrompt = '[Telescope]',
   checkhealth = '[Health Check]',

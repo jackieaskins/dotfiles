@@ -18,7 +18,6 @@ vim.opt.splitbelow = true
 vim.opt.splitkeep = 'screen'
 vim.opt.diffopt:append({ 'vertical', 'linematch:60' })
 vim.opt.matchpairs:append({ '<:>' })
-vim.opt.jumpoptions = 'stack'
 vim.opt.undofile = true
 
 -- Statusline, Tabline, Winbar
