@@ -3,7 +3,7 @@ if type kitty &> /dev/null; then
   alias icat='kitty +kitten icat'
 fi
 
-alias mux=tmuxinator
+alias mux="tmuxinator start"
 
 alias plugs="cd ~/.local/share/nvim/lazy/"
 
