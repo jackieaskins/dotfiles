@@ -11,7 +11,6 @@ brew 'gradle'
 brew 'jq'
 brew 'maven'
 brew 'ninja' # Neovim dependency
-brew 'node@16'
 brew 'node@18', link: true
 brew 'pipx'
 brew 'pre-commit'
