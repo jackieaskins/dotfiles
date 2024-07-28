@@ -10,7 +10,7 @@ return {
       { 'VimResized', callback = set_vimux_orientation },
     })
 
-    vim.g.VimuxHeight = '40'
+    vim.g.VimuxHeight = '40%'
     vim.g.VimuxCloseOnExit = 1
     set_vimux_orientation()
   end,
