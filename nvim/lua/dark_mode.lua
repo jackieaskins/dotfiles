@@ -4,7 +4,7 @@ local theme_file = vim.fn.expand('~/dotfiles/theme')
 local function set_background(is_reload)
   local file = io.open(theme_file, 'r')
   local background = file and file:read() or 'dark'
-  vim.opt.background = background
+  vim.o.background = background
 
   if is_reload then
     local ok, tint = pcall(require, 'tint')

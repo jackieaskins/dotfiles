@@ -3,56 +3,55 @@ vim.g.mapleader = ' '
 require('utils').map({ 'n', 'v' }, '<space>', '<nop>')
 
 -- General
-vim.opt.hidden = true
-vim.opt.number = true
-vim.opt.signcolumn = 'no'
-vim.opt.relativenumber = true
-vim.opt.cursorline = true
-vim.opt.scrolloff = 5
-vim.opt.linebreak = true
-vim.opt.breakindent = true
-vim.opt.breakindentopt = 'shift:1,min:0'
-vim.opt.showmode = false
-vim.opt.splitright = true
-vim.opt.splitbelow = true
-vim.opt.splitkeep = 'screen'
-vim.opt.diffopt:append({ 'vertical', 'linematch:60' })
-vim.opt.matchpairs:append({ '<:>' })
-vim.opt.undofile = true
+vim.o.hidden = true
+vim.o.number = true
+vim.o.signcolumn = 'no'
+vim.o.relativenumber = true
+vim.o.cursorline = true
+vim.o.scrolloff = 5
+vim.o.linebreak = true
+vim.o.breakindent = true
+vim.o.breakindentopt = 'shift:1,min:0'
+vim.o.showmode = false
+vim.o.splitright = true
+vim.o.splitbelow = true
+vim.o.splitkeep = 'screen'
+vim.o.diffopt = vim.o.diffopt .. ',vertical,linematch:60'
+-- vim.o.matchpairs = vim.o.matchpairs .. '<:>'
+vim.o.undofile = true
 
 -- Statusline, Tabline, Winbar
-vim.opt.laststatus = 3
+vim.o.laststatus = 3
 vim.g.qf_disable_statusline = true
-vim.opt.statusline = "%{%v:lua.require('statusline').get_statusline()%}"
-vim.opt.tabline = "%{%v:lua.require('tabline').get_tabline()%}"
-vim.opt.winbar = "%{%v:lua.require('winbar').get_winbar()%}"
+vim.o.statusline = "%{%v:lua.require('statusline').get_statusline()%}"
+vim.o.tabline = "%{%v:lua.require('tabline').get_tabline()%}"
+vim.o.winbar = "%{%v:lua.require('winbar').get_winbar()%}"
 
 -- Folds
-vim.opt.foldcolumn = '1'
-vim.opt.foldlevel = 99
-vim.opt.foldlevelstart = 99
-vim.opt.foldmethod = 'expr'
-vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-vim.opt.foldtext = ''
-vim.opt.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+vim.o.foldcolumn = '1'
+vim.o.foldlevelstart = 99
+vim.o.foldmethod = 'expr'
+vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+vim.o.foldtext = ''
+vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 
 -- Spaces & Tabs
-vim.opt.shiftwidth = 2
-vim.opt.tabstop = 2
-vim.opt.softtabstop = 2
-vim.opt.expandtab = true
-vim.opt.list = true
-vim.opt.listchars = 'tab:  ,trail:·'
+vim.o.shiftwidth = 2
+vim.o.tabstop = 2
+vim.o.softtabstop = 2
+vim.o.expandtab = true
+vim.o.list = true
+vim.o.listchars = 'tab:  ,trail:·'
 
 -- Timeouts
-vim.opt.ttimeoutlen = 10
-vim.opt.updatetime = 100
+vim.o.ttimeoutlen = 10
+vim.o.updatetime = 100
 
 -- Searching
-vim.opt.inccommand = 'nosplit'
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
-vim.opt.path:append({ '**' })
+vim.o.inccommand = 'nosplit'
+vim.o.ignorecase = true
+vim.o.smartcase = true
+vim.o.path = vim.o.path .. ',**'
 
 -- Vim globals
 vim.g.c_syntax_for_h = 1
@@ -64,8 +63,8 @@ vim.on_key(function(char)
     local new_hlsearch = vim.tbl_contains(hlsearch_keys, vim.fn.keytrans(char))
 
     ---@diagnostic disable-next-line: undefined-field
-    if vim.opt.hlsearch:get() ~= new_hlsearch then
-      vim.opt.hlsearch = new_hlsearch
+    if vim.o.hlsearch ~= new_hlsearch then
+      vim.o.hlsearch = new_hlsearch
     end
   end
 end, vim.api.nvim_create_namespace('auto_hlsearch'))
