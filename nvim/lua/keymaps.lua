@@ -20,7 +20,7 @@ map('x', '>', '>gv')
 
 -- Below mappings from https://www.reddit.com/r/neovim/comments/1e1dmpw/what_are_the_keymaps_that_you_replaced_default/
 -- Don't overwrite clipboard on `x`
-map('n', 'x', '"_x"')
+map('n', 'x', '"_x')
 -- }}}
 
 -- Auto-indent {{{
