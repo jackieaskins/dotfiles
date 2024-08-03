@@ -67,17 +67,6 @@ augroup('lsp_keymaps', {
       bsk('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, { desc = 'vim.lsp.buf.add_workspace_folder' })
       bsk('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, { desc = 'vim.lsp.buf.remove_workspace_folder' })
       bsk('n', '<leader>wl', '<cmd>lua =vim.lsp.buf.list_workspace_folders()<CR>')
-
-      bsk({ 'n', 'v' }, 'K', function()
-        local curr_word = vim.fn.expand('<cWORD>')
-
-        if curr_word:match('vim%.opt%.%S+') then
-          local parts = vim.split(curr_word, '.', { plain = true })
-          vim.cmd.help("'" .. parts[#parts] .. "'")
-        else
-          vim.lsp.buf.hover()
-        end
-      end, { desc = 'Hover' })
     end,
   },
 })
