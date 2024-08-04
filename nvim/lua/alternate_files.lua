@@ -73,7 +73,12 @@ M.define_user_commands = function(file, buf)
   end
 
   for type, options in pairs(alternates) do
-    for prefix, cmd in pairs({ E = 'edit', V = 'vsplit', S = 'split' }) do
+    for prefix, cmd in pairs({
+      E = 'edit',
+      V = 'vsplit',
+      S = 'split',
+      T = 'tabedit',
+    }) do
       utils.buf_user_command(buf, prefix .. type, function()
         local choices = {}
 
