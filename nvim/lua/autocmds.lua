@@ -107,3 +107,12 @@ augroup('no_modify', {
 augroup('vim_window_resize', {
   { 'VimResized', command = 'tabdo wincmd =' },
 })
+
+augroup('alternate_files', {
+  {
+    { 'BufRead', 'BufNewFile' },
+    callback = function(arg)
+      require('alternate_files').define_user_commands(arg.file, arg.buf)
+    end,
+  },
+})

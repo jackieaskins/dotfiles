@@ -28,13 +28,26 @@ end
 ---Define vim user command
 ---@param name string
 ---@param command string | function
----@param opts? table
+---@param opts? vim.api.keyset.user_command
 function M.user_command(name, command, opts)
   local options = { force = true }
   if opts then
     options = vim.tbl_extend('force', options, opts)
   end
   vim.api.nvim_create_user_command(name, command, options)
+end
+
+---Define vim buf user command
+---@param buffer integer
+---@param name string
+---@param command string | function
+---@param opts? vim.api.keyset.user_command
+function M.buf_user_command(buffer, name, command, opts)
+  local options = { force = true }
+  if opts then
+    options = vim.tbl_extend('force', options, opts)
+  end
+  vim.api.nvim_buf_create_user_command(buffer, name, command, options)
 end
 
 ---Replace terminal codes in strng with internal representation
