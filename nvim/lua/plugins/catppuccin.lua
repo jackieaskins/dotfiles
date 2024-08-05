@@ -29,7 +29,8 @@ return {
           fg = colors.blue,
         })
 
-        local anchor_link_hl = { fg = colors.blue, style = { 'underline' } }
+        local anchor_link = { fg = colors.blue, style = { 'underline' } }
+        local inline_code = { bg = colors.surface0 }
 
         local custom_highlights = {
           -- Default Highlights
@@ -49,10 +50,10 @@ return {
           WinBarDiagnosticInfo = { fg = colors.sky, bg = colors.base },
 
           -- Treesitter Highlights
-          ['@markup.link.label.markdown_inline'] = anchor_link_hl,
+          ['@markup.link.label.markdown_inline'] = anchor_link,
           ['@markup.quote'] = { fg = colors.subtext1, style = { 'italic' } },
-          ['@markup.raw.markdown_inline'] = { link = 'ColorColumn' },
-          ['@string.special.url'] = anchor_link_hl,
+          ['@markup.raw.markdown_inline'] = inline_code,
+          ['@string.special.url'] = anchor_link,
 
           -- Plugin Highlights
           -- LuaSnip
@@ -63,6 +64,9 @@ return {
 
           -- highlight-undo.nvim
           HighlightUndo = { link = 'IncSearch' },
+
+          -- markdown.nvim
+          RenderMarkdownCodeInline = inline_code,
 
           -- mini.icons
           MiniIconsGrey = { fg = colors.overlay0 },
