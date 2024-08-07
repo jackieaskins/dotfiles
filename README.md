@@ -8,15 +8,15 @@ My dotfiles for Hammerspoon, Karabiner, kitty, Neovim, Vim, QMK, Tmux, WezTerm, 
 
 1. Clone this repo:
 
-```bash
-git clone https://github.com/jackieaskins/dotfiles.git ~/dotfiles
-```
+    ```bash
+    git clone https://github.com/jackieaskins/dotfiles.git ~/dotfiles
+    ```
 
-2. Run the install script:
+1. Run the install script:
 
-```bash
-./install.sh
-```
+    ```bash
+    /install.sh
+    ```
 
 ## Customization
  
