@@ -161,6 +161,7 @@ spotifyNotification = hs.distributednotifications.new(function()
         title = hs.spotify.getCurrentTrack(),
         subTitle = hs.spotify.getCurrentArtist(),
         informativeText = hs.spotify.getCurrentAlbum(),
+        contentImage = hs.image.imageFromURL(hs.spotify.getCurrentTrackArtworkURL()),
       })
       :send()
   end
