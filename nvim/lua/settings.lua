@@ -17,7 +17,7 @@ vim.o.splitright = true
 vim.o.splitbelow = true
 vim.o.splitkeep = 'screen'
 vim.o.diffopt = vim.o.diffopt .. ',vertical,linematch:60'
--- vim.o.matchpairs = vim.o.matchpairs .. '<:>'
+vim.o.matchpairs = vim.o.matchpairs .. ',<:>'
 vim.o.undofile = true
 
 -- Statusline, Tabline, Winbar
