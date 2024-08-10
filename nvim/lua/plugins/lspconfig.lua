@@ -6,18 +6,6 @@ return {
     local lspconfig = require('lspconfig')
     local configs = require('lspconfig.configs')
 
-    if not configs['tmux-language-server'] then
-      configs['tmux-language-server'] = {
-        default_config = {
-          cmd = { 'tmux-language-server' },
-          filetypes = { 'tmux' },
-          root_dir = function(fname)
-            return lspconfig.util.find_git_ancestor(fname)
-          end,
-        },
-      }
-    end
-
     for server_name, config in pairs(vim.g.additional_servers) do
       if not configs[server_name] then
         configs[server_name] = config.lspconfig
