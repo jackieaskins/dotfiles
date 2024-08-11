@@ -64,6 +64,7 @@ return {
 
           -- highlight-undo.nvim
           HighlightUndo = { link = 'IncSearch' },
+          HighlightRedo = { link = 'IncSearch' },
 
           -- markdown.nvim
           RenderMarkdownCodeInline = inline_code,
