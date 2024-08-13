@@ -77,6 +77,8 @@ source $HOMEBREW_PREFIX/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 # Tab and Shift-Tab move the selection in the menu
 bindkey              '^I' menu-select
 bindkey "$terminfo[kcbt]" menu-select
+bindkey -M menuselect              '^I'         menu-complete
+bindkey -M menuselect "$terminfo[kcbt]" reverse-menu-complete
 # Make Ctrl-N and Ctrl-P behave like Tab/Shift-Tab
 bindkey -M menuselect '^N' menu-complete
 bindkey -M menuselect '^P' reverse-menu-complete
@@ -91,8 +93,6 @@ bindkey -M menuselect '^[[C' .forward-char '^[OC' .forward-char
 bindkey -M menuselect '^M' .accept-line
 # Match all substrings, not just prefixes
 zstyle ':completion:*' matcher-list 'r:|?=**'
-bindkey '\e[A' .history-search-backward
-bindkey '\e[B' .history-search-forward
 
 #--------------------------------------------------------------------#
 #                             Scrollback                             #
