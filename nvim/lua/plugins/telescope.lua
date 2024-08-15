@@ -2,7 +2,6 @@ local M = {
   'nvim-telescope/telescope.nvim',
   dependencies = {
     { 'catgoose/telescope-helpgrep.nvim' },
-    { 'danielvolchek/tailiscope.nvim' },
     { 'isak102/telescope-git-file-history.nvim', dependencies = 'tpope/vim-fugitive' },
     { 'nvim-lua/plenary.nvim' },
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
