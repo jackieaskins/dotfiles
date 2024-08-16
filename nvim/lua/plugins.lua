@@ -3,7 +3,7 @@ return {
   { 'axelvc/template-string.nvim', config = true },
   {
     'brenoprata10/nvim-highlight-colors',
-    opts = { enable_tailwind = true, enable_named_colors = false },
+    opts = { enable_named_colors = false, render = 'virtual' },
   },
   { 'chrisgrieser/nvim-early-retirement', opts = { notificationOnAutoClose = true } },
   {
@@ -23,11 +23,6 @@ return {
       sign = { enabled = false },
       virtual_text = { enabled = true, hl = 'LightBulbVirtText' },
     },
-  },
-  {
-    'luckasRanarison/tailwind-tools.nvim',
-    config = true,
-    ft = { 'css', 'hmtl', 'javascript', 'javascriptreact', 'svelte', 'typescriptreact', 'tsx' },
   },
   { 'm00qek/baleia.nvim' },
   { 'mcauley-penney/visual-whitespace.nvim', config = true },

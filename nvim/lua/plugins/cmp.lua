@@ -58,23 +58,34 @@ return {
       },
       ---@diagnostic disable-next-line: missing-fields
       formatting = {
-        format = require('lspkind').cmp_format({
-          before = function(entry, vim_item)
-            local source = entry.source.name
+        format = function(entry, vim_item)
+          local color_item = require('nvim-highlight-colors').format(entry, {
+            kind = vim_item.kind,
+          })
 
-            vim_item.menu = source_menu_map[source]
-            if source == 'nvim_lsp' then
-              pcall(function()
-                local utils = require('lsp.utils')
-                vim_item.menu = '[' .. utils.get_server_display_name(entry.source.source.client.name) .. ']'
-              end)
-            end
+          vim_item = require('lspkind').cmp_format({
+            maxwidth = 50,
+            before = function(e, item)
+              local source = e.source.name
 
-            vim_item.abbr = string.sub(vim_item.abbr, 1, 50)
+              item.menu = source_menu_map[source]
+              if source == 'nvim_lsp' then
+                pcall(function()
+                  local utils = require('lsp.utils')
+                  item.menu = '[' .. utils.get_server_display_name(e.source.source.client.name) .. ']'
+                end)
+              end
 
-            return vim_item
-          end,
-        }),
+              return item
+            end,
+          })(entry, vim_item)
+
+          if color_item.abbr_hl_group then
+            vim_item.kind_hl_group = color_item.abbr_hl_group
+          end
+
+          return vim_item
+        end,
       },
       mapping = {
         ['<C-B>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
