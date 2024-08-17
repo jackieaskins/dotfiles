@@ -1,33 +1,117 @@
 local utils = require('utils')
 
+local snapshots_dir = '__snapshots__/'
+local snap_extension = [[\.snap]]
+
+local optional_dir_capture = '(.+/)?'
+local test_dir_capture = '(tests?/)'
+local file_base_capture = '(.+)'
+local test_extension_capture = [[(\.%(spec|test))]]
+local extension_capture = [[(\.[^\.]+)]]
+
 ---@class Config
----@field pattern string
+---@field pattern string[]
 ---@field alternates table<string, string[]>
 
 ---@type Config[]
 local configs = {
+  -- Snapshots
   {
-    --              %1                  %2        %3           %4
-    pattern = [[\v^(.+/)?__snapshots__/(.+)\.(spec|test)\.(%(j|t)sx?)\.snap$]],
+    pattern = {
+      optional_dir_capture, -- %1
+      test_dir_capture, -- %2
+      optional_dir_capture, -- %3
+      snapshots_dir,
+      file_base_capture, -- %4
+      test_extension_capture, -- %5
+      extension_capture, -- %6
+      snap_extension,
+    },
     alternates = {
-      source = { '%1%2.%4' },
-      test = { '%1%2.%3.%4' },
+      source = { '%1src/%3%4%6', '%1lib/%3%4%6' },
+      test = { '%1%2%3%4%5%6' },
     },
   },
   {
-    --              %1    %2        %3           %4
-    pattern = [[\v^(.+/)?(.+)\.(spec|test)\.(%(j|t)sx?)$]],
+    pattern = {
+      optional_dir_capture, -- %1
+      snapshots_dir,
+      file_base_capture, -- %2
+      test_extension_capture, -- %3
+      extension_capture, -- %4
+      snap_extension,
+    },
     alternates = {
-      source = { '%1%2.%4' },
-      snapshot = { '%1__snapshots__/%2.%3.%4.snap' },
+      source = { '%1%2%4' },
+      test = { '%1%2%3%4' },
+    },
+  },
+
+  -- Tests
+  {
+    pattern = {
+      optional_dir_capture, -- %1
+      test_dir_capture, -- %2
+      optional_dir_capture, -- %3
+      file_base_capture, -- %4
+      test_extension_capture, -- %5
+      extension_capture, -- %6
+    },
+    alternates = {
+      source = { '%1src/%3%4%6', '%1lib/%3%4%6' },
+      snapshot = { '%1%2%3__snapshots__/%4%5%6.snap' },
     },
   },
   {
-    --              %1    %2        %3
-    pattern = [[\v^(.+/)?(.+)\.(%(j|t)sx?)$]],
+    pattern = {
+      optional_dir_capture, -- %1
+      file_base_capture, -- %2
+      test_extension_capture, -- %3
+      extension_capture, -- %4
+    },
     alternates = {
-      test = { '%1%2.spec.%3', '%1%2.test.%3' },
-      snapshot = { '%1__snapshots__/%2.spec.%3.snap', '%1__snapshots__/%2.test.%3.snap' },
+      source = { '%1%2%4' },
+      snapshot = { '%1__snapshots__/%2%3%4' },
+    },
+  },
+
+  -- Sources
+  {
+    pattern = {
+      optional_dir_capture, -- %1
+      [[(%(src|lib)/)]], -- %2
+      optional_dir_capture, -- %3
+      file_base_capture, -- %4
+      extension_capture, -- %5
+    },
+    alternates = {
+      test = {
+        '%1%2%3%4.spec%5',
+        '%1%2%3%4.test%5',
+        '%1test/%3%4.spec%5',
+        '%1test/%3%4.test%5',
+        '%1tests/%3%4.spec%5',
+        '%1tests/%3%4.test%5',
+      },
+      snapshot = {
+        '%1%2%3__snapshots__/%4.spec%5.snap',
+        '%1%2%3__snapshots__/%4.test%5.snap',
+        '%1test/%3__snapshots__/%4.spec%5.snap',
+        '%1test/%3__snapshots__/%4.test%5.snap',
+        '%1tests/%3__snapshots__/%4.spec%5.snap',
+        '%1tests/%3__snapshots__/%4.test%5.snap',
+      },
+    },
+  },
+  {
+    pattern = {
+      optional_dir_capture, -- %1
+      file_base_capture, -- %2
+      extension_capture, -- %3
+    },
+    alternates = {
+      test = { '%1%2.spec%3', '%1%2.test%3' },
+      snapshot = { '%1__snapshots__/%2.spec%3.snap', '%1__snapshots__/%2.test%3.snap' },
     },
   },
 }
@@ -38,7 +122,11 @@ local configs = {
 ---@return string[]
 local function get_matching_config(relative_file)
   for _, config in ipairs(configs) do
-    local matches = vim.fn.matchlist(relative_file, config.pattern)
+    local regex_pattern = vim.fn.copy(config.pattern)
+    table.insert(regex_pattern, 1, [[\v^]])
+    table.insert(regex_pattern, '$')
+
+    local matches = vim.fn.matchlist(relative_file, table.concat(regex_pattern))
 
     if #matches > 0 then
       return config.alternates, matches
@@ -82,7 +170,7 @@ M.define_user_commands = function(file, buf)
       utils.buf_user_command(buf, prefix .. type, function()
         local choices = {}
 
-        for _, option in ipairs(options) do
+        for index, option in ipairs(options) do
           local alternate = parse_option(option, matches)
 
           if #options == 1 or utils.file_exists(vim.fn.getcwd() .. '/' .. alternate) then
@@ -90,14 +178,17 @@ M.define_user_commands = function(file, buf)
             return
           end
 
-          table.insert(choices, alternate)
+          table.insert(choices, { index = index, alternate = alternate })
         end
 
         vim.ui.select(choices, {
           prompt = 'No ' .. type .. ' file exists, choose filename:',
-        }, function(alternate)
-          if alternate then
-            vim.cmd[cmd](alternate)
+          format_item = function(choice)
+            return choice.index .. ': ' .. choice.alternate
+          end,
+        }, function(choice)
+          if choice then
+            vim.cmd[cmd](choice.alternate)
           end
         end)
       end)
