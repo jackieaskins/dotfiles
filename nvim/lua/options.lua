@@ -1,6 +1,9 @@
--- Map Leader to Space
-vim.g.mapleader = ' '
-require('utils').map({ 'n', 'v' }, '<space>', '<nop>')
+---Generate a string for an option list
+---@param ... string
+---@return string
+local function gen_list_option(...)
+  return table.concat({ ... }, ',')
+end
 
 -- General
 vim.o.hidden = true
@@ -10,15 +13,14 @@ vim.o.relativenumber = true
 vim.o.cursorline = true
 vim.o.scrolloff = 5
 vim.o.linebreak = true
-vim.o.breakindent = true
-vim.o.breakindentopt = 'shift:1,min:0'
 vim.o.showmode = false
 vim.o.splitright = true
 vim.o.splitbelow = true
 vim.o.splitkeep = 'screen'
-vim.o.diffopt = vim.o.diffopt .. ',vertical,linematch:60'
-vim.o.matchpairs = vim.o.matchpairs .. ',<:>'
+vim.o.diffopt = gen_list_option(vim.o.diffopt, 'vertical', 'linematch:60')
+vim.o.matchpairs = gen_list_option(vim.o.matchpairs, '<:>')
 vim.o.undofile = true
+vim.o.viewoptions = gen_list_option('cursor', 'folds')
 
 -- Statusline, Tabline, Winbar
 vim.o.laststatus = 3
@@ -33,7 +35,7 @@ vim.o.foldlevelstart = 99
 vim.o.foldmethod = 'expr'
 vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 vim.o.foldtext = ''
-vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+vim.o.fillchars = gen_list_option('eob: ', 'fold: ', 'foldopen:', 'foldsep: ', 'foldclose:')
 
 -- Spaces & Tabs
 vim.o.shiftwidth = 2
@@ -41,7 +43,9 @@ vim.o.tabstop = 2
 vim.o.softtabstop = 2
 vim.o.expandtab = true
 vim.o.list = true
-vim.o.listchars = 'tab:  ,trail:·'
+vim.o.listchars = gen_list_option('tab:  ', 'trail:·')
+vim.o.breakindent = true
+vim.o.breakindentopt = gen_list_option('shift:1', 'min:0')
 
 -- Timeouts
 vim.o.ttimeoutlen = 10
@@ -51,7 +55,7 @@ vim.o.updatetime = 100
 vim.o.inccommand = 'nosplit'
 vim.o.ignorecase = true
 vim.o.smartcase = true
-vim.o.path = vim.o.path .. ',**'
+vim.o.path = gen_list_option(vim.o.path, '**')
 
 -- Vim globals
 vim.g.c_syntax_for_h = 1

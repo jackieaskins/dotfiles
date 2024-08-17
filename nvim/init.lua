@@ -1,9 +1,13 @@
+-- Map Leader to Space
+vim.g.mapleader = ' '
+require('utils').map({ 'n', 'v' }, '<space>', '<nop>')
+
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
 require('dark_mode')
 require('config_variables')
-require('settings')
+require('options')
 
 if require('utils').file_exists('~/dotfiles/nvim/lua/custom.lua') then
   require('custom')

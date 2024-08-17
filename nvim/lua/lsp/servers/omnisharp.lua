@@ -1,5 +1,6 @@
 ---@type LspServer
 return {
+  enable_lsp_format = true,
   config = function(config)
     config.settings = {
       FormattingOptions = {
