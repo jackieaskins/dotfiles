@@ -4,7 +4,7 @@ return {
   dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' },
   keys = { { '<leader>mt', '<cmd>RenderMarkdown toggle<CR>' } },
   opts = {
-    code = { border = 'thick' },
+    code = { border = 'thick', width = 'block' },
     heading = {
       signs = { '󰉫', '󰉬', '󰉭', '󰉮', '󰉯', '󰉰' },
     },

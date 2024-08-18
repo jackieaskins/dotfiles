@@ -1,6 +1,7 @@
 #--------------------------------------------------------------------#
 #                       Homebrew Configuration                       #
 #--------------------------------------------------------------------#
+
 if [[ -d /opt/homebrew ]] then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 else
@@ -15,6 +16,7 @@ asdf_prefix="$(brew --prefix asdf)"
 #--------------------------------------------------------------------#
 #                                Path                                #
 #--------------------------------------------------------------------#
+
 [ -d $HOME/.cargo/bin ] && path+=($HOME/.cargo/bin)
 [ -d $HOME/dotfiles/bin ] && path+=($HOME/dotfiles/bin)
 [ -d $HOME/.local/bin ] && path+=($HOME/.local/bin)
@@ -30,6 +32,7 @@ export PATH
 #--------------------------------------------------------------------#
 #                               Prompt                               #
 #--------------------------------------------------------------------#
+
 autoload -U promptinit; promptinit
 prompt pure
 zstyle :prompt:pure:git:stash show yes
@@ -39,6 +42,7 @@ RPROMPT='%F{'#6E738D'}[%D{%L:%M:%S %p}]'
 #--------------------------------------------------------------------#
 #                       Settings and Bindings                        #
 #--------------------------------------------------------------------#
+
 setopt auto_cd
 setopt correct correctall
 
@@ -66,6 +70,7 @@ export CLICOLOR="Yes"
 #--------------------------------------------------------------------#
 #                              Plugins                               #
 #--------------------------------------------------------------------#
+
 # https://github.com/zsh-users/zsh-autosuggestions
 source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
@@ -97,6 +102,7 @@ zstyle ':completion:*' matcher-list 'r:|?=**'
 #--------------------------------------------------------------------#
 #                             Scrollback                             #
 #--------------------------------------------------------------------#
+
 function clear-scrollback-buffer {
   # Behavior of clear:
   # 1. clear scrollback if E3 cap is supported (terminal, platform specific)
@@ -116,6 +122,7 @@ bindkey '^L' clear-scrollback-buffer
 #--------------------------------------------------------------------#
 #                    External Tools Configuration                    #
 #--------------------------------------------------------------------#
+
 # FZF
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*" --glob "!*.class"'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
@@ -131,4 +138,5 @@ source "$HOMEBREW_PREFIX/opt/fzf/shell/key-bindings.zsh"
 #--------------------------------------------------------------------#
 #                      ZSH Configuration Files                       #
 #--------------------------------------------------------------------#
+
 for f in $HOME/dotfiles/zsh/*; do source $f; done

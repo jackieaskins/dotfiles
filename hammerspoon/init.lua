@@ -4,6 +4,7 @@ local hotkeyStore = require('config.hotkeyStore')
 ----------------------------------------------------------------------
 --                              Custom                              --
 ----------------------------------------------------------------------
+
 ---@class Custom
 ---@field appKeys? table<string, string>
 ---@field brewPrefix? string
@@ -19,6 +20,7 @@ CUSTOM = ok and custom or {}
 ----------------------------------------------------------------------
 --                     Hammerspoon Preferences                      --
 ----------------------------------------------------------------------
+
 -- TODO: Need to handle doc icon preferences changing through preferences menu
 if custom.showDockIcon ~= nil then
   hs.dockIcon(custom.showDockIcon)
@@ -27,6 +29,7 @@ end
 ----------------------------------------------------------------------
 --                             Globals                              --
 ----------------------------------------------------------------------
+
 function Print(...)
   local inspectTypes = { 'thread', 'userdata', 'table', 'function' }
 
@@ -40,6 +43,7 @@ end
 ----------------------------------------------------------------------
 --                            Constants                             --
 ----------------------------------------------------------------------
+
 BREW_PREFIX = CUSTOM.brewPrefix or '/opt/homebrew'
 
 MEH = { 'option', 'shift', 'ctrl' }
@@ -48,6 +52,7 @@ HYPER = { 'option', 'shift', 'ctrl', 'cmd' }
 ----------------------------------------------------------------------
 --                              Spoons                              --
 ----------------------------------------------------------------------
+
 hs.loadSpoon('SpoonInstall')
 spoon.SpoonInstall:andUse('EmmyLua')
 spoon.SpoonInstall:asyncUpdateAllRepos()
@@ -55,6 +60,7 @@ spoon.SpoonInstall:asyncUpdateAllRepos()
 ----------------------------------------------------------------------
 --                              Reload                              --
 ----------------------------------------------------------------------
+
 local configPaths = { '/config', '/init.lua', '/custom.lua' }
 
 reloadWatchers = {}
@@ -73,6 +79,7 @@ hotkeyStore.register('Reload', 'Reload Configuration', MEH, 'r', hs.reload)
 ----------------------------------------------------------------------
 --                             Hotkeys                              --
 ----------------------------------------------------------------------
+
 -- Application launcher
 local appKeyMods = { 'option', 'control' }
 local appKeys = fnutils.mergeTables({
@@ -98,6 +105,7 @@ hotkeyStore.register('Hotkeys', 'Show hotkeys alert', MEH, 'm', hotkeyStore.show
 ----------------------------------------------------------------------
 --                        Window Management                         --
 ----------------------------------------------------------------------
+
 hs.window.setShadows(false)
 hs.window.animationDuration = 0
 
@@ -142,6 +150,7 @@ end)
 ----------------------------------------------------------------------
 --                        Dark Mode Triggers                        --
 ----------------------------------------------------------------------
+
 darkModeNotification = hs.distributednotifications.new(function()
   require('config.darkMode').configureSystemColors()
 end, 'AppleInterfaceThemeChangedNotification')
@@ -151,6 +160,7 @@ darkModeNotification:start()
 ----------------------------------------------------------------------
 --                      Spotify Notifications                       --
 ----------------------------------------------------------------------
+
 hotkeyStore.register('Spotify', 'Show currently playing song', HYPER, 's', hs.spotify.displayCurrentTrack)
 spotifyNotification = hs.distributednotifications.new(function()
   if hs.spotify.isPlaying() then
@@ -172,6 +182,7 @@ spotifyNotification:start()
 ----------------------------------------------------------------------
 --                               Misc                               --
 ----------------------------------------------------------------------
+
 require('hs.ipc').cliInstall(BREW_PREFIX) -- Enables CLI
 hotkeyStore.verify()
 

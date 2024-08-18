@@ -99,15 +99,20 @@ return {
         return vim.tbl_extend('force', custom_highlights, require('modes').get_initial_highlights(colors))
       end,
       integrations = {
+        cmp = true,
         colorful_winsep = { enabled = true, color = 'blue' },
+        dap = true,
+        dap_ui = true,
         diffview = true,
         fidget = true,
         fzf = true,
+        gitsigns = true,
         indent_blankline = {
           enabled = true,
           colored_indent_levels = false,
           scope_color = 'blue',
         },
+        markdown = true,
         native_lsp = {
           enabled = true,
           underlines = {
@@ -120,7 +125,11 @@ return {
         neotest = true,
         notify = true,
         nvimtree = true,
+        render_markdown = true,
+        semantic_tokens = true,
         symbols_outline = true,
+        telescope = true,
+        treesitter = true,
         treesitter_context = true,
       },
     })

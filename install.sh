@@ -9,12 +9,14 @@ function success_echo() {
 #--------------------------------------------------------------------#
 #                            MacOS Check                             #
 #--------------------------------------------------------------------#
+
 is_mac=false
 if [[ $OSTYPE == 'darwin'* ]]; then is_mac=true; fi
 
 #--------------------------------------------------------------------#
 #                       Personal Machine Check                       #
 #--------------------------------------------------------------------#
+
 echo -e "Are you installing on a personal machine?"
 select yn in "Yes" "No"; do
   case $yn in
@@ -36,6 +38,7 @@ echo -e "Beginning installation!\n"
 #--------------------------------------------------------------------#
 #                   Xcode Command Line Tools Check                   #
 #--------------------------------------------------------------------#
+
 if [ $is_mac = true ]; then
   echo -e "Making sure Xcode command line tools are installed..."
   xcode-select --install 2>/dev/null
@@ -47,6 +50,7 @@ fi
 #--------------------------------------------------------------------#
 #                   Homebrew Installation & Bundle                   #
 #--------------------------------------------------------------------#
+
 echo -e "Checking if Homebrew is installed..."
 if [ -x "$(command -v brew)" ]; then
   echo -e "Homebrew is installed! We'll update it and upgrade your packages..."
@@ -71,6 +75,7 @@ success_echo "Succesfully set up Homebrew."
 #--------------------------------------------------------------------#
 #                          System Settings                           #
 #--------------------------------------------------------------------#
+
 if [ $is_mac = true ]; then
   echo -e "Configuring System Settings..."
 
@@ -88,6 +93,7 @@ fi
 #--------------------------------------------------------------------#
 #                         Global Git Config                          #
 #--------------------------------------------------------------------#
+
 echo -e "Configuring Git..."
 git config --global include.path ~/dotfiles/base.gitconfig
 success_echo "Configured Git."
@@ -95,6 +101,7 @@ success_echo "Configured Git."
 #--------------------------------------------------------------------#
 #                              WezTerm                               #
 #--------------------------------------------------------------------#
+
 echo -e "Installing WezTerm terminfo..."
 # Install terminfo to get support for undercurl and the like
 tempfile=$(mktemp)
@@ -106,6 +113,7 @@ success_echo "Successfully installed WezTerm terminfo."
 #--------------------------------------------------------------------#
 #                    Dotfiles Backup & Symlinking                    #
 #--------------------------------------------------------------------#
+
 timestamp=$(date +%Y%m%d%H%M%S) # timestamp for backup
 dotfiles_dir=~/dotfiles
 backup_dir=~/dotfiles_backups/$timestamp
@@ -159,6 +167,7 @@ success_echo "Dotfiles backed up and symlinked."
 #--------------------------------------------------------------------#
 #                                Bat                                 #
 #--------------------------------------------------------------------#
+
 echo -e "Configuring Bat..."
 bat cache --build
 if [ ! -f "$dotfiles_dir/bat/config" ]; then
@@ -169,6 +178,7 @@ success_echo "Bat configured."
 #--------------------------------------------------------------------#
 #                    Neovim Installation & Config                    #
 #--------------------------------------------------------------------#
+
 echo -e "Checking if Neovim is installed from source..."
 if [ "$(command -v nvim)" != "/usr/local/bin/nvim" ]; then
   echo -e "Neovim is not installed from source. Installing it..."

@@ -1,6 +1,8 @@
 local utils = require('utils')
 local augroup, map = utils.augroup, utils.map
 
+map('n', '<leader>so', '<cmd>source %<CR>')
+
 -- Append semicolons and commas {{{
 map('n', '<leader>;', 'A;<Esc>')
 map('n', '<leader>,', 'A,<Esc>')

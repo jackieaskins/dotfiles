@@ -4,6 +4,7 @@
 
 .ignore
 .projections.json
+.solargraph.yml
 
 /google-java-format.jar
 

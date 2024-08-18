@@ -48,7 +48,7 @@ augroup('alternate_files', {
 })
 
 augroup('save_folds_and_cursor', {
-  { 'BufWinLeave', pattern = '?*', command = 'mkview!' },
+  { 'BufWinLeave', pattern = '?*', command = 'silent! mkview!' },
   { 'BufWinEnter', pattern = '?*', command = 'silent! loadview' },
 })
 
