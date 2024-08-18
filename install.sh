@@ -81,11 +81,12 @@ if [ $is_mac = true ]; then
 
   defaults write digital.twisted.noTunes replacement /Applications/Spotify.app
 
-  # Reduce spacing between status bar icons
-  defaults -currentHost write -globalDomain NSStatusItemSpacing -int 6
-  defaults -currentHost write -globalDomain NSStatusItemSelectionPadding -int 12
+  # Undo spacing override
+  defaults -currentHost delete -globalDomain NSStatusItemSpacing
+  defaults -currentHost delete -globalDomain NSStatusItemSelectionPadding
 
   # TODO: Configure MacOS System Preferences
+  # https://github.com/CodingGarden/mac-setup - Cool Mac setup stuff
 
   success_echo "Configured System Settings."
 fi
