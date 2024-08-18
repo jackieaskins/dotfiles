@@ -89,13 +89,7 @@ fi
 #                         Global Git Config                          #
 #--------------------------------------------------------------------#
 echo -e "Configuring Git..."
-git config --global advice.skippedCherryPicks false
-git config --global branch.sort -committerdate
-git config --global column.ui auto
-git config --global core.excludesfile ~/.gitignore_global
-git config --global pull.rebase true
-git config --global rebase.autoStash true
-git config --global rerere.enabled true
+git config --global include.path ~/dotfiles/base.gitconfig
 success_echo "Configured Git."
 
 #--------------------------------------------------------------------#
@@ -159,7 +153,6 @@ backup_and_symlink .config/karabiner  karabiner
 backup_and_symlink .config/wezterm    wezterm
 backup_and_symlink .config/kitty      kitty
 backup_and_symlink .tmux.conf         tmux.conf
-backup_and_symlink .gitignore_global  gitignore_global
 #                  dotfile            backup
 success_echo "Dotfiles backed up and symlinked."
 

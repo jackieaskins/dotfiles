@@ -4,7 +4,7 @@ return {
   'wojciech-kulik/xcodebuild.nvim',
   enabled = require('lsp.utils').is_server_supported('sourcekit'),
   dependencies = {
-    'nvim-telescope/telescope.nvim',
+    { 'nvim-telescope/telescope.nvim', optional = true },
     'MunifTanjim/nui.nvim',
     'nvim-tree/nvim-tree.lua',
     'nvim-treesitter/nvim-treesitter',

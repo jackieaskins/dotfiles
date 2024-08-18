@@ -1,5 +1,6 @@
 local M = {
   'nvim-telescope/telescope.nvim',
+  enabled = vim.g.fuzzy_finder_plugin == 'telescope',
   dependencies = {
     { 'catgoose/telescope-helpgrep.nvim' },
     { 'isak102/telescope-git-file-history.nvim', dependencies = 'tpope/vim-fugitive' },

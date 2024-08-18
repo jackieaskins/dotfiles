@@ -62,6 +62,9 @@ return {
           LuasnipInsertNodeActive = { link = 'Visual' },
           LuasnipInsertNodePassive = { link = 'Visual' },
 
+          -- fzf-lua
+          FzfLuaTitle = { link = 'FzfLuaBorder' },
+
           -- highlight-undo.nvim
           HighlightUndo = { link = 'IncSearch' },
           HighlightRedo = { link = 'IncSearch' },
@@ -83,7 +86,7 @@ return {
           -- nvim-treesitter-context
           TreesitterContext = { fg = colors.text, bg = colors.mantle },
 
-          -- telescope.lua
+          -- telescope.nvim
           TelescopePromptPrefix = { fg = colors.blue },
           TelescopeResultsDiffAdd = { fg = colors.green },
           TelescopeResultsDiffChange = { fg = colors.yellow },
@@ -99,6 +102,7 @@ return {
         colorful_winsep = { enabled = true, color = 'blue' },
         diffview = true,
         fidget = true,
+        fzf = true,
         indent_blankline = {
           enabled = true,
           colored_indent_levels = false,

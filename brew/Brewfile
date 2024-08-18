@@ -6,6 +6,7 @@ brew 'fd'
 brew 'fswatch' # Neovim dependency
 brew 'fzf'
 brew 'gettext' # Neovim dependency
+brew 'git-delta'
 brew 'go'
 brew 'gradle'
 brew 'jq'

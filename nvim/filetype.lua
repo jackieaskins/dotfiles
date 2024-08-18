@@ -11,9 +11,11 @@ vim.filetype.add({
 
       return 'conf'
     end,
+    gitconfig = 'gitconfig',
   },
   filename = {
     Brewfile = 'ruby',
+    gitignore_global = 'gitignore',
     ['coc-settings.json'] = 'jsonc',
     ['.eslintrc.json'] = 'jsonc',
   },

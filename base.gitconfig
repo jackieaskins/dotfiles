@@ -1,0 +1,21 @@
+[include]
+  path = ~/dotfiles/delta/base.gitconfig
+
+[advice]
+  skippedCherryPicks = false
+[branch]
+  sort = -committerdate
+[column]
+  ui = auto
+[core]
+  excludesfile = ~/dotfiles/gitignore_global
+[diff]
+  colorMoved = default
+[merge]
+  conflictstyle = diff3
+[pull]
+  rebase = true
+[rerere]
+  enabled = true
+[rebase]
+  autoStash = true
