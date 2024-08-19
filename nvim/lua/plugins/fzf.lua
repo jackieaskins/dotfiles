@@ -66,18 +66,31 @@ return {
   opts = {
     diagnostics = { cwd_only = true },
     fzf_colors = true,
-    fzf_opts = { ['--marker'] = '+ ' },
-    lsp = {
-      code_actions = { previewer = 'codeaction_native' },
-      references = { ignore_current_line = true, includeDeclaration = false },
+    fzf_opts = {
+      ['--border'] = 'none',
+      ['--cycle'] = true,
+      ['--marker'] = '+',
+      ['--pointer'] = '>',
+      ['--wrap'] = true,
     },
-    oldfiles = { cwd_only = true },
-    previewers = {
-      git_diff = { pager = 'delta --file-style="omit" --hunk-header-style="omit"' },
+    grep = {
+      rg_opts = table.concat({
+        -- custom opts
+        '--hidden',
+        '-g="!.git"',
+        -- default opts
+        '--column',
+        '--line-number',
+        '--no-heading',
+        '--color=always',
+        '--smart-case',
+        '--max-columns=4096',
+        '-e',
+      }, ' '),
     },
-    winopts = { backdrop = 100, border = vim.g.border_style },
     keymap = {
       builtin = {
+        true,
         ['<F1>'] = 'toggle-help',
         ['<F2>'] = 'toggle-fullscreen',
         ['<C-c>'] = 'toggle-preview',
@@ -85,6 +98,7 @@ return {
         ['<C-b>'] = 'preview-page-up',
       },
       fzf = {
+        true,
         ['alt-a'] = 'toggle-all',
         ['ctrl-q'] = 'select-all+accept',
         ['ctrl-c'] = 'toggle-preview',
@@ -93,6 +107,19 @@ return {
         ['ctrl-f'] = 'preview-page-down',
         ['ctrl-b'] = 'preview-page-up',
       },
+    },
+    lsp = {
+      code_actions = { previewer = 'codeaction_native' },
+      references = { ignore_current_line = true, includeDeclaration = false },
+    },
+    oldfiles = { cwd_only = true },
+    previewers = {
+      git_diff = { pager = 'delta --file-style="omit" --hunk-header-style="omit"' },
+    },
+    winopts = {
+      backdrop = 100,
+      border = vim.g.border_style,
+      preview = { border = 'sharp', wrap = 'wrap' },
     },
   },
 }

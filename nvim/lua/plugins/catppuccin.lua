@@ -63,6 +63,12 @@ return {
           LuasnipInsertNodePassive = { link = 'Visual' },
 
           -- fzf-lua
+          FzfLuaHeaderBind = { fg = colors.blue },
+          FzfLuaHeaderText = { fg = colors.mauve },
+          FzfLuaFzfInfo = { fg = colors.mauve },
+          FzfLuaFzfMatch = { fg = colors.blue },
+          FzfLuaFzfPointer = { fg = colors.blue },
+          FzfLuaFzfPrompt = { fg = colors.blue },
           FzfLuaTitle = { link = 'FzfLuaBorder' },
 
           -- highlight-undo.nvim
