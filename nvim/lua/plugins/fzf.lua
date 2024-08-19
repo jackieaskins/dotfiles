@@ -88,6 +88,7 @@ return {
         '-e',
       }, ' '),
     },
+    helptags = { fzf_opts = { ['--wrap'] = false } },
     keymap = {
       builtin = {
         true,
@@ -112,6 +113,7 @@ return {
       code_actions = { previewer = 'codeaction_native' },
       references = { ignore_current_line = true, includeDeclaration = false },
     },
+    manpages = { fzf_opts = { ['--wrap'] = false } },
     oldfiles = { cwd_only = true },
     previewers = {
       git_diff = { pager = 'delta --file-style="omit" --hunk-header-style="omit"' },
