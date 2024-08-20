@@ -81,10 +81,6 @@ if [ $is_mac = true ]; then
 
   defaults write digital.twisted.noTunes replacement /Applications/Spotify.app
 
-  # Undo spacing override
-  defaults -currentHost delete -globalDomain NSStatusItemSpacing
-  defaults -currentHost delete -globalDomain NSStatusItemSelectionPadding
-
   # TODO: Configure MacOS System Preferences
   # https://github.com/CodingGarden/mac-setup - Cool Mac setup stuff
 
