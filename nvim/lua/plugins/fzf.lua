@@ -111,7 +111,8 @@ return {
     },
     lsp = {
       code_actions = { previewer = 'codeaction_native' },
-      references = { ignore_current_line = true, includeDeclaration = false },
+      ignore_current_line = true,
+      includeDeclaration = false,
     },
     manpages = { fzf_opts = { ['--wrap'] = false } },
     oldfiles = { cwd_only = true },
