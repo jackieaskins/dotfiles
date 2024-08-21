@@ -161,4 +161,40 @@ function M.snippet_expand(input)
   end
 end
 
+---Maps from a table to list
+---@generic K : string
+---@generic V
+---@generic R
+---@param fn fun(value: V, key: K): R
+---@param tbl table<K, V>
+---@return R[]
+function M.map_table_to_list(fn, tbl)
+  local list = {}
+
+  for key, value in pairs(tbl) do
+    table.insert(list, fn(value, key))
+  end
+
+  return list
+end
+
+---Maps from a table to another table
+---@generic K : string
+---@generic V
+---@generic RK
+---@generic RV
+---@param fn fun(value: V, key: K): RK, RV
+---@param tbl table<K, V>
+---@return table<RK, RV>
+function M.map_table_to_table(fn, tbl)
+  local out_tbl = {}
+
+  for key, value in pairs(tbl) do
+    local k, v = fn(value, key)
+    out_tbl[k] = v
+  end
+
+  return out_tbl
+end
+
 return M

@@ -1,10 +1,6 @@
 return {
   { 'antonk52/markdowny.nvim', config = true, ft = 'markdown' },
   { 'axelvc/template-string.nvim', config = true },
-  {
-    'brenoprata10/nvim-highlight-colors',
-    opts = { enable_named_colors = false, render = 'virtual' },
-  },
   { 'chrisgrieser/nvim-early-retirement', opts = { notificationOnAutoClose = true } },
   {
     'danymat/neogen',
