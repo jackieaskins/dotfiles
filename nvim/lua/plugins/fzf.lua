@@ -71,7 +71,6 @@ return {
       ['--cycle'] = true,
       ['--marker'] = '+',
       ['--pointer'] = '>',
-      ['--wrap'] = true,
     },
     grep = {
       rg_opts = table.concat({
@@ -88,7 +87,6 @@ return {
         '-e',
       }, ' '),
     },
-    helptags = { fzf_opts = { ['--wrap'] = false } },
     keymap = {
       builtin = {
         true,
@@ -114,7 +112,6 @@ return {
       ignore_current_line = true,
       includeDeclaration = false,
     },
-    manpages = { fzf_opts = { ['--wrap'] = false } },
     oldfiles = { cwd_only = true },
     previewers = {
       git_diff = { pager = 'delta --file-style="omit" --hunk-header-style="omit"' },
@@ -122,7 +119,7 @@ return {
     winopts = {
       backdrop = 100,
       border = vim.g.border_style,
-      preview = { border = 'sharp', wrap = 'wrap' },
+      preview = { border = 'sharp', wrap = 'wrap', flip_columns = 160 },
     },
   },
 }
