@@ -61,32 +61,6 @@ augroup('vim_window_resize', {
 --                               LSP                                --
 ----------------------------------------------------------------------
 
--- TODO: Probably move this to conform config
-augroup('lsp_formatting', {
-  {
-    'LspAttach',
-    callback = function(args)
-      local client = vim.lsp.get_client_by_id(args.data.client_id)
-      if not client then
-        return
-      end
-
-      local server_config = require('lsp.servers')[client.name]
-      if server_config and server_config.enable_lsp_format then
-        augroup('lsp_format', {
-          {
-            'BufWritePre',
-            callback = function()
-              vim.lsp.buf.format({ async = false })
-            end,
-            buffer = args.buf,
-          },
-        })
-      end
-    end,
-  },
-})
-
 augroup('document_highlight_attach', {
   {
     'LspAttach',

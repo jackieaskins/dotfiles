@@ -10,14 +10,9 @@ local linters_by_filetype = {
   swift = supported_linters.swiftlint and { 'swiftlint' } or nil,
 }
 
-local function get_linters_for_filetype(filetype)
-  return linters_by_filetype[filetype] or {}
-end
-
 return {
   'mfussenegger/nvim-lint',
   lazy = true,
-  get_linters_for_filetype = get_linters_for_filetype,
   init = function()
     require('utils').augroup('lint', {
       {

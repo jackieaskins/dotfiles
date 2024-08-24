@@ -1,31 +1,49 @@
 local utils = require('utils')
 
+---@class (exact) FormatterConfig
+---@field install_cmd? InstallCommand
+---@field required_file? string
+---@field filetypes string[]
+
+---@type table<string, FormatterConfig>
 local formatters = {
-  prettierd = {
-    name = 'prettierd',
-    install_cmd = { 'npm', '@fsouza/prettierd' },
-    required_file = './node_modules/.bin/prettier',
+  ['clang-format'] = {
+    install_cmd = { 'brew', 'clang-format' },
+    filetypes = { 'c' },
   },
-  stylua = {
-    name = 'stylua',
-    install_cmd = { 'cargo', 'stylua' },
-    required_file = './stylua.toml',
-  },
+  ['format-queries'] = { filetypes = { 'query' } },
   gdformat = {
-    name = 'gdformat',
     install_cmd = { 'pip', 'git+https://github.com/Scony/godot-gdscript-toolkit.git' },
     required_file = 'project.godot',
+    filetypes = { 'gdscript' },
+  },
+  prettierd = {
+    install_cmd = { 'npm', '@fsouza/prettierd' },
+    required_file = './node_modules/.bin/prettier',
+    filetypes = {
+      'css',
+      'graphql',
+      'html',
+      'javascript',
+      'javascriptreact',
+      'json',
+      'jsonc',
+      'less',
+      'markdown',
+      'scss',
+      'svelte',
+      'typescript',
+      'typescriptreact',
+    },
+  },
+  stylua = {
+    install_cmd = { 'cargo', 'stylua' },
+    required_file = './stylua.toml',
+    filetypes = { 'lua' },
   },
   swiftformat = {
-    name = 'swiftformat',
     install_cmd = { 'brew', 'swiftformat' },
-  },
-  ['format-queries'] = {
-    name = 'format-queries',
-  },
-  ['clang-format'] = {
-    name = 'clang-format',
-    install_cmd = { 'brew', 'clang-format' },
+    filetypes = { 'swift' },
   },
 }
 
@@ -33,43 +51,37 @@ local supported_formatters = vim.g.supported_formatters
     and utils.filter_table_by_keys(formatters, vim.g.supported_formatters)
   or formatters
 
-local formatter_by_filetype = {
-  c = supported_formatters['clang-format'],
-  css = supported_formatters.prettierd,
-  gdscript = supported_formatters.gdformat,
-  graphql = supported_formatters.prettierd,
-  html = supported_formatters.prettierd,
-  javascript = supported_formatters.prettierd,
-  javascriptreact = supported_formatters.prettierd,
-  json = supported_formatters.prettierd,
-  jsonc = supported_formatters.prettierd,
-  less = supported_formatters.prettierd,
-  lua = supported_formatters.stylua,
-  markdown = supported_formatters.prettierd,
-  query = supported_formatters['format-queries'],
-  scss = supported_formatters.prettierd,
-  svelte = supported_formatters.prettierd,
-  swift = supported_formatters.swiftformat,
-  typescript = supported_formatters.prettierd,
-  typescriptreact = supported_formatters.prettierd,
-}
-
-local function get_formatter_for_filetype(filetype)
-  local formatter = formatter_by_filetype[filetype]
-  local root_pattern = require('lspconfig').util.root_pattern
-
-  if formatter and (not formatter.required_file or root_pattern(formatter.required_file)(vim.fn.expand('%:p'))) then
-    return formatter
-  end
-
-  return nil
-end
-
 return {
   'stevearc/conform.nvim',
-  lazy = true,
-  opts = { undojoin = true },
-  get_formatter_for_filetype = get_formatter_for_filetype,
+  event = 'BufWritePre',
+  opts = function()
+    local customized_formatters = {}
+    for name, formatter in pairs(supported_formatters) do
+      if formatter.required_file then
+        customized_formatters[name] = {
+          require_cwd = true,
+          cwd = require('conform.util').root_file(formatter.required_file),
+        }
+      end
+    end
+
+    local formatters_by_ft = {}
+    for name, formatter in pairs(supported_formatters) do
+      for _, ft in ipairs(formatter.filetypes) do
+        local curr_formatters = formatters_by_ft[ft] or {}
+        table.insert(curr_formatters, name)
+        formatters_by_ft[ft] = curr_formatters
+      end
+    end
+
+    return {
+      default_format_opts = { lsp_format = 'fallback' },
+      undojoin = true,
+      formatters = customized_formatters,
+      formatters_by_ft = formatters_by_ft,
+      format_on_save = {},
+    }
+  end,
   init = function()
     local install_cmds = {}
     for formatter, data in pairs(supported_formatters) do
@@ -79,28 +91,5 @@ return {
     end
 
     require('installer').register('formatters', install_cmds, vim.fn.stdpath('data') .. '/formatters')
-
-    utils.augroup('format_on_save', {
-      {
-        'BufWritePre',
-        callback = function()
-          local formatter = get_formatter_for_filetype(vim.bo.filetype)
-          if formatter then
-            require('conform').format({ formatters = { formatter.name } })
-          end
-        end,
-      },
-    })
-
-    utils.user_command('Format', function()
-      local formatter = formatter_by_filetype[vim.bo.filetype]
-
-      if formatter then
-        require('conform').format({ formatters = { formatter.name } })
-        vim.cmd.write()
-      else
-        vim.notify('No formatter defined for filetype', vim.log.levels.ERROR)
-      end
-    end)
   end,
 }

@@ -11,41 +11,37 @@ local function statusline_component(hl, component)
   return hl_str
 end
 
-local function get_active_clients()
-  local all_names = {}
-  local filetype = vim.bo.filetype
-
-  local client_names = {}
-  local buf_clients = vim.lsp.get_clients({ bufnr = 0 })
-  for _, client in ipairs(vim.tbl_values(buf_clients)) do
-    table.insert(client_names, require('lsp.utils').get_server_display_name(client.name))
-  end
-  if #client_names > 0 then
-    table.insert(all_names, table.concat(client_names, ' '))
+local function get_active_lsp_linters_formatters()
+  local function get_lsp_clients()
+    return vim.tbl_map(function(client)
+      return require('lsp.utils').get_server_display_name(client.name)
+    end, vim.lsp.get_clients({ bufnr = 0 }))
   end
 
-  local linter_names = {}
-  local lint_ok, lint_plugin = pcall(require, 'plugins.lint')
-  if lint_ok then
-    for _, linter in ipairs(lint_plugin.get_linters_for_filetype(filetype)) do
-      table.insert(linter_names, linter)
+  local function get_linters()
+    return require('lint').linters_by_ft[vim.bo.filetype] or {}
+  end
+
+  local function get_formatters()
+    local formatters, use_lsp = require('conform').list_formatters_to_run()
+    local formatter_names = vim.tbl_map(function(formatter)
+      return formatter.name
+    end, formatters)
+    if use_lsp then
+      table.insert(formatter_names, 'lsp_format')
     end
-    if #linter_names > 0 then
-      table.insert(all_names, table.concat(linter_names, ' '))
-    end
+    return formatter_names
   end
 
-  local format_ok, format_plugin = pcall(require, 'plugins.conform')
-  if format_ok then
-    local formatter = format_plugin.get_formatter_for_filetype(filetype)
-    if formatter then
-      table.insert(all_names, formatter.name)
+  local all_client_names = {}
+  for _, fn in ipairs({ get_lsp_clients, get_linters, get_formatters }) do
+    local ok, clients = pcall(fn)
+    if ok and #clients > 0 then
+      table.insert(all_client_names, table.concat(clients, ' '))
     end
   end
 
-  local client_str = table.concat(all_names, '|')
-
-  return #client_str > 0 and '󰣖 ' .. client_str or ''
+  return #all_client_names > 0 and '󰣖 ' .. table.concat(all_client_names, '|') or ''
 end
 
 local function get_filename()
@@ -84,7 +80,7 @@ return {
           filetype,
         }, ' ')
       ),
-      statusline_component('StatusLineSection', get_active_clients()),
+      statusline_component('StatusLineSection', get_active_lsp_linters_formatters()),
       statusline_component('StatusLineMode', '%l:%c|%p%%'),
     })
   end,
