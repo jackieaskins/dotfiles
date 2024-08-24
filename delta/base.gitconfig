@@ -9,6 +9,8 @@
 [delta]
   features = catppuccin-macchiato
   navigate = true
+  commit-style = yellow
+  commit-decoration-style = yellow box ul
   file-style = purple
   file-decoration-style = purple ul ol
   hunk-header-decoration-style = blue box
