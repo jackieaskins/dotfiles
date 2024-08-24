@@ -14,3 +14,4 @@
   hunk-header-decoration-style = blue box
   hunk-header-file-style = blue
   hunk-header-style = file syntax
+  true-color = always
