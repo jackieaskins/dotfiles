@@ -12,6 +12,9 @@ return {
         zshrc = { glyph = '', hl = 'MiniIconsGreen' },
         ['init.lua'] = { glyph = '󰢱', hl = 'MiniIconsAzure' },
       },
+      filetype = {
+        tmux = { glyph = '', hl = 'MiniIconsGreen' },
+      },
     })
     MiniIcons.mock_nvim_web_devicons()
   end,

@@ -9,7 +9,15 @@ return {
           return vim.g.lazydev_enabled
         end
 
-        return root_dir ~= vim.fn.expand('~/dotfiles/hammerspoon')
+        return not vim.tbl_contains(
+          vim.tbl_map(function(path)
+            return vim.fn.expand(path)
+          end, {
+            '~/dotfiles/hammerspoon',
+            '~/dotfiles/wezterm',
+          }),
+          root_dir
+        )
       end,
       library = {
         'luvit-meta/library/uv.lua',

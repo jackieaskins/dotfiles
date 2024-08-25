@@ -9,6 +9,9 @@ local M = {
 }
 
 function M.init()
+  -- Use bash parser for ZSH files
+  vim.treesitter.language.register('bash', 'zsh')
+
   local map = require('utils').map
 
   local function goto_adjacent_usage(delta)

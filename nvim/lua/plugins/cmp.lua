@@ -21,10 +21,7 @@ return {
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-nvim-lsp-signature-help',
     'hrsh7th/cmp-path',
-    {
-      'onsails/lspkind.nvim',
-      dependencies = { 'nvim-tree/nvim-web-devicons', optional = true },
-    },
+    { 'onsails/lspkind.nvim' },
     'folke/lazydev.nvim',
     'saadparwaiz1/cmp_luasnip',
     { 'jackieaskins/cmp-luasnip-choice', config = true },

@@ -63,7 +63,9 @@ return {
     })
   end,
   opts = {
+    defaults = { file_icons = 'mini' },
     diagnostics = { cwd_only = true },
+    file_ignore_patterns = { '^%.git/' },
     fzf_colors = true,
     fzf_opts = {
       ['--border'] = 'none',
@@ -111,7 +113,7 @@ return {
       ignore_current_line = true,
       includeDeclaration = false,
     },
-    oldfiles = { cwd_only = true },
+    oldfiles = { cwd_only = true, include_current_session = true },
     previewers = {
       git_diff = { pager = 'delta --file-style="omit" --hunk-header-style="omit"' },
     },

@@ -12,6 +12,7 @@ vim.filetype.add({
       return 'conf'
     end,
     gitconfig = 'gitconfig',
+    tmTheme = 'xml',
   },
   filename = {
     Brewfile = 'ruby',
