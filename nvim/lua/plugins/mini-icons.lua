@@ -12,9 +12,6 @@ return {
         zshrc = { glyph = '', hl = 'MiniIconsGreen' },
         ['init.lua'] = { glyph = '󰢱', hl = 'MiniIconsAzure' },
       },
-      filetype = {
-        telescopeprompt = { glyph = '', hl = 'MiniIconsBlue' },
-      },
     })
     MiniIcons.mock_nvim_web_devicons()
   end,

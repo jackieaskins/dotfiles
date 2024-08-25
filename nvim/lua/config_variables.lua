@@ -25,5 +25,3 @@ vim.g.border_style = { '╔', '═', '╗', '║', '╝', '═', '╚', '║' }
 
 ---@type 'quicktest' | 'neotest'
 vim.g.test_plugin = 'neotest'
----@type 'telescope' | 'fzf'
-vim.g.fuzzy_finder_plugin = 'fzf'

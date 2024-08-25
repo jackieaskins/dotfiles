@@ -1,6 +1,5 @@
 return {
   'ibhagwan/fzf-lua',
-  enabled = vim.g.fuzzy_finder_plugin == 'fzf',
   dependencies = { 'echasnovski/mini.icons' },
   cmd = 'FzfLua',
   keys = function()

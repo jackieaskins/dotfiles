@@ -4,7 +4,6 @@ local readonly_icon = ' '
 local filetype_displays = {
   fugitiveblame = '[Git Blame]',
   NvimTree = '[NvimTree]',
-  TelescopePrompt = '[Telescope]',
   checkhealth = '[Health Check]',
 }
 
@@ -32,7 +31,7 @@ end
 
 function M.get_filename_display(filename, bufnr, quickfix_title, modify_filename)
   local fname = M.get_filename(filename, bufnr, quickfix_title, modify_filename)
-  local modified = vim.fn.getbufvar(bufnr, '&mod') == 1 and fname ~= '[Telescope]'
+  local modified = vim.fn.getbufvar(bufnr, '&mod') == 1
 
   return table.concat({
     vim.fn.getbufvar(bufnr, '&readonly') == 1 and readonly_icon or '',

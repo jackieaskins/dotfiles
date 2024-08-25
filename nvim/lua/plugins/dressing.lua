@@ -12,6 +12,5 @@ return {
         return conf
       end,
     },
-    select = { telescope = { layout_config = { width = 80, height = 20 } } },
   },
 }
