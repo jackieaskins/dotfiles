@@ -17,7 +17,7 @@ function M.start()
     wf.windowsChanged,
     wf.windowInCurrentSpace,
     wf.windowNotInCurrentSpace,
-    wf.windowFocused,
+    wf.windowMoved, -- Hopefully this doesn't lead to an infintie loop :)
   }, M.tile)
 
   M.tile()
