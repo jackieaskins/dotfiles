@@ -3,6 +3,7 @@ brew 'autossh'
 brew 'bat'
 brew 'cmake' # Neovim dependency
 brew 'fd'
+brew 'fish'
 brew 'fswatch' # Neovim dependency
 brew 'fzf'
 brew 'gettext' # Neovim dependency
