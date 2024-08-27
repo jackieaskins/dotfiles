@@ -170,7 +170,7 @@ M.define_user_commands = function(file, buf)
       utils.buf_user_command(buf, prefix .. type, function()
         local choices = {}
 
-        for index, option in ipairs(options) do
+        for _, option in ipairs(options) do
           local alternate = parse_option(option, matches)
 
           if #options == 1 or utils.file_exists(vim.fn.getcwd() .. '/' .. alternate) then
@@ -178,14 +178,11 @@ M.define_user_commands = function(file, buf)
             return
           end
 
-          table.insert(choices, { index = index, alternate = alternate })
+          table.insert(choices, alternate)
         end
 
         vim.ui.select(choices, {
           prompt = 'No ' .. type .. ' file exists, choose filename:',
-          format_item = function(choice)
-            return choice.index .. ': ' .. choice.alternate
-          end,
         }, function(choice)
           if choice then
             vim.cmd[cmd](choice.alternate)
