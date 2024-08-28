@@ -185,7 +185,7 @@ M.define_user_commands = function(file, buf)
           prompt = 'No ' .. type .. ' file exists, choose filename:',
         }, function(choice)
           if choice then
-            vim.cmd[cmd](choice.alternate)
+            vim.cmd[cmd](choice)
           end
         end)
       end)
