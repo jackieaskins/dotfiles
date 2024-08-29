@@ -48,10 +48,10 @@ return {
 
           -- Plugin Highlights
           -- LuaSnip
-          LuasnipChoiceNodeActive = { link = 'Visual' },
-          LuasnipChoiceNodePassive = { link = 'Visual' },
-          LuasnipInsertNodeActive = { link = 'Visual' },
-          LuasnipInsertNodePassive = { link = 'Visual' },
+          LuasnipChoiceNodeActive = { bg = colors.surface0 },
+          LuasnipChoiceNodePassive = { bg = colors.surface0 },
+          LuasnipInsertNodeActive = { bg = colors.surface0 },
+          LuasnipInsertNodePassive = { bg = colors.surface0 },
 
           -- fzf-lua
           FzfLuaHeaderBind = { fg = colors.blue },
