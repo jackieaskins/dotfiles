@@ -26,3 +26,21 @@ user_command('W', function()
   vim.notify('Saving since you probably meant :w')
   vim.cmd.write()
 end)
+
+-- Alternate Files
+for suffix, cmd in pairs({
+  D = 'drop',
+  E = 'edit',
+  S = 'split',
+  V = 'vsplit',
+  T = 'tabedit',
+}) do
+  user_command('A' .. suffix, function()
+    require('alternate_files').try_open_alternate(cmd)
+  end, {
+    nargs = 1,
+    complete = function()
+      return require('alternate_files').get_alternate_types()
+    end,
+  })
+end

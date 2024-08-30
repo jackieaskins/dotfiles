@@ -150,46 +150,58 @@ local function parse_option(option, matches)
   return alternate
 end
 
+local function load_alternate_files()
+  if not vim.b.alternate_files then
+    local relative_file = vim.fn.fnamemodify(vim.fn.bufname(), ':.')
+    local alternates, matches = get_matching_config(relative_file)
+
+    if alternates then
+      vim.b.alternate_files = { alternates = alternates, matches = matches }
+    end
+  end
+
+  return vim.b.alternate_files or {}
+end
+
 local M = {}
 
-M.define_user_commands = function(file, buf)
-  local relative_file = vim.fn.fnamemodify(file, ':.')
+function M.get_alternate_types()
+  local alt = load_alternate_files()
 
-  local alternates, matches = get_matching_config(relative_file)
-  if alternates == nil then
+  if alt then
+    return vim.tbl_keys(alt.alternates)
+  end
+
+  return {}
+end
+
+function M.try_open_alternate(cmd)
+  local alt = load_alternate_files()
+  if not alt then
     return
   end
 
-  for type, options in pairs(alternates) do
-    for prefix, cmd in pairs({
-      E = 'edit',
-      V = 'vsplit',
-      S = 'split',
-      T = 'tabedit',
-    }) do
-      utils.buf_user_command(buf, prefix .. type, function()
-        local choices = {}
+  for type, options in pairs(alt.alternates) do
+    local choices = {}
 
-        for _, option in ipairs(options) do
-          local alternate = parse_option(option, matches)
+    for _, option in ipairs(options) do
+      local alternate = parse_option(option, alt.matches)
 
-          if #options == 1 or utils.file_exists(vim.fn.getcwd() .. '/' .. alternate) then
-            vim.cmd[cmd](alternate)
-            return
-          end
+      if #options == 1 or utils.file_exists(vim.fn.getcwd() .. '/' .. alternate) then
+        vim.cmd[cmd](alternate)
+        return
+      end
 
-          table.insert(choices, alternate)
-        end
-
-        vim.ui.select(choices, {
-          prompt = 'No ' .. type .. ' file exists, choose filename:',
-        }, function(choice)
-          if choice then
-            vim.cmd[cmd](choice)
-          end
-        end)
-      end)
+      table.insert(choices, alternate)
     end
+
+    vim.ui.select(choices, {
+      prompt = 'No ' .. type .. ' file exists, choose filename:',
+    }, function(choice)
+      if choice then
+        vim.cmd[cmd](choice)
+      end
+    end)
   end
 end
 

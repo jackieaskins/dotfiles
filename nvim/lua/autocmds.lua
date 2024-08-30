@@ -38,15 +38,6 @@ augroup('yank_highlight', {
   },
 })
 
-augroup('alternate_files', {
-  {
-    { 'BufRead', 'BufNewFile' },
-    callback = function(arg)
-      require('alternate_files').define_user_commands(arg.file, arg.buf)
-    end,
-  },
-})
-
 augroup('save_folds_and_cursor', {
   { 'BufWinLeave', pattern = '?*', command = 'silent! mkview!' },
   { 'BufWinEnter', pattern = '?*', command = 'silent! loadview' },
