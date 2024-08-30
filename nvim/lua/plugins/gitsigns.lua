@@ -3,46 +3,56 @@ return {
   opts = {
     attach_to_untracked = true,
     on_attach = function(bufnr)
-      local gs = package.loaded.gitsigns
+      local gs = require('gitsigns')
 
       local function bsk(mode, lhs, rhs, opts)
-        local options = { buffer = bufnr }
-        if opts then
-          options = vim.tbl_extend('force', options, opts)
-        end
-        require('utils').map(mode, lhs, rhs, options)
+        opts = opts or {}
+        opts.buffer = bufnr
+        require('utils').map(mode, lhs, rhs, opts)
       end
 
       -- Navigation
-      local function go_to_hunk(key, dir)
-        bsk('n', key, function()
+      for prefix, dir in pairs({
+        ['['] = 'prev',
+        [']'] = 'next',
+      }) do
+        bsk('n', prefix .. 'c', function()
           if vim.wo.diff then
-            return key
+            vim.cmd.normal({ prefix .. 'c', bang = true })
+          else
+            gs.nav_hunk(dir, { greedy = false })
           end
-          vim.schedule(dir)
-          return '<Ignore>'
-        end, { expr = true })
+        end)
+
+        bsk('n', prefix .. 'C', function()
+          gs.nav_hunk(dir, { target = 'all', greedy = false })
+        end)
       end
-      go_to_hunk(']c', gs.next_hunk)
-      go_to_hunk('[c', gs.prev_hunk)
 
       -- Actions
-      -- Using gs.[stage/reset]_hunk as rhs didn't allow partial hunk stages
-      bsk({ 'n', 'v' }, '<leader>hs', ':Gitsigns stage_hunk<CR>')
-      bsk({ 'n', 'v' }, '<leader>hr', ':Gitsigns reset_hunk<CR>')
-      bsk('n', '<leader>hu', gs.undo_stage_hunk, { desc = 'gs.undo_stage_hunk' })
-      bsk('n', '<leader>hp', gs.preview_hunk, { desc = 'gs.preview_hunk' })
-      bsk('n', '<leader>hS', gs.stage_buffer, { desc = 'gs.stage_buffer' })
-      bsk('n', '<leader>hR', gs.reset_buffer, { desc = 'gs.reset_buffer' })
+      bsk('n', '<leader>hs', gs.stage_hunk)
+      bsk('n', '<leader>hr', gs.reset_hunk)
+      bsk('v', '<leader>hs', function()
+        gs.stage_hunk({ vim.fn.line('.'), vim.fn.line('v') })
+      end)
+      bsk('v', '<leader>hr', function()
+        gs.reset_hunk({ vim.fn.line('.'), vim.fn.line('v') })
+      end)
+      bsk('n', '<leader>hS', gs.stage_buffer)
+      bsk('n', '<leader>hu', gs.undo_stage_hunk)
+      bsk('n', '<leader>hR', gs.reset_buffer)
+
+      bsk('n', '<leader>hp', gs.preview_hunk)
       bsk('n', '<leader>hb', function()
         gs.blame_line({ full = true })
-      end, { desc = 'gs.blame_line({ full = true })' })
-      bsk('n', '<leader>tb', gs.toggle_current_line_blame, { desc = 'gs.toggle_current_line_blame' })
-      bsk('n', '<leader>hd', gs.diffthis, { desc = 'gs.diffthis' })
+      end)
+
+      bsk('n', '<leader>tb', gs.toggle_current_line_blame)
+      bsk('n', '<leader>hd', gs.diffthis)
       bsk('n', '<leader>hD', function()
         gs.diffthis('~')
-      end, { desc = 'gs.diffthis("~")' })
-      bsk('n', '<leader>td', gs.toggle_deleted, { desc = 'gs.toggle_deleted' })
+      end)
+      bsk('n', '<leader>td', gs.toggle_deleted)
 
       -- Text object
       bsk({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
