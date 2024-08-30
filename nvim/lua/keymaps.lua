@@ -74,12 +74,6 @@ augroup('lsp_keymaps', {
 })
 -- }}}
 
--- Extended gx {{{
-map('n', 'gx', function()
-  require('gx').handle_url_under_cursor()
-end, { desc = 'Open url under cursor' })
--- }}}
-
 -- Jumplist {{{
 local function jump(key)
   return function()
