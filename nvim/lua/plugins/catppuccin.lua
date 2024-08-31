@@ -72,9 +72,6 @@ return {
           -- mini.icons
           MiniIconsGrey = { fg = colors.overlay0 },
 
-          -- nvim-lightbulb
-          LightBulbVirtText = { bg = colors.none },
-
           -- nvim-tree.lua
           NvimTreeExecFile = { style = { 'underline', 'bold' } },
           NvimTreeNormal = { fg = colors.text, bg = colors.base },

@@ -10,16 +10,6 @@ return {
   { 'dmmulroy/tsc.nvim', cmd = 'TSC', opts = { pretty_errors = false } },
   { 'fladson/vim-kitty', ft = { 'kitty', 'kitty-session' } },
   { 'folke/ts-comments.nvim', config = true, event = 'VeryLazy' },
-  {
-    -- Switching to the lvim-tech fork until original is updated
-    -- 'kosayoda/nvim-lightbulb',
-    'lvim-tech/nvim-lightbulb',
-    opts = {
-      autocmd = { enabled = true },
-      sign = { enabled = false },
-      virtual_text = { enabled = true, hl = 'LightBulbVirtText' },
-    },
-  },
   { 'm00qek/baleia.nvim' },
   { 'mcauley-penney/visual-whitespace.nvim', config = true },
   { 'nvim-treesitter/nvim-treesitter-context', opts = { multiline_threshold = 1 } },

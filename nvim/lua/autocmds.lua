@@ -77,3 +77,18 @@ augroup('document_highlight_attach', {
     end,
   },
 })
+
+augroup('lightbulb', {
+  {
+    'CursorHold',
+    callback = function(arg)
+      require('lsp.lightbulb').update(arg.buf)
+    end,
+  },
+  {
+    'InsertEnter',
+    callback = function(arg)
+      require('lsp.lightbulb').clear(arg.buf)
+    end,
+  },
+})
