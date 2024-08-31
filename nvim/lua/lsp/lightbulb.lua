@@ -23,8 +23,6 @@ function M.update(bufnr)
   local params = vim.lsp.util.make_range_params()
   params.context = { diagnostics = vim.diagnostic.get(0), triggerKind = 1 }
 
-  local range_start = params.range.start
-
   vim.b.lightbulb_cancel = vim.lsp.buf_request_all(
     bufnr,
     vim.lsp.protocol.Methods.textDocument_codeAction,
@@ -32,7 +30,7 @@ function M.update(bufnr)
     function(results)
       for _, result in pairs(results) do
         if result.result and #result.result > 0 then
-          set_lightbulb_extmark(bufnr, range_start.line, range_start.character)
+          set_lightbulb_extmark(bufnr, params.range.start.line, -1)
           return
         end
       end

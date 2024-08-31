@@ -78,17 +78,33 @@ augroup('document_highlight_attach', {
   },
 })
 
-augroup('lightbulb', {
+augroup('lightbulb_attach', {
   {
-    'CursorHold',
-    callback = function(arg)
-      require('lsp.lightbulb').update(arg.buf)
-    end,
-  },
-  {
-    'InsertEnter',
-    callback = function(arg)
-      require('lsp.lightbulb').clear(arg.buf)
+    'LspAttach',
+    callback = function(args)
+      local client = vim.lsp.get_client_by_id(args.data.client_id)
+
+      if not client or not client.supports_method(vim.lsp.protocol.Methods.textDocument_codeAction) then
+        return
+      end
+
+      local bufnr = args.buf
+      augroup('lightbulb', {
+        {
+          'CursorHold',
+          callback = function()
+            require('lsp.lightbulb').update(bufnr)
+          end,
+          buffer = bufnr,
+        },
+        {
+          'InsertEnter',
+          callback = function()
+            require('lsp.lightbulb').clear(bufnr)
+          end,
+          buffer = bufnr,
+        },
+      })
     end,
   },
 })
