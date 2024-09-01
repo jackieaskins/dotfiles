@@ -1,3 +1,32 @@
+local colors = require('colors').get_colors()
+
+local lspkind_icons = {
+  Class = '󰠱',
+  Color = '󰏘',
+  Constant = '󰏿',
+  Constructor = '',
+  Enum = '',
+  EnumMember = '',
+  Event = '',
+  Field = '󰜢',
+  File = '󰈙',
+  Folder = '󰉋',
+  Function = '󰊕',
+  Interface = '',
+  Keyword = '󰌋',
+  Method = '󰆧',
+  Module = '',
+  Operator = '',
+  Property = '',
+  Reference = '󰈇',
+  Snippet = '',
+  Struct = '󰙅',
+  Text = '󰉿',
+  TypeParameter = '',
+  Unit = '',
+  Value = '󰎠',
+  Variable = '󰀫',
+}
 local border_config = {
   border = vim.g.border_style,
   winhighlight = 'FloatBorder:FloatBorder',
@@ -14,6 +43,7 @@ local source_menu_map = {
 
 return {
   'hrsh7th/nvim-cmp',
+  event = 'VeryLazy',
   dependencies = {
     'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-calc',
@@ -21,7 +51,6 @@ return {
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-nvim-lsp-signature-help',
     'hrsh7th/cmp-path',
-    { 'onsails/lspkind.nvim' },
     'folke/lazydev.nvim',
     'saadparwaiz1/cmp_luasnip',
     { 'jackieaskins/cmp-luasnip-choice', config = true },
@@ -37,8 +66,7 @@ return {
           require('utils').snippet_expand(args.body)
         end,
       },
-      ---@diagnostic disable-next-line: missing-fields
-      view = { entries = { follow_cursor = true } },
+      view = { entries = { follow_cursor = true, name = 'custom' } },
       -- Order dictates priority
       sources = cmp.config.sources({
         { name = 'luasnip' },
@@ -53,33 +81,35 @@ return {
         completion = cmp.config.window.bordered(border_config),
         documentation = cmp.config.window.bordered(border_config),
       },
-      ---@diagnostic disable-next-line: missing-fields
       formatting = {
+        expandable_indicator = true,
+        fields = { 'kind', 'abbr', 'menu' },
         format = function(entry, vim_item)
-          local color_item = require('nvim-highlight-colors').format(entry, {
-            kind = vim_item.kind,
-          })
+          local source = entry.source.name
 
-          vim_item = require('lspkind').cmp_format({
-            maxwidth = 50,
-            before = function(e, item)
-              local source = e.source.name
+          if not vim_item.menu then
+            vim_item.menu = source_menu_map[source]
+            if source == 'nvim_lsp' then
+              vim_item.menu = require('lsp.utils').get_server_display_name(entry.source.source.client.name)
 
-              item.menu = source_menu_map[source]
-              if source == 'nvim_lsp' then
-                pcall(function()
-                  local utils = require('lsp.utils')
-                  item.menu = '[' .. utils.get_server_display_name(e.source.source.client.name) .. ']'
-                end)
+              local color = colors[vim_item.abbr]
+              if entry.source.source.client.name == 'lua_ls' and color then
+                vim_item.abbr = vim_item.abbr .. ' ' .. color
               end
+            end
+          end
+          if vim_item.menu then
+            vim_item.menu = ' ' .. vim_item.menu
+          end
 
-              return item
-            end,
-          })(entry, vim_item)
-
+          local color_item = require('nvim-highlight-colors').format(entry, { kind = vim_item.kind })
           if color_item.abbr_hl_group then
             vim_item.kind_hl_group = color_item.abbr_hl_group
+            vim_item.kind = color_item.abbr
+          else
+            vim_item.kind = lspkind_icons[vim_item.kind] or ''
           end
+          vim_item.kind = vim_item.kind .. ' '
 
           return vim_item
         end,
@@ -103,7 +133,8 @@ return {
       },
     })
 
-    cmp.setup.cmdline(':', { sources = { { name = 'cmdline' } } })
-    cmp.setup.cmdline('/', { sources = { { name = 'buffer' } } })
+    local cmdline_formatting = { fields = { 'abbr' } }
+    cmp.setup.cmdline(':', { formatting = cmdline_formatting, sources = { { name = 'cmdline' } } })
+    cmp.setup.cmdline('/', { formatting = cmdline_formatting, sources = { { name = 'buffer' } } })
   end,
 }
