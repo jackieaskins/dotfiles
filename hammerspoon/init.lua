@@ -8,7 +8,6 @@ local hotkeyStore = require('config.hotkeyStore')
 ---@class Custom
 ---@field appKeys? table<string, string>
 ---@field brewPrefix? string
----@field showDockIcon? boolean
 ---@field twmScreenPadding? number
 ---@field twmWindowFilters? table<string, boolean>
 ---@field twmWindowGap? number
@@ -16,15 +15,6 @@ local hotkeyStore = require('config.hotkeyStore')
 local ok, custom = pcall(require, 'custom')
 ---@type Custom
 CUSTOM = ok and custom or {}
-
-----------------------------------------------------------------------
---                     Hammerspoon Preferences                      --
-----------------------------------------------------------------------
-
--- TODO: Need to handle doc icon preferences changing through preferences menu
-if custom.showDockIcon ~= nil then
-  hs.dockIcon(custom.showDockIcon)
-end
 
 ----------------------------------------------------------------------
 --                             Globals                              --
