@@ -86,18 +86,11 @@ return {
         fields = { 'kind', 'abbr', 'menu' },
         format = function(entry, vim_item)
           local source = entry.source.name
+          local client_name = source == 'nvim_lsp'
+              and require('lsp.utils').get_server_display_name(entry.source.source.client.name)
+            or nil
 
-          if not vim_item.menu then
-            vim_item.menu = source_menu_map[source]
-            if source == 'nvim_lsp' then
-              vim_item.menu = require('lsp.utils').get_server_display_name(entry.source.source.client.name)
-
-              local color = colors[vim_item.abbr]
-              if entry.source.source.client.name == 'lua_ls' and color then
-                vim_item.abbr = vim_item.abbr .. ' ' .. color
-              end
-            end
-          end
+          vim_item.menu = vim_item.menu and vim_item.menu or client_name or source_menu_map[source]
           if vim_item.menu then
             vim_item.menu = ' ' .. vim_item.menu
           end
@@ -110,6 +103,12 @@ return {
             vim_item.kind = lspkind_icons[vim_item.kind] or ''
           end
           vim_item.kind = vim_item.kind .. ' '
+
+          local color = colors[vim_item.abbr]
+          if client_name == 'lua_ls' and color then
+            vim_item.abbr = vim_item.abbr .. ' ' .. color
+          end
+          vim_item.abbr = vim_item.abbr:sub(1, 50)
 
           return vim_item
         end,
