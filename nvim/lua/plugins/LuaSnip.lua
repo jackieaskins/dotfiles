@@ -14,7 +14,7 @@ end
 return {
   'L3MON4D3/LuaSnip',
   build = 'make install_jsregexp',
-  lazy = false,
+  event = 'VeryLazy',
   keys = vim.tbl_map(key_map, {
     { '<C-y>', 'expand', nil, 'Expand snippet', 'i' },
     { '<C-j>', 'expand_or_jump', nil, 'Expand snippet or jump to next placeholder', { 'i', 's' } },
