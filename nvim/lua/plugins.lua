@@ -1,6 +1,7 @@
 return {
   { 'antonk52/markdowny.nvim', config = true, ft = 'markdown' },
   { 'axelvc/template-string.nvim', config = true },
+  { 'boltlessengineer/smart-tab.nvim', config = true },
   { 'chrisgrieser/nvim-early-retirement', opts = { notificationOnAutoClose = true } },
   {
     'danymat/neogen',
@@ -10,6 +11,7 @@ return {
   { 'dmmulroy/tsc.nvim', cmd = 'TSC', opts = { pretty_errors = false } },
   { 'fladson/vim-kitty', ft = { 'kitty', 'kitty-session' } },
   { 'folke/ts-comments.nvim', config = true, event = 'VeryLazy' },
+  { 'johmsalas/text-case.nvim' },
   { 'm00qek/baleia.nvim' },
   { 'mcauley-penney/visual-whitespace.nvim', config = true },
   { 'nvim-treesitter/nvim-treesitter-context', opts = { multiline_threshold = 1 } },
@@ -20,8 +22,6 @@ return {
     cmd = 'Hypersonic',
     opts = { border = vim.g.border_style },
   },
-  { 'tpope/vim-abolish' },
-  { 'tpope/vim-fugitive' },
   { 'tpope/vim-repeat' },
   { 'tpope/vim-sleuth' },
   { 'tpope/vim-surround' },

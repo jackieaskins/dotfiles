@@ -22,7 +22,6 @@ return {
           { faster = true, map = '<C-M-e>', cmap = '<C-M-e>' },
         },
         space2 = { enable = true },
-        tabout = { enable = true, hopout = true, map = '<Tab>' },
       }),
       ---@diagnostic disable-next-line: assign-type-mismatch
       { profile = require('ultimate-autopair.experimental.cmpair').init },

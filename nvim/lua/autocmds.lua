@@ -52,32 +52,6 @@ augroup('vim_window_resize', {
 --                               LSP                                --
 ----------------------------------------------------------------------
 
-augroup('document_highlight_attach', {
-  {
-    'LspAttach',
-    callback = function(args)
-      local client = vim.lsp.get_client_by_id(args.data.client_id)
-      if not client or not client.supports_method('textDocument/documentHighlight') then
-        return
-      end
-
-      local bufnr = args.buf
-      augroup('document_highlight', {
-        {
-          { 'CursorHold' },
-          callback = vim.lsp.buf.document_highlight,
-          buffer = bufnr,
-        },
-        {
-          { 'CursorMoved', 'InsertEnter', 'BufLeave' },
-          callback = vim.lsp.buf.clear_references,
-          buffer = bufnr,
-        },
-      })
-    end,
-  },
-})
-
 augroup('lightbulb_attach', {
   {
     'LspAttach',

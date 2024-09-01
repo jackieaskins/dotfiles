@@ -2,7 +2,7 @@ local modified_icon = ' '
 local readonly_icon = ' '
 
 local filetype_displays = {
-  fugitiveblame = '[Git Blame]',
+  ['gitsigns-blame'] = '[Git Blame]',
   NvimTree = '[NvimTree]',
   checkhealth = '[Health Check]',
 }

@@ -28,7 +28,7 @@ return {
           CurSearch = vim.tbl_extend('force', inc_search, { style = { 'bold' } }),
           CursorLineNr = { fg = colors.blue, style = { 'bold' } },
           FoldColumn = { fg = colors.surface1 },
-          Folded = { bg = colors.mantle },
+          Folded = { bg = colors.surface0 },
           NormalFloat = { bg = colors.base },
           FloatBorder = { fg = colors.blue, bg = colors.base },
           StatusLine = { fg = colors.text, bg = colors.base },
@@ -39,6 +39,10 @@ return {
           WinBarDiagnosticWarn = { fg = colors.yellow, bg = colors.base },
           WinBarDiagnosticHint = { fg = colors.teal, bg = colors.base },
           WinBarDiagnosticInfo = { fg = colors.sky, bg = colors.base },
+
+          -- Semantic Highlights
+          -- Removing because it overwrites custom comment colors, like links
+          ['@lsp.type.comment.lua'] = { fg = 'none' },
 
           -- Treesitter Highlights
           ['@markup.link.label.markdown_inline'] = anchor_link,
