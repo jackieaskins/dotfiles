@@ -20,6 +20,17 @@ function M.start()
     wf.windowMoved, -- Hopefully this doesn't lead to an infintie loop :)
   }, M.tile)
 
+  windowFilter:subscribe({
+    hs.window.filter.windowMinimized,
+    hs.window.filter.windowDestroyed,
+  }, function()
+    local otherWindows = wf.copy(windowFilter):setCurrentSpace(true):getWindows(wf.sortByFocusedLast)
+
+    if #otherWindows > 0 then
+      otherWindows[1]:focus()
+    end
+  end)
+
   M.tile()
   menubar.init()
 end
