@@ -115,7 +115,7 @@ return {
     },
     oldfiles = { cwd_only = true, include_current_session = true },
     previewers = {
-      git_diff = { pager = 'delta --file-style="omit" --hunk-header-style="omit"' },
+      git_diff = { pager = 'delta --file-style="omit"' },
     },
     winopts = {
       backdrop = 100,

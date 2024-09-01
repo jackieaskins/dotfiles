@@ -11,9 +11,7 @@
   navigate = true
   commit-style = yellow
   commit-decoration-style = yellow box ul
-  file-style = purple
-  file-decoration-style = purple ul ol
-  hunk-header-decoration-style = blue box
-  hunk-header-file-style = blue
-  hunk-header-style = file syntax
+  file-style = blue
+  file-decoration-style = blue ul
+  hunk-header-style = omit
   true-color = always
