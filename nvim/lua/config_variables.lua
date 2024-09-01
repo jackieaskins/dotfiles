@@ -17,11 +17,5 @@ vim.g.supported_formatters = {}
 ---@type string[]
 vim.g.supported_linters = {}
 
----@type GxMatcher[]
-vim.g.custom_matchers = {}
-
 ---@type string[]
 vim.g.border_style = { '╔', '═', '╗', '║', '╝', '═', '╚', '║' }
-
----@type 'quicktest' | 'neotest'
-vim.g.test_plugin = 'neotest'
