@@ -62,65 +62,80 @@ return {
       },
     })
   end,
-  opts = {
-    defaults = { file_icons = 'mini' },
-    diagnostics = { cwd_only = true },
-    file_ignore_patterns = { '^%.git/' },
-    fzf_colors = true,
-    fzf_opts = {
-      ['--border'] = 'none',
-      ['--cycle'] = true,
-      ['--marker'] = '+',
-      ['--pointer'] = '>',
-    },
-    grep = {
-      rg_opts = table.concat({
-        -- custom opts
-        '--hidden',
-        '-g="!.git"',
-        -- default opts
-        '--column',
-        '--line-number',
-        '--no-heading',
-        '--color=always',
-        '--smart-case',
-        '--max-columns=4096',
-        '-e',
-      }, ' '),
-    },
-    keymap = {
-      builtin = {
-        true,
-        ['<F1>'] = 'toggle-help',
-        ['<F2>'] = 'toggle-fullscreen',
-        ['<C-c>'] = 'toggle-preview',
-        ['<C-f>'] = 'preview-page-down',
-        ['<C-b>'] = 'preview-page-up',
+  opts = function()
+    local actions = require('fzf-lua.actions')
+
+    return {
+      actions = {
+        files = { true, ['ctrl-x'] = actions.file_split },
       },
-      fzf = {
-        true,
-        ['alt-a'] = 'toggle-all',
-        ['ctrl-q'] = 'select-all+accept',
-        ['ctrl-c'] = 'toggle-preview',
-        ['ctrl-a'] = 'beginning-of-line',
-        ['ctrl-e'] = 'end-of-line',
-        ['ctrl-f'] = 'preview-page-down',
-        ['ctrl-b'] = 'preview-page-up',
+      defaults = { file_icons = 'mini' },
+      diagnostics = { cwd_only = true },
+      file_ignore_patterns = { '^%.git/' },
+      fzf_colors = true,
+      fzf_opts = {
+        ['--border'] = 'none',
+        ['--cycle'] = true,
+        ['--marker'] = '+',
+        ['--pointer'] = '>',
       },
-    },
-    lsp = {
-      code_actions = { previewer = 'codeaction_native' },
-      ignore_current_line = true,
-      includeDeclaration = false,
-    },
-    oldfiles = { cwd_only = true, include_current_session = true },
-    previewers = {
-      git_diff = { pager = 'delta --file-style="omit"' },
-    },
-    winopts = {
-      backdrop = 100,
-      border = vim.g.border_style,
-      preview = { border = 'sharp', wrap = 'wrap', flip_columns = 160 },
-    },
-  },
+      git = {
+        status = {
+          actions = {
+            ['ctrl-s'] = { fn = actions.git_reset, reload = true },
+            ['ctrl-x'] = actions.file_split,
+          },
+        },
+      },
+      grep = {
+        rg_opts = table.concat({
+          -- custom opts
+          '--hidden',
+          '-g="!.git"',
+          -- default opts
+          '--column',
+          '--line-number',
+          '--no-heading',
+          '--color=always',
+          '--smart-case',
+          '--max-columns=4096',
+          '-e',
+        }, ' '),
+      },
+      keymap = {
+        builtin = {
+          true,
+          ['<F1>'] = 'toggle-help',
+          ['<F2>'] = 'toggle-fullscreen',
+          ['<C-c>'] = 'toggle-preview',
+          ['<C-f>'] = 'preview-page-down',
+          ['<C-b>'] = 'preview-page-up',
+        },
+        fzf = {
+          true,
+          ['alt-a'] = 'toggle-all',
+          ['ctrl-q'] = 'select-all+accept',
+          ['ctrl-c'] = 'toggle-preview',
+          ['ctrl-a'] = 'beginning-of-line',
+          ['ctrl-e'] = 'end-of-line',
+          ['ctrl-f'] = 'preview-page-down',
+          ['ctrl-b'] = 'preview-page-up',
+        },
+      },
+      lsp = {
+        code_actions = { previewer = 'codeaction_native' },
+        ignore_current_line = true,
+        includeDeclaration = false,
+      },
+      oldfiles = { cwd_only = true, include_current_session = true },
+      previewers = {
+        git_diff = { pager = 'delta --file-style="omit"' },
+      },
+      winopts = {
+        backdrop = 100,
+        border = vim.g.border_style,
+        preview = { border = 'sharp', wrap = 'wrap', flip_columns = 160 },
+      },
+    }
+  end,
 }
