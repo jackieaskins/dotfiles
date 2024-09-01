@@ -1,6 +1,6 @@
 local utils = require('config.twm.menubar.utils')
 
-local menubar = hs.menubar.new()
+local menubar = hs.menubar.new(true, 'twm')
 
 local function updateMenu()
   if menubar then
