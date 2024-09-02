@@ -8,7 +8,10 @@ local wf = hs.window.filter
 
 local M = {}
 
--- Lifecyle {{{
+----------------------------------------------------------------------
+--                            Lifecycle                             --
+----------------------------------------------------------------------
+
 ---Load from cache and start tiling windows on all spaces
 function M.start()
   cache.restore()
@@ -45,9 +48,11 @@ end
 function M.stop()
   cache.save()
 end
--- }}}
 
--- Tiling {{{
+----------------------------------------------------------------------
+--                              Tiling                              --
+----------------------------------------------------------------------
+
 ---Manually trigger tiling for all spaces
 function M.tile()
   utils.tile()
@@ -63,9 +68,11 @@ function M.toggleFloat(win)
 
   M.tile()
 end
--- }}}
 
--- Layouts {{{
+----------------------------------------------------------------------
+--                             Layouts                              --
+----------------------------------------------------------------------
+
 ---Bring up the picker to choose the current space layout
 function M.chooseLayout()
   layout.choose()
@@ -86,9 +93,11 @@ end
 function M.setLayout(layoutName)
   layout.set(layoutName)
 end
--- }}}
 
--- Window Focus {{{
+----------------------------------------------------------------------
+--                           Window Focus                           --
+----------------------------------------------------------------------
+
 ---Change focus to the nearest window to the west
 ---@param win hs.window?
 function M.focusWindowWest(win)
@@ -124,9 +133,11 @@ function M.focusWindowEast(win)
     utils.focusWindowToRight(window)
   end
 end
--- }}}
 
--- Window Swap {{{
+----------------------------------------------------------------------
+--                           Window Swap                            --
+----------------------------------------------------------------------
+
 ---Swap window focus to the nearest tiled window to the west
 ---@param win hs.window?
 function M.swapWindowWest(win)
@@ -150,9 +161,11 @@ end
 function M.swapWindowEast(win)
   utils.swapWindow(win or hs.window.focusedWindow(), 'east')
 end
--- }}}
 
--- Window Space Movement {{{
+----------------------------------------------------------------------
+--                      Window Space Movement                       --
+----------------------------------------------------------------------
+
 ---Move window to provided space
 ---@param desktopNum number
 ---@return fun(win?: hs.window)
@@ -176,8 +189,5 @@ function M.moveWindowToSpace(desktopNum)
     hs.window.get(window:id()):focus()
   end
 end
--- }}}
 
 return M
-
--- vim:foldmethod=marker

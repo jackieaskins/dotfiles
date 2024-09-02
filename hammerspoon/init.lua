@@ -64,7 +64,7 @@ for _, configPath in ipairs(configPaths) do
     :start()
 end
 
-hotkeyStore.register('Reload', 'Reload Configuration', MEH, 'r', hs.reload)
+hotkeyStore.register('Reload', 'Reload configuration', MEH, 'r', hs.reload)
 
 ----------------------------------------------------------------------
 --                             Hotkeys                              --
