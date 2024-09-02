@@ -15,6 +15,7 @@ vim.filetype.add({
     tmTheme = 'xml',
   },
   filename = {
+    ['kitty.conf'] = 'kitty',
     Brewfile = 'ruby',
     gitignore_global = 'gitignore',
     ['coc-settings.json'] = 'jsonc',

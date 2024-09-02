@@ -13,6 +13,7 @@ return {
         ['init.lua'] = { glyph = '󰢱', hl = 'MiniIconsAzure' },
       },
       filetype = {
+        kitty = { glyph = '󰄛', hl = 'MiniIconsOrange' },
         tmux = { glyph = '', hl = 'MiniIconsGreen' },
       },
     })
