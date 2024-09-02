@@ -20,6 +20,8 @@ function M.update(bufnr)
     vim.b.lightbulb_cancel()
   end
 
+  M.clear(bufnr)
+
   local params = vim.lsp.util.make_range_params()
   params.context = { diagnostics = vim.diagnostic.get(0), triggerKind = 1 }
 
@@ -34,8 +36,6 @@ function M.update(bufnr)
           return
         end
       end
-
-      M.clear(bufnr)
     end
   )
 end

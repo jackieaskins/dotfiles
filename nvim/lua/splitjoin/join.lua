@@ -80,5 +80,3 @@ return {
     node_handlers[supported_node:type()](supported_node)
   end,
 }
-
--- vim:foldlevel=0

@@ -40,12 +40,7 @@ return {
       full_name = true,
       group_empty = true,
       highlight_git = true,
-      icons = {
-        git_placement = 'after',
-        glyphs = {
-          git = { unstaged = '' },
-        },
-      },
+      icons = { git_placement = 'after' },
       indent_markers = { enable = true },
     },
     view = {

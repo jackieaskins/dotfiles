@@ -15,7 +15,11 @@ return {
   { 'm00qek/baleia.nvim' },
   { 'mcauley-penney/visual-whitespace.nvim', config = true },
   { 'nvim-treesitter/nvim-treesitter-context', opts = { multiline_threshold = 1 } },
-  { 'nvim-zh/colorful-winsep.nvim', opts = { only_line_seq = false } },
+  {
+    'nvim-zh/colorful-winsep.nvim',
+    event = 'VeryLazy',
+    opts = { only_line_seq = false },
+  },
   {
     'tomiis4/hypersonic.nvim',
     keys = { { '<leader>rx', '<cmd>Hypersonic<CR>' } },

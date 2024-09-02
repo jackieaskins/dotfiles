@@ -3,12 +3,10 @@ local augroup, map = utils.augroup, utils.map
 
 map('n', '<leader>so', '<cmd>source %<CR>')
 
--- Append semicolons and commas {{{
-map('n', '<leader>;', 'A;<Esc>')
-map('n', '<leader>,', 'A,<Esc>')
--- }}}
+----------------------------------------------------------------------
+--                   Clipboard and Visual Select                    --
+----------------------------------------------------------------------
 
--- Clipboard and visual select {{{
 -- Yank to/from System Clipboard
 local yank_keys = { 'c', 'C', 'd', 'D', 'p', 'P', 'y', 'Y' }
 for _, key in ipairs(yank_keys) do
@@ -19,13 +17,23 @@ end
 -- Keep selection after indenting
 map('x', '<', '<gv')
 map('x', '>', '>gv')
+-- Don't overwrite clipboard when deleting empty line with dd
+map('n', 'dd', function()
+  if vim.api.nvim_get_current_line():match('^%s*$') then
+    return '"_dd'
+  else
+    return 'dd'
+  end
+end, { noremap = true, expr = true })
 
--- Below mappings from https://www.reddit.com/r/neovim/comments/1e1dmpw/what_are_the_keymaps_that_you_replaced_default/
--- Don't overwrite clipboard on `x`
+-- Below mappings from https://www.reddit.com/r/neovim/comments/1e1dmpw
+-- Don't overwrite clipboard on x
 map('n', 'x', '"_x')
--- }}}
 
--- Auto-indent {{{
+----------------------------------------------------------------------
+--                           Auto-indent                            --
+----------------------------------------------------------------------
+
 -- https://www.reddit.com/r/neovim/comments/17mrka2/comment/k7n3d9b
 map('n', 'i', function()
   if #vim.fn.getline('.') == 0 then
@@ -34,14 +42,18 @@ map('n', 'i', function()
     return 'i'
   end
 end, { expr = true, desc = 'Properly indent empty line on insert' })
--- }}}
 
--- Diagnostics {{{
+----------------------------------------------------------------------
+--                           Diagnostics                            --
+----------------------------------------------------------------------
+
 map('n', '[e', '<cmd>lua vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR })<CR>')
 map('n', ']e', '<cmd>lua vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR })<CR>')
--- }}}
 
--- LSP {{{
+----------------------------------------------------------------------
+--                               LSP                                --
+----------------------------------------------------------------------
+
 -- Unmap some of the default LSP mappings
 vim.keymap.del('n', 'grn')
 vim.keymap.del('n', 'grr')
@@ -72,9 +84,11 @@ augroup('lsp_keymaps', {
     end,
   },
 })
--- }}}
 
--- Jumplist {{{
+----------------------------------------------------------------------
+--                             Jumplist                             --
+----------------------------------------------------------------------
+
 local function jump(key)
   return function()
     return vim.v.count > 1 and "m'" .. vim.v.count .. key or key
@@ -82,9 +96,11 @@ local function jump(key)
 end
 map('n', 'k', jump('k'), { desc = 'Jump [count] lines up', expr = true })
 map('n', 'j', jump('j'), { desc = 'Jump [count] lines down', expr = true })
--- }}}
 
--- Unimpaired {{{
+----------------------------------------------------------------------
+--                            Unimpaired                            --
+----------------------------------------------------------------------
+
 -- Navigate Quickfix
 map('n', '[q', vim.cmd.cprevious)
 map('n', ']q', vim.cmd.cnext)
@@ -106,9 +122,11 @@ map('n', '[n', vim.cmd.previous)
 map('n', ']n', vim.cmd.next)
 map('n', '[N', vim.cmd.first)
 map('n', ']N', vim.cmd.last)
--- }}}
 
--- Runner {{{
+----------------------------------------------------------------------
+--                              Runner                              --
+----------------------------------------------------------------------
+
 vim.tbl_map(function(value)
   local key, fn = value[1], value[2]
 
@@ -139,6 +157,3 @@ map('n', '<leader>vL', function()
   require('runner').interrupt_runner()
   require('runner').run_last_command()
 end, { desc = 'runner - interrupt_runner_and_run_last_command' })
--- }}}
-
--- vim:foldmethod=marker foldlevel=0
