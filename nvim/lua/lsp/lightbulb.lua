@@ -1,8 +1,8 @@
 local lightbulb_ns = vim.api.nvim_create_namespace('lightbulb')
 
 local function set_lightbulb_extmark(bufnr, line, character)
-  vim.b.lightbulb_extmark = vim.api.nvim_buf_set_extmark(bufnr, lightbulb_ns, line, character, {
-    id = vim.b.lightbulb_extmark,
+  vim.b[bufnr].lightbulb_extmark = vim.api.nvim_buf_set_extmark(bufnr, lightbulb_ns, line, character, {
+    id = vim.b[bufnr].lightbulb_extmark,
     virt_text_pos = 'eol',
     virt_text = { { '💡' } },
     hl_mode = 'combine',
@@ -16,16 +16,14 @@ function M.clear(bufnr)
 end
 
 function M.update(bufnr)
-  if vim.b.lightbulb_cancel then
-    vim.b.lightbulb_cancel()
+  if vim.b[bufnr].lightbulb_cancel then
+    vim.b[bufnr].lightbulb_cancel()
   end
-
-  M.clear(bufnr)
 
   local params = vim.lsp.util.make_range_params()
   params.context = { diagnostics = vim.diagnostic.get(0), triggerKind = 1 }
 
-  vim.b.lightbulb_cancel = vim.lsp.buf_request_all(
+  vim.b[bufnr].lightbulb_cancel = vim.lsp.buf_request_all(
     bufnr,
     vim.lsp.protocol.Methods.textDocument_codeAction,
     params,
@@ -36,6 +34,8 @@ function M.update(bufnr)
           return
         end
       end
+
+      M.clear(bufnr)
     end
   )
 end
