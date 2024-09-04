@@ -23,7 +23,6 @@ My dotfiles for Hammerspoon, Karabiner, kitty, Neovim, Vim, QMK, Tmux, WezTerm, 
 ### Hammerspoon
 
 Return a `table` in `~/dotfiles/hammerspoon/custom.lua`, the following keys can be provided:
-- `brewPrefix` - `string`
 - `appKeys` - `table<string, string>`
 - `twmWindowFilters` - `table<string, boolean | table>`
     - See [setFilters](https://www.hammerspoon.org/docs/hs.window.filter.html#setFilters)

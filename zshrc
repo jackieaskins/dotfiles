@@ -2,12 +2,15 @@
 #                       Homebrew Configuration                       #
 #--------------------------------------------------------------------#
 
-if [[ -d /opt/homebrew ]] then
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-else
-  brew_path="$(which brew)"
-  eval "$($brew_path shellenv)"
-fi
+brew_paths=(/usr/local/bin/brew /opt/homebrew/bin/brew /home/linuxbrew/.linuxbrew/bin/brew)
+for brew_path in $brew_paths
+do
+  if [[ -x $brew_path ]]; then
+    eval "$($brew_path shellenv)"
+    break
+  fi
+done
+
 fpath=($HOMEBREW_PREFIX/share/zsh/site-functions $fpath)
 
 asdf_prefix="$(brew --prefix asdf)"

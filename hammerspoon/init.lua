@@ -7,7 +7,6 @@ local hotkeyStore = require('config.hotkeyStore')
 
 ---@class Custom
 ---@field appKeys? table<string, string>
----@field brewPrefix? string
 ---@field twmScreenPadding? number
 ---@field twmWindowFilters? table<string, boolean>
 ---@field twmWindowGap? number
@@ -34,7 +33,7 @@ end
 --                            Constants                             --
 ----------------------------------------------------------------------
 
-BREW_PREFIX = CUSTOM.brewPrefix or '/opt/homebrew'
+BREW_PREFIX = os.getenv('HOMEBREW_PREFIX')
 
 MEH = { 'option', 'shift', 'ctrl' }
 HYPER = { 'option', 'shift', 'ctrl', 'cmd' }
