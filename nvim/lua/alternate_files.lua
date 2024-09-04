@@ -10,6 +10,7 @@ local test_extension_capture = [[(\.%(spec|test))]]
 local extension_capture = [[(\.[^\.]+)]]
 
 ---@class Config
+---@field type string
 ---@field pattern string[]
 ---@field alternates table<string, string[]>
 
@@ -17,6 +18,7 @@ local extension_capture = [[(\.[^\.]+)]]
 local configs = {
   -- Snapshots
   {
+    type = 'snapshot',
     pattern = {
       optional_dir_capture, -- %1
       test_dir_capture, -- %2
@@ -33,6 +35,7 @@ local configs = {
     },
   },
   {
+    type = 'snapshot',
     pattern = {
       optional_dir_capture, -- %1
       snapshots_dir,
@@ -49,6 +52,7 @@ local configs = {
 
   -- Tests
   {
+    type = 'test',
     pattern = {
       optional_dir_capture, -- %1
       test_dir_capture, -- %2
@@ -63,6 +67,7 @@ local configs = {
     },
   },
   {
+    type = 'test',
     pattern = {
       optional_dir_capture, -- %1
       file_base_capture, -- %2
@@ -77,6 +82,7 @@ local configs = {
 
   -- Sources
   {
+    type = 'source',
     pattern = {
       optional_dir_capture, -- %1
       [[(%(src|lib)/)]], -- %2
@@ -104,6 +110,7 @@ local configs = {
     },
   },
   {
+    type = 'source',
     pattern = {
       optional_dir_capture, -- %1
       file_base_capture, -- %2
@@ -168,41 +175,44 @@ local M = {}
 function M.get_alternate_types()
   local alt = load_alternate_files()
 
-  if alt then
+  if alt and alt.alternates then
     return vim.tbl_keys(alt.alternates)
   end
 
   return {}
 end
 
-function M.try_open_alternate(cmd)
-  local alt = load_alternate_files()
-  if not alt then
+function M.try_open_alternate(cmd, type)
+  local ok, options, matches = pcall(function()
+    local alt = load_alternate_files()
+    return alt.alternates[type], alt.matches
+  end)
+
+  if not ok then
+    vim.notify('This file does not have any alternates of type ' .. type)
     return
   end
 
-  for type, options in pairs(alt.alternates) do
-    local choices = {}
+  local choices = {}
 
-    for _, option in ipairs(options) do
-      local alternate = parse_option(option, alt.matches)
+  for _, option in ipairs(options) do
+    local alternate = parse_option(option, matches)
 
-      if #options == 1 or utils.file_exists(vim.fn.getcwd() .. '/' .. alternate) then
-        vim.cmd[cmd](alternate)
-        return
-      end
-
-      table.insert(choices, alternate)
+    if #options == 1 or utils.file_exists(vim.fn.getcwd() .. '/' .. alternate) then
+      vim.cmd[cmd](alternate)
+      return
     end
 
-    vim.ui.select(choices, {
-      prompt = 'No ' .. type .. ' file exists, choose filename:',
-    }, function(choice)
-      if choice then
-        vim.cmd[cmd](choice)
-      end
-    end)
+    table.insert(choices, alternate)
   end
+
+  vim.ui.select(choices, {
+    prompt = 'No ' .. type .. ' file exists, choose filename:',
+  }, function(choice)
+    if choice then
+      vim.cmd[cmd](choice)
+    end
+  end)
 end
 
 return M

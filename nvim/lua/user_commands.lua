@@ -28,15 +28,15 @@ user_command('W', function()
 end)
 
 -- Alternate Files
-for suffix, cmd in pairs({
+for key, cmd in pairs({
   D = 'drop',
   E = 'edit',
   S = 'split',
   V = 'vsplit',
   T = 'tabedit',
 }) do
-  user_command('A' .. suffix, function()
-    require('alternate_files').try_open_alternate(cmd)
+  user_command(key, function(arg)
+    require('alternate_files').try_open_alternate(cmd, arg.args)
   end, {
     nargs = 1,
     complete = function()

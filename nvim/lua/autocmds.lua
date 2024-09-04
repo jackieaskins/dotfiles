@@ -72,7 +72,7 @@ augroup('lightbulb_attach', {
           buffer = bufnr,
         },
         {
-          'InsertEnter',
+          { 'InsertEnter', 'BufLeave' },
           callback = function()
             require('lsp.lightbulb').clear(bufnr)
           end,
