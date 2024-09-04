@@ -5,7 +5,7 @@
 /nvim/lazy-lock.json
 /nvim/lua/custom/
 /nvim/lua/custom.lua
-/nvim/lua/plugins/custom.lua
+/nvim/lua/plugins/custom/
 /nvim/spell/
 
 /zsh/custom.zsh

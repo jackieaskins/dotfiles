@@ -15,7 +15,7 @@ My dotfiles for Hammerspoon, Karabiner, kitty, Neovim, Vim, QMK, Tmux, WezTerm, 
 1. Run the install script:
 
     ```bash
-    /install.sh
+    ./install.sh
     ```
 
 ## Customization
@@ -33,7 +33,7 @@ Return a `table` in `~/dotfiles/hammerspoon/custom.lua`, the following keys can 
 
 Use the following files to customize Neovim:
 - General settings: `~/dotfiles/nvim/lua/custom.lua`
-- Custom plugins: `~/dotfiles/nvim/lua/plugins/custom.lua`
+- Custom plugins: `~/dotfiles/nvim/lua/plugins/custom/`
 
 #### Configuration Variables
 

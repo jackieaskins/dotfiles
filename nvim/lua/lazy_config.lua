@@ -14,6 +14,10 @@ vim.o.runtimepath = lazypath .. ',' .. vim.o.runtimepath
 require('lazy').setup({
   { import = 'plugins.appearance' },
   { import = 'plugins.comments' },
+  {
+    import = 'plugins.custom',
+    cond = require('utils').file_exists('~/dotfiles/nvim/lua/plugins/custom/*'),
+  },
   { import = 'plugins.diagnostics' },
   { import = 'plugins.editing' },
   { import = 'plugins.formatting' },
