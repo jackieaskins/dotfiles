@@ -2,7 +2,9 @@ return {
   'MeanderingProgrammer/render-markdown.nvim',
   ft = 'markdown',
   dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' },
-  keys = { { '<leader>mt', '<cmd>RenderMarkdown toggle<CR>' } },
+  keys = {
+    { '<leader>mt', '<cmd>RenderMarkdown toggle<CR>' },
+  },
   opts = {
     code = { border = 'thick', width = 'block', right_pad = 1 },
     heading = {
