@@ -2,14 +2,14 @@ return {
   'chrishrb/gx.nvim',
   dependencies = 'nvim-lua/plenary.nvim',
   keys = {
-    { 'gx', '<cmd>Browse<CR>', mode = { 'n', 'x' } },
+    { 'gx', '<cmd>Browse<CR>', mode = { 'n', 'x' }, desc = 'Open URL under cursor' },
   },
   cmd = 'Browse',
   init = function()
     vim.g.netrw_nogx = 1
   end,
   opts = {
-    handlers = {
+    handlers = vim.tbl_extend('force', {
       search = false,
       tmux = {
         name = 'tmux',
@@ -22,6 +22,6 @@ return {
           end
         end,
       },
-    },
+    }, vim.g.custom_gx_handlers),
   },
 }
