@@ -33,6 +33,7 @@ return {
           FloatBorder = { fg = colors.blue, bg = colors.base },
           StatusLine = { fg = colors.text, bg = colors.base },
           TabLine = { fg = colors.text, bg = colors.surface0 },
+          TabLineFill = { bg = colors.surface0 },
 
           -- Custom Highlights
           WinBarDiagnosticError = { fg = colors.red, bg = colors.base },
