@@ -1,3 +1,4 @@
+---@type LazySpec
 local M = {
   'nvim-treesitter/nvim-treesitter',
   dependencies = {

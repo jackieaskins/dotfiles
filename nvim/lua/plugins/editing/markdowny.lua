@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
   'antonk52/markdowny.nvim',
   config = true,

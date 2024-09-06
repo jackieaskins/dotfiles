@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
   'jinh0/eyeliner.nvim',
   config = function()

@@ -1,5 +1,6 @@
 local diagnostic_icons = require('diagnostic.icons')
 
+---@type LazySpec
 return {
   'nvim-tree/nvim-tree.lua',
   dependencies = {

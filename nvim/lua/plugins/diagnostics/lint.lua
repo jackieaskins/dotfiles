@@ -10,6 +10,7 @@ local linters_by_filetype = {
   swift = supported_linters.swiftlint and { 'swiftlint' } or nil,
 }
 
+---@type LazySpec
 return {
   'mfussenegger/nvim-lint',
   lazy = true,

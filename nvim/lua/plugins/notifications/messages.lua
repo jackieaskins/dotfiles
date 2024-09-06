@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
   'AckslD/messages.nvim',
   cmd = 'Messages',

@@ -11,6 +11,7 @@ local function key_map(map)
   }
 end
 
+---@type LazySpec
 return {
   'L3MON4D3/LuaSnip',
   build = 'make install_jsregexp',

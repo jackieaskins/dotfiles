@@ -41,6 +41,7 @@ local source_menu_map = {
   path = 'path',
 }
 
+---@type LazySpec
 return {
   'hrsh7th/nvim-cmp',
   event = 'VeryLazy',

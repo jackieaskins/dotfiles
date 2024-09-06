@@ -1,5 +1,6 @@
 local lsp_utils = require('lsp.utils')
 
+---@type LazySpec
 return {
   'pmizio/typescript-tools.nvim',
   enabled = lsp_utils.is_server_supported('typescript-tools'),

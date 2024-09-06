@@ -20,6 +20,6 @@ vim.g.supported_linters = {}
 ---@type string[]
 vim.g.border_style = { '╔', '═', '╗', '║', '╝', '═', '╚', '║' }
 
----@module "gx"
+---@module 'gx'
 ---@type GxHandler[]
 vim.g.custom_gx_handlers = {}

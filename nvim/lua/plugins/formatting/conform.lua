@@ -51,6 +51,7 @@ local supported_formatters = vim.g.supported_formatters
     and utils.filter_table_by_keys(formatters, vim.g.supported_formatters)
   or formatters
 
+---@type LazySpec
 return {
   'stevearc/conform.nvim',
   event = 'BufWritePre',
@@ -74,6 +75,8 @@ return {
       end
     end
 
+    ---@module 'conform'
+    ---@type conform.setupOpts
     return {
       default_format_opts = { lsp_format = 'fallback' },
       undojoin = true,

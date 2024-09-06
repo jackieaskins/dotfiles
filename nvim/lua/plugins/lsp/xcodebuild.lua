@@ -1,5 +1,6 @@
 local progress_handle
 
+---@type LazySpec
 return {
   'wojciech-kulik/xcodebuild.nvim',
   enabled = require('lsp.utils').is_server_supported('sourcekit'),

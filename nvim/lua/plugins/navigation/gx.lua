@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
   'chrishrb/gx.nvim',
   dependencies = 'nvim-lua/plenary.nvim',
@@ -8,6 +9,9 @@ return {
   init = function()
     vim.g.netrw_nogx = 1
   end,
+  ---@module 'gx'
+  ---@type GxOptions
+  ---@diagnostic disable-next-line: missing-fields
   opts = {
     handlers = vim.tbl_extend('force', {
       search = false,

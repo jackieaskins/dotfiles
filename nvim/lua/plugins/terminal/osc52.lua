@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
   'ojroques/nvim-osc52',
   commit = '5e0210990b3c809ec58bbf830e0dabd4bda3a949',

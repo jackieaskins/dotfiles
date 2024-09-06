@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
   'rhysd/committia.vim',
   config = function()

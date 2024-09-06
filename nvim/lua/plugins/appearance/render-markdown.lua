@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
   'MeanderingProgrammer/render-markdown.nvim',
   ft = 'markdown',
@@ -5,6 +6,8 @@ return {
   keys = {
     { '<leader>mt', '<cmd>RenderMarkdown toggle<CR>' },
   },
+  ---@module 'render-markdown'
+  ---@type render.md.UserConfig
   opts = {
     code = { border = 'thick', width = 'block', right_pad = 1 },
     heading = {

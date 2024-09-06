@@ -1,5 +1,10 @@
+---@type LazySpec
 return {
   'dmmulroy/tsc.nvim',
   cmd = 'TSC',
-  opts = { pretty_errors = false },
+  ---@module 'tsc'
+  ---@type Opts
+  opts = {
+    pretty_errors = false,
+  },
 }

@@ -1,5 +1,8 @@
+---@type LazySpec
 return {
   'codethread/qmk.nvim',
+  ---@module 'qmk'
+  ---@type qmk.UserConfig
   opts = {
     name = 'LAYOUT_single_arc_num',
     layout = {

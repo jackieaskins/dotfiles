@@ -32,6 +32,7 @@ local function dap_key_map(key, fn)
   }
 end
 
+---@type LazySpec
 return {
   'mfussenegger/nvim-dap',
   cmd = { 'DapContinue', 'DapShowLog', 'DapToggleBreakpoint' },

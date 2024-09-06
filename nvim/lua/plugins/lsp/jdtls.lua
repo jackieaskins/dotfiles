@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
   'mfussenegger/nvim-jdtls',
   enabled = require('lsp.utils').is_server_supported('jdtls'),
