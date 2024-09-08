@@ -1,4 +1,4 @@
----@alias InstallCommand string[] | fun(install_dir?:string):table
+---@alias InstallCommand string[] | fun(install_dir?:string):string[]
 
 local utils = require('utils')
 local filter_table_by_keys, user_command = utils.filter_table_by_keys, utils.user_command

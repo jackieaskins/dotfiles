@@ -2,7 +2,7 @@
 return {
   'lukas-reineke/indent-blankline.nvim',
   main = 'ibl',
-  ---@module 'indent-blankline'
+  ---@module 'ibl'
   ---@type ibl.config
   opts = {
     indent = { tab_char = '╎' },

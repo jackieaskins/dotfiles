@@ -67,9 +67,6 @@ return {
     local actions = require('fzf-lua.actions')
 
     return {
-      actions = {
-        files = { true, ['ctrl-x'] = actions.file_split },
-      },
       defaults = { file_icons = 'mini' },
       diagnostics = { cwd_only = true },
       file_ignore_patterns = { '^%.git/' },
@@ -83,8 +80,9 @@ return {
       git = {
         status = {
           actions = {
-            ['ctrl-s'] = { fn = actions.git_reset, reload = true },
-            ['ctrl-x'] = actions.file_split,
+            right = false,
+            left = false,
+            ['ctrl-space'] = { fn = actions.git_stage_unstage, reload = true },
           },
         },
       },

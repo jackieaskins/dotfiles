@@ -22,6 +22,7 @@ local servers = {
   lua_ls = require('lsp.servers.lua_ls'),
   omnisharp = require('lsp.servers.omnisharp'),
   pyright = { install = { 'npm', 'pyright' } },
+  ruby_lsp = { install = { 'gem', 'ruby-lsp' } },
   solargraph = { install = { 'gem', 'solargraph' } },
   sourcekit = require('lsp.servers.sourcekit'),
   svelte = require('lsp.servers.svelte'),

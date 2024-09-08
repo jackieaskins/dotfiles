@@ -9,7 +9,7 @@ return {
   ---@module 'render-markdown'
   ---@type render.md.UserConfig
   opts = {
-    code = { border = 'thick', width = 'block', right_pad = 1 },
+    code = { border = 'thick', width = 'full' },
     heading = {
       signs = { '󰉫', '󰉬', '󰉭', '󰉮', '󰉯', '󰉰' },
     },

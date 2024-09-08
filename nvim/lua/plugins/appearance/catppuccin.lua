@@ -44,12 +44,15 @@ return {
 
           -- Semantic Highlights
           -- Removing because it overwrites custom comment colors, like links
-          ['@lsp.type.comment.lua'] = { fg = 'none' },
+          ['@lsp.type.comment.lua'] = { fg = colors.none },
 
           -- Treesitter Highlights
+          ['@label.vimdoc'] = { fg = colors.mauve, style = { 'bold' } },
           ['@markup.link.label.markdown_inline'] = anchor_link,
           ['@markup.quote'] = { fg = colors.subtext1, style = { 'italic' } },
+          ['@markup.raw'] = { fg = colors.lavender },
           ['@markup.raw.markdown_inline'] = inline_code,
+          ['@markup.raw.vimdoc'] = inline_code,
           ['@string.special.url'] = anchor_link,
 
           -- Plugin Highlights
