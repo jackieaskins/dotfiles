@@ -26,6 +26,7 @@ local servers = {
   sourcekit = require('lsp.servers.sourcekit'),
   svelte = require('lsp.servers.svelte'),
   tailwindcss = require('lsp.servers.tailwindcss'),
+  taplo = require('lsp.servers.taplo'),
   ['typescript-tools'] = require('lsp.servers.typescript-tools'),
   vimls = { install = { 'npm', 'vim-language-server' } },
   yamlls = { install = { 'npm', 'yaml-language-server' } },

@@ -36,11 +36,7 @@ export PATH
 #                               Prompt                               #
 #--------------------------------------------------------------------#
 
-autoload -U promptinit; promptinit
-prompt pure
-zstyle :prompt:pure:git:stash show yes
-
-RPROMPT='%F{'#6E738D'}[%D{%L:%M:%S %p}]'
+eval "$(starship init zsh)"
 
 #--------------------------------------------------------------------#
 #                       Settings and Bindings                        #

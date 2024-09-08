@@ -1,0 +1,42 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """
+$hostname\
+$directory\
+$git_branch\
+$git_state\
+$git_status\
+$cmd_duration\
+$line_break\
+$jobs\
+$character"""
+
+right_format = """
+$bun\
+$go\
+$java\
+$lua\
+$nodejs\
+$ruby\
+$swift\
+$time"""
+
+[directory]
+style = 'bold blue'
+truncate_to_repo = false
+fish_style_pwd_dir_length = 1
+
+[git_branch]
+style = 'purple'
+symbol = " "
+
+[git_status]
+format = '[($all_status )](218)[($ahead_behind )](cyan)'
+
+[lua]
+symbol = "󰢱 "
+
+[time]
+format = 'at [$time]($style)'
+disabled = false
+style = 'yellow'
