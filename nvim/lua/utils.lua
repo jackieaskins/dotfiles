@@ -133,9 +133,10 @@ function M.open_url(url)
 end
 
 ---Filter key-value table based on key
----@param table table<string, any>
+---@generic T
+---@param table table<string, T>
 ---@param keys string[]
----@return table<string, any>
+---@return table<string, T>
 function M.filter_table_by_keys(table, keys)
   local rv = {}
   for _, key in ipairs(keys) do
