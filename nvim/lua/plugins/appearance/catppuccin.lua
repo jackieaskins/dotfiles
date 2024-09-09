@@ -104,6 +104,7 @@ return {
         dap_ui = true,
         diffview = true,
         fidget = true,
+        flash = true,
         fzf = true,
         gitsigns = true,
         indent_blankline = {
