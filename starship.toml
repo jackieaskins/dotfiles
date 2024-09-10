@@ -21,6 +21,9 @@ $ruby\
 $swift\
 $time"""
 
+[cmd_duration]
+style = "yellow"
+
 [directory]
 style = 'bold blue'
 truncate_to_repo = false
@@ -32,6 +35,9 @@ symbol = " "
 
 [git_status]
 format = '[($all_status )](218)[($ahead_behind )](cyan)'
+
+[hostname]
+ssh_symbol = " "
 
 [lua]
 symbol = "󰢱 "
