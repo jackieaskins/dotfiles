@@ -59,7 +59,15 @@ if [ -x "$(command -v brew)" ]; then
 else
   echo -e "Homebrew is not installed, let's change that..."
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  [ -d /opt/homebrew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
+
+  brew_paths=("/usr/local/bin/brew" "/opt/homebrew/bin/brew" "/home/linuxbrew/.linuxbrew/bin/brew")
+  for brew_path in ${brew_paths[@]}; do
+    if [[ -x $brew_path ]]; then
+      echo -e "Homebrew path: $brew_path"
+      eval "$($brew_path shellenv)"
+      break
+    fi
+  done
 fi
 echo -e "Bundling Homebrew packages..."
 brew bundle --file ./brew/Brewfile
