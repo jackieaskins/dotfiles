@@ -7,6 +7,7 @@ $git_branch\
 $git_state\
 $git_status\
 $cmd_duration\
+$aws\
 $line_break\
 $jobs\
 $character"""
@@ -21,8 +22,12 @@ $ruby\
 $swift\
 $time"""
 
+[aws]
+style = 'yellow'
+symbol = '☁️ '
+
 [cmd_duration]
-style = "yellow"
+style = 'yellow'
 
 [directory]
 style = 'bold blue'
@@ -31,16 +36,16 @@ fish_style_pwd_dir_length = 1
 
 [git_branch]
 style = 'purple'
-symbol = " "
+symbol = ' '
 
 [git_status]
 format = '[($all_status )](218)[($ahead_behind )](cyan)'
 
 [hostname]
-ssh_symbol = " "
+ssh_symbol = ' '
 
 [lua]
-symbol = "󰢱 "
+symbol = '󰢱 '
 
 [time]
 format = 'at [$time]($style)'
