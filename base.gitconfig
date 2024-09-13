@@ -5,8 +5,6 @@
   skippedCherryPicks = false
 [branch]
   sort = -committerdate
-[column]
-  ui = auto
 [core]
   excludesfile = ~/dotfiles/gitignore_global
 [diff]
