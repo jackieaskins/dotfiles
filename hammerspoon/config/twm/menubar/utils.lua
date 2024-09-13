@@ -20,7 +20,7 @@ local function getAppImage(bundleID)
   local image = hs.image.imageFromAppBundle(bundleID)
 
   if image then
-    local resizedImage = image:setSize({ h = 16, w = 16 })
+    local resizedImage = image:setSize({ h = 18, w = 18 })
     appImageCache[bundleID] = resizedImage
     return resizedImage
   end
@@ -44,23 +44,6 @@ local function getWindowsBySpaceId()
   end
 
   return windowsBySpaceId
-end
-
----@param window hs.window
----@return string
-local function getWindowDisplayName(window)
-  local windowDisplay = {}
-
-  local app = window:application()
-  if app and app:title() then
-    table.insert(windowDisplay, app:title())
-  end
-
-  if window:title() then
-    table.insert(windowDisplay, window:title())
-  end
-
-  return table.concat(windowDisplay, ' │ ')
 end
 
 local M = {
@@ -123,7 +106,7 @@ function M.getMenu()
 
           table.insert(menu, {
             indent = 2,
-            title = getWindowDisplayName(window),
+            title = window:title(),
             image = getAppImage(bundleID),
             checked = isFocused,
             disabled = isFocused,
