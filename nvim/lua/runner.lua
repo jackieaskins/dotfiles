@@ -11,10 +11,4 @@ if vim.fn.exists('$TMUX') == 1 then
   return require('runner.tmux')
 end
 
-local term = vim.fn.getenv('TERM')
-
-if term:find('wezterm') then
-  return require('runner.wezterm')
-end
-
 vim.notify('No runner configured for terminal type', vim.log.levels.ERROR)

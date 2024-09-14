@@ -13,7 +13,6 @@ Brewfile.lock.json
 
 .DS_Store
 
-/wezterm/custom.lua
 /tmux/custom.conf
 
 /hammerspoon/Spoons/*

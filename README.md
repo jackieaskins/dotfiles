@@ -48,11 +48,6 @@ The list of supported configuration variables can be found at the top of `~/dotf
 
 `~/dotfiles/vim/custom.vim`
 
-### WezTerm
-
-Return a table in  `~/dotfiles/wezterm/custom.lua`, the following keys can be provided:
-- `workspaces` - `table<string, Workspace>`
-
 ### Zsh
 
 `~/dotfiles/zsh/custom.zsh`
