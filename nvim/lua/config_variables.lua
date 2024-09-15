@@ -17,8 +17,8 @@ vim.g.supported_formatters = {}
 ---@type string[]
 vim.g.supported_linters = {}
 
----@type string[]
-vim.g.border_style = { '╔', '═', '╗', '║', '╝', '═', '╚', '║' }
+---@type string
+vim.g.border_style = 'rounded'
 
 ---@module 'gx'
 ---@type GxHandler[]

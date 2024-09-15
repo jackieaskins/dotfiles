@@ -10,6 +10,7 @@ return {
         filetype = { glyph = '' },
       },
       file = {
+        fzfrc = { glyph = '󱡠', hl = 'MiniIconsAzure' },
         vimrc = { glyph = '', hl = 'MiniIconsGreen' },
         zshrc = { glyph = '', hl = 'MiniIconsGreen' },
         ['init.lua'] = { glyph = '󰢱', hl = 'MiniIconsAzure' },

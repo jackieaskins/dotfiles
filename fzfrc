@@ -1,0 +1,17 @@
+--color='bg+:#363a4f,fg+:#cad3f5,hl:blue,hl+:blue'
+--color='gutter:#24273a,pointer:blue,marker:blue,prompt:blue'
+--color='border:blue,label:blue'
+--color='info:magenta,spinner:magenta,separator:magenta'
+--color='preview-scrollbar:blue,scrollbar:blue'
+--color='header:magenta'
+
+--highlight-line
+--cycle
+--marker='+'
+--pointer='>'
+--border='rounded'
+--layout=reverse
+
+--preview='bat --style=numbers --color=always {}'
+
+--multi

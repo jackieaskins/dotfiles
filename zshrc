@@ -123,14 +123,9 @@ bindkey '^L' clear-scrollback-buffer
 #--------------------------------------------------------------------#
 
 # FZF
+export FZF_DEFAULT_OPTS_FILE="$HOME/dotfiles/fzfrc"
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*" --glob "!*.class"'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-
-export FZF_DEFAULT_OPTS=" \
---color=bg+:#363a4f,bg:#24273a,spinner:#f4dbd6,hl:#ed8796 \
---color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 \
---color=marker:#f4dbd6,fg+:#cad3f5,prompt:#c6a0f6,hl+:#ed8796"
-
 [[ $- == *i* ]] && source "$HOMEBREW_PREFIX/opt/fzf/shell/completion.zsh" 2> /dev/null
 source "$HOMEBREW_PREFIX/opt/fzf/shell/key-bindings.zsh"
 

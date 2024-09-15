@@ -74,8 +74,6 @@ return {
       fzf_opts = {
         ['--border'] = 'none',
         ['--cycle'] = true,
-        ['--marker'] = '+',
-        ['--pointer'] = '>',
       },
       git = {
         status = {
@@ -133,7 +131,7 @@ return {
       winopts = {
         backdrop = 100,
         border = vim.g.border_style,
-        preview = { border = 'sharp', wrap = 'wrap', flip_columns = 160 },
+        preview = { border = vim.g.border_style, wrap = 'wrap', flip_columns = 160 },
       },
     }
   end,
