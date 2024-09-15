@@ -24,11 +24,6 @@ augroup('mode_highlights', {
   },
 })
 
-augroup('mouse', {
-  { 'FocusLost', command = 'map <LeftMouse> <nop>' },
-  { 'FocusGained', command = 'unmap <LeftMouse>' },
-})
-
 augroup('yank_highlight', {
   {
     'TextYankPost',
