@@ -47,5 +47,6 @@ if RUBY_PLATFORM =~ /darwin/
   cask 'wezterm-nightly'
 
   brew 'awscli'
+  brew 'cormacrelf/tap/dark-notify'
   brew 'imagemagick'
 end

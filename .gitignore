@@ -24,8 +24,4 @@ Brewfile.lock.json
 /kitty/theme.conf.bak
 /kitty/current-theme.conf
 
-/theme
-
-/tmux/active_theme.conf
-
 /bat/config

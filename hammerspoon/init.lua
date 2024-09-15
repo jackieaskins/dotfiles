@@ -137,16 +137,6 @@ registerTwmHotkey('Set layout to tall or monocle', MEH, 's', function()
 end)
 
 ----------------------------------------------------------------------
---                        Dark Mode Triggers                        --
-----------------------------------------------------------------------
-
-darkModeNotification = hs.distributednotifications.new(function()
-  require('config.darkMode').configureSystemColors()
-end, 'AppleInterfaceThemeChangedNotification')
-
-darkModeNotification:start()
-
-----------------------------------------------------------------------
 --                      Spotify Notifications                       --
 ----------------------------------------------------------------------
 
