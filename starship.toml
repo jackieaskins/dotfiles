@@ -3,11 +3,11 @@
 format = """
 $hostname\
 $directory\
+$shell\
 $git_branch\
 $git_state\
 $git_status\
 $cmd_duration\
-$aws\
 $line_break\
 $jobs\
 $character"""
@@ -21,10 +21,6 @@ $nodejs\
 $ruby\
 $swift\
 $time"""
-
-[aws]
-style = 'yellow'
-symbol = '☁️ '
 
 [cmd_duration]
 style = 'yellow'
@@ -46,6 +42,11 @@ ssh_symbol = ' '
 
 [lua]
 symbol = '󰢱 '
+
+[shell]
+format = 'on [$indicator]($style) '
+disabled = false
+style = 'green'
 
 [time]
 format = 'at [$time]($style)'
