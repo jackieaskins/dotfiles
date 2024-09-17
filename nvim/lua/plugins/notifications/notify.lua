@@ -7,7 +7,7 @@ return {
     ---@diagnostic disable-next-line: missing-fields
     require('notify').setup({
       on_open = function(win)
-        vim.api.nvim_win_set_config(win, { border = vim.g.border_style })
+        vim.api.nvim_win_set_config(win, { border = MY_CONFIG.border_style })
       end,
       timeout = 2500,
       icons = {

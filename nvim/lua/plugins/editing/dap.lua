@@ -18,7 +18,8 @@ local debuggers = {
   end,
 }
 
-local supported_debuggers = vim.g.supported_debuggers and filter_table_by_keys(debuggers, vim.g.supported_debuggers)
+local supported_debuggers = MY_CONFIG.supported_debuggers
+    and filter_table_by_keys(debuggers, MY_CONFIG.supported_debuggers)
   or debuggers
 -- }}}
 
@@ -59,7 +60,7 @@ return {
     {
       'rcarriga/nvim-dap-ui',
       dependencies = 'nvim-neotest/nvim-nio',
-      opts = { floating = { border = vim.g.border_style } },
+      opts = { floating = { border = MY_CONFIG.border_style } },
     },
     { 'theHamsta/nvim-dap-virtual-text', config = true },
   },

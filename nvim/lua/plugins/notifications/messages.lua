@@ -8,7 +8,7 @@ return {
     return {
       buffer_opts = function(lines)
         return vim.tbl_extend('force', buffer_opts(lines), {
-          border = vim.g.border_style,
+          border = MY_CONFIG.border_style,
         })
       end,
     }

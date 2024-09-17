@@ -26,6 +26,6 @@ return {
           end
         end,
       },
-    }, vim.g.custom_gx_handlers),
+    }, MY_CONFIG.custom_gx_handlers),
   },
 }

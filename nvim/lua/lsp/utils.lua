@@ -4,7 +4,7 @@ local M = {}
 ---@param server string
 ---@return boolean
 function M.is_server_supported(server)
-  return not vim.g.supported_servers or vim.tbl_contains(vim.g.supported_servers, server)
+  return not MY_CONFIG.supported_servers or vim.tbl_contains(MY_CONFIG.supported_servers, server)
 end
 
 ---Return lsp server display name or default server name

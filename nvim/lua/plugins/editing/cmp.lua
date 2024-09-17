@@ -28,7 +28,7 @@ local lspkind_icons = {
   Variable = '󰀫',
 }
 local border_config = {
-  border = vim.g.border_style,
+  border = MY_CONFIG.border_style,
   winhighlight = 'FloatBorder:FloatBorder',
 }
 local source_menu_map = {

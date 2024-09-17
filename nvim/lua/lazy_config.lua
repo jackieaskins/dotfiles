@@ -34,9 +34,9 @@ require('lazy').setup({
   checker = { enabled = true, notify = false },
   dev = {
     path = '~/vim-plugins',
-    patterns = vim.g.is_personal_machine and { 'jackieaskins' } or {},
+    patterns = MY_CONFIG.is_personal_machine and { 'jackieaskins' } or {},
   },
-  ui = { backdrop = 100, border = vim.g.border_style },
+  ui = { backdrop = 100, border = MY_CONFIG.border_style },
 })
 
 vim.diagnostic.config({

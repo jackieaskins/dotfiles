@@ -58,7 +58,7 @@ return {
       -- Text object
       bsk({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
     end,
-    preview_config = { border = vim.g.border_style },
+    preview_config = { border = MY_CONFIG.border_style },
     sign_priority = require('sign_priorities').gitsigns,
     trouble = false,
   },

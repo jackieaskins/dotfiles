@@ -47,8 +47,8 @@ local formatters = {
   },
 }
 
-local supported_formatters = vim.g.supported_formatters
-    and utils.filter_table_by_keys(formatters, vim.g.supported_formatters)
+local supported_formatters = MY_CONFIG.supported_formatters
+    and utils.filter_table_by_keys(formatters, MY_CONFIG.supported_formatters)
   or formatters
 
 ---@type LazySpec

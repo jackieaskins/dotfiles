@@ -8,7 +8,7 @@ return {
     },
     notification = {
       window = {
-        border = vim.g.border_style,
+        border = MY_CONFIG.border_style,
         winblend = 0,
       },
     },

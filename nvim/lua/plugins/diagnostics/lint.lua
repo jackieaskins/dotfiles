@@ -15,7 +15,8 @@ local linters = {
     install_cmd = { 'brew', 'swiftlint' },
   },
 }
-local supported_linters = vim.g.supported_linters and utils.filter_table_by_keys(linters, vim.g.supported_linters)
+local supported_linters = MY_CONFIG.supported_linters
+    and utils.filter_table_by_keys(linters, MY_CONFIG.supported_linters)
   or linters
 
 local linters_by_filetype = {}
