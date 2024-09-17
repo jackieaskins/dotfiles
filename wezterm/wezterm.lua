@@ -14,8 +14,10 @@ config.swallow_mouse_click_on_pane_focus = true
 ----------------------------------------------------------------------
 
 config.font = wezterm.font({ family = 'Mononoki Nerd Font' })
-config.font_size = 13
+config.font_size = 14
 config.harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' } -- disable ligatures
+config.freetype_load_target = 'Light'
+config.freetype_render_target = 'HorizontalLcd'
 
 ----------------------------------------------------------------------
 --                           Color Scheme                           --
