@@ -5,8 +5,8 @@ $hostname\
 $directory\
 $shell\
 $git_branch\
-$git_state\
 $git_status\
+$git_state\
 $cmd_duration\
 $line_break\
 $jobs\
@@ -36,6 +36,7 @@ symbol = ' '
 
 [git_status]
 format = '[($all_status )](218)[($ahead_behind )](cyan)'
+diverged = "⇡⇣"
 
 [hostname]
 ssh_symbol = ' '
