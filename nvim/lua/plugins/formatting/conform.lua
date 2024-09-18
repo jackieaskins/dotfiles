@@ -11,6 +11,7 @@ local formatters = {
     install_cmd = { 'brew', 'clang-format' },
     filetypes = { 'c' },
   },
+  fish_indent = { filetypes = { 'fish' } },
   ['format-queries'] = { filetypes = { 'query' } },
   gdformat = {
     install_cmd = { 'pip', 'git+https://github.com/Scony/godot-gdscript-toolkit.git' },

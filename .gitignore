@@ -25,3 +25,6 @@ Brewfile.lock.json
 /kitty/current-theme.conf
 
 /bat/config
+
+/fish/fish_variables
+/fish/conf.d/custom.fish
