@@ -22,6 +22,6 @@ MY_CONFIG = {
   supported_debuggers = {},
   supported_formatters = {},
   supported_linters = {},
-  border_style = 'rounded',
+  border_style = 'double',
   custom_gx_handlers = {},
 }

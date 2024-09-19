@@ -9,7 +9,7 @@
 --cycle
 --marker='+'
 --pointer='>'
---border='rounded'
+--border='double'
 --layout=reverse
 
 --preview='bat --style=numbers --color=always {}'

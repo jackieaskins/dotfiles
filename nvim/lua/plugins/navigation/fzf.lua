@@ -131,7 +131,11 @@ return {
       winopts = {
         backdrop = 100,
         border = MY_CONFIG.border_style,
-        preview = { border = MY_CONFIG.border_style, wrap = 'wrap', flip_columns = 160 },
+        preview = {
+          border = 'border-' .. MY_CONFIG.border_style,
+          wrap = 'wrap',
+          flip_columns = 160,
+        },
       },
     }
   end,
