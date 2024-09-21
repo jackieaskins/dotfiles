@@ -1,8 +1,3 @@
-if type kitty &> /dev/null; then
-  alias kssh='kitty +kitten ssh'
-  alias icat='kitty +kitten icat'
-fi
-
 alias mux="tmuxinator start"
 
 alias plugs="cd ~/.local/share/nvim/lazy/"

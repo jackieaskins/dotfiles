@@ -5,17 +5,12 @@ vim.filetype.add({
         return 'tmux'
       end
 
-      if path:match('kitty') then
-        return 'kitty'
-      end
-
       return 'conf'
     end,
     gitconfig = 'gitconfig',
     tmTheme = 'xml',
   },
   filename = {
-    ['kitty.conf'] = 'kitty',
     Brewfile = 'ruby',
     gitignore_global = 'gitignore',
     ['coc-settings.json'] = 'jsonc',

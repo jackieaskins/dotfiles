@@ -17,7 +17,6 @@ return {
       },
       filetype = {
         fish = { glyph = '󰈺', hl = 'MiniIconsAzure' },
-        kitty = { glyph = '󰄛', hl = 'MiniIconsOrange' },
         tmux = { glyph = '', hl = 'MiniIconsGreen' },
       },
     })

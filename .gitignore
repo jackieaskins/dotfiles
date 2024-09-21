@@ -20,10 +20,6 @@ Brewfile.lock.json
 /hammerspoon/custom.lua
 /karabiner/automatic_backups
 
-/kitty/theme.conf
-/kitty/theme.conf.bak
-/kitty/current-theme.conf
-
 /bat/config
 
 /fish/fish_variables
