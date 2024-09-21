@@ -2,7 +2,7 @@
 local M = {
   'nvim-treesitter/nvim-treesitter',
   dependencies = {
-    'RRethy/nvim-treesitter-endwise',
+    { 'PriceHiller/nvim-treesitter-endwise', branch = 'fix/iter-matches' },
     'RRethy/nvim-treesitter-textsubjects',
     'nvim-treesitter/nvim-treesitter-textobjects',
   },
