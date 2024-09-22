@@ -1,12 +1,5 @@
 vim.filetype.add({
   extension = {
-    conf = function(path)
-      if path:match('tmux') then
-        return 'tmux'
-      end
-
-      return 'conf'
-    end,
     gitconfig = 'gitconfig',
     tmTheme = 'xml',
   },

@@ -28,10 +28,18 @@ local colors = {
       bg_color = color_scheme.background,
     },
     inactive_tab_hover = {
+      fg_color = accent,
+      bg_color = color_scheme.background,
+    },
+    inactive_tab_edge = color_scheme.background,
+    new_tab = {
+      bg_color = color_scheme.background,
+      fg_color = accent,
+    },
+    new_tab_hover = {
       fg_color = color_scheme.visual_bell,
       bg_color = accent,
     },
-    inactive_tab_edge = color_scheme.background,
   },
 }
 

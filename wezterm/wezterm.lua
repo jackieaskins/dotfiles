@@ -33,7 +33,6 @@ config.colors = colors
 --                             Tab Bar                              --
 ----------------------------------------------------------------------
 
-config.show_new_tab_button_in_tab_bar = false
 config.show_close_tab_button_in_tabs = false
 config.show_tab_index_in_tab_bar = false
 config.window_frame = {
