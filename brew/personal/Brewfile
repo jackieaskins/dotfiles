@@ -12,4 +12,5 @@ if RUBY_PLATFORM =~ /darwin/
 
   tap 'homebrew/cask-drivers'
   cask 'qmk-toolbox'
+  cask 'zen-browser'
 end
