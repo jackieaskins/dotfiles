@@ -35,7 +35,7 @@ function M.getWindowsBySpaceMap()
   for _, window in ipairs(windowFilter:getWindows()) do
     local spaceIds = hs.spaces.windowSpaces(window)
     if not spaceIds or #spaceIds ~= 1 then
-      print('Window is included on multiple screens, not tiling it')
+      print('Window is included on multiple screens, not tiling it', window)
     else
       local spaceId = spaceIds[1]
       local windows = windowsBySpace[spaceId] or {}

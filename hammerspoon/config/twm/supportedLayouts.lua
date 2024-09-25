@@ -31,7 +31,7 @@ function M.floating(windows, screenFrame, gap) end
 ---@type Layout
 ---@diagnostic disable-next-line: unused-local
 function M.monocle(windows, screenFrame, gap)
-  for _, window in pairs(windows) do
+  for _, window in ipairs(windows) do
     window:setFrame({
       x = screenFrame.x,
       y = screenFrame.y,
