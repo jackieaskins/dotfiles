@@ -13,16 +13,11 @@ local function getWindowsBySpaceId()
   local windowsBySpaceId = {}
 
   for _, window in ipairs(windowFilter:getWindows()) do
-    local spaces = hs.spaces.windowSpaces(window) or {}
-
-    if #spaces == 1 then
-      local spaceId = tostring(spaces[1])
-      local windows = windowsBySpaceId[spaceId] or {}
-      table.insert(windows, window)
-      windowsBySpaceId[spaceId] = windows
-    else
-      Print("not tiling window because it's on multiple spaces", window)
-    end
+    local windowSpaces = hs.spaces.windowSpaces(window) or {}
+    local spaceId = tostring(windowSpaces[1])
+    local windows = windowsBySpaceId[spaceId] or {}
+    table.insert(windows, window)
+    windowsBySpaceId[spaceId] = windows
   end
 
   return windowsBySpaceId
@@ -34,22 +29,25 @@ end
 
 ---@class (exact) ScreenLayout
 ---@field screenIdToSpaceIds table<string, string[]>
----@field spaceIdToScreenId table<string, string>
+---@field screenFrames table<string, ScreenFrame>
 ---@field layouts table<string, string>
 ---@field windows table<string, hs.window[]>
 
 ---@class (exact) CachedScreenLayout
 ---@field screenIdToSpaceIds table<string, string[]>
----@field spaceIdToScreenId table<string, string>
+---@field screenFrames table<string, ScreenFrame>
 ---@field layouts table<string, string>
 ---@field windows table<string, string[]>
 
----Get a stable identifying key for the current screen layout
+---Get a stable identifying key for the current screen layout or provided screens
+---@param screenIds? string[]
 ---@return string
-local function getScreenLayoutKey()
-  local screenIds = hs.fnutils.imap(hs.screen.allScreens() or {}, function(screen)
-    return screen:getUUID()
-  end) or {}
+local function getScreenLayoutKey(screenIds)
+  screenIds = screenIds
+    or hs.fnutils.imap(hs.screen.allScreens() or {}, function(screen)
+      return screen:getUUID()
+    end)
+    or {}
 
   table.sort(screenIds)
 
@@ -77,6 +75,22 @@ local function getOrderedUserSpaceByScreenId()
   return orderedSpaces
 end
 
+---Get the frames for the current screens
+---@return table<string, ScreenFrame>
+local function getScreenFrames()
+  local screenFrames = {}
+  for _, screen in ipairs(hs.screen.allScreens() or {}) do
+    local screenFrame = screen:frame()
+    screenFrames[screen:getUUID()] = {
+      x = screenFrame.x + SCREEN_PADDING,
+      y = screenFrame.y + SCREEN_PADDING,
+      w = screenFrame.w - (SCREEN_PADDING * 2),
+      h = screenFrame.h - (SCREEN_PADDING * 2),
+    }
+  end
+  return screenFrames
+end
+
 ---Create a new screen layout based on the current screen configuration
 ---@return ScreenLayout
 local function createScreenLayout()
@@ -85,15 +99,14 @@ local function createScreenLayout()
   ---@class ScreenLayout
   local screenLayout = {
     screenIdToSpaceIds = {},
-    spaceIdToScreenId = {},
+    screenFrames = getScreenFrames(),
     layouts = {},
     windows = {},
   }
 
   screenLayout.screenIdToSpaceIds = getOrderedUserSpaceByScreenId()
-  for screenId, spaceIds in pairs(screenLayout.screenIdToSpaceIds) do
+  for _, spaceIds in pairs(screenLayout.screenIdToSpaceIds) do
     for _, spaceId in ipairs(spaceIds) do
-      screenLayout.spaceIdToScreenId[spaceId] = screenId
       screenLayout.layouts[spaceId] = 'tall'
       screenLayout.windows[spaceId] = windowsBySpaceId[spaceId] or {}
     end
@@ -157,7 +170,7 @@ local function loadScreenLayout()
   for _, window in ipairs(wf.default:getWindows()) do
     local spaceIds = hs.spaces.windowSpaces(window) or {}
 
-    if #spaceIds == 1 then
+    if #spaceIds == 1 and not window:isFullScreen() then
       local currentSpaceId = spaceIds[1]
       local oldSpaceId = oldWindowIdToSpaceId[window:id()]
       local newSpaceId = oldSpaceId and oldToNewSpaceId[oldSpaceId] or firstSpaceId
@@ -171,7 +184,7 @@ local function loadScreenLayout()
   -- Remove extra spaces
   for _, spaceIds in pairs(hs.spaces.allSpaces() or {}) do
     for _, spaceId in ipairs(spaceIds) do
-      if not newSpaceIds[tostring(spaceId)] then
+      if not newSpaceIds[tostring(spaceId)] and hs.spaces.spaceType(spaceId) == 'user' then
         hs.spaces.removeSpace(spaceId, false)
       end
     end
@@ -180,30 +193,31 @@ local function loadScreenLayout()
 
   local newScreenLayout = createScreenLayout()
   newScreenLayout.layouts = newLayouts
-  -- TODO: ensure windows remain in order
-  -- TODO: set active screens
+
+  -- Ensure windows remain in order
+  for oldSpaceId, newSpaceId in pairs(oldToNewSpaceId) do
+    local newWindows = newScreenLayout.windows[newSpaceId]
+    local oldWindowIds = cachedLayout.windows[oldSpaceId]
+    if newWindows and oldWindowIds then
+      table.sort(newWindows, function(a, b)
+        local aIndex = hs.fnutils.indexOf(oldWindowIds, a:id())
+        local bIndex = hs.fnutils.indexOf(oldWindowIds, b:id())
+
+        -- Unstable sort fn was being returned when object compared against itself
+        if aIndex == bIndex then
+          return false
+        end
+
+        return (aIndex and bIndex) and (aIndex < bIndex) or not bIndex
+      end)
+    end
+  end
+
   return newScreenLayout
 end
 
 local currentScreenLayout = loadScreenLayout()
 -- local currentScreenLayout = createScreenLayout()
-
----Get the frames for the current screens
----@return table<string, ScreenFrame>
-local function getScreenFrames()
-  local screenFrames = {}
-  for _, screen in ipairs(hs.screen.allScreens() or {}) do
-    local screenFrame = screen:frame()
-    screenFrames[screen:getUUID()] = {
-      x = screenFrame.x + SCREEN_PADDING,
-      y = screenFrame.y + SCREEN_PADDING,
-      w = screenFrame.w - (SCREEN_PADDING * 2),
-      h = screenFrame.h - (SCREEN_PADDING * 2),
-    }
-  end
-  return screenFrames
-end
-local screenFrames = getScreenFrames()
 
 ---Save current screen layout to cache
 local function saveScreenLayout()
@@ -221,11 +235,10 @@ end
 
 ---Tile all of the current spaces
 local function tile()
-  for _, spaceIds in pairs(currentScreenLayout.screenIdToSpaceIds) do
+  for screenId, spaceIds in pairs(currentScreenLayout.screenIdToSpaceIds) do
     for _, spaceId in ipairs(spaceIds) do
       local layout = currentScreenLayout.layouts[spaceId]
-      local screenId = currentScreenLayout.spaceIdToScreenId[spaceId]
-      local screenFrame = screenFrames[screenId]
+      local screenFrame = currentScreenLayout.screenFrames[screenId]
       local windows = currentScreenLayout.windows[spaceId] or {}
 
       if #windows == 1 then
@@ -238,6 +251,7 @@ local function tile()
 end
 tile()
 
+---Recalculate the new windows and retile
 local function retileWindows()
   local currentWindowsBySpaceId = currentScreenLayout.windows
   local windowsBySpaceId = getWindowsBySpaceId()
@@ -267,6 +281,8 @@ local retileWindowEvents = {
   wf.windowMoved,
   wf.windowAllowed,
   wf.windowRejected,
+  wf.windowNotInCurrentSpace,
+  wf.windowInCurrentSpace,
 }
 windowFilter:subscribe(retileWindowEvents, retileWindows)
 
@@ -280,6 +296,29 @@ wf.defaultCurrentSpace:subscribe({ wf.windowDestroyed }, function()
     end
   end
 end)
+
+hs.screen.watcher
+  .new(function()
+    local currentScreenIds = {}
+    for screenId, _ in pairs(currentScreenLayout.screenIdToSpaceIds) do
+      table.insert(currentScreenIds, screenId)
+    end
+
+    local oldScreenKey = getScreenLayoutKey(currentScreenIds)
+    local newScreenKey = getScreenLayoutKey()
+
+    -- TODO: Get this part working
+    if oldScreenKey ~= newScreenKey then
+      windowFilter:pause()
+
+      saveScreenLayout()
+      currentScreenLayout = loadScreenLayout()
+      tile()
+
+      windowFilter:resume()
+    end
+  end)
+  :start()
 
 local twmRegister = hotkeyStore.registerGroup('twm')
 
@@ -347,6 +386,11 @@ twmRegister('maximize window', HYPER, 'm', function()
   local focusedWindow = hs.window.focusedWindow()
   if not windowFilter:isWindowAllowed(focusedWindow) then
     local screenId = hs.screen.mainScreen():getUUID()
-    supportedLayouts.monocle({ focusedWindow }, screenFrames[screenId], WINDOW_GAP)
+    supportedLayouts.monocle({ focusedWindow }, currentScreenLayout.screenFrames[screenId], WINDOW_GAP)
   end
+end)
+
+twmRegister('reset tiling', HYPER, 'r', function()
+  currentScreenLayout = createScreenLayout()
+  tile()
 end)
