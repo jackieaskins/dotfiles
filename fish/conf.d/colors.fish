@@ -1,6 +1,6 @@
 set -g fish_color_command green
 set -g fish_color_param white
-set -g fish_color_valid_path white
+set -g fish_color_valid_path white --underline
 set -g fish_color_option cyan
 set -g fish_color_cancel yellow
 
