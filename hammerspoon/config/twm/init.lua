@@ -1,193 +1,132 @@
-local cache = require('config.twm.cache')
-local layout = require('config.twm.layout')
-local utils = require('config.twm.utils')
-local windowFilter = require('config.twm.windowFilter')
-local menubar = require('config.twm.menubar')
+local WINDOW_GAP = CUSTOM.twmWindowGap or 10
 
 local wf = hs.window.filter
+local windowFilter = require('config.twm.windowFilter')
+local hotkeyStore = require('config.hotkeyStore')
+local supportedLayouts = require('config.twm.supportedLayouts')
 
-local M = {}
+local screenLayout = require('config.twm.screenLayout')
 
-----------------------------------------------------------------------
---                            Lifecycle                             --
-----------------------------------------------------------------------
+-- TODO: Detect space changes
+-- TODO: Add menubar icon
 
----Load from cache and start tiling windows on all spaces
-function M.start()
-  cache.restore()
+---Tile all of the current spaces
+local function tile()
+  for screenId, spaceIds in pairs(screenLayout.getScreenIdToSpaceIdsMap()) do
+    for _, spaceId in ipairs(spaceIds) do
+      local layout = screenLayout.getSpaceIdToLayoutMap()[spaceId]
+      local screenFrame = screenLayout.getScreenIdToFrameMap()[screenId]
+      local windows = screenLayout.getSpaceIdToWindowsMap()[spaceId] or {}
 
-  windowFilter:subscribe({
-    wf.windowsChanged,
-    wf.windowInCurrentSpace,
-    wf.windowNotInCurrentSpace,
-    wf.windowMoved, -- Hopefully this doesn't lead to an infintie loop :)
-  }, M.tile)
-
-  windowFilter:subscribe({
-    hs.window.filter.windowMinimized,
-    hs.window.filter.windowDestroyed,
-  }, function()
-    local otherWindows = wf.copy(windowFilter):setCurrentSpace(true):getWindows(wf.sortByFocusedLast)
-
-    if #otherWindows > 0 then
-      otherWindows[1]:focus()
+      if #windows == 1 then
+        supportedLayouts.monocle(windows, screenFrame, WINDOW_GAP)
+      elseif #windows > 1 then
+        supportedLayouts[layout](windows, screenFrame, WINDOW_GAP)
+      end
     end
-  end)
-
-  M.tile()
-  menubar.init()
-end
-
----Reset tiling cache and re-tile
-function M.reset()
-  cache.reset()
-  M.tile()
-end
-
----Save current tiling cache
-function M.stop()
-  cache.save()
-end
-
-----------------------------------------------------------------------
---                              Tiling                              --
-----------------------------------------------------------------------
-
----Manually trigger tiling for all spaces
-function M.tile()
-  utils.tile()
-end
-
----Toggle float for the current window
----@param win hs.window?
-function M.toggleFloat(win)
-  local window = win or hs.window.focusedWindow()
-
-  local isFloating = cache.getFloatingWindow(window:id()) or false
-  cache.setFloatingWindow(window:id(), not isFloating)
-
-  M.tile()
-end
-
-----------------------------------------------------------------------
---                             Layouts                              --
-----------------------------------------------------------------------
-
----Bring up the picker to choose the current space layout
-function M.chooseLayout()
-  layout.choose()
-end
-
----Get the current space layout
-function M.getLayout()
-  return layout.get()
-end
-
----Show an alert with the current space layout
-function M.showLayout()
-  layout.show()
-end
-
----Set layout for the current space
----@param layoutName string
-function M.setLayout(layoutName)
-  layout.set(layoutName)
-end
-
-----------------------------------------------------------------------
---                           Window Focus                           --
-----------------------------------------------------------------------
-
----Change focus to the nearest window to the west
----@param win hs.window?
-function M.focusWindowWest(win)
-  local window = win or hs.window.focusedWindow()
-  if not window:focusWindowWest() then
-    utils.focusWindowToLeft(window)
   end
 end
+tile()
 
----Change focus to the nearest window to the south
----@param win hs.window?
-function M.focusWindowSouth(win)
-  local window = win or hs.window.focusedWindow()
-  if not window:focusWindowSouth() then
-    utils.focusWindowToRight(window)
-  end
-end
+windowFilter:subscribe({
+  wf.windowsChanged,
+  wf.windowMoved,
+  wf.windowAllowed,
+  wf.windowRejected,
+  wf.windowNotInCurrentSpace,
+  wf.windowInCurrentSpace,
+}, function()
+  screenLayout.recalculateWindows()
+  tile()
+end)
 
----Change focus to the nearest window to the north
----@param win hs.window?
-function M.focusWindowNorth(win)
-  local window = win or hs.window.focusedWindow()
-  if not window:focusWindowNorth() then
-    utils.focusWindowToLeft(window)
-  end
-end
+wf.defaultCurrentSpace:subscribe({ wf.windowDestroyed }, function()
+  local focusedWindow = hs.window.focusedWindow()
 
----Change focus to the nearest window to the east
----@param win hs.window?
-function M.focusWindowEast(win)
-  local window = win or hs.window.focusedWindow()
-  if not window:focusWindowEast() then
-    utils.focusWindowToRight(window)
-  end
-end
-
-----------------------------------------------------------------------
---                           Window Swap                            --
-----------------------------------------------------------------------
-
----Swap window focus to the nearest tiled window to the west
----@param win hs.window?
-function M.swapWindowWest(win)
-  utils.swapWindow(win or hs.window.focusedWindow(), 'west')
-end
-
----Swap window focus to the nearest tiled window to the south
----@param win hs.window?
-function M.swapWindowSouth(win)
-  utils.swapWindow(win or hs.window.focusedWindow(), 'south')
-end
-
----Swap window focus to the nearest tiled window to the north
----@param win hs.window?
-function M.swapWindowNorth(win)
-  utils.swapWindow(win or hs.window.focusedWindow(), 'north')
-end
-
----Swap window focus to the nearest tiled window to the east
----@param win hs.window?
-function M.swapWindowEast(win)
-  utils.swapWindow(win or hs.window.focusedWindow(), 'east')
-end
-
-----------------------------------------------------------------------
---                      Window Space Movement                       --
-----------------------------------------------------------------------
-
----Move window to provided space
----@param desktopNum number
----@return fun(win?: hs.window)
-function M.moveWindowToSpace(desktopNum)
-  return function(win)
-    local spaceId = utils.getSpaceId(desktopNum)
-
-    if not spaceId then
-      hs.alert.show('Desktop ' .. desktopNum .. ' does not exist')
-      return
+  if not focusedWindow or not focusedWindow:isVisible() then
+    local windows = wf.defaultCurrentSpace:getWindows()
+    if #windows >= 1 then
+      windows[1]:focus()
     end
+  end
+end)
 
-    local window = win or hs.window.focusedWindow()
-    hs.spaces.moveWindowToSpace(window, spaceId)
+screenWatcher = hs.screen.watcher.new(function()
+  hs.alert.show('triggered')
+  windowFilter:pause()
 
-    -- Use ctrl+num mapping to go to screen
-    -- This is smoother than hs.spaces.goToSpace
-    hs.eventtap.keyStroke({ 'ctrl' }, tostring(desktopNum))
+  screenLayout.save()
+  screenLayout.createOrLoad()
+  tile()
 
-    -- Refocus window
-    hs.window.get(window:id()):focus()
+  windowFilter:resume()
+end)
+screenWatcher:start()
+
+local twmRegister = hotkeyStore.registerGroup('twm')
+
+twmRegister('tile', MEH, 't', tile)
+
+---Set the layout for the provided spaceId and retile
+---@param spaceId number
+---@param layout string
+local function setSpaceLayout(spaceId, layout)
+  screenLayout.getSpaceIdToLayoutMap()[spaceId] = layout
+  tile()
+  hs.alert.show(layout)
+end
+twmRegister('toggle between monocle and tall', MEH, 's', function()
+  local spaceId = hs.spaces.focusedSpace()
+  local currentLayout = screenLayout.getSpaceIdToLayoutMap()[spaceId]
+  setSpaceLayout(spaceId, currentLayout == 'tall' and 'monocle' or 'tall')
+end)
+
+twmRegister('focus window west', MEH, 'h', wf.focusWest)
+twmRegister('focus window south', MEH, 'j', wf.focusSouth)
+twmRegister('focus window north', MEH, 'k', wf.focusNorth)
+twmRegister('focus window east', MEH, 'l', wf.focusEast)
+
+---Swap focused window with window in direction
+---@param direction 'West' | 'South' | 'North' | 'East'
+---@return fun()
+local function swapWindow(direction)
+  local windowsToFn = windowFilter['windowsTo' .. direction]
+
+  return function()
+    local focusedWindow = hs.window.focusedWindow()
+    local windows = windowsToFn(windowFilter, focusedWindow, true, false)
+    local currentSpaceId = hs.spaces.focusedSpace()
+
+    if #windows >= 1 then
+      local windowToSwap = windows[1]
+
+      local spaceWindows = screenLayout.getSpaceIdToWindowsMap()[currentSpaceId]
+      local currentIndex = hs.fnutils.indexOf(spaceWindows, focusedWindow)
+      local newIndex = hs.fnutils.indexOf(spaceWindows, windowToSwap)
+
+      if currentIndex and newIndex then
+        spaceWindows[currentIndex] = windowToSwap
+        spaceWindows[newIndex] = focusedWindow
+      end
+
+      tile()
+    end
   end
 end
+twmRegister('swap window west', HYPER, 'h', swapWindow('West'))
+twmRegister('swap window south', HYPER, 'j', swapWindow('South'))
+twmRegister('swap window north', HYPER, 'k', swapWindow('North'))
+twmRegister('swap window east', HYPER, 'l', swapWindow('East'))
 
-return M
+twmRegister('maximize window', HYPER, 'm', function()
+  local focusedWindow = hs.window.focusedWindow()
+  if not windowFilter:isWindowAllowed(focusedWindow) then
+    local screenId = hs.screen.mainScreen():getUUID()
+    supportedLayouts.monocle({ focusedWindow }, screenLayout.getScreenIdToFrameMap()[screenId], WINDOW_GAP)
+  end
+end)
+
+twmRegister('reset tiling', HYPER, 'r', function()
+  screenLayout.reset()
+  tile()
+end)

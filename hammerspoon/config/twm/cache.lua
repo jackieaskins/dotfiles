@@ -1,63 +1,86 @@
-local floatingWindows = {}
-local spaceLayouts = {}
-local spaceWindows = {}
+local CACHE_KEY_PREFIX = 'twm.cache.'
 
-local CACHE_KEY = 'twm.cache'
+local fnutils = require('config.fnutils')
+
+---@class (exact) CachedScreenLayout
+---@field screenIdToSpaceIds table<string, number[]>
+---@field screenIdToFrame table<string, ScreenFrame>
+---@field spaceIdToLayout table<string, string>
+---@field spaceIdToWindowIds table<string, number[]>
+
+---Get a stable identifying key for the current screen layout or provided screens
+---@param screenIds? string[]
+---@return string
+local function getScreenLayoutKey(screenIds)
+  local sortedScreenIds = screenIds and hs.fnutils.copy(screenIds)
+    or hs.fnutils.imap(hs.screen.allScreens() or {}, function(screen)
+      return screen:getUUID()
+    end)
+    or {}
+
+  table.sort(sortedScreenIds)
+
+  return CACHE_KEY_PREFIX .. table.concat(sortedScreenIds, '.')
+end
 
 local M = {}
 
-function M.getFloatingWindow(windowId)
-  return floatingWindows[tostring(windowId)]
+function M.loadLayout()
+  ---@type CachedScreenLayout | nil
+  local cachedLayout = hs.settings.get(getScreenLayoutKey())
+
+  if not cachedLayout then
+    return nil
+  end
+
+  local function tointeger(str)
+    return tonumber(str) --[[@as integer]]
+  end
+
+  local windowsById = {}
+  for _, window in ipairs(require('config.twm.windowFilter'):getWindows()) do
+    windowsById[window:id()] = window
+  end
+
+  ---@type ScreenLayout
+  return {
+    screenIdToSpaceIds = cachedLayout.screenIdToSpaceIds,
+    screenIdToFrame = cachedLayout.screenIdToFrame,
+    spaceIdToLayout = fnutils.mapKeys(cachedLayout.spaceIdToLayout, tointeger),
+    spaceIdToWindows = fnutils.map(cachedLayout.spaceIdToWindowIds, function(spaceId, windowIds)
+      return tointeger(spaceId),
+        fnutils.ireduce(windowIds, function(windowId, windows)
+          local window = windowsById[windowId]
+          if window then
+            table.insert(windows, window)
+          end
+          return windows
+        end, {})
+    end),
+  }
 end
 
-function M.setFloatingWindow(windowId, isFloating)
-  floatingWindows[tostring(windowId)] = isFloating
-end
+---Save provided screen layout to cache
+---@param screenLayout ScreenLayout
+function M.saveLayout(screenLayout)
+  local screenIds = fnutils.getKeys(screenLayout.screenIdToSpaceIds)
 
-function M.getSpaceLayout(space)
-  return spaceLayouts[tostring(space)]
-end
+  ---@type CachedScreenLayout
+  local cachedLayout = {
+    screenIdToSpaceIds = screenLayout.screenIdToSpaceIds,
+    screenIdToFrame = screenLayout.screenIdToFrame,
+    spaceIdToLayout = fnutils.mapKeys(screenLayout.spaceIdToLayout, tostring),
+    spaceIdToWindowIds = fnutils.map(screenLayout.spaceIdToWindows, function(spaceId, windows)
+      ---@alias numbers number[]
+      local windowIds = hs.fnutils.imap(windows, function(window)
+        return window:id()
+      end) --[[@as numbers]]
 
-function M.setSpaceLayout(space, layout)
-  spaceLayouts[tostring(space)] = layout
-end
+      return tostring(spaceId), windowIds
+    end),
+  }
 
-function M.getSpaceWindows(space)
-  return spaceWindows[tostring(space)]
-end
-
-function M.setSpaceWindows(space, windows)
-  spaceWindows[tostring(space)] = windows
-end
-
-function M.setSpaceWindow(space, index, window)
-  spaceWindows[tostring(space)][index] = window:id()
-end
-
-function M.save()
-  hs.settings.set(
-    CACHE_KEY,
-    hs.json.encode({
-      floatingWindows = hs.fnutils.filter(floatingWindows, function(isFloating)
-        return isFloating
-      end),
-      spaceLayouts = spaceLayouts,
-      spaceWindows = spaceWindows,
-    })
-  )
-end
-
-function M.restore()
-  local cachedSettings = hs.settings.get(CACHE_KEY)
-  local cache = cachedSettings and hs.json.decode(cachedSettings) or {}
-
-  floatingWindows = cache.floatingWindows or {}
-  spaceLayouts = cache.spaceLayouts or {}
-  spaceWindows = cache.spaceWindows or {}
-end
-
-function M.reset()
-  hs.settings.clear(CACHE_KEY)
+  hs.settings.set(getScreenLayoutKey(screenIds), cachedLayout)
 end
 
 return M

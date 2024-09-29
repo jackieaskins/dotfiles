@@ -54,6 +54,7 @@ local configPaths = { '/config', '/init.lua', '/custom.lua' }
 
 reloadWatchers = {}
 
+-- TODO: Watch whole dir and just filter out stuff I don't want to watch
 for _, configPath in ipairs(configPaths) do
   reloadWatchers[#reloadWatchers + 1] = hs.pathwatcher
     .new(hs.configdir .. configPath, function(paths)
@@ -98,43 +99,7 @@ hotkeyStore.register('Hotkeys', 'Show hotkeys alert', MEH, 'm', hotkeyStore.show
 hs.window.setShadows(false)
 hs.window.animationDuration = 0
 
-twm = require('config.twm')
-
-twm.start()
-hs.shutdownCallback = function()
-  twm.stop()
-end
-
-local registerTwmHotkey = hotkeyStore.registerGroup('TWM')
-
-registerTwmHotkey('Reset tiling', HYPER, 'r', twm.reset)
-registerTwmHotkey('Tile', MEH, 't', twm.tile)
-
-registerTwmHotkey('Toggle float', MEH, 'f', twm.toggleFloat)
-registerTwmHotkey('Show layout', MEH, 'p', twm.showLayout)
-registerTwmHotkey('Choose layout', MEH, 'c', twm.chooseLayout)
-
-registerTwmHotkey('Focus window west', MEH, 'h', twm.focusWindowWest)
-registerTwmHotkey('Focus window south', MEH, 'j', twm.focusWindowSouth)
-registerTwmHotkey('Focus window north', MEH, 'k', twm.focusWindowNorth)
-registerTwmHotkey('Focus window east', MEH, 'l', twm.focusWindowEast)
-
-registerTwmHotkey('Swap window west', HYPER, 'h', twm.swapWindowWest)
-registerTwmHotkey('Swap window south', HYPER, 'j', twm.swapWindowSouth)
-registerTwmHotkey('Swap window north', HYPER, 'k', twm.swapWindowNorth)
-registerTwmHotkey('Swap window north', HYPER, 'l', twm.swapWindowEast)
-
-for i = 1, 9, 1 do
-  registerTwmHotkey('Move window to space ' .. i, MEH, tostring(i), twm.moveWindowToSpace(i))
-end
-
-registerTwmHotkey('Set layout to floating', HYPER, 'f', function()
-  twm.setLayout('floating')
-end)
-registerTwmHotkey('Set layout to tall or monocle', MEH, 's', function()
-  local currentLayout = twm.getLayout()
-  twm.setLayout(currentLayout == 'monocle' and 'tall' or 'monocle')
-end)
+require('config.twm')
 
 ----------------------------------------------------------------------
 --                      Spotify Notifications                       --
