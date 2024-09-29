@@ -1,7 +1,7 @@
 local SCREEN_PADDING = CUSTOM.twmScreenPadding or 10
 
-local fnutils = require('config.fnutils')
-local cache = require('config.twm.cache')
+local fnutils = require('fnutils')
+local cache = require('twm.cache')
 
 ---@class (exact) ScreenLayout
 ---@field screenIdToSpaceIds table<string, number[]>
@@ -10,7 +10,7 @@ local cache = require('config.twm.cache')
 ---@field spaceIdToWindows table<integer, hs.window[]>
 
 local wf = hs.window.filter
-local windowFilter = require('config.twm.windowFilter')
+local windowFilter = require('twm.windowFilter')
 
 ---Get a map from space id to array of windows
 ---@return table<integer, hs.window[]>

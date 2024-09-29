@@ -1,4 +1,4 @@
-local utils = require('config.twm.menubar.utils')
+local utils = require('twm.menubar.utils')
 
 local menubar = hs.menubar.new(true, 'twm')
 
@@ -11,7 +11,7 @@ end
 local M = {}
 
 function M.update()
-  local currentLayout = require('config.twm.layout').get()
+  local currentLayout = require('twm.layout').get()
 
   local currentSpaceId = hs.spaces.focusedSpace()
   local icon = currentLayout == 'monocle' and '􀏭' or '􀇵'

@@ -1,11 +1,11 @@
 local WINDOW_GAP = CUSTOM.twmWindowGap or 10
 
 local wf = hs.window.filter
-local windowFilter = require('config.twm.windowFilter')
-local hotkeyStore = require('config.hotkeyStore')
-local supportedLayouts = require('config.twm.supportedLayouts')
+local windowFilter = require('twm.windowFilter')
+local hotkeyStore = require('hotkeyStore')
+local supportedLayouts = require('twm.supportedLayouts')
 
-local screenLayout = require('config.twm.screenLayout')
+local screenLayout = require('twm.screenLayout')
 
 -- TODO: Detect space changes
 -- TODO: Add menubar icon
@@ -52,7 +52,6 @@ wf.defaultCurrentSpace:subscribe({ wf.windowDestroyed }, function()
 end)
 
 screenWatcher = hs.screen.watcher.new(function()
-  hs.alert.show('triggered')
   windowFilter:pause()
 
   screenLayout.save()

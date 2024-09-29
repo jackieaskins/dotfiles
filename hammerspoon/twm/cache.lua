@@ -1,6 +1,6 @@
 local CACHE_KEY_PREFIX = 'twm.cache.'
 
-local fnutils = require('config.fnutils')
+local fnutils = require('fnutils')
 
 ---@class (exact) CachedScreenLayout
 ---@field screenIdToSpaceIds table<string, number[]>
@@ -38,7 +38,7 @@ function M.loadLayout()
   end
 
   local windowsById = {}
-  for _, window in ipairs(require('config.twm.windowFilter'):getWindows()) do
+  for _, window in ipairs(require('twm.windowFilter'):getWindows()) do
     windowsById[window:id()] = window
   end
 

@@ -1,5 +1,5 @@
-local fnutils = require('config.fnutils')
-local hotkeyStore = require('config.hotkeyStore')
+local fnutils = require('fnutils')
+local hotkeyStore = require('hotkeyStore')
 
 ----------------------------------------------------------------------
 --                              Custom                              --
@@ -50,19 +50,11 @@ spoon.SpoonInstall:asyncUpdateAllRepos()
 --                              Reload                              --
 ----------------------------------------------------------------------
 
-local configPaths = { '/config', '/init.lua', '/custom.lua' }
-
-reloadWatchers = {}
-
--- TODO: Watch whole dir and just filter out stuff I don't want to watch
-for _, configPath in ipairs(configPaths) do
-  reloadWatchers[#reloadWatchers + 1] = hs.pathwatcher
-    .new(hs.configdir .. configPath, function(paths)
-      print('Reloading for ' .. table.concat(paths, ', '))
-      hs.reload()
-    end)
-    :start()
-end
+reloadWatcher = hs.pathwatcher.new(hs.configdir, function()
+  -- TODO: Filter out paths that shouldn't trigger reload
+  hs.reload()
+end)
+reloadWatcher:start()
 
 hotkeyStore.register('Reload', 'Reload configuration', MEH, 'r', hs.reload)
 
@@ -99,7 +91,7 @@ hotkeyStore.register('Hotkeys', 'Show hotkeys alert', MEH, 'm', hotkeyStore.show
 hs.window.setShadows(false)
 hs.window.animationDuration = 0
 
-require('config.twm')
+require('twm')
 
 ----------------------------------------------------------------------
 --                      Spotify Notifications                       --
