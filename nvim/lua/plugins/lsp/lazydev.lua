@@ -28,6 +28,7 @@ return {
         'catppuccin',
         'nvim-lspconfig',
         'mini.icons',
+        'mini.files',
       },
     },
   },

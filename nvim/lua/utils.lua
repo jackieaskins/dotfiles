@@ -1,6 +1,6 @@
 local M = {}
 
----@alias map_fn fun(mode: string | table<string>, lhs: string, rhs: string | function, opts?: table)
+---@alias map_fn fun(mode: string | string[], lhs: string, rhs: string | function, opts?: vim.keymap.set.Opts)
 
 ---Define vim keymap
 ---@type map_fn
