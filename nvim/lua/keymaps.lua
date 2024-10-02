@@ -98,32 +98,6 @@ map('n', 'k', jump('k'), { desc = 'Jump [count] lines up', expr = true })
 map('n', 'j', jump('j'), { desc = 'Jump [count] lines down', expr = true })
 
 ----------------------------------------------------------------------
---                            Unimpaired                            --
-----------------------------------------------------------------------
-
--- Navigate Quickfix
-map('n', '[q', vim.cmd.cprevious)
-map('n', ']q', vim.cmd.cnext)
-map('n', '[Q', vim.cmd.cfirst)
-map('n', ']Q', vim.cmd.clast)
-map('n', '[<C-q>', vim.cmd.cpfile)
-map('n', ']<C-q>', vim.cmd.cnfile)
-
--- Navigate Location List
-map('n', '[l', vim.cmd.lprevious)
-map('n', ']l', vim.cmd.lnext)
-map('n', '[L', vim.cmd.lfirst)
-map('n', ']L', vim.cmd.llast)
-map('n', '[<C-l>', vim.cmd.lpfile)
-map('n', ']<C-l>', vim.cmd.lnfile)
-
--- Navigate Files
-map('n', '[n', vim.cmd.previous)
-map('n', ']n', vim.cmd.next)
-map('n', '[N', vim.cmd.first)
-map('n', ']N', vim.cmd.last)
-
-----------------------------------------------------------------------
 --                              Runner                              --
 ----------------------------------------------------------------------
 
