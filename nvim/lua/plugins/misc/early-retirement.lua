@@ -1,7 +1,7 @@
 ---@type LazySpec
 return {
   'chrisgrieser/nvim-early-retirement',
-  opt = {
+  opts = {
     deleteBufferWhenFileDeleted = true,
   },
 }
