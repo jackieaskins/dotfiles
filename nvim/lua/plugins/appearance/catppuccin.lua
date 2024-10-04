@@ -33,7 +33,9 @@ return {
           NormalFloat = { bg = colors.base },
           FloatBorder = { fg = colors.blue, bg = colors.base },
           StatusLine = { fg = colors.text, bg = colors.base },
+          StatusLineSectionSep = { fg = colors.surface0, bg = colors.base },
           TabLine = { fg = colors.text, bg = colors.surface0 },
+          TabLineSep = { fg = colors.surface0, bg = colors.base },
           TabLineFill = { bg = colors.base },
 
           -- Custom Highlights

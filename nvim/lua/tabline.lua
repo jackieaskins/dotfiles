@@ -40,20 +40,30 @@ return {
         )
       end
 
-      local components = {
-        '%#' .. (tabnr == current_tabnr and 'TabLineSel' or 'TabLine') .. '#',
-        ' ',
-        tabnr,
-        ' ',
-        require('icons').get_filetype_icon(vim.api.nvim_get_option_value('filetype', {
-          buf = bufnr,
-        })),
-        ' ',
-        get_bufname(),
-        ' ',
-      }
+      local hl_group = tabnr == current_tabnr and 'TabLineSel' or 'TabLine'
+      local sep_hl = '%#' .. hl_group .. 'Sep' .. '#'
 
-      table.insert(tabline_components, table.concat(components))
+      if tabnr ~= 1 then
+        table.insert(tabline_components, sep_hl .. '')
+      end
+
+      table.insert(
+        tabline_components,
+        table.concat({
+          '%#' .. hl_group .. '#',
+          ' ',
+          tabnr,
+          ' ',
+          require('icons').get_filetype_icon(vim.api.nvim_get_option_value('filetype', {
+            buf = bufnr,
+          })),
+          ' ',
+          get_bufname(),
+          ' ',
+        })
+      )
+
+      table.insert(tabline_components, sep_hl .. '')
     end
 
     table.insert(tabline_components, '%#TabLineFill#')

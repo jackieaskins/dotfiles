@@ -2,13 +2,37 @@ require('utils').augroup('statusline_redraw', {
   { 'User', pattern = 'LazyCheck', command = 'redrawstatus' },
 })
 
-local function statusline_component(hl, component)
-  local hl_str = '%#' .. hl .. '#'
-  if component and component ~= '' then
-    return hl_str .. ' ' .. component .. ' '
+local function get_hl_str(hl)
+  return '%#' .. hl .. '#'
+end
+
+local function statusline_component(hl, component, seps)
+  seps = seps or {}
+  local parts = {}
+  local has_component = component and component ~= ''
+
+  local component_hl = get_hl_str(hl)
+  local sep_hl = get_hl_str(hl .. 'Sep')
+
+  if has_component and seps.left then
+    table.insert(parts, sep_hl)
+    table.insert(parts, seps.left)
   end
 
-  return hl_str
+  table.insert(parts, component_hl)
+
+  if has_component then
+    table.insert(parts, ' ')
+    table.insert(parts, component)
+    table.insert(parts, ' ')
+  end
+
+  if has_component and seps.right then
+    table.insert(parts, sep_hl)
+    table.insert(parts, seps.right)
+  end
+
+  return table.concat(parts)
 end
 
 local function get_active_lsp_linters_formatters()
@@ -67,8 +91,8 @@ return {
     local filetype = vim.bo.filetype
 
     return table.concat({
-      statusline_component('StatusLineMode', ' ' .. modes.get_label()),
-      statusline_component('StatusLineSection', get_lazy_updates()),
+      statusline_component('StatusLineMode', ' ' .. modes.get_label(), { right = '' }),
+      statusline_component('StatusLineSection', get_lazy_updates(), { left = '', right = '' }),
       statusline_component('StatusLine', get_filename()),
 
       '%=',
@@ -80,8 +104,8 @@ return {
           filetype,
         }, ' ')
       ),
-      statusline_component('StatusLineSection', get_active_lsp_linters_formatters()),
-      statusline_component('StatusLineMode', '%l:%c|%p%%'),
+      statusline_component('StatusLineSection', get_active_lsp_linters_formatters(), { left = '', right = '' }),
+      statusline_component('StatusLineMode', '%l:%c|%p%%', { left = '' }),
     })
   end,
 }

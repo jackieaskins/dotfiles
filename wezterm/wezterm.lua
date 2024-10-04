@@ -57,7 +57,7 @@ end)
 
 config.window_decorations = 'INTEGRATED_BUTTONS | RESIZE'
 config.adjust_window_size_when_changing_font_size = false
-config.window_padding = { left = 0, right = 0, top = 0, bottom = '0.5cell' }
+config.window_padding = { left = 0, right = 0, top = '0.5cell', bottom = '0.5cell' }
 
 local function center_content(window, pane)
   local win_dim = window:get_dimensions()
@@ -67,7 +67,7 @@ local function center_content(window, pane)
   overrides.window_padding = {
     left = (win_dim.pixel_width - tab_dim.pixel_width) / 2,
     right = 0,
-    top = 0,
+    top = '0.5cell',
     bottom = '0.5cell',
   }
 
