@@ -52,6 +52,10 @@ wf.defaultCurrentSpace:subscribe({ wf.windowDestroyed }, function()
 end)
 
 screenWatcher = hs.screen.watcher.new(function()
+  if screenLayout.getKey() == require('twm.cache').getScreenLayoutKey() then
+    return
+  end
+
   windowFilter:pause()
 
   screenLayout.save()

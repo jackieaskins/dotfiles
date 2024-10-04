@@ -4,6 +4,7 @@ local fnutils = require('fnutils')
 local cache = require('twm.cache')
 
 ---@class (exact) ScreenLayout
+---@field key string
 ---@field screenIdToSpaceIds table<string, number[]>
 ---@field screenIdToFrame table<string, ScreenFrame>
 ---@field spaceIdToLayout table<integer, string>
@@ -92,6 +93,7 @@ local function createLayout()
 
   ---@type ScreenLayout
   local screenLayout = {
+    key = cache.getScreenLayoutKey(),
     screenIdToSpaceIds = {},
     screenIdToFrame = getScreenFrames(),
     spaceIdToLayout = {},
@@ -160,9 +162,9 @@ function M.createOrLoad()
   end
 
   local oldWindowIdToSpaceId = {}
-  for spaceId, windowIds in pairs(cachedLayout.spaceIdToWindows) do
-    for _, windowId in ipairs(windowIds) do
-      oldWindowIdToSpaceId[windowId] = spaceId
+  for spaceId, windows in pairs(cachedLayout.spaceIdToWindows) do
+    for _, window in ipairs(windows) do
+      oldWindowIdToSpaceId[window:id()] = spaceId
     end
   end
 
@@ -211,6 +213,10 @@ end
 
 function M.reset()
   currentScreenLayout = createLayout()
+end
+
+function M.getKey()
+  return currentScreenLayout.key
 end
 
 ---Get a map from screen id to space id

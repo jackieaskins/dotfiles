@@ -8,10 +8,12 @@ local fnutils = require('fnutils')
 ---@field spaceIdToLayout table<string, string>
 ---@field spaceIdToWindowIds table<string, number[]>
 
+local M = {}
+
 ---Get a stable identifying key for the current screen layout or provided screens
 ---@param screenIds? string[]
 ---@return string
-local function getScreenLayoutKey(screenIds)
+function M.getScreenLayoutKey(screenIds)
   local sortedScreenIds = screenIds and hs.fnutils.copy(screenIds)
     or hs.fnutils.imap(hs.screen.allScreens() or {}, function(screen)
       return screen:getUUID()
@@ -23,11 +25,11 @@ local function getScreenLayoutKey(screenIds)
   return CACHE_KEY_PREFIX .. table.concat(sortedScreenIds, '.')
 end
 
-local M = {}
-
 function M.loadLayout()
+  local key = M.getScreenLayoutKey()
+
   ---@type CachedScreenLayout | nil
-  local cachedLayout = hs.settings.get(getScreenLayoutKey())
+  local cachedLayout = hs.settings.get(key)
 
   if not cachedLayout then
     return nil
@@ -44,6 +46,7 @@ function M.loadLayout()
 
   ---@type ScreenLayout
   return {
+    key = key,
     screenIdToSpaceIds = cachedLayout.screenIdToSpaceIds,
     screenIdToFrame = cachedLayout.screenIdToFrame,
     spaceIdToLayout = fnutils.mapKeys(cachedLayout.spaceIdToLayout, tointeger),
@@ -80,7 +83,7 @@ function M.saveLayout(screenLayout)
     end),
   }
 
-  hs.settings.set(getScreenLayoutKey(screenIds), cachedLayout)
+  hs.settings.set(M.getScreenLayoutKey(screenIds), cachedLayout)
 end
 
 return M
