@@ -65,7 +65,7 @@ local function get_active_lsp_linters_formatters()
     end
   end
 
-  return #all_client_names > 0 and '󰣖 ' .. table.concat(all_client_names, '|') or ''
+  return #all_client_names > 0 and '󰣖 ' .. table.concat(all_client_names, '󰿟') or ''
 end
 
 local function get_filename()
@@ -105,7 +105,7 @@ return {
         }, ' ')
       ),
       statusline_component('StatusLineSection', get_active_lsp_linters_formatters(), { left = '', right = '' }),
-      statusline_component('StatusLineMode', '%l:%c|%p%%', { left = '' }),
+      statusline_component('StatusLineMode', '%l:%c󰿟%p%%', { left = '' }),
     })
   end,
 }
