@@ -43,7 +43,7 @@ local source_menu_map = {
 
 ---@type LazySpec
 return {
-  'hrsh7th/nvim-cmp',
+  'iguanacucumber/magazine.nvim',
   event = 'VeryLazy',
   dependencies = {
     'hrsh7th/cmp-buffer',
@@ -83,7 +83,6 @@ return {
         documentation = cmp.config.window.bordered(border_config),
       },
       formatting = {
-        expandable_indicator = true,
         fields = { 'kind', 'abbr', 'menu' },
         format = function(entry, vim_item)
           local source = entry.source.name
