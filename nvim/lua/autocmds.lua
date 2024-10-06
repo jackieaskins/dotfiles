@@ -34,8 +34,28 @@ augroup('yank_highlight', {
 })
 
 augroup('save_folds_and_cursor', {
-  { 'BufWinLeave', pattern = '?*', command = 'silent! mkview!' },
-  { 'BufWinEnter', pattern = '?*', command = 'silent! loadview' },
+  {
+    'BufWinLeave',
+    pattern = '?*',
+    callback = function(args)
+      local filetype = vim.fn.getbufvar(args.buf, '&filetype')
+
+      if filetype ~= 'gitcommit' then
+        vim.cmd('silent! mkview!')
+      end
+    end,
+  },
+  {
+    'BufWinEnter',
+    pattern = '?*',
+    callback = function(args)
+      local filetype = vim.fn.getbufvar(args.buf, '&filetype')
+
+      if filetype ~= 'gitcommit' then
+        vim.cmd('silent! loadview')
+      end
+    end,
+  },
 })
 
 -- Borrowed from https://github.com/Abstract-IDE/abstract-autocmds
