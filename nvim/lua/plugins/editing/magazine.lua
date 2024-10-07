@@ -44,6 +44,7 @@ local source_menu_map = {
 ---@type LazySpec
 return {
   'iguanacucumber/magazine.nvim',
+  name = 'nvim-cmp',
   event = 'VeryLazy',
   dependencies = {
     'hrsh7th/cmp-buffer',
