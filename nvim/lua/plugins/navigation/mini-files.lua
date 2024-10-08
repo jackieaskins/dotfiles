@@ -58,6 +58,17 @@ return {
     utils.augroup('mini_files', {
       {
         'User',
+        pattern = 'MiniFilesActionDelete',
+        callback = function(args)
+          local bufnr = vim.fn.bufnr(args.data.from)
+
+          if bufnr ~= -1 then
+            vim.api.nvim_buf_delete(bufnr, {})
+          end
+        end,
+      },
+      {
+        'User',
         pattern = 'MiniFilesBufferCreate',
         callback = function(args)
           local buf_id = args.data.buf_id
