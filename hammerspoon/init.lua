@@ -94,6 +94,15 @@ hs.window.animationDuration = 0
 require('twm')
 
 ----------------------------------------------------------------------
+--                            Dark Mode                             --
+----------------------------------------------------------------------
+
+darkModeNotification = hs.distributednotifications.new(function()
+  require('darkMode').handleDarkModeChange()
+end, 'AppleInterfaceThemeChangedNotification')
+darkModeNotification:start()
+
+----------------------------------------------------------------------
 --                      Spotify Notifications                       --
 ----------------------------------------------------------------------
 

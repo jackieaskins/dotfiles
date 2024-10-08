@@ -5,6 +5,8 @@ require('utils').map({ 'n', 'v' }, '<space>', '<nop>')
 require('config_variables')
 require('options')
 
+require('dark_mode')
+
 if require('utils').file_exists('~/dotfiles/nvim/lua/custom.lua') then
   require('custom')
 end
