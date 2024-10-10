@@ -14,6 +14,7 @@ end
 ---@type LazySpec
 return {
   'L3MON4D3/LuaSnip',
+  enabled = MY_CONFIG.completion_source == 'cmp',
   build = 'make install_jsregexp',
   event = 'VeryLazy',
   keys = vim.tbl_map(key_map, {
