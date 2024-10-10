@@ -76,7 +76,7 @@ local configs = {
     },
     alternates = {
       source = { '%1%2%4' },
-      snapshot = { '%1__snapshots__/%2%3%4' },
+      snapshot = { '%1__snapshots__/%2%3%4.snap' },
     },
   },
 
