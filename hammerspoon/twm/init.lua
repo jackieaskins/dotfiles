@@ -35,6 +35,7 @@ windowFilter:subscribe({
   wf.windowRejected,
   wf.windowNotInCurrentSpace,
   wf.windowInCurrentSpace,
+  wf.windowTitleChanged,
 }, function()
   screenLayout.recalculateWindows()
   tile()
