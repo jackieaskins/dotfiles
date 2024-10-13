@@ -59,6 +59,11 @@ return {
           ['@string.special.url'] = anchor_link,
 
           -- Plugin Highlights
+          -- blink.cmp
+          BlinkCmpMenu = { fg = colors.text, bg = colors.base },
+          BlinkCmpMenuBorder = { link = 'FloatBorder' },
+          BlinkCmpMenuSelection = { bg = colors.surface0 },
+
           -- LuaSnip
           LuasnipChoiceNodeActive = { bg = colors.surface0 },
           LuasnipChoiceNodePassive = { bg = colors.surface0 },
