@@ -38,5 +38,10 @@ return {
       },
     },
     trigger = { signature_help = { enabled = true } },
+    windows = {
+      autocomplete = { border = MY_CONFIG.border_style },
+      documentation = { border = MY_CONFIG.border_style },
+      signature_help = { border = MY_CONFIG.border_style },
+    },
   },
 }
