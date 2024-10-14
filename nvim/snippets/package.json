@@ -1,0 +1,48 @@
+{
+  "name": "my-snippets",
+  "contributes": {
+    "snippets": [
+      {
+        "path": "./ecma/tests.json",
+        "language": [
+          "javascript",
+          "javascriptreact",
+          "typescript",
+          "typescriptreact"
+        ]
+      },
+      {
+        "path": "./ecma/react.json",
+        "language": [
+          "javascript",
+          "javascriptreact",
+          "typescriptreact"
+        ]
+      },
+      {
+        "path": "./ecma/collections.json",
+        "language": [
+          "javascript",
+          "javascriptreact",
+          "typescript",
+          "typescriptreact"
+        ]
+      },
+      {
+        "path": "./json.json",
+        "language": [
+          "json",
+          "jsonc"
+        ]
+      },
+      {
+        "path": "./unity.json",
+        "language": "cs"
+      },
+      {
+        "path": "./swift.json",
+        "language": "swift"
+      }
+    ]
+  }
+}

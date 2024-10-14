@@ -7,11 +7,15 @@
   },
   "useContext(Context)": {
     "prefix": "uco",
-    "body": ["const $1 = useContext$2($0);"]
+    "body": [
+      "const $1 = useContext$2($0);"
+    ]
   },
   "useDeferredValue(value, initialVal?)": {
     "prefix": "ud",
-    "body": ["const $1 = useDeferredValue$2($0);"]
+    "body": [
+      "const $1 = useDeferredValue$2($0);"
+    ]
   },
   "useEffect(cb, deps)": {
     "prefix": "ue",
@@ -37,21 +41,26 @@
   },
   "useReducer(red, initialVal)": {
     "prefix": "ured",
-    "body": ["const [$1, ${2:dispatch}] = useReducer$3(${4:reducer}, $0);"]
+    "body": [
+      "const [$1, ${2:dispatch}] = useReducer$3(${4:reducer}, $0);"
+    ]
   },
   "useRef(ref)": {
     "prefix": "uref",
-    "body": ["const $1 = useRef$2($0);"]
+    "body": [
+      "const $1 = useRef$2($0);"
+    ]
   },
   "useState(initialVal)": {
     "prefix": "us",
-    "body": ["const [$1, set${1/(.*)/${1:/capitalize}/}] = useState$3($0);"]
+    "body": [
+      "const [$1, set${1/(.*)/${1:/capitalize}/}] = useState$3($0);"
+    ]
   },
-
   "function Component()": {
     "prefix": "rfc",
     "body": [
-      "${1|export default ,export ,|}function ${2:$TM_FILENAME_BASE}()${3:: JSX.Element} {",
+      "$1function ${2:$TM_FILENAME_BASE}()${3:: JSX.Element} {",
       "\treturn ${0:<div />;}",
       "}"
     ]
@@ -59,11 +68,11 @@
   "function Component(props)": {
     "prefix": "rfcp",
     "body": [
-      "${1|export ,|}type ${2:$TM_FILENAME_BASE}Props = {",
+      "$1type ${2:$TM_FILENAME_BASE}Props = {",
       "\t$5",
       "}",
       "",
-      "${3|export default ,export ,|}function $2(${6:props}: $2Props)${4:: JSX.Element} {",
+      "$3function $2(${6:props}: $2Props)${4:: JSX.Element} {",
       "\treturn ${0:<div />;}",
       "}"
     ]

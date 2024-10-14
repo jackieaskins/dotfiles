@@ -1,5 +1,3 @@
----@diagnostic disable: missing-fields
-
 ---@type LazySpec
 return {
   'saghen/blink.cmp',
@@ -12,31 +10,10 @@ return {
     highlight = { use_nvim_cmp_as_default = true },
     keymap = {
       accept = '<C-y>',
-      select_next = '<C-n>',
-      select_prev = '<C-p>',
-
       snippet_forward = '<C-j>',
       snippet_backward = '<C-k>',
     },
     nerd_font_variant = 'normal',
-    sources = {
-      providers = {
-        {
-          { 'blink.cmp.sources.lsp' },
-          { 'blink.cmp.sources.path' },
-          {
-            'blink.cmp.sources.snippets',
-            score_offset = -3,
-            opts = {
-              search_paths = { vim.fn.expand('~/dotfiles/vim-common') },
-            },
-          },
-        },
-        {
-          { 'blink.cmp.sources.buffer' },
-        },
-      },
-    },
     trigger = { signature_help = { enabled = true } },
     windows = {
       autocomplete = { border = MY_CONFIG.border_style },
