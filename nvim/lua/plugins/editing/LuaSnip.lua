@@ -26,7 +26,7 @@ return {
     require('luasnip').config.set_config({ updateevents = 'TextChanged,TextChangedI' })
 
     require('luasnip.loaders.from_vscode').lazy_load({
-      paths = { '~/dotfiles/vim-common' },
+      paths = { '~/dotfiles/nvim/snippets' },
     })
   end,
 }
