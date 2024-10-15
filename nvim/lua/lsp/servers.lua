@@ -11,6 +11,7 @@
 local servers = {
   clangd = { install = { 'brew', 'llvm' } },
   cssls = { install = { 'npm', 'vscode-langservers-extracted' } },
+  denols = require('lsp.servers.denols'),
   emmet_language_server = require('lsp.servers.emmet_language_server'),
   eslint = require('lsp.servers.eslint'),
   gdscript = { install = { 'brew', 'godot' } },

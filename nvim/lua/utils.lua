@@ -161,9 +161,9 @@ function M.debounce(fn, ms)
 end
 
 ---Get the current snippet engine
----@return 'luasnip' | 'nvim'
+---@return 'nvim'
 function M.get_snippet_engine()
-  return 'luasnip'
+  return 'nvim'
 end
 
 --- Expand snippet using current snippet engine
@@ -171,8 +171,6 @@ end
 function M.snippet_expand(input)
   if M.get_snippet_engine() == 'nvim' then
     vim.snippet.expand(input)
-  else
-    require('luasnip').lsp_expand(input)
   end
 end
 

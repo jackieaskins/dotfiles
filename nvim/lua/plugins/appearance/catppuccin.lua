@@ -64,12 +64,6 @@ return {
           BlinkCmpMenuBorder = { link = 'FloatBorder' },
           BlinkCmpMenuSelection = { bg = colors.surface0 },
 
-          -- LuaSnip
-          LuasnipChoiceNodeActive = { bg = colors.surface0 },
-          LuasnipChoiceNodePassive = { bg = colors.surface0 },
-          LuasnipInsertNodeActive = { bg = colors.surface0 },
-          LuasnipInsertNodePassive = { bg = colors.surface0 },
-
           -- fzf-lua
           FzfLuaHeaderBind = { fg = colors.blue },
           FzfLuaHeaderText = { fg = colors.mauve },

@@ -21,6 +21,7 @@ vim.o.diffopt = gen_list_option(vim.o.diffopt, 'vertical', 'linematch:60')
 vim.o.matchpairs = gen_list_option(vim.o.matchpairs, '<:>')
 vim.o.undofile = true
 vim.o.viewoptions = gen_list_option('cursor', 'folds')
+vim.o.completeopt = 'menu,menuone,noselect'
 
 -- Statusline, Tabline, Winbar
 vim.o.laststatus = 3

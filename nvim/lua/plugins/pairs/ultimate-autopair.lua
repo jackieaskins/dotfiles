@@ -24,8 +24,6 @@ return {
         },
         space2 = { enable = true },
       }),
-      ---@diagnostic disable-next-line: assign-type-mismatch
-      { profile = require('ultimate-autopair.experimental.cmpair').init },
     })
   end,
 }

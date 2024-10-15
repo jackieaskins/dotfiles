@@ -34,22 +34,28 @@ function M.register(group_name, commands, install_dir)
 
   registered_commands[capitalized_group_name] = { commands = commands, install_dir = install_dir }
 
-  user_command('Install' .. capitalized_group_name, function(arg)
-    local cmd_keys = arg.fargs
+  local user_command_names = {
+    'Install' .. capitalized_group_name,
+    capitalized_group_name .. 'Install',
+  }
+  for _, user_command_name in ipairs(user_command_names) do
+    user_command(user_command_name, function(arg)
+      local cmd_keys = arg.fargs
 
-    M.install({
-      {
-        group_name = capitalized_group_name,
-        commands = #cmd_keys > 0 and filter_table_by_keys(commands, cmd_keys) or commands,
-        install_dir = install_dir,
-      },
+      M.install({
+        {
+          group_name = capitalized_group_name,
+          commands = #cmd_keys > 0 and filter_table_by_keys(commands, cmd_keys) or commands,
+          install_dir = install_dir,
+        },
+      })
+    end, {
+      nargs = '*',
+      complete = function()
+        return vim.tbl_keys(commands)
+      end,
     })
-  end, {
-    nargs = '*',
-    complete = function()
-      return vim.tbl_keys(commands)
-    end,
-  })
+  end
 end
 
 ---@class InstallGroup

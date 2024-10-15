@@ -35,10 +35,10 @@ local source_menu_map = {
   buffer = 'buff',
   calc = 'calc',
   lazydev = 'lazy',
-  luasnip = 'snip',
   nvim_lsp = 'lsp',
   nvim_lsp_signature_help = 'sig',
   path = 'path',
+  snippets = 'snip',
 }
 
 ---@type LazySpec
@@ -54,8 +54,14 @@ return {
     'hrsh7th/cmp-nvim-lsp-signature-help',
     'hrsh7th/cmp-path',
     'folke/lazydev.nvim',
-    'saadparwaiz1/cmp_luasnip',
-    { 'jackieaskins/cmp-luasnip-choice', config = true },
+    {
+      'garymjr/nvim-snippets',
+      keys = {
+        { '<C-j>', '<cmd>lua vim.snippet.jump(1)<CR>', mode = { 'i', 's' } },
+        { '<C-k>', '<cmd>lua vim.snippet.jump(-1)<CR>', mode = { 'i', 's' } },
+      },
+      config = true,
+    },
   },
   config = function()
     local cmp = require('cmp')
@@ -71,7 +77,7 @@ return {
       view = { entries = { follow_cursor = true, name = 'custom' } },
       -- Order dictates priority
       sources = cmp.config.sources({
-        { name = 'luasnip' },
+        { name = 'snippets' },
         { name = 'nvim_lsp' },
         { name = 'path' },
         { name = 'nvim_lsp_signature_help' },
