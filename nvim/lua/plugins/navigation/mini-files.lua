@@ -32,7 +32,9 @@ return {
       },
     }
   end,
-  config = true,
+  opts = {
+    mappings = { go_in = '', go_out = '' },
+  },
   init = function()
     local utils = require('utils')
 
@@ -56,6 +58,18 @@ return {
     end
 
     utils.augroup('mini_files', {
+      {
+        'User',
+        pattern = 'MiniFilesWindowOpen',
+        callback = function(args)
+          local win_id = args.data.win_id
+
+          local config = vim.api.nvim_win_get_config(win_id)
+          config.border = MY_CONFIG.border_style
+
+          vim.api.nvim_win_set_config(win_id, config)
+        end,
+      },
       {
         'User',
         pattern = 'MiniFilesActionDelete',
