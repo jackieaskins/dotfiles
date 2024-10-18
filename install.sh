@@ -157,6 +157,7 @@ function backup_and_symlink() {
 echo -e "Backing up and symlinking dotfiles..."
 #                  dotfile                backup
 backup_and_symlink .config/bat            bat
+backup_and_symlink .config/borders        borders
 backup_and_symlink .config/fish           fish
 backup_and_symlink .config/karabiner      karabiner
 backup_and_symlink .config/nvim           nvim

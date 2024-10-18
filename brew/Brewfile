@@ -49,4 +49,7 @@ if RUBY_PLATFORM =~ /darwin/
 
   brew 'awscli'
   brew 'imagemagick'
+
+  tap 'FelixKratz/formulae'
+  brew 'borders'
 end
