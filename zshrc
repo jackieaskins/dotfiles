@@ -45,6 +45,8 @@ eval "$(starship init zsh)"
 setopt auto_cd
 setopt correct correctall
 
+unsetopt BEEP
+
 # Neovim as default editor
 export VISUAL='nvim'
 export EDITOR='nvim'
