@@ -27,7 +27,6 @@ brew 'tree'
 brew 'vim'
 brew 'wget'
 brew 'zsh'
-brew 'zsh-autocomplete'
 brew 'zsh-autosuggestions'
 brew 'zsh-syntax-highlighting'
 
