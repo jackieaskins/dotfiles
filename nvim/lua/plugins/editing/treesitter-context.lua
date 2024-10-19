@@ -3,5 +3,8 @@ return {
   'nvim-treesitter/nvim-treesitter-context',
   ---@module 'treesitter-context'
   ---@type TSContext.UserConfig
-  opts = { multiline_threshold = 1 },
+  opts = {
+    multiline_threshold = 1,
+    multiwindow = true,
+  },
 }
