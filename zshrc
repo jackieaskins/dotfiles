@@ -109,6 +109,8 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 [[ $- == *i* ]] && source "$HOMEBREW_PREFIX/opt/fzf/shell/completion.zsh" 2> /dev/null
 source "$HOMEBREW_PREFIX/opt/fzf/shell/key-bindings.zsh"
 
+export EZA_ICONS_AUTO=on
+
 #--------------------------------------------------------------------#
 #                      ZSH Configuration Files                       #
 #--------------------------------------------------------------------#
