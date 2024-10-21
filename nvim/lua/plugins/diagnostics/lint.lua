@@ -6,7 +6,6 @@ local utils = require('utils')
 
 ---@type table<string, LinterConfig>
 local linters = {
-  fish = { filetypes = { 'fish' } },
   gdlint = {
     filetypes = { 'gdscript' },
     install_cmd = { 'pip', 'git+https://github.com/Scony/godot-gdscript-toolkit.git' },

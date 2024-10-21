@@ -21,6 +21,3 @@ Brewfile.lock.json
 /karabiner/automatic_backups
 
 /bat/config
-
-/fish/fish_variables
-/fish/conf.d/custom.fish

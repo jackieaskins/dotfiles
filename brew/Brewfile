@@ -4,8 +4,6 @@ brew 'bat'
 brew 'cmake' # Neovim dependency
 brew 'eza'
 brew 'fd'
-brew 'fish'
-brew 'fisher'
 brew 'fswatch' # Neovim dependency
 brew 'fzf'
 brew 'gettext' # Neovim dependency

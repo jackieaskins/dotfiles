@@ -15,7 +15,6 @@ return {
       ['init.lua'] = { glyph = '󰢱', hl = 'MiniIconsAzure' },
     },
     filetype = {
-      fish = { glyph = '󰈺', hl = 'MiniIconsAzure' },
       tmux = { glyph = '', hl = 'MiniIconsGreen' },
     },
   },
