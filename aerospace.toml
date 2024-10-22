@@ -1,0 +1,107 @@
+start-at-login = true
+
+# Available commands: https://nikitabobko.github.io/AeroSpace/commands
+after-login-command = []
+after-startup-command = []
+
+# Normalizations. See: https://nikitabobko.github.io/AeroSpace/guide#normalization
+enable-normalization-flatten-containers = false
+enable-normalization-opposite-orientation-for-nested-containers = true
+
+accordion-padding = 15
+
+default-root-container-layout = 'tiles'     # 'tiles|accordion'
+default-root-container-orientation = 'auto' # 'horizontal|vertical|auto'
+
+# See https://nikitabobko.github.io/AeroSpace/guide#on-focus-changed-callbacks
+# See https://nikitabobko.github.io/AeroSpace/commands#move-mouse
+on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+
+# See: https://nikitabobko.github.io/AeroSpace/goodness#disable-hide-app
+automatically-unhide-macos-hidden-apps = false
+
+# See https://nikitabobko.github.io/AeroSpace/guide#key-mapping
+[key-mapping]
+preset = 'qwerty' # 'qwerty|dvorak'
+
+# See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
+[gaps]
+inner.horizontal = 14
+inner.vertical = 14
+outer.left = 14
+outer.bottom = 14
+outer.top = 14
+outer.right = 14
+
+# See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
+# All possible commands: https://nikitabobko.github.io/AeroSpace/commands
+[mode.main.binding]
+
+# See: https://nikitabobko.github.io/AeroSpace/commands#layout
+alt-ctrl-shift-slash = 'layout tiles horizontal vertical'
+alt-ctrl-shift-comma = 'layout accordion vertical horizontal'
+
+# See: https://nikitabobko.github.io/AeroSpace/commands#focus
+alt-ctrl-shift-h = 'focus left'
+alt-ctrl-shift-j = 'focus down'
+alt-ctrl-shift-k = 'focus up'
+alt-ctrl-shift-l = 'focus right'
+
+# See: https://nikitabobko.github.io/AeroSpace/commands#move
+alt-ctrl-shift-cmd-h = 'move left'
+alt-ctrl-shift-cmd-j = 'move down'
+alt-ctrl-shift-cmd-k = 'move up'
+alt-ctrl-shift-cmd-l = 'move right'
+
+# See: https://nikitabobko.github.io/AeroSpace/commands#resize
+alt-ctrl-shift-cmd-minus = 'resize smart -50'
+alt-ctrl-shift-cmd-equal = 'resize smart +50'
+
+# See: https://nikitabobko.github.io/AeroSpace/commands#workspace
+alt-ctrl-shift-1 = 'workspace 1'
+alt-ctrl-shift-2 = 'workspace 2'
+alt-ctrl-shift-3 = 'workspace 3'
+alt-ctrl-shift-4 = 'workspace 4'
+alt-ctrl-shift-5 = 'workspace 5'
+alt-ctrl-shift-6 = 'workspace 6'
+alt-ctrl-shift-7 = 'workspace 7'
+alt-ctrl-shift-8 = 'workspace 8'
+alt-ctrl-shift-9 = 'workspace 9'
+
+# See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
+alt-ctrl-shift-cmd-1 = 'move-node-to-workspace 1'
+alt-ctrl-shift-cmd-2 = 'move-node-to-workspace 2'
+alt-ctrl-shift-cmd-3 = 'move-node-to-workspace 3'
+alt-ctrl-shift-cmd-4 = 'move-node-to-workspace 4'
+alt-ctrl-shift-cmd-5 = 'move-node-to-workspace 5'
+alt-ctrl-shift-cmd-6 = 'move-node-to-workspace 6'
+alt-ctrl-shift-cmd-7 = 'move-node-to-workspace 7'
+alt-ctrl-shift-cmd-8 = 'move-node-to-workspace 8'
+alt-ctrl-shift-cmd-9 = 'move-node-to-workspace 9'
+
+# See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
+alt-ctrl-shift-tab = 'workspace-back-and-forth'
+# See: https://nikitabobko.github.io/AeroSpace/commands#move-workspace-to-monitor
+alt-ctrl-shift-cmd-tab = 'move-workspace-to-monitor --wrap-around next'
+
+# See: https://nikitabobko.github.io/AeroSpace/commands#mode
+alt-ctrl-shift-cmd-semicolon = 'mode service'
+
+# 'service' binding mode declaration.
+# See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
+[mode.service.binding]
+esc = ['reload-config', 'mode main']
+r = ['flatten-workspace-tree', 'mode main'] # reset layout
+f = [
+  'layout floating tiling',
+  'mode main',
+] # Toggle between floating and tiling layout
+backspace = ['close-all-windows-but-current', 'mode main']
+
+# sticky is not yet supported https://github.com/nikitabobko/AeroSpace/issues/2
+#s = ['layout sticky tiling', 'mode main']
+
+alt-ctrl-shift-cmd-h = ['join-with left', 'mode main']
+alt-ctrl-shift-cmd-j = ['join-with down', 'mode main']
+alt-ctrl-shift-cmd-k = ['join-with up', 'mode main']
+alt-ctrl-shift-cmd-l = ['join-with right', 'mode main']

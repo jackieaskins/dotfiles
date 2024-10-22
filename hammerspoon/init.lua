@@ -7,9 +7,6 @@ local hotkeyStore = require('hotkeyStore')
 
 ---@class Custom
 ---@field appKeys? table<string, string>
----@field twmScreenPadding? number
----@field twmWindowFilters? table<string, boolean>
----@field twmWindowGap? number
 
 local ok, custom = pcall(require, 'custom')
 ---@type Custom
@@ -76,11 +73,6 @@ for key, app in pairs(appKeys) do
   end)
 end
 
--- Window switcher
-local registerWindowSwitcherHotKey = hotkeyStore.registerGroup('Window Switcher')
-registerWindowSwitcherHotKey('Next window', appKeyMods, 'tab', hs.window.switcher.nextWindow)
-registerWindowSwitcherHotKey('Previous window', MEH, 'tab', hs.window.switcher.previousWindow)
-
 -- Hotkey store
 hotkeyStore.register('Hotkeys', 'Show hotkeys alert', MEH, 'm', hotkeyStore.show)
 
@@ -90,8 +82,6 @@ hotkeyStore.register('Hotkeys', 'Show hotkeys alert', MEH, 'm', hotkeyStore.show
 
 hs.window.setShadows(false)
 hs.window.animationDuration = 0
-
-require('twm')
 
 ----------------------------------------------------------------------
 --                            Dark Mode                             --
