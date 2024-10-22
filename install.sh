@@ -156,7 +156,6 @@ function backup_and_symlink() {
 
 echo -e "Backing up and symlinking dotfiles..."
 #                  dotfile                backup
-backup_and_symlink .aerospace.toml        aerospace.toml
 backup_and_symlink .config/bat            bat
 backup_and_symlink .config/borders        borders
 backup_and_symlink .config/karabiner      karabiner
