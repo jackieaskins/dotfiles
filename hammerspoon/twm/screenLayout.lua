@@ -1,4 +1,4 @@
-local SCREEN_PADDING = CUSTOM.twmScreenPadding or 10
+local SCREEN_PADDING = CUSTOM.twmScreenPadding or 14
 
 local fnutils = require('fnutils')
 local cache = require('twm.cache')

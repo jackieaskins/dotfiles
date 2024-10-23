@@ -1,4 +1,4 @@
-local WINDOW_GAP = CUSTOM.twmWindowGap or 10
+local WINDOW_GAP = CUSTOM.twmWindowGap or 14
 
 local wf = hs.window.filter
 local windowFilter = require('twm.windowFilter')
