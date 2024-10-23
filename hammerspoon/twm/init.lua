@@ -52,19 +52,7 @@ wf.defaultCurrentSpace:subscribe({ wf.windowDestroyed }, function()
   end
 end)
 
-screenWatcher = hs.screen.watcher.new(function()
-  if screenLayout.getKey() == require('twm.cache').getScreenLayoutKey() then
-    return
-  end
-
-  windowFilter:pause()
-
-  screenLayout.save()
-  screenLayout.createOrLoad()
-  tile()
-
-  windowFilter:resume()
-end)
+screenWatcher = hs.screen.watcher.new(tile)
 screenWatcher:start()
 
 local twmRegister = hotkeyStore.registerGroup('twm')
@@ -131,6 +119,6 @@ twmRegister('maximize window', HYPER, 'm', function()
 end)
 
 twmRegister('reset tiling', HYPER, 'r', function()
-  screenLayout.reset()
+  screenLayout.create()
   tile()
 end)

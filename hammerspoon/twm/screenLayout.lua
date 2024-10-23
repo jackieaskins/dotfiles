@@ -1,16 +1,13 @@
 local SCREEN_PADDING = CUSTOM.twmScreenPadding or 14
 
 local fnutils = require('fnutils')
-local cache = require('twm.cache')
 
 ---@class (exact) ScreenLayout
----@field key string
 ---@field screenIdToSpaceIds table<string, number[]>
 ---@field screenIdToFrame table<string, ScreenFrame>
 ---@field spaceIdToLayout table<integer, string>
 ---@field spaceIdToWindows table<integer, hs.window[]>
 
-local wf = hs.window.filter
 local windowFilter = require('twm.windowFilter')
 
 ---Get a map from space id to array of windows
@@ -86,14 +83,17 @@ local function sortWindows(oldWindowsBySpaceId, newWindowsBySpaceId)
   end
 end
 
+---@type ScreenLayout
+local currentScreenLayout
+
+local M = {}
+
 ---Create a new screen layout based on the current screen configuration
----@return ScreenLayout
-local function createLayout()
+function M.create()
   local windowsBySpaceId = getWindowsBySpaceId()
 
   ---@type ScreenLayout
   local screenLayout = {
-    key = cache.getScreenLayoutKey(),
     screenIdToSpaceIds = {},
     screenIdToFrame = getScreenFrames(),
     spaceIdToLayout = {},
@@ -108,95 +108,7 @@ local function createLayout()
     end
   end
 
-  return screenLayout
-end
-
----@type ScreenLayout
-local currentScreenLayout
-
-local M = {}
-
----Try to load the saved layout for the current screen configuration
-function M.createOrLoad()
-  local cachedLayout = cache.loadLayout()
-  if not cachedLayout then
-    currentScreenLayout = createLayout()
-    return
-  end
-
-  hs.alert.show('Loading saved screen layout')
-
-  -- Add new spaces
-  for screenId, spaceIds in pairs(getOrderedUserSpacesByScreenId()) do
-    local newSpaceCount = #spaceIds
-    local oldSpaceCount = #cachedLayout.screenIdToSpaceIds[screenId]
-
-    while newSpaceCount < oldSpaceCount do
-      hs.spaces.addSpaceToScreen(screenId, false)
-      newSpaceCount = newSpaceCount + 1
-    end
-  end
-  hs.spaces.closeMissionControl()
-
-  -- Move saved windows to correct spaces
-  local firstSpaceId
-  local newSpaceIds = {}
-  local oldToNewSpaceId = {}
-  local newLayouts = {}
-
-  local newSpaceIdsByScreenId = getOrderedUserSpacesByScreenId()
-  for screenId, oldSpaceIds in pairs(cachedLayout.screenIdToSpaceIds) do
-    local newSpaceIdsForScreen = newSpaceIdsByScreenId[screenId]
-
-    for index, oldSpaceId in ipairs(oldSpaceIds) do
-      local newSpaceId = newSpaceIdsForScreen[index]
-
-      if not firstSpaceId then
-        firstSpaceId = newSpaceId
-      end
-
-      newSpaceIds[newSpaceId] = true
-      oldToNewSpaceId[oldSpaceId] = newSpaceId
-      newLayouts[newSpaceId] = cachedLayout.spaceIdToLayout[oldSpaceId]
-    end
-  end
-
-  local oldWindowIdToSpaceId = {}
-  for spaceId, windows in pairs(cachedLayout.spaceIdToWindows) do
-    for _, window in ipairs(windows) do
-      oldWindowIdToSpaceId[window:id()] = spaceId
-    end
-  end
-
-  -- TODO: This is broken on MacOS Sequoia :(
-  for _, window in ipairs(wf.default:getWindows()) do
-    local spaceIds = hs.spaces.windowSpaces(window) or {}
-
-    if #spaceIds == 1 and not window:isFullScreen() then
-      local currentSpaceId = spaceIds[1]
-      local oldSpaceId = oldWindowIdToSpaceId[window:id()]
-      local newSpaceId = oldSpaceId and oldToNewSpaceId[oldSpaceId] or firstSpaceId
-
-      if currentSpaceId ~= newSpaceId then
-        hs.spaces.moveWindowToSpace(window, newSpaceId)
-      end
-    end
-  end
-
-  -- Remove extra spaces
-  for _, spaceIds in pairs(hs.spaces.allSpaces() or {}) do
-    for _, spaceId in ipairs(spaceIds) do
-      if not newSpaceIds[spaceId] and hs.spaces.spaceType(spaceId) == 'user' then
-        hs.spaces.removeSpace(spaceId, false)
-      end
-    end
-  end
-  hs.spaces.closeMissionControl()
-
-  local newScreenLayout = createLayout()
-  newScreenLayout.spaceIdToLayout = newLayouts
-  sortWindows(cachedLayout.spaceIdToWindows, newScreenLayout.spaceIdToWindows)
-  currentScreenLayout = newScreenLayout
+  currentScreenLayout = screenLayout
 end
 
 ---Recalculate the current screen layout windows
@@ -204,19 +116,6 @@ function M.recalculateWindows()
   local spaceIdToWindows = getWindowsBySpaceId()
   sortWindows(currentScreenLayout.spaceIdToWindows, spaceIdToWindows)
   currentScreenLayout.spaceIdToWindows = spaceIdToWindows
-end
-
----Save current layout to cache
-function M.save()
-  cache.saveLayout(currentScreenLayout)
-end
-
-function M.reset()
-  currentScreenLayout = createLayout()
-end
-
-function M.getKey()
-  return currentScreenLayout.key
 end
 
 ---Get a map from screen id to space id
@@ -243,9 +142,5 @@ function M.getSpaceIdToWindowsMap()
   return currentScreenLayout.spaceIdToWindows
 end
 
-M.createOrLoad()
-hs.shutdownCallback = function()
-  M.save()
-end
-
+M.create()
 return M
