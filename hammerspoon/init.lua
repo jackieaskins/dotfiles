@@ -76,14 +76,6 @@ for key, app in pairs(appKeys) do
   end)
 end
 
--- Window switcher
-local registerWindowSwitcherHotKey = hotkeyStore.registerGroup('Window Switcher')
-registerWindowSwitcherHotKey('Next window', appKeyMods, 'tab', hs.window.switcher.nextWindow)
-registerWindowSwitcherHotKey('Previous window', MEH, 'tab', hs.window.switcher.previousWindow)
-
--- Hotkey store
-hotkeyStore.register('Hotkeys', 'Show hotkeys alert', MEH, 'm', hotkeyStore.show)
-
 ----------------------------------------------------------------------
 --                        Window Management                         --
 ----------------------------------------------------------------------
@@ -130,5 +122,6 @@ spotifyNotification:start()
 
 require('hs.ipc').cliInstall(BREW_PREFIX) -- Enables CLI
 hotkeyStore.verify()
+hotkeyStore.addMenubarItem()
 
 hs.alert.show('Loaded HammerSpoon config')

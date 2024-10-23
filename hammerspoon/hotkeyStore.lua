@@ -1,14 +1,18 @@
 local M = {}
 
+---@type hs.menubar | nil
+local menubar = hs.menubar.new(true, 'hotkeys')
+
 local hotkeyGroups = {}
 
 local cmd = '⌘'
 local alt = '⌥'
 local ctrl = '⌃'
 local shift = '⇧'
-local meh = '􀋀' -- Hammerspoon doesn't have a symbol defined for meh
+local meh = '􀫸' -- Hammerspoon doesn't have a symbol defined for meh
 local hyper = '✧'
 
+local modNames = { cmd = cmd, option = alt, ctrl = ctrl, shift = shift, meh = meh, hyper = hyper }
 local modMap = { cmd = cmd, command = cmd, ctrl = ctrl, control = ctrl, alt = alt, option = alt, shift = shift }
 
 ---@param groupName string
@@ -104,8 +108,12 @@ function M.verify()
   end
 end
 
----Show a dialog alert with all of the defined hotkeys
-function M.show()
+---Add menubar item with Hammerspoon hotkeys
+function M.addMenubarItem()
+  if not menubar then
+    return
+  end
+
   local hotkeysByGroup = {}
   for key, value in pairs(hotkeyGroups) do
     local group = hotkeysByGroup[value.groupName] or {}
@@ -113,38 +121,26 @@ function M.show()
     hotkeysByGroup[value.groupName] = group
   end
 
-  local dialogText = {}
-  for groupName, descs in pairs(hotkeysByGroup) do
-    table.insert(dialogText, groupName)
-    for key, desc in pairs(descs) do
-      -- Handles switching key combo for meh key into meh symbol
-      table.insert(dialogText, desc .. ' - ' .. key:gsub(ctrl .. alt .. shift, meh))
+  menubar:setTitle('􀇳')
+
+  local menu = {}
+  for group, hotkeys in pairs(hotkeysByGroup) do
+    table.insert(menu, { title = group, disabled = true })
+
+    for key, desc in pairs(hotkeys) do
+      table.insert(menu, {
+        title = desc .. ' - ' .. key:gsub(ctrl .. alt .. shift, meh):lower(),
+      })
     end
-    table.insert(dialogText, '')
+
+    table.insert(menu, { title = '-' })
   end
 
-  table.insert(
-    dialogText,
-    table.concat({
-      cmd .. ': command ',
-      ctrl .. ': control ',
-      alt .. ': option ',
-      shift .. ': shift ',
-      meh .. ': meh',
-      hyper .. ': hyper',
-    }, ' ')
-  )
+  for name, mod in pairs(modNames) do
+    table.insert(menu, { title = mod .. ' - ' .. name, disabled = true })
+  end
 
-  hs.dialog.alert(
-    hs.screen.mainScreen():fullFrame().center.x,
-    10,
-    function() end,
-    'Hammerspoon Hotkeys',
-    table.concat(dialogText, '\n'),
-    'Dismiss',
-    nil,
-    'informational'
-  )
+  menubar:setMenu(menu)
 end
 
 return M
