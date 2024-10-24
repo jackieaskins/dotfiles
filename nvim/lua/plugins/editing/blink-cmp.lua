@@ -14,7 +14,6 @@ return {
       snippet_backward = '<C-k>',
     },
     nerd_font_variant = 'normal',
-    trigger = { signature_help = { enabled = true } },
     windows = {
       autocomplete = { border = MY_CONFIG.border_style },
       documentation = { border = MY_CONFIG.border_style },

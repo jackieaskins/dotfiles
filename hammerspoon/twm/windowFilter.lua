@@ -15,6 +15,7 @@ local windowFilters = mergeTables({
   Finder = false,
   Flux = false,
   ['Font Book'] = false,
+  Home = false,
   Ice = false,
   ['iPhone Mirroring'] = false,
   ['Karabiner-Elements'] = false,
@@ -23,6 +24,7 @@ local windowFilters = mergeTables({
   Notes = false,
   Passwords = false,
   Raycast = false,
+  Steam = false,
   ['System Settings'] = false,
 }, CUSTOM.twmWindowFilters or {})
 

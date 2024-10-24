@@ -1,15 +1,44 @@
-local M = {}
-
-local hotkeyGroups = {}
-
 local cmd = '⌘'
 local alt = '⌥'
 local ctrl = '⌃'
 local shift = '⇧'
-local meh = '􀋀' -- Hammerspoon doesn't have a symbol defined for meh
+local meh = '􀫸' -- Hammerspoon doesn't have a symbol defined for meh
 local hyper = '✧'
 
-local modMap = { cmd = cmd, command = cmd, ctrl = ctrl, control = ctrl, alt = alt, option = alt, shift = shift }
+local modNames = {
+  cmd = cmd,
+  option = alt,
+  ctrl = ctrl,
+  shift = shift,
+  meh = meh,
+  hyper = hyper,
+}
+local modMap = {
+  cmd = cmd,
+  command = cmd,
+  ctrl = ctrl,
+  control = ctrl,
+  alt = alt,
+  option = alt,
+  shift = shift,
+}
+
+local M = {}
+
+---@type hs.menubar | nil
+local menubar = hs.menubar.new(true, 'hotkeys')
+
+---@type table<string, boolean>
+local definedHotKeys = {}
+
+---@class HotKey
+---@field keys string
+---@field desc string
+---@field mods string[]
+---@field character string
+
+---@type table<string, HotKey[]>
+local hotkeysByGroup = {}
 
 ---@param groupName string
 ---@param desc string
@@ -39,10 +68,19 @@ local function addHotkey(groupName, desc, mods, key)
   end
 
   local modKey = modStr .. string.upper(key)
-  if hotkeyGroups[modKey] then
+  if definedHotKeys[modKey] then
     error('Hot key ' .. modKey .. 'is already defined with description: ' .. desc)
   end
-  hotkeyGroups[modKey] = { desc = desc, groupName = groupName }
+  definedHotKeys[modKey] = true
+
+  local currentKeys = hotkeysByGroup[groupName] or {}
+  table.insert(currentKeys, {
+    keys = modKey,
+    desc = desc,
+    mods = mods,
+    character = key,
+  })
+  hotkeysByGroup[groupName] = currentKeys
 end
 
 ---Bind a hot key and add it to store for display
@@ -94,7 +132,7 @@ function M.verify()
 
   ---@diagnostic disable-next-line: param-type-mismatch
   for _, key in ipairs(hs.hotkey.getHotkeys()) do
-    if not hotkeyGroups[key.idx] then
+    if not definedHotKeys[key.idx] then
       table.insert(missingHotkeys, key.idx)
     end
   end
@@ -104,47 +142,35 @@ function M.verify()
   end
 end
 
----Show a dialog alert with all of the defined hotkeys
-function M.show()
-  local hotkeysByGroup = {}
-  for key, value in pairs(hotkeyGroups) do
-    local group = hotkeysByGroup[value.groupName] or {}
-    group[key] = value.desc
-    hotkeysByGroup[value.groupName] = group
+---Add menubar item with Hammerspoon hotkeys
+function M.addMenubarItem()
+  if not menubar then
+    return
   end
 
-  local dialogText = {}
-  for groupName, descs in pairs(hotkeysByGroup) do
-    table.insert(dialogText, groupName)
-    for key, desc in pairs(descs) do
-      -- Handles switching key combo for meh key into meh symbol
-      table.insert(dialogText, desc .. ' - ' .. key:gsub(ctrl .. alt .. shift, meh))
+  menubar:setTitle('􀇳')
+
+  local menu = {}
+  for group, hotkeys in pairs(hotkeysByGroup) do
+    table.insert(menu, { title = group, disabled = true })
+
+    for _, hotkey in ipairs(hotkeys) do
+      table.insert(menu, {
+        title = hotkey.desc .. ' - ' .. hotkey.keys:gsub(ctrl .. alt .. shift, meh),
+        fn = function()
+          hs.eventtap.keyStroke(hotkey.mods, hotkey.character)
+        end,
+      })
     end
-    table.insert(dialogText, '')
+
+    table.insert(menu, { title = '-' })
   end
 
-  table.insert(
-    dialogText,
-    table.concat({
-      cmd .. ': command ',
-      ctrl .. ': control ',
-      alt .. ': option ',
-      shift .. ': shift ',
-      meh .. ': meh',
-      hyper .. ': hyper',
-    }, ' ')
-  )
+  for name, mod in pairs(modNames) do
+    table.insert(menu, { title = mod .. ' - ' .. name, disabled = true })
+  end
 
-  hs.dialog.alert(
-    hs.screen.mainScreen():fullFrame().center.x,
-    10,
-    function() end,
-    'Hammerspoon Hotkeys',
-    table.concat(dialogText, '\n'),
-    'Dismiss',
-    nil,
-    'informational'
-  )
+  menubar:setMenu(menu)
 end
 
 return M

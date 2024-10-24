@@ -30,23 +30,24 @@ bindkey -M menuselect '^P' reverse-menu-complete
 
 autoload -Uz compinit; compinit
 
-globalias() {
+expand-alias-and-self-insert() {
   zle _expand_alias
   zle self-insert
 }
-zle -N globalias
+zle -N expand-alias-and-self-insert
 
-globaliasret() {
+expand-alias-and-accept-line() {
   zle _expand_alias
   zle accept-line
 }
-zle -N globaliasret
+zle -N expand-alias-and-accept-line
+ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(expand-alias-and-accept-line)
 
 # space & enter expand all aliases, including global
-bindkey -M emacs " " globalias
-bindkey -M viins " " globalias
-bindkey -M emacs "^M" globaliasret
-bindkey -M viins "^M" globaliasret
+bindkey -M emacs " " expand-alias-and-self-insert
+bindkey -M viins " " expand-alias-and-self-insert
+bindkey -M emacs "^M" expand-alias-and-accept-line
+bindkey -M viins "^M" expand-alias-and-accept-line
 
 # control-space to make a normal space
 bindkey -M emacs "^ " magic-space

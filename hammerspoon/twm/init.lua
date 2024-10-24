@@ -1,4 +1,4 @@
-local WINDOW_GAP = CUSTOM.twmWindowGap or 10
+local WINDOW_GAP = CUSTOM.twmWindowGap or 14
 
 local wf = hs.window.filter
 local windowFilter = require('twm.windowFilter')
@@ -52,24 +52,12 @@ wf.defaultCurrentSpace:subscribe({ wf.windowDestroyed }, function()
   end
 end)
 
-screenWatcher = hs.screen.watcher.new(function()
-  if screenLayout.getKey() == require('twm.cache').getScreenLayoutKey() then
-    return
-  end
-
-  windowFilter:pause()
-
-  screenLayout.save()
-  screenLayout.createOrLoad()
-  tile()
-
-  windowFilter:resume()
-end)
+screenWatcher = hs.screen.watcher.new(tile)
 screenWatcher:start()
 
-local twmRegister = hotkeyStore.registerGroup('twm')
+local twmRegister = hotkeyStore.registerGroup('Window Management')
 
-twmRegister('tile', MEH, 't', tile)
+twmRegister('Tile', MEH, 't', tile)
 
 ---Set the layout for the provided spaceId and retile
 ---@param spaceId number
@@ -79,16 +67,16 @@ local function setSpaceLayout(spaceId, layout)
   tile()
   hs.alert.show(layout)
 end
-twmRegister('toggle between monocle and tall', MEH, 's', function()
+twmRegister('Toggle between monocle and tall', MEH, 's', function()
   local spaceId = hs.spaces.focusedSpace()
   local currentLayout = screenLayout.getSpaceIdToLayoutMap()[spaceId]
   setSpaceLayout(spaceId, currentLayout == 'tall' and 'monocle' or 'tall')
 end)
 
-twmRegister('focus window west', MEH, 'h', wf.focusWest)
-twmRegister('focus window south', MEH, 'j', wf.focusSouth)
-twmRegister('focus window north', MEH, 'k', wf.focusNorth)
-twmRegister('focus window east', MEH, 'l', wf.focusEast)
+twmRegister('Focus window west', MEH, 'h', wf.focusWest)
+twmRegister('Focus window south', MEH, 'j', wf.focusSouth)
+twmRegister('Focus window north', MEH, 'k', wf.focusNorth)
+twmRegister('Focus window east', MEH, 'l', wf.focusEast)
 
 ---Swap focused window with window in direction
 ---@param direction 'West' | 'South' | 'North' | 'East'
@@ -117,12 +105,12 @@ local function swapWindow(direction)
     end
   end
 end
-twmRegister('swap window west', HYPER, 'h', swapWindow('West'))
-twmRegister('swap window south', HYPER, 'j', swapWindow('South'))
-twmRegister('swap window north', HYPER, 'k', swapWindow('North'))
-twmRegister('swap window east', HYPER, 'l', swapWindow('East'))
+twmRegister('Swap window west', HYPER, 'h', swapWindow('West'))
+twmRegister('Swap window south', HYPER, 'j', swapWindow('South'))
+twmRegister('Swap window north', HYPER, 'k', swapWindow('North'))
+twmRegister('Swap window east', HYPER, 'l', swapWindow('East'))
 
-twmRegister('maximize window', HYPER, 'm', function()
+twmRegister('Maximize window', HYPER, 'm', function()
   local focusedWindow = hs.window.focusedWindow()
   if not windowFilter:isWindowAllowed(focusedWindow) then
     local screenId = hs.screen.mainScreen():getUUID()
@@ -130,7 +118,7 @@ twmRegister('maximize window', HYPER, 'm', function()
   end
 end)
 
-twmRegister('reset tiling', HYPER, 'r', function()
-  screenLayout.reset()
+twmRegister('Reset tiling', HYPER, 'r', function()
+  screenLayout.create()
   tile()
 end)
