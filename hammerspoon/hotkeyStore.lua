@@ -1,10 +1,3 @@
-local M = {}
-
----@type hs.menubar | nil
-local menubar = hs.menubar.new(true, 'hotkeys')
-
-local hotkeyGroups = {}
-
 local cmd = '⌘'
 local alt = '⌥'
 local ctrl = '⌃'
@@ -12,8 +5,40 @@ local shift = '⇧'
 local meh = '􀫸' -- Hammerspoon doesn't have a symbol defined for meh
 local hyper = '✧'
 
-local modNames = { cmd = cmd, option = alt, ctrl = ctrl, shift = shift, meh = meh, hyper = hyper }
-local modMap = { cmd = cmd, command = cmd, ctrl = ctrl, control = ctrl, alt = alt, option = alt, shift = shift }
+local modNames = {
+  cmd = cmd,
+  option = alt,
+  ctrl = ctrl,
+  shift = shift,
+  meh = meh,
+  hyper = hyper,
+}
+local modMap = {
+  cmd = cmd,
+  command = cmd,
+  ctrl = ctrl,
+  control = ctrl,
+  alt = alt,
+  option = alt,
+  shift = shift,
+}
+
+local M = {}
+
+---@type hs.menubar | nil
+local menubar = hs.menubar.new(true, 'hotkeys')
+
+---@type table<string, boolean>
+local definedHotKeys = {}
+
+---@class HotKey
+---@field keys string
+---@field desc string
+---@field mods string[]
+---@field character string
+
+---@type table<string, HotKey[]>
+local hotkeysByGroup = {}
 
 ---@param groupName string
 ---@param desc string
@@ -43,10 +68,19 @@ local function addHotkey(groupName, desc, mods, key)
   end
 
   local modKey = modStr .. string.upper(key)
-  if hotkeyGroups[modKey] then
+  if definedHotKeys[modKey] then
     error('Hot key ' .. modKey .. 'is already defined with description: ' .. desc)
   end
-  hotkeyGroups[modKey] = { desc = desc, groupName = groupName }
+  definedHotKeys[modKey] = true
+
+  local currentKeys = hotkeysByGroup[groupName] or {}
+  table.insert(currentKeys, {
+    keys = modKey,
+    desc = desc,
+    mods = mods,
+    character = key,
+  })
+  hotkeysByGroup[groupName] = currentKeys
 end
 
 ---Bind a hot key and add it to store for display
@@ -98,7 +132,7 @@ function M.verify()
 
   ---@diagnostic disable-next-line: param-type-mismatch
   for _, key in ipairs(hs.hotkey.getHotkeys()) do
-    if not hotkeyGroups[key.idx] then
+    if not definedHotKeys[key.idx] then
       table.insert(missingHotkeys, key.idx)
     end
   end
@@ -114,22 +148,18 @@ function M.addMenubarItem()
     return
   end
 
-  local hotkeysByGroup = {}
-  for key, value in pairs(hotkeyGroups) do
-    local group = hotkeysByGroup[value.groupName] or {}
-    group[key] = value.desc
-    hotkeysByGroup[value.groupName] = group
-  end
-
   menubar:setTitle('􀇳')
 
   local menu = {}
   for group, hotkeys in pairs(hotkeysByGroup) do
     table.insert(menu, { title = group, disabled = true })
 
-    for key, desc in pairs(hotkeys) do
+    for _, hotkey in ipairs(hotkeys) do
       table.insert(menu, {
-        title = desc .. ' - ' .. key:gsub(ctrl .. alt .. shift, meh):lower(),
+        title = hotkey.desc .. ' - ' .. hotkey.keys:gsub(ctrl .. alt .. shift, meh),
+        fn = function()
+          hs.eventtap.keyStroke(hotkey.mods, hotkey.character)
+        end,
       })
     end
 
