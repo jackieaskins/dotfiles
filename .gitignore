@@ -19,5 +19,3 @@ Brewfile.lock.json
 !/hammerspoon/Spoons/SpoonInstall.spoon/
 /hammerspoon/custom.lua
 /karabiner/automatic_backups
-
-/bat/config

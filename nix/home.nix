@@ -1,27 +1,33 @@
-{ config, pkgs, ... }:
-{
+{ inputs, config, pkgs, ... }: {
   programs.home-manager.enable = true;
   home.stateVersion = "24.05";
 
   home.username = "jackie";
   home.homeDirectory = "/Users/jackie";
 
-  home.sessionPath = [ "$HOME/dotfiles/bin" ];
+  home.sessionPath = [ "Users/jackie/dotfiles/bin" ];
 
   home.packages = [
     pkgs.autossh
-    pkgs.delta
     pkgs.fd
-    pkgs.git
     pkgs.neovim
+    pkgs.nixd
+    pkgs.nixfmt
     pkgs."pre-commit"
     pkgs.ripgrep
+    pkgs.stylua
     pkgs.tree
   ];
 
+  nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+
   home.file = {
-    ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "/Users/jackie/dotfiles/nvim";
-    ".config/starship.toml".source = config.lib.file.mkOutOfStoreSymlink "/Users/jackie/dotfiles/starship.toml";
+    ".config/nvim".source =
+      config.lib.file.mkOutOfStoreSymlink "/Users/jackie/dotfiles/nvim";
+    ".config/starship.toml".source = config.lib.file.mkOutOfStoreSymlink
+      "/Users/jackie/dotfiles/starship.toml";
+    ".hammerspoon".source =
+      config.lib.file.mkOutOfStoreSymlink "/Users/jackie/dotfiles/hammerspoon";
   };
 
   programs.zsh = {
@@ -30,9 +36,10 @@
     autosuggestion.enable = true;
     historySubstringSearch.enable = true;
     syntaxHighlighting.enable = true;
-    initExtra = /* zsh */ ''
-      source $HOME/dotfiles/zshrc
-    '';
+    initExtra = # zsh
+      ''
+        source $HOME/dotfiles/zshrc
+      '';
   };
 
   programs.bat.enable = true;
@@ -47,7 +54,8 @@
   programs.fzf = {
     enable = true;
     enableZshIntegration = true;
-    defaultCommand = "rg --files --hidden --follow --glob '!.git/*' --glob '!*.class'";
+    defaultCommand =
+      "rg --files --hidden --follow --glob '!.git/*' --glob '!*.class'";
     defaultOptions = [
       "--highlight-line"
       "--cycle"
@@ -86,19 +94,16 @@
   programs.tmux = {
     enable = true;
     sensibleOnTop = false;
-    extraConfig = /* tmux */ ''
-      source $HOME/dotfiles/tmux.conf
-    '';
-    plugins = [
-      pkgs.tmuxPlugins."vim-tmux-navigator"
-    ];
+    extraConfig = # tmux
+      ''
+        source $HOME/dotfiles/tmux.conf
+      '';
+    plugins = [ pkgs.tmuxPlugins."vim-tmux-navigator" ];
   };
 
   programs.zoxide = {
     enable = true;
     enableZshIntegration = true;
-    options = [
-      "--cmd cd"
-    ];
+    options = [ "--cmd cd" ];
   };
 }
