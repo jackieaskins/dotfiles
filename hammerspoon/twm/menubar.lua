@@ -14,7 +14,7 @@ function M.update()
   local currentLayout = require('twm.layout').get()
 
   local currentSpaceId = hs.spaces.focusedSpace()
-  local icon = currentLayout == 'monocle' and '􀏭' or '􀇵'
+  local icon = currentLayout == 'stack' and '􀏭' or '􀇵'
   local currentSpaceWindows = hs.fnutils.filter(utils.menubarCurrentWF:getWindows(), function(window)
     return hs.fnutils.contains(hs.spaces.windowSpaces(window), currentSpaceId)
   end)

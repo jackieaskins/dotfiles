@@ -19,7 +19,7 @@ local function tile()
       local windows = screenLayout.getSpaceIdToWindowsMap()[spaceId] or {}
 
       if #windows == 1 then
-        supportedLayouts.monocle(windows, screenFrame, WINDOW_GAP)
+        supportedLayouts.stack(windows, screenFrame, WINDOW_GAP)
       elseif #windows > 1 then
         supportedLayouts[layout](windows, screenFrame, WINDOW_GAP)
       end
@@ -67,10 +67,10 @@ local function setSpaceLayout(spaceId, layout)
   tile()
   hs.alert.show(layout)
 end
-twmRegister('Toggle between monocle and tall', MEH, 's', function()
+twmRegister('Toggle between stack and tall', MEH, 's', function()
   local spaceId = hs.spaces.focusedSpace()
   local currentLayout = screenLayout.getSpaceIdToLayoutMap()[spaceId]
-  setSpaceLayout(spaceId, currentLayout == 'tall' and 'monocle' or 'tall')
+  setSpaceLayout(spaceId, currentLayout == 'tall' and 'stack' or 'tall')
 end)
 
 twmRegister('Focus window west', MEH, 'h', wf.focusWest)
@@ -114,7 +114,7 @@ twmRegister('Maximize window', HYPER, 'm', function()
   local focusedWindow = hs.window.focusedWindow()
   if not windowFilter:isWindowAllowed(focusedWindow) then
     local screenId = hs.screen.mainScreen():getUUID()
-    supportedLayouts.monocle({ focusedWindow }, screenLayout.getScreenIdToFrameMap()[screenId], WINDOW_GAP)
+    supportedLayouts.stack({ focusedWindow }, screenLayout.getScreenIdToFrameMap()[screenId], WINDOW_GAP)
   end
 end)
 
