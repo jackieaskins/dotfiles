@@ -26,14 +26,24 @@
     };
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, nix-darwin, nix-homebrew, ... }:
+  outputs =
+    inputs@{
+      home-manager,
+      nix-darwin,
+      nix-homebrew,
+      nixpkgs,
+      ...
+    }:
     let
+      user = builtins.getEnv "USER";
+      home-dir = builtins.getEnv "HOME";
       system = "aarch64-darwin";
       pkgs = import nixpkgs {
         inherit system;
         overlays = [ inputs.neovim-nightly-overlay.overlays.default ];
       };
-    in {
+    in
+    {
       darwinConfigurations.personal = nix-darwin.lib.darwinSystem {
         modules = [
           ./configuration.nix
@@ -41,16 +51,22 @@
           {
             nix-homebrew = {
               enable = true;
-              user = "jackie";
+              inherit user;
             };
           }
         ];
-        specialArgs = { inherit inputs; };
+        specialArgs = {
+          inherit inputs;
+        };
       };
 
-      homeConfigurations.jackie = home-manager.lib.homeManagerConfiguration {
+      homeConfigurations."${user}" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        extraSpecialArgs = { inherit inputs; };
+        extraSpecialArgs = {
+          inherit home-dir;
+          inherit inputs;
+          inherit user;
+        };
         modules = [ ./home.nix ];
       };
     };

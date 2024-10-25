@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   system.stateVersion = 5;
 
   nixpkgs.config.allowUnfree = true;
@@ -22,7 +23,10 @@
 
   homebrew = {
     enable = true;
-    casks = [ "hammerspoon" "sf-symbols" ];
+    casks = [
+      "hammerspoon"
+      "sf-symbols"
+    ];
     onActivation.cleanup = "zap";
     onActivation.autoUpdate = true;
     onActivation.upgrade = true;

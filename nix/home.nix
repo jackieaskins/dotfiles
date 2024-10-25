@@ -1,33 +1,37 @@
-{ inputs, config, pkgs, ... }: {
+{
+  inputs,
+  config,
+  pkgs,
+  user,
+  home-dir,
+  ...
+}:
+{
   programs.home-manager.enable = true;
   home.stateVersion = "24.05";
 
-  home.username = "jackie";
-  home.homeDirectory = "/Users/jackie";
+  home.username = user;
+  home.homeDirectory = home-dir;
 
-  home.sessionPath = [ "Users/jackie/dotfiles/bin" ];
+  home.sessionPath = [ "${home-dir}/dotfiles/bin" ];
 
   home.packages = [
     pkgs.autossh
     pkgs.fd
     pkgs.neovim
     pkgs.nixd
-    pkgs.nixfmt
-    pkgs."pre-commit"
+    pkgs.nixfmt-rfc-style
+    pkgs.pre-commit
     pkgs.ripgrep
     pkgs.stylua
-    pkgs.tree
   ];
 
   nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 
   home.file = {
-    ".config/nvim".source =
-      config.lib.file.mkOutOfStoreSymlink "/Users/jackie/dotfiles/nvim";
-    ".config/starship.toml".source = config.lib.file.mkOutOfStoreSymlink
-      "/Users/jackie/dotfiles/starship.toml";
-    ".hammerspoon".source =
-      config.lib.file.mkOutOfStoreSymlink "/Users/jackie/dotfiles/hammerspoon";
+    ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${home-dir}/dotfiles/nvim";
+    ".config/starship.toml".source = config.lib.file.mkOutOfStoreSymlink "${home-dir}/dotfiles/starship.toml";
+    ".hammerspoon".source = config.lib.file.mkOutOfStoreSymlink "${home-dir}/dotfiles/hammerspoon";
   };
 
   programs.zsh = {
@@ -36,6 +40,11 @@
     autosuggestion.enable = true;
     historySubstringSearch.enable = true;
     syntaxHighlighting.enable = true;
+    shellAliases = {
+      nix-update = "nix flake update --flake $HOME/dotfiles/nix";
+      nix-rebuild-darwin = "darwin-rebuild switch --flake $HOME/dotfiles/nix#personal --impure";
+      nix-rebuild-home = "home-manager switch --flake $HOME/dotfiles/nix --impure";
+    };
     initExtra = # zsh
       ''
         source $HOME/dotfiles/zshrc
@@ -54,8 +63,7 @@
   programs.fzf = {
     enable = true;
     enableZshIntegration = true;
-    defaultCommand =
-      "rg --files --hidden --follow --glob '!.git/*' --glob '!*.class'";
+    defaultCommand = "rg --files --hidden --follow --glob '!.git/*' --glob '!*.class'";
     defaultOptions = [
       "--highlight-line"
       "--cycle"
