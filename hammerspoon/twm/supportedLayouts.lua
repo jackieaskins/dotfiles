@@ -6,6 +6,8 @@
 
 ---@alias Layout fun(windows: hs.window[], screenFrame: ScreenFrame, gap: number)
 
+local stackGap = CUSTOM.twmStackGap or 15
+
 local function getWinWidth(screenFrame, gap, numCols)
   -- Total width of the screen
   -- Minus the number of vertical gaps (one less than the number of columns)
@@ -24,19 +26,28 @@ local M = {}
 
 ---Floating
 ---@type Layout
----@diagnostic disable-next-line: unused-local
-function M.floating(windows, screenFrame, gap) end
+function M.floating() end
 
----Monocle
+---Stack
 ---@type Layout
----@diagnostic disable-next-line: unused-local
-function M.monocle(windows, screenFrame, gap)
-  for _, window in ipairs(windows) do
+function M.stack(windows, screenFrame)
+  local winHeight = screenFrame.h - (stackGap * math.min(2, #windows - 1))
+
+  for index, window in ipairs(windows) do
+    local y
+    if index == 1 then
+      y = screenFrame.y
+    elseif index == 2 or index ~= #windows then
+      y = screenFrame.y + stackGap
+    else
+      y = screenFrame.y + (2 * stackGap)
+    end
+
     window:setFrame({
       x = screenFrame.x,
-      y = screenFrame.y,
+      y = y,
       w = screenFrame.w,
-      h = screenFrame.h,
+      h = winHeight,
     })
   end
 end

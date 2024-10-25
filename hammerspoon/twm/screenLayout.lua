@@ -1,10 +1,7 @@
-local SCREEN_PADDING = CUSTOM.twmScreenPadding or 14
-
 local fnutils = require('fnutils')
 
 ---@class (exact) ScreenLayout
 ---@field screenIdToSpaceIds table<string, number[]>
----@field screenIdToFrame table<string, ScreenFrame>
 ---@field spaceIdToLayout table<integer, string>
 ---@field spaceIdToWindows table<integer, hs.window[]>
 
@@ -46,22 +43,6 @@ local function getOrderedUserSpacesByScreenId()
   return spacesByScreenId
 end
 
----Get the frames for the current screens
----@return table<string, ScreenFrame>
-local function getScreenFrames()
-  local screenFrames = {}
-  for _, screen in ipairs(hs.screen.allScreens() or {}) do
-    local screenFrame = screen:frame()
-    screenFrames[screen:getUUID()] = {
-      x = screenFrame.x + SCREEN_PADDING,
-      y = screenFrame.y + SCREEN_PADDING,
-      w = screenFrame.w - (SCREEN_PADDING * 2),
-      h = screenFrame.h - (SCREEN_PADDING * 2),
-    }
-  end
-  return screenFrames
-end
-
 ---Sort the windows on all spaces
 ---@param oldWindowsBySpaceId table<number, hs.window[]>
 ---@param newWindowsBySpaceId table<number, hs.window[]>
@@ -95,7 +76,6 @@ function M.create()
   ---@type ScreenLayout
   local screenLayout = {
     screenIdToSpaceIds = {},
-    screenIdToFrame = getScreenFrames(),
     spaceIdToLayout = {},
     spaceIdToWindows = {},
   }
@@ -128,12 +108,6 @@ end
 ---@return table<integer, string>
 function M.getSpaceIdToLayoutMap()
   return currentScreenLayout.spaceIdToLayout
-end
-
----Get a map from screen id to frame
----@return table<string, ScreenFrame>
-function M.getScreenIdToFrameMap()
-  return currentScreenLayout.screenIdToFrame
 end
 
 ---Get a map from space id to windows

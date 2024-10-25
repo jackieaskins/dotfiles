@@ -10,6 +10,7 @@ local hotkeyStore = require('hotkeyStore')
 ---@field twmScreenPadding? number
 ---@field twmWindowFilters? table<string, boolean>
 ---@field twmWindowGap? number
+---@field twmStackGap? number
 
 local ok, custom = pcall(require, 'custom')
 ---@type Custom
