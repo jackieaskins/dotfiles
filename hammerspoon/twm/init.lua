@@ -1,3 +1,4 @@
+local SCREEN_PADDING = CUSTOM.twmScreenPadding or 14
 local WINDOW_GAP = CUSTOM.twmWindowGap or 14
 
 local wf = hs.window.filter
@@ -10,12 +11,24 @@ local screenLayout = require('twm.screenLayout')
 -- TODO: Detect space changes
 -- TODO: Add menubar icon
 
+---Add padding to screen frame
+---@param screenFrame hs.geometry
+---@return ScreenFrame
+local function padScreenFrame(screenFrame)
+  return {
+    x = screenFrame.x + SCREEN_PADDING,
+    y = screenFrame.y + SCREEN_PADDING,
+    w = screenFrame.w - (SCREEN_PADDING * 2),
+    h = screenFrame.h - (SCREEN_PADDING * 2),
+  }
+end
+
 ---Tile all of the current spaces
 local function tile()
   for screenId, spaceIds in pairs(screenLayout.getScreenIdToSpaceIdsMap()) do
     for _, spaceId in ipairs(spaceIds) do
       local layout = screenLayout.getSpaceIdToLayoutMap()[spaceId]
-      local screenFrame = screenLayout.getScreenIdToFrameMap()[screenId]
+      local screenFrame = padScreenFrame(hs.screen.find(screenId):frame())
       local windows = screenLayout.getSpaceIdToWindowsMap()[spaceId] or {}
 
       if #windows == 1 then
@@ -113,8 +126,7 @@ twmRegister('Swap window east', HYPER, 'l', swapWindow('East'))
 twmRegister('Maximize window', HYPER, 'm', function()
   local focusedWindow = hs.window.focusedWindow()
   if not windowFilter:isWindowAllowed(focusedWindow) then
-    local screenId = hs.screen.mainScreen():getUUID()
-    supportedLayouts.stack({ focusedWindow }, screenLayout.getScreenIdToFrameMap()[screenId], WINDOW_GAP)
+    supportedLayouts.stack({ focusedWindow }, padScreenFrame(focusedWindow:screen():frame()), WINDOW_GAP)
   end
 end)
 
