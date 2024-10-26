@@ -23,9 +23,11 @@ in
 
   home.packages = [
     pkgs.autossh
+    pkgs.awscli2
     pkgs.fd
     pkgs.lua-language-server
     pkgs.neovim
+    pkgs.nil
     pkgs.nixd
     pkgs.nixfmt-rfc-style
     pkgs.pre-commit

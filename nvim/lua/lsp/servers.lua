@@ -21,6 +21,7 @@ local servers = {
   jdtls = require('lsp.servers.jdtls'),
   jsonls = require('lsp.servers.jsonls'),
   lua_ls = require('lsp.servers.lua_ls'),
+  nil_ls = {},
   nixd = require('lsp.servers.nixd'),
   omnisharp = require('lsp.servers.omnisharp'),
   pyright = { install = { 'npm', 'pyright' } },

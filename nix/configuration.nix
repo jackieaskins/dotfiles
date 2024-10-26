@@ -11,6 +11,11 @@
 
   programs.zsh.enable = true;
 
+  environment.systemPackages = [
+    pkgs.mas
+    pkgs.qmk
+  ];
+
   services.jankyborders = {
     enable = true;
     active_color = "0xFFA6DA95";
@@ -24,6 +29,7 @@
     casks = [
       "firefox"
       "hammerspoon"
+      "jordanbaird-ice"
       "karabiner-elements"
       "noTunes"
       "raycast"
