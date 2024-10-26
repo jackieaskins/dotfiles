@@ -54,17 +54,6 @@ windowFilter:subscribe({
   tile()
 end)
 
-wf.defaultCurrentSpace:subscribe({ wf.windowDestroyed }, function()
-  local focusedWindow = hs.window.focusedWindow()
-
-  if not focusedWindow or not focusedWindow:isVisible() then
-    local windows = wf.defaultCurrentSpace:getWindows()
-    if #windows >= 1 then
-      windows[1]:focus()
-    end
-  end
-end)
-
 screenWatcher = hs.screen.watcher.new(tile)
 screenWatcher:start()
 
