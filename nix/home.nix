@@ -1,11 +1,17 @@
 {
-  inputs,
   config,
+  home-dir,
+  inputs,
   pkgs,
   user,
-  home-dir,
   ...
 }:
+let
+  catppuccin = {
+    enable = true;
+    flavor = "macchiato";
+  };
+in
 {
   programs.home-manager.enable = true;
   home.stateVersion = "24.05";
@@ -18,6 +24,7 @@
   home.packages = [
     pkgs.autossh
     pkgs.fd
+    pkgs.lua-language-server
     pkgs.neovim
     pkgs.nixd
     pkgs.nixfmt-rfc-style
@@ -30,6 +37,7 @@
 
   home.file = {
     ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${home-dir}/dotfiles/nvim";
+    ".config/karabiner".source = config.lib.file.mkOutOfStoreSymlink "${home-dir}/dotfiles/karabiner";
     ".config/starship.toml".source = config.lib.file.mkOutOfStoreSymlink "${home-dir}/dotfiles/starship.toml";
     ".hammerspoon".source = config.lib.file.mkOutOfStoreSymlink "${home-dir}/dotfiles/hammerspoon";
   };
@@ -44,6 +52,7 @@
       nix-update = "nix flake update --flake $HOME/dotfiles/nix";
       nix-rebuild-darwin = "darwin-rebuild switch --flake $HOME/dotfiles/nix#personal --impure";
       nix-rebuild-home = "home-manager switch --flake $HOME/dotfiles/nix --impure";
+      nix-rebuild-all = "nix-rebuild-darwin && nix-rebuild-home";
     };
     initExtra = # zsh
       ''
@@ -51,7 +60,13 @@
       '';
   };
 
-  programs.bat.enable = true;
+  programs.bat = {
+    enable = true;
+    inherit catppuccin;
+    config = {
+      theme = "Catppuccin Macchiato";
+    };
+  };
 
   programs.eza = {
     enable = true;
@@ -91,6 +106,24 @@
       scrollbar = "blue";
       separator = "magenta";
       spinner = "magenta";
+    };
+  };
+
+  programs.git = {
+    enable = true;
+    delta = {
+      enable = true;
+      inherit catppuccin;
+      options = {
+        features = "catppuccin-macchiato";
+        commit-decoration-style = "yellow box ul";
+        commit-style = "yellow";
+        file-decoration-style = "blue ul";
+        file-style = "blue";
+        hunk-header-style = "omit";
+        navigate = true;
+        true-color = "always";
+      };
     };
   };
 

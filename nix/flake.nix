@@ -24,10 +24,13 @@
       url = "github:zhaofengli-wip/nix-homebrew";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    catppuccin.url = "github:catppuccin/nix";
   };
 
   outputs =
     inputs@{
+      catppuccin,
       home-manager,
       nix-darwin,
       nix-homebrew,
@@ -67,7 +70,10 @@
           inherit inputs;
           inherit user;
         };
-        modules = [ ./home.nix ];
+        modules = [
+          ./home.nix
+          catppuccin.homeManagerModules.catppuccin
+        ];
       };
     };
 }

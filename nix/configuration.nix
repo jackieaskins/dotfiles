@@ -11,8 +11,6 @@
 
   programs.zsh.enable = true;
 
-  environment.systemPackages = [ pkgs.raycast ];
-
   services.jankyborders = {
     enable = true;
     active_color = "0xFFA6DA95";
@@ -24,8 +22,14 @@
   homebrew = {
     enable = true;
     casks = [
+      "firefox"
       "hammerspoon"
+      "karabiner-elements"
+      "noTunes"
+      "raycast"
       "sf-symbols"
+      "spotify"
+      "zen-browser"
     ];
     onActivation.cleanup = "zap";
     onActivation.autoUpdate = true;
@@ -35,6 +39,13 @@
   security.pam.enableSudoTouchIdAuth = true;
 
   system.defaults = {
+    CustomSystemPreferences = {
+      "digital.twisted.noTunes" = {
+        hideIcon = 1;
+        replacement = /Applications/Spotify.app;
+      };
+    };
+
     NSGlobalDomain = {
       AppleEnableMouseSwipeNavigateWithScrolls = true;
       AppleInterfaceStyle = "Dark";
@@ -49,9 +60,11 @@
       autohide = true;
       magnification = true;
       persistent-apps = [
+        "/System/Applications/Launchpad.app"
         "/System/Applications/Notes.app"
         "/System/Applications/Messages.app"
-        "/Applications/Safari.app"
+        "/Applications/Spotify.app"
+        "/Applications/Zen Browser.app"
         "/System/Applications/Utilities/Terminal.app"
         "/System/Applications/Passwords.app"
       ];
