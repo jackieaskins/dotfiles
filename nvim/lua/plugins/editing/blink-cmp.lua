@@ -1,7 +1,7 @@
 ---@type LazySpec
 return {
   'saghen/blink.cmp',
-  version = 'v0.*',
+  build = 'nix run .#build-plugin',
   enabled = MY_CONFIG.completion_source == 'blink',
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
