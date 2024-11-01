@@ -25,9 +25,12 @@ return {
       signature_help = { enabled = true },
     },
     windows = {
-      autocomplete = { border = MY_CONFIG.border_style, draw = 'reversed' },
+      autocomplete = {
+        border = MY_CONFIG.border_style,
+        draw = 'reversed',
+        selection = 'auto_insert',
+      },
       documentation = { border = MY_CONFIG.border_style },
-      ghost_text = { enabled = true },
       signature_help = { border = MY_CONFIG.border_style },
     },
   },
