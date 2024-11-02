@@ -7,20 +7,24 @@ return {
   ---@type blink.cmp.Config
   opts = {
     keymap = {
-      ['<C-space>'] = { 'show', 'show_documentation', 'hide_documentation' },
-      ['<C-e>'] = { 'hide' },
-      ['<C-y>'] = { 'select_and_accept' },
-
-      ['<C-p>'] = { 'select_prev', 'fallback' },
-      ['<C-n>'] = { 'select_next', 'fallback' },
-
-      ['<C-b>'] = { 'scroll_documentation_up', 'fallback' },
-      ['<C-f>'] = { 'scroll_documentation_down', 'fallback' },
-
+      preset = 'default',
       ['<C-j>'] = { 'snippet_forward', 'fallback' },
       ['<C-k>'] = { 'snippet_backward', 'fallback' },
     },
     nerd_font_variant = 'normal',
+    sources = {
+      completion = {
+        enabled_providers = { 'lsp', 'path', 'snippets', 'buffer', 'lazydev' },
+      },
+      providers = {
+        lsp = {
+          name = 'LSP',
+          fallback_for = { 'lazydev' },
+          module = 'blink.cmp.sources.lsp',
+        },
+        lazydev = { name = 'LazyDev', module = 'lazydev.integrations.blink' },
+      },
+    },
     trigger = {
       signature_help = { enabled = true },
     },

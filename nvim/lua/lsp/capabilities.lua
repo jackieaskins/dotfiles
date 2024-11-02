@@ -18,5 +18,9 @@ return function()
     return vim.tbl_deep_extend('force', base_compatabilities, require('cmp_nvim_lsp').default_capabilities())
   end
 
+  if MY_CONFIG.completion_source == 'blink' then
+    return require('blink.cmp').get_lsp_capabilities({}, true)
+  end
+
   return vim.tbl_deep_extend('force', vim.lsp.protocol.make_client_capabilities(), file_operation_capabilities)
 end
