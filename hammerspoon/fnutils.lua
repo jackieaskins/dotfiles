@@ -1,5 +1,43 @@
 local M = {}
 
+---Return whether two arrays are equal by comparing items
+---@generic V
+---@param list1 V[]
+---@param list2 V[]
+---@return boolean
+function M.iequals(list1, list2)
+  if #list1 ~= #list2 then
+    return false
+  end
+
+  for index, value in ipairs(list1) do
+    if value ~= list2[index] then
+      return false
+    end
+  end
+
+  return true
+end
+
+---Group list values by result of fn(value)
+---@generic K, V
+---@param list V[]
+---@param fn fun(value: V): K
+---@return { [K]: V[] }
+function M.igroupBy(list, fn)
+  local output = {}
+
+  for _, value in ipairs(list) do
+    local groupName = fn(value)
+
+    local curr = output[groupName] or {}
+    table.insert(curr, value)
+    output[groupName] = curr
+  end
+
+  return output
+end
+
 ---Reduce a list
 ---@generic I, O
 ---@param list I[]

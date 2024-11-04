@@ -1,78 +1,18 @@
-local SCREEN_PADDING = CUSTOM.twmScreenPadding or 14
-local WINDOW_GAP = CUSTOM.twmWindowGap or 14
+local ScreenManager = require('twm.ScreenManager')
+local hotkeyStore = require('hotkeyStore')
 
 local wf = hs.window.filter
-local windowFilter = require('twm.windowFilter')
-local hotkeyStore = require('hotkeyStore')
-local supportedLayouts = require('twm.supportedLayouts')
 
-local screenLayout = require('twm.screenLayout')
-
--- TODO: Detect space changes
--- TODO: Add menubar icon
-
----Add padding to screen frame
----@param screenFrame hs.geometry
----@return ScreenFrame
-local function padScreenFrame(screenFrame)
-  return {
-    x = screenFrame.x + SCREEN_PADDING,
-    y = screenFrame.y + SCREEN_PADDING,
-    w = screenFrame.w - (SCREEN_PADDING * 2),
-    h = screenFrame.h - (SCREEN_PADDING * 2),
-  }
-end
-
----Tile all of the current spaces
-local function tile()
-  for screenId, spaceIds in pairs(screenLayout.getScreenIdToSpaceIdsMap()) do
-    for _, spaceId in ipairs(spaceIds) do
-      local layout = screenLayout.getSpaceIdToLayoutMap()[spaceId]
-      local screenFrame = padScreenFrame(hs.screen.find(screenId):frame())
-      local windows = screenLayout.getSpaceIdToWindowsMap()[spaceId] or {}
-
-      if #windows == 1 then
-        supportedLayouts.stack(windows, screenFrame, WINDOW_GAP)
-      elseif #windows > 1 then
-        supportedLayouts[layout](windows, screenFrame, WINDOW_GAP)
-      end
-    end
-  end
-end
-tile()
-
-windowFilter:subscribe({
-  wf.windowsChanged,
-  wf.windowMoved,
-  wf.windowAllowed,
-  wf.windowRejected,
-  wf.windowNotInCurrentSpace,
-  wf.windowInCurrentSpace,
-  wf.windowTitleChanged,
-}, function()
-  screenLayout.recalculateWindows()
-  tile()
-end)
-
-screenWatcher = hs.screen.watcher.new(tile)
-screenWatcher:start()
+screenManager = ScreenManager.new():start()
 
 local twmRegister = hotkeyStore.registerGroup('Window Management')
 
-twmRegister('Tile', MEH, 't', tile)
+twmRegister('Tile', MEH, 't', function()
+  screenManager.windowManager:tile()
+end)
 
----Set the layout for the provided spaceId and retile
----@param spaceId number
----@param layout string
-local function setSpaceLayout(spaceId, layout)
-  screenLayout.getSpaceIdToLayoutMap()[spaceId] = layout
-  tile()
-  hs.alert.show(layout)
-end
 twmRegister('Toggle between stack and tall', MEH, 's', function()
-  local spaceId = hs.spaces.focusedSpace()
-  local currentLayout = screenLayout.getSpaceIdToLayoutMap()[spaceId]
-  setSpaceLayout(spaceId, currentLayout == 'tall' and 'stack' or 'tall')
+  screenManager.windowManager:toggleStackLayout(hs.spaces.focusedSpace())
 end)
 
 twmRegister('Focus window west', MEH, 'h', wf.focusWest)
@@ -80,46 +20,46 @@ twmRegister('Focus window south', MEH, 'j', wf.focusSouth)
 twmRegister('Focus window north', MEH, 'k', wf.focusNorth)
 twmRegister('Focus window east', MEH, 'l', wf.focusEast)
 
----Swap focused window with window in direction
----@param direction 'West' | 'South' | 'North' | 'East'
----@return fun()
-local function swapWindow(direction)
-  local windowsToFn = windowFilter['windowsTo' .. direction]
-
-  return function()
-    local focusedWindow = hs.window.focusedWindow()
-    local windows = windowsToFn(windowFilter, focusedWindow, true, false)
-    local currentSpaceId = hs.spaces.focusedSpace()
-
-    if #windows >= 1 then
-      local windowToSwap = windows[1]
-
-      local spaceWindows = screenLayout.getSpaceIdToWindowsMap()[currentSpaceId]
-      local currentIndex = hs.fnutils.indexOf(spaceWindows, focusedWindow)
-      local newIndex = hs.fnutils.indexOf(spaceWindows, windowToSwap)
-
-      if currentIndex and newIndex then
-        spaceWindows[currentIndex] = windowToSwap
-        spaceWindows[newIndex] = focusedWindow
-      end
-
-      tile()
-    end
-  end
-end
-twmRegister('Swap window west', HYPER, 'h', swapWindow('West'))
-twmRegister('Swap window south', HYPER, 'j', swapWindow('South'))
-twmRegister('Swap window north', HYPER, 'k', swapWindow('North'))
-twmRegister('Swap window east', HYPER, 'l', swapWindow('East'))
-
-twmRegister('Maximize window', HYPER, 'm', function()
-  local focusedWindow = hs.window.focusedWindow()
-  if not windowFilter:isWindowAllowed(focusedWindow) then
-    supportedLayouts.stack({ focusedWindow }, padScreenFrame(focusedWindow:screen():frame()), WINDOW_GAP)
-  end
+twmRegister('Swap window west', HYPER, 'h', function()
+  screenManager.windowManager:swapWindowWest()
+end)
+twmRegister('Swap window south', HYPER, 'j', function()
+  screenManager.windowManager:swapWindowSouth()
+end)
+twmRegister('Swap window north', HYPER, 'k', function()
+  screenManager.windowManager:swapWindowNorth()
+end)
+twmRegister('Swap window east', HYPER, 'l', function()
+  screenManager.windowManager:swapWindowEast()
 end)
 
 twmRegister('Reset tiling', HYPER, 'r', function()
-  screenLayout.create()
-  tile()
+  screenManager:stop()
+  screenManager = ScreenManager.new():start()
+end)
+
+for spaceId = 1, 9 do
+  twmRegister('Move window to space ' .. spaceId, MEH, tostring(spaceId), function()
+    hs.spaces.moveWindowToSpace(hs.window.focusedWindow(), spaceId)
+  end)
+end
+
+for screenIndex = 1, 9 do
+  twmRegister('Move window to screen ' .. screenIndex, HYPER, tostring(screenIndex), function()
+    local screens = hs.screen.allScreens() or {}
+    hs.window.focusedWindow():moveToScreen(screens[screenIndex])
+  end)
+end
+
+twmRegister('Focus screen west', MEH, 'left', function()
+  hs.screen.find(hs.spaces.spaceDisplay(hs.spaces.focusedSpace())):toWest()
+end)
+twmRegister('Focus screen south', MEH, 'down', function()
+  hs.screen.find(hs.spaces.spaceDisplay(hs.spaces.focusedSpace())):toSouth()
+end)
+twmRegister('Focus screen north', MEH, 'up', function()
+  hs.screen.find(hs.spaces.spaceDisplay(hs.spaces.focusedSpace())):toNorth()
+end)
+twmRegister('Focus screen east', MEH, 'right', function()
+  hs.screen.find(hs.spaces.spaceDisplay(hs.spaces.focusedSpace())):toEast()
 end)
