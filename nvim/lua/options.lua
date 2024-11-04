@@ -32,7 +32,7 @@ vim.o.winbar = "%{%v:lua.require('winbar').get_winbar()%}"
 
 -- Folds
 vim.o.foldcolumn = '1'
-vim.o.foldlevelstart = 1
+vim.o.foldlevelstart = 99
 vim.o.foldmethod = 'expr'
 vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 vim.o.foldtext = ''

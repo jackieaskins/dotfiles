@@ -30,7 +30,7 @@ return {
           CursorLineNr = { fg = colors.blue, style = { 'bold' } },
           FoldColumn = { fg = colors.surface1 },
           Folded = { bg = colors.mantle },
-          MatchParen = { bg = colors.none, style = { 'bold', 'underline' } },
+          MatchParen = { bg = colors.none, style = { 'bold' } },
           NormalFloat = { bg = colors.base },
           FloatBorder = { fg = colors.blue, bg = colors.base },
           StatusLine = { fg = colors.text, bg = colors.base },

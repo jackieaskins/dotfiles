@@ -89,7 +89,7 @@ end
 ---@param mods string[]
 ---@param key string
 ---@param pressedfn fun()
----@param message string | nil
+---@param message? string
 function M.register(groupName, desc, mods, key, pressedfn, message)
   addHotkey(groupName, desc, mods, key)
 

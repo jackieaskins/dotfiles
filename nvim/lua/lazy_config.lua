@@ -36,6 +36,7 @@ require('lazy').setup({
     path = '~/vim-plugins',
     patterns = MY_CONFIG.is_personal_machine and { 'jackieaskins' } or {},
   },
+  git = { timeout = 300 },
   ui = { backdrop = 100, border = MY_CONFIG.border_style },
 })
 

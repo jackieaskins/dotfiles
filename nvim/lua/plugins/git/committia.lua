@@ -4,6 +4,7 @@ return {
   config = function()
     local map = require('utils').map
 
+    vim.g['committia#git#use_verbose'] = '1'
     vim.g.committia_hooks = {
       edit_open = function()
         map({ 'i', 'n' }, '<C-d>', '<Plug>(committia-scroll-diff-down-half)', { buffer = 0 })
