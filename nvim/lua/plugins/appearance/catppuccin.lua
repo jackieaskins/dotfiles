@@ -60,6 +60,7 @@ return {
 
           -- Plugin Highlights
           -- blink.cmp
+          BlinkCmpDocBorder = { link = 'FloatBorder' },
           BlinkCmpMenu = { fg = colors.text, bg = colors.base },
           BlinkCmpMenuBorder = { link = 'FloatBorder' },
           BlinkCmpMenuSelection = { bg = colors.surface0 },
@@ -100,6 +101,7 @@ return {
         return vim.tbl_extend('force', custom_highlights, require('modes').get_initial_highlights(colors))
       end,
       integrations = {
+        blink_cmp = false,
         cmp = true,
         colorful_winsep = { enabled = true, color = 'blue' },
         fidget = true,

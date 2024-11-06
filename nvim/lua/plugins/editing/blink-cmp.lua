@@ -7,6 +7,7 @@ return {
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
   opts = {
+    highlight = { use_nvim_cmp_as_default = true },
     keymap = {
       preset = 'default',
       ['<C-j>'] = { 'snippet_forward', 'fallback' },
