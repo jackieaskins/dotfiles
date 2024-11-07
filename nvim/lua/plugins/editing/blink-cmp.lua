@@ -1,7 +1,6 @@
 ---@type LazySpec
 return {
   'saghen/blink.cmp',
-  commit = '1ce30c9d1aa539f05e99b9ecea0dcc35d4cc33fe',
   build = 'nix run .#build-plugin',
   enabled = MY_CONFIG.completion_source == 'blink',
   ---@module 'blink.cmp'
@@ -13,7 +12,6 @@ return {
       ['<C-j>'] = { 'snippet_forward', 'fallback' },
       ['<C-k>'] = { 'snippet_backward', 'fallback' },
     },
-    nerd_font_variant = 'normal',
     sources = {
       completion = {
         enabled_providers = { 'lsp', 'path', 'snippets', 'buffer', 'lazydev' },
@@ -33,8 +31,6 @@ return {
     windows = {
       autocomplete = {
         border = MY_CONFIG.border_style,
-        draw = 'reversed',
-        selection = 'auto_insert',
       },
       documentation = { border = MY_CONFIG.border_style },
       signature_help = { border = MY_CONFIG.border_style },
