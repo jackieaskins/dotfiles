@@ -12,6 +12,7 @@ return {
       ['<C-j>'] = { 'snippet_forward', 'fallback' },
       ['<C-k>'] = { 'snippet_backward', 'fallback' },
     },
+    kind_icons = require('icons').get_lspkind_icons(),
     sources = {
       completion = {
         enabled_providers = { 'lsp', 'path', 'snippets', 'buffer', 'lazydev' },
@@ -29,9 +30,7 @@ return {
       signature_help = { enabled = true },
     },
     windows = {
-      autocomplete = {
-        border = MY_CONFIG.border_style,
-      },
+      autocomplete = { border = MY_CONFIG.border_style },
       documentation = { border = MY_CONFIG.border_style },
       signature_help = { border = MY_CONFIG.border_style },
     },

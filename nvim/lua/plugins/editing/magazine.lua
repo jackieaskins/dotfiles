@@ -1,32 +1,6 @@
 local colors = require('colors').get_colors()
 
-local lspkind_icons = {
-  Class = '󰠱',
-  Color = '󰏘',
-  Constant = '󰏿',
-  Constructor = '',
-  Enum = '',
-  EnumMember = '',
-  Event = '',
-  Field = '󰜢',
-  File = '󰈙',
-  Folder = '󰉋',
-  Function = '󰊕',
-  Interface = '',
-  Keyword = '󰌋',
-  Method = '󰆧',
-  Module = '',
-  Operator = '',
-  Property = '',
-  Reference = '󰈇',
-  Snippet = '',
-  Struct = '󰙅',
-  Text = '󰉿',
-  TypeParameter = '',
-  Unit = '',
-  Value = '󰎠',
-  Variable = '󰀫',
-}
+local lspkind_icons = require('icons').get_lspkind_icons()
 local border_config = {
   border = MY_CONFIG.border_style,
   winhighlight = 'FloatBorder:FloatBorder',
