@@ -1,5 +1,6 @@
 local flake_path = vim.fn.expand('~/dotfiles/nix')
 local flake = '(builtins.getFlake "' .. flake_path .. '")'
+local hostname = vim.fn.system('hostname -s')
 
 return {
   config = function(config)
@@ -13,7 +14,7 @@ return {
             expr = flake .. '.homeConfigurations.' .. vim.env.USER .. '.options',
           },
           nix_darwin = {
-            expr = flake .. '.darwinConfigurations.personal.options',
+            expr = flake .. '.darwinConfigurations.' .. hostname .. '.options',
           },
         },
       },
