@@ -69,6 +69,22 @@ in
       '';
   };
 
+  programs.alacritty = {
+    enable = true;
+    inherit catppuccin;
+    settings = {
+      font = {
+        normal.family = "Mononoki Nerd Font";
+        size = 14;
+      };
+      window = {
+        dynamic_padding = true;
+        option_as_alt = "Both";
+        padding.y = 10;
+      };
+    };
+  };
+
   programs.bat = {
     enable = true;
     inherit catppuccin;
