@@ -65,7 +65,7 @@ function ScreenManager.new()
   self.windowManager = createWindowManager(self.currentScreenIds)
   self.screenWatcher = hs.screen.watcher.new(function()
     local newScreenIds = getCurrentScreenIds()
-    if newScreenIds ~= self.currentScreenIds then
+    if not fnutils.iequals(newScreenIds, self.currentScreenIds) then
       self.windowManager:stop()
       self.currentScreenIds = newScreenIds
       self.windowManager = createWindowManager(self.currentScreenIds):start()
