@@ -38,23 +38,29 @@
       ...
     }:
     let
-      user = builtins.getEnv "USER";
-      home-dir = builtins.getEnv "HOME";
-      system = "aarch64-darwin";
+      # Config Variables
+      fullName = "";
+      email = "";
+      homeDirectory = "";
+      hostname = "";
+      system = "";
+      username = "";
+      # End Config Variables
+
       pkgs = import nixpkgs {
         inherit system;
         overlays = [ inputs.neovim-nightly-overlay.overlays.default ];
       };
     in
     {
-      darwinConfigurations.personal = nix-darwin.lib.darwinSystem {
+      darwinConfigurations.${hostname} = nix-darwin.lib.darwinSystem {
         modules = [
           ./configuration.nix
           nix-homebrew.darwinModules.nix-homebrew
           {
             nix-homebrew = {
               enable = true;
-              inherit user;
+              user = username;
             };
           }
         ];
@@ -63,12 +69,14 @@
         };
       };
 
-      homeConfigurations."${user}" = home-manager.lib.homeManagerConfiguration {
+      homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         extraSpecialArgs = {
-          inherit home-dir;
+          inherit email;
+          inherit fullName;
           inherit inputs;
-          inherit user;
+          inherit username;
+          inherit homeDirectory;
         };
         modules = [
           ./home.nix

@@ -1,25 +1,31 @@
 {
   config,
-  home-dir,
+  email,
+  fullName,
+  homeDirectory,
   inputs,
+  lib,
   pkgs,
-  user,
+  username,
   ...
 }:
 let
+  capitalize = word: (lib.toUpper (lib.substring 0 1 word) + lib.substring 1 (-1) word);
   catppuccin = {
     enable = true;
     flavor = "macchiato";
   };
+  flakePath = "$HOME/dotfiles/nix";
+  mkSymlink = symlink: config.lib.file.mkOutOfStoreSymlink "${homeDirectory}/dotfiles/${symlink}";
 in
 {
   programs.home-manager.enable = true;
   home.stateVersion = "24.05";
 
-  home.username = user;
-  home.homeDirectory = home-dir;
+  home.username = username;
+  home.homeDirectory = homeDirectory;
 
-  home.sessionPath = [ "${home-dir}/dotfiles/bin" ];
+  home.sessionPath = [ "${homeDirectory}/dotfiles/bin" ];
 
   home.packages = [
     pkgs.autossh
@@ -38,10 +44,10 @@ in
   nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 
   home.file = {
-    ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${home-dir}/dotfiles/nvim";
-    ".config/karabiner".source = config.lib.file.mkOutOfStoreSymlink "${home-dir}/dotfiles/karabiner";
-    ".config/starship.toml".source = config.lib.file.mkOutOfStoreSymlink "${home-dir}/dotfiles/starship.toml";
-    ".hammerspoon".source = config.lib.file.mkOutOfStoreSymlink "${home-dir}/dotfiles/hammerspoon";
+    ".config/nvim".source = mkSymlink "nvim";
+    ".config/karabiner".source = mkSymlink "karabiner";
+    ".config/starship.toml".source = mkSymlink "starship.toml";
+    ".hammerspoon".source = mkSymlink "hammerspoon";
   };
 
   programs.zsh = {
@@ -51,10 +57,11 @@ in
     historySubstringSearch.enable = true;
     syntaxHighlighting.enable = true;
     shellAliases = {
-      nix-update = "nix flake update --flake $HOME/dotfiles/nix";
-      nix-rebuild-darwin = "darwin-rebuild switch --flake $HOME/dotfiles/nix#personal --impure";
-      nix-rebuild-home = "home-manager switch --flake $HOME/dotfiles/nix --impure";
-      nix-rebuild-all = "nix-rebuild-darwin && nix-rebuild-home";
+      nu = "nix flake update --flake ${flakePath}";
+      drs = "darwin-rebuild switch --flake ${flakePath}";
+      hms = "home-manager switch --flake ${flakePath}";
+      ns = "darwin-rebuild switch --flake ${flakePath} && home-manager switch --flake ${flakePath}";
+      nus = "nix flake update --flake ${flakePath} && darwin-rebuild switch --flake ${flakePath} && home-manager switch --flake ${flakePath}";
     };
     initExtra = # zsh
       ''
@@ -66,7 +73,7 @@ in
     enable = true;
     inherit catppuccin;
     config = {
-      theme = "Catppuccin Macchiato";
+      theme = "Catppuccin ${capitalize catppuccin.flavor}";
     };
   };
 
@@ -113,11 +120,21 @@ in
 
   programs.git = {
     enable = true;
+    extraConfig = {
+      advice.skippedCherryPicks = false;
+      branch.sort = "-committerdate";
+      diff.colorMoved = "default";
+      init.defaultBranch = "main";
+      merge.conflictstyle = "diff3";
+      pull.rebase = true;
+      rerere.enabled = true;
+      rebase.autoStash = true;
+    };
     delta = {
       enable = true;
       inherit catppuccin;
       options = {
-        features = "catppuccin-macchiato";
+        features = "catppuccin-${catppuccin.flavor}";
         commit-decoration-style = "yellow box ul";
         commit-style = "yellow";
         file-decoration-style = "blue ul";
@@ -127,6 +144,15 @@ in
         true-color = "always";
       };
     };
+    ignores = [
+      ".DS_Store"
+      ".git"
+      ".ignore"
+      ".repro"
+      ".solargraph.yml"
+    ];
+    userEmail = email;
+    userName = fullName;
   };
 
   programs.starship = {
