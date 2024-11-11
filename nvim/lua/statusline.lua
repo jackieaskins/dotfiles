@@ -35,15 +35,11 @@ local function statusline_component(hl, component, seps)
   return table.concat(parts)
 end
 
-local function get_active_lsp_linters_formatters()
+local function get_active_lsps_and_formatters()
   local function get_lsp_clients()
     return vim.tbl_map(function(client)
       return require('lsp.utils').get_server_display_name(client.name)
     end, vim.lsp.get_clients({ bufnr = 0 }))
-  end
-
-  local function get_linters()
-    return require('lint').linters_by_ft[vim.bo.filetype] or {}
   end
 
   local function get_formatters()
@@ -58,7 +54,7 @@ local function get_active_lsp_linters_formatters()
   end
 
   local all_client_names = {}
-  for _, fn in ipairs({ get_lsp_clients, get_linters, get_formatters }) do
+  for _, fn in ipairs({ get_lsp_clients, get_formatters }) do
     local ok, clients = pcall(fn)
     if ok and #clients > 0 then
       table.insert(all_client_names, table.concat(clients, ' '))
@@ -104,7 +100,7 @@ return {
           filetype,
         }, ' ')
       ),
-      statusline_component('StatusLineSection', get_active_lsp_linters_formatters(), { left = '', right = '' }),
+      statusline_component('StatusLineSection', get_active_lsps_and_formatters(), { left = '', right = '' }),
       statusline_component('StatusLineMode', '%l:%c󰿟%p%%', { left = '' }),
     })
   end,

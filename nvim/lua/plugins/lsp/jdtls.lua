@@ -8,16 +8,9 @@ return {
         'FileType',
         pattern = 'java',
         callback = function()
-          local jdtls_path = vim.fn.stdpath('data') .. '/lsp-servers/eclipse.jdt.ls'
-
           require('jdtls').start_or_attach({
-            capabilities = require('lsp.capabilities')(),
-            cmd = { 'run_jdtls.sh' },
-            init_options = {
-              bundles = {
-                jdtls_path .. '/plugins/lombok.jar',
-              },
-            },
+            capabilities = require('lsp.capabilities').get_capabilities(),
+            cmd = { 'jdtls' },
             root_dir = vim.fs.dirname(vim.fs.find({ '.gradlew', '.git', 'mvnw' }, { upward = true })[1]),
           })
         end,

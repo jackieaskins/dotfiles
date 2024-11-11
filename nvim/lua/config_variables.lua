@@ -1,16 +1,9 @@
----@class (exact) AdditionalServer
----@field lspconfig lspconfig.Config
----@field server LspServer
-
 ---@module 'gx'
 
 ---@class (exact) MyConfig
 ---@field is_personal_machine boolean
----@field additional_servers table<string, AdditionalServer>
+---@field additional_server_configs table<string, lspconfig.Config>
 ---@field supported_servers string[]
----@field supported_debuggers string[]
----@field supported_formatters string[]
----@field supported_linters string[]
 ---@field border_style string
 ---@field custom_gx_handlers GxHandler[]
 ---@field completion_source 'blink' | 'cmp'
@@ -18,11 +11,26 @@
 ---@class MyConfig
 MY_CONFIG = {
   is_personal_machine = false,
-  additional_servers = {},
-  supported_servers = {},
-  supported_debuggers = {},
-  supported_formatters = {},
-  supported_linters = {},
+  additional_server_configs = {},
+  supported_servers = {
+    'clangd',
+    'cssls',
+    'denols',
+    'emmet_language_server',
+    'eslint',
+    'gopls',
+    'graphql',
+    'html',
+    'jsonls',
+    'lua_ls',
+    'nixd',
+    'svelte',
+    'tailwindcss',
+    'taplo',
+    'typescript-tools',
+    'vimls',
+    'yamlls',
+  },
   border_style = 'double',
   custom_gx_handlers = {},
   completion_source = 'cmp',

@@ -1,64 +1,154 @@
----@class ClientConfig: lspconfig.Config
----@field root_dir string | function
+local lspconfig = require('lspconfig')
 
 ---@class (exact) LspServer
----@field config? fun(config: ClientConfig): ClientConfig
+---@field config? fun(): lspconfig.Config
 ---@field display? string
----@field install? InstallCommand
 ---@field skip_lspconfig? boolean
 
 ---@type table<string, LspServer>
-local servers = {
-  clangd = { install = { 'brew', 'llvm' } },
-  cssls = { install = { 'npm', 'vscode-langservers-extracted' } },
-  denols = require('lsp.servers.denols'),
-  emmet_language_server = require('lsp.servers.emmet_language_server'),
-  eslint = require('lsp.servers.eslint'),
-  gdscript = { install = { 'brew', 'godot' } },
-  gopls = { install = { 'go', 'golang.org/x/tools/gopls@latest' } },
-  graphql = require('lsp.servers.graphql'),
-  html = require('lsp.servers.html'),
-  jdtls = require('lsp.servers.jdtls'),
-  jsonls = require('lsp.servers.jsonls'),
-  lua_ls = require('lsp.servers.lua_ls'),
-  nil_ls = {},
-  nixd = require('lsp.servers.nixd'),
-  omnisharp = require('lsp.servers.omnisharp'),
-  pyright = { install = { 'npm', 'pyright' } },
-  ruby_lsp = { install = { 'gem', 'ruby-lsp' } },
-  solargraph = { install = { 'gem', 'solargraph' } },
-  sourcekit = require('lsp.servers.sourcekit'),
-  svelte = require('lsp.servers.svelte'),
-  tailwindcss = require('lsp.servers.tailwindcss'),
-  taplo = require('lsp.servers.taplo'),
-  ['typescript-tools'] = require('lsp.servers.typescript-tools'),
-  vimls = { install = { 'npm', 'vim-language-server' } },
-  yamlls = { install = { 'npm', 'yaml-language-server' } },
+local servers = {}
+
+vim.g.markdown_fenced_languages = { 'ts=typescript' }
+servers.denols = {
+  config = function()
+    return {
+      root_dir = lspconfig.util.root_pattern('deno.json', 'deno.jsonc'),
+    }
+  end,
 }
 
-for server_name, config in pairs(MY_CONFIG.additional_servers) do
-  servers[server_name] = config.server
-end
+servers.emmet_language_server = { display = 'emmet-ls' }
 
-local supported_servers = {}
-if MY_CONFIG.supported_servers then
-  for _, server_name in ipairs(MY_CONFIG.supported_servers) do
-    if servers[server_name] then
-      supported_servers[server_name] = servers[server_name]
-    end
-  end
-else
-  supported_servers = servers
-end
+servers.eslint = {
+  config = function()
+    return {
+      root_dir = require('lspconfig').util.root_pattern(
+        '.eslintrc',
+        '.eslintrc.js',
+        '.eslintrc.cjs',
+        '.eslintrc.yaml',
+        '.eslintrc.yml',
+        '.eslintrc.json',
+        'eslint.config.js',
+        './node_modules/eslint'
+      ),
+      on_attach = function(_, bufnr)
+        require('utils').buffer_map(bufnr)('n', '<leader>ef', vim.cmd.EslintFixAll)
+      end,
+      handlers = {
+        ['textDocument/diagnostic'] = function(err, result, ctx)
+          for _, item in ipairs(result.items) do
+            item.severity = 4
+          end
+          return vim.lsp.diagnostic.on_diagnostic(err, result, ctx)
+        end,
+      },
+    }
+  end,
+}
 
-local install_cmds = {}
-for server, data in pairs(supported_servers) do
-  if data.install then
-    install_cmds[server] = data.install
-  end
-end
-require('installer').register('lsp', install_cmds, vim.fn.stdpath('data') .. '/lsp-servers')
+servers.graphql = {
+  config = function()
+    return {
+      filetypes = { 'graphql' },
+    }
+  end,
+}
 
-return supported_servers
+servers.html = {
+  config = function()
+    return {
+      on_attach = function(client, bufnr)
+        require('lsp.utils').setup_auto_close_tag(client, bufnr, 'html/autoInsert')
+      end,
+    }
+  end,
+}
 
--- vim:foldmethod=marker foldlevel=0
+servers.jdtls = { skip_lspconfig = true }
+
+servers.jsonls = {
+  config = function()
+    return {
+      settings = {
+        json = {
+          schemas = require('schemastore').json.schemas(), -- https://www.schemastore.org
+          validate = { enable = true },
+        },
+      },
+    }
+  end,
+}
+
+servers.lua_ls = {
+  config = function()
+    return {
+      settings = {
+        Lua = {
+          completion = { keywordSnippet = 'Replace', callSnippet = 'Replace' },
+          hint = { arrayIndex = 'Disable', enable = true },
+          workspace = { checkThirdParty = false },
+        },
+      },
+    }
+  end,
+}
+
+servers.nixd = {
+  config = function()
+    local flake_path = vim.fn.expand('~/dotfiles/nix')
+    local flake = '(builtins.getFlake "' .. flake_path .. '")'
+    local hostname = vim.fn.system('hostname -s')
+
+    return {
+      settings = {
+        nixd = {
+          options = {
+            home_manager = {
+              expr = flake .. '.homeConfigurations.' .. vim.env.USER .. '.options',
+            },
+            nix_darwin = {
+              expr = flake .. '.darwinConfigurations.' .. hostname .. '.options',
+            },
+          },
+        },
+      },
+    }
+  end,
+}
+
+servers.svelte = {
+  config = function()
+    return {
+      init_options = {
+        configuration = {
+          svelte = {
+            plugin = {
+              svelte = { defaultScriptLanguage = 'ts' },
+            },
+          },
+        },
+      },
+      on_attach = function(client, bufnr)
+        require('lsp.utils').setup_auto_close_tag(client, bufnr, 'html/tag')
+      end,
+    }
+  end,
+}
+
+servers.tailwindcss = {
+  display = 'tailwind',
+  config = function()
+    local capabilities = require('lsp.capabilities').get_capabilities()
+    capabilities.textDocument.colorProvider = { dynamicRegistration = true }
+
+    return {
+      root_dir = lspconfig.util.root_pattern('tailwind.config.*', 'node_modules/tailwindcss'),
+      capabilities = capabilities,
+    }
+  end,
+}
+
+servers['typescript-tools'] = { display = 'ts-tools', skip_lspconfig = true }
+
+return servers

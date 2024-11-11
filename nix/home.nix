@@ -25,20 +25,46 @@ in
   home.username = username;
   home.homeDirectory = homeDirectory;
 
-  home.sessionPath = [ "${homeDirectory}/dotfiles/bin" ];
+  home.sessionPath = [
+    "${homeDirectory}/dotfiles/bin"
+  ];
 
   home.packages = [
     pkgs.autossh
     pkgs.awscli2
+    pkgs.deno
     pkgs.fd
-    pkgs.lua-language-server
+    pkgs.go
+    pkgs.jdk
     pkgs.neovim
-    pkgs.nil
-    pkgs.nixd
-    pkgs.nixfmt-rfc-style
+    pkgs.nodejs_18
     pkgs.pre-commit
     pkgs.ripgrep
-    pkgs.stylua
+
+    # Neovim Language Servers
+    pkgs.emmet-language-server # emmet
+    pkgs.gopls # gopls
+    pkgs.jdt-language-server # jdtls
+    pkgs.lua-language-server # lua_ls
+    pkgs.nil # nil_ls
+    pkgs.nixd # nixd
+    pkgs.nodePackages.graphql-language-service-cli # graphql
+    pkgs.pyright # pyright
+    pkgs.ruby-lsp # ruby_lsp
+    pkgs.solargraph # solargraph
+    pkgs.svelte-language-server # svelte
+    pkgs.tailwindcss-language-server # tailwindcss
+    pkgs.taplo-lsp # taplo
+    pkgs.typescript # typescript-tools
+    pkgs.vim-language-server # vimls
+    pkgs.vscode-langservers-extracted # cssls, eslint, html, jsonls
+    pkgs.yaml-language-server # yamlls
+
+    # Neovim Formatters
+    pkgs.libclang # clang-format
+    pkgs.nixfmt-rfc-style # nixfmt
+    pkgs.prettierd # prettierd
+    pkgs.stylua # stylua
   ];
 
   nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];

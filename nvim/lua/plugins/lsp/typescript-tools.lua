@@ -8,7 +8,7 @@ return {
   dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
   opts = function()
     return {
-      capabilities = require('lsp.capabilities')(),
+      capabilities = require('lsp.capabilities').get_capabilities(),
       settings = {
         complete_function_calls = false,
         include_completions_with_insert_text = true,
