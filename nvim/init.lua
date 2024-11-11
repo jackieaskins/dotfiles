@@ -17,5 +17,4 @@ require('autocmds')
 require('keymaps')
 require('user_commands')
 
-require('lsp')
 require('diagnostic')
