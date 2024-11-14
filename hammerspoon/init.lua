@@ -48,30 +48,11 @@ hs.autoLaunch(true)
 hs.automaticallyCheckForUpdates(true)
 
 ----------------------------------------------------------------------
---                              Spoons                              --
-----------------------------------------------------------------------
-
-hs.loadSpoon('SpoonInstall')
-spoon.SpoonInstall:andUse('EmmyLua')
-spoon.SpoonInstall:asyncUpdateAllRepos()
-
-----------------------------------------------------------------------
---                              Reload                              --
-----------------------------------------------------------------------
-
-reloadWatcher = hs.pathwatcher.new(hs.configdir, function()
-  -- TODO: Filter out paths that shouldn't trigger reload
-  hs.reload()
-end)
-reloadWatcher:start()
-
-hotkeyStore.register('Reload', 'Reload configuration', MEH, 'r', hs.reload)
-
-----------------------------------------------------------------------
 --                             Hotkeys                              --
 ----------------------------------------------------------------------
 
--- Application launcher
+hotkeyStore.register('Reload', 'Reload configuration', MEH, 'r', hs.reload)
+
 local appKeyMods = { 'option', 'control' }
 local appKeys = fnutils.mergeTables({
   m = 'Spotify',
@@ -129,6 +110,7 @@ spotifyNotification:start()
 --                               Misc                               --
 ----------------------------------------------------------------------
 
+require('annotations')
 require('hs.ipc').cliInstall(BREW_PREFIX) -- Enables CLI
 hotkeyStore.verify()
 hotkeyStore.addMenubarItem()

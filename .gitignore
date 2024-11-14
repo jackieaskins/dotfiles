@@ -15,8 +15,7 @@ Brewfile.lock.json
 
 /tmux/custom.conf
 
-/hammerspoon/Spoons/*
-!/hammerspoon/Spoons/SpoonInstall.spoon/
+/hammerspoon/annotations/generated/
 /hammerspoon/custom.lua
 /karabiner/automatic_backups
 
