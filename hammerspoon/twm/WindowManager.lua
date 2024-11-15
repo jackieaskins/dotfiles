@@ -8,6 +8,7 @@ local wf = hs.window.filter
 ---@class SpaceConfiguration
 ---@field layout string
 ---@field appNames string[]
+---@field shouldFocus? boolean
 
 ---@alias MonitorConfiguration { [string]: SpaceConfiguration[] }
 
@@ -34,12 +35,17 @@ function WindowManager.new(monitorConfiguration)
   for _, display in ipairs(hs.spaces.data_managedDisplaySpaces() or {}) do
     local screenId = display['Display Identifier']
     local layoutSpaces = monitorConfiguration[screenId] or {}
+    local focusedSpace
 
     for index, space in ipairs(display.Spaces) do
       local spaceId = space.ManagedSpaceID
       local layoutSpace = layoutSpaces[index]
 
       if layoutSpace then
+        if layoutSpace.shouldFocus then
+          focusedSpace = spaceId
+        end
+
         local windows = {}
         for _, appName in ipairs(layoutSpace.appNames) do
           for _, window in pairs(windowsByAppName[appName] or {}) do
@@ -52,6 +58,10 @@ function WindowManager.new(monitorConfiguration)
       else
         self.tilingSpaces[spaceId] = TilingSpace.new(spaceId)
       end
+    end
+
+    if focusedSpace then
+      hs.spaces.gotoSpace(focusedSpace)
     end
   end
 
