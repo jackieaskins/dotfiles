@@ -34,6 +34,7 @@ return {
   end,
   opts = {
     mappings = { go_in = '', go_out = '' },
+    windows = { preview = true },
   },
   init = function()
     local utils = require('utils')

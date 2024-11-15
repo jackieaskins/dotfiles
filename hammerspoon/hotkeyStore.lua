@@ -130,7 +130,6 @@ end
 function M.verify()
   local missingHotkeys = {}
 
-  ---@diagnostic disable-next-line: param-type-mismatch
   for _, key in ipairs(hs.hotkey.getHotkeys()) do
     if not definedHotKeys[key.idx] then
       table.insert(missingHotkeys, key.idx)
