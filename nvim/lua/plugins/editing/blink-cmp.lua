@@ -6,10 +6,11 @@ return {
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
   opts = {
+    accept = { auto_brackets = { enabled = true } },
     highlight = { use_nvim_cmp_as_default = true },
     keymap = {
       preset = 'default',
-      ['<C-j>'] = { 'snippet_forward', 'fallback' },
+      ['<C-j>'] = { 'snippet_forward' },
       ['<C-k>'] = { 'snippet_backward', 'fallback' },
     },
     kind_icons = require('icons').get_lspkind_icons(),
@@ -31,7 +32,7 @@ return {
     },
     windows = {
       autocomplete = { border = MY_CONFIG.border_style },
-      documentation = { border = MY_CONFIG.border_style },
+      documentation = { auto_show = true, border = MY_CONFIG.border_style },
       signature_help = { border = MY_CONFIG.border_style },
     },
   },

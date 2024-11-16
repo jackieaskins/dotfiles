@@ -33,6 +33,9 @@ return {
           MatchParen = { bg = colors.none, style = { 'bold' } },
           NormalFloat = { bg = colors.base },
           FloatBorder = { fg = colors.blue, bg = colors.base },
+          Pmenu = { fg = colors.surface2, bg = colors.base },
+          PmenuSel = { fg = colors.none, bg = colors.surface0 },
+          PmenuThumb = { bg = colors.blue },
           StatusLine = { fg = colors.text, bg = colors.base },
           StatusLineSectionSep = { fg = colors.surface0, bg = colors.base },
           TabLine = { fg = colors.text, bg = colors.surface0 },
@@ -60,10 +63,9 @@ return {
 
           -- Plugin Highlights
           -- blink.cmp
-          BlinkCmpDocBorder = { link = 'FloatBorder' },
-          BlinkCmpMenu = { fg = colors.text, bg = colors.base },
           BlinkCmpMenuBorder = { link = 'FloatBorder' },
-          BlinkCmpMenuSelection = { bg = colors.surface0 },
+          BlinkCmpDocBorder = { link = 'FloatBorder' },
+          BlinkCmpSignatureHelpBorder = { link = 'FloatBorder' },
 
           -- fzf-lua
           FzfLuaHeaderBind = { fg = colors.blue },
