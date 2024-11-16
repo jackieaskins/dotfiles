@@ -6,6 +6,7 @@
 local formatters = {
   ['clang-format'] = { filetypes = { 'c' } },
   ['format-queries'] = { filetypes = { 'query' } },
+  gofmt = { filetypes = { 'go', 'gomod', 'gowork', 'gotmpl' } },
   nixfmt = { filetypes = { 'nix' } },
   prettierd = {
     required_file = './node_modules/.bin/prettier',
@@ -58,7 +59,6 @@ return {
     ---@module 'conform'
     ---@type conform.setupOpts
     return {
-      default_format_opts = { lsp_format = 'fallback' },
       undojoin = true,
       formatters = customized_formatters,
       formatters_by_ft = formatters_by_ft,

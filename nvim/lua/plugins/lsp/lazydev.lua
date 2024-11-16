@@ -29,6 +29,7 @@ return {
         'nvim-lspconfig',
         'mini.icons',
         'mini.files',
+        'snacks.nvim',
       },
     },
   },

@@ -33,6 +33,9 @@ return {
           MatchParen = { bg = colors.none, style = { 'bold' } },
           NormalFloat = { bg = colors.base },
           FloatBorder = { fg = colors.blue, bg = colors.base },
+          Pmenu = { fg = colors.surface2, bg = colors.base },
+          PmenuSel = { fg = colors.none, bg = colors.surface0 },
+          PmenuThumb = { bg = colors.blue },
           StatusLine = { fg = colors.text, bg = colors.base },
           StatusLineSectionSep = { fg = colors.surface0, bg = colors.base },
           TabLine = { fg = colors.text, bg = colors.surface0 },
@@ -60,10 +63,9 @@ return {
 
           -- Plugin Highlights
           -- blink.cmp
-          BlinkCmpDocBorder = { link = 'FloatBorder' },
-          BlinkCmpMenu = { fg = colors.text, bg = colors.base },
           BlinkCmpMenuBorder = { link = 'FloatBorder' },
-          BlinkCmpMenuSelection = { bg = colors.surface0 },
+          BlinkCmpDocBorder = { link = 'FloatBorder' },
+          BlinkCmpSignatureHelpBorder = { link = 'FloatBorder' },
 
           -- fzf-lua
           FzfLuaHeaderBind = { fg = colors.blue },
@@ -89,13 +91,9 @@ return {
           CmpItemAbbrMatch = { fg = colors.blue },
           CmpItemMenu = { fg = colors.surface2 },
 
-          -- nvim-tree.lua
-          NvimTreeExecFile = { style = { 'underline', 'bold' } },
-          NvimTreeNormal = { fg = colors.text, bg = colors.base },
-          NvimTreeWinSeparator = { fg = colors.surface1, bg = colors.none },
-
           -- nvim-treesitter-context
           TreesitterContext = { fg = colors.text, bg = colors.mantle },
+          TreesitterContextLineNumber = { fg = colors.surface1, bg = colors.mantle },
         }
 
         return vim.tbl_extend('force', custom_highlights, require('modes').get_initial_highlights(colors))
@@ -125,7 +123,7 @@ return {
         notify = true,
         semantic_tokens = true,
         treesitter = true,
-        treesitter_context = true,
+        treesitter_context = false,
       },
     })
 
