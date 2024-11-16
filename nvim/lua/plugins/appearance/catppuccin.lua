@@ -91,13 +91,9 @@ return {
           CmpItemAbbrMatch = { fg = colors.blue },
           CmpItemMenu = { fg = colors.surface2 },
 
-          -- nvim-tree.lua
-          NvimTreeExecFile = { style = { 'underline', 'bold' } },
-          NvimTreeNormal = { fg = colors.text, bg = colors.base },
-          NvimTreeWinSeparator = { fg = colors.surface1, bg = colors.none },
-
           -- nvim-treesitter-context
           TreesitterContext = { fg = colors.text, bg = colors.mantle },
+          TreesitterContextLineNumber = { fg = colors.surface1, bg = colors.mantle },
         }
 
         return vim.tbl_extend('force', custom_highlights, require('modes').get_initial_highlights(colors))
@@ -127,7 +123,7 @@ return {
         notify = true,
         semantic_tokens = true,
         treesitter = true,
-        treesitter_context = true,
+        treesitter_context = false,
       },
     })
 

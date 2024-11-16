@@ -17,6 +17,7 @@ local formatters = {
     required_file = 'project.godot',
     filetypes = { 'gdscript' },
   },
+  gofmt = { filetypes = { 'go', 'gomod', 'gowork', 'gotmpl' } },
   prettierd = {
     install_cmd = { 'npm', '@fsouza/prettierd' },
     required_file = './node_modules/.bin/prettier',
@@ -78,7 +79,6 @@ return {
     ---@module 'conform'
     ---@type conform.setupOpts
     return {
-      default_format_opts = { lsp_format = 'fallback' },
       undojoin = true,
       formatters = customized_formatters,
       formatters_by_ft = formatters_by_ft,

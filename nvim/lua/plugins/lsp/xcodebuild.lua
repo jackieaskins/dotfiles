@@ -4,11 +4,7 @@ local progress_handle
 return {
   'wojciech-kulik/xcodebuild.nvim',
   enabled = require('lsp.utils').is_server_supported('sourcekit'),
-  dependencies = {
-    'MunifTanjim/nui.nvim',
-    'nvim-tree/nvim-tree.lua',
-    'nvim-treesitter/nvim-treesitter',
-  },
+  dependencies = { 'MunifTanjim/nui.nvim', 'nvim-treesitter/nvim-treesitter' },
   opts = {
     show_build_progress_bar = false,
     logs = {
