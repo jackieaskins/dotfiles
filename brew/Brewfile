@@ -21,7 +21,6 @@ brew 'ruby'
 brew 'rust'
 brew 'starship'
 brew 'tmux'
-brew 'tmuxinator'
 brew 'tree'
 brew 'vim'
 brew 'wget'
@@ -29,6 +28,9 @@ brew 'zoxide'
 brew 'zsh'
 brew 'zsh-autosuggestions'
 brew 'zsh-syntax-highlighting'
+
+tap 'joshmedeski/sesh'
+brew 'joshmedeski/sesh/sesh'
 
 if RUBY_PLATFORM =~ /darwin/
   cask 'font-hack-nerd-font'

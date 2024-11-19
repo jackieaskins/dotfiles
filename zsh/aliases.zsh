@@ -1,6 +1,6 @@
-alias mux="tmuxinator start"
+alias fzfsesh='sesh connect $(sesh list | fzf)'
 
-alias plugs="cd ~/.local/share/nvim/lazy/"
+alias plugs='cd ~/.local/share/nvim/lazy/'
 
 alias ls='eza'
 
