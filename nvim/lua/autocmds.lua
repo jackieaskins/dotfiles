@@ -16,10 +16,6 @@ augroup('mode_highlights', {
     'ModeChanged',
     callback = function()
       require('modes').relink_highlights()
-      local ok, tint = pcall(require, 'tint')
-      if ok then
-        tint.refresh()
-      end
     end,
   },
 })
