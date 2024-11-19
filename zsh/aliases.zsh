@@ -1,3 +1,5 @@
+alias fzfsesh='sesh connect $(sesh list | fzf)'
+
 # Directory Navigation
 alias -- -="cd -"
 alias ..='cd ..'
