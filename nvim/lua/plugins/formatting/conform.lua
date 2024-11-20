@@ -11,6 +11,23 @@ local formatters = {
     install_cmd = { 'brew', 'clang-format' },
     filetypes = { 'c' },
   },
+  deno_fmt = {
+    filetypes = {
+      'css',
+      'html',
+      'javascript',
+      'javascriptreact',
+      'json',
+      'jsonc',
+      'less',
+      'markdown',
+      'scss',
+      'svelte',
+      'typescript',
+      'typescriptreact',
+    },
+    required_file = 'deno.json',
+  },
   ['format-queries'] = { filetypes = { 'query' } },
   gdformat = {
     install_cmd = { 'pip', 'git+https://github.com/Scony/godot-gdscript-toolkit.git' },
