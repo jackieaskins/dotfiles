@@ -31,7 +31,10 @@ return {
       signature_help = { enabled = true },
     },
     windows = {
-      autocomplete = { border = MY_CONFIG.border_style },
+      autocomplete = {
+        border = MY_CONFIG.border_style,
+        selection = 'auto_insert',
+      },
       documentation = { auto_show = true, border = MY_CONFIG.border_style },
       signature_help = { border = MY_CONFIG.border_style },
     },
