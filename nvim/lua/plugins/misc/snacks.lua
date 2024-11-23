@@ -6,6 +6,15 @@ return {
   ---@type snacks.Config
   opts = {
     bigfile = { enabled = true },
+    dashboard = {
+      enabled = true,
+      sections = {
+        { section = 'header' },
+        { title = 'Recent Files', section = 'recent_files', padding = 1 },
+        { title = 'Keymaps', section = 'keys', padding = 1 },
+        { section = 'startup' },
+      },
+    },
     notifier = { enabled = true, margin = { top = 1 } },
     quickfile = { enabled = true },
     statuscolumn = { enabled = false },
