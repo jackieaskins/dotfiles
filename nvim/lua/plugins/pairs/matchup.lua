@@ -1,6 +1,8 @@
 ---@type LazySpec
 return {
   'andymass/vim-matchup',
+  dependencies = { 'nvim-treesitter/nvim-treesitter' },
+  event = 'VeryLazy',
   init = function()
     vim.g.loaded_matchparen = 1
     vim.g.matchup_matchparen_offscreen = {}

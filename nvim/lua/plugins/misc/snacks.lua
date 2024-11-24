@@ -10,8 +10,19 @@ return {
       enabled = true,
       sections = {
         { section = 'header' },
-        { title = 'Recent Files', section = 'recent_files', padding = 1 },
-        { title = 'Keymaps', section = 'keys', padding = 1 },
+        {
+          section = 'recent_files',
+          title = 'Recent Files',
+          cwd = true,
+          indent = 1,
+          padding = 1,
+        },
+        {
+          section = 'keys',
+          title = 'Keymaps',
+          indent = 1,
+          padding = 1,
+        },
         { section = 'startup' },
       },
     },
