@@ -65,6 +65,9 @@ export SAVEHIST=10000
 export HISTORY_IGNORE="clear;*"
 setopt appendhistory histignorealldups sharehistory histreduceblanks
 
+bindkey "^[[A" history-beginning-search-backward
+bindkey "^[[B" history-beginning-search-forward
+
 # Color ls output
 export CLICOLOR="Yes"
 
