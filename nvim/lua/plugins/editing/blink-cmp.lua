@@ -13,6 +13,7 @@ return {
       preset = 'default',
       ['<C-j>'] = { 'snippet_forward' },
       ['<C-k>'] = { 'snippet_backward', 'fallback' },
+      ['<C-c>'] = { 'cancel' },
     },
     kind_icons = require('icons').get_lspkind_icons(),
     sources = {
