@@ -2,7 +2,7 @@
 return {
   'saghen/blink.cmp',
   enabled = MY_CONFIG.completion_source == 'blink',
-  build = MY_CONFIG.is_personal_machine and { build = 'nix run .#build-plugin' } or nil,
+  build = MY_CONFIG.is_personal_machine and 'nix run .#build-plugin' or nil,
   version = not MY_CONFIG.is_personal_machine and 'v0.*' or nil,
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
