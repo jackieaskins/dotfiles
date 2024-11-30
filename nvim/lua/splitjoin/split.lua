@@ -11,7 +11,7 @@ end
 ---@param split_fn fun(index: integer, num_children: integer, child_text: string, first_line_spaces: integer): string?
 ---@return boolean
 local function split_node_wrapper(node, split_fn)
-  local sr, sc, er, ec = node:range()
+  local sr, sc, er, ec = node:range(false)
 
   if sr ~= er then
     return false

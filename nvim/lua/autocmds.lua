@@ -69,7 +69,7 @@ augroup('lightbulb_attach', {
     callback = function(args)
       local client = vim.lsp.get_client_by_id(args.data.client_id)
 
-      if not client or not client.supports_method(vim.lsp.protocol.Methods.textDocument_codeAction) then
+      if not client or not client:supports_method(vim.lsp.protocol.Methods.textDocument_codeAction) then
         return
       end
 

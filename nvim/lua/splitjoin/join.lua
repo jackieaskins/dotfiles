@@ -2,7 +2,7 @@
 ---@param node TSNode
 ---@return boolean
 local function join_node(node)
-  local sr, sc, er, ec = node:range()
+  local sr, sc, er, ec = node:range(false)
 
   if sr == er then
     return false

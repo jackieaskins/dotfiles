@@ -2,7 +2,7 @@
 ---@param node TSNode
 ---@param lines string[]
 local function replace_node_text(node, lines)
-  local sr, sc, er, ec = node:range()
+  local sr, sc, er, ec = node:range(false)
   vim.api.nvim_buf_set_text(0, sr, sc, er, ec, lines)
 end
 
