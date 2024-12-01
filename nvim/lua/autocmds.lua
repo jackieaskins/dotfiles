@@ -63,6 +63,23 @@ augroup('vim_window_resize', {
 --                               LSP                                --
 ----------------------------------------------------------------------
 
+augroup('lsp_folding', {
+  {
+    'LspAttach',
+    callback = function(args)
+      local client = vim.lsp.get_client_by_id(args.data.client_id)
+
+      if not client or not client:supports_method(vim.lsp.protocol.Methods.textDocument_foldingRange) then
+        return
+      end
+
+      local winid = vim.fn.bufwinid(args.buf)
+      vim.api.nvim_set_option_value('foldmethod', 'expr', { win = winid })
+      vim.api.nvim_set_option_value('foldexpr', 'v:lua.vim.lsp.foldexpr()', { win = winid })
+    end,
+  },
+})
+
 augroup('lightbulb_attach', {
   {
     'LspAttach',
