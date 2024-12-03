@@ -4,7 +4,26 @@
 
 ---@type table<string, FormatterConfig>
 local formatters = {
-  ['clang-format'] = { filetypes = { 'c' } },
+  ['clang-format'] = {
+    filetypes = { 'c' },
+  },
+  deno_fmt = {
+    filetypes = {
+      'css',
+      'html',
+      'javascript',
+      'javascriptreact',
+      'json',
+      'jsonc',
+      'less',
+      'markdown',
+      'scss',
+      'svelte',
+      'typescript',
+      'typescriptreact',
+    },
+    required_file = 'deno.json',
+  },
   ['format-queries'] = { filetypes = { 'query' } },
   gofmt = { filetypes = { 'go', 'gomod', 'gowork', 'gotmpl' } },
   nixfmt = { filetypes = { 'nix' } },

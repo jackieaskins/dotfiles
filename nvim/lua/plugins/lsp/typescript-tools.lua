@@ -31,8 +31,9 @@ return {
           80001, -- File is a CommonJS module; it may be converted to an ES module.
         }),
       },
-      on_attach = function(_, bufnr)
+      on_attach = function(client, bufnr)
         local bsk = require('utils').buffer_map(bufnr)
+        local winid = vim.fn.bufwinid(bufnr)
 
         bsk('n', '<leader>oi', '<cmd>TSToolsOrganizeImports<CR>')
         bsk('n', '<leader>ia', '<cmd>TSToolsAddMissingImports<CR>')
@@ -49,7 +50,7 @@ return {
             vim.schedule(function()
               require('typescript-tools.api').jsx_close_tag(
                 bufnr,
-                vim.lsp.util.make_position_params(),
+                vim.lsp.util.make_position_params(winid, client.offset_encoding),
                 function() end,
                 nil
               )

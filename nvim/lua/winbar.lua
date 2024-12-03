@@ -43,12 +43,17 @@ end
 
 return {
   get_winbar = function()
-    local diagnostic_counts = vim.diagnostic.count(0)
+    local filetype = vim.bo.filetype
 
+    if filetype == 'snacks_dashboard' then
+      return ''
+    end
+
+    local diagnostic_counts = vim.diagnostic.count(0)
     return table.concat({
       get_hl('WinBarFile'),
       ' ',
-      require('icons').get_filetype_icon(vim.bo.filetype),
+      require('icons').get_filetype_icon(filetype),
       ' ',
       get_filename_display(),
       ' ',

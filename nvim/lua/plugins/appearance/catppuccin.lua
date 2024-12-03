@@ -67,6 +67,13 @@ return {
           BlinkCmpDocBorder = { link = 'FloatBorder' },
           BlinkCmpSignatureHelpBorder = { link = 'FloatBorder' },
 
+          -- eyeliner.nvim
+          EyelinerPrimary = {
+            fg = colors.sapphire,
+            style = { 'bold', 'underline' },
+          },
+          EyelinerSecondary = { fg = colors.pink, style = { 'underline' } },
+
           -- fzf-lua
           FzfLuaHeaderBind = { fg = colors.blue },
           FzfLuaHeaderText = { fg = colors.mauve },
@@ -122,6 +129,7 @@ return {
         },
         notify = true,
         semantic_tokens = true,
+        snacks = true,
         treesitter = true,
         treesitter_context = false,
       },

@@ -60,5 +60,10 @@ return {
         callback = lsp.rename_or_move,
       },
     })
+
+    local git = require('plugins.navigation.mini-files.git')
+    utils.augroup('mini_files_git', {
+      { 'User', pattern = 'MiniFilesBufferUpdate', callback = git.add_git_info },
+    })
   end,
 }

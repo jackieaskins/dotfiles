@@ -20,8 +20,13 @@ function M.update(bufnr)
     vim.b[bufnr].lightbulb_cancel()
   end
 
-  local params = vim.lsp.util.make_range_params()
-  params.context = { diagnostics = vim.diagnostic.get(0), triggerKind = 1 }
+  local winid = vim.fn.bufwinid(bufnr)
+  local first_client = vim.lsp.get_clients({ bufnr = bufnr })[1]
+  local params = vim.tbl_extend(
+    'force',
+    vim.lsp.util.make_range_params(winid, first_client.offset_encoding),
+    { diagnostics = vim.diagnostic.get(bufnr), triggerKind = 1 }
+  )
 
   vim.b[bufnr].lightbulb_cancel = vim.lsp.buf_request_all(
     bufnr,

@@ -21,13 +21,18 @@ end
 ---@param method string
 function M.setup_auto_close_tag(client, bufnr, method)
   local bsk = require('utils').buffer_map(bufnr)
+  local winid = vim.fn.bufwinid(bufnr)
 
   local function auto_insert(key)
     return function()
       vim.schedule(function()
-        client.request(
+        client:request(
           method,
-          vim.tbl_extend('force', vim.lsp.util.make_position_params(), { kind = 'autoClose' }),
+          vim.tbl_extend(
+            'force',
+            vim.lsp.util.make_position_params(winid, client.offset_encoding),
+            { kind = 'autoClose' }
+          ),
           function(_, result)
             if result then
               require('utils').snippet_expand(result)

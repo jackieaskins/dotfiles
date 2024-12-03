@@ -3,16 +3,16 @@ local function handle_modification(method_suffix, params)
 
   for _, client in ipairs(clients) do
     local will_rename_method = 'workspace/will' .. method_suffix
-    if client.supports_method(will_rename_method) then
-      local resp = client.request_sync(will_rename_method, params, 1000, 0)
+    if client:supports_method(will_rename_method) then
+      local resp = client:request_sync(will_rename_method, params, 1000, 0)
       if resp and resp.result then
         vim.lsp.util.apply_workspace_edit(resp.result, client.offset_encoding)
       end
     end
 
     local did_rename_method = 'workspace/did' .. method_suffix
-    if client.supports_method(did_rename_method) then
-      client.notify(did_rename_method)
+    if client:supports_method(did_rename_method) then
+      client:notify(did_rename_method)
     end
   end
 end

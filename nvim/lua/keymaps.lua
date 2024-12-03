@@ -26,9 +26,14 @@ map('n', 'dd', function()
   end
 end, { noremap = true, expr = true })
 
--- Below mappings from https://www.reddit.com/r/neovim/comments/1e1dmpw
 -- Don't overwrite clipboard on x
+-- https://www.reddit.com/r/neovim/comments/1e1dmpw
 map('n', 'x', '"_x')
+
+-- https://github.com/neovim/neovim/issues/26449
+map({ 'i', 's' }, '<C-e>', function()
+  vim.snippet.stop()
+end)
 
 ----------------------------------------------------------------------
 --                           Auto-indent                            --

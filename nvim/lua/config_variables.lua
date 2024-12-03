@@ -33,5 +33,5 @@ MY_CONFIG = {
   },
   border_style = 'double',
   custom_gx_handlers = {},
-  completion_source = 'cmp',
+  completion_source = 'blink',
 }
