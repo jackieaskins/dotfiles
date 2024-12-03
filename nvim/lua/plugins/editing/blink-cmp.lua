@@ -7,38 +7,43 @@ return {
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
   opts = {
-    accept = { auto_brackets = { enabled = true } },
-    highlight = { use_nvim_cmp_as_default = true },
+    appearance = {
+      kind_icons = require('icons').get_lspkind_icons(),
+      use_nvim_cmp_as_default = true,
+    },
+    completion = {
+      accept = {
+        auto_brackets = { enabled = true },
+      },
+      documentation = {
+        auto_show = true,
+        window = { border = MY_CONFIG.border_style },
+      },
+      list = { selection = 'auto_insert' },
+      menu = { border = MY_CONFIG.border_style },
+    },
     keymap = {
       preset = 'default',
       ['<C-j>'] = { 'snippet_forward' },
       ['<C-k>'] = { 'snippet_backward', 'fallback' },
       ['<C-c>'] = { 'cancel' },
     },
-    kind_icons = require('icons').get_lspkind_icons(),
+    signature = {
+      enabled = true,
+      window = { border = MY_CONFIG.border_style },
+    },
     sources = {
       completion = {
         enabled_providers = { 'lsp', 'path', 'snippets', 'buffer', 'lazydev' },
       },
       providers = {
+        lazydev = { name = 'LazyDev', module = 'lazydev.integrations.blink' },
         lsp = {
           name = 'LSP',
           fallback_for = { 'lazydev' },
           module = 'blink.cmp.sources.lsp',
         },
-        lazydev = { name = 'LazyDev', module = 'lazydev.integrations.blink' },
       },
-    },
-    trigger = {
-      signature_help = { enabled = true },
-    },
-    windows = {
-      autocomplete = {
-        border = MY_CONFIG.border_style,
-        selection = 'auto_insert',
-      },
-      documentation = { auto_show = true, border = MY_CONFIG.border_style },
-      signature_help = { border = MY_CONFIG.border_style },
     },
   },
 }
