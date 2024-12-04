@@ -23,7 +23,7 @@ function update_neovim() {
 }
 
 # Update Neovim and do a clean install
-function update_and_reinstall_neovim()
+function update_and_reinstall_neovim() {
   cd $HOME/neovim
   git pull
   sudo make distclean
