@@ -23,7 +23,6 @@ vim.o.undofile = true
 vim.o.viewoptions = gen_list_option('cursor', 'folds')
 vim.o.completeopt = 'menu,menuone,noselect'
 vim.o.ruler = false
-vim.o.messagesopt = 'wait:3,history:500'
 
 -- Statusline, Tabline, Winbar
 vim.o.laststatus = 3
