@@ -89,6 +89,9 @@ function TilingSpace:toggleStackLayout()
     self.previousLayout = self.layout
     self.layout = 'stack'
   end
+
+  hs.alert.show('Layout: ' .. self.layout)
+
   return self
 end
 

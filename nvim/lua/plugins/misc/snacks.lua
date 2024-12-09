@@ -26,7 +26,11 @@ return {
         { section = 'startup' },
       },
     },
-    notifier = { enabled = true, margin = { top = 1 } },
+    notifier = {
+      enabled = true,
+      margin = { top = 1 },
+      width = { max = 50 },
+    },
     quickfile = { enabled = true },
     statuscolumn = { enabled = false },
     styles = {

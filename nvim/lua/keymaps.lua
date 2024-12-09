@@ -1,7 +1,13 @@
 local utils = require('utils')
 local augroup, map = utils.augroup, utils.map
 
+----------------------------------------------------------------------
+--                             General                              --
+----------------------------------------------------------------------
 map('n', '<leader>so', '<cmd>source %<CR>')
+map('n', '<leader>co', function()
+  require('convert').show_convert_select()
+end)
 
 ----------------------------------------------------------------------
 --                   Clipboard and Visual Select                    --

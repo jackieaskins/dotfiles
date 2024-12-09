@@ -44,8 +44,3 @@ for key, cmd in pairs({
     end,
   })
 end
-
--- Arrow Functions
-user_command('ToggleBraces', function()
-  require('arrow_functions').toggle_braces()
-end)

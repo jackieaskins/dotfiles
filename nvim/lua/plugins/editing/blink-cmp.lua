@@ -37,6 +37,9 @@ return {
         enabled_providers = { 'lsp', 'path', 'snippets', 'buffer', 'lazydev' },
       },
       providers = {
+        buffer = {
+          opts = { get_bufnrs = vim.api.nvim_list_bufs },
+        },
         lazydev = { name = 'LazyDev', module = 'lazydev.integrations.blink' },
         lsp = {
           name = 'LSP',

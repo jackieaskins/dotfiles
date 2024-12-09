@@ -1,25 +1,4 @@
----Replace node text with provided text
----@param node TSNode
----@param lines string[]
-local function replace_node_text(node, lines)
-  local sr, sc, er, ec = node:range(false)
-  vim.api.nvim_buf_set_text(0, sr, sc, er, ec, lines)
-end
-
----Search up from node to find arrow function node
----@param node TSNode | nil
----@return TSNode | nil
-local function find_arrow_function_node(node)
-  if node == nil then
-    return nil
-  end
-
-  if node:type() == 'arrow_function' then
-    return node
-  end
-
-  return find_arrow_function_node(node:parent())
-end
+local ts_utils = require('treesitter.utils')
 
 ---Remove braces from arrow function
 ---@param body_node TSNode
@@ -41,7 +20,7 @@ local function remove_braces(body_node)
     new_text = vim.treesitter.get_node_text(content_node, 0):gsub(';$', '')
   end
 
-  replace_node_text(body_node, vim.split(new_text, '\n' .. (' '):rep(vim.bo.shiftwidth)))
+  ts_utils.replace_node_text(body_node, vim.split(new_text, '\n' .. (' '):rep(vim.bo.shiftwidth)))
 end
 
 ---Add braces to arrow function
@@ -60,14 +39,12 @@ local function add_braces(body_node, body_text)
   table.insert(lines, 1, '{')
   table.insert(lines, '}')
 
-  replace_node_text(body_node, lines)
+  ts_utils.replace_node_text(body_node, lines)
 end
 
-local M = {}
-
-function M.toggle_braces()
+return function()
   local current_node = vim.treesitter.get_node({ ignore_injections = false })
-  local arrow_function_node = find_arrow_function_node(current_node)
+  local arrow_function_node = ts_utils.find_node_parent(current_node, 'arrow_function')
   if not arrow_function_node then
     vim.notify('Not currently on an arrow function')
     return
@@ -88,5 +65,3 @@ function M.toggle_braces()
     add_braces(body_node, body_text)
   end
 end
-
-return M
