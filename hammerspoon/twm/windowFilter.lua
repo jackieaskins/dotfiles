@@ -11,6 +11,7 @@ local appFilters = fnutils.mergeTables({
   ['Folder Hub'] = false,
   ['Font Book'] = false,
   Home = false,
+  Homerow = false,
   Ice = false,
   ['iPhone Mirroring'] = false,
   ['Karabiner-Elements'] = false,

@@ -10,6 +10,7 @@ brew 'gettext' # Neovim dependency
 brew 'git-delta'
 brew 'go'
 brew 'gradle'
+brew 'homerow'
 brew 'jq'
 brew 'maven'
 brew 'ninja' # Neovim dependency
