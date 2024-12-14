@@ -1,3 +1,4 @@
+---@diagnostic disable: missing-fields
 ---@type LazySpec
 return {
   'saghen/blink.cmp',
@@ -27,6 +28,11 @@ return {
       ['<C-j>'] = { 'snippet_forward' },
       ['<C-k>'] = { 'snippet_backward', 'fallback' },
       ['<C-c>'] = { 'cancel' },
+      ['<C-space>'] = {
+        function(cmp)
+          cmp.show({ providers = { 'lsp' } })
+        end,
+      },
     },
     signature = {
       enabled = true,
