@@ -41,6 +41,7 @@ config.window_frame = {
   active_titlebar_bg = colors.background,
   inactive_titlebar_bg = colors.background,
 }
+config.hide_tab_bar_if_only_one_tab = true
 
 wezterm.on('format-tab-title', function(tab, tabs)
   return {
