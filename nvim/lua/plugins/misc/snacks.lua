@@ -6,13 +6,17 @@ return {
   ---@type snacks.Config
   opts = {
     bigfile = { enabled = true },
+    indent = {
+      enabled = true,
+      animate = { enabled = false },
+      chunk = { enabled = true },
+    },
     notifier = {
       enabled = true,
       margin = { top = 1 },
       width = { max = 50 },
     },
     quickfile = { enabled = true },
-    statuscolumn = { enabled = false },
     styles = {
       notification = {
         bo = { filetype = 'snacks_notif' },
@@ -76,7 +80,7 @@ return {
       function()
         Snacks.bufdelete()
       end,
-      desc = 'Delete buffer',
+      desc = 'Delete Buffer',
     },
     {
       ']]',
