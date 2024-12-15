@@ -13,6 +13,7 @@ local appFilters = fnutils.mergeTables({
   Home = false,
   Homerow = false,
   Ice = false,
+  Installer = false,
   ['iPhone Mirroring'] = false,
   ['Karabiner-Elements'] = false,
   ['Keychain Access'] = false,
