@@ -56,7 +56,7 @@ end)
 --                              Window                              --
 ----------------------------------------------------------------------
 
-config.window_decorations = 'INTEGRATED_BUTTONS | RESIZE'
+config.window_decorations = 'RESIZE'
 config.adjust_window_size_when_changing_font_size = false
 config.window_padding = { left = 0, right = 0, top = '0.5cell', bottom = '0.5cell' }
 
