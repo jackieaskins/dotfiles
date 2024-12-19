@@ -11,6 +11,7 @@ return {
       animate = { enabled = false },
       chunk = { enabled = true },
     },
+    input = { enabled = true },
     notifier = {
       enabled = true,
       margin = { top = 1 },
@@ -18,6 +19,12 @@ return {
     },
     quickfile = { enabled = true },
     styles = {
+      input = {
+        border = MY_CONFIG.border_style,
+        relative = 'cursor',
+        row = -3,
+        col = 0,
+      },
       notification = {
         bo = { filetype = 'snacks_notif' },
         border = MY_CONFIG.border_style,
