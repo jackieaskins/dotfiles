@@ -1,4 +1,3 @@
----@diagnostic disable: missing-fields
 ---@type LazySpec
 return {
   'saghen/blink.cmp',
@@ -39,9 +38,7 @@ return {
       window = { border = MY_CONFIG.border_style },
     },
     sources = {
-      completion = {
-        enabled_providers = { 'lsp', 'path', 'snippets', 'buffer', 'lazydev' },
-      },
+      default = { 'lsp', 'path', 'snippets', 'buffer', 'lazydev' },
       providers = {
         buffer = {
           opts = { get_bufnrs = vim.api.nvim_list_bufs },
@@ -49,7 +46,7 @@ return {
         lazydev = { name = 'LazyDev', module = 'lazydev.integrations.blink' },
         lsp = {
           name = 'LSP',
-          fallback_for = { 'lazydev' },
+          fallbacks = { 'buffer' },
           module = 'blink.cmp.sources.lsp',
         },
       },
