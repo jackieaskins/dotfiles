@@ -101,6 +101,9 @@ return {
           -- nvim-treesitter-context
           TreesitterContext = { fg = colors.text, bg = colors.mantle },
           TreesitterContextLineNumber = { fg = colors.surface1, bg = colors.mantle },
+
+          -- snacks.nvim
+          SnacksIndent = { fg = colors.surface0 },
         }
 
         return vim.tbl_extend('force', custom_highlights, require('modes').get_initial_highlights(colors))
@@ -112,11 +115,7 @@ return {
         fidget = true,
         fzf = true,
         gitsigns = true,
-        indent_blankline = {
-          enabled = true,
-          colored_indent_levels = false,
-          scope_color = 'blue',
-        },
+        indent_blankline = { enabled = false },
         markdown = true,
         native_lsp = {
           enabled = true,

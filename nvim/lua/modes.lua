@@ -68,6 +68,8 @@ local function get_highlight_maps(mode_color)
 
   return {
     WinBarFile = { fg = mode_color },
+    SnacksIndentChunk = { fg = mode_color },
+    SnacksIndentScope = { fg = mode_color },
     StatusLineMode = { fg = colors.base, bg = mode_color, style = { 'bold' } },
     StatusLineModeSep = { fg = mode_color, bg = colors.base },
     StatusLineSection = { fg = mode_color, bg = colors.surface0 },
@@ -75,7 +77,6 @@ local function get_highlight_maps(mode_color)
     TabLineSelSep = { fg = mode_color, bg = colors.base },
     NvimSeparator = { fg = mode_color },
     CursorLineNr = { fg = mode_color, style = { 'bold' } },
-    ['@ibl.scope.char.1'] = { fg = mode_color },
   }
 end
 

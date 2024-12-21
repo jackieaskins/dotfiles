@@ -2,7 +2,7 @@
 return {
   'ibhagwan/fzf-lua',
   dependencies = { 'echasnovski/mini.icons' },
-  cmd = 'FzfLua',
+  event = 'VeryLazy',
   keys = function()
     local keys = {
       -- Buffers and Files
@@ -63,10 +63,11 @@ return {
       },
     })
   end,
-  opts = function()
+  config = function()
     local actions = require('fzf-lua.actions')
+    local fzf_lua = require('fzf-lua')
 
-    return {
+    fzf_lua.setup({
       defaults = { file_icons = 'mini' },
       diagnostics = { cwd_only = true },
       file_ignore_patterns = { '^%.git/' },
@@ -137,6 +138,19 @@ return {
           flip_columns = 160,
         },
       },
-    }
+    })
+
+    fzf_lua.register_ui_select(function(_, items)
+      local min_h, max_h = 0.15, 0.70
+      local h = (#items + 4) / vim.o.lines
+      if h < min_h then
+        h = min_h
+      elseif h > max_h then
+        h = max_h
+      end
+      return {
+        winopts = { height = h, width = 0.60, row = 0.40 },
+      }
+    end)
   end,
 }

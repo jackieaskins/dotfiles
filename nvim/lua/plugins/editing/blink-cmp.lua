@@ -27,15 +27,18 @@ return {
       ['<C-j>'] = { 'snippet_forward' },
       ['<C-k>'] = { 'snippet_backward', 'fallback' },
       ['<C-c>'] = { 'cancel' },
+      ['<C-space>'] = {
+        function(cmp)
+          cmp.show({ providers = { 'lsp' } })
+        end,
+      },
     },
     signature = {
       enabled = true,
       window = { border = MY_CONFIG.border_style },
     },
     sources = {
-      completion = {
-        enabled_providers = { 'lsp', 'path', 'snippets', 'buffer', 'lazydev' },
-      },
+      default = { 'lsp', 'path', 'snippets', 'buffer', 'lazydev' },
       providers = {
         buffer = {
           opts = { get_bufnrs = vim.api.nvim_list_bufs },
@@ -43,7 +46,7 @@ return {
         lazydev = { name = 'LazyDev', module = 'lazydev.integrations.blink' },
         lsp = {
           name = 'LSP',
-          fallback_for = { 'lazydev' },
+          fallbacks = { 'buffer' },
           module = 'blink.cmp.sources.lsp',
         },
       },

@@ -6,34 +6,25 @@ return {
   ---@type snacks.Config
   opts = {
     bigfile = { enabled = true },
-    dashboard = {
+    indent = {
       enabled = true,
-      sections = {
-        { section = 'header' },
-        {
-          section = 'recent_files',
-          title = 'Recent Files',
-          cwd = true,
-          indent = 1,
-          padding = 1,
-        },
-        {
-          section = 'keys',
-          title = 'Keymaps',
-          indent = 1,
-          padding = 1,
-        },
-        { section = 'startup' },
-      },
+      animate = { enabled = false },
+      chunk = { enabled = true },
     },
+    input = { enabled = true },
     notifier = {
       enabled = true,
       margin = { top = 1 },
       width = { max = 50 },
     },
     quickfile = { enabled = true },
-    statuscolumn = { enabled = false },
     styles = {
+      input = {
+        border = MY_CONFIG.border_style,
+        relative = 'cursor',
+        row = -3,
+        col = 0,
+      },
       notification = {
         bo = { filetype = 'snacks_notif' },
         border = MY_CONFIG.border_style,
@@ -96,7 +87,7 @@ return {
       function()
         Snacks.bufdelete()
       end,
-      desc = 'Delete buffer',
+      desc = 'Delete Buffer',
     },
     {
       ']]',
