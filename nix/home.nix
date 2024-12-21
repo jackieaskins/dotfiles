@@ -29,6 +29,8 @@ in
     enable = true;
     flavor = "macchiato";
     starship.enable = false;
+    tmux.enable = false;
+    zsh-syntax-highlighting.enable = false;
   };
 
   home.packages = [
