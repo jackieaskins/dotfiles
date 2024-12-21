@@ -77,6 +77,7 @@ in
     ".config/karabiner".source = mkSymlink "karabiner";
     ".config/starship.toml".source = mkSymlink "starship.toml";
     ".hammerspoon".source = mkSymlink "hammerspoon";
+
     "dotfiles/nvim/lua/custom.lua".source = mkCustomSymlink "nvim-custom.lua";
     "dotfiles/hammerspoon/custom.lua".source = mkCustomSymlink "hammerspoon-custom.lua";
   };
@@ -89,10 +90,8 @@ in
     syntaxHighlighting.enable = true;
     shellAliases = {
       nu = "nix flake update --commit-lock-file --flake ${flakePath}";
-      drs = "darwin-rebuild switch --flake ${flakePath}";
-      hms = "home-manager switch --flake ${flakePath}";
-      ns = "darwin-rebuild switch --flake ${flakePath} && home-manager switch --flake ${flakePath}";
-      nus = "nix flake update --flake ${flakePath} && darwin-rebuild switch --flake ${flakePath} && home-manager switch --flake ${flakePath}";
+      drs = "darwin-rebuild switch --flake ${flakePath} --impure";
+      hms = "home-manager switch --flake ${flakePath} --impure";
     };
     initExtra = # zsh
       ''

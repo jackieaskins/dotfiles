@@ -38,14 +38,14 @@
       ...
     }:
     let
-      # Config Variables
-      fullName = "";
-      email = "";
-      homeDirectory = "";
-      hostname = "";
-      system = "";
-      username = "";
-      # End Config Variables
+      username = builtins.getEnv "USER";
+      homeDirectory = builtins.getEnv "HOME";
+
+      config = import "${homeDirectory}/dotfiles_custom/nix-custom.nix";
+      fullName = config.fullName;
+      email = config.email;
+      hostname = config.hostname;
+      system = config.system;
 
       pkgs = import nixpkgs {
         inherit system;
