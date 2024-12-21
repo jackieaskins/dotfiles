@@ -12,6 +12,10 @@ local M = {}
 function M.get_filename(filename, bufnr, quickfix_title, modify_filename)
   local filetype = vim.fn.getbufvar(bufnr, '&filetype')
 
+  if filetype == 'oil' then
+    filename = require('oil').get_current_dir(bufnr)
+  end
+
   if filetype == 'qf' then
     local suffix = quickfix_title and quickfix_title ~= '' and ' ' .. quickfix_title or ''
     return '[Quickfix]' .. suffix
@@ -26,7 +30,7 @@ function M.get_filename(filename, bufnr, quickfix_title, modify_filename)
     return '[No Name]'
   end
 
-  return modify_filename(filename)
+  return modify_filename(filename:gsub('/$', ''))
 end
 
 function M.get_filename_display(filename, bufnr, quickfix_title, modify_filename)
