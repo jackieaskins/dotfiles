@@ -108,5 +108,7 @@
     remapCapsLockToControl = true;
   };
 
-  fonts.packages = [ (pkgs.nerdfonts.override { fonts = [ "Mononoki" ]; }) ];
+  fonts.packages = [
+    pkgs.nerd-fonts.mononoki
+  ];
 }

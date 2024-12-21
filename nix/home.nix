@@ -4,19 +4,15 @@
   fullName,
   homeDirectory,
   inputs,
-  lib,
   pkgs,
   username,
   ...
 }:
 let
-  capitalize = word: (lib.toUpper (lib.substring 0 1 word) + lib.substring 1 (-1) word);
-  catppuccin = {
-    enable = true;
-    flavor = "macchiato";
-  };
   flakePath = "$HOME/dotfiles/nix";
   mkSymlink = symlink: config.lib.file.mkOutOfStoreSymlink "${homeDirectory}/dotfiles/${symlink}";
+  mkCustomSymlink =
+    symlink: config.lib.file.mkOutOfStoreSymlink "${homeDirectory}/dotfiles_custom/${symlink}";
 in
 {
   programs.home-manager.enable = true;
@@ -29,6 +25,12 @@ in
     "${homeDirectory}/dotfiles/bin"
   ];
 
+  catppuccin = {
+    enable = true;
+    flavor = "macchiato";
+    starship.enable = false;
+  };
+
   home.packages = [
     pkgs.autossh
     pkgs.awscli2
@@ -40,6 +42,7 @@ in
     pkgs.nodejs_18
     pkgs.pre-commit
     pkgs.ripgrep
+    pkgs.sesh
 
     # Neovim Language Servers
     pkgs.emmet-language-server # emmet
@@ -74,6 +77,8 @@ in
     ".config/karabiner".source = mkSymlink "karabiner";
     ".config/starship.toml".source = mkSymlink "starship.toml";
     ".hammerspoon".source = mkSymlink "hammerspoon";
+    "dotfiles/nvim/lua/custom.lua".source = mkCustomSymlink "nvim-custom.lua";
+    "dotfiles/hammerspoon/custom.lua".source = mkCustomSymlink "hammerspoon-custom.lua";
   };
 
   programs.zsh = {
@@ -83,7 +88,7 @@ in
     historySubstringSearch.enable = true;
     syntaxHighlighting.enable = true;
     shellAliases = {
-      nu = "nix flake update --flake ${flakePath}";
+      nu = "nix flake update --commit-lock-file --flake ${flakePath}";
       drs = "darwin-rebuild switch --flake ${flakePath}";
       hms = "home-manager switch --flake ${flakePath}";
       ns = "darwin-rebuild switch --flake ${flakePath} && home-manager switch --flake ${flakePath}";
@@ -97,7 +102,6 @@ in
 
   programs.alacritty = {
     enable = true;
-    inherit catppuccin;
     settings = {
       font = {
         normal.family = "Mononoki Nerd Font";
@@ -111,13 +115,7 @@ in
     };
   };
 
-  programs.bat = {
-    enable = true;
-    inherit catppuccin;
-    config = {
-      theme = "Catppuccin ${capitalize catppuccin.flavor}";
-    };
-  };
+  programs.bat.enable = true;
 
   programs.eza = {
     enable = true;
@@ -140,24 +138,6 @@ in
       "--preview 'bat --style=numbers --color=always {}'"
       "--multi"
     ];
-    colors = {
-      "bg+" = "#363a4f";
-      border = "blue";
-      "fg+" = "#cad3f5";
-      gutter = "#24273a";
-      header = "magenta";
-      hl = "blue";
-      "hl+" = "blue";
-      info = "magenta";
-      label = "blue";
-      marker = "blue";
-      pointer = "blue";
-      "preview-scrollbar" = "blue";
-      prompt = "blue";
-      scrollbar = "blue";
-      separator = "magenta";
-      spinner = "magenta";
-    };
   };
 
   programs.git = {
@@ -174,9 +154,7 @@ in
     };
     delta = {
       enable = true;
-      inherit catppuccin;
       options = {
-        features = "catppuccin-${catppuccin.flavor}";
         commit-decoration-style = "yellow box ul";
         commit-style = "yellow";
         file-decoration-style = "blue ul";
