@@ -3,7 +3,6 @@ return {
   'saghen/blink.cmp',
   enabled = MY_CONFIG.completion_source == 'blink',
   build = MY_CONFIG.is_personal_machine and 'nix run .#build-plugin' or nil,
-  version = not MY_CONFIG.is_personal_machine and 'v0.*' or nil,
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
   opts = {
@@ -38,17 +37,17 @@ return {
       window = { border = MY_CONFIG.border_style },
     },
     sources = {
-      default = { 'lsp', 'path', 'snippets', 'buffer', 'lazydev' },
+      default = { 'lazydev', 'lsp', 'path', 'snippets', 'buffer' },
       providers = {
         buffer = {
           opts = { get_bufnrs = vim.api.nvim_list_bufs },
         },
-        lazydev = { name = 'LazyDev', module = 'lazydev.integrations.blink' },
-        lsp = {
-          name = 'LSP',
-          fallbacks = { 'buffer' },
-          module = 'blink.cmp.sources.lsp',
+        lazydev = {
+          name = 'LazyDev',
+          module = 'lazydev.integrations.blink',
+          score_offset = 100,
         },
+        lsp = { fallbacks = { 'buffer' } },
       },
     },
   },
