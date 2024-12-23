@@ -24,7 +24,10 @@ return {
           includeInlayVariableTypeHints = false,
           includeInlayVariableTypeHintsWhenTypeMatchesName = false,
         },
-        tsserver_plugins = { 'typescript-svelte-plugin' },
+        tsserver_plugins = {
+          '@styled/typescript-styled-plugin',
+          'typescript-svelte-plugin',
+        },
       },
       handlers = {
         ['textDocument/publishDiagnostics'] = require('typescript-tools.api').filter_diagnostics({
