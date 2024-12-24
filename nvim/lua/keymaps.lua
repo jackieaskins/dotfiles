@@ -25,7 +25,8 @@ map('x', '<', '<gv')
 map('x', '>', '>gv')
 -- Don't overwrite clipboard when deleting empty line with dd
 map('n', 'dd', function()
-  if vim.api.nvim_get_current_line():match('^%s*$') then
+  -- TODO: Check all lines, not just first
+  if vim.v.count == 1 and vim.api.nvim_get_current_line():match('^%s*$') then
     return '"_dd'
   else
     return 'dd'

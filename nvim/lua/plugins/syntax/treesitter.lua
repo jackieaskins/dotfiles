@@ -18,6 +18,7 @@ return {
         'gitcommit',
         'markdown_inline',
         'regex',
+        'styled',
       },
       highlight = { enable = true },
       incremental_selection = {
