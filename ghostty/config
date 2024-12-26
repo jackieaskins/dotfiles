@@ -1,0 +1,12 @@
+font-family = "Mononoki Nerd Font"
+window-title-font-family = "Mononoki Nerd Font"
+theme = "catppuccin-macchiato"
+
+cursor-invert-fg-bg = true
+cursor-style = "block"
+cursor-style-blink = false
+
+shell-integration-features = "no-cursor"
+
+window-padding-y = 0,3
+window-padding-balance = true
