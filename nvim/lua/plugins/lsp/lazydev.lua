@@ -17,7 +17,6 @@ return {
             return vim.fn.expand(path)
           end, {
             '~/dotfiles/hammerspoon',
-            '~/dotfiles/wezterm',
           }),
           root_dir
         )

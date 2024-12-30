@@ -46,7 +46,6 @@ if RUBY_PLATFORM =~ /darwin/
   cask 'notunes'
   cask 'raycast'
   cask 'sf-symbols'
-  cask 'wezterm-nightly'
 
   brew 'awscli'
   brew 'imagemagick'

@@ -57,7 +57,7 @@ local appKeyMods = { 'option', 'control' }
 local appKeys = fnutils.mergeTables({
   m = 'Spotify',
   n = 'Notes',
-  t = 'WezTerm',
+  t = 'Ghostty',
 }, CUSTOM.appKeys or {})
 
 for key, app in pairs(appKeys) do
