@@ -84,16 +84,8 @@ success_echo "Succesfully set up Homebrew."
 #                          System Settings                           #
 #--------------------------------------------------------------------#
 
-if [ $is_mac = true ]; then
-  echo -e "Configuring System Settings..."
-
-  defaults write digital.twisted.noTunes replacement /Applications/Spotify.app
-
-  # TODO: Configure MacOS System Preferences
-  # https://github.com/CodingGarden/mac-setup - Cool Mac setup stuff
-
-  success_echo "Configured System Settings."
-fi
+# TODO: Configure MacOS System Preferences
+# https://github.com/CodingGarden/mac-setup - Cool Mac setup stuff
 
 #--------------------------------------------------------------------#
 #                         Global Git Config                          #

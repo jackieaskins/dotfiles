@@ -55,7 +55,7 @@ hotkeyStore.register('Reload', 'Reload configuration', MEH, 'r', hs.reload)
 
 local appKeyMods = { 'option', 'control' }
 local appKeys = fnutils.mergeTables({
-  m = 'Spotify',
+  m = 'Music',
   n = 'Notes',
   t = 'Ghostty',
 }, CUSTOM.appKeys or {})
@@ -83,28 +83,6 @@ darkModeNotification = hs.distributednotifications.new(function()
   require('darkMode').handleDarkModeChange()
 end, 'AppleInterfaceThemeChangedNotification')
 darkModeNotification:start()
-
-----------------------------------------------------------------------
---                      Spotify Notifications                       --
-----------------------------------------------------------------------
-
-hotkeyStore.register('Spotify', 'Show currently playing song', HYPER, 's', hs.spotify.displayCurrentTrack)
-spotifyNotification = hs.distributednotifications.new(function()
-  if hs.spotify.isPlaying() then
-    hs.notify
-      .new(function()
-        hs.application.open('Spotify')
-      end, {
-        title = hs.spotify.getCurrentTrack(),
-        subTitle = hs.spotify.getCurrentArtist(),
-        informativeText = hs.spotify.getCurrentAlbum(),
-        contentImage = hs.image.imageFromURL(hs.spotify.getCurrentTrackArtworkURL()),
-      })
-      :send()
-  end
-end, 'com.spotify.client.PlaybackStateChanged')
-
-spotifyNotification:start()
 
 ----------------------------------------------------------------------
 --                               Misc                               --
