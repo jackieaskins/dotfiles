@@ -84,16 +84,8 @@ success_echo "Succesfully set up Homebrew."
 #                          System Settings                           #
 #--------------------------------------------------------------------#
 
-if [ $is_mac = true ]; then
-  echo -e "Configuring System Settings..."
-
-  defaults write digital.twisted.noTunes replacement /Applications/Spotify.app
-
-  # TODO: Configure MacOS System Preferences
-  # https://github.com/CodingGarden/mac-setup - Cool Mac setup stuff
-
-  success_echo "Configured System Settings."
-fi
+# TODO: Configure MacOS System Preferences
+# https://github.com/CodingGarden/mac-setup - Cool Mac setup stuff
 
 #--------------------------------------------------------------------#
 #                         Global Git Config                          #
@@ -102,18 +94,6 @@ fi
 echo -e "Configuring Git..."
 git config --global include.path ~/dotfiles/base.gitconfig
 success_echo "Configured Git."
-
-#--------------------------------------------------------------------#
-#                              WezTerm                               #
-#--------------------------------------------------------------------#
-
-echo -e "Installing WezTerm terminfo..."
-# Install terminfo to get support for undercurl and the like
-tempfile=$(mktemp)
-curl -o $tempfile https://raw.githubusercontent.com/wez/wezterm/main/termwiz/data/wezterm.terminfo
-tic -x -o ~/.terminfo $tempfile
-rm $tempfile
-success_echo "Successfully installed WezTerm terminfo."
 
 #--------------------------------------------------------------------#
 #                    Dotfiles Backup & Symlinking                    #
@@ -162,7 +142,6 @@ backup_and_symlink .config/ghostty        ghostty
 backup_and_symlink .config/karabiner      karabiner
 backup_and_symlink .config/nvim           nvim
 backup_and_symlink .config/starship.toml  starship.toml
-backup_and_symlink .config/wezterm        wezterm
 backup_and_symlink .hammerspoon           hammerspoon
 backup_and_symlink .tmux.conf             tmux.conf
 backup_and_symlink .vim                   vim

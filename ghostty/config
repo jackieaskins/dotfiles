@@ -8,5 +8,5 @@ cursor-style-blink = false
 
 shell-integration-features = "no-cursor"
 
-window-padding-y = 0,3
 window-padding-balance = true
+window-padding-color = extend

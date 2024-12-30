@@ -2,7 +2,10 @@
 return {
   'saghen/blink.cmp',
   enabled = MY_CONFIG.completion_source == 'blink',
-  version = '0.*',
+  build = {
+    'rustup toolchain install nightly --force',
+    'cargo build --release',
+  },
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
   opts = {
