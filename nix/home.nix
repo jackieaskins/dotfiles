@@ -44,6 +44,7 @@ in
     pkgs.nodejs_18
     pkgs.pre-commit
     pkgs.ripgrep
+    pkgs.rustup
     pkgs.sesh
 
     # Neovim Language Servers
@@ -79,6 +80,7 @@ in
     ".config/karabiner".source = mkSymlink "karabiner";
     ".config/starship.toml".source = mkSymlink "starship.toml";
     ".hammerspoon".source = mkSymlink "hammerspoon";
+    ".config/ghostty".source = mkSymlink "ghostty";
 
     "dotfiles/nvim/lua/custom.lua".source = mkCustomSymlink "nvim-custom.lua";
     "dotfiles/hammerspoon/custom.lua".source = mkCustomSymlink "hammerspoon-custom.lua";
@@ -99,21 +101,6 @@ in
       ''
         source $HOME/dotfiles/zshrc
       '';
-  };
-
-  programs.alacritty = {
-    enable = true;
-    settings = {
-      font = {
-        normal.family = "Mononoki Nerd Font";
-        size = 14;
-      };
-      window = {
-        dynamic_padding = true;
-        option_as_alt = "Both";
-        padding.y = 10;
-      };
-    };
   };
 
   programs.bat.enable = true;

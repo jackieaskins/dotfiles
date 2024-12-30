@@ -12,6 +12,7 @@
   programs.zsh.enable = true;
 
   environment.systemPackages = [
+    pkgs.iina
     pkgs.mas
     pkgs.qmk
   ];
@@ -28,13 +29,12 @@
     enable = true;
     casks = [
       "firefox"
+      "ghostty"
       "hammerspoon"
       "jordanbaird-ice"
       "karabiner-elements"
-      "noTunes"
       "raycast"
       "sf-symbols"
-      "spotify"
       "zen-browser"
     ];
     onActivation.cleanup = "zap";
@@ -45,14 +45,8 @@
   security.pam.enableSudoTouchIdAuth = true;
 
   system.defaults = {
-    CustomSystemPreferences = {
-      "digital.twisted.noTunes" = {
-        hideIcon = 1;
-        replacement = /Applications/Spotify.app;
-      };
-    };
-
     NSGlobalDomain = {
+      _HIHideMenuBar = false;
       AppleEnableMouseSwipeNavigateWithScrolls = true;
       AppleInterfaceStyle = "Dark";
       AppleShowScrollBars = "WhenScrolling";
@@ -69,9 +63,9 @@
         "/System/Applications/Launchpad.app"
         "/System/Applications/Notes.app"
         "/System/Applications/Messages.app"
-        "/Applications/Spotify.app"
+        "/System/Applications/Music.app"
         "/Applications/Zen Browser.app"
-        "/System/Applications/Utilities/Terminal.app"
+        "/Applications/Ghostty.app"
         "/System/Applications/Passwords.app"
       ];
       show-recents = false;
