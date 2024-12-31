@@ -1,5 +1,6 @@
 brew 'asdf'
 brew 'autossh'
+brew 'awscli'
 brew 'bat'
 brew 'cmake' # Neovim dependency
 brew 'eza'
@@ -46,7 +47,6 @@ if RUBY_PLATFORM =~ /darwin/
   cask 'raycast'
   cask 'sf-symbols'
 
-  brew 'awscli'
   brew 'imagemagick'
 
   tap 'FelixKratz/formulae'
