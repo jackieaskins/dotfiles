@@ -140,7 +140,11 @@ return {
       },
     })
 
-    fzf_lua.register_ui_select(function(_, items)
+    fzf_lua.register_ui_select(function(opts, items)
+      if opts.kind == 'codeaction' then
+        return {}
+      end
+
       local min_h, max_h = 0.15, 0.70
       local h = (#items + 4) / vim.o.lines
       if h < min_h then
