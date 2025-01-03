@@ -27,7 +27,6 @@ return {
         local custom_highlights = {
           -- Default Highlights
           CurSearch = vim.tbl_extend('force', inc_search, { style = { 'bold' } }),
-          CursorLineNr = { fg = colors.blue, style = { 'bold' } },
           FoldColumn = { fg = colors.surface1 },
           Folded = { bg = colors.mantle },
           MatchParen = { bg = colors.none, style = { 'bold' } },
@@ -78,10 +77,7 @@ return {
           FzfLuaHeaderBind = { fg = colors.blue },
           FzfLuaHeaderText = { fg = colors.mauve },
           FzfLuaFzfInfo = { fg = colors.mauve },
-          FzfLuaFzfMatch = { fg = colors.blue },
           FzfLuaFzfPointer = { fg = colors.blue },
-          FzfLuaFzfPrompt = { fg = colors.blue },
-          FzfLuaTitle = { link = 'FzfLuaBorder' },
 
           -- highlight-undo.nvim
           HighlightUndo = { link = 'IncSearch' },
