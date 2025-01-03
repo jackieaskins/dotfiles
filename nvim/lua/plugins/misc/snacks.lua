@@ -31,6 +31,10 @@ return {
         ft = 'markdown',
         wo = { wrap = true },
       },
+      notification_history = {
+        border = MY_CONFIG.border_style,
+        backdrop = 100,
+      },
     },
     words = { enabled = true, modes = { 'n', 'c' } },
   },
@@ -38,7 +42,13 @@ return {
     local spinner = { '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏' }
     local progress = vim.defaulttable()
 
-    require('utils').augroup('snacks', {
+    local utils = require('utils')
+
+    utils.user_command('Notifications', function()
+      Snacks.notifier.show_history()
+    end)
+
+    utils.augroup('snacks', {
       {
         'LspProgress',
         callback = function(args)
