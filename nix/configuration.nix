@@ -28,7 +28,6 @@
   homebrew = {
     enable = true;
     casks = [
-      "firefox"
       "ghostty"
       "hammerspoon"
       "jordanbaird-ice"
