@@ -65,6 +65,9 @@ ctrl-alt-shift-s = 'layout h_tiles h_accordion'
 ctrl-alt-shift-slash = 'layout tiles horizontal vertical'
 ctrl-alt-shift-comma = 'layout accordion vertical horizontal'
 
+ctrl-alt-shift-f = 'layout floating tiling'
+ctrl-alt-shift-cmd-r = 'flatten-workspace-tree'
+
 ctrl-alt-shift-h = 'focus left'
 ctrl-alt-shift-j = 'focus down'
 ctrl-alt-shift-k = 'focus up'
@@ -105,9 +108,6 @@ ctrl-alt-shift-cmd-semicolon = 'mode service'
 
 [mode.service.binding]
 esc = ['reload-config', 'mode main']
-
-r = ['flatten-workspace-tree', 'mode main']
-f = ['layout floating tiling', 'mode main']
 
 h = ['join-with left', 'mode main']
 j = ['join-with down', 'mode main']
