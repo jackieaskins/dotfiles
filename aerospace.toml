@@ -16,6 +16,10 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 automatically-unhide-macos-hidden-apps = true
 
 [[on-window-detected]]
+if.window-title-regex-substring = 'Picture.*in.*Picture'
+run = 'layout floating'
+
+[[on-window-detected]]
 if.app-id = 'com.apple.AppStore'
 run = 'layout floating'
 
