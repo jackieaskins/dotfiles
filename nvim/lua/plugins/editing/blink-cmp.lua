@@ -21,7 +21,9 @@ return {
         auto_show = true,
         window = { border = MY_CONFIG.border_style },
       },
-      list = { selection = 'auto_insert' },
+      list = {
+        selection = { preselect = true, auto_insert = true },
+      },
       menu = { border = MY_CONFIG.border_style },
     },
     keymap = {
