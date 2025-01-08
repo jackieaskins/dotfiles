@@ -24,7 +24,10 @@ return {
       list = {
         selection = { preselect = true, auto_insert = true },
       },
-      menu = { border = MY_CONFIG.border_style },
+      menu = {
+        border = MY_CONFIG.border_style,
+        draw = { treesitter = { 'lsp' } },
+      },
     },
     keymap = {
       preset = 'default',
