@@ -22,8 +22,6 @@ return {
       input = {
         border = MY_CONFIG.border_style,
         relative = 'cursor',
-        row = -3,
-        col = 0,
       },
       notification = {
         bo = { filetype = 'snacks_notif' },
