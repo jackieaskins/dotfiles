@@ -16,8 +16,10 @@ return {
     end
     config.handlers = {
       ['textDocument/diagnostic'] = function(err, result, ctx)
-        for _, item in ipairs(result.items) do
-          item.severity = 4
+        if result and result.items then
+          for _, item in ipairs(result.items) do
+            item.severity = 4
+          end
         end
 
         return vim.lsp.handlers['textDocument/diagnostic'](err, result, ctx)
