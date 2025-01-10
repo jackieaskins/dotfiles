@@ -43,7 +43,10 @@ return {
     },
     signature = {
       enabled = true,
-      window = { border = MY_CONFIG.border_style },
+      window = {
+        border = MY_CONFIG.border_style,
+        show_documentation = false,
+      },
     },
     sources = {
       default = { 'lazydev', 'lsp', 'path', 'snippets', 'buffer' },
