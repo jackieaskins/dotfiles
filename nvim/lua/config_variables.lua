@@ -14,6 +14,7 @@
 ---@field border_style string
 ---@field custom_gx_handlers GxHandler[]
 ---@field completion_source 'blink' | 'cmp'
+---@field picker 'fzf-lua' | 'mini.pick'
 
 ---@class MyConfig
 MY_CONFIG = {
@@ -26,4 +27,5 @@ MY_CONFIG = {
   border_style = 'double',
   custom_gx_handlers = {},
   completion_source = 'blink',
+  picker = 'fzf-lua',
 }

@@ -2,6 +2,7 @@
 return {
   'ibhagwan/fzf-lua',
   dependencies = { 'echasnovski/mini.icons' },
+  enabled = MY_CONFIG.picker == 'fzf-lua',
   event = 'VeryLazy',
   keys = function()
     local keys = {
