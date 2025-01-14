@@ -21,9 +21,6 @@ return {
         auto_show = true,
         window = { border = MY_CONFIG.border_style },
       },
-      list = {
-        selection = { preselect = true, auto_insert = true },
-      },
       menu = {
         border = MY_CONFIG.border_style,
         draw = { treesitter = { 'lsp' } },
