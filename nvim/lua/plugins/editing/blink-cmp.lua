@@ -28,7 +28,10 @@ return {
     },
     keymap = {
       preset = 'default',
-      cmdline = { preset = 'super-tab' },
+      cmdline = {
+        preset = 'default',
+        ['<Tab>'] = { 'select_and_accept' },
+      },
       ['<C-j>'] = { 'snippet_forward' },
       ['<C-k>'] = { 'snippet_backward', 'fallback' },
       ['<C-c>'] = { 'cancel' },
