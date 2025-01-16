@@ -14,7 +14,7 @@
 ---@field border_style string
 ---@field custom_gx_handlers GxHandler[]
 ---@field completion_source 'blink' | 'cmp'
----@field picker 'fzf-lua' | 'mini.pick'
+---@field picker 'fzf-lua' | 'mini.pick' | 'snacks'
 
 ---@class MyConfig
 MY_CONFIG = {
