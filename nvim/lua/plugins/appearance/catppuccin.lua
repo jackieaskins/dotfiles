@@ -99,9 +99,16 @@ return {
           CmpItemAbbrMatch = { fg = colors.blue },
           CmpItemMenu = { fg = colors.surface2 },
 
+          -- nvim-lightbulb
+          LightBulbVirtText = { bg = colors.none },
+
           -- nvim-treesitter-context
           TreesitterContext = { fg = colors.text, bg = colors.mantle },
           TreesitterContextLineNumber = { fg = colors.surface1, bg = colors.mantle },
+
+          -- oil.nvim
+          -- OilDirHidden = { link = 'OilDir' },
+          -- OilFileHidden = { link = 'OilFile' },
 
           -- snacks.nvim
           SnacksIndent = { fg = colors.surface0 },
