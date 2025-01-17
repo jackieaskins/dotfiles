@@ -18,13 +18,14 @@ end
 function M.get_keys()
   local keys = {
     -- Buffers and Files
+    { '<leader><leader>', 'smart' },
     { '<leader>bu', 'buffers' },
-    { '<C-p>', 'files' },
-    { '<leader>of', 'recent' },
+    { '<C-p>', 'files', { follow = true, hidden = true } },
+    { '<leader>of', 'recent', { filter = { cwd = true } } },
 
     -- Search
     { '<leader>fw', 'grep_word' },
-    { '<leader>/', 'live_grep' },
+    { '<leader>/', 'grep' },
 
     -- Git
     { '<leader>gs', 'git_status' },
