@@ -3,42 +3,44 @@ return {
   'folke/snacks.nvim',
   priority = 1000,
   lazy = false,
-  ---@type snacks.Config
-  opts = {
-    bigfile = { enabled = true },
-    indent = {
-      enabled = true,
-      animate = { enabled = false },
-      chunk = { enabled = true },
-    },
-    input = { enabled = true },
-    notifier = {
-      enabled = true,
-      margin = { top = 1 },
-      width = { max = 50 },
-    },
-    picker = require('plugins.misc.snacks.picker').get_config(),
-    quickfile = { enabled = true },
-    styles = {
-      input = {
-        border = MY_CONFIG.border_style,
-        relative = 'cursor',
+  opts = function()
+    ---@type snacks.Config
+    return {
+      bigfile = { enabled = true },
+      indent = {
+        enabled = true,
+        animate = { enabled = false },
+        chunk = { enabled = true },
       },
-      ---@diagnostic disable-next-line: missing-fields
-      notification = {
-        bo = { filetype = 'snacks_notif' },
-        border = MY_CONFIG.border_style,
-        ft = 'markdown',
-        wo = { wrap = true },
+      input = { enabled = true },
+      notifier = {
+        enabled = true,
+        margin = { top = 1 },
+        width = { max = 50 },
       },
-      ---@diagnostic disable-next-line: missing-fields
-      notification_history = {
-        border = MY_CONFIG.border_style,
-        backdrop = 100,
+      picker = require('plugins.misc.snacks.picker').get_config(),
+      quickfile = { enabled = true },
+      styles = {
+        input = {
+          border = MY_CONFIG.border_style,
+          relative = 'cursor',
+        },
+        ---@diagnostic disable-next-line: missing-fields
+        notification = {
+          bo = { filetype = 'snacks_notif' },
+          border = MY_CONFIG.border_style,
+          ft = 'markdown',
+          wo = { wrap = true },
+        },
+        ---@diagnostic disable-next-line: missing-fields
+        notification_history = {
+          border = MY_CONFIG.border_style,
+          backdrop = 100,
+        },
       },
-    },
-    words = { enabled = true, modes = { 'n', 'c' } },
-  },
+      words = { enabled = true, modes = { 'n', 'c' } },
+    }
+  end,
   init = function()
     local spinner = { '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏' }
     local progress = vim.defaulttable()
