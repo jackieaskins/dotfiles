@@ -51,6 +51,15 @@ hs.automaticallyCheckForUpdates(true)
 --                             Hotkeys                              --
 ----------------------------------------------------------------------
 
+reloadWatcher = hs.pathwatcher.new(hs.configdir, function(paths)
+  for _, path in ipairs(paths) do
+    if not path:match(hs.configdir .. '/annotations/generated') then
+      hs.reload()
+      break
+    end
+  end
+end)
+reloadWatcher:start()
 hotkeyStore.register('Reload', 'Reload configuration', MEH, 'r', hs.reload)
 
 local appKeyMods = { 'option', 'control' }
