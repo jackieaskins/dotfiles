@@ -31,6 +31,8 @@ return {
       cmdline = {
         preset = 'default',
         ['<Tab>'] = { 'select_and_accept' },
+        ['<Up>'] = {},
+        ['<Down>'] = {},
       },
       ['<C-j>'] = { 'snippet_forward' },
       ['<C-k>'] = { 'snippet_backward', 'fallback' },
@@ -40,6 +42,8 @@ return {
           cmp.show({ providers = { 'lsp' } })
         end,
       },
+      ['<Up>'] = {},
+      ['<Down>'] = {},
     },
     signature = {
       enabled = true,
