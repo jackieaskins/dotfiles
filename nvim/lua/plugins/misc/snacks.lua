@@ -4,6 +4,8 @@ return {
   priority = 1000,
   lazy = false,
   opts = function()
+    local border = MY_CONFIG.border_style
+
     ---@type snacks.Config
     return {
       bigfile = { enabled = true },
@@ -22,19 +24,18 @@ return {
       quickfile = { enabled = true },
       styles = {
         input = {
-          border = MY_CONFIG.border_style,
+          border = border,
           relative = 'cursor',
         },
         ---@diagnostic disable-next-line: missing-fields
         notification = {
-          bo = { filetype = 'snacks_notif' },
-          border = MY_CONFIG.border_style,
+          border = border,
           ft = 'markdown',
           wo = { wrap = true },
         },
         ---@diagnostic disable-next-line: missing-fields
         notification_history = {
-          border = MY_CONFIG.border_style,
+          border = border,
           backdrop = 100,
         },
       },

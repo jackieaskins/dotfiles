@@ -27,7 +27,7 @@ local function override_layouts()
 
   local vscode = layouts.vscode.layout
   vscode.backdrop = 60
-  vscode[1].border = border
+  vscode[1].border = border -- Input
 end
 
 ---@return snacks.picker.Config
@@ -41,6 +41,7 @@ function M.get_config()
       input = {
         keys = {
           ['<Esc>'] = { 'close', mode = { 'n', 'i' } },
+          ['<C-u>'] = false,
         },
       },
     },
@@ -56,7 +57,7 @@ function M.get_keys()
     { '<leader>of', 'recent', { filter = { cwd = true } } },
 
     -- Search
-    { '<leader>fw', 'grep_word' },
+    { '<leader>fw', 'grep_word', nil, { 'n', 'x' } },
     { '<leader>/', 'grep' },
 
     -- Git
@@ -74,7 +75,7 @@ function M.get_keys()
     { 'gi', 'lsp_implementations' },
     { 'gpi', 'lsp_implementations', { auto_confirm = false } },
     { '<leader>sd', 'lsp_symbols' },
-    -- { '<leader>sw', 'lsp_workspace_symbols' },
+    { '<leader>sw', 'lsp_workspace_symbols' },
 
     -- Diagnostics
     { '<leader>wd', 'diagnostics' },
@@ -86,15 +87,19 @@ function M.get_keys()
     { '<leader>hi', 'highlights' },
     { '<leader>au', 'autocmds' },
     { '<leader>km', 'keymaps' },
+    { '<leader>z=', 'spelling' },
   }
 
   return vim.tbl_map(function(map)
+    local keymap, picker, args, mode = unpack(map)
+
     return {
-      map[1],
+      keymap,
       function()
-        Snacks.picker[map[2]](map[3])
+        Snacks.picker[picker](args)
       end,
-      desc = 'Picker ' .. map[1],
+      desc = 'Picker ' .. picker,
+      mode = mode,
     }
   end, keys)
 end

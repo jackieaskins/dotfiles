@@ -89,11 +89,6 @@ return {
           -- mini.icons
           MiniIconsGrey = { fg = colors.overlay0 },
 
-          -- mini.pick
-          MiniPickHeader = { fg = colors.mauve },
-          MiniPickMatchRanges = { fg = colors.blue },
-          MiniPickPrompt = { fg = colors.mauve },
-
           -- nvim-cmp
           CmpItemAbbr = { fg = colors.text },
           CmpItemAbbrMatch = { fg = colors.blue },
