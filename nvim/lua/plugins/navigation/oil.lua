@@ -37,6 +37,9 @@ return {
       'echasnovski/mini.icons',
     },
     lazy = false,
-    keys = { { '-', '<cmd>Oil<CR>' } },
+    keys = {
+      { '-', '<cmd>Oil<CR>' },
+      { '_', '<cmd>Oil .<CR>' },
+    },
   },
 }
