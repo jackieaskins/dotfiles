@@ -36,6 +36,7 @@ return {
       },
       ['<C-j>'] = { 'snippet_forward' },
       ['<C-k>'] = { 'snippet_backward', 'fallback' },
+      ['<C-s>'] = { 'show_signature', 'hide_signature' },
       ['<C-c>'] = { 'cancel' },
       ['<C-space>'] = {
         function(cmp)
