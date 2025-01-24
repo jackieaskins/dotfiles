@@ -1,3 +1,5 @@
+# https://nikitabobko.github.io/AeroSpace/guide
+
 start-at-login = true
 
 after-login-command = []
@@ -21,6 +23,10 @@ run = 'layout floating'
 
 [[on-window-detected]]
 if.app-id = 'com.apple.AppStore'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.window-title-regex-substring = 'Hammerspoon Console'
 run = 'layout floating'
 
 [[on-window-detected]]
@@ -100,6 +106,16 @@ ctrl-alt-shift-6 = 'move-node-to-workspace 6'
 ctrl-alt-shift-7 = 'move-node-to-workspace 7'
 ctrl-alt-shift-8 = 'move-node-to-workspace 8'
 ctrl-alt-shift-9 = 'move-node-to-workspace 9'
+
+ctrl-alt-shift-cmd-1 = 'move-node-to-monitor 1'
+ctrl-alt-shift-cmd-2 = 'move-node-to-monitor 2'
+ctrl-alt-shift-cmd-3 = 'move-node-to-monitor 3'
+ctrl-alt-shift-cmd-4 = 'move-node-to-monitor 4'
+ctrl-alt-shift-cmd-5 = 'move-node-to-monitor 5'
+ctrl-alt-shift-cmd-6 = 'move-node-to-monitor 6'
+ctrl-alt-shift-cmd-7 = 'move-node-to-monitor 7'
+ctrl-alt-shift-cmd-8 = 'move-node-to-monitor 8'
+ctrl-alt-shift-cmd-9 = 'move-node-to-monitor 9'
 
 ctrl-alt-shift-tab = 'focus-back-and-forth'
 ctrl-alt-shift-cmd-tab = 'workspace-back-and-forth'
