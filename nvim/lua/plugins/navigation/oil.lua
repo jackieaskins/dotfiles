@@ -1,7 +1,6 @@
 ---@type LazySpec
 return {
   { 'JezerM/oil-lsp-diagnostics.nvim', ft = 'oil', opts = {} },
-  { 'FerretDetective/oil-git-signs.nvim', ft = 'oil', opts = {} },
   {
     'stevearc/oil.nvim',
     ---@module 'oil'
