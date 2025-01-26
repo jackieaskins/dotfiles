@@ -34,6 +34,8 @@ return {
         ['<Up>'] = {},
         ['<Down>'] = {},
       },
+      ['<Tab>'] = {},
+      ['<S-Tab>'] = {},
       ['<C-j>'] = { 'snippet_forward' },
       ['<C-k>'] = { 'snippet_backward', 'fallback' },
       ['<C-s>'] = { 'show_signature', 'hide_signature' },
