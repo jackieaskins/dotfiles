@@ -30,12 +30,16 @@ local function override_layouts()
   vscode[1].border = border -- Input
 end
 
----@return snacks.picker.Config
 function M.get_config()
   override_layouts()
 
+  ---@type snacks.picker.Config
   return {
     enabled = MY_CONFIG.picker == 'snacks',
+    matcher = { frecency = true },
+    previewers = {
+      git = { native = true },
+    },
     ui_select = true,
     win = {
       input = {
