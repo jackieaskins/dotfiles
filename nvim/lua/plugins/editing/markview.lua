@@ -7,9 +7,6 @@ return {
     'echasnovski/mini.icons',
   },
   ---@module 'markview'
-  ---@type markview.configuration
-  opts = {
-    initial_state = false,
-    code_blocks = { icons = 'mini', pad_amount = 2 },
-  },
+  ---@type mkv.config
+  opts = {},
 }
