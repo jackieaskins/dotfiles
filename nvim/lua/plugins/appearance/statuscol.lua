@@ -5,7 +5,7 @@ return {
     local builtin = require('statuscol.builtin')
 
     return {
-      ft_ignore = { 'NvimTree' },
+      ft_ignore = { 'snacks_picker_preview' },
       segments = {
         { -- Gitsigns
           sign = { namespace = { 'gitsigns' }, wrap = true, auto = false, foldclosed = true },
