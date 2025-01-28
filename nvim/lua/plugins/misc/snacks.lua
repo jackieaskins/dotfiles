@@ -12,7 +12,10 @@ return {
       indent = {
         enabled = true,
         animate = { enabled = false },
-        chunk = { enabled = true },
+        chunk = {
+          enabled = true,
+          char = { arrow = '─' },
+        },
       },
       input = { enabled = true },
       notifier = {
