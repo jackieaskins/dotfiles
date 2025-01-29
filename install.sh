@@ -96,6 +96,17 @@ git config --global include.path ~/dotfiles/base.gitconfig
 success_echo "Configured Git."
 
 #--------------------------------------------------------------------#
+#                              WezTerm                               #
+#--------------------------------------------------------------------#
+echo -e "Installing WezTerm terminfo..."
+# Install terminfo to get support for undercurl and the like
+tempfile=$(mktemp)
+curl -o $tempfile https://raw.githubusercontent.com/wez/wezterm/main/termwiz/data/wezterm.terminfo
+tic -x -o ~/.terminfo $tempfile
+rm $tempfile
+success_echo "Successfully installed WezTerm terminfo."
+
+#--------------------------------------------------------------------#
 #                    Dotfiles Backup & Symlinking                    #
 #--------------------------------------------------------------------#
 
@@ -143,6 +154,7 @@ backup_and_symlink .config/ghostty        ghostty
 backup_and_symlink .config/karabiner      karabiner
 backup_and_symlink .config/nvim           nvim
 backup_and_symlink .config/starship.toml  starship.toml
+backup_and_symlink .config/wezterm        wezterm
 backup_and_symlink .hammerspoon           hammerspoon
 backup_and_symlink .tmux.conf             tmux.conf
 backup_and_symlink .vim                   vim
