@@ -37,10 +37,13 @@ servers.eslint = {
       end,
       handlers = {
         ['textDocument/diagnostic'] = function(err, result, ctx)
-          for _, item in ipairs(result.items) do
-            item.severity = 4
+          if result and result.items then
+            for _, item in ipairs(result.items) do
+              item.severity = 4
+            end
           end
-          return vim.lsp.diagnostic.on_diagnostic(err, result, ctx)
+
+          return vim.lsp.handlers['textDocument/diagnostic'](err, result, ctx)
         end,
       },
     }
@@ -131,6 +134,16 @@ servers.svelte = {
       },
       on_attach = function(client, bufnr)
         require('lsp.utils').setup_auto_close_tag(client, bufnr, 'html/tag')
+
+        require('utils').augroup('svelte_tsjschanges', {
+          {
+            { 'BufWritePost' },
+            pattern = { '*.js', '*.ts' },
+            callback = function(args)
+              client:notify('$/onDidChangeTsOrJsFile', { uri = args.match })
+            end,
+          },
+        })
       end,
     }
   end,

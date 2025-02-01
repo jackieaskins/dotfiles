@@ -3,41 +3,48 @@ return {
   'folke/snacks.nvim',
   priority = 1000,
   lazy = false,
-  ---@type snacks.Config
-  opts = {
-    bigfile = { enabled = true },
-    indent = {
-      enabled = true,
-      animate = { enabled = false },
-      chunk = { enabled = true },
-    },
-    input = { enabled = true },
-    notifier = {
-      enabled = true,
-      margin = { top = 1 },
-      width = { max = 50 },
-    },
-    quickfile = { enabled = true },
-    styles = {
-      input = {
-        border = MY_CONFIG.border_style,
-        relative = 'cursor',
-        row = -3,
-        col = 0,
+  opts = function()
+    local border = MY_CONFIG.border_style
+
+    ---@type snacks.Config
+    return {
+      bigfile = { enabled = true },
+      indent = {
+        enabled = true,
+        animate = { enabled = false },
+        chunk = {
+          enabled = true,
+          char = { arrow = '─' },
+        },
       },
-      notification = {
-        bo = { filetype = 'snacks_notif' },
-        border = MY_CONFIG.border_style,
-        ft = 'markdown',
-        wo = { wrap = true },
+      input = { enabled = true },
+      notifier = {
+        enabled = true,
+        margin = { top = 1 },
+        width = { max = 50 },
       },
-      notification_history = {
-        border = MY_CONFIG.border_style,
-        backdrop = 100,
+      picker = require('plugins.misc.snacks.picker').get_config(),
+      quickfile = { enabled = true },
+      styles = {
+        input = {
+          border = border,
+          relative = 'cursor',
+        },
+        ---@diagnostic disable-next-line: missing-fields
+        notification = {
+          border = border,
+          ft = 'markdown',
+          wo = { wrap = true },
+        },
+        ---@diagnostic disable-next-line: missing-fields
+        notification_history = {
+          border = border,
+          backdrop = 100,
+        },
       },
-    },
-    words = { enabled = true, modes = { 'n', 'c' } },
-  },
+      words = { enabled = true, modes = { 'n', 'c' } },
+    }
+  end,
   init = function()
     local spinner = { '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏' }
     local progress = vim.defaulttable()
@@ -91,29 +98,33 @@ return {
       },
     })
   end,
-  keys = {
-    {
-      '<leader>bd',
-      function()
-        Snacks.bufdelete()
-      end,
-      desc = 'Delete Buffer',
-    },
-    {
-      ']]',
-      function()
-        Snacks.words.jump(vim.v.count1)
-      end,
-      desc = 'Next Reference',
-      mode = { 'n', 't' },
-    },
-    {
-      '[[',
-      function()
-        Snacks.words.jump(-vim.v.count1)
-      end,
-      desc = 'Prev Reference',
-      mode = { 'n', 't' },
-    },
-  },
+  keys = function()
+    local default_keys = {
+      {
+        '<leader>bd',
+        function()
+          Snacks.bufdelete()
+        end,
+        desc = 'Delete Buffer',
+      },
+      {
+        ']]',
+        function()
+          Snacks.words.jump(vim.v.count1)
+        end,
+        desc = 'Next Reference',
+        mode = { 'n', 't' },
+      },
+      {
+        '[[',
+        function()
+          Snacks.words.jump(-vim.v.count1)
+        end,
+        desc = 'Prev Reference',
+        mode = { 'n', 't' },
+      },
+    }
+
+    return vim.list_extend(default_keys, require('plugins.misc.snacks.picker').get_keys())
+  end,
 }

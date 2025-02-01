@@ -82,6 +82,7 @@ return {
       formatters = customized_formatters,
       formatters_by_ft = formatters_by_ft,
       format_on_save = {},
+      default_format_opts = { quiet = true },
     }
   end,
 }

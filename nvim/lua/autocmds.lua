@@ -79,34 +79,3 @@ augroup('lsp_folding', {
     end,
   },
 })
-
-augroup('lightbulb_attach', {
-  {
-    'LspAttach',
-    callback = function(args)
-      local client = vim.lsp.get_client_by_id(args.data.client_id)
-
-      if not client or not client:supports_method(vim.lsp.protocol.Methods.textDocument_codeAction) then
-        return
-      end
-
-      local bufnr = args.buf
-      augroup('lightbulb', {
-        {
-          'CursorHold',
-          callback = function()
-            require('lsp.lightbulb').update(bufnr)
-          end,
-          buffer = bufnr,
-        },
-        {
-          { 'InsertEnter', 'BufLeave' },
-          callback = function()
-            require('lsp.lightbulb').clear(bufnr)
-          end,
-          buffer = bufnr,
-        },
-      })
-    end,
-  },
-})
