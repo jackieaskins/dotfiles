@@ -56,10 +56,21 @@ return {
       },
     },
     sources = {
-      default = { 'lazydev', 'lsp', 'path', 'snippets', 'buffer' },
+      default = {
+        'lazydev',
+        'lsp',
+        'dadbod',
+        'path',
+        'snippets',
+        'buffer',
+      },
       providers = {
         buffer = {
           opts = { get_bufnrs = vim.api.nvim_list_bufs },
+        },
+        dadbod = {
+          name = 'Dadbod',
+          module = 'vim_dadbod_completion.blink',
         },
         lazydev = {
           name = 'LazyDev',
