@@ -25,9 +25,6 @@ local modMap = {
 
 local M = {}
 
----@type hs.menubar | nil
-local menubar = hs.menubar.new(true, 'hotkeys')
-
 ---@type table<string, boolean>
 local definedHotKeys = {}
 
@@ -143,6 +140,8 @@ end
 
 ---Add menubar item with Hammerspoon hotkeys
 function M.addMenubarItem()
+  local menubar = hs.menubar.new(true, 'hotkeys')
+
   if not menubar then
     return
   end

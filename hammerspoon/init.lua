@@ -98,8 +98,8 @@ darkModeNotification:start()
 ----------------------------------------------------------------------
 
 require('annotations')
-require('hs.ipc').cliInstall(BREW_PREFIX) -- Enables CLI
+require('hs.ipc').cliInstall() -- Enables CLI
 hotkeyStore.verify()
 hotkeyStore.addMenubarItem()
 
-hs.alert.show('Loaded HammerSpoon config')
+hs.alert.show('Loaded Hammerspoon config')
