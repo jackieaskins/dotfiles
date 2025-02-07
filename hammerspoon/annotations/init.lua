@@ -6,9 +6,47 @@ local parameterOverrides = {
   ['end'] = 'end_',
 }
 
+local supportedTypes = {
+  any = 'any',
+  ['nil'] = 'nil',
+
+  str = 'string',
+  string = 'string',
+  uuid = 'string',
+  uuidstring = 'string',
+  errmsg = 'string',
+  error = 'string',
+  errorstring = 'string',
+
+  bool = 'boolean',
+  boolean = 'boolean',
+  ['true'] = 'boolean',
+  ['false'] = 'boolean',
+
+  integer = 'integer',
+  number = 'number',
+  keycode = 'number',
+  ['rotation angle'] = 'number',
+  sec = 'number',
+
+  audio = 'hs.audiodevice',
+  datastore = 'hs.webview.datastore',
+  device = 'hs.audiodevice',
+  echorequest = 'hs.network.ping.echoRequest',
+  menubaritem = 'hs.menubar',
+  notification = 'hs.notify',
+  serialport = 'hs.serialport',
+  toolbar = 'hs.webview.toolbar',
+  usercontentcontroller = 'hs.webview.usercontent',
+  win = 'hs.window',
+}
+
 local signatureOverrides = {
+  ['hs.console.titleVisibility([state]) -> current value'] = 'hs.console.titleVisibility([state]) -> string',
   ['hs.tangent.sendPanelConnectionStatesRequest())'] = 'hs.tangent.sendPanelConnectionStatesRequest()',
   ['hs.chooser:enableDefaultForQuery([]) -> hs.chooser object or boolean'] = 'hs.chooser:enableDefaultForQuery(enableDefaultForQuery) -> hs.chooser object or boolean',
+  ['hs.notify.register(tag, fn) -> id'] = 'hs.notify.register(tag, fn) -> number',
+  ['hs.pasteboard.readSound([name], [all]) -> hs.sound object or array of hs.sound objects'] = 'hs.pasteboard.readSound([name], [all]) -> hs.sound | hs.sound[]',
 }
 
 local annotationsLastGenerated = hs.settings.get(annotationGenKey)
@@ -32,6 +70,11 @@ assert(modules, 'Error reading docstrings json file')
 local outDir = os.getenv('HOME') .. '/dotfiles/hammerspoon/annotations/generated'
 hs.fs.rmdir(outDir)
 hs.fs.mkdir(outDir)
+
+local moduleNames = {}
+for _, module in ipairs(modules) do
+  moduleNames[module.name] = module.name
+end
 
 for _, module in ipairs(modules) do
   local moduleName = module.name
@@ -94,8 +137,41 @@ for _, module in ipairs(modules) do
       for _, arg in ipairs(args) do
         table.insert(itemLines, '---@param ' .. arg .. ' any')
       end
-      if item.signature:match('%s*->%s*') ~= nil then
-        table.insert(itemLines, '---@return any')
+
+      ---@type string
+      local returnMatch = item.signature:match('%s*->%s*(.*)')
+      if returnMatch and returnMatch:lower() ~= 'none' then
+        local returnStr = returnMatch
+          :gsub('%sor%s', ' | ')
+          :gsub('`', '')
+          :gsub('(%S+)Object', '%1')
+          :gsub('%sobjects', '[]')
+          :gsub('%sobject%(s%)', '[]')
+          :gsub('%sobject', '')
+        ---@type string[]
+        local returnParts = hs.fnutils.split(returnStr, '%s*|%s*')
+
+        local matchedReturnParts = {}
+        for _, returnPart in ipairs(returnParts) do
+          local suffix = returnPart:match('(%[%])$')
+          local modifiedReturnPart = returnPart == 'self' and module.name
+            or returnPart:gsub('%[%]$', ''):gsub('^hs.geometry%s.+', 'hs.geometry'):lower()
+
+          local matchedReturnPart = supportedTypes[modifiedReturnPart]
+            or moduleNames[modifiedReturnPart]
+            or moduleNames['hs.' .. modifiedReturnPart]
+
+          if matchedReturnPart then
+            table.insert(matchedReturnParts, matchedReturnPart .. (suffix or ''))
+          end
+        end
+
+        if #returnParts == #matchedReturnParts then
+          local returnType = table.concat(matchedReturnParts, ' | ')
+          table.insert(itemLines, '---@return ' .. returnType)
+        else
+          table.insert(itemLines, '---@return any')
+        end
       end
 
       local argStr = table.concat(args, ', ')
