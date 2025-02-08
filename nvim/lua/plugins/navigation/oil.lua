@@ -23,8 +23,6 @@ return {
       win_options = {
         number = false,
         relativenumber = false,
-        signcolumn = 'yes:2',
-        statuscolumn = '',
       },
       view_options = {
         is_hidden_file = function()
