@@ -14,6 +14,7 @@ return {
       ensure_installed = {
         'bash',
         'comment',
+        'diff',
         'git_rebase',
         'gitcommit',
         'markdown_inline',
