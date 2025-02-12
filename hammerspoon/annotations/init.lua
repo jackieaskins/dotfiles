@@ -25,17 +25,24 @@ local supportedTypes = {
 
   integer = 'integer',
   number = 'number',
+  distance = 'number',
   keycode = 'number',
   ['rotation angle'] = 'number',
   sec = 'number',
+  seconds = 'number',
 
+  table = 'table',
+
+  app = 'hs.application',
   audio = 'hs.audiodevice',
   datastore = 'hs.webview.datastore',
   device = 'hs.audiodevice',
   echorequest = 'hs.network.ping.echoRequest',
   menubaritem = 'hs.menubar',
   notification = 'hs.notify',
-  serialport = 'hs.serialport',
+  serialport = 'hs.serial',
+  spotlightitem = 'hs.spotlight',
+  synthesizer = 'hs.speech',
   toolbar = 'hs.webview.toolbar',
   usercontentcontroller = 'hs.webview.usercontent',
   win = 'hs.window',
@@ -47,6 +54,8 @@ local signatureOverrides = {
   ['hs.chooser:enableDefaultForQuery([]) -> hs.chooser object or boolean'] = 'hs.chooser:enableDefaultForQuery(enableDefaultForQuery) -> hs.chooser object or boolean',
   ['hs.notify.register(tag, fn) -> id'] = 'hs.notify.register(tag, fn) -> number',
   ['hs.pasteboard.readSound([name], [all]) -> hs.sound object or array of hs.sound objects'] = 'hs.pasteboard.readSound([name], [all]) -> hs.sound | hs.sound[]',
+  ['hs.screen.find(hint) -> hs.screen object(s)'] = 'hs.screen.find(hint) -> hs.screen | nil',
+  ['hs.window.filter:getWindows([sortOrder]) -> list of hs.window objects'] = 'hs.window.filter:getWindows([sortOrder]) -> hs.window[]',
 }
 
 local annotationsLastGenerated = hs.settings.get(annotationGenKey)
