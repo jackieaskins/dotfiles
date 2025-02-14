@@ -9,6 +9,7 @@ return {
     ---@type snacks.Config
     return {
       bigfile = { enabled = true },
+      image = { enabled = true },
       indent = {
         enabled = true,
         animate = { enabled = false },
