@@ -13,6 +13,14 @@ return {
       kind_icons = require('icons').get_lspkind_icons(),
       use_nvim_cmp_as_default = true,
     },
+    cmdline = {
+      keymap = {
+        preset = 'default',
+        ['<Tab>'] = { 'select_and_accept' },
+        ['<Up>'] = {},
+        ['<Down>'] = {},
+      },
+    },
     completion = {
       accept = {
         auto_brackets = { enabled = true },
@@ -28,12 +36,6 @@ return {
     },
     keymap = {
       preset = 'default',
-      cmdline = {
-        preset = 'default',
-        ['<Tab>'] = { 'select_and_accept' },
-        ['<Up>'] = {},
-        ['<Down>'] = {},
-      },
       ['<Tab>'] = {},
       ['<S-Tab>'] = {},
       ['<C-j>'] = { 'snippet_forward' },
