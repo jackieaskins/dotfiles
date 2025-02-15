@@ -10,6 +10,7 @@ vim.o.hidden = true
 vim.o.number = true
 vim.o.signcolumn = 'no'
 vim.o.relativenumber = true
+vim.o.numberwidth = 1
 vim.o.cursorline = true
 vim.o.scrolloff = 5
 vim.o.linebreak = true
