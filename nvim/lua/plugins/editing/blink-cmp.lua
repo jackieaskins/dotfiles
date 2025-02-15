@@ -13,6 +13,14 @@ return {
       kind_icons = require('icons').get_lspkind_icons(),
       use_nvim_cmp_as_default = true,
     },
+    cmdline = {
+      keymap = {
+        preset = 'default',
+        ['<Tab>'] = { 'select_and_accept' },
+        ['<Up>'] = {},
+        ['<Down>'] = {},
+      },
+    },
     completion = {
       accept = {
         auto_brackets = { enabled = true },
@@ -28,12 +36,6 @@ return {
     },
     keymap = {
       preset = 'default',
-      cmdline = {
-        preset = 'default',
-        ['<Tab>'] = { 'select_and_accept' },
-        ['<Up>'] = {},
-        ['<Down>'] = {},
-      },
       ['<Tab>'] = {},
       ['<S-Tab>'] = {},
       ['<C-j>'] = { 'snippet_forward' },
@@ -56,10 +58,21 @@ return {
       },
     },
     sources = {
-      default = { 'lazydev', 'lsp', 'path', 'snippets', 'buffer' },
+      default = {
+        'lazydev',
+        'lsp',
+        'dadbod',
+        'path',
+        'snippets',
+        'buffer',
+      },
       providers = {
         buffer = {
           opts = { get_bufnrs = vim.api.nvim_list_bufs },
+        },
+        dadbod = {
+          name = 'Dadbod',
+          module = 'vim_dadbod_completion.blink',
         },
         lazydev = {
           name = 'LazyDev',

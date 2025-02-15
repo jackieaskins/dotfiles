@@ -59,23 +59,9 @@ end)
 config.window_decorations = 'RESIZE'
 config.adjust_window_size_when_changing_font_size = false
 config.window_padding = { left = 0, right = 0, top = '0.5cell', bottom = '0.5cell' }
-
-local function center_content(window, pane)
-  local win_dim = window:get_dimensions()
-  local tab_dim = pane:tab():get_size()
-
-  local overrides = window:get_config_overrides() or {}
-  overrides.window_padding = {
-    left = (win_dim.pixel_width - tab_dim.pixel_width) / 2,
-    right = 0,
-    top = '0.5cell',
-    bottom = '0.5cell',
-  }
-
-  window:set_config_overrides(overrides)
-end
-
-wezterm.on('window-resized', center_content)
-wezterm.on('window-config-reloaded', center_content)
+config.window_content_alignment = {
+  horizontal = 'Center',
+  vertical = 'Center',
+}
 
 return config
