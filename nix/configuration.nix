@@ -27,12 +27,14 @@
   homebrew = {
     enable = true;
     casks = [
+      "alcove"
       "firefox"
       "ghostty"
       "hammerspoon"
       "jordanbaird-ice"
       "karabiner-elements"
       "raycast"
+      "rocket"
       "sf-symbols"
     ];
     onActivation.cleanup = "zap";
