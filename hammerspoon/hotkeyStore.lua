@@ -99,11 +99,21 @@ end
 
 ---Generate a wrapper function to register hotkeys in a common group
 ---@param groupName string
----@return fun(desc: string, mods: string[], key: string, pressedfn: fun(), message: string | nil)
+---@return fun(desc: string, mods: string[], key: string, pressedfn: fun(), message?: string)
 function M.registerGroup(groupName)
   return function(desc, mods, key, pressedfn, message)
     M.register(groupName, desc, mods, key, pressedfn, message)
   end
+end
+
+---Unregister all hotkeys related to a specific group
+---@param groupName string
+function M.unregisterGroup(groupName)
+  for _, hotkey in ipairs(hotkeysByGroup[groupName]) do
+    hs.hotkey.deleteAll(hotkey.mods, hotkey.keys)
+  end
+
+  hotkeysByGroup[groupName] = nil
 end
 
 ---Annotate a hotkey that is not defined directly (i.e. hotkeys defined by spoons)
@@ -148,27 +158,29 @@ function M.addMenubarItem()
 
   menubar:setTitle('􀇳')
 
-  local menu = {}
-  for group, hotkeys in pairs(hotkeysByGroup) do
-    table.insert(menu, { title = group, disabled = true })
+  menubar:setMenu(function()
+    local menu = {}
+    for group, hotkeys in pairs(hotkeysByGroup) do
+      table.insert(menu, { title = group, disabled = true })
 
-    for _, hotkey in ipairs(hotkeys) do
-      table.insert(menu, {
-        title = hotkey.desc .. ' - ' .. hotkey.keys:gsub(ctrl .. alt .. shift, meh),
-        fn = function()
-          hs.eventtap.keyStroke(hotkey.mods, hotkey.character)
-        end,
-      })
+      for _, hotkey in ipairs(hotkeys) do
+        table.insert(menu, {
+          title = hotkey.desc .. '  |  ' .. hotkey.keys:gsub(ctrl .. alt .. shift, meh),
+          fn = function()
+            hs.eventtap.keyStroke(hotkey.mods, hotkey.character)
+          end,
+        })
+      end
+
+      table.insert(menu, { title = '-' })
     end
 
-    table.insert(menu, { title = '-' })
-  end
+    for name, mod in pairs(modNames) do
+      table.insert(menu, { title = mod .. '  |  ' .. name, disabled = true })
+    end
 
-  for name, mod in pairs(modNames) do
-    table.insert(menu, { title = mod .. ' - ' .. name, disabled = true })
-  end
-
-  menubar:setMenu(menu)
+    return menu
+  end)
 end
 
 return M
