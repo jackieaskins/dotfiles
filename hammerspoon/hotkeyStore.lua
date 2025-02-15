@@ -110,7 +110,7 @@ end
 ---@param groupName string
 function M.unregisterGroup(groupName)
   for _, hotkey in ipairs(hotkeysByGroup[groupName]) do
-    hs.hotkey.deleteAll(hotkey.mods, hotkey.keys)
+    hs.hotkey.deleteAll(hotkey.mods, hotkey.character)
   end
 
   hotkeysByGroup[groupName] = nil
