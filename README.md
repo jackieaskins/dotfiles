@@ -78,10 +78,10 @@ My dotfiles for Ghostty, Hammerspoon, Karabiner, Neovim, Nix, Vim, QMK, Tmux, We
     open -a Hammerspoon
     ```
 
-1. Configure Zen Browser
+1. Configure Firefox Browser
 
     ```bash
-    open -a "Zen Browser"
+    open -a "Firefox"
     ```
 
 1. Configure Raycast

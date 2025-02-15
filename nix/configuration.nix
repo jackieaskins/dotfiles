@@ -28,13 +28,13 @@
   homebrew = {
     enable = true;
     casks = [
+      "firefox"
       "ghostty"
       "hammerspoon"
       "jordanbaird-ice"
       "karabiner-elements"
       "raycast"
       "sf-symbols"
-      "zen-browser"
     ];
     onActivation.cleanup = "zap";
     onActivation.autoUpdate = true;
@@ -63,7 +63,7 @@
         "/System/Applications/Notes.app"
         "/System/Applications/Messages.app"
         "/System/Applications/Music.app"
-        "/Applications/Zen Browser.app"
+        "/Applications/Firefox.app"
         "/Applications/Ghostty.app"
         "/System/Applications/Passwords.app"
       ];
