@@ -47,6 +47,14 @@
       hostname = config.hostname;
       system = config.system;
 
+      homeManagerArgs = {
+        inherit email;
+        inherit fullName;
+        inherit inputs;
+        inherit username;
+        inherit homeDirectory;
+      };
+
       pkgs = import nixpkgs {
         inherit system;
         overlays = [ inputs.neovim-nightly-overlay.overlays.default ];
@@ -54,6 +62,8 @@
     in
     {
       darwinConfigurations.${hostname} = nix-darwin.lib.darwinSystem {
+        inherit pkgs;
+        inherit system;
         modules = [
           ./configuration.nix
           nix-homebrew.darwinModules.nix-homebrew
@@ -63,21 +73,29 @@
               user = username;
             };
           }
+
+          home-manager.darwinModules.home-manager
+          {
+            users.users.${username}.home = homeDirectory;
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              extraSpecialArgs = homeManagerArgs;
+              users.${username} = {
+                imports = [
+                  ./home.nix
+                  catppuccin.homeManagerModules.catppuccin
+                ];
+              };
+            };
+          }
         ];
-        specialArgs = {
-          inherit inputs;
-        };
+        specialArgs = { inherit inputs; };
       };
 
       homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        extraSpecialArgs = {
-          inherit email;
-          inherit fullName;
-          inherit inputs;
-          inherit username;
-          inherit homeDirectory;
-        };
+        extraSpecialArgs = homeManagerArgs;
         modules = [
           ./home.nix
           catppuccin.homeManagerModules.catppuccin

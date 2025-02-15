@@ -81,11 +81,17 @@ My dotfiles for Ghostty, Hammerspoon, Karabiner, Neovim, Nix, Vim, QMK, Tmux, We
 1. Configure Firefox Browser
 
     ```bash
-    open -a "Firefox"
+    open -a Firefox
     ```
 
 1. Configure Raycast
 
     ```bash
     open -a Raycast
+    ```
+
+1. Configure Alcove
+
+    ```bash
+    open -a Alcove
     ```

@@ -15,6 +15,8 @@ let
     symlink: config.lib.file.mkOutOfStoreSymlink "${homeDirectory}/dotfiles_custom/${symlink}";
 in
 {
+  nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+
   programs.home-manager.enable = true;
   home.stateVersion = "24.05";
 
@@ -38,10 +40,7 @@ in
     pkgs.awscli2
     pkgs.deno
     pkgs.fd
-    pkgs.go
-    pkgs.jdk
     pkgs.neovim
-    pkgs.nodejs_18
     pkgs.pre-commit
     pkgs.ripgrep
     pkgs.rustup
@@ -73,8 +72,6 @@ in
     pkgs.stylua # stylua
   ];
 
-  nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
-
   home.file = {
     ".config/nvim".source = mkSymlink "nvim";
     ".config/karabiner".source = mkSymlink "karabiner";
@@ -93,12 +90,18 @@ in
     historySubstringSearch.enable = true;
     syntaxHighlighting.enable = true;
     shellAliases = {
-      nu = "nix flake update --commit-lock-file --flake ${flakePath}";
-      drs = "darwin-rebuild switch --flake ${flakePath} --impure";
-      hms = "home-manager switch --flake ${flakePath} --impure";
+      nix-update = "nix flake update --commit-lock-file --flake ${flakePath}";
     };
     initExtra = # zsh
       ''
+        function nix-switch {
+          if [[ $(uname) == "Darwin" ]]; then
+            darwin-rebuild switch --flake ${flakePath} --impure
+          else
+            home-manager switch --flake ${flakePath} --impure
+          fi
+        }
+
         source $HOME/dotfiles/zshrc
       '';
   };
