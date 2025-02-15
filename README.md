@@ -50,13 +50,15 @@ My dotfiles for Ghostty, Hammerspoon, Karabiner, Neovim, Nix, Vim, QMK, Tmux, We
    echo "extra-experimental-features = nix-command flakes" >> ~/.config/nix/nix.conf
    ```
 
-1. On MacOS only, apply the nix-darwin config:
+1. Apply the Nix configuration:
+
+    On MacOS:
 
     ```bash
     nix run nix-darwin -- switch --flake ~/dotfiles/nix --impure
     ```
 
-1. Apply the home-manager config:
+    On Linux:
 
     ```bash
     nix run home-manager -- switch --flake ~/dotfiles/nix --impure
