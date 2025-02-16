@@ -1,7 +1,6 @@
 ---@type LazySpec
 return {
   'saghen/blink.cmp',
-  enabled = MY_CONFIG.completion_source == 'blink',
   build = {
     'rustup toolchain install nightly --force',
     'cargo build --release',

@@ -35,7 +35,7 @@ function M.get_config()
 
   ---@type snacks.picker.Config
   return {
-    enabled = MY_CONFIG.picker == 'snacks',
+    enabled = true,
     matcher = { frecency = true },
     previewers = {
       git = { native = true },
