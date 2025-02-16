@@ -20,15 +20,6 @@ augroup('mode_highlights', {
   },
 })
 
-augroup('yank_highlight', {
-  {
-    'TextYankPost',
-    callback = function()
-      vim.hl.on_yank()
-    end,
-  },
-})
-
 augroup('save_folds_and_cursor', {
   {
     'BufWinLeave',
