@@ -1,3 +1,5 @@
+local inline_sep = '〡'
+
 require('utils').augroup('statusline_redraw', {
   { 'User', pattern = 'LazyCheck', command = 'redrawstatus' },
 })
@@ -65,7 +67,7 @@ local function get_active_lsp_linters_formatters()
     end
   end
 
-  return #all_client_names > 0 and '󰣖 ' .. table.concat(all_client_names, '󰿟') or ''
+  return #all_client_names > 0 and '󰣖 ' .. table.concat(all_client_names, inline_sep) or ''
 end
 
 local function get_filename()
@@ -105,7 +107,7 @@ return {
         }, ' ')
       ),
       statusline_component('StatusLineSection', get_active_lsp_linters_formatters()),
-      statusline_component('StatusLineMode', '%l:%c󰿟%p%%'),
+      statusline_component('StatusLineMode', '%l:%c' .. inline_sep .. '%p%%'),
     })
   end,
 }
