@@ -91,8 +91,8 @@ return {
     local filetype = vim.bo.filetype
 
     return table.concat({
-      statusline_component('StatusLineMode', ' ' .. modes.get_label(), { right = '' }),
-      statusline_component('StatusLineSection', get_lazy_updates(), { left = '', right = '' }),
+      statusline_component('StatusLineMode', ' ' .. modes.get_label()),
+      statusline_component('StatusLineSection', get_lazy_updates()),
       statusline_component('StatusLine', get_filename()),
 
       '%=',
@@ -104,8 +104,8 @@ return {
           filetype,
         }, ' ')
       ),
-      statusline_component('StatusLineSection', get_active_lsp_linters_formatters(), { left = '', right = '' }),
-      statusline_component('StatusLineMode', '%l:%c󰿟%p%%', { left = '' }),
+      statusline_component('StatusLineSection', get_active_lsp_linters_formatters()),
+      statusline_component('StatusLineMode', '%l:%c󰿟%p%%'),
     })
   end,
 }

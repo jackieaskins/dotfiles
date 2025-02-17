@@ -41,11 +41,6 @@ return {
       end
 
       local hl_group = tabnr == current_tabnr and 'TabLineSel' or 'TabLine'
-      local sep_hl = '%#' .. hl_group .. 'Sep' .. '#'
-
-      if tabnr ~= 1 then
-        table.insert(tabline_components, sep_hl .. '')
-      end
 
       table.insert(
         tabline_components,
@@ -62,8 +57,6 @@ return {
           ' ',
         })
       )
-
-      table.insert(tabline_components, sep_hl .. '')
     end
 
     table.insert(tabline_components, '%#TabLineFill#')
