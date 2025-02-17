@@ -37,6 +37,18 @@ function M.get_config()
   return {
     enabled = true,
     matcher = { frecency = true },
+    sources = {
+      git_status = {
+        win = {
+          input = {
+            keys = {
+              ['<Tab>'] = { 'select_and_next', mode = { 'n', 'i' } },
+              ['<C-Space>'] = { 'git_stage', mode = { 'n', 'i' } },
+            },
+          },
+        },
+      },
+    },
     previewers = {
       git = { native = true },
     },
@@ -45,6 +57,7 @@ function M.get_config()
       input = {
         keys = {
           ['<Esc>'] = { 'close', mode = { 'n', 'i' } },
+          ['<C-t>'] = { 'edit_tab', mode = { 'n', 'i' } },
           ['<C-u>'] = false,
         },
       },
