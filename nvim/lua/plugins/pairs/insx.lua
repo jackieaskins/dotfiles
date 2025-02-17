@@ -1,6 +1,7 @@
 ---@type LazySpec
 return {
   'hrsh7th/nvim-insx',
+  enabled = false,
   event = 'InsertEnter',
   config = function()
     local insx = require('insx')
