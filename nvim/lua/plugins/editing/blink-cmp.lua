@@ -57,13 +57,10 @@ return {
       },
     },
     sources = {
-      default = {
-        'lazydev',
-        'lsp',
-        'dadbod',
-        'path',
-        'snippets',
-        'buffer',
+      default = { 'lsp', 'path', 'snippets', 'buffer' },
+      per_filetype = {
+        lua = { 'lazydev', 'lsp', 'path', 'snippets', 'buffer' },
+        sql = { 'dadbod', 'snippets', 'buffer' },
       },
       providers = {
         buffer = {
