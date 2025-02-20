@@ -39,12 +39,14 @@ if RUBY_PLATFORM =~ /darwin/
   cask 'font-jetbrains-mono-nerd-font'
   cask 'font-mononoki-nerd-font'
 
+  cask 'alcove'
   cask 'docker'
   cask 'ghostty'
   cask 'hammerspoon'
   cask 'jordanbaird-ice'
   cask 'karabiner-elements'
   cask 'raycast'
+  cask 'rocket'
   cask 'sf-symbols'
   cask 'wezterm-nightly'
 
