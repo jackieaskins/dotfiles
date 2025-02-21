@@ -33,6 +33,9 @@ return {
         draw = { treesitter = { 'lsp' } },
       },
     },
+    fuzzy = {
+      sorts = { 'exact', 'score', 'sort_text' },
+    },
     keymap = {
       preset = 'default',
       ['<Tab>'] = {},
