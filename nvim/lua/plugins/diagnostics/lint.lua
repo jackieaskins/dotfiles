@@ -1,6 +1,6 @@
 local utils = require('utils')
 
----@class (exact) LinterConfig
+---@class LinterConfig
 ---@field install_cmd? InstallCommand
 ---@field filetypes string[]
 

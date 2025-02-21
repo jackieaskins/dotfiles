@@ -1,6 +1,6 @@
 local utils = require('utils')
 
----@class (exact) FormatterConfig
+---@class FormatterConfig
 ---@field install_cmd? InstallCommand
 ---@field required_file? string
 ---@field filetypes string[]

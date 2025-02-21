@@ -1,10 +1,10 @@
----@class (exact) AdditionalServer
+---@class AdditionalServer
 ---@field lspconfig lspconfig.Config
 ---@field server LspServer
 
 ---@module 'gx'
 
----@class (exact) MyConfig
+---@class MyConfig
 ---@field is_personal_machine boolean
 ---@field additional_servers table<string, AdditionalServer>
 ---@field supported_servers string[]
@@ -14,7 +14,7 @@
 ---@field border_style string
 ---@field custom_gx_handlers GxHandler[]
 
----@class MyConfig
+---@class (exact) MyConfig
 MY_CONFIG = {
   is_personal_machine = false,
   additional_servers = {},
