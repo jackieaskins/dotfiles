@@ -58,6 +58,11 @@ return {
 
     utils.augroup('snacks', {
       {
+        'FileType',
+        pattern = 'markdown',
+        command = 'let b:snacks_indent = v:false',
+      },
+      {
         'LspProgress',
         callback = function(args)
           local client = vim.lsp.get_client_by_id(args.data.client_id)
