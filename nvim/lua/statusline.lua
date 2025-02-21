@@ -1,3 +1,5 @@
+local inline_sep = '〡'
+
 require('utils').augroup('statusline_redraw', {
   { 'User', pattern = 'LazyCheck', command = 'redrawstatus' },
 })
@@ -61,7 +63,7 @@ local function get_active_lsps_and_formatters()
     end
   end
 
-  return #all_client_names > 0 and '󰣖 ' .. table.concat(all_client_names, '󰿟') or ''
+  return #all_client_names > 0 and '󰣖 ' .. table.concat(all_client_names, inline_sep) or ''
 end
 
 local function get_filename()
@@ -87,8 +89,8 @@ return {
     local filetype = vim.bo.filetype
 
     return table.concat({
-      statusline_component('StatusLineMode', ' ' .. modes.get_label(), { right = '' }),
-      statusline_component('StatusLineSection', get_lazy_updates(), { left = '', right = '' }),
+      statusline_component('StatusLineMode', ' ' .. modes.get_label()),
+      statusline_component('StatusLineSection', get_lazy_updates()),
       statusline_component('StatusLine', get_filename()),
 
       '%=',
@@ -100,8 +102,8 @@ return {
           filetype,
         }, ' ')
       ),
-      statusline_component('StatusLineSection', get_active_lsps_and_formatters(), { left = '', right = '' }),
-      statusline_component('StatusLineMode', '%l:%c󰿟%p%%', { left = '' }),
+      statusline_component('StatusLineSection', get_active_lsps_and_formatters()),
+      statusline_component('StatusLineMode', '%l:%c' .. inline_sep .. '%p%%'),
     })
   end,
 }

@@ -1,7 +1,6 @@
 ---@type LazySpec
 return {
   'saghen/blink.cmp',
-  enabled = MY_CONFIG.completion_source == 'blink',
   build = {
     'rustup toolchain install nightly --force',
     'cargo build --release',
@@ -34,6 +33,9 @@ return {
         draw = { treesitter = { 'lsp' } },
       },
     },
+    fuzzy = {
+      sorts = { 'exact', 'score', 'sort_text' },
+    },
     keymap = {
       preset = 'default',
       ['<Tab>'] = {},
@@ -58,13 +60,10 @@ return {
       },
     },
     sources = {
-      default = {
-        'lazydev',
-        'lsp',
-        'dadbod',
-        'path',
-        'snippets',
-        'buffer',
+      default = { 'lsp', 'path', 'snippets', 'buffer' },
+      per_filetype = {
+        lua = { 'lazydev', 'lsp', 'path', 'snippets', 'buffer' },
+        sql = { 'dadbod', 'snippets', 'buffer' },
       },
       providers = {
         buffer = {

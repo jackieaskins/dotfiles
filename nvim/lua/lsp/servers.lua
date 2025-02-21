@@ -1,6 +1,6 @@
 local lspconfig = require('lspconfig')
 
----@class (exact) LspServer
+---@class LspServer
 ---@field config? fun(): lspconfig.Config
 ---@field display? string
 ---@field skip_lspconfig? boolean
@@ -152,7 +152,7 @@ servers.svelte = {
 servers.tailwindcss = {
   display = 'tailwind',
   config = function()
-    local capabilities = require('lsp.capabilities').get_capabilities()
+    local capabilities = require('lsp.capabilities')()
     capabilities.textDocument.colorProvider = { dynamicRegistration = true }
 
     return {

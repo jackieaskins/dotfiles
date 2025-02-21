@@ -1,6 +1,6 @@
 vim.cmd.Lazy('load vimux')
 
----@class TerminalRunner
+---@class (exact) TerminalRunner
 local tmux = {}
 
 function tmux.open_runner()

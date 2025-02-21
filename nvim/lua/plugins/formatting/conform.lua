@@ -1,4 +1,4 @@
----@class (exact) FormatterConfig
+---@class FormatterConfig
 ---@field required_file? string
 ---@field filetypes string[]
 

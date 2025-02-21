@@ -33,7 +33,7 @@ return {
         lspconfig[server_name].setup(
           vim.tbl_extend(
             'force',
-            { capabilities = require('lsp.capabilities').get_capabilities() },
+            { capabilities = require('lsp.capabilities')() },
             server.config and server.config() or {}
           )
         )

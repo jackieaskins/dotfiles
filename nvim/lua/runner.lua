@@ -1,4 +1,4 @@
----@class (exact) TerminalRunner
+---@class TerminalRunner
 ---@field open_runner fun()
 ---@field toggle_pane fun()
 ---@field close_runner fun()

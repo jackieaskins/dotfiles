@@ -8,19 +8,9 @@ return {
   },
   ---@module 'markview'
   ---@type mkv.config
-  opts = {},
-  init = function()
-    require('utils').augroup('markview', {
-      {
-        'FileType',
-        pattern = 'markdown',
-        command = 'setlocal nowrap',
-      },
-      {
-        'FileType',
-        pattern = 'markdown',
-        command = 'let b:snacks_indent = v:false',
-      },
-    })
-  end,
+  opts = {
+    preview = {
+      hybrid_modes = { 'n', 'no', 'c' },
+    },
+  },
 }

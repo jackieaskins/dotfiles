@@ -1,15 +1,13 @@
 ---@module 'gx'
 
----@class (exact) MyConfig
+---@class MyConfig
 ---@field is_personal_machine boolean
 ---@field additional_server_configs table<string, lspconfig.Config>
 ---@field supported_servers string[]
 ---@field border_style string
 ---@field custom_gx_handlers GxHandler[]
----@field completion_source 'blink' | 'cmp'
----@field picker 'fzf-lua' | 'snacks'
 
----@class MyConfig
+---@class (exact) MyConfig
 MY_CONFIG = {
   is_personal_machine = false,
   additional_server_configs = {},
@@ -34,6 +32,4 @@ MY_CONFIG = {
   },
   border_style = 'double',
   custom_gx_handlers = {},
-  completion_source = 'blink',
-  picker = 'snacks',
 }
