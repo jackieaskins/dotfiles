@@ -38,6 +38,22 @@ function M.get_config()
     enabled = true,
     matcher = { frecency = true },
     sources = {
+      directories = {
+        finder = function(opts, ctx)
+          return require('snacks.picker.source.proc').proc({
+            opts,
+            {
+              cmd = 'fd',
+              args = { '--type', 'd', '--color', 'never', '-E', '.git', '--hidden' },
+              transform = function(item)
+                item.cwd = vim.fs.normalize(opts and opts.cwd or vim.uv.cwd() or '.')
+                item.file = item.text
+                item.dir = true
+              end,
+            },
+          }, ctx)
+        end,
+      },
       git_status = {
         win = {
           input = {
@@ -72,6 +88,7 @@ function M.get_keys()
     { '<leader>bu', 'buffers' },
     { '<C-p>', 'files', { follow = true, hidden = true } },
     { '<leader>of', 'recent', { filter = { cwd = true } } },
+    { '<leader>fd', 'directories' },
 
     -- Search
     { '<leader>fw', 'grep_word', nil, { 'n', 'x' } },
@@ -113,7 +130,7 @@ function M.get_keys()
     return {
       keymap,
       function()
-        Snacks.picker[picker](args)
+        Snacks.picker.pick(picker, args)
       end,
       desc = 'Picker ' .. picker,
       mode = mode,
