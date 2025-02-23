@@ -1,4 +1,5 @@
-alias fzfsesh='sesh connect $(sesh list | fzf)'
+alias tea='~/.tmux/plugins/tmux-tea/bin/tea.sh'
+alias mux='tmuxinator'
 
 # Directory Navigation
 alias -- -="cd -"

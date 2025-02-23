@@ -1,3 +1,5 @@
+local border = MY_CONFIG.border_style
+
 ---@type LazySpec
 return {
   'saghen/blink.cmp',
@@ -22,15 +24,36 @@ return {
     },
     completion = {
       accept = {
-        auto_brackets = { enabled = true },
+        auto_brackets = { enabled = false },
       },
       documentation = {
         auto_show = true,
-        window = { border = MY_CONFIG.border_style },
+        window = { border = border },
       },
       menu = {
-        border = MY_CONFIG.border_style,
-        draw = { treesitter = { 'lsp' } },
+        border = border,
+        draw = {
+          columns = {
+            { 'kind_icon' },
+            { 'label', 'label_description', gap = 1 },
+            { 'source_name' },
+          },
+          components = {
+            source_name = {
+              text = function(ctx)
+                local client_name = ctx.item.client_name
+
+                if client_name then
+                  local display_name = require('lsp.utils').get_server_display_name(client_name)
+                  return ctx.source_name .. '[' .. display_name .. ']'
+                end
+
+                return ctx.source_name
+              end,
+            },
+          },
+          treesitter = { 'lsp' },
+        },
       },
     },
     fuzzy = {
@@ -55,7 +78,7 @@ return {
     signature = {
       enabled = true,
       window = {
-        border = MY_CONFIG.border_style,
+        border = border,
         show_documentation = false,
       },
     },

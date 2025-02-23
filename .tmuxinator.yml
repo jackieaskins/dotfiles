@@ -1,0 +1,9 @@
+# ./.tmuxinator.yml
+
+name: dotfiles
+root: ~/dotfiles
+
+windows:
+  - editor:
+  - plugins:
+      root: ~/.local/share/nvim/lazy/
