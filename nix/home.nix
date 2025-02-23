@@ -9,10 +9,27 @@
   ...
 }:
 let
-  flakePath = "$HOME/dotfiles/nix";
   mkSymlink = symlink: config.lib.file.mkOutOfStoreSymlink "${homeDirectory}/dotfiles/${symlink}";
   mkCustomSymlink =
     symlink: config.lib.file.mkOutOfStoreSymlink "${homeDirectory}/dotfiles_custom/${symlink}";
+
+  flakePath = "$HOME/dotfiles/nix";
+
+  palette =
+    (pkgs.lib.importJSON "${config.catppuccin.sources.palette}/palette.json")
+    .${config.catppuccin.flavor}.colors;
+
+  tmux-tea = pkgs.tmuxPlugins.mkTmuxPlugin {
+    pluginName = "tmux-tea";
+    rtpFilePath = "tea.tmux";
+    version = "main";
+    src = pkgs.fetchFromGitHub {
+      owner = "2KAbhishek";
+      repo = "tmux-tea";
+      rev = "main";
+      hash = "sha256-UiuHl9E8JqGJHSYRPzR0E+woo6e2eG6fMSSBfLexF5w=";
+    };
+  };
 in
 {
   nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
@@ -44,7 +61,6 @@ in
     pkgs.pre-commit
     pkgs.ripgrep
     pkgs.rustup
-    pkgs.sesh
 
     # Neovim Language Servers
     pkgs.emmet-language-server # emmet
@@ -90,6 +106,7 @@ in
     historySubstringSearch.enable = true;
     syntaxHighlighting.enable = true;
     shellAliases = {
+      mux = "tmuxinator";
       nix-update = "nix flake update --commit-lock-file --flake ${flakePath}";
     };
     initExtra = # zsh
@@ -119,14 +136,24 @@ in
     enable = true;
     enableZshIntegration = true;
     defaultCommand = "rg --files --hidden --follow --glob '!.git/*' --glob '!*.class'";
+    colors = {
+      border = "blue";
+      gutter = "${palette.base.hex}";
+    };
     defaultOptions = [
       "--highlight-line"
       "--cycle"
       "--marker +"
       "--pointer '>'"
-      "--border double"
       "--layout reverse"
+
+      "--border none"
+      "--input-border double"
+      "--list-border double"
+      "--preview-border double"
+
       "--preview 'bat --style=numbers --color=always {}'"
+
       "--multi"
     ];
   };
@@ -173,12 +200,23 @@ in
 
   programs.tmux = {
     enable = true;
-    sensibleOnTop = false;
     extraConfig = # tmux
       ''
         source $HOME/dotfiles/tmux.conf
       '';
-    plugins = [ pkgs.tmuxPlugins."vim-tmux-navigator" ];
+    plugins = [
+      pkgs.tmuxPlugins."vim-tmux-navigator"
+      {
+        plugin = tmux-tea;
+        extraConfig = # tmux
+          ''
+            set -g @tea-alt-bind "false"
+          '';
+      }
+    ];
+    tmuxinator = {
+      enable = true;
+    };
   };
 
   programs.zoxide = {
