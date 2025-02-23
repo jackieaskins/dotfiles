@@ -9,8 +9,12 @@
 --cycle
 --marker='+'
 --pointer='>'
---border='double'
 --layout=reverse
+
+--border='none'
+--input-border='double'
+--list-border='double'
+--preview-border='double'
 
 --preview='bat --style=numbers --color=always {}'
 
