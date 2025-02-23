@@ -53,7 +53,7 @@ in
     pkgs.lua-language-server # lua_ls
     pkgs.nil # nil_ls
     pkgs.nixd # nixd
-    pkgs.nodePackages.graphql-language-service-cli # graphql
+    # pkgs.nodePackages.graphql-language-service-cli # graphql
     pkgs.pyright # pyright
     pkgs.ruby-lsp # ruby_lsp
     pkgs.solargraph # solargraph
