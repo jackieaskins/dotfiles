@@ -13,9 +13,6 @@ done
 
 fpath=($HOMEBREW_PREFIX/share/zsh/site-functions $fpath)
 
-asdf_prefix="$(brew --prefix asdf)"
-[ -d $asdf_prefix ] && . $asdf_prefix/libexec/asdf.sh
-
 #--------------------------------------------------------------------#
 #                                Path                                #
 #--------------------------------------------------------------------#
