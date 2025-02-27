@@ -12,6 +12,7 @@
 --layout=reverse
 
 --border='none'
+--header-border='double'
 --input-border='double'
 --list-border='double'
 --preview-border='double'
