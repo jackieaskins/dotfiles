@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 sesh connect "$(
-  sesh list --hide-duplicates --icons | fzf \
+  sesh list --icons | fzf \
     --no-sort \
     --ansi \
     --height 40% \
