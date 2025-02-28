@@ -67,6 +67,7 @@ bindkey "^[[B" history-beginning-search-forward
 
 # Color ls output
 export CLICOLOR="Yes"
+export LS_COLORS="$(vivid generate catppuccin-macchiato)"
 
 #--------------------------------------------------------------------#
 #                              Plugins                               #
