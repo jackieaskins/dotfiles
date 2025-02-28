@@ -43,12 +43,10 @@ in
   home.packages = [
     pkgs.autossh
     pkgs.awscli2
-    pkgs.deno
     pkgs.fd
     pkgs.neovim
     pkgs.pre-commit
     pkgs.ripgrep
-    pkgs.rustup
     pkgs.sesh
     pkgs.vivid
 

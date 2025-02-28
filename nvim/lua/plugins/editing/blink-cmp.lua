@@ -3,10 +3,7 @@ local border = MY_CONFIG.border_style
 ---@type LazySpec
 return {
   'saghen/blink.cmp',
-  build = {
-    'rustup toolchain install nightly --force',
-    'cargo build --release',
-  },
+  build = 'nix run .#build-plugin',
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
   opts = {
