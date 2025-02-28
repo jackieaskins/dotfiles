@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+sesh connect "$(
+  sesh list --icons | fzf \
+    --no-sort \
+    --ansi \
+    --height 40% \
+    --tmux 80%,70% \
+    --input-label ' sesh ' \
+    --prompt '⚡' \
+    --preview-window 'hidden' \
+    --preview 'sesh preview {}'
+)"

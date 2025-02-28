@@ -1,7 +1,6 @@
 ---@type LazySpec
 return {
   's1n7ax/nvim-comment-frame',
-  dependencies = { 'nvim-treesitter/nvim-treesitter' },
   keys = { '<leader>cf', '<leader>cF' },
   opts = {
     keymap = '<leader>cf',

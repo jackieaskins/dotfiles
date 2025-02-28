@@ -77,6 +77,9 @@ function M.get_config()
           ['<C-u>'] = false,
         },
       },
+      list = {
+        wo = { foldcolumn = '0' },
+      },
     },
   }
 end
