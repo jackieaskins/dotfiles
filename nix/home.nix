@@ -18,18 +18,6 @@ let
   palette =
     (pkgs.lib.importJSON "${config.catppuccin.sources.palette}/palette.json")
     .${config.catppuccin.flavor}.colors;
-
-  tmux-tea = pkgs.tmuxPlugins.mkTmuxPlugin {
-    pluginName = "tmux-tea";
-    rtpFilePath = "tea.tmux";
-    version = "main";
-    src = pkgs.fetchFromGitHub {
-      owner = "2KAbhishek";
-      repo = "tmux-tea";
-      rev = "main";
-      hash = "sha256-UiuHl9E8JqGJHSYRPzR0E+woo6e2eG6fMSSBfLexF5w=";
-    };
-  };
 in
 {
   nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
@@ -61,6 +49,8 @@ in
     pkgs.pre-commit
     pkgs.ripgrep
     pkgs.rustup
+    pkgs.sesh
+    pkgs.vivid
 
     # Neovim Language Servers
     pkgs.emmet-language-server # emmet
@@ -111,6 +101,8 @@ in
     };
     initExtra = # zsh
       ''
+        export LS_COLORS="$(vivid generate catppuccin-${config.catppuccin.flavor})"
+
         function nix-switch {
           if [[ $(uname) == "Darwin" ]]; then
             darwin-rebuild switch --flake ${flakePath} --impure
@@ -148,6 +140,7 @@ in
       "--layout reverse"
 
       "--border none"
+      "--header-border double"
       "--input-border double"
       "--list-border double"
       "--preview-border double"
@@ -206,13 +199,6 @@ in
       '';
     plugins = [
       pkgs.tmuxPlugins."vim-tmux-navigator"
-      {
-        plugin = tmux-tea;
-        extraConfig = # tmux
-          ''
-            set -g @tea-alt-bind "false"
-          '';
-      }
     ];
     tmuxinator = {
       enable = true;
