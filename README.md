@@ -19,7 +19,7 @@ My dotfiles for Ghostty, Hammerspoon, Karabiner, Neovim, Vim, QMK, Tmux, WezTerm
     ```
 
 ## Customization
- 
+
 ### Hammerspoon
 
 Return a `table` in `~/dotfiles/hammerspoon/custom.lua`, the following keys can be provided:
