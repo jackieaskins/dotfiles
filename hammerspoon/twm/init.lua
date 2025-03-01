@@ -1,65 +1,33 @@
-local ScreenManager = require('twm.ScreenManager')
-local hotkeyStore = require('hotkeyStore')
+local TilingWindowManager = require('twm.TilingWindowManager')
+local fnutils = require('fnutils')
 
-local wf = hs.window.filter
+local function generateTilingWindowManager()
+  local screens = hs.screen.allScreens()
 
-screenManager = ScreenManager.new():start()
+  for _, twmConfiguration in ipairs(CUSTOM.twmMonitorConfigurations) do
+    if #screens == #fnutils.getKeys(twmConfiguration) then
+      local configurationHasEveryScreen = hs.fnutils.every(screens, function(screen)
+        return twmConfiguration[screen:getUUID()] ~= nil
+      end)
 
-local twmRegister = hotkeyStore.registerGroup('Window Management')
+      if configurationHasEveryScreen then
+        return TilingWindowManager.new(twmConfiguration)
+      end
+    end
+  end
 
-twmRegister('Tile', MEH, 't', function()
-  screenManager.windowManager:tile()
-end)
-
-twmRegister('Toggle between stack and tall', MEH, 's', function()
-  screenManager.windowManager:toggleStackLayout(hs.spaces.focusedSpace())
-end)
-
-twmRegister('Focus window west', MEH, 'h', wf.focusWest)
-twmRegister('Focus window south', MEH, 'j', wf.focusSouth)
-twmRegister('Focus window north', MEH, 'k', wf.focusNorth)
-twmRegister('Focus window east', MEH, 'l', wf.focusEast)
-
-twmRegister('Swap window west', HYPER, 'h', function()
-  screenManager.windowManager:swapWindowWest()
-end)
-twmRegister('Swap window south', HYPER, 'j', function()
-  screenManager.windowManager:swapWindowSouth()
-end)
-twmRegister('Swap window north', HYPER, 'k', function()
-  screenManager.windowManager:swapWindowNorth()
-end)
-twmRegister('Swap window east', HYPER, 'l', function()
-  screenManager.windowManager:swapWindowEast()
-end)
-
-twmRegister('Reset tiling', HYPER, 'r', function()
-  screenManager:stop()
-  screenManager = ScreenManager.new():start()
-end)
-
-for spaceId = 1, 9 do
-  twmRegister('Move window to space ' .. spaceId, MEH, tostring(spaceId), function()
-    hs.spaces.moveWindowToSpace(hs.window.focusedWindow(), spaceId)
-  end)
+  local workspaces = {}
+  for _, screen in ipairs(screens) do
+    workspaces[screen:getUUID()] = { { layout = 'v_tiled', children = {} } }
+  end
+  return TilingWindowManager(workspaces)
 end
 
-for screenIndex = 1, 9 do
-  twmRegister('Move window to screen ' .. screenIndex, HYPER, tostring(screenIndex), function()
-    local screens = hs.screen.allScreens() or {}
-    hs.window.focusedWindow():moveToScreen(screens[screenIndex])
-  end)
-end
+twm = generateTilingWindowManager()
 
-twmRegister('Focus screen west', MEH, 'left', function()
-  hs.screen.find(hs.spaces.spaceDisplay(hs.spaces.focusedSpace())):toWest()
-end)
-twmRegister('Focus screen south', MEH, 'down', function()
-  hs.screen.find(hs.spaces.spaceDisplay(hs.spaces.focusedSpace())):toSouth()
-end)
-twmRegister('Focus screen north', MEH, 'up', function()
-  hs.screen.find(hs.spaces.spaceDisplay(hs.spaces.focusedSpace())):toNorth()
-end)
-twmRegister('Focus screen east', MEH, 'right', function()
-  hs.screen.find(hs.spaces.spaceDisplay(hs.spaces.focusedSpace())):toEast()
-end)
+hs.screen.watcher
+  .new(function()
+    twm:destroy()
+    twm = generateTilingWindowManager()
+  end)
+  :start()
