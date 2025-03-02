@@ -1,10 +1,21 @@
 local M = {}
 
----Return whether the provided lsp server is supported
----@param server string
----@return boolean
-function M.is_server_supported(server)
-  return vim.tbl_contains(MY_CONFIG.supported_servers, server)
+local supported_servers
+---Get list of supported servers
+---@return string[]
+function M.get_supported_servers()
+  if supported_servers then
+    return supported_servers
+  end
+
+  local file = io.open(os.getenv('HOME') .. '/dotfiles/nix/lsp-servers.json', 'r')
+  assert(file)
+
+  local lsp_servers = vim.json.decode(file:read('*a'))
+  file:close()
+
+  supported_servers = vim.list_extend(vim.tbl_keys(lsp_servers), vim.tbl_keys(MY_CONFIG.additional_server_configs))
+  return supported_servers
 end
 
 ---Return lsp server display name or default server name

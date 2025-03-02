@@ -26,7 +26,7 @@ return {
 
     require('lspconfig.ui.windows').default_options.border = MY_CONFIG.border_style
 
-    for _, server_name in ipairs(MY_CONFIG.supported_servers) do
+    for _, server_name in ipairs(require('lsp.utils').get_supported_servers()) do
       local server = servers[server_name] or {}
 
       if not server.skip_lspconfig then

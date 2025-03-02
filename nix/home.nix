@@ -4,6 +4,7 @@
   fullName,
   homeDirectory,
   inputs,
+  lib,
   pkgs,
   username,
   ...
@@ -13,11 +14,15 @@ let
   mkCustomSymlink =
     symlink: config.lib.file.mkOutOfStoreSymlink "${homeDirectory}/dotfiles_custom/${symlink}";
 
-  flakePath = "$HOME/dotfiles/nix";
+  flakePath = "${homeDirectory}/dotfiles/nix";
 
   palette =
-    (pkgs.lib.importJSON "${config.catppuccin.sources.palette}/palette.json")
+    (lib.importJSON "${config.catppuccin.sources.palette}/palette.json")
     .${config.catppuccin.flavor}.colors;
+
+  lspServers = lib.attrsets.mapAttrsToList (name: value: pkgs.${value.pkg}) (
+    lib.importJSON "${flakePath}/lsp-servers.json"
+  );
 in
 {
   nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
@@ -40,40 +45,26 @@ in
     zsh-syntax-highlighting.enable = false;
   };
 
-  home.packages = [
-    pkgs.autossh
-    pkgs.awscli2
-    pkgs.fd
-    pkgs.neovim
-    pkgs.pre-commit
-    pkgs.ripgrep
-    pkgs.sesh
-    pkgs.vivid
+  home.packages = lib.lists.flatten [
+    lspServers
+    [
+      pkgs.autossh
+      pkgs.awscli2
+      pkgs.devenv
+      pkgs.direnv
+      pkgs.fd
+      pkgs.neovim
+      pkgs.pre-commit
+      pkgs.ripgrep
+      pkgs.sesh
+      pkgs.vivid
 
-    # Neovim Language Servers
-    pkgs.emmet-language-server # emmet
-    pkgs.gopls # gopls
-    pkgs.jdt-language-server # jdtls
-    pkgs.lua-language-server # lua_ls
-    pkgs.nil # nil_ls
-    pkgs.nixd # nixd
-    # pkgs.nodePackages.graphql-language-service-cli # graphql
-    pkgs.pyright # pyright
-    pkgs.ruby-lsp # ruby_lsp
-    pkgs.solargraph # solargraph
-    pkgs.svelte-language-server # svelte
-    pkgs.tailwindcss-language-server # tailwindcss
-    pkgs.taplo-lsp # taplo
-    pkgs.typescript # typescript-tools
-    pkgs.vim-language-server # vimls
-    pkgs.vscode-langservers-extracted # cssls, eslint, html, jsonls
-    pkgs.yaml-language-server # yamlls
-
-    # Neovim Formatters
-    pkgs.libclang # clang-format
-    pkgs.nixfmt-rfc-style # nixfmt
-    pkgs.prettierd # prettierd
-    pkgs.stylua # stylua
+      # Neovim Formatters
+      pkgs.libclang # clang-format
+      pkgs.nixfmt-rfc-style # nixfmt
+      pkgs.prettierd # prettierd
+      pkgs.stylua # stylua
+    ]
   ];
 
   home.file = {
@@ -95,7 +86,6 @@ in
     syntaxHighlighting.enable = true;
     shellAliases = {
       mux = "tmuxinator";
-      nix-update = "nix flake update --commit-lock-file --flake ${flakePath}";
     };
     initExtra = # zsh
       ''
@@ -107,6 +97,11 @@ in
           else
             home-manager switch --flake ${flakePath} --impure
           fi
+        }
+
+        function nix-update {
+          nix flake update --commit-lock-file --flake ${flakePath}
+          nix-switch
         }
 
         source $HOME/dotfiles/zshrc

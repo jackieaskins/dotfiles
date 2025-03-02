@@ -1,0 +1,18 @@
+{
+  "clangd": { "pkg": "libclang" },
+  "cssls": { "pkg": "vscode-langservers-extracted" },
+  "emmet_language_server": { "pkg": "emmet-language-server" },
+  "eslint": { "pkg": "vscode-langservers-extracted" },
+  "gopls": { "pkg": "gopls" },
+  "html": { "pkg": "vscode-langservers-extracted" },
+  "jdtls": { "pkg": "jdt-language-server" },
+  "jsonls": { "pkg": "vscode-langservers-extracted" },
+  "lua_ls": { "pkg": "lua-language-server" },
+  "nil_ls": { "pkg": "nil" },
+  "nixd": { "pkg": "nixd" },
+  "ruby_lsp": { "pkg": "ruby-lsp" },
+  "svelte": { "pkg": "svelte-language-server" },
+  "tailwindcss": { "pkg": "tailwindcss-language-server" },
+  "taplo": { "pkg": "taplo-lsp" },
+  "vimls": { "pkg": "vim-language-server" }
+}
