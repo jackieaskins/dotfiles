@@ -13,16 +13,19 @@ let
   mkSymlink = symlink: config.lib.file.mkOutOfStoreSymlink "${homeDirectory}/dotfiles/${symlink}";
   mkCustomSymlink =
     symlink: config.lib.file.mkOutOfStoreSymlink "${homeDirectory}/dotfiles_custom/${symlink}";
+  getPkgsFromJsonFile =
+    filepath:
+    lib.attrsets.mapAttrsToList (name: value: pkgs.${value.pkg}) (
+      lib.attrsets.filterAttrs (name: value: (lib.hasAttrByPath [ "pkg" ] value)) (
+        lib.importJSON filepath
+      )
+    );
 
   flakePath = "${homeDirectory}/dotfiles/nix";
 
   palette =
     (lib.importJSON "${config.catppuccin.sources.palette}/palette.json")
     .${config.catppuccin.flavor}.colors;
-
-  lspServers = lib.attrsets.mapAttrsToList (name: value: pkgs.${value.pkg}) (
-    lib.importJSON "${flakePath}/lsp-servers.json"
-  );
 in
 {
   nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
@@ -46,7 +49,8 @@ in
   };
 
   home.packages = lib.lists.flatten [
-    lspServers
+    (getPkgsFromJsonFile "${flakePath}/lsp-servers.json")
+    (getPkgsFromJsonFile "${flakePath}/formatters.json")
     [
       pkgs.autossh
       pkgs.awscli2
@@ -58,12 +62,6 @@ in
       pkgs.ripgrep
       pkgs.sesh
       pkgs.vivid
-
-      # Neovim Formatters
-      pkgs.libclang # clang-format
-      pkgs.nixfmt-rfc-style # nixfmt
-      pkgs.prettierd # prettierd
-      pkgs.stylua # stylua
     ]
   ];
 

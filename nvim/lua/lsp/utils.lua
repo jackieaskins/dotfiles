@@ -8,11 +8,7 @@ function M.get_supported_servers()
     return supported_servers
   end
 
-  local file = io.open(os.getenv('HOME') .. '/dotfiles/nix/lsp-servers.json', 'r')
-  assert(file)
-
-  local lsp_servers = vim.json.decode(file:read('*a'))
-  file:close()
+  local lsp_servers = require('utils').import_json_file('~/dotfiles/nix/lsp-servers.json')
 
   supported_servers = vim.list_extend(vim.tbl_keys(lsp_servers), vim.tbl_keys(MY_CONFIG.additional_server_configs))
   return supported_servers

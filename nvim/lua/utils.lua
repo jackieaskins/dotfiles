@@ -1,5 +1,18 @@
 local M = {}
 
+---Import and parse json file
+---@param filepath string
+---@return table
+function M.import_json_file(filepath)
+  local file = io.open(vim.fn.expand(filepath), 'r')
+  assert(file)
+
+  local json = vim.json.decode(file:read('*a'))
+  file:close()
+
+  return json
+end
+
 ---@alias map_fn fun(mode: string | string[], lhs: string, rhs: string | function, opts?: vim.keymap.set.Opts)
 
 ---Define vim keymap

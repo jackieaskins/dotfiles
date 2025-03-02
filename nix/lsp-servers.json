@@ -14,5 +14,6 @@
   "svelte": { "pkg": "svelte-language-server" },
   "tailwindcss": { "pkg": "tailwindcss-language-server" },
   "taplo": { "pkg": "taplo-lsp" },
+  "typescript-tools": {},
   "vimls": { "pkg": "vim-language-server" }
 }

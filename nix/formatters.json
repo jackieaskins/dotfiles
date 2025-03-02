@@ -1,0 +1,33 @@
+{
+  "format-queries": {
+    "filetypes": ["query"]
+  },
+  "nixfmt": {
+    "pkg": "nixfmt-rfc-style",
+    "filetypes": ["nix"]
+  },
+  "prettierd": {
+    "pkg":  "prettierd",
+    "required_file": "./node_modules/.bin/prettier",
+    "filetypes": [
+      "css",
+      "graphql",
+      "html",
+      "javascript",
+      "javascriptreact",
+      "json",
+      "jsonc",
+      "less",
+      "markdown",
+      "scss",
+      "svelte",
+      "typescript",
+      "typescriptreact"
+    ]
+  },
+  "stylua": {
+    "pkg": "stylua",
+    "required_file": "./stylua.toml",
+    "filetypes": ["lua"]
+  }
+}
