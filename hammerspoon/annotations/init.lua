@@ -55,6 +55,7 @@ local signatureOverrides = {
   ['hs.notify.register(tag, fn) -> id'] = 'hs.notify.register(tag, fn) -> number',
   ['hs.pasteboard.readSound([name], [all]) -> hs.sound object or array of hs.sound objects'] = 'hs.pasteboard.readSound([name], [all]) -> hs.sound | hs.sound[]',
   ['hs.screen.find(hint) -> hs.screen object(s)'] = 'hs.screen.find(hint) -> hs.screen | nil',
+  ['hs.screen.watcher.new(fn) -> watcher'] = 'hs.screen.watcher.new(fn) -> hs.screen.watcher',
   ['hs.window.filter:getWindows([sortOrder]) -> list of hs.window objects'] = 'hs.window.filter:getWindows([sortOrder]) -> hs.window[]',
 }
 

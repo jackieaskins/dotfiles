@@ -39,11 +39,6 @@ run = 'layout floating'
 
 [[on-window-detected]]
 if.app-id = 'com.mitchellh.ghostty'
-if.during-aerospace-startup = false
-run = 'layout floating'
-
-[[on-window-detected]]
-if.app-id = 'com.mitchellh.ghostty'
 run = 'move-node-to-workspace 1'
 
 [[on-window-detected]]

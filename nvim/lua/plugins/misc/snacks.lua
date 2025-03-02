@@ -8,7 +8,7 @@ return {
 
     ---@type snacks.Config
     return {
-      bigfile = { enabled = true },
+      bigfile = { enabled = false },
       image = { enabled = true },
       indent = {
         enabled = true,
@@ -59,7 +59,7 @@ return {
     utils.augroup('snacks', {
       {
         'FileType',
-        pattern = 'markdown',
+        pattern = { 'gitcommit', 'markdown' },
         command = 'let b:snacks_indent = v:false',
       },
       {

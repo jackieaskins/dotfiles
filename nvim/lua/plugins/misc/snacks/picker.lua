@@ -36,7 +36,7 @@ function M.get_config()
   ---@type snacks.picker.Config
   return {
     enabled = true,
-    matcher = { frecency = true },
+    matcher = { frecency = true, history_bonus = true },
     sources = {
       directories = {
         finder = function(opts, ctx)
@@ -67,8 +67,14 @@ function M.get_config()
     },
     previewers = {
       git = { native = true },
+      diff = {
+        native = true,
+        cmd = { 'delta' },
+      },
     },
     ui_select = true,
+    ---@diagnostic disable-next-line: missing-fields
+    icons = { diagnostics = require('diagnostic.icons') },
     win = {
       input = {
         keys = {
