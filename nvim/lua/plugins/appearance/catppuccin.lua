@@ -16,9 +16,15 @@ return {
         -- For details and workaround: https://github.com/catppuccin/nvim/issues/667
         -- Unfortunately the workaround can't be used here
         -- This hard-codes the highlights I was referencing until there's a better solution
-        local inc_search = {
+        local inc_search_hl = {
           bg = utils.darken(colors.sky, 0.90, colors.base),
           fg = colors.mantle,
+        }
+        local cursor_line_hl = {
+          bg = utils.vary_color(
+            { latte = utils.lighten(colors.mantle, 0.70, colors.base) },
+            utils.darken(colors.surface0, 0.64, colors.base)
+          ),
         }
 
         local anchor_link = { fg = colors.blue, style = { 'underline' } }
@@ -26,9 +32,10 @@ return {
 
         local custom_highlights = {
           -- Default Highlights
-          CurSearch = vim.tbl_extend('force', inc_search, { style = { 'bold' } }),
+          CurSearch = vim.tbl_extend('force', inc_search_hl, { style = { 'bold' } }),
           FoldColumn = { fg = colors.surface1 },
           Folded = { bg = colors.mantle },
+          CursorLineFold = { fg = colors.surface1, bg = cursor_line_hl.bg },
           MatchParen = { bg = colors.none, style = { 'bold' } },
           NormalFloat = { bg = colors.base },
           FloatBorder = { fg = colors.blue, bg = colors.base },
@@ -67,24 +74,8 @@ return {
           BlinkCmpSignatureHelpBorder = { link = 'FloatBorder' },
 
           -- eyeliner.nvim
-          EyelinerPrimary = {
-            fg = colors.sapphire,
-            style = { 'bold', 'underline' },
-          },
+          EyelinerPrimary = { fg = colors.sapphire, style = { 'bold', 'underline' } },
           EyelinerSecondary = { fg = colors.pink, style = { 'underline' } },
-
-          -- fzf-lua
-          FzfLuaHeaderBind = { fg = colors.blue },
-          FzfLuaHeaderText = { fg = colors.mauve },
-          FzfLuaFzfInfo = { fg = colors.mauve },
-          FzfLuaFzfPointer = { fg = colors.blue },
-
-          -- highlight-undo.nvim
-          HighlightUndo = { link = 'IncSearch' },
-          HighlightRedo = { link = 'IncSearch' },
-
-          -- markdown.nvim
-          RenderMarkdownCodeInline = inline_code,
 
           -- mini.icons
           MiniIconsGrey = { fg = colors.overlay0 },
@@ -120,12 +111,12 @@ return {
           OilGitStatusWorkingTreeTypeChanged = { link = 'GitSignsChange' },
           OilGitStatusIndexUnmerged = { link = 'GitSignsChange' },
           OilGitStatusWorkingTreeUnmerged = { link = 'GitSignsChange' },
-
-          -- snacks.nvim
-          SnacksIndent = { fg = colors.surface0 },
         }
-
-        return vim.tbl_extend('force', custom_highlights, require('modes').get_initial_highlights(colors))
+        return vim.tbl_extend(
+          'force',
+          custom_highlights,
+          require('modes').get_and_link_mode_highlights(colors, cursor_line_hl)
+        )
       end,
       integrations = {
         blink_cmp = false,
