@@ -5,6 +5,8 @@
   skippedCherryPicks = false
 [branch]
   sort = -committerdate
+[commit]
+  verbose = true
 [core]
   excludesfile = ~/dotfiles/gitignore_global
 [diff]
@@ -13,6 +15,7 @@
   conflictstyle = diff3
 [pull]
   rebase = true
+  verbose = true
 [rerere]
   enabled = true
 [rebase]
