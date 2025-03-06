@@ -1,7 +1,7 @@
 local wezterm = require('wezterm')
 
 local appearance = wezterm.gui and wezterm.gui.get_appearance() or 'Dark'
-local color_scheme_name = appearance:find('Light') and 'Catppuccin Latte' or 'Catppuccin Macchiato'
+local color_scheme_name = appearance:find('Light') and 'Catppuccin Latte' or 'Catppuccin Mocha'
 
 local color_scheme = wezterm.color.get_builtin_schemes()[color_scheme_name]
 

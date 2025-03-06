@@ -26,8 +26,8 @@ if has('termguicolors')
   set termguicolors
 endif
 
-let g:lightline = { 'colorscheme': 'catppuccin_macchiato' }
-silent! colorscheme catppuccin_macchiato
+let g:lightline = { 'colorscheme': 'catppuccin_mocha' }
+silent! colorscheme catppuccin_mocha
 " }}}
 
 " Backup/Swp/Undo {{{

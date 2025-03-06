@@ -7,7 +7,7 @@
   diffFilter = delta --color-only
 
 [delta]
-  features = catppuccin-macchiato
+  features = catppuccin-mocha
   navigate = true
   commit-style = yellow
   commit-decoration-style = yellow box ul
