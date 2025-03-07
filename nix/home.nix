@@ -42,7 +42,7 @@ in
 
   catppuccin = {
     enable = true;
-    flavor = "macchiato";
+    flavor = "mocha";
     starship.enable = false;
     tmux.enable = false;
     zsh-syntax-highlighting.enable = false;
