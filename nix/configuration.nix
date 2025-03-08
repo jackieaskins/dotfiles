@@ -7,6 +7,7 @@ in
 {
   system.stateVersion = 5;
 
+  nix.gc.automatic = true;
   nix.settings.experimental-features = "nix-command flakes";
 
   nixpkgs.config.allowUnfree = true;

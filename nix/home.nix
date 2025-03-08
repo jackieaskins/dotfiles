@@ -29,6 +29,7 @@ let
 in
 {
   nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+  nix.gc.automatic = true;
 
   programs.home-manager.enable = true;
   home.stateVersion = "24.05";
