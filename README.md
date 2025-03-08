@@ -14,55 +14,52 @@ My dotfiles for Ghostty, Hammerspoon, Karabiner, Neovim, Nix, Vim, QMK, Tmux, We
 
 1. Install [Nix](https://nixos.org/download):
 
-    * On Linux:
+   - On Linux:
 
-       ```bash
-       sh <(curl -L https://nixos.org/nix/install) --daemon
-       ```
+   ```bash
+   sh <(curl -L https://nixos.org/nix/install) --daemon
+   ```
 
-    * On MacOS:
+   - On MacOS:
 
-       ```bash
-       sh <(curl -L https://nixos.org/nix/install)
-       ```
+     ```bash
+     sh <(curl -L https://nixos.org/nix/install)
+     ```
 
 1. Close the shell and open a new one.
 
 1. Add custom configuration files to `~/dotfiles_custom`:
 
-    * `nvim-custom.lua`
-    * `hammerspoon-custom.lua`
-    * `nix-custom.nix`
+   - `nvim-custom.lua`
+   - `hammerspoon-custom.lua`
+   - `nix-custom.nix`
 
 1. Clone this repo:
 
-    ```bash
-    git clone -b nix https://github.com/jackieaskins/dotfiles.git ~/dotfiles
-    ```
+   ```bash
+   git clone -b nix https://github.com/jackieaskins/dotfiles.git ~/dotfiles
+   ```
 
 1. Enable "experimental" flake support:
 
    ```bash
    mkdir -p ~/.config/nix/
-   ```
-
-   ```bash
    echo "extra-experimental-features = nix-command flakes" >> ~/.config/nix/nix.conf
    ```
 
 1. Apply the Nix configuration:
 
-    On MacOS:
+   - On MacOS:
 
-    ```bash
-    nix run nix-darwin -- switch --flake ~/dotfiles/nix --impure
-    ```
+     ```bash
+     nix run nix-darwin -- switch --flake ~/dotfiles/nix --impure
+     ```
 
-    On Linux:
+   - On Linux:
 
-    ```bash
-    nix run home-manager -- switch --flake ~/dotfiles/nix --impure
-    ```
+     ```bash
+     nix run home-manager -- switch --flake ~/dotfiles/nix --impure
+     ```
 
 1. Restart your device or log out and back in to ensure all settings are applied.
 
@@ -70,30 +67,30 @@ My dotfiles for Ghostty, Hammerspoon, Karabiner, Neovim, Nix, Vim, QMK, Tmux, We
 
 1. Install Neovim plugins
 
-    ```bash
-    nvim --headless "+Lazy! sync" +qa
-    ```
+   ```bash
+   nvim --headless "+Lazy! sync" +qa
+   ```
 
 1. Open Hammerspoon
 
-    ```bash
-    open -a Hammerspoon
-    ```
+   ```bash
+   open -a Hammerspoon
+   ```
 
 1. Configure Firefox Browser
 
-    ```bash
-    open -a Firefox
-    ```
+   ```bash
+   open -a Firefox
+   ```
 
 1. Configure Raycast
 
-    ```bash
-    open -a Raycast
-    ```
+   ```bash
+   open -a Raycast
+   ```
 
 1. Configure Alcove
 
-    ```bash
-    open -a Alcove
-    ```
+   ```bash
+   open -a Alcove
+   ```

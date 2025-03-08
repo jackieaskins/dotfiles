@@ -223,4 +223,40 @@ function M.map_table_to_table(fn, tbl)
   return out_tbl
 end
 
+local formatters
+local formatters_by_ft
+local function load_formatters()
+  formatters = require('utils').import_json_file('~/dotfiles/nix/formatters.json')
+
+  formatters_by_ft = {}
+  for name, formatter in pairs(formatters) do
+    for _, ft in ipairs(formatter.filetypes) do
+      local curr_formatters = formatters_by_ft[ft] or {}
+      table.insert(curr_formatters, name)
+      formatters_by_ft[ft] = curr_formatters
+    end
+  end
+end
+
+---Get formatters for filetype
+---@param filetype string
+---@return string[]
+function M.get_formatters(filetype)
+  if not formatters_by_ft then
+    load_formatters()
+  end
+
+  return formatters_by_ft[filetype] or {}
+end
+
+---Get formatters for filetype considering the required file
+---@param filetype string
+---@return string[]
+function M.get_active_formatters(filetype)
+  return vim.tbl_filter(function(formatter_name)
+    local formatter = formatters[formatter_name]
+    return formatter.required_file == nil or M.file_exists(formatter.required_file)
+  end, M.get_formatters(filetype))
+end
+
 return M

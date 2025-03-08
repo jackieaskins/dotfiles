@@ -38,27 +38,15 @@ local function statusline_component(hl, component, seps)
 end
 
 local function get_active_lsps_and_formatters()
-  local function get_lsp_clients()
-    return vim.tbl_map(function(client)
-      return require('lsp.utils').get_server_display_name(client.name)
-    end, vim.lsp.get_clients({ bufnr = 0 }))
-  end
+  local lsp_clients = vim.tbl_map(function(client)
+    return require('lsp.utils').get_server_display_name(client.name)
+  end, vim.lsp.get_clients({ bufnr = 0 }))
 
-  local function get_formatters()
-    local formatters, use_lsp = require('conform').list_formatters_to_run()
-    local formatter_names = vim.tbl_map(function(formatter)
-      return formatter.name
-    end, formatters)
-    if use_lsp then
-      table.insert(formatter_names, 'lsp_format')
-    end
-    return formatter_names
-  end
+  local formatters = require('utils').get_active_formatters(vim.bo.filetype)
 
   local all_client_names = {}
-  for _, fn in ipairs({ get_lsp_clients, get_formatters }) do
-    local ok, clients = pcall(fn)
-    if ok and #clients > 0 then
+  for _, clients in ipairs({ lsp_clients, formatters }) do
+    if #clients > 0 then
       table.insert(all_client_names, table.concat(clients, ' '))
     end
   end
