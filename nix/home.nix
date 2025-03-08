@@ -57,6 +57,7 @@ in
       pkgs.devenv
       pkgs.direnv
       pkgs.fd
+      pkgs.imagemagick
       pkgs.neovim
       pkgs.pre-commit
       pkgs.ripgrep
