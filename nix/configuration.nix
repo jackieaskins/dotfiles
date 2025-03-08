@@ -196,7 +196,7 @@ in
 
   services.jankyborders = {
     enable = true;
-    active_color = "0xFFA6DA95";
+    active_color = "0xFFA6E3A1";
     width = 8.0;
     hidpi = true;
     inactive_color = "";
