@@ -97,6 +97,17 @@ servers.lua_ls = {
   end,
 }
 
+servers.nil_ls = {
+  config = function()
+    return {
+      ---@param client vim.lsp.Client
+      on_attach = function(client)
+        client.server_capabilities.completionProvider = nil
+      end,
+    }
+  end,
+}
+
 servers.nixd = {
   config = function()
     local flake_path = vim.fn.expand('~/dotfiles/nix')
