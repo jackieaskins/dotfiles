@@ -161,17 +161,25 @@ function M.debounce(fn, ms)
 end
 
 ---Get the current snippet engine
----@return 'nvim'
+---@return 'nvim' | 'luasnip'
 function M.get_snippet_engine()
-  return 'nvim'
+  return 'luasnip'
 end
+
+local snippet_fns = {
+  nvim = function(input)
+    vim.snippet.expand(input)
+  end,
+  luasnip = function(input)
+    require('luasnip').lsp_expand(input)
+  end,
+}
 
 --- Expand snippet using current snippet engine
 ---@param input string
 function M.snippet_expand(input)
-  if M.get_snippet_engine() == 'nvim' then
-    vim.snippet.expand(input)
-  end
+  local snippet_engine = M.get_snippet_engine()
+  snippet_fns[snippet_engine](input)
 end
 
 ---Maps from a table to list

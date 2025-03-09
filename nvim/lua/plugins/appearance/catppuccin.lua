@@ -77,6 +77,10 @@ return {
           EyelinerPrimary = { fg = colors.sapphire, style = { 'bold', 'underline' } },
           EyelinerSecondary = { fg = colors.pink, style = { 'underline' } },
 
+          -- LuaSnip
+          LuasnipInsertNodeActive = { bg = colors.surface2 },
+          LuasnipInsertNodePassive = { bg = colors.surface0 },
+
           -- mini.icons
           MiniIconsGrey = { fg = colors.overlay0 },
 
