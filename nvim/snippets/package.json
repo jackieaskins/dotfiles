@@ -3,10 +3,21 @@
   "contributes": {
     "snippets": [
       {
-        "path": "./ecma/tests.json",
+        "path": "./ecma/base.json",
         "language": [
           "javascript",
           "javascriptreact",
+          "svelte",
+          "typescript",
+          "typescriptreact"
+        ]
+      },
+      {
+        "path": "./ecma/collections.json",
+        "language": [
+          "javascript",
+          "javascriptreact",
+          "svelte",
           "typescript",
           "typescriptreact"
         ]
@@ -20,7 +31,7 @@
         ]
       },
       {
-        "path": "./ecma/collections.json",
+        "path": "./ecma/tests.json",
         "language": [
           "javascript",
           "javascriptreact",
