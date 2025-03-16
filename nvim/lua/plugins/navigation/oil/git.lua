@@ -58,8 +58,9 @@ local M = {}
 
 ---Set git sign extmarks
 ---@param buf number
----@param file_statuses FileStatuses | nil
-function M.set_signs(buf, file_statuses)
+function M.set_signs(buf)
+  local file_statuses = vim.b[buf].file_statuses
+
   if not file_statuses then
     return
   end
@@ -86,17 +87,24 @@ function M.set_signs(buf, file_statuses)
   end
 end
 
----Add git signs to oil buffer
+---Load git info and add git signs to oil buffer
 ---@param buf number
----@param out vim.SystemCompleted
----@return FileStatuses
-function M.add_git_signs(buf, out)
-  local items = vim.split(out.stdout, '\n', { trimempty = true })
-  local file_statuses = get_file_statuses(items)
+function M.load_git_signs(buf)
+  vim.system({ 'git', '-c', 'status.relativePaths=true', 'status', '--short', '--ignored', '.' }, {
+    cwd = require('oil').get_current_dir(buf),
+    text = true,
+  }, function(out)
+    if out.code ~= 0 then
+      return
+    end
 
-  M.set_signs(buf, file_statuses)
+    vim.schedule(function()
+      local items = vim.split(out.stdout, '\n', { trimempty = true })
+      vim.b[buf].file_statuses = get_file_statuses(items)
 
-  return file_statuses
+      M.set_signs(buf)
+    end)
+  end)
 end
 
 return M
