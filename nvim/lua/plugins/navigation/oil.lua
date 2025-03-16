@@ -45,7 +45,21 @@ return {
       local utils = require('utils')
       local git_oil = require('plugins.navigation.oil.git')
 
-      utils.augroup('oil-git-signs', {
+      utils.augroup('oil', {
+        {
+          'User',
+          pattern = 'OilActionsPre',
+          callback = function(args)
+            local actions = args.data.actions --[=[@as oil.Action[]]=]
+
+            for _, action in ipairs(actions) do
+              if action.type == 'delete' then
+                local _, path = require('oil.util').parse_url(action.url)
+                Snacks.bufdelete({ file = path, force = true })
+              end
+            end
+          end,
+        },
         {
           'User',
           pattern = 'OilMutationComplete',
