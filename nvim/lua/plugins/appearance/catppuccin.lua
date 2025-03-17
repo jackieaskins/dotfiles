@@ -77,6 +77,10 @@ return {
           EyelinerPrimary = { fg = colors.sapphire, style = { 'bold', 'underline' } },
           EyelinerSecondary = { fg = colors.pink, style = { 'underline' } },
 
+          -- LuaSnip
+          LuasnipInsertNodeActive = { bg = colors.surface2 },
+          LuasnipInsertNodePassive = { bg = colors.surface0 },
+
           -- mini.icons
           MiniIconsGrey = { fg = colors.overlay0 },
 
@@ -91,26 +95,6 @@ return {
           -- nvim-treesitter-context
           TreesitterContext = { fg = colors.text, bg = colors.mantle },
           TreesitterContextLineNumber = { fg = colors.surface1, bg = colors.mantle },
-
-          -- oil.nvim
-          OilGitStatusIndexIgnored = { link = 'NonText' },
-          OilGitStatusWorkingTreeIgnored = { link = 'NonText' },
-          OilGitStatusIndexUntracked = { link = 'GitSignsUntracked' },
-          OilGitStatusWorkingTreeUntracked = { link = 'GitSignsUntracked' },
-          OilGitStatusIndexAdded = { link = 'GitSignsAdd' },
-          OilGitStatusWorkingTreeAdded = { link = 'GitSignsAdd' },
-          OilGitStatusIndexCopied = { link = 'GitSignsChange' },
-          OilGitStatusWorkingTreeCopied = { link = 'GitSignsChange' },
-          OilGitStatusIndexDeleted = { link = 'GitSignsDelete' },
-          OilGitStatusWorkingTreeDeleted = { link = 'GitSignsDelete' },
-          OilGitStatusIndexModified = { link = 'GitSignsChange' },
-          OilGitStatusWorkingTreeModified = { link = 'GitSignsChange' },
-          OilGitStatusIndexRenamed = { link = 'GitSignsChange' },
-          OilGitStatusWorkingTreeRenamed = { link = 'GitSignsChange' },
-          OilGitStatusIndexTypeChanged = { link = 'GitSignsChange' },
-          OilGitStatusWorkingTreeTypeChanged = { link = 'GitSignsChange' },
-          OilGitStatusIndexUnmerged = { link = 'GitSignsChange' },
-          OilGitStatusWorkingTreeUnmerged = { link = 'GitSignsChange' },
         }
         return vim.tbl_extend(
           'force',

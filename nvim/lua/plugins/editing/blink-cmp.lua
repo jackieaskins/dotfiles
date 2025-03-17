@@ -1,4 +1,5 @@
 local border = MY_CONFIG.border_style
+local snippet_engine = require('utils').get_snippet_engine()
 
 ---@type LazySpec
 return {
@@ -83,6 +84,10 @@ return {
         border = border,
         show_documentation = false,
       },
+    },
+    snippets = {
+      ---@diagnostic disable-next-line: assign-type-mismatch
+      preset = snippet_engine == 'nvim' and 'default' or snippet_engine,
     },
     sources = {
       default = { 'lsp', 'path', 'snippets', 'buffer' },
