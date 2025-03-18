@@ -13,7 +13,6 @@ return {
   opts = {
     appearance = {
       kind_icons = require('icons').get_lspkind_icons(),
-      use_nvim_cmp_as_default = true,
     },
     cmdline = {
       completion = {
@@ -111,7 +110,6 @@ return {
           module = 'lazydev.integrations.blink',
           score_offset = 100,
         },
-        lsp = { fallbacks = { 'buffer' } },
       },
     },
   },
