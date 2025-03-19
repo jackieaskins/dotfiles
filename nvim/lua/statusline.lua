@@ -49,14 +49,7 @@ local function get_active_lsp_linters_formatters()
   end
 
   local function get_formatters()
-    local formatters, use_lsp = require('conform').list_formatters_to_run()
-    local formatter_names = vim.tbl_map(function(formatter)
-      return formatter.name
-    end, formatters)
-    if use_lsp then
-      table.insert(formatter_names, 'lsp_format')
-    end
-    return formatter_names
+    return require('formatting').get_active_formatters(vim.bo.filetype)
   end
 
   local all_client_names = {}
