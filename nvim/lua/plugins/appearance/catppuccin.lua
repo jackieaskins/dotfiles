@@ -69,8 +69,10 @@ return {
 
           -- Plugin Highlights
           -- blink.cmp
-          BlinkCmpMenuBorder = { link = 'FloatBorder' },
           BlinkCmpDocBorder = { link = 'FloatBorder' },
+          BlinkCmpLabel = { fg = colors.text },
+          BlinkCmpLabelMatch = { fg = colors.blue },
+          BlinkCmpMenuBorder = { link = 'FloatBorder' },
           BlinkCmpSignatureHelpBorder = { link = 'FloatBorder' },
           BlinkCmpSource = { fg = colors.surface2 },
 
