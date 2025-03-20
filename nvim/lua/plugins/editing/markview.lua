@@ -2,15 +2,12 @@
 ---@type LazySpec
 return {
   'OXY2DEV/markview.nvim',
-  dependencies = {
-    'nvim-treesitter/nvim-treesitter',
-    'echasnovski/mini.icons',
+  lazy = false,
+  dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' },
+  keys = {
+    { '<leader>mv', '<cmd>Markview toggle<CR>' },
   },
   ---@module 'markview'
   ---@type mkv.config
-  opts = {
-    preview = {
-      hybrid_modes = { 'n', 'no', 'c' },
-    },
-  },
+  opts = {},
 }
