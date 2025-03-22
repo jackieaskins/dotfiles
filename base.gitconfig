@@ -10,13 +10,16 @@
 [core]
   excludesfile = ~/dotfiles/gitignore_global
 [diff]
+  algorithm = histogram
   colorMoved = default
 [merge]
   conflictstyle = diff3
 [pull]
   rebase = true
   verbose = true
-[rerere]
-  enabled = true
+[push]
+  autosetupremote = true
 [rebase]
   autoStash = true
+[rerere]
+  enabled = true
