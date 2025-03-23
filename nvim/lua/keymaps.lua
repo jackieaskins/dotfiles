@@ -77,10 +77,10 @@ augroup('lsp_keymaps', {
     callback = function(args)
       local bsk = utils.buffer_map(args.buf)
       bsk('n', 'K', function()
-        vim.lsp.buf.hover({ silent = true, border = MY_CONFIG.border_style })
+        vim.lsp.buf.hover({ silent = true })
       end)
       bsk({ 'i', 'n' }, '<C-S>', function()
-        vim.lsp.buf.signature_help({ border = MY_CONFIG.border_style })
+        vim.lsp.buf.signature_help()
       end, { desc = 'vim.lsp.buf.signature_help' })
 
       bsk('n', '<leader>rn', vim.lsp.buf.rename, { desc = 'vim.lsp.buf.rename' })

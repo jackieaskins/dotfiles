@@ -24,8 +24,6 @@ return {
       end
     end
 
-    require('lspconfig.ui.windows').default_options.border = MY_CONFIG.border_style
-
     for server_name, server in pairs(servers) do
       if not server.skip_lspconfig then
         local base_config = { capabilities = require('lsp.capabilities')() }
