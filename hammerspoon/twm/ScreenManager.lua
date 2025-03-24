@@ -36,7 +36,11 @@ local function createWindowManager(currentScreenIds)
       local currentSpaceCount = #spaceIds
       local desiredSpaceCount = #currentMonitorConfiguration[screenId]
 
-      if currentSpaceCount < desiredSpaceCount then
+      if currentSpaceCount > desiredSpaceCount then
+        for i = currentSpaceCount, desiredSpaceCount + 1, -1 do
+          hs.spaces.removeSpace(spaceIds[i], false)
+        end
+      elseif currentSpaceCount < desiredSpaceCount then
         for _ = 1, desiredSpaceCount - currentSpaceCount do
           hs.spaces.addSpaceToScreen(screenId, false)
         end
