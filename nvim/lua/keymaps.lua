@@ -39,7 +39,7 @@ map('n', 'x', '"_x')
 
 -- https://github.com/neovim/neovim/issues/26449
 map({ 'i', 's' }, '<C-e>', function()
-  vim.snippet.stop()
+  utils.snippet_stop()
 end)
 
 ----------------------------------------------------------------------

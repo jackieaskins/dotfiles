@@ -167,19 +167,30 @@ function M.get_snippet_engine()
 end
 
 local snippet_fns = {
-  nvim = function(input)
-    vim.snippet.expand(input)
-  end,
-  luasnip = function(input)
-    require('luasnip').lsp_expand(input)
-  end,
+  nvim = {
+    expand = function(input)
+      vim.snippet.expand(input)
+    end,
+    stop = vim.snippet.stop,
+  },
+  luasnip = {
+    expand = function(input)
+      require('luasnip').lsp_expand(input)
+    end,
+    stop = vim.cmd.LuaSnipUnlinkCurrent,
+  },
 }
 
 --- Expand snippet using current snippet engine
 ---@param input string
 function M.snippet_expand(input)
   local snippet_engine = M.get_snippet_engine()
-  snippet_fns[snippet_engine](input)
+  snippet_fns[snippet_engine].expand(input)
+end
+
+function M.snippet_stop()
+  local snippet_engine = M.get_snippet_engine()
+  snippet_fns[snippet_engine].stop()
 end
 
 ---Maps from a table to list
