@@ -14,22 +14,31 @@ in
   nixpkgs.hostPlatform = "aarch64-darwin";
 
   environment.systemPackages = [
+    pkgs.gimp
+    pkgs.ice-bar
     pkgs.iina
+    pkgs.karabiner-elements
+    pkgs.keycastr
     pkgs.mas
     pkgs.qmk
+    pkgs.vscodium
   ];
 
   homebrew = {
     enable = true;
     casks = [
       "alcove"
+      "discord"
+      "dockdoor"
       "ghostty"
       "hammerspoon"
-      "jordanbaird-ice"
-      "karabiner-elements"
+      "leader-key"
+      "logitune"
+      "nordvpn"
       "raycast"
       "rocket"
       "sf-symbols"
+      "whisky"
     ];
     onActivation.cleanup = "zap";
     onActivation.autoUpdate = true;
