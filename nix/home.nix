@@ -63,6 +63,7 @@ in
       pkgs.pre-commit
       pkgs.ripgrep
       pkgs.sesh
+      pkgs.tree-sitter
       pkgs.vivid
     ]
   ];
