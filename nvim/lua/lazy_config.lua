@@ -33,6 +33,7 @@ require('lazy').setup({
   change_detection = { notify = false },
   checker = { enabled = true, notify = false },
   dev = {
+    fallback = true,
     path = '~/vim-plugins',
     patterns = MY_CONFIG.is_personal_machine and { 'jackieaskins' } or {},
   },
