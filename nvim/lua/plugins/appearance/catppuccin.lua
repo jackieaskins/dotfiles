@@ -69,9 +69,12 @@ return {
 
           -- Plugin Highlights
           -- blink.cmp
-          BlinkCmpMenuBorder = { link = 'FloatBorder' },
           BlinkCmpDocBorder = { link = 'FloatBorder' },
+          BlinkCmpLabel = { fg = colors.text },
+          BlinkCmpLabelMatch = { fg = colors.blue },
+          BlinkCmpMenuBorder = { link = 'FloatBorder' },
           BlinkCmpSignatureHelpBorder = { link = 'FloatBorder' },
+          BlinkCmpSource = { fg = colors.surface2 },
 
           -- eyeliner.nvim
           EyelinerPrimary = { fg = colors.sapphire, style = { 'bold', 'underline' } },
@@ -83,11 +86,6 @@ return {
 
           -- mini.icons
           MiniIconsGrey = { fg = colors.overlay0 },
-
-          -- nvim-cmp
-          CmpItemAbbr = { fg = colors.text },
-          CmpItemAbbrMatch = { fg = colors.blue },
-          CmpItemMenu = { fg = colors.surface2 },
 
           -- nvim-lightbulb
           LightBulbVirtText = { bg = colors.none },
@@ -103,8 +101,8 @@ return {
         )
       end,
       integrations = {
-        blink_cmp = false,
-        cmp = true,
+        blink_cmp = true,
+        cmp = false,
         colorful_winsep = { enabled = true, color = 'blue' },
         fidget = true,
         fzf = true,

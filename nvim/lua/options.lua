@@ -24,6 +24,7 @@ vim.o.undofile = true
 vim.o.viewoptions = gen_list_option('cursor', 'folds')
 vim.o.completeopt = 'menu,menuone,noselect'
 vim.o.ruler = false
+vim.o.winborder = MY_CONFIG.border_style
 
 -- Statusline, Tabline, Winbar
 vim.o.laststatus = 3

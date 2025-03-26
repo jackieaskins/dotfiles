@@ -1,4 +1,3 @@
-local border = MY_CONFIG.border_style
 local snippet_engine = require('utils').get_snippet_engine()
 
 ---@type LazySpec
@@ -10,7 +9,6 @@ return {
   opts = {
     appearance = {
       kind_icons = require('icons').get_lspkind_icons(),
-      use_nvim_cmp_as_default = true,
     },
     cmdline = {
       completion = {
@@ -29,12 +27,8 @@ return {
       accept = {
         auto_brackets = { enabled = false },
       },
-      documentation = {
-        auto_show = true,
-        window = { border = border },
-      },
+      documentation = { auto_show = true },
       menu = {
-        border = border,
         draw = {
           columns = {
             { 'kind_icon' },
@@ -80,10 +74,7 @@ return {
     },
     signature = {
       enabled = true,
-      window = {
-        border = border,
-        show_documentation = false,
-      },
+      window = { show_documentation = false },
     },
     snippets = {
       ---@diagnostic disable-next-line: assign-type-mismatch
@@ -108,7 +99,6 @@ return {
           module = 'lazydev.integrations.blink',
           score_offset = 100,
         },
-        lsp = { fallbacks = { 'buffer' } },
       },
     },
   },

@@ -42,7 +42,7 @@ local function get_active_lsps_and_formatters()
     return require('lsp.utils').get_server_display_name(client.name)
   end, vim.lsp.get_clients({ bufnr = 0 }))
 
-  local formatters = require('utils').get_active_formatters(vim.bo.filetype)
+  local formatters = require('formatting').get_active_formatters(vim.bo.filetype)
 
   local all_client_names = {}
   for _, clients in ipairs({ lsp_clients, formatters }) do

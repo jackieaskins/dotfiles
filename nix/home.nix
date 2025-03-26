@@ -150,10 +150,14 @@ in
     extraConfig = {
       advice.skippedCherryPicks = false;
       branch.sort = "-committerdate";
-      diff.colorMoved = "default";
+      diff = {
+        algorithm = "histogram";
+        colorMoved = "default";
+      };
       init.defaultBranch = "main";
       merge.conflictstyle = "diff3";
       pull.rebase = true;
+      push.autosetupremote = true;
       rerere.enabled = true;
       rebase.autoStash = true;
     };

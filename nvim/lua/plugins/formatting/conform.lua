@@ -1,7 +1,3 @@
----@class FormatterConfig
----@field required_file? string
----@field filetypes string[]
-
 ---@type LazySpec
 return {
   'stevearc/conform.nvim',
@@ -11,13 +7,14 @@ return {
   opts = { undojoin = true },
   init = function()
     local utils = require('utils')
+    local formatting_utils = require('formatting')
 
     utils.augroup('conform', {
       {
         'BufWritePre',
         callback = function(args)
           local filetype = vim.bo[args.buf].filetype
-          local formatters = utils.get_active_formatters(filetype)
+          local formatters = formatting_utils.get_active_formatters(filetype)
           if #formatters > 0 then
             require('conform').format({ formatters = formatters })
           end
@@ -26,7 +23,7 @@ return {
     })
 
     utils.user_command('Format', function()
-      local formatters = utils.get_formatters(vim.bo.filetype)
+      local formatters = formatting_utils.get_formatters(vim.bo.filetype)
 
       if #formatters > 0 then
         require('conform').format({ formatters = formatters })
