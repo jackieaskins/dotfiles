@@ -37,6 +37,7 @@ in
       "nordvpn"
       "raycast"
       "rocket"
+      "sanesidebuttons"
       "sf-symbols"
       "whisky"
     ];
