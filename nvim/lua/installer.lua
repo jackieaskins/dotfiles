@@ -9,7 +9,7 @@ local pkg_managers = {
   gem = 'gem install --user-install %s',
   go = 'go install %s',
   npm = 'npm install -g %s',
-  pip = 'pipx upgrade %s || pipx install %s',
+  pip = 'uv tool install --upgrade %s',
 }
 
 ---@class RegisteredCommands

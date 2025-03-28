@@ -8,7 +8,7 @@ local utils = require('utils')
 local linters = {
   gdlint = {
     filetypes = { 'gdscript' },
-    install_cmd = { 'pip', 'git+https://github.com/Scony/godot-gdscript-toolkit.git' },
+    install_cmd = { 'uv', 'gdtoolkit' },
   },
   swiftlint = {
     filetypes = { 'swift' },

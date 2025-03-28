@@ -32,7 +32,7 @@ local all_formatters = {
   },
   ['format-queries'] = { filetypes = { 'query' } },
   gdformat = {
-    install_cmd = { 'pip', 'git+https://github.com/Scony/godot-gdscript-toolkit.git' },
+    install_cmd = { 'pip', 'gdtoolkit' },
     required_file = 'project.godot',
     filetypes = { 'gdscript' },
   },
