@@ -127,7 +127,7 @@ function M.install(groups)
   vim.cmd.new()
   vim.cmd.startinsert()
 
-  vim.fn.termopen({ 'sh', '-c', table.concat(script_lines, '\n') })
+  vim.fn.jobstart({ 'sh', '-c', table.concat(script_lines, '\n') }, { term = true })
 end
 
 user_command('InstallAll', function()
