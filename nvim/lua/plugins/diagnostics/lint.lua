@@ -8,7 +8,7 @@ local utils = require('utils')
 local linters = {
   gdlint = {
     filetypes = { 'gdscript' },
-    install_cmd = { 'uv', 'gdtoolkit' },
+    install_cmd = { 'pip', 'gdtoolkit' },
   },
   swiftlint = {
     filetypes = { 'swift' },
