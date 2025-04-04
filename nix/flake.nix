@@ -84,7 +84,7 @@
               users.${username} = {
                 imports = [
                   ./home.nix
-                  catppuccin.homeManagerModules.catppuccin
+                  catppuccin.homeModules.catppuccin
                 ];
               };
             };
