@@ -76,6 +76,12 @@ in
         }
         {
           "if" = {
+            app-id = "com.apple.finder";
+          };
+          run = "layout floating";
+        }
+        {
+          "if" = {
             app-id = "com.apple.FaceTime";
           };
           run = "layout floating";

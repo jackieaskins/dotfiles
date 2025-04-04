@@ -46,6 +46,7 @@ require('lazy').setup({
 })
 
 vim.diagnostic.config({
+  signs = false,
   jump = { float = false },
   underline = false,
   virtual_lines = false,

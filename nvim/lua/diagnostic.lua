@@ -9,9 +9,6 @@ vim.diagnostic.config({
   severity_sort = true,
   update_in_insert = false,
   jump = { float = true },
-  virtual_text = {
-    current_line = false,
-    source = 'if_many',
-    spacing = 1,
-  },
+  virtual_lines = { current_line = true },
+  virtual_text = false,
 })

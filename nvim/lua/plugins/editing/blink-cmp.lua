@@ -12,15 +12,10 @@ return {
     },
     cmdline = {
       completion = {
-        menu = {
-          auto_show = true,
-        },
+        menu = { auto_show = true },
       },
       keymap = {
-        preset = 'default',
         ['<Tab>'] = { 'select_and_accept' },
-        ['<Up>'] = {},
-        ['<Down>'] = {},
       },
     },
     completion = {
