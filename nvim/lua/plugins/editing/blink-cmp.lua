@@ -3,6 +3,7 @@ local snippet_engine = require('utils').get_snippet_engine()
 ---@type LazySpec
 return {
   'saghen/blink.cmp',
+  dependencies = { 'saghen/blink.compat', opts = {} },
   build = {
     'rustup toolchain install nightly --force',
     'cargo build --release',
@@ -79,11 +80,7 @@ return {
       preset = snippet_engine == 'nvim' and 'default' or snippet_engine,
     },
     sources = {
-      default = { 'lsp', 'path', 'snippets', 'buffer' },
-      per_filetype = {
-        lua = { 'lazydev', 'lsp', 'path', 'snippets', 'buffer' },
-        sql = { 'dadbod', 'snippets', 'buffer' },
-      },
+      default = { 'lazydev', 'dadbod', 'lsp', 'path', 'snippets', 'buffer', 'html-css' },
       providers = {
         buffer = {
           opts = { get_bufnrs = vim.api.nvim_list_bufs },
@@ -91,6 +88,10 @@ return {
         dadbod = {
           name = 'Dadbod',
           module = 'vim_dadbod_completion.blink',
+        },
+        ['html-css'] = {
+          name = 'html-css',
+          module = 'blink.compat.source',
         },
         lazydev = {
           name = 'LazyDev',
