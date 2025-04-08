@@ -14,7 +14,7 @@ brew 'homerow'
 brew 'jq'
 brew 'maven'
 brew 'ninja' # Neovim dependency
-brew 'node@18', link: true
+brew 'node@20', link: true
 brew 'node@22'
 brew 'pre-commit'
 brew 'ripgrep'
