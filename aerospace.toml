@@ -61,6 +61,10 @@ run = 'move-node-to-workspace 2'
 if.app-id = 'com.apple.MobileSMS'
 run = 'move-node-to-workspace 2'
 
+[[on-window-detected]]
+if.app-id = 'com.apple.dt.Xcode'
+run = 'move-node-to-workspace 3'
+
 [key-mapping]
 preset = 'qwerty'
 
