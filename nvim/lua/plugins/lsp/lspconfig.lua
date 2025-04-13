@@ -3,38 +3,39 @@ return {
   'neovim/nvim-lspconfig',
   event = 'VeryLazy',
   config = function()
-    local servers = require('lsp.servers')
     local lspconfig = require('lspconfig')
-    local configs = require('lspconfig.configs')
 
-    if not configs['ghostty-ls'] then
-      configs['ghostty-ls'] = {
-        default_config = {
-          cmd = { vim.fn.stdpath('data') .. '/lsp-servers/ghostty/bin/ghostty-ls' },
-          filetypes = { 'ghostty' },
-          root_dir = lspconfig.util.root_pattern('.git'),
-          settings = {},
-        },
-      }
-    end
+    -- eslint doesn't support the new format yet
+    lspconfig.eslint.setup({
+      root_dir = lspconfig.util.root_pattern(
+        '.eslintrc',
+        '.eslintrc.js',
+        '.eslintrc.cjs',
+        '.eslintrc.yaml',
+        '.eslintrc.yml',
+        '.eslintrc.json',
+        'eslint.config.js',
+        './node_modules/eslint'
+      ),
+      on_attach = function(_, bufnr)
+        require('utils').buffer_map(bufnr)('n', '<leader>ef', vim.cmd.EslintFixAll)
+      end,
+      handlers = {
+        ['textDocument/diagnostic'] = function(err, result, ctx)
+          if result and result.items then
+            for _, item in ipairs(result.items) do
+              item.severity = 4
+            end
+          end
 
-    for server_name, config in pairs(MY_CONFIG.additional_server_configs) do
-      if not configs[server_name] then
-        configs[server_name] = config
-      end
-    end
+          return vim.lsp.handlers['textDocument/diagnostic'](err, result, ctx)
+        end,
+      },
+    })
 
-    for _, server_name in ipairs(require('lsp.utils').get_supported_servers()) do
-      local server = servers[server_name] or {}
-
+    for server_name, server in pairs(require('lsp.utils').get_supported_servers()) do
       if not server.skip_lspconfig then
-        lspconfig[server_name].setup(
-          vim.tbl_extend(
-            'force',
-            { capabilities = require('lsp.capabilities')() },
-            server.config and server.config() or {}
-          )
-        )
+        vim.lsp.enable(server_name)
       end
     end
   end,

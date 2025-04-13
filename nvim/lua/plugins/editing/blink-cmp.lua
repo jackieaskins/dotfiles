@@ -76,11 +76,7 @@ return {
       preset = snippet_engine == 'nvim' and 'default' or snippet_engine,
     },
     sources = {
-      default = { 'lsp', 'path', 'snippets', 'buffer' },
-      per_filetype = {
-        lua = { 'lazydev', 'lsp', 'path', 'snippets', 'buffer' },
-        sql = { 'dadbod', 'snippets', 'buffer' },
-      },
+      default = { 'lazydev', 'dadbod', 'lsp', 'path', 'snippets', 'buffer' },
       providers = {
         buffer = {
           opts = { get_bufnrs = vim.api.nvim_list_bufs },

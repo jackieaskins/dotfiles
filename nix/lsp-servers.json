@@ -1,19 +1,31 @@
 {
   "clangd": { "pkg": "libclang" },
   "cssls": { "pkg": "vscode-langservers-extracted" },
-  "emmet_language_server": { "pkg": "emmet-language-server" },
-  "eslint": { "pkg": "vscode-langservers-extracted" },
+  "emmet_language_server": {
+    "display": "emmet-ls",
+    "pkg": "emmet-language-server"
+  },
+  "eslint": {
+    "pkg": "vscode-langservers-extracted",
+    "skip_lspconfig": true
+  },
   "gopls": { "pkg": "gopls" },
   "html": { "pkg": "vscode-langservers-extracted" },
-  "jdtls": { "pkg": "jdt-language-server" },
+  "jdtls": {
+    "pkg": "jdt-language-server",
+    "skip_lspconfig": true
+  },
   "jsonls": { "pkg": "vscode-langservers-extracted" },
   "lua_ls": { "pkg": "lua-language-server" },
   "nil_ls": { "pkg": "nil" },
   "nixd": { "pkg": "nixd" },
   "ruby_lsp": { "pkg": "ruby-lsp" },
   "svelte": { "pkg": "svelte-language-server" },
-  "tailwindcss": { "pkg": "tailwindcss-language-server" },
   "taplo": { "pkg": "taplo-lsp" },
-  "typescript-tools": {},
-  "vimls": { "pkg": "vim-language-server" }
+  "typescript-tools": {
+    "display": "ts-tools",
+    "skip_lspconfig": true
+  },
+  "vimls": { "pkg": "vim-language-server" },
+  "yamlls": { "pkg": "yaml-language-server" }
 }

@@ -1,16 +1,20 @@
 local M = {}
 
+---@class LspServer
+---@field display? string
+---@field skip_lspconfig? boolean
+
+---@type table<string, LspServer>
 local supported_servers
 ---Get list of supported servers
----@return string[]
+---@return table<string, LspServer>
 function M.get_supported_servers()
   if supported_servers then
     return supported_servers
   end
 
-  local lsp_servers = require('utils').import_json_file('~/dotfiles/nix/lsp-servers.json')
+  supported_servers = require('utils').import_json_file('~/dotfiles/nix/lsp-servers.json')
 
-  supported_servers = vim.list_extend(vim.tbl_keys(lsp_servers), vim.tbl_keys(MY_CONFIG.additional_server_configs))
   return supported_servers
 end
 
@@ -18,7 +22,7 @@ end
 ---@param server_name string
 ---@return string
 function M.get_server_display_name(server_name)
-  local server = require('lsp.servers')[server_name]
+  local server = M.get_supported_servers()[server_name]
   return server and server.display or server_name
 end
 

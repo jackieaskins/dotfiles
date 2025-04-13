@@ -88,6 +88,12 @@ in
         }
         {
           "if" = {
+            app-id = "com.apple.Music";
+          };
+          run = "layout floating";
+        }
+        {
+          "if" = {
             app-id = "com.apple.Notes";
           };
           run = "layout floating";
