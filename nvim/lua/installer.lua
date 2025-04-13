@@ -1,7 +1,6 @@
 ---@alias InstallCommand string[] | fun(install_dir?:string):string[]
 
 local utils = require('utils')
-local filter_table_by_keys, user_command = utils.filter_table_by_keys, utils.user_command
 
 local pkg_managers = {
   brew = 'brew reinstall %s',
@@ -21,6 +20,37 @@ local registered_commands = {}
 
 local M = {}
 
+---@param group_name string
+local function create_group_user_command(group_name)
+  local capitalized_group_name = group_name:gsub('^%l', string.upper)
+
+  local user_command_names = {
+    'Install' .. capitalized_group_name,
+    capitalized_group_name .. 'Install',
+  }
+
+  for _, user_command_name in ipairs(user_command_names) do
+    local group = registered_commands[group_name]
+
+    utils.user_command(user_command_name, function(arg)
+      local cmd_keys = arg.fargs
+
+      M.install({
+        {
+          group_name = group_name,
+          commands = #cmd_keys > 0 and utils.filter_table_by_keys(group.commands, cmd_keys) or group.commands,
+          install_dir = group.install_dir,
+        },
+      })
+    end, {
+      nargs = '*',
+      complete = function()
+        return vim.tbl_keys(group.commands)
+      end,
+    })
+  end
+end
+
 ---Register install group with installation directory and commands
 ---@param group_name string
 ---@param commands table<string, InstallCommand>
@@ -30,38 +60,24 @@ function M.register(group_name, commands, install_dir)
     return
   end
 
-  local capitalized_group_name = group_name:gsub('^%l', string.upper)
-
-  registered_commands[capitalized_group_name] = { commands = commands, install_dir = install_dir }
-
-  local user_command_names = {
-    'Install' .. capitalized_group_name,
-    capitalized_group_name .. 'Install',
+  registered_commands[group_name] = {
+    commands = commands,
+    install_dir = install_dir,
   }
-  for _, user_command_name in ipairs(user_command_names) do
-    user_command(user_command_name, function(arg)
-      local cmd_keys = arg.fargs
 
-      M.install({
-        {
-          group_name = capitalized_group_name,
-          commands = #cmd_keys > 0 and filter_table_by_keys(commands, cmd_keys) or commands,
-          install_dir = install_dir,
-        },
-      })
-    end, {
-      nargs = '*',
-      complete = function()
-        return vim.tbl_keys(commands)
-      end,
-    })
-  end
+  create_group_user_command(group_name)
 end
 
----@class InstallGroup
+---Add an additional command to an existing install group
+---@param group_name string
+---@param command_key string
+---@param command InstallCommand
+function M.extend(group_name, command_key, command)
+  registered_commands[group_name].commands[command_key] = command
+end
+
+---@class InstallGroup: RegisteredCommands
 ---@field group_name string
----@field commands table<string, InstallCommand>
----@field install_dir? string
 
 ---Generic install command
 ---@param groups InstallGroup[]
@@ -130,12 +146,16 @@ function M.install(groups)
   vim.fn.jobstart({ 'sh', '-c', table.concat(script_lines, '\n') }, { term = true })
 end
 
-user_command('InstallAll', function()
+utils.user_command('InstallAll', function()
   ---@type InstallGroup[]
   local all_groups = {}
 
   for group_name, group in pairs(registered_commands) do
-    table.insert(all_groups, { group_name = group_name, commands = group.commands, install_dir = group.install_dir })
+    table.insert(all_groups, {
+      group_name = group_name,
+      commands = group.commands,
+      install_dir = group.install_dir,
+    })
   end
 
   M.install(all_groups)

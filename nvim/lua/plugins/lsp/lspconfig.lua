@@ -3,32 +3,39 @@ return {
   'neovim/nvim-lspconfig',
   event = 'VeryLazy',
   config = function()
-    local servers = require('lsp.servers')
     local lspconfig = require('lspconfig')
-    local configs = require('lspconfig.configs')
 
-    if not configs['ghostty-ls'] then
-      configs['ghostty-ls'] = {
-        default_config = {
-          cmd = { vim.fn.stdpath('data') .. '/lsp-servers/ghostty/bin/ghostty-ls' },
-          filetypes = { 'ghostty' },
-          root_dir = lspconfig.util.root_pattern('.git'),
-          settings = {},
-        },
-      }
-    end
+    -- eslint doesn't support the new format yet
+    lspconfig.eslint.setup({
+      root_dir = lspconfig.util.root_pattern(
+        '.eslintrc',
+        '.eslintrc.js',
+        '.eslintrc.cjs',
+        '.eslintrc.yaml',
+        '.eslintrc.yml',
+        '.eslintrc.json',
+        'eslint.config.js',
+        './node_modules/eslint'
+      ),
+      on_attach = function(_, bufnr)
+        require('utils').buffer_map(bufnr)('n', '<leader>ef', vim.cmd.EslintFixAll)
+      end,
+      handlers = {
+        ['textDocument/diagnostic'] = function(err, result, ctx)
+          if result and result.items then
+            for _, item in ipairs(result.items) do
+              item.severity = 4
+            end
+          end
 
-    for server_name, config in pairs(MY_CONFIG.additional_servers) do
-      if not configs[server_name] then
-        configs[server_name] = config.lspconfig
-      end
-    end
+          return vim.lsp.handlers['textDocument/diagnostic'](err, result, ctx)
+        end,
+      },
+    })
 
-    for server_name, server in pairs(servers) do
-      if not server.skip_lspconfig then
-        local base_config = { capabilities = require('lsp.capabilities')() }
-        local config = server.config and server.config(base_config) or base_config
-        lspconfig[server_name].setup(config)
+    for server, config in pairs(require('lsp.servers')) do
+      if not config.skip_lspconfig then
+        vim.lsp.enable(server)
       end
     end
   end,

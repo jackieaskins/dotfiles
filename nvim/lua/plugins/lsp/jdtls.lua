@@ -11,7 +11,6 @@ return {
           local jdtls_path = vim.fn.stdpath('data') .. '/lsp-servers/eclipse.jdt.ls'
 
           require('jdtls').start_or_attach({
-            capabilities = require('lsp.capabilities')(),
             cmd = { 'run_jdtls.sh' },
             init_options = {
               bundles = {

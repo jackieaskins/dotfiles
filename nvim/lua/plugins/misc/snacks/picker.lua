@@ -93,7 +93,6 @@ end
 function M.get_keys()
   local keys = {
     -- Buffers and Files
-    { '<leader><leader>', 'smart' },
     { '<leader>bu', 'buffers' },
     { '<C-p>', 'files', { follow = true, hidden = true } },
     { '<leader>of', 'recent', { filter = { cwd = true } } },
@@ -109,14 +108,10 @@ function M.get_keys()
     { '<leader>gL', 'git_log_file' },
 
     -- LSP
-    { 'gr', 'lsp_references', { include_declaration = false } },
-    { 'gpr', 'lsp_references', { include_declaration = false, auto_confirm = false } },
-    { 'gd', 'lsp_definitions' },
-    { 'gpd', 'lsp_definitions', { auto_confirm = false } },
-    { 'gD', 'lsp_declarations' },
-    { 'gpD', 'lsp_declarations', { auto_confirm = false } },
-    { 'gi', 'lsp_implementations' },
-    { 'gpi', 'lsp_implementations', { auto_confirm = false } },
+    { 'grr', 'lsp_references', { include_declaration = false } },
+    { 'grR', 'lsp_references', { include_declaration = false, auto_confirm = false } },
+    { 'gri', 'lsp_implementations' },
+    { 'grI', 'lsp_implementations', { auto_confirm = false } },
     { '<leader>sd', 'lsp_symbols' },
     { '<leader>sw', 'lsp_workspace_symbols' },
 

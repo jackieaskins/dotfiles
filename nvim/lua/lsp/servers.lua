@@ -1,8 +1,4 @@
----@class ClientConfig: lspconfig.Config
----@field root_dir string | function
-
 ---@class LspServer
----@field config? fun(config: ClientConfig): ClientConfig
 ---@field display? string
 ---@field install? InstallCommand
 ---@field skip_lspconfig? boolean
@@ -11,33 +7,69 @@
 local servers = {
   clangd = { install = { 'brew', 'llvm' } },
   cssls = { install = { 'npm', 'vscode-langservers-extracted' } },
-  denols = require('lsp.servers.denols'),
-  emmet_language_server = require('lsp.servers.emmet_language_server'),
-  eslint = require('lsp.servers.eslint'),
-  gdscript = { install = { 'brew', 'godot' } },
-  ['ghostty-ls'] = require('lsp.servers.ghostty-ls'),
+  denols = { install = { 'brew', 'deno' } },
+  emmet_language_server = {
+    display = 'emmet-ls',
+    install = { 'npm', '@olrtg/emmet-language-server' },
+  },
+  eslint = {
+    install = { 'npm', 'vscode-langservers-extracted' },
+    skip_lspconfig = true, -- temporary, until it's supported
+  },
+  ['ghostty-ls'] = {
+    install = function(servers_dir)
+      local install_dir = servers_dir .. '/ghostty'
+      local zip_file = 'ghostty-ls_aarch64_macos.tar.gz'
+
+      return {
+        'rm -rf ' .. install_dir,
+        'mkdir ' .. install_dir,
+        'wget https://github.com/MKindberg/ghostty-ls/releases/latest/download/' .. zip_file,
+        'tar -xf ' .. zip_file .. ' -C ' .. install_dir,
+        'rm ' .. zip_file,
+      }
+    end,
+  },
   gopls = { install = { 'go', 'golang.org/x/tools/gopls@latest' } },
-  graphql = require('lsp.servers.graphql'),
-  html = require('lsp.servers.html'),
-  jdtls = require('lsp.servers.jdtls'),
-  jsonls = require('lsp.servers.jsonls'),
-  lua_ls = require('lsp.servers.lua_ls'),
-  omnisharp = require('lsp.servers.omnisharp'),
+  graphql = { install = { 'npm', 'graphql-language-service-cli' } },
+  html = { install = { 'npm', 'vscode-langservers-extracted' } },
+  jdtls = {
+    install = function(servers_dir)
+      local install_dir = servers_dir .. '/eclipse.jdt.ls'
+      local zip_file = 'jdt-language-server-latest.tar.gz'
+
+      return {
+        'rm -rf ' .. install_dir,
+        'mkdir ' .. install_dir,
+        'wget http://download.eclipse.org/jdtls/snapshots/' .. zip_file,
+        'tar -xf ' .. zip_file .. ' -C ' .. install_dir,
+        'rm ' .. zip_file,
+        'cd ' .. install_dir .. '/plugins',
+        'wget https://projectlombok.org/downloads/lombok.jar',
+      }
+    end,
+    skip_lspconfig = true,
+  },
+  jsonls = { install = { 'npm', 'vscode-langservers-extracted' } },
+  lua_ls = { install = { 'brew', 'lua-language-server' } },
   pyright = { install = { 'npm', 'pyright' } },
   ruby_lsp = { install = { 'gem', 'ruby-lsp' } },
   solargraph = { install = { 'gem', 'solargraph' } },
-  sourcekit = require('lsp.servers.sourcekit'),
-  svelte = require('lsp.servers.svelte'),
-  tailwindcss = require('lsp.servers.tailwindcss'),
-  taplo = require('lsp.servers.taplo'),
-  ['typescript-tools'] = require('lsp.servers.typescript-tools'),
+  sourcekit = {},
+  svelte = { install = { 'npm', 'svelte-language-server' } },
+  taplo = {
+    install = function()
+      return { 'cargo install --features lsp --locked taplo-cli' }
+    end,
+  },
+  ['typescript-tools'] = {
+    display = 'ts-tools',
+    install = { 'npm', 'typescript typescript-svelte-plugin typescript-styled-plugin' },
+    skip_lspconfig = true,
+  },
   vimls = { install = { 'npm', 'vim-language-server' } },
   yamlls = { install = { 'npm', 'yaml-language-server' } },
 }
-
-for server_name, config in pairs(MY_CONFIG.additional_servers) do
-  servers[server_name] = config.server
-end
 
 local supported_servers = {}
 if MY_CONFIG.supported_servers then
@@ -59,5 +91,3 @@ end
 require('installer').register('lsp', install_cmds, vim.fn.stdpath('data') .. '/lsp-servers')
 
 return supported_servers
-
--- vim:foldmethod=marker foldlevel=0
