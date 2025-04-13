@@ -3,6 +3,8 @@
 ---@field install? InstallCommand
 ---@field skip_lspconfig? boolean
 
+local installer = require('installer')
+
 ---@type table<string, LspServer>
 local servers = {
   clangd = { install = { 'brew', 'llvm' } },
@@ -17,18 +19,7 @@ local servers = {
     skip_lspconfig = true, -- temporary, until it's supported
   },
   ['ghostty-ls'] = {
-    install = function(servers_dir)
-      local install_dir = servers_dir .. '/ghostty'
-      local zip_file = 'ghostty-ls_aarch64_macos.tar.gz'
-
-      return {
-        'rm -rf ' .. install_dir,
-        'mkdir ' .. install_dir,
-        'wget https://github.com/MKindberg/ghostty-ls/releases/latest/download/' .. zip_file,
-        'tar -xf ' .. zip_file .. ' -C ' .. install_dir,
-        'rm ' .. zip_file,
-      }
-    end,
+    install = installer.github_install('MKindberg', 'ghostty-ls', 'ghostty-ls_aarch64_macos.tar.gz'),
   },
   gopls = { install = { 'go', 'golang.org/x/tools/gopls@latest' } },
   graphql = { install = { 'npm', 'graphql-language-service-cli' } },
@@ -62,6 +53,9 @@ local servers = {
       return { 'cargo install --features lsp --locked taplo-cli' }
     end,
   },
+  ts_query_ls = {
+    install = installer.github_install('ribru17', 'ts_query_ls', 'ts_query_ls-aarch64-apple-darwin.tar.gz'),
+  },
   ['typescript-tools'] = {
     display = 'ts-tools',
     install = { 'npm', 'typescript typescript-svelte-plugin typescript-styled-plugin' },
@@ -88,6 +82,6 @@ for server, data in pairs(supported_servers) do
     install_cmds[server] = data.install
   end
 end
-require('installer').register('lsp', install_cmds, vim.fn.stdpath('data') .. '/lsp-servers')
+installer.register('lsp', install_cmds, vim.fn.stdpath('data') .. '/lsp-servers')
 
 return supported_servers

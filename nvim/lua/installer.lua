@@ -51,6 +51,25 @@ local function create_group_user_command(group_name)
   end
 end
 
+---Get an install function to install the latest release from GitHub
+---@param username string
+---@param repo string
+---@param zip_file string
+---@return fun(install_path: string): string[]
+function M.github_install(username, repo, zip_file)
+  return function(install_path)
+    local install_dir = install_path .. '/' .. repo
+
+    return {
+      'rm -rf ' .. install_dir,
+      'mkdir ' .. install_dir,
+      string.format('wget https://github.com/%s/%s/releases/latest/download/%s', username, repo, zip_file),
+      string.format('tar -xf %s -C %s', zip_file, install_dir),
+      'rm ' .. zip_file,
+    }
+  end
+end
+
 ---Register install group with installation directory and commands
 ---@param group_name string
 ---@param commands table<string, InstallCommand>
