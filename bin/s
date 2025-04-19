@@ -8,6 +8,5 @@ sesh connect "$(
     --tmux 80%,70% \
     --input-label ' sesh ' \
     --prompt '⚡' \
-    --preview-window 'hidden' \
     --preview 'sesh preview {}'
 )"
