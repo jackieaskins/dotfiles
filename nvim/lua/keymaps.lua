@@ -71,7 +71,7 @@ map('n', '<C-S>', vim.lsp.buf.signature_help, {
 })
 
 local lsp_renames = {
-  { '<leader>rn', 'grr' },
+  { '<leader>rn', 'grn' },
   { '<leader>ca', 'gra' },
   { 'gd', '<C-]>' },
   { 'gr', 'grr' },

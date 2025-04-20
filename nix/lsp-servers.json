@@ -22,6 +22,7 @@
   "ruby_lsp": { "pkg": "ruby-lsp" },
   "svelte": { "pkg": "svelte-language-server" },
   "taplo": { "pkg": "taplo-lsp" },
+  "ts_query_ls": { "pkg": "ts_query_ls" },
   "typescript-tools": {
     "display": "ts-tools",
     "skip_lspconfig": true

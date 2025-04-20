@@ -1,5 +1,6 @@
 local utils = require('utils')
 
+local mocks_dir = '__mocks__/'
 local snapshots_dir = '__snapshots__/'
 local snap_extension = [[\.snap]]
 
@@ -9,13 +10,27 @@ local file_base_capture = '(.+)'
 local test_extension_capture = [[(\.%(spec|test))]]
 local extension_capture = [[(\.[^\.]+)]]
 
----@class Config
+---@class AlternateFileConfig
 ---@field type string
 ---@field pattern string[]
 ---@field alternates table<string, string[]>
 
----@type Config[]
+---@type AlternateFileConfig[]
 local configs = {
+  -- Mocks
+  {
+    type = 'mock',
+    pattern = {
+      optional_dir_capture, -- %1
+      mocks_dir,
+      file_base_capture, -- %2
+      extension_capture, -- %3
+    },
+    alternates = {
+      source = { '%1/%2%3' },
+    },
+  },
+
   -- Snapshots
   {
     type = 'snapshot',
@@ -91,6 +106,7 @@ local configs = {
       extension_capture, -- %5
     },
     alternates = {
+      mock = { '%1%2%3__mocks__/%4%5' },
       test = {
         '%1%2%3%4.spec%5',
         '%1%2%3%4.test%5',
@@ -117,6 +133,7 @@ local configs = {
       extension_capture, -- %3
     },
     alternates = {
+      mock = { '%1__mocks__/%2%3' },
       test = { '%1%2.spec%3', '%1%2.test%3' },
       snapshot = { '%1__snapshots__/%2.spec%3.snap', '%1__snapshots__/%2.test%3.snap' },
     },
