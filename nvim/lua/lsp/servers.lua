@@ -14,10 +14,7 @@ local servers = {
     display = 'emmet-ls',
     install = { 'npm', '@olrtg/emmet-language-server' },
   },
-  eslint = {
-    install = { 'npm', 'vscode-langservers-extracted' },
-    skip_lspconfig = true, -- temporary, until it's supported
-  },
+  eslint = { install = { 'npm', 'vscode-langservers-extracted' } },
   ['ghostty-ls'] = {
     install = installer.github_install('MKindberg', 'ghostty-ls', 'ghostty-ls_aarch64_macos.tar.gz'),
   },
