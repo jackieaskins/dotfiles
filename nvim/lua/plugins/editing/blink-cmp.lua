@@ -26,6 +26,7 @@ return {
         auto_brackets = { enabled = false },
       },
       documentation = { auto_show = true },
+      keyword = { range = 'full' },
       menu = {
         draw = {
           columns = {
