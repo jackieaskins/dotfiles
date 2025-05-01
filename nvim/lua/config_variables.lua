@@ -12,6 +12,6 @@ MY_CONFIG = {
   supported_servers = {},
   supported_formatters = {},
   supported_linters = {},
-  border_style = 'double',
+  border_style = 'bold',
   custom_gx_handlers = {},
 }

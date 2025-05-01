@@ -1,4 +1,4 @@
-local inline_sep = '〡'
+local inline_sep = ' | '
 
 require('utils').augroup('statusline_redraw', {
   { 'User', pattern = 'LazyCheck', command = 'redrawstatus' },
