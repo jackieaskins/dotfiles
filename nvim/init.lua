@@ -2,7 +2,9 @@
 vim.g.mapleader = ' '
 require('utils').map({ 'n', 'v' }, '<space>', '<nop>')
 
-require('vim._extui').enable({})
+require('vim._extui').enable({
+  msg = { pos = 'box' },
+})
 
 require('config_variables')
 require('options')
