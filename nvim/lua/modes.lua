@@ -68,7 +68,8 @@ local function get_highlight_maps(mode_color, cursor_line_hl)
   local colors = require('colors').get_colors()
 
   return {
-    WinBarFile = { fg = mode_color },
+    CursorLineNr = { fg = mode_color, bg = cursor_line_hl.bg, style = { 'bold' } },
+    NvimSeparator = { fg = mode_color },
     SnacksIndentChunk = { fg = mode_color },
     SnacksIndentScope = { fg = mode_color },
     StatusLineMode = { fg = colors.base, bg = mode_color, style = { 'bold' } },
@@ -76,8 +77,8 @@ local function get_highlight_maps(mode_color, cursor_line_hl)
     StatusLineSection = { fg = mode_color, bg = colors.surface0 },
     TabLineSel = { fg = colors.base, bg = mode_color },
     TabLineSelSep = { fg = mode_color, bg = colors.base },
-    NvimSeparator = { fg = mode_color },
-    CursorLineNr = { fg = mode_color, bg = cursor_line_hl.bg, style = { 'bold' } },
+    WinBarFile = { fg = mode_color },
+    WinSeparator = { fg = mode_color },
   }
 end
 
