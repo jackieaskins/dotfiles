@@ -122,7 +122,7 @@ function M.get_keys()
     { '<leader>.', 'resume' },
     { '<leader>:', 'commands' },
     { '<leader>ht', 'help' },
-    { '<leader>hi', 'highlights' },
+    { '<leader>hl', 'highlights' },
     { '<leader>au', 'autocmds' },
     { '<leader>km', 'keymaps' },
     { '<leader>z=', 'spelling' },

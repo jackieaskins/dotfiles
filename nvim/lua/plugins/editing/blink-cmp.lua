@@ -23,6 +23,7 @@ return {
         auto_brackets = { enabled = false },
       },
       documentation = { auto_show = true },
+      keyword = { range = 'full' },
       menu = {
         draw = {
           columns = {
@@ -90,6 +91,7 @@ return {
           module = 'lazydev.integrations.blink',
           score_offset = 100,
         },
+        lsp = { fallbacks = {} },
       },
     },
   },

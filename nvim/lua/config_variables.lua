@@ -6,6 +6,6 @@
 ---@field custom_gx_handlers GxHandler[]
 MY_CONFIG = {
   is_personal_machine = false,
-  border_style = 'double',
+  border_style = 'bold',
   custom_gx_handlers = {},
 }

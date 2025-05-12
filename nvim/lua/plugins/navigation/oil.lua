@@ -48,7 +48,7 @@ return {
       utils.augroup('oil', {
         {
           'User',
-          pattern = 'OilActionsPre',
+          pattern = 'OilActionsPost',
           callback = function(args)
             local actions = args.data.actions --[=[@as oil.Action[]]=]
 
