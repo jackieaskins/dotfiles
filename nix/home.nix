@@ -88,7 +88,7 @@ in
     shellAliases = {
       mux = "tmuxinator";
     };
-    initExtra = # zsh
+    initContent = # zsh
       ''
         export LS_COLORS="$(vivid generate catppuccin-${config.catppuccin.flavor})"
 
