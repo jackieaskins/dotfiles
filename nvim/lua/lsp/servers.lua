@@ -15,9 +15,6 @@ local servers = {
     install = { 'npm', '@olrtg/emmet-language-server' },
   },
   eslint = { install = { 'npm', 'vscode-langservers-extracted' } },
-  ['ghostty-ls'] = {
-    install = installer.github_install('MKindberg', 'ghostty-ls', 'ghostty-ls_aarch64_macos.tar.gz'),
-  },
   gopls = { install = { 'go', 'golang.org/x/tools/gopls@latest' } },
   graphql = { install = { 'npm', 'graphql-language-service-cli' } },
   html = { install = { 'npm', 'vscode-langservers-extracted' } },
