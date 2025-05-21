@@ -50,6 +50,8 @@ return {
     local spinner = { '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏' }
     local progress = vim.defaulttable()
 
+    require('plugins.misc.snacks.picker').get_init()
+
     local utils = require('utils')
 
     utils.user_command('Notifications', function()

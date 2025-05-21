@@ -66,14 +66,13 @@ map('n', ']e', '<cmd>lua vim.diagnostic.jump({ count = 1, severity = vim.diagnos
 --                               LSP                                --
 ----------------------------------------------------------------------
 
-map('n', '<C-S>', vim.lsp.buf.signature_help, {
-  desc = 'vim.lsp.buf.signature_help',
-})
+map('n', '<C-s>', vim.lsp.buf.signature_help)
 
 local lsp_renames = {
   { '<leader>rn', 'grn' },
   { '<leader>ca', 'gra' },
   { 'gd', '<C-]>' },
+  { 'gpd', '<C-M-]>' },
   { 'gr', 'grr' },
   { 'gpr', 'grR' },
   { 'gi', 'gri' },
