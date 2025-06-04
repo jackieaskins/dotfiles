@@ -44,3 +44,15 @@ for key, cmd in pairs({
     end,
   })
 end
+
+-- Toggles
+local toggles = {
+  { name = 'ToggleArrowFunctionBraces', file = 'toggles.arrow_function_braces' },
+  { name = 'ToggleStringInterpolation', file = 'toggles.string_interpolation' },
+}
+
+for _, toggle in ipairs(toggles) do
+  user_command(toggle.name, function()
+    require(toggle.file).toggle()
+  end)
+end

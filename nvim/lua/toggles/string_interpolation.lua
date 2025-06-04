@@ -23,18 +23,20 @@ local function add_string_interpolation(current_node)
   end
 end
 
-return function()
-  local current_node = vim.treesitter.get_node({ ignore_injections = false })
+return {
+  toggle = function()
+    local current_node = vim.treesitter.get_node({ ignore_injections = false })
 
-  if not current_node then
-    return
-  end
+    if not current_node then
+      return
+    end
 
-  local template_substitution_node = ts_utils.find_node_parent(current_node, 'template_substitution')
+    local template_substitution_node = ts_utils.find_node_parent(current_node, 'template_substitution')
 
-  if template_substitution_node then
-    remove_string_interpolation(template_substitution_node)
-  else
-    add_string_interpolation(current_node)
-  end
-end
+    if template_substitution_node then
+      remove_string_interpolation(template_substitution_node)
+    else
+      add_string_interpolation(current_node)
+    end
+  end,
+}
