@@ -197,6 +197,7 @@ in
       '';
     plugins = [
       pkgs.tmuxPlugins."vim-tmux-navigator"
+      # TODO: Add tmux-suspend
     ];
     tmuxinator = {
       enable = true;

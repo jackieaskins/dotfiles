@@ -90,6 +90,36 @@ function M.get_config()
   }
 end
 
+function M.get_init()
+  local lsp_keymaps = {
+    { 'grr', 'lsp_references', { include_declaration = false } },
+    { 'grR', 'lsp_references', { include_declaration = false, auto_confirm = false } },
+    { '<C-]>', 'lsp_definitions' },
+    { '<C-M-]>', 'lsp_definitions', { auto_confirm = false } },
+    { 'gri', 'lsp_implementations' },
+    { 'grI', 'lsp_implementations', { auto_confirm = false } },
+    { '<leader>sd', 'lsp_symbols' },
+    { '<leader>sw', 'lsp_workspace_symbols' },
+  }
+
+  local utils = require('utils')
+
+  utils.augroup('snacks_picker_lsp', {
+    {
+      'LspAttach',
+      callback = function(args)
+        local bsk = utils.buffer_map(args.buf)
+
+        for _, map in ipairs(lsp_keymaps) do
+          bsk('n', map[1], function()
+            Snacks.picker.pick(map[2], map[3])
+          end)
+        end
+      end,
+    },
+  })
+end
+
 function M.get_keys()
   local keys = {
     -- Buffers and Files
@@ -106,14 +136,6 @@ function M.get_keys()
     { '<leader>gs', 'git_status' },
     { '<leader>gl', 'git_log' },
     { '<leader>gL', 'git_log_file' },
-
-    -- LSP
-    { 'grr', 'lsp_references', { include_declaration = false } },
-    { 'grR', 'lsp_references', { include_declaration = false, auto_confirm = false } },
-    { 'gri', 'lsp_implementations' },
-    { 'grI', 'lsp_implementations', { auto_confirm = false } },
-    { '<leader>sd', 'lsp_symbols' },
-    { '<leader>sw', 'lsp_workspace_symbols' },
 
     -- Diagnostics
     { '<leader>wd', 'diagnostics' },

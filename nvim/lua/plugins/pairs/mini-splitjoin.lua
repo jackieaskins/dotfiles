@@ -53,11 +53,6 @@ return {
           local gen_hook = require('mini.splitjoin').gen_hook
 
           vim.b.minisplitjoin_config = {
-            split = {
-              hooks_post = {
-                gen_hook.add_trailing_separator(curly_opts),
-              },
-            },
             join = {
               hooks_post = {
                 gen_hook.del_trailing_separator(curly_opts),
@@ -72,7 +67,6 @@ return {
         pattern = 'json',
         callback = function()
           vim.b.minisplitjoin_config = {
-            split = { hooks_post = {} },
             join = {
               hooks_post = {
                 require('mini.splitjoin').gen_hook.pad_brackets(curly_opts),
@@ -91,11 +85,6 @@ return {
         brackets = { '%b()', '%b<>', '%b[]', '%b{}' },
       },
       mappings = { toggle = '', split = '', join = '' },
-      split = {
-        hooks_post = {
-          gen_hook.add_trailing_separator(),
-        },
-      },
       join = {
         hooks_post = {
           gen_hook.del_trailing_separator(),

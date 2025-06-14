@@ -42,26 +42,28 @@ local function add_braces(body_node, body_text)
   ts_utils.replace_node_text(body_node, lines)
 end
 
-return function()
-  local current_node = vim.treesitter.get_node({ ignore_injections = false })
-  local arrow_function_node = ts_utils.find_node_parent(current_node, 'arrow_function')
-  if not arrow_function_node then
-    vim.notify('Not currently on an arrow function')
-    return
-  end
+return {
+  toggle = function()
+    local current_node = vim.treesitter.get_node({ ignore_injections = false })
+    local arrow_function_node = ts_utils.find_node_parent(current_node, 'arrow_function')
+    if not arrow_function_node then
+      vim.notify('Not currently on an arrow function')
+      return
+    end
 
-  local body_nodes = arrow_function_node:field('body')
-  if arrow_function_node:has_error() or #body_nodes ~= 1 then
-    vim.notify('Invalid arrow function')
-    return
-  end
+    local body_nodes = arrow_function_node:field('body')
+    if arrow_function_node:has_error() or #body_nodes ~= 1 then
+      vim.notify('Invalid arrow function')
+      return
+    end
 
-  local body_node = body_nodes[1]
-  local body_text = vim.treesitter.get_node_text(body_node, 0)
+    local body_node = body_nodes[1]
+    local body_text = vim.treesitter.get_node_text(body_node, 0)
 
-  if body_text:match('^{.*}$') then
-    remove_braces(body_node)
-  else
-    add_braces(body_node, body_text)
-  end
-end
+    if body_text:match('^{.*}$') then
+      remove_braces(body_node)
+    else
+      add_braces(body_node, body_text)
+    end
+  end,
+}

@@ -50,6 +50,8 @@ return {
     local spinner = { '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏' }
     local progress = vim.defaulttable()
 
+    require('plugins.misc.snacks.picker').get_init()
+
     local utils = require('utils')
 
     utils.user_command('Notifications', function()
@@ -116,7 +118,7 @@ return {
       {
         ']]',
         function()
-          Snacks.words.jump(vim.v.count1)
+          Snacks.words.jump(vim.v.count1, true)
         end,
         desc = 'Next Reference',
         mode = { 'n', 't' },
@@ -124,7 +126,7 @@ return {
       {
         '[[',
         function()
-          Snacks.words.jump(-vim.v.count1)
+          Snacks.words.jump(-vim.v.count1, true)
         end,
         desc = 'Prev Reference',
         mode = { 'n', 't' },
