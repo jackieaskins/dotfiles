@@ -12,7 +12,6 @@
 
     nix-darwin = {
       url = "github:LnL7/nix-darwin";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     neovim-nightly-overlay = {
@@ -76,6 +75,7 @@
 
           home-manager.darwinModules.home-manager
           {
+            system.primaryUser = username;
             users.users.${username}.home = homeDirectory;
             home-manager = {
               useGlobalPkgs = true;
