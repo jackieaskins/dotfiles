@@ -26,7 +26,9 @@ local function get_file_statuses(items)
 
     local is_dir = file:match('.+/.*') ~= nil
 
-    if is_dir then
+    if file == './' then
+      file_statuses['..'] = statuses
+    elseif is_dir then
       local dir = vim.split(file, '/', { plain = true })[1]
       local is_git_ignored = index_status == '!' and working_tree_status == '!'
 
@@ -83,6 +85,13 @@ function M.set_signs(buf)
         priority = 2,
         sign_hl_group = hl_groups[statuses.index],
       })
+
+      -- Highlight line when file is git ignored
+      if statuses.working_tree == '!' and statuses.index == '!' then
+        vim.api.nvim_buf_set_extmark(buf, oil_gitsigns_ns, line_num - 1, 0, {
+          line_hl_group = 'OilHidden',
+        })
+      end
     end
   end
 end
