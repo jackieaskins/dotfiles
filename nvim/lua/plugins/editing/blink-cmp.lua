@@ -73,6 +73,7 @@ return {
     },
     signature = {
       enabled = true,
+      trigger = { enabled = false },
       window = { show_documentation = false },
     },
     snippets = {
