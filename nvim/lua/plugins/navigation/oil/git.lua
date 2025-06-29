@@ -13,16 +13,24 @@ local hl_groups = {
   ['?'] = 'GitSignsUntracked',
 }
 
----@alias FileStatuses table<string, { index: string, working_tree: string }>
+---@alias FileStatuses { index: string, working_tree: string, is_git_ignored: boolean }
 
 ---@param items string[]
----@return FileStatuses
+---@return table<string, FileStatuses>
 local function get_file_statuses(items)
+  ---@type table<string, FileStatuses>
   local file_statuses = {}
 
   for _, item in ipairs(items) do
     local index_status, working_tree_status, file = item:match('^(.)(.)%s(.+)$')
-    local statuses = { index = index_status, working_tree = working_tree_status }
+    local is_git_ignored = index_status == '!' and working_tree_status == '!'
+
+    ---@type FileStatuses
+    local statuses = {
+      index = index_status,
+      working_tree = working_tree_status,
+      is_git_ignored = is_git_ignored,
+    }
 
     local is_dir = file:match('.+/.*') ~= nil
 
@@ -30,7 +38,6 @@ local function get_file_statuses(items)
       file_statuses['..'] = statuses
     elseif is_dir then
       local dir = vim.split(file, '/', { plain = true })[1]
-      local is_git_ignored = index_status == '!' and working_tree_status == '!'
 
       if is_git_ignored then
         if dir .. '/' == file then
@@ -43,6 +50,7 @@ local function get_file_statuses(items)
           file_statuses[dir] = {
             index = curr_statuses.index == index_status and curr_statuses.index or 'M',
             working_tree = curr_statuses.working_tree == working_tree_status and curr_statuses.index or 'M',
+            is_git_ignored = curr_statuses.is_git_ignored,
           }
         else
           file_statuses[dir] = statuses
@@ -61,6 +69,7 @@ local M = {}
 ---Set git sign extmarks
 ---@param buf number
 function M.set_signs(buf)
+  ---@type table<string, FileStatuses>
   local file_statuses = vim.b[buf].file_statuses
 
   if not file_statuses then
@@ -86,8 +95,7 @@ function M.set_signs(buf)
         sign_hl_group = hl_groups[statuses.index],
       })
 
-      -- Highlight line when file is git ignored
-      if statuses.working_tree == '!' and statuses.index == '!' then
+      if statuses.is_git_ignored then
         vim.api.nvim_buf_set_extmark(buf, oil_gitsigns_ns, line_num - 1, 0, {
           line_hl_group = 'OilHidden',
         })
@@ -99,21 +107,22 @@ end
 ---Load git info and add git signs to oil buffer
 ---@param buf number
 function M.load_git_signs(buf)
-  vim.system({ 'git', '-c', 'status.relativePaths=true', 'status', '--short', '--ignored', '.' }, {
-    cwd = require('oil').get_current_dir(buf),
-    text = true,
-  }, function(out)
-    if out.code ~= 0 then
-      return
+  vim.system(
+    { 'git', '-c', 'status.relativePaths=true', 'status', '--short', '--ignored', '.' },
+    { cwd = require('oil').get_current_dir(buf), text = true },
+    function(out)
+      if out.code ~= 0 then
+        return
+      end
+
+      vim.schedule(function()
+        local items = vim.split(out.stdout, '\n', { trimempty = true })
+        vim.b[buf].file_statuses = get_file_statuses(items)
+
+        M.set_signs(buf)
+      end)
     end
-
-    vim.schedule(function()
-      local items = vim.split(out.stdout, '\n', { trimempty = true })
-      vim.b[buf].file_statuses = get_file_statuses(items)
-
-      M.set_signs(buf)
-    end)
-  end)
+  )
 end
 
 return M
