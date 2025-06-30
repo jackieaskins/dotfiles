@@ -5,14 +5,6 @@ local shift = '⇧'
 local meh = '􀫸' -- Hammerspoon doesn't have a symbol defined for meh
 local hyper = '✧'
 
-local modNames = {
-  cmd = cmd,
-  option = alt,
-  ctrl = ctrl,
-  shift = shift,
-  meh = meh,
-  hyper = hyper,
-}
 local modMap = {
   cmd = cmd,
   command = cmd,
@@ -173,12 +165,27 @@ function M.addMenubarItem()
   hotkeyMenubar:setMenu(function()
     local menu = {}
 
+    local maxLen = 0
+
+    for _, hotkeys in pairs(hotkeysByGroup) do
+      for _, hotkey in ipairs(hotkeys) do
+        maxLen = math.max(maxLen, #hotkey.desc)
+      end
+    end
+
     for group, hotkeys in pairs(hotkeysByGroup) do
       table.insert(menu, { title = group, disabled = true })
 
       for _, hotkey in ipairs(hotkeys) do
+        local keysStr = hotkey.keys:gsub(ctrl .. alt .. shift, meh)
+
         table.insert(menu, {
-          title = hotkey.desc .. '  |  ' .. hotkey.keys:gsub(ctrl .. alt .. shift, meh),
+          title = table.concat({
+            hotkey.desc,
+            -- Add padding based on desc and keys lengths to right-align keys
+            string.rep(' ', (maxLen - #hotkey.desc) + (7 - #keysStr)),
+            keysStr,
+          }, ' '),
           fn = function()
             hs.eventtap.keyStroke(hotkey.mods, hotkey.character)
           end,
@@ -188,8 +195,10 @@ function M.addMenubarItem()
       table.insert(menu, { title = '-' })
     end
 
-    for name, mod in pairs(modNames) do
-      table.insert(menu, { title = mod .. '  |  ' .. name, disabled = true })
+    for _, item in ipairs(menu) do
+      item.title = hs.styledtext.new(item.title, {
+        font = { name = 'Mononoki Nerd Font Mono' },
+      })
     end
 
     return menu
