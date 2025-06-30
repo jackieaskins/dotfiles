@@ -162,16 +162,17 @@ end
 
 ---Add menubar item with Hammerspoon hotkeys
 function M.addMenubarItem()
-  local menubar = hs.menubar.new(true, 'hotkeys')
+  hotkeyMenubar = hs.menubar.new(true, 'hotkeys')
 
-  if not menubar then
+  if not hotkeyMenubar then
     return
   end
 
-  menubar:setTitle('􀇳')
+  hotkeyMenubar:setTitle('􀇳')
 
-  menubar:setMenu(function()
+  hotkeyMenubar:setMenu(function()
     local menu = {}
+
     for group, hotkeys in pairs(hotkeysByGroup) do
       table.insert(menu, { title = group, disabled = true })
 
