@@ -1,4 +1,3 @@
-local fnutils = require('fnutils')
 local hotkeyStore = require('hotkeyStore')
 
 ----------------------------------------------------------------------
@@ -48,7 +47,7 @@ hs.autoLaunch(true)
 hs.automaticallyCheckForUpdates(true)
 
 ----------------------------------------------------------------------
---                             Hotkeys                              --
+--                              Reload                              --
 ----------------------------------------------------------------------
 
 reloadWatcher = hs.pathwatcher.new(hs.configdir, function(paths)
@@ -60,20 +59,7 @@ reloadWatcher = hs.pathwatcher.new(hs.configdir, function(paths)
   end
 end)
 reloadWatcher:start()
-hotkeyStore.register('Reload', 'Reload configuration', MEH, 'r', hs.reload)
-
-local appKeyMods = { 'option', 'control' }
-local appKeys = fnutils.mergeTables({
-  m = 'Music',
-  n = 'Notes',
-  t = 'WezTerm',
-}, CUSTOM.appKeys or {})
-
-for key, app in pairs(appKeys) do
-  hotkeyStore.register('Application Launchers', 'Open ' .. app, appKeyMods, key, function()
-    hs.application.launchOrFocus(app)
-  end)
-end
+hotkeyStore.register('Configuration', 'Reload Configuration', MEH, 'r', hs.reload)
 
 ----------------------------------------------------------------------
 --                        Window Management                         --
@@ -81,6 +67,8 @@ end
 
 hs.window.setShadows(false)
 hs.window.animationDuration = 0
+
+require('appLauncher')
 
 ----------------------------------------------------------------------
 --                            Dark Mode                             --
@@ -97,6 +85,7 @@ darkModeNotification:start()
 
 require('annotations')
 require('hs.ipc').cliInstall() -- Enables CLI
+
 hotkeyStore.verify()
 hotkeyStore.addMenubarItem()
 

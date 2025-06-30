@@ -80,6 +80,18 @@ local function addHotkey(groupName, desc, mods, key)
   hotkeysByGroup[groupName] = currentKeys
 end
 
+---Bind a modal hot key and add it to store for display
+---@param desc string
+---@param mods string[]
+---@param key string
+---@param message? string
+---@return hs.hotkey.modal
+function M.registerMode(desc, mods, key, message)
+  addHotkey('Modes', desc, mods, key)
+
+  return hs.hotkey.modal.new(mods, key, message)
+end
+
 ---Bind a hot key and add it to store for display
 ---@param groupName string
 ---@param desc string
