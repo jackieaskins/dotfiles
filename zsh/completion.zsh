@@ -55,5 +55,3 @@ bindkey -M viins "^ " magic-space
 
 # normal space during searches
 bindkey -M isearch " " magic-space
-
-eval "$(zoxide init zsh --cmd cd)"

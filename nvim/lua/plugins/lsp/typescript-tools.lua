@@ -1,9 +1,6 @@
-local lsp_utils = require('lsp.utils')
-
 ---@type LazySpec
 return {
   'pmizio/typescript-tools.nvim',
-  enabled = lsp_utils.is_server_supported('typescript-tools'),
   event = 'VeryLazy',
   dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
   opts = function()

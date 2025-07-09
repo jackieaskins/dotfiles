@@ -1,7 +1,7 @@
 --@type LazySpec
 return {
   'saghen/blink.pairs',
-  build = 'cargo build --release',
+  build = 'nix --accept-flake-config run .#build-plugin',
   enabled = not MY_CONFIG.use_ultimate_autopair,
   --- @module 'blink.pairs'
   --- @type blink.pairs.Config

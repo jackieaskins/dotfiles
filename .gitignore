@@ -18,5 +18,3 @@ Brewfile.lock.json
 /hammerspoon/annotations/generated/
 /hammerspoon/custom.lua
 /karabiner/automatic_backups
-
-/bat/config

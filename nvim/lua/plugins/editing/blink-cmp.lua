@@ -3,10 +3,7 @@ local snippet_engine = require('utils').get_snippet_engine()
 ---@type LazySpec
 return {
   'saghen/blink.cmp',
-  build = {
-    'rustup toolchain install nightly --force',
-    'cargo build --release',
-  },
+  build = 'nix --accept-flake-config run .#build-plugin',
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
   opts = {

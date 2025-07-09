@@ -1,4 +1,5 @@
-local curly = { brackets = { '%b{}' } }
+local curly_brackets = { '%b{}' }
+local curly_opts = { brackets = curly_brackets }
 
 ---@type LazySpec
 return {
@@ -22,6 +23,31 @@ return {
     require('utils').augroup('splitjoin_overrides', {
       {
         'FileType',
+        pattern = 'nix',
+        callback = function()
+          local gen_hook = require('mini.splitjoin').gen_hook
+
+          vim.b.minisplitjoin_config = {
+            split = {
+              hooks_post = {
+                gen_hook.add_trailing_separator({
+                  sep = ';',
+                  brackets = curly_brackets,
+                }),
+              },
+            },
+            join = {
+              hooks_post = {
+                gen_hook.pad_brackets({
+                  brackets = { '%b[]', '%b{}' },
+                }),
+              },
+            },
+          }
+        end,
+      },
+      {
+        'FileType',
         pattern = 'lua',
         callback = function()
           local gen_hook = require('mini.splitjoin').gen_hook
@@ -29,8 +55,8 @@ return {
           vim.b.minisplitjoin_config = {
             join = {
               hooks_post = {
-                gen_hook.del_trailing_separator(curly),
-                gen_hook.pad_brackets(curly),
+                gen_hook.del_trailing_separator(curly_opts),
+                gen_hook.pad_brackets(curly_opts),
               },
             },
           }
@@ -43,7 +69,7 @@ return {
           vim.b.minisplitjoin_config = {
             join = {
               hooks_post = {
-                require('mini.splitjoin').gen_hook.pad_brackets(curly),
+                require('mini.splitjoin').gen_hook.pad_brackets(curly_opts),
               },
             },
           }
@@ -62,7 +88,7 @@ return {
       join = {
         hooks_post = {
           gen_hook.del_trailing_separator(),
-          gen_hook.pad_brackets(curly),
+          gen_hook.pad_brackets(curly_opts),
         },
       },
     }

@@ -1,17 +1,28 @@
 local M = {}
 
----Return whether the provided lsp server is supported
----@param server string
----@return boolean
-function M.is_server_supported(server)
-  return not MY_CONFIG.supported_servers or vim.tbl_contains(MY_CONFIG.supported_servers, server)
+---@class LspServer
+---@field display? string
+---@field skip_lspconfig? boolean
+
+---@type table<string, LspServer>
+local supported_servers
+---Get list of supported servers
+---@return table<string, LspServer>
+function M.get_supported_servers()
+  if supported_servers then
+    return supported_servers
+  end
+
+  supported_servers = require('utils').import_json_file('~/dotfiles/nix/home/modules/neovim/lsp-servers.json')
+
+  return supported_servers
 end
 
 ---Return lsp server display name or default server name
 ---@param server_name string
 ---@return string
 function M.get_server_display_name(server_name)
-  local server = require('lsp.servers')[server_name]
+  local server = M.get_supported_servers()[server_name]
   return server and server.display or server_name
 end
 

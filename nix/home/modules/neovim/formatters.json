@@ -1,0 +1,33 @@
+{
+  "format-queries": {
+    "filetypes": ["query"]
+  },
+  "nixfmt": {
+    "pkgs": ["nixfmt-rfc-style"],
+    "filetypes": ["nix"]
+  },
+  "prettierd": {
+    "pkgs": ["prettierd"],
+    "required_file": "./node_modules/.bin/prettier",
+    "filetypes": [
+      "css",
+      "graphql",
+      "html",
+      "javascript",
+      "javascriptreact",
+      "json",
+      "jsonc",
+      "less",
+      "markdown",
+      "scss",
+      "svelte",
+      "typescript",
+      "typescriptreact"
+    ]
+  },
+  "stylua": {
+    "pkgs": ["stylua"],
+    "required_file": "./stylua.toml",
+    "filetypes": ["lua"]
+  }
+}

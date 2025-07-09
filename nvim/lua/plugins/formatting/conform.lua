@@ -1,7 +1,7 @@
 ---@type LazySpec
 return {
   'stevearc/conform.nvim',
-  event = 'BufWritePre',
+  lazy = true,
   ---@module 'conform'
   ---@type conform.setupOpts
   opts = { undojoin = true },
