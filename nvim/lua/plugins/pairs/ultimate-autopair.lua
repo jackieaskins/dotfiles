@@ -2,7 +2,6 @@
 return {
   'altermo/ultimate-autopair.nvim',
   event = 'InsertEnter',
-  enabled = MY_CONFIG.use_ultimate_autopair,
   config = function()
     local autopair = require('ultimate-autopair')
 
