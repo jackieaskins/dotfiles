@@ -1,20 +1,31 @@
 {
+  config,
   pkgs,
   inputs,
   ...
 }:
 {
-  # Used for backwards compatibility, please read the changelog before changing.
-  # darwin-rebuild changelog
-  system.stateVersion = 6;
-  system.configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;
+  system = {
+    # Used for backwards compatibility, please read the changelog before changing.
+    # darwin-rebuild changelog
+    stateVersion = 6;
+    configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;
+  };
 
-  nix.settings.experimental-features = "nix-command flakes";
-  nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
-  nix.gc.automatic = true;
+  nix = {
+    settings = {
+      experimental-features = "nix-command flakes";
+      trusted-users = [ config.system.primaryUser ];
+    };
 
-  nixpkgs.hostPlatform = "aarch64-darwin";
-  nixpkgs.config.allowUnfree = true;
+    nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+    gc.automatic = true;
+  };
+
+  nixpkgs = {
+    hostPlatform = "aarch64-darwin";
+    config.allowUnfree = true;
+  };
 
   programs.zsh.enable = true;
 

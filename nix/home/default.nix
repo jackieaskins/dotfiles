@@ -31,11 +31,9 @@
     pkgs.autossh
     pkgs.awscli2
     pkgs.devenv
-    pkgs.direnv
     pkgs.fd
     pkgs.imagemagick
     pkgs.jq
-    pkgs.pre-commit
     pkgs.ripgrep
     pkgs.sesh
     pkgs.tree

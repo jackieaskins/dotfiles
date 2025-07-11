@@ -13,6 +13,7 @@ $jobs\
 $character"""
 
 right_format = """
+$direnv\
 $bun\
 $go\
 $java\
@@ -30,6 +31,14 @@ style = 'yellow'
 style = 'bold blue'
 truncate_to_repo = false
 fish_style_pwd_dir_length = 1
+
+[direnv]
+disabled = false
+style = 'blue'
+format = '[$symbol$allowed]($style) '
+allowed_msg = '󰸞'
+not_allowed_msg = ''
+denied_msg = ' '
 
 [git_branch]
 style = 'purple'
