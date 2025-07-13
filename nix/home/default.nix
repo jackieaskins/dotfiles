@@ -21,8 +21,7 @@
 
   home.file = {
     ".hammerspoon".source = config.lib.custom.mkDotfilesSymlink "hammerspoon";
-    "dotfiles/hammerspoon/custom.lua".source =
-      config.lib.custom.mkCustomSymlink "hammerspoon-custom.lua";
+    "dotfiles/hammerspoon/custom.lua".source = config.lib.custom.mkCustomSymlink "hammerspoon.lua";
 
     "./config/karabiner".source = config.lib.custom.mkDotfilesSymlink "karabiner";
   };

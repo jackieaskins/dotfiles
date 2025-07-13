@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ln -s ~/dotfiles/nix /etc/nix-darwin
-ln -s ~/dotfiles_custom/nix /etc/nix-custom
+sudo ln -s ~/dotfiles/nix /etc/nix-darwin
+sudo ln -s ~/dotfiles_custom/nix /etc/nix-custom
 
-nix run nix-darwin -- switch --flake /etc/nix-darwin --impure
+sudo nix run nix-darwin --extra-experimental-features 'nix-command flakes' -- switch --flake /etc/nix-darwin#darwin --impure
