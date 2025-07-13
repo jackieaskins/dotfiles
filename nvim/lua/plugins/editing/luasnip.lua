@@ -5,7 +5,7 @@ return {
   build = 'make install_jsregexp',
   config = function()
     require('luasnip').config.set_config({
-      updateevents = 'TextChanged,TextChangedI',
+      update_events = 'TextChanged,TextChangedI',
     })
 
     require('luasnip.loaders.from_vscode').lazy_load({

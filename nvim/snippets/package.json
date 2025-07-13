@@ -47,12 +47,16 @@
         ]
       },
       {
-        "path": "./unity.json",
-        "language": "cs"
+        "path": "./nix.json",
+        "language": "nix"
       },
       {
         "path": "./swift.json",
         "language": "swift"
+      },
+      {
+        "path": "./unity.json",
+        "language": "cs"
       }
     ]
   }
