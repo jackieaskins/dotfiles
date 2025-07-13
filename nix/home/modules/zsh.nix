@@ -13,6 +13,8 @@
 
     shellAliases = {
       mux = "tmuxinator";
+      nix-switch = "sudo darwin-rebuild switch --flake /etc/nix-darwin#darwin --impure";
+      nix-update = "sudo nix flake update --flake /etc/nix-darwin";
     };
 
     autosuggestion.enable = true;
