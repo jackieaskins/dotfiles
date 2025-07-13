@@ -2,6 +2,7 @@
   config,
   pkgs,
   inputs,
+  lib,
   ...
 }:
 {
@@ -47,10 +48,27 @@
     reattach = true;
   };
 
+  system.activationScripts.extraActivation.text =
+    let
+      loginItems = [
+        "Alcove"
+        "DockDoor"
+        "Hammerspoon"
+        "Raycast"
+        "Rocket"
+        "SaneSideButtons"
+        "WezTerm"
+      ];
+    in
+    lib.strings.concatMapStringsSep "\n" (appName: ''
+      osascript -e '
+        tell application "System Events" to make login item at end with properties { name: "${appName}", path: "/Applications/${appName}.app", hidden: true }
+      '
+    '') loginItems;
+
   imports = [
     /etc/nix-custom/configuration.nix
     ./modules
-    ./homebrew.nix
     ./system-preferences.nix
   ];
 }

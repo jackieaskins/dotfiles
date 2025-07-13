@@ -1,0 +1,4 @@
+{ ... }:
+{
+  homebrew.casks = [ "wezterm@nightly" ];
+}
