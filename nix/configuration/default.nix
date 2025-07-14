@@ -51,18 +51,19 @@
   system.activationScripts.extraActivation.text =
     let
       loginItems = [
-        "Alcove"
-        "DockDoor"
-        "Hammerspoon"
-        "Raycast"
-        "Rocket"
-        "SaneSideButtons"
-        "WezTerm"
+        "/Applications/Alcove.app"
+        "/Applications/DockDoor.app"
+        "/Applications/Hammerspoon.app"
+        "/Applications/Nix Apps/Ice.app"
+        "/Applications/Raycast.app"
+        "/Applications/Rocket.app"
+        "/Applications/SaneSideButtons.app"
+        "/Applications/WezTerm.app"
       ];
     in
-    lib.strings.concatMapStringsSep "\n" (appName: ''
+    lib.strings.concatMapStringsSep "\n" (path: ''
       osascript -e '
-        tell application "System Events" to make login item at end with properties { name: "${appName}", path: "/Applications/${appName}.app", hidden: true }
+        tell application "System Events" to make login item at end with properties { name: "${path}", path: "${path}", hidden: true }
       '
     '') loginItems;
 
