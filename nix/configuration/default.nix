@@ -31,7 +31,6 @@
   programs.zsh.enable = true;
 
   environment.systemPackages = [
-    pkgs.ice-bar
     pkgs.iina
     pkgs.keycastr
     pkgs.vscodium

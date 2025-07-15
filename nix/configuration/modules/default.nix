@@ -7,6 +7,7 @@
     ./firefox.nix
     ./hammerspoon.nix
     ./homebrew.nix
+    ./ice.nix
     ./karabiner-elements.nix
     ./raycast.nix
     ./rocket.nix
