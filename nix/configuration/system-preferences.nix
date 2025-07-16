@@ -16,8 +16,14 @@
       "com.apple.trackpad.trackpadCornerClickBehavior" = 1;
     };
 
+    controlcenter = {
+      BatteryShowPercentage = true;
+      Bluetooth = true;
+      Sound = true;
+    };
+
     dock = {
-      appswitcher-all-displays = true;
+      appswitcher-all-displays = false;
       autohide = true;
       magnification = true;
       show-recents = false;
@@ -30,6 +36,10 @@
       FXPreferredViewStyle = "Nlsv";
       ShowPathbar = true;
       ShowStatusBar = true;
+    };
+
+    iCal = {
+      "TimeZone support enabled" = true;
     };
 
     loginwindow.GuestEnabled = false;
