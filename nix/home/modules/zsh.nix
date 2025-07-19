@@ -11,11 +11,24 @@
 
     enableCompletion = false;
 
-    shellAliases = {
-      mux = "tmuxinator";
-      nix-switch = "sudo darwin-rebuild switch --flake /etc/nix-darwin#darwin --impure";
-      nix-update = "sudo nix flake update --flake /etc/nix-darwin";
-    };
+    shellAliases =
+      let
+        darwinFlake = "/etc/nix-darwin#darwin";
+        linuxFlake = "${config.home.homeDirectory}/dotfiles/nix#linux";
+      in
+      {
+        mux = "tmuxinator";
+        nix-switch =
+          if config.lib.custom.isDarwin then
+            "sudo darwin-rebuild switch --flake ${darwinFlake} --impure"
+          else
+            "home-manager switch --flake ${linuxFlake} --impure";
+        nix-update =
+          if config.lib.custom.isDarwin then
+            "sudo nix flake update --flake ${darwinFlake}"
+          else
+            "nix flake update --flake ${linuxFlake}";
+      };
 
     autosuggestion.enable = true;
     historySubstringSearch.enable = true;

@@ -1,9 +1,16 @@
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   homeDirectory = config.home.homeDirectory;
 in
 {
   lib.custom = {
+    isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
+
     mkDotfilesSymlink =
       symlink: config.lib.file.mkOutOfStoreSymlink "${homeDirectory}/dotfiles/${symlink}";
     mkCustomSymlink =

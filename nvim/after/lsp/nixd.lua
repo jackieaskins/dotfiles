@@ -1,4 +1,4 @@
-local flake_path = vim.uv.fs_readlink('/etc/nix-darwin')
+local flake_path = vim.fn.expand('~/dotfiles/nix')
 local flake = '(builtins.getFlake "' .. flake_path .. '")'
 local flake_base = flake .. '.darwinConfigurations.darwin.options'
 

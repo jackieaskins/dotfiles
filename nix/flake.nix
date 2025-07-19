@@ -32,6 +32,13 @@
       nix-homebrew,
       ...
     }:
+    let
+      homeManagerArgs = { inherit inputs; };
+      homeManagerModules = [
+        ./home
+        catppuccin.homeModules.catppuccin
+      ];
+    in
     {
       # sudo darwin-rebuild switch --flake .#darwin --impure
       darwinConfigurations.darwin = nix-darwin.lib.darwinSystem {
@@ -58,17 +65,19 @@
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
-                extraSpecialArgs = { inherit inputs; };
+                extraSpecialArgs = homeManagerArgs;
                 users.${config.system.primaryUser} = {
-                  imports = [
-                    ./home
-                    catppuccin.homeModules.catppuccin
-                  ];
+                  imports = homeManagerModules;
                 };
               };
             }
           )
         ];
+      };
+
+      homeConfigurations.linux = home-manager.lib.homeManagerConfiguration {
+        extraSpecialArgs = homeManagerArgs;
+        modules = homeManagerModules;
       };
     };
 }

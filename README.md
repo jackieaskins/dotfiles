@@ -19,9 +19,10 @@ My dotfiles for Hammerspoon, Karabiner, Neovim, Nix, QMK, Tmux, WezTerm, and Zsh
    - `nvim.lua`
    - `hammerspoon.lua`
    - `nix/configuration.nix`
-     - At a minimum: `system.primaryUser` & `users.user.${primaryUser}.home`
+     - On MacOS: `system.primaryUser` & `users.user.${primaryUser}.home`
    - `nix/home.nix`
      - At a minimum: `programs.git.userEmail` & `programs.git.userName`
+     - On Linux: `home.username` & `home.homeDirectory`
 
 1. Clone this repo:
 
