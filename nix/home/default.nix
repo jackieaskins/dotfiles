@@ -2,15 +2,19 @@
   config,
   inputs,
   pkgs,
+  lib,
   ...
 }:
 {
-  nix = {
-    gc.automatic = true;
-    nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
-    package = pkgs.nix;
-    settings.experimental-features = "nix-command flakes";
-  };
+  nix =
+    {
+      gc.automatic = true;
+      nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+    }
+    // lib.optionalAttrs (!config.lib.custom.isDarwin) {
+      package = pkgs.nix;
+      settings.experimental-features = "nix-command flakes";
+    };
 
   home.stateVersion = "25.05";
 
@@ -47,6 +51,7 @@
   ];
 
   imports = [
+    inputs.catppuccin.homeModules.catppuccin
     /etc/nix-custom/home.nix
     ./utils.nix
     ./modules

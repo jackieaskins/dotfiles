@@ -26,7 +26,6 @@
 
   outputs =
     inputs@{
-      catppuccin,
       home-manager,
       nix-darwin,
       nix-homebrew,
@@ -35,10 +34,6 @@
     }:
     let
       homeManagerArgs = { inherit inputs; };
-      homeManagerModules = [
-        ./home
-        catppuccin.homeModules.catppuccin
-      ];
     in
     {
       # sudo darwin-rebuild switch --flake .#darwin --impure
@@ -67,9 +62,7 @@
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 extraSpecialArgs = homeManagerArgs;
-                users.${config.system.primaryUser} = {
-                  imports = homeManagerModules;
-                };
+                users.${config.system.primaryUser} = ./home;
               };
             }
           )
@@ -79,7 +72,7 @@
       homeConfigurations.linux = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = homeManagerArgs;
-        modules = homeManagerModules;
+        modules = [ ./home ];
       };
     };
 }
