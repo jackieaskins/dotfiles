@@ -30,6 +30,7 @@
       home-manager,
       nix-darwin,
       nix-homebrew,
+      nixpkgs,
       ...
     }:
     let
@@ -76,6 +77,7 @@
       };
 
       homeConfigurations.linux = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = homeManagerArgs;
         modules = homeManagerModules;
       };

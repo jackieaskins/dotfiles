@@ -5,8 +5,12 @@
   ...
 }:
 {
-  nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
-  nix.gc.automatic = true;
+  nix = {
+    gc.automatic = true;
+    nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+    package = pkgs.nix;
+    settings.experimental-features = "nix-command flakes";
+  };
 
   home.stateVersion = "25.05";
 
@@ -29,9 +33,11 @@
   home.packages = [
     pkgs.autossh
     pkgs.awscli2
+    pkgs.clang
     pkgs.devenv
     pkgs.fd
     pkgs.imagemagick
+    pkgs.gnumake
     pkgs.jq
     pkgs.ripgrep
     pkgs.sesh

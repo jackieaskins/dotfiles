@@ -10,6 +10,14 @@ My dotfiles for Hammerspoon, Karabiner, Neovim, Nix, QMK, Tmux, WezTerm, and Zsh
    xcode-select --install 2> /dev/null
    ```
 
+1. On Linux, set ZSH as the default shell:
+
+   ```bash
+   chsh -s /bin/zsh
+   ```
+
+1. Ensure `git` and `curl` are installed.
+
 1. Install [Nix](https://nixos.org/download)
 
 1. Close the shell and open a new one
