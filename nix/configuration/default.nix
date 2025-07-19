@@ -47,7 +47,7 @@
     reattach = true;
   };
 
-  system.activationScripts.extraActivation.text =
+  system.activationScripts.postActivation.text =
     let
       loginItems = [
         "/Applications/Alcove.app"
