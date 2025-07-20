@@ -4,11 +4,14 @@
 
   imports = [
     ./bat.nix
+    ./catppuccin.nix
     ./direnv.nix
     ./eza.nix
     ./fzf.nix
     ./git.nix
+    ./hammerspoon.nix
     ./jankyborders.nix
+    ./karabiner.nix
     ./neovim
     ./starship.nix
     ./tmux.nix

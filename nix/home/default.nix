@@ -5,61 +5,60 @@
   lib,
   ...
 }:
+let
+  homeDirectory = config.home.homeDirectory;
+  isNotDarwin = !config.lib.custom.isDarwin;
+in
 {
-  nix =
-    {
-      gc.automatic = true;
-      nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
-    }
-    // lib.optionalAttrs (!config.lib.custom.isDarwin) {
-      package = pkgs.nix;
-      settings.experimental-features = "nix-command flakes";
-    };
-
-  home.stateVersion = "25.05";
-
-  home.sessionPath = [
-    "${config.home.homeDirectory}/dotfiles/bin"
-  ];
-
-  catppuccin = {
-    enable = true;
-    flavor = "mocha";
+  nix = {
+    gc.automatic = true;
+    nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+    package = lib.mkIf isNotDarwin pkgs.nix;
+    settings.experimental-features = lib.mkIf isNotDarwin "nix-command flakes";
   };
 
-  home.file = {
-    ".hammerspoon".source = config.lib.custom.mkDotfilesSymlink "hammerspoon";
-    "dotfiles/hammerspoon/custom.lua".source = config.lib.custom.mkCustomSymlink "hammerspoon.lua";
+  lib.custom = {
+    isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
 
-    "./config/karabiner".source = config.lib.custom.mkDotfilesSymlink "karabiner";
+    mkDotfilesSymlink =
+      symlink: config.lib.file.mkOutOfStoreSymlink "${homeDirectory}/dotfiles/${symlink}";
+    mkCustomSymlink =
+      symlink: config.lib.file.mkOutOfStoreSymlink "${homeDirectory}/dotfiles_custom/${symlink}";
+
+    palette =
+      (lib.importJSON "${config.catppuccin.sources.palette}/palette.json")
+      .${config.catppuccin.flavor}.colors;
   };
-
-  fonts.fontconfig.enable = true;
-
-  home.packages = [
-    pkgs.autossh
-    pkgs.awscli2
-    pkgs.clang
-    pkgs.devenv
-    pkgs.fd
-    pkgs.imagemagick
-    pkgs.gnumake
-    pkgs.jq
-    pkgs.ripgrep
-    pkgs.sesh
-    pkgs.tree
-    pkgs.vim
-    pkgs.wget
-
-    pkgs.nerd-fonts.hack
-    pkgs.nerd-fonts.jetbrains-mono
-    pkgs.nerd-fonts.mononoki
-  ];
 
   imports = [
     inputs.catppuccin.homeModules.catppuccin
     /etc/nix-custom/home.nix
-    ./utils.nix
     ./modules
   ];
+
+  home = {
+    stateVersion = "25.05";
+    sessionPath = [ "${homeDirectory}/dotfiles/bin" ];
+    packages = [
+      pkgs.autossh
+      pkgs.awscli2
+      pkgs.clang
+      pkgs.devenv
+      pkgs.fd
+      pkgs.imagemagick
+      pkgs.gnumake
+      pkgs.jq
+      pkgs.ripgrep
+      pkgs.sesh
+      pkgs.tree
+      pkgs.vim
+      pkgs.wget
+
+      pkgs.nerd-fonts.hack
+      pkgs.nerd-fonts.jetbrains-mono
+      pkgs.nerd-fonts.mononoki
+    ];
+  };
+
+  fonts.fontconfig.enable = true;
 }
