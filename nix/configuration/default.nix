@@ -36,12 +36,6 @@
     pkgs.vscodium
   ];
 
-  fonts.packages = [
-    pkgs.nerd-fonts.hack
-    pkgs.nerd-fonts.jetbrains-mono
-    pkgs.nerd-fonts.mononoki
-  ];
-
   security.pam.services.sudo_local = {
     touchIdAuth = true;
     reattach = true;

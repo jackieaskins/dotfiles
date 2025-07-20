@@ -34,6 +34,8 @@
     "./config/karabiner".source = config.lib.custom.mkDotfilesSymlink "karabiner";
   };
 
+  fonts.fontconfig.enable = true;
+
   home.packages = [
     pkgs.autossh
     pkgs.awscli2
@@ -48,6 +50,10 @@
     pkgs.tree
     pkgs.vim
     pkgs.wget
+
+    pkgs.nerd-fonts.hack
+    pkgs.nerd-fonts.jetbrains-mono
+    pkgs.nerd-fonts.mononoki
   ];
 
   imports = [
