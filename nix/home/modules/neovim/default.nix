@@ -29,7 +29,6 @@ in
 
   home.file = {
     ".config/nvim".source = config.lib.custom.mkDotfilesSymlink "nvim";
-    ".config/wezterm".source = config.lib.custom.mkDotfilesSymlink "wezterm";
     "dotfiles/nvim/lua/custom.lua".source = config.lib.custom.mkCustomSymlink "nvim.lua";
   };
 }
