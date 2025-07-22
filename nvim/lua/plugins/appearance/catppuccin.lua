@@ -101,15 +101,9 @@ return {
           require('modes').get_and_link_mode_highlights(colors, cursor_line_hl)
         )
       end,
+      auto_integrations = true,
+      default_integrations = true,
       integrations = {
-        blink_cmp = true,
-        cmp = false,
-        colorful_winsep = { enabled = true, color = 'blue' },
-        fidget = true,
-        fzf = true,
-        gitsigns = true,
-        indent_blankline = { enabled = false },
-        markdown = true,
         native_lsp = {
           enabled = true,
           underlines = {
@@ -119,10 +113,6 @@ return {
             information = { 'undercurl' },
           },
         },
-        notify = true,
-        semantic_tokens = true,
-        snacks = true,
-        treesitter = true,
         treesitter_context = false,
       },
     })
