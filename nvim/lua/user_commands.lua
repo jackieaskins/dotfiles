@@ -56,3 +56,11 @@ for _, toggle in ipairs(toggles) do
     require(toggle.file).toggle()
   end)
 end
+
+-- Nix
+user_command('NixSwitch', function()
+  require('runner').run_command('nix-switch')
+end)
+user_command('NixUpdate', function()
+  require('runner').run_command('nix-update')
+end)
