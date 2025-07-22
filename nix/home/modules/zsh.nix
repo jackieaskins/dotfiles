@@ -13,16 +13,16 @@
 
     shellAliases =
       let
-        darwinFlake = "/etc/nix-darwin#darwin";
-        linuxFlake = "${config.home.homeDirectory}/dotfiles/nix#linux";
+        darwinFlake = "/etc/nix-darwin";
+        linuxFlake = "${config.home.homeDirectory}/dotfiles/nix";
       in
       {
         mux = "tmuxinator";
         nix-switch =
           if config.lib.custom.isDarwin then
-            "sudo darwin-rebuild switch --flake ${darwinFlake} --impure"
+            "sudo darwin-rebuild switch --flake ${darwinFlake}#darwin --impure"
           else
-            "home-manager switch --flake ${linuxFlake} --impure";
+            "home-manager switch --flake ${linuxFlake}#linux --impure";
         nix-update =
           if config.lib.custom.isDarwin then
             "sudo nix flake update --flake ${darwinFlake}"
