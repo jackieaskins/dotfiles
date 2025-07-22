@@ -57,6 +57,7 @@ return {
           -- Semantic Highlights
           -- Removing because it overwrites custom comment colors, like links
           ['@lsp.type.comment.lua'] = { fg = colors.none },
+          ['@lsp.type.comment.nix'] = { fg = colors.none },
 
           -- Treesitter Highlights
           ['@label.vimdoc'] = { fg = colors.mauve, style = { 'bold' } },
