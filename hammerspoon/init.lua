@@ -50,15 +50,6 @@ hs.automaticallyCheckForUpdates(true)
 --                              Reload                              --
 ----------------------------------------------------------------------
 
-reloadWatcher = hs.pathwatcher.new(hs.configdir, function(paths)
-  for _, path in ipairs(paths) do
-    if not path:match(hs.configdir .. '/annotations/generated') then
-      hs.reload()
-      break
-    end
-  end
-end)
-reloadWatcher:start()
 hotkeyStore.register('Configuration', 'Reload Configuration', MEH, 'r', hs.reload)
 
 ----------------------------------------------------------------------
