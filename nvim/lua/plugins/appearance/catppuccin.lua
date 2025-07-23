@@ -7,7 +7,7 @@ return {
   config = function()
     require('catppuccin').setup({
       term_colors = true, -- Setting for baleia.nvim
-      background = { light = 'latte', dark = 'macchiato' },
+      background = { light = 'latte', dark = 'mocha' },
       custom_highlights = function(colors)
         local utils = require('catppuccin.utils.colors')
 
@@ -16,9 +16,15 @@ return {
         -- For details and workaround: https://github.com/catppuccin/nvim/issues/667
         -- Unfortunately the workaround can't be used here
         -- This hard-codes the highlights I was referencing until there's a better solution
-        local inc_search = {
+        local inc_search_hl = {
           bg = utils.darken(colors.sky, 0.90, colors.base),
           fg = colors.mantle,
+        }
+        local cursor_line_hl = {
+          bg = utils.vary_color(
+            { latte = utils.lighten(colors.mantle, 0.70, colors.base) },
+            utils.darken(colors.surface0, 0.64, colors.base)
+          ),
         }
 
         local anchor_link = { fg = colors.blue, style = { 'underline' } }
@@ -26,9 +32,10 @@ return {
 
         local custom_highlights = {
           -- Default Highlights
-          CurSearch = vim.tbl_extend('force', inc_search, { style = { 'bold' } }),
+          CurSearch = vim.tbl_extend('force', inc_search_hl, { style = { 'bold' } }),
           FoldColumn = { fg = colors.surface1 },
           Folded = { bg = colors.mantle },
+          CursorLineFold = { fg = colors.surface1, bg = cursor_line_hl.bg },
           MatchParen = { bg = colors.none, style = { 'bold' } },
           NormalFloat = { bg = colors.base },
           FloatBorder = { fg = colors.blue, bg = colors.base },
@@ -50,6 +57,7 @@ return {
           -- Semantic Highlights
           -- Removing because it overwrites custom comment colors, like links
           ['@lsp.type.comment.lua'] = { fg = colors.none },
+          ['@lsp.type.comment.nix'] = { fg = colors.none },
 
           -- Treesitter Highlights
           ['@label.vimdoc'] = { fg = colors.mauve, style = { 'bold' } },
@@ -62,37 +70,23 @@ return {
 
           -- Plugin Highlights
           -- blink.cmp
-          BlinkCmpMenuBorder = { link = 'FloatBorder' },
           BlinkCmpDocBorder = { link = 'FloatBorder' },
+          BlinkCmpLabel = { fg = colors.text },
+          BlinkCmpLabelMatch = { fg = colors.blue },
+          BlinkCmpMenuBorder = { link = 'FloatBorder' },
           BlinkCmpSignatureHelpBorder = { link = 'FloatBorder' },
+          BlinkCmpSource = { fg = colors.surface2 },
 
           -- eyeliner.nvim
-          EyelinerPrimary = {
-            fg = colors.sapphire,
-            style = { 'bold', 'underline' },
-          },
+          EyelinerPrimary = { fg = colors.sapphire, style = { 'bold', 'underline' } },
           EyelinerSecondary = { fg = colors.pink, style = { 'underline' } },
 
-          -- fzf-lua
-          FzfLuaHeaderBind = { fg = colors.blue },
-          FzfLuaHeaderText = { fg = colors.mauve },
-          FzfLuaFzfInfo = { fg = colors.mauve },
-          FzfLuaFzfPointer = { fg = colors.blue },
-
-          -- highlight-undo.nvim
-          HighlightUndo = { link = 'IncSearch' },
-          HighlightRedo = { link = 'IncSearch' },
-
-          -- markdown.nvim
-          RenderMarkdownCodeInline = inline_code,
+          -- LuaSnip
+          LuasnipInsertNodeActive = { bg = colors.surface2 },
+          LuasnipInsertNodePassive = { bg = colors.surface0 },
 
           -- mini.icons
           MiniIconsGrey = { fg = colors.overlay0 },
-
-          -- nvim-cmp
-          CmpItemAbbr = { fg = colors.text },
-          CmpItemAbbrMatch = { fg = colors.blue },
-          CmpItemMenu = { fg = colors.surface2 },
 
           -- nvim-lightbulb
           LightBulbVirtText = { bg = colors.none },
@@ -100,26 +94,16 @@ return {
           -- nvim-treesitter-context
           TreesitterContext = { fg = colors.text, bg = colors.mantle },
           TreesitterContextLineNumber = { fg = colors.surface1, bg = colors.mantle },
-
-          -- oil.nvim
-          -- OilDirHidden = { link = 'OilDir' },
-          -- OilFileHidden = { link = 'OilFile' },
-
-          -- snacks.nvim
-          SnacksIndent = { fg = colors.surface0 },
         }
-
-        return vim.tbl_extend('force', custom_highlights, require('modes').get_initial_highlights(colors))
+        return vim.tbl_extend(
+          'force',
+          custom_highlights,
+          require('modes').get_and_link_mode_highlights(colors, cursor_line_hl)
+        )
       end,
+      auto_integrations = true,
+      default_integrations = true,
       integrations = {
-        blink_cmp = false,
-        cmp = true,
-        colorful_winsep = { enabled = true, color = 'blue' },
-        fidget = true,
-        fzf = true,
-        gitsigns = true,
-        indent_blankline = { enabled = false },
-        markdown = true,
         native_lsp = {
           enabled = true,
           underlines = {
@@ -129,10 +113,6 @@ return {
             information = { 'undercurl' },
           },
         },
-        notify = true,
-        semantic_tokens = true,
-        snacks = true,
-        treesitter = true,
         treesitter_context = false,
       },
     })

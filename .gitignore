@@ -19,4 +19,12 @@ Brewfile.lock.json
 /hammerspoon/custom.lua
 /karabiner/automatic_backups
 
-/bat/config
+# Devenv
+.devenv*
+devenv.local.nix
+
+# direnv
+.direnv
+
+# pre-commit
+.pre-commit-config.yaml

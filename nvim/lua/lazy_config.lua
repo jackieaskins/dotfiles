@@ -33,14 +33,20 @@ require('lazy').setup({
   change_detection = { notify = false },
   checker = { enabled = true, notify = false },
   dev = {
+    fallback = true,
     path = '~/vim-plugins',
     patterns = MY_CONFIG.is_personal_machine and { 'jackieaskins' } or {},
   },
   git = { timeout = 300 },
-  ui = { backdrop = 100, border = MY_CONFIG.border_style },
+  ui = {
+    backdrop = 100,
+    border = MY_CONFIG.border_style,
+    browser = 'local-open',
+  },
 })
 
 vim.diagnostic.config({
+  signs = false,
   jump = { float = false },
   underline = false,
   virtual_lines = false,

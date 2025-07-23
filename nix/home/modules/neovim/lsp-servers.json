@@ -1,0 +1,29 @@
+{
+  "clangd": { "pkgs": ["libclang"] },
+  "cssls": { "pkgs": ["vscode-langservers-extracted"] },
+  "emmet_language_server": {
+    "display": "emmet-ls",
+    "pkgs": ["emmet-language-server"]
+  },
+  "eslint": { "pkgs": ["vscode-langservers-extracted"] },
+  "gopls": { "pkgs": ["gopls"] },
+  "html": { "pkgs": ["vscode-langservers-extracted"] },
+  "jdtls": {
+    "pkgs": ["jdt-language-server"],
+    "skip_lspconfig": true
+  },
+  "jsonls": { "pkgs": ["vscode-langservers-extracted"] },
+  "lua_ls": { "pkgs": ["lua-language-server"] },
+  "nil_ls": { "pkgs": ["nil"] },
+  "nixd": { "pkgs": ["nixd"] },
+  "ruby_lsp": { "pkgs": ["ruby-lsp"] },
+  "svelte": { "pkgs": ["svelte-language-server"] },
+  "taplo": { "pkgs": ["taplo-lsp"] },
+  "ts_query_ls": { "pkgs": ["ts_query_ls"] },
+  "typescript-tools": {
+    "display": "ts-tools",
+    "skip_lspconfig": true
+  },
+  "vimls": { "pkgs": ["vim-language-server"] },
+  "yamlls": { "pkgs": ["yaml-language-server"] }
+}

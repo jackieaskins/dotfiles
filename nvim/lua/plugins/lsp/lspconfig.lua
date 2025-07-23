@@ -3,34 +3,9 @@ return {
   'neovim/nvim-lspconfig',
   event = 'VeryLazy',
   config = function()
-    local servers = require('lsp.servers')
-    local lspconfig = require('lspconfig')
-    local configs = require('lspconfig.configs')
-
-    if not configs['ghostty-ls'] then
-      configs['ghostty-ls'] = {
-        default_config = {
-          cmd = { vim.fn.stdpath('data') .. '/lsp-servers/ghostty/bin/ghostty-ls' },
-          filetypes = { 'ghostty' },
-          root_dir = lspconfig.util.root_pattern('.git'),
-          settings = {},
-        },
-      }
-    end
-
-    for server_name, config in pairs(MY_CONFIG.additional_servers) do
-      if not configs[server_name] then
-        configs[server_name] = config.lspconfig
-      end
-    end
-
-    require('lspconfig.ui.windows').default_options.border = MY_CONFIG.border_style
-
-    for server_name, server in pairs(servers) do
+    for server_name, server in pairs(require('lsp.utils').get_supported_servers()) do
       if not server.skip_lspconfig then
-        local base_config = { capabilities = require('lsp.capabilities')() }
-        local config = server.config and server.config(base_config) or base_config
-        lspconfig[server_name].setup(config)
+        vim.lsp.enable(server_name)
       end
     end
   end,

@@ -24,6 +24,7 @@ vim.o.undofile = true
 vim.o.viewoptions = gen_list_option('cursor', 'folds')
 vim.o.completeopt = 'menu,menuone,noselect'
 vim.o.ruler = false
+vim.o.winborder = MY_CONFIG.border_style
 
 -- Statusline, Tabline, Winbar
 vim.o.laststatus = 3
@@ -38,7 +39,7 @@ vim.o.foldlevelstart = 99
 vim.o.foldmethod = 'expr'
 vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 vim.o.foldtext = ''
-vim.o.fillchars = gen_list_option('eob: ', 'fold: ', 'foldopen:', 'foldsep: ', 'foldclose:')
+vim.o.fillchars = gen_list_option('eob: ', 'foldopen:', 'foldsep: ', 'foldclose:')
 
 -- Spaces & Tabs
 vim.o.shiftwidth = 2

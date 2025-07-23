@@ -1,13 +1,10 @@
 local utils = require('utils')
-local augroup, map = utils.augroup, utils.map
+local map = utils.map
 
 ----------------------------------------------------------------------
 --                             General                              --
 ----------------------------------------------------------------------
 map('n', '<leader>so', '<cmd>source %<CR>')
-map('n', '<leader>co', function()
-  require('convert').show_convert_select()
-end)
 
 ----------------------------------------------------------------------
 --                   Clipboard and Visual Select                    --
@@ -39,7 +36,7 @@ map('n', 'x', '"_x')
 
 -- https://github.com/neovim/neovim/issues/26449
 map({ 'i', 's' }, '<C-e>', function()
-  vim.snippet.stop()
+  utils.snippet_stop()
 end)
 
 ----------------------------------------------------------------------
@@ -66,41 +63,26 @@ map('n', ']e', '<cmd>lua vim.diagnostic.jump({ count = 1, severity = vim.diagnos
 --                               LSP                                --
 ----------------------------------------------------------------------
 
--- Unmap some of the default LSP mappings
-vim.keymap.del('n', 'grn')
-vim.keymap.del('n', 'grr')
-vim.keymap.del({ 'n', 'x' }, 'gra')
+map('n', '<C-s>', vim.lsp.buf.signature_help)
 
-augroup('lsp_keymaps', {
-  {
-    'LspAttach',
-    callback = function(args)
-      local bsk = utils.buffer_map(args.buf)
-      bsk('n', 'K', function()
-        vim.lsp.buf.hover({ silent = true, border = MY_CONFIG.border_style })
-      end)
-      bsk({ 'i', 'n' }, '<C-S>', function()
-        vim.lsp.buf.signature_help({ border = MY_CONFIG.border_style })
-      end, { desc = 'vim.lsp.buf.signature_help' })
+local lsp_renames = {
+  { '<leader>rn', 'grn' },
+  { '<leader>ca', 'gra' },
+  { 'gd', '<C-]>' },
+  { 'gpd', '<C-M-]>' },
+  { 'gr', 'grr' },
+  { 'gpr', 'grR' },
+  { 'gi', 'gri' },
+  { 'gpi', 'grI' },
+}
 
-      bsk('n', '<leader>rn', vim.lsp.buf.rename, { desc = 'vim.lsp.buf.rename' })
-      bsk('n', '<leader>bf', function()
-        vim.lsp.buf.format({ async = true })
-      end, { desc = 'vim.lsp.buf.format' })
-
-      bsk('n', '<leader>ca', vim.lsp.buf.code_action, { desc = 'vim.lsp.buf.code_action' })
-      bsk('x', '<leader>ca', vim.lsp.buf.code_action, { desc = 'vim.lsp.buf.range_code_action' })
-
-      bsk('n', '<leader>ih', function()
-        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({}))
-      end, { desc = 'vim.lsp.inlay_hint toggle' })
-
-      bsk('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, { desc = 'vim.lsp.buf.add_workspace_folder' })
-      bsk('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, { desc = 'vim.lsp.buf.remove_workspace_folder' })
-      bsk('n', '<leader>wl', '<cmd>lua =vim.lsp.buf.list_workspace_folders()<CR>')
-    end,
-  },
-})
+for _, maps in ipairs(lsp_renames) do
+  map('n', maps[1], function()
+    Snacks.notify.error('Use ' .. maps[2] .. ' instead of ' .. maps[1], {
+      title = 'Awkward! Try this...',
+    })
+  end)
+end
 
 ----------------------------------------------------------------------
 --                             Jumplist                             --

@@ -5,6 +5,7 @@ return {
     local builtin = require('statuscol.builtin')
 
     return {
+      bt_ignore = { 'prompt' },
       ft_ignore = { 'dbui', 'oil', 'snacks_picker_preview' },
       segments = {
         { -- Gitsigns

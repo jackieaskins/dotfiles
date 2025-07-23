@@ -1,4 +1,4 @@
-local inline_sep = '〡'
+local inline_sep = ' | '
 
 require('utils').augroup('statusline_redraw', {
   { 'User', pattern = 'LazyCheck', command = 'redrawstatus' },
@@ -37,32 +37,16 @@ local function statusline_component(hl, component, seps)
   return table.concat(parts)
 end
 
-local function get_active_lsp_linters_formatters()
-  local function get_lsp_clients()
-    return vim.tbl_map(function(client)
-      return require('lsp.utils').get_server_display_name(client.name)
-    end, vim.lsp.get_clients({ bufnr = 0 }))
-  end
+local function get_active_lsps_and_formatters()
+  local lsp_clients = vim.tbl_map(function(client)
+    return require('lsp.utils').get_server_display_name(client.name)
+  end, vim.lsp.get_clients({ bufnr = 0 }))
 
-  local function get_linters()
-    return require('lint').linters_by_ft[vim.bo.filetype] or {}
-  end
-
-  local function get_formatters()
-    local formatters, use_lsp = require('conform').list_formatters_to_run()
-    local formatter_names = vim.tbl_map(function(formatter)
-      return formatter.name
-    end, formatters)
-    if use_lsp then
-      table.insert(formatter_names, 'lsp_format')
-    end
-    return formatter_names
-  end
+  local formatters = require('formatting').get_active_formatters(vim.bo.filetype)
 
   local all_client_names = {}
-  for _, fn in ipairs({ get_lsp_clients, get_linters, get_formatters }) do
-    local ok, clients = pcall(fn)
-    if ok and #clients > 0 then
+  for _, clients in ipairs({ lsp_clients, formatters }) do
+    if #clients > 0 then
       table.insert(all_client_names, table.concat(clients, ' '))
     end
   end
@@ -106,7 +90,7 @@ return {
           filetype,
         }, ' ')
       ),
-      statusline_component('StatusLineSection', get_active_lsp_linters_formatters()),
+      statusline_component('StatusLineSection', get_active_lsps_and_formatters()),
       statusline_component('StatusLineMode', '%l:%c' .. inline_sep .. '%p%%'),
     })
   end,

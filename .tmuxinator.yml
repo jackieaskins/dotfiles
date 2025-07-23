@@ -5,5 +5,7 @@ root: ~/dotfiles
 
 windows:
   - editor:
+  - custom:
+      root: ~/dotfiles_custom
   - plugins:
-      root: ~/.local/share/nvim/lazy/
+      root: ~/.local/share/nvim/lazy

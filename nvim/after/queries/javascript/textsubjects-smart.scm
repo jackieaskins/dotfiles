@@ -13,5 +13,6 @@
   (import_statement)
   (import_clause)
   (object_pattern)
+  body: (_)
 ] @_start @_end
   (#make-range! "range" @_start @_end))

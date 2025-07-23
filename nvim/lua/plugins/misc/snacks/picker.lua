@@ -36,7 +36,7 @@ function M.get_config()
   ---@type snacks.picker.Config
   return {
     enabled = true,
-    matcher = { frecency = true },
+    matcher = { frecency = true, history_bonus = true },
     sources = {
       directories = {
         finder = function(opts, ctx)
@@ -67,8 +67,14 @@ function M.get_config()
     },
     previewers = {
       git = { native = true },
+      diff = {
+        native = true,
+        cmd = { 'delta' },
+      },
     },
     ui_select = true,
+    ---@diagnostic disable-next-line: missing-fields
+    icons = { diagnostics = require('diagnostic.icons') },
     win = {
       input = {
         keys = {
@@ -84,10 +90,39 @@ function M.get_config()
   }
 end
 
+function M.get_init()
+  local lsp_keymaps = {
+    { 'grr', 'lsp_references', { include_declaration = false } },
+    { 'grR', 'lsp_references', { include_declaration = false, auto_confirm = false } },
+    { '<C-]>', 'lsp_definitions' },
+    { '<C-M-]>', 'lsp_definitions', { auto_confirm = false } },
+    { 'gri', 'lsp_implementations' },
+    { 'grI', 'lsp_implementations', { auto_confirm = false } },
+    { '<leader>sd', 'lsp_symbols' },
+    { '<leader>sw', 'lsp_workspace_symbols' },
+  }
+
+  local utils = require('utils')
+
+  utils.augroup('snacks_picker_lsp', {
+    {
+      'LspAttach',
+      callback = function(args)
+        local bsk = utils.buffer_map(args.buf)
+
+        for _, map in ipairs(lsp_keymaps) do
+          bsk('n', map[1], function()
+            Snacks.picker.pick(map[2], map[3])
+          end)
+        end
+      end,
+    },
+  })
+end
+
 function M.get_keys()
   local keys = {
     -- Buffers and Files
-    { '<leader><leader>', 'smart' },
     { '<leader>bu', 'buffers' },
     { '<C-p>', 'files', { follow = true, hidden = true } },
     { '<leader>of', 'recent', { filter = { cwd = true } } },
@@ -102,18 +137,6 @@ function M.get_keys()
     { '<leader>gl', 'git_log' },
     { '<leader>gL', 'git_log_file' },
 
-    -- LSP
-    { 'gr', 'lsp_references', { include_declaration = false } },
-    { 'gpr', 'lsp_references', { include_declaration = false, auto_confirm = false } },
-    { 'gd', 'lsp_definitions' },
-    { 'gpd', 'lsp_definitions', { auto_confirm = false } },
-    { 'gD', 'lsp_declarations' },
-    { 'gpD', 'lsp_declarations', { auto_confirm = false } },
-    { 'gi', 'lsp_implementations' },
-    { 'gpi', 'lsp_implementations', { auto_confirm = false } },
-    { '<leader>sd', 'lsp_symbols' },
-    { '<leader>sw', 'lsp_workspace_symbols' },
-
     -- Diagnostics
     { '<leader>wd', 'diagnostics' },
 
@@ -121,7 +144,7 @@ function M.get_keys()
     { '<leader>.', 'resume' },
     { '<leader>:', 'commands' },
     { '<leader>ht', 'help' },
-    { '<leader>hi', 'highlights' },
+    { '<leader>hl', 'highlights' },
     { '<leader>au', 'autocmds' },
     { '<leader>km', 'keymaps' },
     { '<leader>z=', 'spelling' },

@@ -5,9 +5,23 @@ local config = wezterm.config_builder()
 --                             General                              --
 ----------------------------------------------------------------------
 
+config.set_environment_variables = {
+  TERMINFO_DIRS = '/run/current-system/sw/share/terminfo',
+}
 config.term = 'wezterm'
 config.force_reverse_video_cursor = true
 config.swallow_mouse_click_on_pane_focus = true
+
+----------------------------------------------------------------------
+--                               Keys                               --
+----------------------------------------------------------------------
+config.keys = {
+  {
+    key = 'Enter',
+    mods = 'ALT',
+    action = wezterm.action.DisableDefaultAssignment,
+  },
+}
 
 ----------------------------------------------------------------------
 --                               Font                               --

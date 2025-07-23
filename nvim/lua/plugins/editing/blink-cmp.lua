@@ -1,37 +1,30 @@
-local border = MY_CONFIG.border_style
+local snippet_engine = require('utils').get_snippet_engine()
 
 ---@type LazySpec
 return {
   'saghen/blink.cmp',
-  build = {
-    'rustup toolchain install nightly --force',
-    'cargo build --release',
-  },
+  build = 'nix --accept-flake-config run .#build-plugin',
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
   opts = {
     appearance = {
       kind_icons = require('icons').get_lspkind_icons(),
-      use_nvim_cmp_as_default = true,
     },
     cmdline = {
+      completion = {
+        menu = { auto_show = true },
+      },
       keymap = {
-        preset = 'default',
         ['<Tab>'] = { 'select_and_accept' },
-        ['<Up>'] = {},
-        ['<Down>'] = {},
       },
     },
     completion = {
       accept = {
         auto_brackets = { enabled = false },
       },
-      documentation = {
-        auto_show = true,
-        window = { border = border },
-      },
+      documentation = { auto_show = true },
+      keyword = { range = 'full' },
       menu = {
-        border = border,
         draw = {
           columns = {
             { 'kind_icon' },
@@ -77,17 +70,15 @@ return {
     },
     signature = {
       enabled = true,
-      window = {
-        border = border,
-        show_documentation = false,
-      },
+      trigger = { enabled = false },
+      window = { show_documentation = false },
+    },
+    snippets = {
+      ---@diagnostic disable-next-line: assign-type-mismatch
+      preset = snippet_engine == 'nvim' and 'default' or snippet_engine,
     },
     sources = {
-      default = { 'lsp', 'path', 'snippets', 'buffer' },
-      per_filetype = {
-        lua = { 'lazydev', 'lsp', 'path', 'snippets', 'buffer' },
-        sql = { 'dadbod', 'snippets', 'buffer' },
-      },
+      default = { 'lazydev', 'dadbod', 'lsp', 'path', 'snippets', 'buffer' },
       providers = {
         buffer = {
           opts = { get_bufnrs = vim.api.nvim_list_bufs },
@@ -101,7 +92,6 @@ return {
           module = 'lazydev.integrations.blink',
           score_offset = 100,
         },
-        lsp = { fallbacks = { 'buffer' } },
       },
     },
   },

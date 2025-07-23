@@ -62,12 +62,14 @@ local function get_mode_highlight_name(mode_label, highlight_name)
 end
 
 ---@param mode_color string
+---@param cursor_line_hl CtpHighlight
 ---@return table<string, CtpHighlight>
-local function get_highlight_maps(mode_color)
+local function get_highlight_maps(mode_color, cursor_line_hl)
   local colors = require('colors').get_colors()
 
   return {
-    WinBarFile = { fg = mode_color },
+    CursorLineNr = { fg = mode_color, bg = cursor_line_hl.bg, style = { 'bold' } },
+    NvimSeparator = { fg = mode_color },
     SnacksIndentChunk = { fg = mode_color },
     SnacksIndentScope = { fg = mode_color },
     StatusLineMode = { fg = colors.base, bg = mode_color, style = { 'bold' } },
@@ -75,13 +77,13 @@ local function get_highlight_maps(mode_color)
     StatusLineSection = { fg = mode_color, bg = colors.surface0 },
     TabLineSel = { fg = colors.base, bg = mode_color },
     TabLineSelSep = { fg = mode_color, bg = colors.base },
-    NvimSeparator = { fg = mode_color },
-    CursorLineNr = { fg = mode_color, style = { 'bold' } },
+    WinBarFile = { fg = mode_color },
+    WinSeparator = { fg = mode_color },
   }
 end
 
 ---@type string[]
-local highlight_names = vim.tbl_keys(get_highlight_maps(''))
+local highlight_names = vim.tbl_keys(get_highlight_maps('', {}))
 
 local M = {}
 
@@ -95,14 +97,15 @@ end
 ---Returns a table linking all defined highlight names to the corresponding mode color
 ---Also sets up an initial link for each highlight name to normal mode
 ---@param colors CtpColors
+---@param cursor_line_hl CtpHighlight
 ---@return table<string, CtpHighlight>
-function M.get_initial_highlights(colors)
+function M.get_and_link_mode_highlights(colors, cursor_line_hl)
   local highlights = {}
 
   for mode, color_name in pairs(color_map) do
     local mode_color = colors[color_name]
 
-    for hl_name, hl_opts in pairs(get_highlight_maps(mode_color)) do
+    for hl_name, hl_opts in pairs(get_highlight_maps(mode_color, cursor_line_hl)) do
       local mode_hl_name = get_mode_highlight_name(mode, hl_name)
 
       highlights[mode_hl_name] = hl_opts

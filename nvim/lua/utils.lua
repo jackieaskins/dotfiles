@@ -1,5 +1,18 @@
 local M = {}
 
+---Import and parse json file
+---@param filepath string
+---@return table
+function M.import_json_file(filepath)
+  local file = io.open(vim.fn.expand(filepath), 'r')
+  assert(file)
+
+  local json = vim.json.decode(file:read('*a'))
+  file:close()
+
+  return json
+end
+
 ---@alias map_fn fun(mode: string | string[], lhs: string, rhs: string | function, opts?: vim.keymap.set.Opts)
 
 ---Define vim keymap
@@ -161,17 +174,36 @@ function M.debounce(fn, ms)
 end
 
 ---Get the current snippet engine
----@return 'nvim'
+---@return 'nvim' | 'luasnip'
 function M.get_snippet_engine()
-  return 'nvim'
+  return 'luasnip'
 end
+
+local snippet_fns = {
+  nvim = {
+    expand = function(input)
+      vim.snippet.expand(input)
+    end,
+    stop = vim.snippet.stop,
+  },
+  luasnip = {
+    expand = function(input)
+      require('luasnip').lsp_expand(input)
+    end,
+    stop = vim.cmd.LuaSnipUnlinkCurrent,
+  },
+}
 
 --- Expand snippet using current snippet engine
 ---@param input string
 function M.snippet_expand(input)
-  if M.get_snippet_engine() == 'nvim' then
-    vim.snippet.expand(input)
-  end
+  local snippet_engine = M.get_snippet_engine()
+  snippet_fns[snippet_engine].expand(input)
+end
+
+function M.snippet_stop()
+  local snippet_engine = M.get_snippet_engine()
+  snippet_fns[snippet_engine].stop()
 end
 
 ---Maps from a table to list

@@ -1,6 +1,7 @@
 ---@type LazySpec
 return {
   'AckslD/messages.nvim',
+  enabled = not MY_CONFIG.experimental_ui,
   cmd = 'Messages',
   opts = function()
     local buffer_opts = require('messages.config').settings.buffer_opts

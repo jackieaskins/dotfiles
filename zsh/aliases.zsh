@@ -1,9 +1,3 @@
-alias mux='tmuxinator'
-
-alias plugs='cd ~/.local/share/nvim/lazy/'
-
-alias ls='eza'
-
 # Directory Navigation
 alias -- -="cd -"
 alias ..='cd ..'
@@ -39,14 +33,3 @@ alias gstp='git stash pop'
 alias gstd='git stash drop'
 alias gsts='git stash show -p'
 alias gsu='git submodule update --recursive'
-
-# Dotfiles
-alias dotfiles='cd ~/dotfiles'
-alias sourcezsh='source ~/.zshrc'
-alias zshaliases='nvim ~/dotfiles/zsh/aliases.zsh'
-alias zshfuncs='nvim ~/dotfiles/zsh/functions.zsh'
-alias zshconfig='nvim ~/dotfiles/zshrc'
-alias zshcustom='nvim ~/dotfiles/zsh/custom.zsh'
-
-alias brave='open -a "Brave Browser"'
-alias chrome='open -a "Google Chrome"'

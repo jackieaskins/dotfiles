@@ -3,7 +3,7 @@
 format = """
 $hostname\
 $directory\
-$shell\
+$sudo\
 $git_branch\
 $git_status\
 $git_state\
@@ -13,11 +13,13 @@ $jobs\
 $character"""
 
 right_format = """
+$direnv\
 $bun\
 $go\
 $java\
 $lua\
 $nodejs\
+$deno\
 $ruby\
 $swift\
 $time"""
@@ -29,6 +31,14 @@ style = 'yellow'
 style = 'bold blue'
 truncate_to_repo = false
 fish_style_pwd_dir_length = 1
+
+[direnv]
+disabled = false
+style = 'blue'
+format = '[$symbol$allowed]($style) '
+allowed_msg = '󰸞'
+not_allowed_msg = ''
+denied_msg = ' '
 
 [git_branch]
 style = 'purple'
@@ -48,6 +58,9 @@ symbol = '󰢱 '
 format = 'on [$indicator]($style) '
 disabled = false
 style = 'green'
+
+[sudo]
+disabled = false
 
 [time]
 format = 'at [$time]($style)'

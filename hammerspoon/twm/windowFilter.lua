@@ -14,6 +14,7 @@ local appFilters = {
   Installer = false,
   ['iPhone Mirroring'] = false,
   ['Karabiner-Elements'] = false,
+  KeyCastr = false,
   ['Keychain Access'] = false,
   Latest = false,
   MonitorControl = false,
