@@ -1,4 +1,9 @@
 { ... }:
 {
-  homebrew.casks = [ "wezterm@nightly" ];
+  homebrew.casks = [
+    {
+      name = "wezterm@nightly";
+      greedy = true;
+    }
+  ];
 }

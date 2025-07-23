@@ -18,6 +18,9 @@
       in
       {
         mux = "tmuxinator";
+        get-bundle-id = "mdls -name kMDItemCFBundleIdentifier -r";
+
+        nix-repl = "nix repl --expr 'import <nixpkgs>{}'";
         nix-switch =
           if config.lib.custom.isDarwin then
             "sudo darwin-rebuild switch --flake ${darwinFlake}#darwin --impure"

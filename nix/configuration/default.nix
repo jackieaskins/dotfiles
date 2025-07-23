@@ -29,6 +29,7 @@
   };
 
   programs.zsh.enable = true;
+  environment.enableAllTerminfo = true;
 
   environment.systemPackages = [
     pkgs.iina
