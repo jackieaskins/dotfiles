@@ -60,6 +60,7 @@ hs.window.setShadows(false)
 hs.window.animationDuration = 0
 
 require('appLauncher')
+require('twm')
 
 ----------------------------------------------------------------------
 --                            Dark Mode                             --

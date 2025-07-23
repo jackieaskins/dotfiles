@@ -1,7 +1,6 @@
 { ... }:
 {
   imports = [
-    ./aerospace.nix
     ./alcove.nix
     ./dockdoor.nix
     ./firefox.nix
