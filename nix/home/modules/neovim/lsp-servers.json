@@ -5,10 +5,7 @@
     "display": "emmet-ls",
     "pkgs": ["emmet-language-server"]
   },
-  "eslint": {
-    "pkgs": ["vscode-langservers-extracted"],
-    "skip_lspconfig": true
-  },
+  "eslint": { "pkgs": ["vscode-langservers-extracted"] },
   "gopls": { "pkgs": ["gopls"] },
   "html": { "pkgs": ["vscode-langservers-extracted"] },
   "jdtls": {
