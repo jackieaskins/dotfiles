@@ -18,7 +18,6 @@ return {
           char = { arrow = '─' },
         },
       },
-      input = { enabled = true },
       notifier = {
         enabled = true,
         margin = { top = 1 },

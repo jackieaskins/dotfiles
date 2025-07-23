@@ -8,7 +8,7 @@
 MY_CONFIG = {
   is_personal_machine = false,
 
-  border_style = 'bold',
+  border_style = 'double',
   experimental_ui = false,
 
   custom_gx_handlers = {},
