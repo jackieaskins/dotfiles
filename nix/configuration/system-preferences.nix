@@ -1,4 +1,7 @@
-{ ... }:
+{ config, ... }:
+let
+  homeDirectory = config.users.users.${config.system.primaryUser}.home;
+in
 {
   system.keyboard = {
     enableKeyMapping = true;
@@ -27,6 +30,9 @@
       autohide = true;
       magnification = true;
       show-recents = false;
+      persistent-others = [
+        "${homeDirectory}/Downloads"
+      ];
     };
 
     finder = {
