@@ -19,13 +19,12 @@ let
     filepath: lib.lists.map (value: pkgs.${value}) (getPkgNames (getAttrsWithPkgs filepath));
 in
 {
-  home.packages =
-    [
-      inputs.neovim-nightly-overlay.packages.${pkgs.system}.default
-      pkgs.tree-sitter
-    ]
-    ++ (getPkgsFromJsonFile ./lsp-servers.json)
-    ++ (getPkgsFromJsonFile ./formatters.json);
+  home.packages = [
+    inputs.neovim-nightly-overlay.packages.${pkgs.system}.default
+    pkgs.tree-sitter
+  ]
+  ++ (getPkgsFromJsonFile ./lsp-servers.json)
+  ++ (getPkgsFromJsonFile ./formatters.json);
 
   home.file = {
     ".config/nvim".source = config.lib.custom.mkDotfilesSymlink "nvim";
