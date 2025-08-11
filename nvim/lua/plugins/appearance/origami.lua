@@ -5,6 +5,7 @@ return {
   ---@module 'origami'
   ---@type Origami.config
   opts = {
+    foldKeymaps = { setup = false },
     foldtext = {
       lineCount = { template = '󰘕 %d' },
     },

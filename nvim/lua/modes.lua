@@ -78,7 +78,7 @@ local function get_highlight_maps(mode_color, cursor_line_hl)
     TabLineSel = { fg = colors.base, bg = mode_color },
     TabLineSelSep = { fg = mode_color, bg = colors.base },
     WinBarFile = { fg = mode_color },
-    WinSeparator = { fg = mode_color },
+    ColorfulWinSep = { fg = mode_color },
   }
 end
 

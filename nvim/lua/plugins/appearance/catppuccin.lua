@@ -5,6 +5,7 @@ return {
   name = 'catppuccin',
   priority = 1000,
   config = function()
+    ---@diagnostic disable-next-line: missing-fields
     require('catppuccin').setup({
       term_colors = true, -- Setting for baleia.nvim
       background = { light = 'latte', dark = 'mocha' },
@@ -39,6 +40,7 @@ return {
           MatchParen = { bg = colors.none, style = { 'bold' } },
           NormalFloat = { bg = colors.base },
           FloatBorder = { fg = colors.blue, bg = colors.base },
+          FloatTitle = { fg = colors.blue, bg = colors.base },
           Pmenu = { fg = colors.surface2, bg = colors.base },
           PmenuSel = { fg = colors.none, bg = colors.surface0 },
           PmenuThumb = { bg = colors.blue },
