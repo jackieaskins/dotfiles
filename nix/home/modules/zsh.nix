@@ -11,6 +11,10 @@
 
     enableCompletion = false;
 
+    sessionVariables = {
+      LS_COLORS = "$(vivid generate catppuccin-${config.catppuccin.flavor})";
+    };
+
     shellAliases =
       let
         darwinFlake = "/etc/nix-darwin";
@@ -39,8 +43,6 @@
 
     initContent = # zsh
       ''
-        export LS_COLORS="$(vivid generate catppuccin-${config.catppuccin.flavor})"
-
         source $HOME/dotfiles/zshrc
       '';
   };

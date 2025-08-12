@@ -42,7 +42,6 @@ in
     packages = [
       pkgs.autossh
       pkgs.awscli2
-      pkgs.clang
       pkgs.devenv
       pkgs.fd
       pkgs.imagemagick
@@ -57,7 +56,8 @@ in
       pkgs.nerd-fonts.hack
       pkgs.nerd-fonts.jetbrains-mono
       pkgs.nerd-fonts.mononoki
-    ];
+    ]
+    ++ (pkgs.lib.optionals (!config.lib.custom.isDarwin) pkgs.clang);
   };
 
   fonts.fontconfig.enable = true;
