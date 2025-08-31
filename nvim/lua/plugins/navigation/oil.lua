@@ -33,9 +33,7 @@ return {
         end,
       },
     },
-    dependencies = {
-      'echasnovski/mini.icons',
-    },
+    dependencies = { 'nvim-mini/mini.icons' },
     lazy = false,
     keys = {
       { '-', '<cmd>Oil<CR>' },

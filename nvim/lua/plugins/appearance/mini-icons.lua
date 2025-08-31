@@ -1,6 +1,6 @@
 ---@type LazySpec
 return {
-  'echasnovski/mini.icons',
+  'nvim-mini/mini.icons',
   event = 'VeryLazy',
   opts = {
     default = {

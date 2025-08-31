@@ -3,7 +3,7 @@ local curly_opts = { brackets = curly_brackets }
 
 ---@type LazySpec
 return {
-  'echasnovski/mini.splitjoin',
+  'nvim-mini/mini.splitjoin',
   version = false,
   keys = {
     {
