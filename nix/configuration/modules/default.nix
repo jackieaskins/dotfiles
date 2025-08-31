@@ -1,8 +1,8 @@
 { ... }:
 {
   imports = [
-    ./alcove.nix
     ./betterdisplay.nix
+    ./boring-notch.nix
     ./dockdoor.nix
     ./firefox.nix
     ./hammerspoon.nix

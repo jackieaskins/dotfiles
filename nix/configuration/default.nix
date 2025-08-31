@@ -45,8 +45,8 @@
   system.activationScripts.postActivation.text =
     let
       loginItems = [
-        "/Applications/Alcove.app"
         "/Applications/BetterDisplay.app"
+        "/Applications/boringNotch.app"
         "/Applications/DockDoor.app"
         "/Applications/Hammerspoon.app"
         "/Applications/Nix Apps/Ice.app"
