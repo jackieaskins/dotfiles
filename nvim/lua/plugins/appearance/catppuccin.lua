@@ -96,6 +96,13 @@ return {
           -- nvim-treesitter-context
           TreesitterContext = { fg = colors.text, bg = colors.mantle },
           TreesitterContextLineNumber = { fg = colors.surface1, bg = colors.mantle },
+
+          -- oil.nvim
+          OilChange = { link = 'GitSignsChange' },
+          OilCopy = { link = 'GitSignsChange' },
+          OilCreate = { link = 'GitSignsAdd' },
+          OilDelete = { link = 'GitSignsDelete' },
+          OilMove = { link = 'GitSignsChange' },
         }
         return vim.tbl_extend(
           'force',
