@@ -11,6 +11,9 @@ return {
           '__committia_status__',
         },
       },
+      win_separator = {
+        highlights = { 'WinSeparator' },
+      },
     },
   },
 }
