@@ -64,3 +64,6 @@ end)
 user_command('NixUpdate', function()
   require('runner').run_command('nix-update')
 end)
+
+-- Utils
+user_command('JQ', '%!jq .')
