@@ -50,6 +50,7 @@ vim.o.list = true
 vim.o.listchars = gen_list_option('tab:  ', 'trail:·')
 vim.o.breakindent = true
 vim.o.breakindentopt = gen_list_option('shift:1', 'min:0')
+vim.o.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 
 -- Timeouts
 vim.o.ttimeoutlen = 10
