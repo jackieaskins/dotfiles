@@ -103,6 +103,26 @@ return {
           OilCreate = { link = 'GitSignsAdd' },
           OilDelete = { link = 'GitSignsDelete' },
           OilMove = { link = 'GitSignsChange' },
+
+          -- oil-git-status.nvim
+          OilGitStatusIndexIgnored = { link = 'NonText' },
+          OilGitStatusIndexUntracked = { link = 'GitSignsAdd' },
+          OilGitStatusIndexAdded = { link = 'GitSignsAdd' },
+          OilGitStatusIndexCopied = { link = 'GitSignsChange' },
+          OilGitStatusIndexDeleted = { link = 'GitSignsDelete' },
+          OilGitStatusIndexModified = { link = 'GitSignsChange' },
+          OilGitStatusIndexRenamed = { link = 'GitSignsChange' },
+          OilGitStatusIndexTypeChanged = { link = 'GitSignsChange' },
+          OilGitStatusIndexUnmerged = { link = 'GitSignsChange' },
+          OilGitStatusWorkingTreeIgnored = { link = 'NonText' },
+          OilGitStatusWorkingTreeUntracked = { link = 'GitSignsAdd' },
+          OilGitStatusWorkingTreeAdded = { link = 'GitSignsAdd' },
+          OilGitStatusWorkingTreeCopied = { link = 'GitSignsChange' },
+          OilGitStatusWorkingTreeDeleted = { link = 'GitSignsDelete' },
+          OilGitStatusWorkingTreeModified = { link = 'GitSignsChange' },
+          OilGitStatusWorkingTreeRenamed = { link = 'GitSignsChange' },
+          OilGitStatusWorkingTreeTypeChanged = { link = 'GitSignsChange' },
+          OilGitStatusWorkingTreeUnmerged = { link = 'GitSignsChange' },
         }
         return vim.tbl_extend(
           'force',
