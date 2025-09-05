@@ -81,28 +81,4 @@ augroup('treesitter', {
       pcall(vim.treesitter.start, args.buf)
     end,
   },
-  {
-    'Filetype',
-    callback = function(args)
-      local parser_found = pcall(vim.treesitter.get_parser, args.buf)
-
-      if parser_found then
-        return
-      end
-
-      ---@type string
-      local filetype = args.match
-      local ignored_filetypes = { '', 'blink.*', 'fugitive', 'oil.*', 'snacks.*' }
-
-      if
-        vim.iter(ignored_filetypes):any(function(ignored_filetype)
-          return filetype:find('^' .. ignored_filetype .. '$') ~= nil
-        end)
-      then
-        return
-      end
-
-      vim.notify(string.format('No parser found for filetype %s', filetype))
-    end,
-  },
 })
