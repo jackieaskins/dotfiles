@@ -2,8 +2,8 @@ local fnutils = require('fnutils')
 
 local appFilters = fnutils.mergeTables({
   [''] = false,
-  Alcove = false,
   BetterDisplay = false,
+  boringNotch = false,
   coreautha = false,
   FaceTime = false,
   Finder = false,
@@ -28,6 +28,7 @@ local appFilters = fnutils.mergeTables({
   SecurityAgent = false,
   Steam = false,
   ['System Settings'] = false,
+  TV = false,
 }, CUSTOM.twmWindowFilters or {})
 
 local windowFilter = hs.window.filter

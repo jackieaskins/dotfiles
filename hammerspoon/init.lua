@@ -7,7 +7,7 @@ local hotkeyStore = require('hotkeyStore')
 ---@class Custom
 ---@field appKeys? table<string, string>
 ---@field twmScreenPadding? number
----@field twmWindowFilters? table<string, boolean>
+---@field twmWindowFilters? table<string, boolean | { [string]: any }>
 ---@field twmWindowGap? number
 ---@field twmStackGap? number
 ---@field twmMonitorConfigurations? MonitorConfiguration[]

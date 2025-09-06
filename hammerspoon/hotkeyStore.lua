@@ -161,6 +161,7 @@ function M.addMenubarItem()
   end
 
   hotkeyMenubar:setTitle('􀇳')
+  hotkeyMenubar:setTooltip('Hammerspoon Keys')
 
   hotkeyMenubar:setMenu(function()
     local menu = {}
