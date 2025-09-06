@@ -7,7 +7,8 @@ function M.import_json_file(filepath)
   local file = io.open(vim.fn.expand(filepath), 'r')
   assert(file)
 
-  local json = vim.json.decode(file:read('*a'))
+  local file_contents = file:read('*a')
+  local json = vim.json.decode(file_contents)
   file:close()
 
   return json
@@ -38,23 +39,9 @@ function M.buffer_map(bufnr)
   end
 end
 
----@class UserCommandArg
----@field name string Command name
----@field args string The args passed to the command, if any <args>
----@field fargs table The args split by unescaped whitespace (when more than one argument is allowed), if any <f-args>
----@field nargs string Number of arguments |:command-nargs|
----@field bang boolean "true" if the command was executed with a ! modifier <bang>
----@field line1 number The starting line of the command range <line1>
----@field line2 number The final line of the command range <line2>
----@field range number The number of items in the command range: 0, 1, or 2 <range>
----@field count number Any count supplied <count>
----@field reg string The optional register, if specified <reg>
----@field mods string Command modifiers, if any <mods>
----@field smods table Command modifiers in a structured format. Has the same structure as the "mods" key of |nvim_parse_cmd()|.
-
 ---Define vim user command
 ---@param name string
----@param command string | fun(arg: UserCommandArg)
+---@param command string | fun(arg: vim.api.keyset.create_user_command.command_args)
 ---@param opts? vim.api.keyset.user_command
 function M.user_command(name, command, opts)
   local options = { force = true }
@@ -77,7 +64,7 @@ function M.buf_user_command(buffer, name, command, opts)
   vim.api.nvim_buf_create_user_command(buffer, name, command, options)
 end
 
----Replace terminal codes in strng with internal representation
+---Replace terminal codes in string with internal representation
 ---@param str string
 ---@return string
 function M.t(str)
@@ -91,24 +78,8 @@ function M.highlight(name, highlight_map)
   vim.api.nvim_set_hl(0, name, highlight_map)
 end
 
----@class AutoCmdCallbackArgs
----@field id number
----@field event string
----@field group number | nil
----@field match string
----@field buf number
----@field file string
----@field data any
-
----@class AutoCmd
----@field [1] string | string[]
----@field pattern? string | string[]
----@field buffer? number
----@field desc? string
----@field callback? fun(args: AutoCmdCallbackArgs) | string
----@field command? string
----@field once? boolean
----@field nested? boolean
+---@class AutoCmd: vim.api.keyset.create_autocmd
+---@field [1] vim.api.keyset.events | vim.api.keyset.events[]
 
 ---Create augroup
 ---@param group_name string
@@ -145,25 +116,14 @@ function M.open_url(url)
   vim.ui.open(url)
 end
 
----Filter key-value table based on key
----@generic T
----@param table table<string, T>
----@param keys string[]
----@return table<string, T>
-function M.filter_table_by_keys(table, keys)
-  local rv = {}
-  for _, key in ipairs(keys) do
-    rv[key] = table[key]
-  end
-  return rv
-end
-
 ---Debounce a function for ms
 ---@param fn function
----@param ms number
+---@param ms integer
 ---@return function
 function M.debounce(fn, ms)
   local timer = vim.uv.new_timer()
+  assert(timer)
+
   return function(...)
     local argv = { ... }
     timer:start(ms, 0, function()

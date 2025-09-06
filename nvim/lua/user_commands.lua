@@ -64,6 +64,9 @@ end)
 user_command('NixUpdate', function()
   require('runner').run_command('nix-update')
 end)
+user_command('NixGC', function()
+  require('runner').run_command('nix-collect-garbage -d && sudo nix-collect-garbage -d')
+end)
 
 -- Utils
 user_command('JQ', '%!jq .')

@@ -6,7 +6,7 @@ local utils = require('utils')
 
 ---@type table<string, FormatterConfig>
 local formatters
----@type table<string, FormatterConfig[]>
+---@type table<string, string[]>
 local formatters_by_ft
 local function load_formatters()
   formatters = utils.import_json_file('~/dotfiles/nix/home/modules/neovim/formatters.json')
