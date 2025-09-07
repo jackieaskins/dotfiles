@@ -4,6 +4,7 @@ require('utils').map({ 'n', 'v' }, '<space>', '<nop>')
 
 require('config_variables')
 require('options')
+require('folds')
 
 require('dark_mode')
 
