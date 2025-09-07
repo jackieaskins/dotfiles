@@ -5,6 +5,7 @@ local filetype_displays = {
   ['gitsigns-blame'] = '[Git Blame]',
   NvimTree = '[NvimTree]',
   checkhealth = '[Health Check]',
+  fugitive = '[Fugitive]',
 }
 
 local M = {}

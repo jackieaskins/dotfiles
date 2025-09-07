@@ -16,6 +16,7 @@ return {
     },
     filetype = {
       tmux = { glyph = '', hl = 'MiniIconsGreen' },
+      fugitive = { glyph = '󰊢', hl = 'MiniIconsGreen' },
     },
   },
 }
