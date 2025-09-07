@@ -5,6 +5,7 @@ local map = utils.map
 --                             General                              --
 ----------------------------------------------------------------------
 map('n', '<leader>so', '<cmd>source %<CR>')
+map('n', '<leader>re', '<cmd>restart<CR>')
 
 ----------------------------------------------------------------------
 --                   Clipboard and Visual Select                    --
