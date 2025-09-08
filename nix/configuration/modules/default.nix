@@ -11,7 +11,6 @@
     ./karabiner-elements.nix
     ./raycast.nix
     ./rocket.nix
-    ./sanesidebuttons.nix
     ./sf-symbols.nix
     ./wezterm.nix
   ];

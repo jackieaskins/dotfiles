@@ -1,4 +1,0 @@
-{ ... }:
-{
-  homebrew.casks = [ "sanesidebuttons" ];
-}

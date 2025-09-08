@@ -52,7 +52,6 @@
         "/Applications/Nix Apps/Ice.app"
         "/Applications/Raycast.app"
         "/Applications/Rocket.app"
-        "/Applications/SaneSideButtons.app"
         "/Applications/WezTerm.app"
       ];
     in
