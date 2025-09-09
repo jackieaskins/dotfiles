@@ -70,7 +70,7 @@ return {
     },
     signature = {
       enabled = true,
-      trigger = { enabled = false },
+      trigger = { enabled = true },
       window = { show_documentation = false },
     },
     snippets = {
