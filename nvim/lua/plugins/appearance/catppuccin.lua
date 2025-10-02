@@ -132,16 +132,16 @@ return {
       end,
       auto_integrations = true,
       default_integrations = true,
-      integrations = {
-        native_lsp = {
-          enabled = true,
-          underlines = {
-            errors = { 'undercurl' },
-            hints = { 'undercurl' },
-            warnings = { 'undercurl' },
-            information = { 'undercurl' },
-          },
+      lsp_styles = {
+        enabled = true,
+        underlines = {
+          errors = { 'undercurl' },
+          hints = { 'undercurl' },
+          warnings = { 'undercurl' },
+          information = { 'undercurl' },
         },
+      },
+      integrations = {
         treesitter_context = false,
       },
     })
