@@ -1,4 +1,22 @@
 {
+  "biome": {
+    "required_files": ["./biome.json", "./biome.jsonc"],
+    "filetypes": [
+      "css",
+      "graphql",
+      "html",
+      "javascript",
+      "javascriptreact",
+      "json",
+      "jsonc",
+      "less",
+      "markdown",
+      "scss",
+      "svelte",
+      "typescript",
+      "typescriptreact"
+    ]
+  },
   "format-queries": {
     "filetypes": ["query"]
   },
@@ -8,7 +26,7 @@
   },
   "prettierd": {
     "pkgs": ["prettierd"],
-    "required_file": "./node_modules/.bin/prettier",
+    "required_files": ["./node_modules/.bin/prettier"],
     "filetypes": [
       "css",
       "graphql",
@@ -27,7 +45,7 @@
   },
   "stylua": {
     "pkgs": ["stylua"],
-    "required_file": "./stylua.toml",
+    "required_files": ["./stylua.toml"],
     "filetypes": ["lua"]
   }
 }

@@ -1,5 +1,5 @@
 ---@class FormatterConfig
----@field required_file? string
+---@field required_files? string[]
 ---@field filetypes string[]
 
 local utils = require('utils')
@@ -40,7 +40,10 @@ end
 function M.get_active_formatters(filetype)
   return vim.tbl_filter(function(formatter_name)
     local formatter = formatters[formatter_name]
-    return formatter.required_file == nil or utils.file_exists(formatter.required_file)
+    return formatter.required_files == nil
+      or vim.iter(formatter.required_files):any(function(file)
+        return utils.file_exists(file)
+      end)
   end, M.get_formatters(filetype))
 end
 

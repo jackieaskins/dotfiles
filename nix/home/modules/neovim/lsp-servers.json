@@ -1,4 +1,5 @@
 {
+  "biome": {},
   "clangd": { "pkgs": ["libclang"] },
   "cssls": { "pkgs": ["vscode-langservers-extracted"] },
   "emmet_language_server": {
@@ -18,6 +19,7 @@
   "nixd": { "pkgs": ["nixd"] },
   "ruby_lsp": { "pkgs": ["ruby-lsp"] },
   "svelte": { "pkgs": ["svelte-language-server"] },
+  "tailwindcss": { "pkgs": ["tailwindcss-language-server"] },
   "taplo": { "pkgs": ["taplo-lsp"] },
   "ts_query_ls": { "pkgs": ["ts_query_ls"] },
   "typescript-tools": {

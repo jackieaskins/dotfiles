@@ -15,7 +15,7 @@ return {
     local objects = { a = 'parameter', F = 'call', f = 'function', c = 'class', l = 'loop' }
 
     return vim.iter(objects):fold({}, function(accum, key, textobject)
-      function get_keymap(prefix, suffix)
+      local function get_keymap(prefix, suffix)
         return {
           prefix .. key,
           function()
