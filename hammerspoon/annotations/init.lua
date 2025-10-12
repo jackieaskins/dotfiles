@@ -57,6 +57,7 @@ local signatureOverrides = {
   ['hs.screen.find(hint) -> hs.screen object(s)'] = 'hs.screen.find(hint) -> hs.screen | nil',
   ['hs.screen.watcher.new(fn) -> watcher'] = 'hs.screen.watcher.new(fn) -> hs.screen.watcher',
   ['hs.window.filter:getWindows([sortOrder]) -> list of hs.window objects'] = 'hs.window.filter:getWindows([sortOrder]) -> hs.window[]',
+  ['hs.window.find(hint) -> hs.window object(s)'] = 'hs.window.find(hint) -> hs.window | nil',
 }
 
 local annotationsLastGenerated = hs.settings.get(annotationGenKey)

@@ -1,24 +1,24 @@
 local M = {}
 
-function M.getUserSpaceIdsByScreenId()
-  local displays = hs.spaces.data_managedDisplaySpaces() or {}
+---@param window hs.window
+---@param frame hs.geometry
+---Set window frame with workaround for applications with AXEnhancedUserInterface
+function M.setWindowFrame(window, frame)
+  -- https://github.com/Hammerspoon/hammerspoon/issues/3224#issuecomment-1294359070
 
-  local userSpaceIdsByScreenId = {}
+  ---@class hs.axuielement
+  local appElement = hs.axuielement.applicationElement(window:application())
+  local isEnhanced = appElement.AXEnhancedUserInterface
 
-  for _, display in ipairs(displays) do
-    local screenId = display['Display Identifier']
-    local spaceIds = {}
-
-    for _, space in ipairs(display.Spaces) do
-      if space.type == 0 then
-        table.insert(spaceIds, space.ManagedSpaceID)
-      end
-    end
-
-    userSpaceIdsByScreenId[screenId] = spaceIds
+  if isEnhanced then
+    appElement.AXEnhancedUserInterface = false
   end
 
-  return userSpaceIdsByScreenId
+  window:setFrame(frame)
+
+  if isEnhanced then
+    appElement.AXEnhancedUserInterface = true
+  end
 end
 
 return M

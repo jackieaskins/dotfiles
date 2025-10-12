@@ -6,6 +6,7 @@
 
 ---@alias Layout fun(windows: hs.window[], screenFrame: ScreenFrame, gap: number)
 
+local twmUtils = require('twm.utils')
 local stackGap = CUSTOM.twmStackGap or 15
 
 ---@param screenFrame ScreenFrame
@@ -30,27 +31,6 @@ local function getWinHeight(screenFrame, gap, numRows)
   return (screenFrame.h - (gap * (numRows - 1))) / numRows
 end
 
----@param window hs.window
----@param frame hs.geometry
----Set window frame with workaround for applications with AXEnhancedUserInterface
-local function setWindowFrame(window, frame)
-  -- https://github.com/Hammerspoon/hammerspoon/issues/3224#issuecomment-1294359070
-
-  ---@class hs.axuielement
-  local appElement = hs.axuielement.applicationElement(window:application())
-  local isEnhanced = appElement.AXEnhancedUserInterface
-
-  if isEnhanced then
-    appElement.AXEnhancedUserInterface = false
-  end
-
-  window:setFrame(frame)
-
-  if isEnhanced then
-    appElement.AXEnhancedUserInterface = true
-  end
-end
-
 local M = {}
 
 ---Floating
@@ -72,7 +52,7 @@ function M.stack(windows, screenFrame)
       y = screenFrame.y + (2 * stackGap)
     end
 
-    setWindowFrame(window, {
+    twmUtils.setWindowFrame(window, {
       x = screenFrame.x,
       y = y,
       w = screenFrame.w,
@@ -84,19 +64,23 @@ end
 ---Tall
 ---@type Layout
 function M.tall(windows, screenFrame, gap)
+  if #windows == 1 then
+    return M.stack(windows, screenFrame, gap)
+  end
+
   local winWidth = getWinWidth(screenFrame, gap, 2)
   local winHeight = getWinHeight(screenFrame, gap, #windows - 1)
 
   for index, window in ipairs(windows) do
     if index == 1 then
-      setWindowFrame(window, {
+      twmUtils.setWindowFrame(window, {
         x = screenFrame.x,
         y = screenFrame.y,
         w = winWidth,
         h = screenFrame.h,
       })
     else
-      setWindowFrame(window, {
+      twmUtils.setWindowFrame(window, {
         x = screenFrame.x + winWidth + gap,
         y = screenFrame.y + ((index - 2) * (winHeight + gap)),
         w = winWidth,
@@ -109,19 +93,23 @@ end
 ---Tall (Reversed)
 ---@type Layout
 function M.rtall(windows, screenFrame, gap)
+  if #windows == 1 then
+    return M.stack(windows, screenFrame, gap)
+  end
+
   local winWidth = getWinWidth(screenFrame, gap, 2)
   local winHeight = getWinHeight(screenFrame, gap, #windows - 1)
 
   for index, window in ipairs(windows) do
     if index == 1 then
-      setWindowFrame(window, {
+      twmUtils.setWindowFrame(window, {
         x = screenFrame.x + winWidth + gap,
         y = screenFrame.y,
         w = winWidth,
         h = screenFrame.h,
       })
     else
-      setWindowFrame(window, {
+      twmUtils.setWindowFrame(window, {
         x = screenFrame.x,
         y = screenFrame.y + ((index - 2) * (winHeight + gap)),
         h = winHeight,
@@ -148,7 +136,7 @@ function M.grid(windows, screenFrame, gap)
     local x = screenFrame.x + math.floor((index - 1) / numRows) * (winWidth + gap)
     local y = screenFrame.y + ((index - 1) % numRows) * (winHeight + gap)
 
-    setWindowFrame(window, {
+    twmUtils.setWindowFrame(window, {
       x = x,
       y = y,
       -- Make last window fill remaining height
@@ -164,7 +152,7 @@ function M.columns(windows, screenFrame, gap)
   local winWidth = getWinWidth(screenFrame, gap, #windows)
 
   for index, window in ipairs(windows) do
-    setWindowFrame(window, {
+    twmUtils.setWindowFrame(window, {
       x = screenFrame.x + (index - 1) * (winWidth + gap),
       y = screenFrame.y,
       w = winWidth,
@@ -179,7 +167,7 @@ function M.rows(windows, screenFrame, gap)
   local winHeight = getWinHeight(screenFrame, gap, #windows)
 
   for index, window in ipairs(windows) do
-    setWindowFrame(window, {
+    twmUtils.setWindowFrame(window, {
       x = screenFrame.x,
       y = screenFrame.y + (index - 1) * (winHeight + gap),
       w = screenFrame.w,

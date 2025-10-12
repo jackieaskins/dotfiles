@@ -1,6 +1,5 @@
 appLauncher = require('hotkeyStore').registerMode('Application Launcher', MEH, 'a')
 
-local fnutils = require('fnutils')
 local appKeys = fnutils.mergeTables({
   m = 'com.apple.Music',
   n = 'com.apple.Notes',

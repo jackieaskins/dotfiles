@@ -34,7 +34,7 @@ local hotkeysByGroup = {}
 ---@param mods string[]
 ---@param key string
 local function addHotkey(groupName, desc, mods, key)
-  local mappedMods = hs.fnutils.imap(mods, function(mod)
+  local mappedMods = fnutils.imap(mods, function(mod)
     return modMap[mod] or mod
   end)
 
@@ -156,9 +156,7 @@ end
 function M.addMenubarItem()
   hotkeyMenubar = hs.menubar.new(true, 'hotkeys')
 
-  if not hotkeyMenubar then
-    return
-  end
+  assert(hotkeyMenubar)
 
   hotkeyMenubar:setTitle('􀇳')
   hotkeyMenubar:setTooltip('Hammerspoon Keys')
