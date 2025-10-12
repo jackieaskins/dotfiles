@@ -115,18 +115,6 @@ end
 function TilingWindowManager:getWFSubscriptions()
   return {
     {
-      events = {
-        hs.window.filter.windowsChanged,
-        hs.window.filter.windowAllowed,
-        hs.window.filter.windowRejected,
-        hs.window.filter.windowVisible,
-        hs.window.filter.windowNotVisible,
-      },
-      fn = function(_, _, event)
-        hs.alert.show(event)
-      end,
-    },
-    {
       events = { hs.window.filter.windowFocused },
       fn = function(window)
         self:focusWorkspace(self:findWindowWorkspace(window))
