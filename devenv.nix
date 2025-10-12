@@ -1,5 +1,8 @@
 # https://devenv.sh/reference/options/
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
+let
+  pkgs-unstable = import inputs.nixpkgs-unstable { system = pkgs.stdenv.system; };
+in
 {
   languages.lua = {
     enable = true;
@@ -7,7 +10,10 @@
   };
 
   git-hooks.hooks = {
-    commitizen.enable = true;
+    commitizen = {
+      enable = true;
+      package = pkgs-unstable.commitizen;
+    };
     nixfmt-rfc-style.enable = true;
     stylua.enable = true;
   };
