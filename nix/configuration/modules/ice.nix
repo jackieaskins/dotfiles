@@ -1,6 +1,8 @@
-{ pkgs, ... }:
+{ ... }:
 {
-  environment.systemPackages = [ pkgs.ice-bar ];
+  homebrew.casks = [
+    "jordanbaird-ice@beta"
+  ];
 
   system.defaults.CustomUserPreferences = {
     "com.jordanbaird.Ice" = {
