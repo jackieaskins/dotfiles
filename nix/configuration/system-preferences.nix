@@ -19,6 +19,18 @@ in
       "com.apple.trackpad.trackpadCornerClickBehavior" = 1;
     };
 
+    CustomUserPreferences = {
+      "com.apple.symbolichotkeys" = {
+        AppleSymbolicHotKeys = {
+          # Disable '^ + Space' for 'Select the previous input source'
+          "60".enabled = false;
+
+          # Disable '^ + Option + Space' for 'Select next source in Input menu'
+          "61".enabled = false;
+        };
+      };
+    };
+
     controlcenter = {
       BatteryShowPercentage = true;
       Bluetooth = true;
