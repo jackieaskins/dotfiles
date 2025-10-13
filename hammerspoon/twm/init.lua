@@ -40,7 +40,7 @@ for key, direction in pairs(directionMap) do
 end
 
 for index = 1, 9 do
-  twmRegister('Focus space ' .. index, { 'ctrl', 'shift' }, tostring(index), function()
+  twmRegister('Focus space ' .. index, { 'ctrl', 'cmd' }, tostring(index), function()
     twm:focusWorkspace(index)
   end)
 end
