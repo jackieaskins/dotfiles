@@ -4,7 +4,8 @@
     enable = true;
     extraPackages = [
       pkgs.bat-extras.batdiff
-      pkgs.bat-extras.batgrep
+      # Batgrep is broken in unstable
+      # pkgs.bat-extras.batgrep
       pkgs.bat-extras.batman
     ];
     syntaxes = {
