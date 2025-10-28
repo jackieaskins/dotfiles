@@ -29,7 +29,7 @@ My dotfiles for Hammerspoon, Karabiner, Neovim, Nix, QMK, Tmux, WezTerm, and Zsh
    - `nix/configuration.nix`
      - On MacOS: `system.primaryUser` & `users.user.${primaryUser}.home`
    - `nix/home.nix`
-     - At a minimum: `programs.git.userEmail` & `programs.git.userName`
+     - At a minimum: `programs.git.settings.user.email` & `programs.git.settings.user.name`
      - On Linux: `home.username` & `home.homeDirectory`
 
 1. Clone this repo:

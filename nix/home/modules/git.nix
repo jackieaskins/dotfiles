@@ -3,7 +3,7 @@
   programs.git = {
     enable = true;
 
-    extraConfig = {
+    settings = {
       advice.skippedCherryPicks = false;
       branch.sort = "-committerdate";
       diff = {
@@ -16,19 +16,6 @@
       push.autosetupremote = true;
       rerere.enabled = true;
       rebase.autoStash = true;
-    };
-
-    delta = {
-      enable = true;
-      options = {
-        commit-decoration-style = "yellow box ul";
-        commit-style = "yellow";
-        file-decoration-style = "blue ul";
-        file-style = "blue";
-        hunk-header-style = "omit";
-        navigate = true;
-        true-color = "always";
-      };
     };
 
     ignores = [
