@@ -1,33 +1,10 @@
 local M = {}
 
 local function override_layouts()
-  local border = MY_CONFIG.border_style
-
   local layouts = require('snacks.picker.config.layouts')
 
-  local default = layouts.default.layout
-  default.backdrop = false
-  default[1].border = border -- Results & Input
-  default[2].border = border -- Preview
-
-  local telescope = layouts.telescope.layout
-  telescope[1][1].border = border -- Results
-  telescope[1][2].border = border -- Input
-  telescope[2].border = border -- Preview
-
-  local dropdown = layouts.dropdown.layout
-  dropdown[1].border = border -- Preview
-  dropdown[2].border = border -- Results & Input
-
-  local vertical = layouts.vertical.layout
-  vertical.border = border
-
-  local select = layouts.select.layout
-  select.border = border
-
-  local vscode = layouts.vscode.layout
-  vscode.backdrop = 60
-  vscode[1].border = border -- Input
+  layouts.default.layout.backdrop = false
+  layouts.vscode.layout.backdrop = 60
 end
 
 function M.get_config()

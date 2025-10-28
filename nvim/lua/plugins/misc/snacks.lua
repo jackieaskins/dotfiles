@@ -3,48 +3,35 @@ return {
   'folke/snacks.nvim',
   priority = 1000,
   lazy = false,
-  opts = function()
-    local border = MY_CONFIG.border_style
-
-    ---@type snacks.Config
-    return {
-      bigfile = { enabled = false },
-      image = { enabled = true },
-      indent = {
+  ---@type snacks.Config
+  opts = {
+    bigfile = { enabled = false },
+    image = { enabled = true },
+    indent = {
+      enabled = true,
+      animate = { enabled = false },
+      chunk = {
         enabled = true,
-        animate = { enabled = false },
-        chunk = {
-          enabled = true,
-          char = { arrow = '─' },
-        },
+        char = { arrow = '─' },
       },
-      notifier = {
-        enabled = true,
-        margin = { top = 1 },
-        width = { max = 50 },
+    },
+    notifier = {
+      enabled = true,
+      margin = { top = 1 },
+      width = { max = 50 },
+    },
+    picker = require('plugins.misc.snacks.picker').get_config(),
+    quickfile = { enabled = true },
+    styles = {
+      input = { relative = 'cursor' },
+      notification = {
+        ft = 'markdown',
+        wo = { wrap = true },
       },
-      picker = require('plugins.misc.snacks.picker').get_config(),
-      quickfile = { enabled = true },
-      styles = {
-        input = {
-          border = border,
-          relative = 'cursor',
-        },
-        ---@diagnostic disable-next-line: missing-fields
-        notification = {
-          border = border,
-          ft = 'markdown',
-          wo = { wrap = true },
-        },
-        ---@diagnostic disable-next-line: missing-fields
-        notification_history = {
-          border = border,
-          backdrop = 100,
-        },
-      },
-      words = { enabled = true, modes = { 'n', 'c' } },
-    }
-  end,
+      notification_history = { backdrop = 100 },
+    },
+    words = { enabled = true, modes = { 'n', 'c' } },
+  },
   init = function()
     local spinner = { '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏' }
     local progress = vim.defaulttable()
