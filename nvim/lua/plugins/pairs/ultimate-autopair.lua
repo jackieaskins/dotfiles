@@ -7,7 +7,10 @@ return {
 
     autopair.init({
       autopair.extend_default({
-        bs = { single_delete = true },
+        bs = {
+          single_delete = true,
+          delete_from_end = false,
+        },
         close = { enable = true },
         cmap = false,
         cr = {
