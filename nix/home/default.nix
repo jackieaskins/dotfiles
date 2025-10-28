@@ -56,6 +56,8 @@ in
       pkgs.nerd-fonts.hack
       pkgs.nerd-fonts.jetbrains-mono
       pkgs.nerd-fonts.mononoki
+
+      inputs.fenix.packages.${pkgs.system}.minimal.toolchain
     ]
     ++ (pkgs.lib.optionals (!config.lib.custom.isDarwin) pkgs.clang);
   };
