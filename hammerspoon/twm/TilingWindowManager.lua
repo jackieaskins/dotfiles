@@ -238,7 +238,7 @@ function TilingWindowManager:focusWorkspace(workspaceOrIndex)
 
     local focusedWindow = hs.window.focusedWindow()
     if not workspace:hasWindow(focusedWindow) then
-      local windows = workspace:getVisibleWindows()
+      local windows = workspace:getVisibleWindows(true)
 
       if #windows > 0 then
         windows[1]:focus()

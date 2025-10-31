@@ -42,6 +42,17 @@ end
 
 ---@private
 ---@return hs.window[]
+function VirtualWorkspace:getWindowsByLastFocus()
+  return hs.fnutils.reduce(windowFilter:getWindows(), function(accum, window)
+    if hs.fnutils.contains(self.windowIds, window:id()) then
+      table.insert(accum, window)
+    end
+    return accum
+  end, {})
+end
+
+---@private
+---@return hs.window[]
 function VirtualWorkspace:getWindows()
   local windowById = hs.fnutils.reduce(windowFilter:getWindows(), function(accum, window)
     accum[window:id()] = window
@@ -53,14 +64,15 @@ function VirtualWorkspace:getWindows()
   end)
 end
 
+---@param sortByLastFocus? boolean
 ---@return hs.window[]
-function VirtualWorkspace:getVisibleWindows()
+function VirtualWorkspace:getVisibleWindows(sortByLastFocus)
   if not self.isActive then
     return {}
   end
 
   return hs.fnutils.ifilter(
-    self:getWindows(),
+    sortByLastFocus and self:getWindowsByLastFocus() or self:getWindows(),
     ---@param window hs.window
     function(window)
       return window:isVisible()
