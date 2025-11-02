@@ -11,4 +11,7 @@ return {
       },
     },
   },
+  on_attach = function(client, bufnr)
+    require('lsp.utils').setup_auto_close_tag(client, bufnr, 'html/tag')
+  end,
 }
