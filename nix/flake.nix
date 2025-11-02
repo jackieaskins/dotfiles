@@ -6,6 +6,11 @@
 
     catppuccin.url = "github:catppuccin/nix";
 
+    fenix = {
+      url = "github:nix-community/fenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -25,11 +30,6 @@
 
     wezterm-nightly-overlay = {
       url = "github:wez/wezterm?dir=nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    fenix = {
-      url = "github:nix-community/fenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -52,18 +52,6 @@
         modules = [
           ./configuration
 
-          nix-homebrew.darwinModules.nix-homebrew
-          (
-            { config, ... }:
-            {
-              nix-homebrew = {
-                enable = true;
-                user = config.system.primaryUser;
-                autoMigrate = true;
-              };
-            }
-          )
-
           home-manager.darwinModules.home-manager
           (
             { config, ... }:
@@ -73,6 +61,18 @@
                 useUserPackages = true;
                 extraSpecialArgs = homeManagerArgs;
                 users.${config.system.primaryUser} = ./home;
+              };
+            }
+          )
+
+          nix-homebrew.darwinModules.nix-homebrew
+          (
+            { config, ... }:
+            {
+              nix-homebrew = {
+                enable = true;
+                user = config.system.primaryUser;
+                autoMigrate = true;
               };
             }
           )
