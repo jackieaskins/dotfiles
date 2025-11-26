@@ -14,6 +14,7 @@ local appFilters = fnutils.mergeTables({
   KeyCastr = false,
   ['Keychain Access'] = false,
   MonitorControl = false,
+  Music = false,
   Notes = false,
   Passwords = false,
   Photos = false,
@@ -24,6 +25,7 @@ local appFilters = fnutils.mergeTables({
   ['System Settings'] = false,
   TV = false,
   ['Zoom Workplace'] = false,
+  ['zoom.us'] = false,
 }, CUSTOM.twmWindowFilters or {})
 
 local overrideFilter = {
