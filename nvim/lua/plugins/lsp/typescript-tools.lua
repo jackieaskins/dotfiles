@@ -2,7 +2,7 @@
 return {
   'pmizio/typescript-tools.nvim',
   event = 'VeryLazy',
-  dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
+  dependencies = { 'nvim-lua/plenary.nvim' },
   opts = function()
     return {
       settings = {
@@ -59,7 +59,6 @@ return {
           end, { expr = true })
         end
       end,
-      root_dir = require('lspconfig.util').root_pattern('package.json'),
       single_file_support = false,
     }
   end,
