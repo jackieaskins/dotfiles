@@ -17,9 +17,8 @@ function M.get_config()
     sources = {
       directories = {
         finder = function(opts, ctx)
-          return require('snacks.picker.source.proc').proc({
-            opts,
-            {
+          return require('snacks.picker.source.proc').proc(
+            ctx:opts({
               cmd = 'fd',
               args = { '--type', 'd', '--color', 'never', '-E', '.git', '--hidden' },
               transform = function(item)
@@ -27,8 +26,9 @@ function M.get_config()
                 item.file = item.text
                 item.dir = true
               end,
-            },
-          }, ctx)
+            }),
+            ctx
+          )
         end,
       },
       git_status = {
@@ -125,6 +125,7 @@ function M.get_keys()
     { '<leader>au', 'autocmds' },
     { '<leader>km', 'keymaps' },
     { '<leader>z=', 'spelling' },
+    { '<leader>ut', 'undo' },
   }
 
   return vim.tbl_map(function(map)
