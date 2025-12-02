@@ -3,7 +3,13 @@ local border_config = { border = MY_CONFIG.border_style }
 ---@type LazySpec
 return {
   { 'JezerM/oil-lsp-diagnostics.nvim', ft = 'oil', opts = {} },
-  { 'refractalize/oil-git-status.nvim', ft = 'oil', opts = {} },
+  {
+    'FerretDetective/oil-git-signs.nvim',
+    ft = 'oil',
+    ---@module 'oil_git_signs'
+    ---@type oil_git_signs.Config
+    opts = {},
+  },
   {
     'stevearc/oil.nvim',
     ---@module 'oil'
