@@ -40,7 +40,8 @@
       "scss",
       "svelte",
       "typescript",
-      "typescriptreact"
+      "typescriptreact",
+      "yaml"
     ]
   },
   "stylua": {
