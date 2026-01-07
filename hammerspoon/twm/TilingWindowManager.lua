@@ -124,7 +124,7 @@ function TilingWindowManager:getWFSubscriptions()
       events = { hs.window.filter.windowVisible, hs.window.filter.windowNotVisible },
       fn = function(window, _, event)
         local screenUUID = window:screen():getUUID()
-        local workspace = self:getActiveWorkspace(screenUUID)
+        local workspace = self:getVisibleWorkspace(screenUUID)
 
         if event == hs.window.filter.windowVisible then
           workspace:addWindow(window):tile()
@@ -148,7 +148,7 @@ function TilingWindowManager:getWFSubscriptions()
         if newWindowScreenUUID == currentWindowWorkspace.screenUUID then
           currentWindowWorkspace:tile()
         else
-          local newWindowWorkspace = self:getActiveWorkspace(newWindowScreenUUID)
+          local newWindowWorkspace = self:getVisibleWorkspace(newWindowScreenUUID)
 
           currentWindowWorkspace:removeWindow(window):tile()
           newWindowWorkspace:addWindow(window):tile()
@@ -179,16 +179,23 @@ end
 ---@private
 ---@param screenUUID string
 ---@return VirtualWorkspace
-function TilingWindowManager:getActiveWorkspace(screenUUID)
+function TilingWindowManager:getVisibleWorkspace(screenUUID)
   return hs.fnutils.find(self.virtualWorkspaces, function(workspace)
-    return workspace.screenUUID == screenUUID and workspace.isActive
+    return workspace.screenUUID == screenUUID and workspace.isVisible
+  end)
+end
+
+---@return table<string, VirtualWorkspace[]>
+function TilingWindowManager:getWorkspacesByScreenUUID()
+  return fnutils.igroupBy(self.virtualWorkspaces, function(workspace)
+    return workspace.screenUUID
   end)
 end
 
 ---@return VirtualWorkspace[]
-function TilingWindowManager:getActiveWorkspaces()
+function TilingWindowManager:getVisibleWorkspaces()
   return hs.fnutils.ifilter(self.virtualWorkspaces, function(workspace)
-    return workspace.isActive
+    return workspace.isVisible
   end)
 end
 
@@ -231,20 +238,27 @@ end
 function TilingWindowManager:focusWorkspace(workspaceOrIndex)
   local workspace = type(workspaceOrIndex) == 'number' and self.virtualWorkspaces[workspaceOrIndex] or workspaceOrIndex --[[@as VirtualWorkspace]]
 
-  if workspace and not workspace.isActive then
-    local activeWorkspace = self:getActiveWorkspace(workspace.screenUUID)
-    activeWorkspace:unfocus()
-    workspace:focus()
+  if not workspace then
+    return self
+  end
 
-    local focusedWindow = hs.window.focusedWindow()
-    if not workspace:hasWindow(focusedWindow) then
-      local windows = workspace:getVisibleWindows(true)
+  local visibleWorkspace = self:getVisibleWorkspace(workspace.screenUUID)
 
-      if #windows > 0 then
-        windows[1]:focus()
-      end
+  if visibleWorkspace.id ~= workspace.id then
+    visibleWorkspace:hide()
+    workspace:show()
+  end
+
+  local focusedWindow = hs.window.focusedWindow()
+  if not workspace:hasWindow(focusedWindow) then
+    local windows = workspace:getVisibleWindows(true)
+
+    if #windows > 0 then
+      windows[1]:focus()
     end
   end
+
+  EventListener.emitEvent(EventListener.events.activeSpacesChanged)
 
   return self
 end
@@ -271,7 +285,7 @@ function TilingWindowManager:moveFocusedWindowToScreen(screenIndex)
   local screenUUID = self.screenUUIDs[screenIndex]
 
   if screenUUID then
-    self:moveFocusedWindowToWorkspace(self:getActiveWorkspace(screenUUID))
+    self:moveFocusedWindowToWorkspace(self:getVisibleWorkspace(screenUUID))
   end
 
   return self
@@ -298,7 +312,7 @@ end
 ---@return TilingWindowManager
 function TilingWindowManager:toggleWorkspaceLayout()
   local currentScreenUUID = hs.screen.mainScreen():getUUID()
-  local focusedSpace = self:getActiveWorkspace(currentScreenUUID)
+  local focusedSpace = self:getVisibleWorkspace(currentScreenUUID)
 
   local newLayout = focusedSpace.layout == 'stack' and 'tall' or 'stack'
   focusedSpace:setLayout(newLayout):tile()

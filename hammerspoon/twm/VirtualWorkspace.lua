@@ -5,7 +5,7 @@ local windowFilter = require('twm.windowFilter')
 ---@class VirtualWorkspace
 ---@field id integer
 ---@field screenUUID string
----@field isActive boolean
+---@field isVisible boolean
 ---@field screenFrame hs.geometry
 ---@field layout LayoutName
 ---@field private windowIds number[]
@@ -18,8 +18,8 @@ VirtualWorkspace.__index = VirtualWorkspace
 ---@param screenUUID string
 ---@param windows hs.window[]
 ---@param layout string
----@param isActive boolean
-function VirtualWorkspace.new(id, screenUUID, windows, layout, isActive)
+---@param isVisible boolean
+function VirtualWorkspace.new(id, screenUUID, windows, layout, isVisible)
   local self = setmetatable({}, VirtualWorkspace)
 
   local frame = hs.screen.find(screenUUID):frame()
@@ -34,7 +34,7 @@ function VirtualWorkspace.new(id, screenUUID, windows, layout, isActive)
     return window:id()
   end)
 
-  self.isActive = isActive
+  self.isVisible = isVisible
 
   return self
 end
@@ -66,7 +66,7 @@ end
 ---@param sortByLastFocus? boolean
 ---@return hs.window[]
 function VirtualWorkspace:getVisibleWindows(sortByLastFocus)
-  if not self.isActive then
+  if not self.isVisible then
     return {}
   end
 
@@ -87,6 +87,7 @@ end
 
 ---@private
 function VirtualWorkspace:hideWindows()
+  ---@type hs.window[]
   local nonFullScreenWindows = hs.fnutils.ifilter(self:getWindows(), function(window)
     return not window:isFullScreen()
   end)
@@ -112,7 +113,7 @@ function VirtualWorkspace:setLayout(newLayout)
 end
 
 function VirtualWorkspace:tile()
-  if self.isActive then
+  if self.isVisible then
     self:showWindows()
   else
     self:hideWindows()
@@ -122,29 +123,17 @@ function VirtualWorkspace:tile()
 end
 
 ---@return VirtualWorkspace
-function VirtualWorkspace:focus()
-  local wasActive = self.isActive
-
-  self.isActive = true
+function VirtualWorkspace:show()
+  self.isVisible = true
   self:showWindows()
-
-  if not wasActive then
-    EventListener.emitEvent(EventListener.events.activeSpacesChanged)
-  end
 
   return self
 end
 
 ---@return VirtualWorkspace
-function VirtualWorkspace:unfocus()
-  local wasActive = self.isActive
-
-  self.isActive = false
+function VirtualWorkspace:hide()
+  self.isVisible = false
   self:hideWindows()
-
-  if wasActive then
-    EventListener.emitEvent(EventListener.events.activeSpacesChanged)
-  end
 
   return self
 end
