@@ -85,6 +85,14 @@ end, 'AppleInterfaceThemeChangedNotification')
 darkModeNotification:start()
 
 ----------------------------------------------------------------------
+--                           Apple Music                            --
+----------------------------------------------------------------------
+
+hotkeyStore.register('Apple Music', 'Display Current Track', HYPER, 's', function()
+  hs.itunes.displayCurrentTrack()
+end)
+
+----------------------------------------------------------------------
 --                               Misc                               --
 ----------------------------------------------------------------------
 
