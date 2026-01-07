@@ -6,7 +6,6 @@
 
 ---@alias Layout fun(windows: hs.window[], screenFrame: ScreenFrame, gap: number)
 
-local twmUtils = require('twm.utils')
 local stackGap = CUSTOM.twmStackGap or 15
 
 ---@param screenFrame ScreenFrame
@@ -52,7 +51,7 @@ function M.stack(windows, screenFrame)
       y = screenFrame.y + (2 * stackGap)
     end
 
-    twmUtils.setWindowFrame(window, {
+    window:setFrame({
       x = screenFrame.x,
       y = y,
       w = screenFrame.w,
@@ -73,14 +72,14 @@ function M.tall(windows, screenFrame, gap)
 
   for index, window in ipairs(windows) do
     if index == 1 then
-      twmUtils.setWindowFrame(window, {
+      window:setFrame({
         x = screenFrame.x,
         y = screenFrame.y,
         w = winWidth,
         h = screenFrame.h,
       })
     else
-      twmUtils.setWindowFrame(window, {
+      window:setFrame({
         x = screenFrame.x + winWidth + gap,
         y = screenFrame.y + ((index - 2) * (winHeight + gap)),
         w = winWidth,
@@ -102,14 +101,14 @@ function M.rtall(windows, screenFrame, gap)
 
   for index, window in ipairs(windows) do
     if index == 1 then
-      twmUtils.setWindowFrame(window, {
+      window:setFrame({
         x = screenFrame.x + winWidth + gap,
         y = screenFrame.y,
         w = winWidth,
         h = screenFrame.h,
       })
     else
-      twmUtils.setWindowFrame(window, {
+      window:setFrame({
         x = screenFrame.x,
         y = screenFrame.y + ((index - 2) * (winHeight + gap)),
         h = winHeight,
@@ -136,7 +135,7 @@ function M.grid(windows, screenFrame, gap)
     local x = screenFrame.x + math.floor((index - 1) / numRows) * (winWidth + gap)
     local y = screenFrame.y + ((index - 1) % numRows) * (winHeight + gap)
 
-    twmUtils.setWindowFrame(window, {
+    window:setFrame({
       x = x,
       y = y,
       -- Make last window fill remaining height
@@ -152,7 +151,7 @@ function M.columns(windows, screenFrame, gap)
   local winWidth = getWinWidth(screenFrame, gap, #windows)
 
   for index, window in ipairs(windows) do
-    twmUtils.setWindowFrame(window, {
+    window:setFrame({
       x = screenFrame.x + (index - 1) * (winWidth + gap),
       y = screenFrame.y,
       w = winWidth,
@@ -167,7 +166,7 @@ function M.rows(windows, screenFrame, gap)
   local winHeight = getWinHeight(screenFrame, gap, #windows)
 
   for index, window in ipairs(windows) do
-    twmUtils.setWindowFrame(window, {
+    window:setFrame({
       x = screenFrame.x,
       y = screenFrame.y + (index - 1) * (winHeight + gap),
       w = screenFrame.w,

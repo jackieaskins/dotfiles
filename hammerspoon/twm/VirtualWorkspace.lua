@@ -1,4 +1,3 @@
-local twmUtils = require('twm.utils')
 local windowFilter = require('twm.windowFilter')
 
 ---@alias LayoutName 'floating' | 'stack' | 'tall' | 'rtall' | 'grid' | 'columns' | 'rows'
@@ -93,8 +92,7 @@ function VirtualWorkspace:hideWindows()
   end)
 
   for _, window in ipairs(nonFullScreenWindows) do
-    twmUtils.setWindowFrame(
-      window,
+    window:setFrame(
       hs.geometry.rect(
         self.screenFrame.x + self.screenFrame.w - 1,
         self.screenFrame.y + self.screenFrame.h,
