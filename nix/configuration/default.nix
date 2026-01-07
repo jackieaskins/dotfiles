@@ -46,7 +46,6 @@
     let
       loginItems = [
         "/Applications/BetterDisplay.app"
-        "/Applications/boringNotch.app"
         "/Applications/DockDoor.app"
         "/Applications/Hammerspoon.app"
         "/Applications/Nix Apps/Ice.app"

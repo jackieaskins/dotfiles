@@ -1,7 +1,6 @@
 local appFilters = fnutils.mergeTables({
   [''] = false,
   BetterDisplay = false,
-  boringNotch = false,
   coreautha = false,
   FaceTime = false,
   Finder = false,
