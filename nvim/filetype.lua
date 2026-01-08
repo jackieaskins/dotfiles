@@ -6,12 +6,9 @@ vim.filetype.add({
   filename = {
     Brewfile = 'ruby',
     gitignore_global = 'gitignore',
-    ['coc-settings.json'] = 'jsonc',
-    ['.eslintrc.json'] = 'jsonc',
   },
   pattern = {
     ['jdt://.*'] = 'java',
-    ['tsconfig.*%.json'] = 'jsonc',
     ['%.env.*'] = 'sh',
   },
 })
