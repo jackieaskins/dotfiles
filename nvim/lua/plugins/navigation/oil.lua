@@ -4,13 +4,6 @@ local border_config = { border = MY_CONFIG.border_style }
 return {
   { 'JezerM/oil-lsp-diagnostics.nvim', ft = 'oil', opts = {} },
   {
-    'FerretDetective/oil-git-signs.nvim',
-    ft = 'oil',
-    ---@module 'oil_git_signs'
-    ---@type oil_git_signs.Config
-    opts = {},
-  },
-  {
     'stevearc/oil.nvim',
     ---@module 'oil'
     ---@type oil.SetupOpts
@@ -48,6 +41,7 @@ return {
     },
     init = function()
       local utils = require('utils')
+      local git_oil = require('plugins.navigation.oil.git')
 
       utils.augroup('oil', {
         {
@@ -62,6 +56,43 @@ return {
                 Snacks.bufdelete({ file = path, force = true })
               end
             end
+          end,
+        },
+        {
+          'User',
+          pattern = 'OilMutationComplete',
+          callback = function(args)
+            git_oil.load_git_signs(args.buf)
+          end,
+        },
+        {
+          'FileType',
+          pattern = 'oil',
+          callback = function(args)
+            local buf = args.buf
+
+            if vim.b[buf].git_signs_configured then
+              return
+            end
+
+            vim.b[buf].git_signs_configured = true
+
+            utils.augroup('oil-git-signs-buf-' .. buf, {
+              {
+                'BufReadPost',
+                buffer = buf,
+                callback = function()
+                  git_oil.load_git_signs(buf)
+                end,
+              },
+              {
+                { 'InsertLeave', 'TextChanged' },
+                buffer = buf,
+                callback = function()
+                  git_oil.set_signs(buf)
+                end,
+              },
+            })
           end,
         },
       })
