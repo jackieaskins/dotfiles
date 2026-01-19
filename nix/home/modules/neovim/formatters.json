@@ -21,7 +21,7 @@
     "filetypes": ["query"]
   },
   "nixfmt": {
-    "pkgs": ["nixfmt-rfc-style"],
+    "pkgs": ["nixfmt"],
     "filetypes": ["nix"]
   },
   "prettierd": {
