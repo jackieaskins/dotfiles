@@ -9,6 +9,11 @@ return {
   info_icon,
   hint_icon,
 
+  error = error_icon,
+  warn = warn_icon,
+  info = info_icon,
+  hint = hint_icon,
+
   Error = error_icon,
   Warn = warn_icon,
   Info = info_icon,

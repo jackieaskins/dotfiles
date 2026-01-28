@@ -2,7 +2,20 @@ local border_config = { border = MY_CONFIG.border_style }
 
 ---@type LazySpec
 return {
-  { 'JezerM/oil-lsp-diagnostics.nvim', ft = 'oil', opts = {} },
+  {
+    'JezerM/oil-lsp-diagnostics.nvim',
+    ft = 'oil',
+    opts = {
+      count = false,
+      diagnostic_symbols = require('diagnostic.icons'),
+      diagnostic_colors = {
+        error = 'DiagnosticSignError',
+        warn = 'DiagnosticSignWarn',
+        info = 'DiagnosticSignInfo',
+        hint = 'DiagnosticSignHint',
+      },
+    },
+  },
   {
     'stevearc/oil.nvim',
     ---@module 'oil'
