@@ -12,6 +12,9 @@ return {
         home_manager = {
           expr = flake_base .. '.home-manager.users.type.getSubOptions []',
         },
+        nix_homebrew = {
+          expr = flake_base .. '.nix-homebrew.user.type.getSubOptions []',
+        },
       },
     },
   },
