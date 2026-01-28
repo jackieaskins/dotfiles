@@ -15,27 +15,15 @@
       LS_COLORS = "$(vivid generate catppuccin-${config.catppuccin.flavor})";
     };
 
-    shellAliases =
-      let
-        darwinFlake = "/etc/nix-darwin";
-        linuxFlake = "${config.home.homeDirectory}/dotfiles/nix";
-      in
-      {
-        mux = "tmuxinator";
-        get-bundle-id = "mdls -name kMDItemCFBundleIdentifier -r";
+    shellAliases = {
+      mux = "tmuxinator";
+      get-bundle-id = "mdls -name kMDItemCFBundleIdentifier -r";
 
-        nix-repl = "nix repl --expr 'import <nixpkgs>{}'";
-        nix-switch =
-          if config.lib.custom.isDarwin then
-            "sudo darwin-rebuild switch --flake ${darwinFlake}#darwin --impure"
-          else
-            "home-manager switch --flake ${linuxFlake}#linux --impure";
-        nix-update =
-          if config.lib.custom.isDarwin then
-            "sudo nix flake update --flake ${darwinFlake}"
-          else
-            "nix flake update --flake ${linuxFlake}";
-      };
+      nix-repl = "nix repl --expr 'import <nixpkgs>{}'";
+      nix-update = "nix flake update --flake ~/dotfiles/nix";
+      nix-darwin-switch = "sudo darwin-rebuild switch";
+      nix-hm-switch = "home-manager switch";
+    };
 
     autosuggestion.enable = true;
     historySubstringSearch.enable = true;

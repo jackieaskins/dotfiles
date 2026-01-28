@@ -3,18 +3,14 @@
   inputs,
   pkgs,
   lib,
+  username,
+  homeDirectory,
   ...
 }:
-let
-  homeDirectory = config.home.homeDirectory;
-  isNotDarwin = !config.lib.custom.isDarwin;
-in
 {
   nix = {
     gc.automatic = true;
     nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
-    package = lib.mkIf isNotDarwin pkgs.nix;
-    settings.experimental-features = lib.mkIf isNotDarwin "nix-command flakes";
   };
 
   lib.custom = {
@@ -32,11 +28,13 @@ in
 
   imports = [
     inputs.catppuccin.homeModules.catppuccin
-    /etc/nix-custom/home.nix
     ./modules
   ];
 
   home = {
+    username = username;
+    homeDirectory = homeDirectory;
+
     stateVersion = "25.05";
     sessionPath = [ "${homeDirectory}/dotfiles/bin" ];
     packages = [
@@ -58,8 +56,7 @@ in
       pkgs.nerd-fonts.mononoki
 
       inputs.fenix.packages.${pkgs.stdenv.hostPlatform.system}.minimal.toolchain
-    ]
-    ++ (pkgs.lib.optionals (!config.lib.custom.isDarwin) pkgs.clang);
+    ];
   };
 
   fonts.fontconfig.enable = true;

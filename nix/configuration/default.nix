@@ -3,6 +3,8 @@
   pkgs,
   inputs,
   lib,
+  homeDirectory,
+  username,
   ...
 }:
 {
@@ -11,7 +13,9 @@
     # darwin-rebuild changelog
     stateVersion = 6;
     configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;
+    primaryUser = username;
   };
+  users.users.${username}.home = homeDirectory;
 
   nix = {
     settings = {
@@ -32,9 +36,17 @@
   environment.enableAllTerminfo = true;
 
   environment.systemPackages = [
+    pkgs.discord
     pkgs.iina
     pkgs.keycastr
+    pkgs.mas
+    pkgs.qmk
     pkgs.vscodium
+  ];
+
+  homebrew.casks = [
+    "logitune"
+    "virtualbuddy"
   ];
 
   security.pam.services.sudo_local = {
@@ -61,7 +73,6 @@
     '') loginItems;
 
   imports = [
-    /etc/nix-custom/configuration.nix
     ./modules
     ./system-preferences.nix
   ];

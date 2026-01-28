@@ -43,27 +43,17 @@
       ...
     }:
     let
-      homeManagerArgs = { inherit inputs; };
+      args = {
+        inherit inputs;
+        username = "jackie";
+        homeDirectory = "/Users/jackie";
+      };
     in
     {
-      # sudo darwin-rebuild switch --flake .#darwin --impure
-      darwinConfigurations.darwin = nix-darwin.lib.darwinSystem {
-        specialArgs = { inherit inputs; };
+      darwinConfigurations."Jackies-MacBook-Pro" = nix-darwin.lib.darwinSystem {
+        specialArgs = args;
         modules = [
           ./configuration
-
-          home-manager.darwinModules.home-manager
-          (
-            { config, ... }:
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                extraSpecialArgs = homeManagerArgs;
-                users.${config.system.primaryUser} = ./home;
-              };
-            }
-          )
 
           nix-homebrew.darwinModules.nix-homebrew
           (
@@ -79,9 +69,9 @@
         ];
       };
 
-      homeConfigurations.linux = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        extraSpecialArgs = homeManagerArgs;
+      homeConfigurations.jackie = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+        extraSpecialArgs = args;
         modules = [ ./home ];
       };
     };

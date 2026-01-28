@@ -1,4 +1,7 @@
 { ... }:
+let
+  emailBase = "askinsjacqueline";
+in
 {
   programs.git = {
     enable = true;
@@ -16,6 +19,10 @@
       push.autosetupremote = true;
       rerere.enabled = true;
       rebase.autoStash = true;
+      user = {
+        email = "${emailBase}@gmail.com";
+        name = "Jacqueline Askins";
+      };
     };
 
     ignores = [
