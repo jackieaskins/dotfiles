@@ -93,10 +93,6 @@ return {
           -- nvim-lightbulb
           LightBulbVirtText = { bg = colors.none },
 
-          -- nvim-treesitter-context
-          TreesitterContext = { fg = colors.text, bg = colors.mantle },
-          TreesitterContextLineNumber = { fg = colors.surface1, bg = colors.mantle },
-
           -- oil.nvim
           OilChange = { link = 'GitSignsChange' },
           OilCopy = { link = 'GitSignsChange' },
@@ -120,9 +116,6 @@ return {
           warnings = { 'undercurl' },
           information = { 'undercurl' },
         },
-      },
-      integrations = {
-        treesitter_context = false,
       },
     })
 
