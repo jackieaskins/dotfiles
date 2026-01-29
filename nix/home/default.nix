@@ -35,15 +35,15 @@
     username = username;
     homeDirectory = homeDirectory;
 
-    stateVersion = "25.05";
+    # Check https://nix-community.github.io/home-manager/release-notes.xhtml before updating
+    stateVersion = "26.05";
     sessionPath = [ "${homeDirectory}/dotfiles/bin" ];
     packages = [
-      pkgs.autossh
       pkgs.awscli2
       pkgs.devenv
       pkgs.fd
-      pkgs.imagemagick
       pkgs.gnumake
+      pkgs.imagemagick
       pkgs.jq
       pkgs.ripgrep
       pkgs.sesh
