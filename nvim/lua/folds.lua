@@ -62,7 +62,10 @@ local type_hls = { change = 'GitSignsChange', delete = 'GitSignsDelete', add = '
 
 ---@type GetSegment
 local function get_gitsigns_segment(buf, foldstart, foldend)
-  local gitsigns = require('gitsigns')
+  local ok, gitsigns = pcall(require, 'gitsigns')
+  if not ok then
+    return {}
+  end
 
   local hunks_in_fold = { change = 0, delete = 0, add = 0 }
 
