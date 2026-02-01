@@ -14,6 +14,7 @@
     ./jankyborders.nix
     ./karabiner.nix
     ./neovim
+    ./opencode.nix
     ./starship.nix
     ./tmux.nix
     ./tmuxinator.nix
