@@ -20,6 +20,7 @@ local appFilters = fnutils.mergeTables({
   Raycast = false,
   Rocket = false,
   SecurityAgent = false,
+  Simulator = false,
   Steam = false,
   ['System Settings'] = false,
   TV = false,

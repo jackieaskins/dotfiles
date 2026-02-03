@@ -48,5 +48,8 @@
     "pkgs": ["stylua"],
     "required_files": ["./stylua.toml"],
     "filetypes": ["lua"]
+  },
+  "swiftformat": {
+    "filetypes": ["swift"]
   }
 }

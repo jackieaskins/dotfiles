@@ -18,6 +18,7 @@
   "nil_ls": { "pkgs": ["nil"] },
   "nixd": { "pkgs": ["nixd"] },
   "ruby_lsp": { "pkgs": ["ruby-lsp"] },
+  "sourcekit": {},
   "svelte": { "pkgs": ["svelte-language-server"] },
   "tailwindcss": { "pkgs": ["tailwindcss-language-server"] },
   "taplo": { "pkgs": ["taplo"] },

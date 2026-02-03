@@ -12,5 +12,6 @@
     ./rocket.nix
     ./sf-symbols.nix
     ./wezterm.nix
+    ./xcodebuild.nix
   ];
 }
