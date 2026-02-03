@@ -3,7 +3,7 @@ local snippet_engine = require('utils').get_snippet_engine()
 ---@type LazySpec
 return {
   'saghen/blink.cmp',
-  build = 'cargo build --release',
+  build = 'nix run .#build-plugin',
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
   opts = {

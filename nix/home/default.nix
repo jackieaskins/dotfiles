@@ -54,8 +54,6 @@
       pkgs.nerd-fonts.hack
       pkgs.nerd-fonts.jetbrains-mono
       pkgs.nerd-fonts.mononoki
-
-      inputs.fenix.packages.${pkgs.stdenv.hostPlatform.system}.minimal.toolchain
     ];
   };
 
