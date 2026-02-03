@@ -1,4 +1,5 @@
 {
+  "bashls": { "pkgs": ["bash-language-server"] },
   "biome": {},
   "clangd": { "pkgs": ["libclang"] },
   "cssls": { "pkgs": ["vscode-langservers-extracted"] },
