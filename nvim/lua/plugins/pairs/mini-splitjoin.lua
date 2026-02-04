@@ -77,10 +77,10 @@ return {
       },
     })
   end,
-  opts = function()
+  config = function()
     local gen_hook = require('mini.splitjoin').gen_hook
 
-    return {
+    require('mini.splitjoin').setup({
       detect = {
         brackets = { '%b()', '%b<>', '%b[]', '%b{}' },
       },
@@ -91,6 +91,6 @@ return {
           gen_hook.pad_brackets(curly_opts),
         },
       },
-    }
+    })
   end,
 }

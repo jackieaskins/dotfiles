@@ -5,47 +5,49 @@ return {
   {
     'JezerM/oil-lsp-diagnostics.nvim',
     ft = 'oil',
-    opts = {
-      count = false,
-      diagnostic_symbols = require('diagnostic.icons'),
-      diagnostic_colors = {
-        error = 'DiagnosticSignError',
-        warn = 'DiagnosticSignWarn',
-        info = 'DiagnosticSignInfo',
-        hint = 'DiagnosticSignHint',
-      },
-    },
+    config = function()
+      require('oil-lsp-diagnostics').setup({
+        count = false,
+        diagnostic_symbols = require('diagnostic.icons'),
+        diagnostic_colors = {
+          error = 'DiagnosticSignError',
+          warn = 'DiagnosticSignWarn',
+          info = 'DiagnosticSignInfo',
+          hint = 'DiagnosticSignHint',
+        },
+      })
+    end,
   },
   {
     'stevearc/oil.nvim',
-    ---@module 'oil'
-    ---@type oil.SetupOpts
-    opts = {
-      confirmation = border_config,
-      float = border_config,
-      keymaps = {
-        ['<C-h>'] = false,
-        ['<C-l>'] = false,
-        ['<C-p>'] = false,
-        ['<C-v>'] = { 'actions.select', opts = { vertical = true } },
-        ['<C-s>'] = { 'actions.select', opts = { horizontal = true } },
-        gp = 'actions.preview',
-        gr = 'actions.refresh',
-      },
-      keymaps_help = border_config,
-      progress = border_config,
-      ssh = border_config,
-      win_options = {
-        number = false,
-        relativenumber = false,
-        signcolumn = 'yes:2',
-      },
-      view_options = {
-        is_hidden_file = function()
-          return false
-        end,
-      },
-    },
+    config = function()
+      require('oil').setup({
+        confirmation = border_config,
+        float = border_config,
+        keymaps = {
+          ['<C-h>'] = false,
+          ['<C-l>'] = false,
+          ['<C-p>'] = false,
+          ['<C-v>'] = { 'actions.select', opts = { vertical = true } },
+          ['<C-s>'] = { 'actions.select', opts = { horizontal = true } },
+          gp = 'actions.preview',
+          gr = 'actions.refresh',
+        },
+        keymaps_help = border_config,
+        progress = border_config,
+        ssh = border_config,
+        win_options = {
+          number = false,
+          relativenumber = false,
+          signcolumn = 'yes:2',
+        },
+        view_options = {
+          is_hidden_file = function()
+            return false
+          end,
+        },
+      })
+    end,
     dependencies = { 'nvim-mini/mini.icons' },
     lazy = false,
     keys = {

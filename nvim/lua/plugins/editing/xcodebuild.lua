@@ -11,5 +11,7 @@ return {
     'stevearc/oil.nvim',
     'nvim-treesitter/nvim-treesitter',
   },
-  config = true,
+  config = function()
+    require('xcodebuild').setup()
+  end,
 }

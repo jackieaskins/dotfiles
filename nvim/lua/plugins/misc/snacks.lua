@@ -3,35 +3,36 @@ return {
   'folke/snacks.nvim',
   priority = 1000,
   lazy = false,
-  ---@type snacks.Config
-  opts = {
-    bigfile = { enabled = false },
-    image = { enabled = true },
-    indent = {
-      enabled = true,
-      animate = { enabled = false },
-      chunk = {
+  config = function()
+    require('snacks').setup({
+      bigfile = { enabled = false },
+      image = { enabled = true },
+      indent = {
         enabled = true,
-        char = { arrow = '─' },
+        animate = { enabled = false },
+        chunk = {
+          enabled = true,
+          char = { arrow = '─' },
+        },
       },
-    },
-    notifier = {
-      enabled = true,
-      margin = { top = 1 },
-      width = { max = 50 },
-    },
-    picker = require('plugins.misc.snacks.picker').get_config(),
-    quickfile = { enabled = true },
-    styles = {
-      input = { relative = 'cursor' },
-      notification = {
-        ft = 'markdown',
-        wo = { wrap = true },
+      notifier = {
+        enabled = true,
+        margin = { top = 1 },
+        width = { max = 50 },
       },
-      notification_history = { backdrop = 100 },
-    },
-    words = { enabled = true, modes = { 'n', 'c' } },
-  },
+      picker = require('plugins.misc.snacks.picker').get_config(),
+      quickfile = { enabled = true },
+      styles = {
+        input = { relative = 'cursor' },
+        notification = {
+          ft = 'markdown',
+          wo = { wrap = true },
+        },
+        notification_history = { backdrop = 100 },
+      },
+      words = { enabled = true, modes = { 'n', 'c' } },
+    })
+  end,
   init = function()
     local spinner = { '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏' }
     local progress = vim.defaulttable()

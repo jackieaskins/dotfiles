@@ -1,10 +1,10 @@
 ---@type LazySpec
 return {
   'luukvbaal/statuscol.nvim',
-  opts = function()
+  config = function()
     local builtin = require('statuscol.builtin')
 
-    return {
+    require('statuscol').setup({
       bt_ignore = { 'prompt' },
       ft_ignore = { 'dbui', 'oil', 'snacks_picker_preview' },
       segments = {
@@ -20,6 +20,6 @@ return {
         { text = { builtin.foldfunc }, click = 'v:lua.ScFa' }, -- Fold
         { text = { ' ' }, hl = 'FoldColumn' }, -- Spacer
       },
-    }
+    })
   end,
 }

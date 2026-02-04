@@ -1,7 +1,10 @@
 ---@type LazySpec
 return {
   'numToStr/Navigator.nvim',
-  config = true,
+  config = function()
+    ---@diagnostic disable-next-line: missing-fields
+    require('Navigator').setup({})
+  end,
   keys = {
     { '<C-h>', '<cmd>NavigatorLeft<CR>', mode = { 'n', 't' } },
     { '<C-l>', '<cmd>NavigatorRight<CR>', mode = { 'n', 't' } },

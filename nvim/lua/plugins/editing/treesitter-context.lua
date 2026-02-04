@@ -1,7 +1,7 @@
 ---@type LazySpec
 return {
   'nvim-treesitter/nvim-treesitter-context',
-  ---@module 'treesitter-context'
-  ---@type TSContext.UserConfig
-  opts = { multiline_threshold = 1 },
+  config = function()
+    require('treesitter-context').setup({ multiline_threshold = 1 })
+  end,
 }

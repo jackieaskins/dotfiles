@@ -3,14 +3,14 @@ return {
   'nvim-treesitter/nvim-treesitter-textobjects',
   branch = 'main',
   lazy = false,
-  ---@module 'nvim-treesitter-textobjects'
-  ---@type TSTextObjects.UserConfig
-  opts = {
-    select = {
-      enable = true,
-      lookahead = true,
-    },
-  },
+  config = function()
+    require('nvim-treesitter-textobjects').setup({
+      select = {
+        enable = true,
+        lookahead = true,
+      },
+    })
+  end,
   keys = function()
     local objects = { a = 'parameter', F = 'call', f = 'function', c = 'class', l = 'loop' }
 

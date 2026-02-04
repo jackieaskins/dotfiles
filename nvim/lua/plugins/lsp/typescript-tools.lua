@@ -3,8 +3,8 @@ return {
   'pmizio/typescript-tools.nvim',
   event = 'VeryLazy',
   dependencies = { 'nvim-lua/plenary.nvim' },
-  opts = function()
-    return {
+  config = function()
+    require('typescript-tools').setup({
       settings = {
         complete_function_calls = false,
         include_completions_with_insert_text = true,
@@ -60,6 +60,6 @@ return {
         end
       end,
       single_file_support = false,
-    }
+    })
   end,
 }

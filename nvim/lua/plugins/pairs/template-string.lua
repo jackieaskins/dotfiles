@@ -1,5 +1,7 @@
 ---@type LazySpec
 return {
   'axelvc/template-string.nvim',
-  config = true,
+  config = function()
+    require('template-string').setup()
+  end,
 }

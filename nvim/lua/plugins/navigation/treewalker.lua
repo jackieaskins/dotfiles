@@ -1,9 +1,9 @@
 ---@type LazySpec
 return {
   'aaronik/treewalker.nvim',
-  ---@module 'treewalker'
-  ---@type Opts
-  opts = {},
+  config = function()
+    require('treewalker').setup()
+  end,
   keys = {
     { '<M-h>', '<cmd>Treewalker Left<CR>' },
     { '<M-j>', '<cmd>Treewalker Down<CR>' },

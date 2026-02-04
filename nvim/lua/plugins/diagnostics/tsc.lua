@@ -2,9 +2,9 @@
 return {
   'dmmulroy/tsc.nvim',
   cmd = 'TSC',
-  ---@module 'tsc'
-  ---@type Opts
-  opts = {
-    pretty_errors = false,
-  },
+  config = function()
+    require('tsc').setup({
+      pretty_errors = false,
+    })
+  end,
 }

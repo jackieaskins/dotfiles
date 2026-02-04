@@ -9,8 +9,7 @@ return {
     vim.g.matchup_matchparen_hi_surround_always = 1
     vim.g.matchup_treesitter_disable_virtual_text = 1
   end,
-  ---@module 'match-up'
-  ---@type matchup.Config
-  ---@diagnostic disable-next-line: missing-fields
-  opts = {},
+  config = function()
+    require('match-up').setup({})
+  end,
 }

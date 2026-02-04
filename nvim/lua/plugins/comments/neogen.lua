@@ -2,7 +2,9 @@
 return {
   'danymat/neogen',
   cmd = 'Neogen',
-  opts = {
-    snippet_engine = require('utils').get_snippet_engine(),
-  },
+  config = function()
+    require('neogen').setup({
+      snippet_engine = require('utils').get_snippet_engine(),
+    })
+  end,
 }

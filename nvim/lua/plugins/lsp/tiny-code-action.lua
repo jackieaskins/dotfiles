@@ -14,13 +14,15 @@ return {
     -- For some reason this plugin defaults to `DiagnosticWarning` instead of `DiagnosticWarn`
     vim.api.nvim_set_hl(0, 'DiagnosticWarning', { link = 'DiagnosticWarn' })
   end,
-  opts = {
-    backend = 'delta',
-    backend_opts = {
-      delta = {
-        args = {}, -- Clearing args so line number highlights are correct
+  config = function()
+    require('tiny-code-action').setup({
+      backend = 'delta',
+      backend_opts = {
+        delta = {
+          args = {}, -- Clearing args so line number highlights are correct
+        },
       },
-    },
-    picker = 'snacks',
-  },
+      picker = 'snacks',
+    })
+  end,
 }

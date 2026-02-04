@@ -10,5 +10,7 @@ return {
       mode = 'i',
     },
   },
-  opts = {},
+  config = function()
+    require('in-and-out').setup({})
+  end,
 }

@@ -2,5 +2,7 @@
 return {
   'johmsalas/text-case.nvim',
   event = 'VeryLazy',
-  config = true,
+  config = function()
+    require('textcase').setup()
+  end,
 }

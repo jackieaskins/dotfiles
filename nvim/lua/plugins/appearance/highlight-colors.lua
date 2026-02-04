@@ -1,7 +1,7 @@
 ---@type LazySpec
 return {
   'brenoprata10/nvim-highlight-colors',
-  opts = function()
+  config = function()
     local custom_colors = {}
 
     for name, color in pairs(require('colors').get_colors()) do
@@ -9,10 +9,10 @@ return {
       table.insert(custom_colors, { label = '%-%-ctp%-' .. name, color = color })
     end
 
-    return {
+    require('nvim-highlight-colors').setup({
       custom_colors = custom_colors,
       enable_named_colors = false,
       excluded_filetypes = { 'lazy' },
-    }
+    })
   end,
 }

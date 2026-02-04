@@ -7,7 +7,7 @@ return {
   keys = {
     { '<leader>mv', '<cmd>Markview toggle<CR>' },
   },
-  ---@module 'markview'
-  ---@type markview.config
-  opts = {},
+  config = function()
+    require('markview').setup()
+  end,
 }

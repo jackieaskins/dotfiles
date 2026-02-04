@@ -2,9 +2,9 @@
 return {
   'stevearc/conform.nvim',
   lazy = true,
-  ---@module 'conform'
-  ---@type conform.setupOpts
-  opts = { undojoin = true },
+  config = function()
+    require('conform').setup({ undojoin = true })
+  end,
   init = function()
     local utils = require('utils')
     local formatting_utils = require('formatting')
