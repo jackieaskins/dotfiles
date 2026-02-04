@@ -79,7 +79,7 @@ augroup('lsp_folding', {
 ----------------------------------------------------------------------
 augroup('treesitter', {
   {
-    'Filetype',
+    'FileType',
     callback = function(args)
       pcall(vim.treesitter.start, args.buf)
     end,
