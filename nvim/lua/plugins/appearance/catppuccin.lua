@@ -7,7 +7,7 @@ return {
   config = function()
     ---@diagnostic disable-next-line: missing-fields
     require('catppuccin').setup({
-      term_colors = true, -- Setting for baleia.nvim
+      auto_integrations = false,
       background = { light = 'latte', dark = 'mocha' },
       custom_highlights = function(colors)
         local utils = require('catppuccin.utils.colors')
@@ -106,8 +106,13 @@ return {
           require('modes').get_and_link_mode_highlights(colors, cursor_line_hl)
         )
       end,
-      auto_integrations = true,
-      default_integrations = true,
+      default_integrations = false,
+      integrations = {
+        blink_cmp = { style = 'bordered' },
+        gitsigns = true,
+        snacks = { enabled = true },
+        treesitter_context = true,
+      },
       lsp_styles = {
         enabled = true,
         underlines = {
@@ -117,6 +122,7 @@ return {
           information = { 'undercurl' },
         },
       },
+      term_colors = true, -- Setting for baleia.nvim
     })
 
     vim.cmd.colorscheme('catppuccin')
