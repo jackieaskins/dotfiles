@@ -87,14 +87,10 @@ return {
         preset = snippet_engine == 'nvim' and 'default' or snippet_engine,
       },
       sources = {
-        default = { 'lazydev', 'dadbod', 'lsp', 'path', 'snippets', 'buffer' },
+        default = { 'lazydev', 'lsp', 'path', 'snippets', 'buffer' },
         providers = {
           buffer = {
             opts = { get_bufnrs = vim.api.nvim_list_bufs },
-          },
-          dadbod = {
-            name = 'Dadbod',
-            module = 'vim_dadbod_completion.blink',
           },
           lazydev = {
             name = 'LazyDev',
