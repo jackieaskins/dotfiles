@@ -11,25 +11,7 @@ if not vim.uv.fs_stat(lazypath) then
 end
 vim.o.runtimepath = lazypath .. ',' .. vim.o.runtimepath
 
-require('lazy').setup({
-  { import = 'plugins.appearance' },
-  { import = 'plugins.comments' },
-  {
-    import = 'plugins.custom',
-    cond = require('utils').file_exists('~/dotfiles/nvim/lua/plugins/custom/*'),
-  },
-  { import = 'plugins.diagnostics' },
-  { import = 'plugins.editing' },
-  { import = 'plugins.formatting' },
-  { import = 'plugins.git' },
-  { import = 'plugins.lsp' },
-  { import = 'plugins.misc' },
-  { import = 'plugins.navigation' },
-  { import = 'plugins.notifications' },
-  { import = 'plugins.pairs' },
-  { import = 'plugins.syntax' },
-  { import = 'plugins.terminal' },
-}, {
+require('lazy').setup('plugins', {
   change_detection = { notify = false },
   checker = { enabled = true, notify = false },
   dev = {

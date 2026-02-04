@@ -56,7 +56,7 @@ return {
     },
     init = function()
       local utils = require('utils')
-      local git_oil = require('plugins.navigation.oil.git')
+      local git_oil = require('plugins.oil.git')
 
       utils.augroup('oil', {
         {

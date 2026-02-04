@@ -20,7 +20,7 @@ return {
         margin = { top = 1 },
         width = { max = 50 },
       },
-      picker = require('plugins.misc.snacks.picker').get_config(),
+      picker = require('plugins.snacks.picker').get_config(),
       quickfile = { enabled = true },
       styles = {
         input = { relative = 'cursor' },
@@ -37,7 +37,7 @@ return {
     local spinner = { '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏' }
     local progress = vim.defaulttable()
 
-    require('plugins.misc.snacks.picker').get_init()
+    require('plugins.snacks.picker').get_init()
 
     local utils = require('utils')
 
@@ -120,6 +120,6 @@ return {
       },
     }
 
-    return vim.list_extend(default_keys, require('plugins.misc.snacks.picker').get_keys())
+    return vim.list_extend(default_keys, require('plugins.snacks.picker').get_keys())
   end,
 }
