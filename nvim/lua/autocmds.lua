@@ -65,8 +65,11 @@ augroup('lsp_folding', {
       end
 
       local winid = vim.fn.bufwinid(args.buf)
-      vim.api.nvim_set_option_value('foldmethod', 'expr', { win = winid })
-      vim.api.nvim_set_option_value('foldexpr', 'v:lua.vim.lsp.foldexpr()', { win = winid })
+
+      if winid ~= -1 then
+        vim.api.nvim_set_option_value('foldmethod', 'expr', { win = winid })
+        vim.api.nvim_set_option_value('foldexpr', 'v:lua.vim.lsp.foldexpr()', { win = winid })
+      end
     end,
   },
 })
