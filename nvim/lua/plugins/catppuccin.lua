@@ -108,7 +108,7 @@ return {
       end,
       default_integrations = false,
       integrations = {
-        blink_cmp = { style = 'bordered' },
+        blink_cmp = true,
         gitsigns = true,
         snacks = { enabled = true },
         treesitter_context = true,
