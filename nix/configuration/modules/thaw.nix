@@ -1,11 +1,9 @@
 { ... }:
 {
-  homebrew.casks = [
-    "jordanbaird-ice@beta"
-  ];
+  homebrew.casks = [ "thaw" ];
 
   system.defaults.CustomUserPreferences = {
-    "com.jordanbaird.Ice" = {
+    "com.stonerl.Thaw" = {
       ShowOnClick = 0;
       ShowOnScroll = 0;
       UseIceBar = 1;

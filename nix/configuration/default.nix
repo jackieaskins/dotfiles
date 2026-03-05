@@ -46,6 +46,7 @@
 
   homebrew.casks = [
     "logitune"
+    "logitech-g-hub"
     "virtualbuddy"
   ];
 
@@ -60,7 +61,6 @@
         "/Applications/BetterDisplay.app"
         "/Applications/DockDoor.app"
         "/Applications/Hammerspoon.app"
-        "/Applications/Nix Apps/Ice.app"
         "/Applications/Raycast.app"
         "/Applications/Rocket.app"
         "/Applications/WezTerm.app"
