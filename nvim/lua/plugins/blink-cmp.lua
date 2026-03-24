@@ -3,7 +3,7 @@ local snippet_engine = require('utils').get_snippet_engine()
 ---@type LazySpec
 return {
   'saghen/blink.cmp',
-  build = 'nix run .#build-plugin',
+  build = 'nix --accept-flake-config run .#build-plugin',
   config = function()
     require('blink.cmp').setup({
       appearance = {
