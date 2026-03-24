@@ -13,6 +13,21 @@
     nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
   };
 
+  nixpkgs = {
+    # Temporary fix for direnv failing to build
+    # Borrowed from https://github.com/dvcorreia/nix-config/commit/a4fe9902a3bee18fcde502eb3d5313c328f419ea
+    # Tracking for fix: https://nixpk.gs/pr-tracker.html?pr=502769
+    overlays = [
+      (final: prev: {
+        direnv = prev.direnv.overrideAttrs (old: {
+          postPatch = ''
+            substituteInPlace GNUmakefile --replace-fail " -linkmode=external" ""
+          '';
+        });
+      })
+    ];
+  };
+
   lib.custom = {
     isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
 
