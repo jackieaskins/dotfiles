@@ -125,6 +125,6 @@ return {
       term_colors = true, -- Setting for baleia.nvim
     })
 
-    vim.cmd.colorscheme('catppuccin')
+    vim.cmd.colorscheme('catppuccin-nvim')
   end,
 }
