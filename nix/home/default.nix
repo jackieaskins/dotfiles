@@ -45,6 +45,7 @@
       pkgs.gnumake
       pkgs.imagemagick
       pkgs.jq
+      pkgs.nodejs
       pkgs.ripgrep
       pkgs.sesh
       pkgs.tree

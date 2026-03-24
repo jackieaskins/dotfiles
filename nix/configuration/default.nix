@@ -59,10 +59,11 @@
     let
       loginItems = [
         "/Applications/BetterDisplay.app"
-        "/Applications/DockDoor.app"
+        "/Applications/Firefox.app"
         "/Applications/Hammerspoon.app"
         "/Applications/Raycast.app"
         "/Applications/Rocket.app"
+        "/Applications/Thaw.app"
         "/Applications/WezTerm.app"
       ];
     in
