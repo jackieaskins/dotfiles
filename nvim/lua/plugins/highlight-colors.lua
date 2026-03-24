@@ -12,7 +12,7 @@ return {
     require('nvim-highlight-colors').setup({
       custom_colors = custom_colors,
       enable_named_colors = false,
-      excluded_filetypes = { 'lazy' },
+      exclude_filetypes = { 'lazy' },
     })
   end,
 }
