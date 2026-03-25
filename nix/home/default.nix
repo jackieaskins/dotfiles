@@ -3,10 +3,11 @@
   inputs,
   pkgs,
   lib,
-  username,
-  homeDirectory,
   ...
 }:
+let
+  homeDirectory = config.home.homeDirectory;
+in
 {
   nix = {
     gc.automatic = true;
@@ -47,9 +48,6 @@
   ];
 
   home = {
-    username = username;
-    homeDirectory = homeDirectory;
-
     # Check https://nix-community.github.io/home-manager/release-notes.xhtml before updating
     stateVersion = "26.05";
     sessionPath = [ "${homeDirectory}/dotfiles/bin" ];

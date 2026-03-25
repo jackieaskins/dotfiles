@@ -23,6 +23,5 @@
     "/System/Applications/Music.app"
     "/Applications/WezTerm.app"
     "/Applications/Firefox.app"
-    "/System/Applications/Passwords.app"
   ];
 }

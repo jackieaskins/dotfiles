@@ -38,42 +38,88 @@
       ...
     }:
     let
-      args = {
-        inherit inputs;
-        username = "jackie";
-        homeDirectory = "/Users/jackie";
-        emailBase = "askinsjacqueline";
-        emailSuffix = "gmail.com";
-      };
+      mkDarwinConfig =
+        {
+          username,
+          homeDirectory,
+          modules,
+        }:
+        nix-darwin.lib.darwinSystem {
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./configuration
+            (
+              { ... }:
+              {
+                system.primaryUser = username;
+                users.users.${username}.home = homeDirectory;
+              }
+            )
+
+            nix-homebrew.darwinModules.nix-homebrew
+            (
+              { config, ... }:
+              {
+                nix-homebrew = {
+                  enable = true;
+                  user = config.system.primaryUser;
+                  autoMigrate = true;
+                };
+              }
+            )
+          ]
+          ++ modules;
+        };
+
+      mkHomeConfig =
+        {
+          username,
+          homeDirectory,
+          email,
+          modules,
+        }:
+        home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+          extraSpecialArgs = {
+            inherit inputs;
+            inherit email;
+          };
+          modules = [
+            ./home
+
+            (
+              { ... }:
+              {
+                home = {
+                  username = username;
+                  homeDirectory = homeDirectory;
+                };
+              }
+            )
+          ]
+          ++ modules;
+        };
+
+      emailBase = "askinsjacqueline";
+      personalUsername = "jackie";
+      personalHomeDirectory = "/Users/jackie";
+      personalEmail = "${emailBase}@gmail.com";
     in
     {
-      darwinConfigurations."Jackies-MacBook-Pro" = nix-darwin.lib.darwinSystem {
-        specialArgs = args;
-        modules = [
-          ./personal/configuration.nix
-          ./configuration
+      mkDarwinConfig = mkDarwinConfig;
+      mkHomeConfig = mkHomeConfig;
 
-          nix-homebrew.darwinModules.nix-homebrew
-          (
-            { config, ... }:
-            {
-              nix-homebrew = {
-                enable = true;
-                user = config.system.primaryUser;
-                autoMigrate = true;
-              };
-            }
-          )
-        ];
+      darwinConfigurations."Jackies-MacBook-Pro" = mkDarwinConfig {
+        username = personalUsername;
+        homeDirectory = personalHomeDirectory;
+        modules = [ ./personal/configuration.nix ];
       };
 
-      homeConfigurations.jackie = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.aarch64-darwin;
-        extraSpecialArgs = args;
-        modules = [
-          ./personal/home.nix
-          ./home
-        ];
+      homeConfigurations.jackie = mkHomeConfig {
+        username = personalUsername;
+        homeDirectory = personalHomeDirectory;
+        email = personalEmail;
+        modules = [ ./personal/home.nix ];
       };
     };
 }

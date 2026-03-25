@@ -1,4 +1,4 @@
-{ emailBase, emailSuffix, ... }:
+{ email, ... }:
 {
   programs.git = {
     enable = true;
@@ -17,7 +17,7 @@
       rerere.enabled = true;
       rebase.autoStash = true;
       user = {
-        email = "${emailBase}@${emailSuffix}";
+        email = email;
         name = "Jacqueline Askins";
       };
     };
@@ -27,7 +27,6 @@
       ".git"
       ".ignore"
       ".repro"
-      ".solargraph.yml"
     ];
   };
 }

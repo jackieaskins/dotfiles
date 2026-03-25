@@ -3,8 +3,6 @@
   pkgs,
   inputs,
   lib,
-  homeDirectory,
-  username,
   ...
 }:
 {
@@ -13,9 +11,7 @@
     # darwin-rebuild changelog
     stateVersion = 6;
     configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;
-    primaryUser = username;
   };
-  users.users.${username}.home = homeDirectory;
 
   nix = {
     settings = {
@@ -37,6 +33,7 @@
 
   environment.systemPackages = [
     pkgs.vscodium
+    pkgs.slack
   ];
 
   security.pam.services.sudo_local = {
