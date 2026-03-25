@@ -36,18 +36,7 @@
   environment.enableAllTerminfo = true;
 
   environment.systemPackages = [
-    pkgs.discord
-    pkgs.iina
-    pkgs.keycastr
-    pkgs.mas
-    pkgs.qmk
     pkgs.vscodium
-  ];
-
-  homebrew.casks = [
-    "logitune"
-    "logitech-g-hub"
-    "virtualbuddy"
   ];
 
   security.pam.services.sudo_local = {

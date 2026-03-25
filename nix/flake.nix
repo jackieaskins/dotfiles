@@ -42,12 +42,15 @@
         inherit inputs;
         username = "jackie";
         homeDirectory = "/Users/jackie";
+        emailBase = "askinsjacqueline";
+        emailSuffix = "gmail.com";
       };
     in
     {
       darwinConfigurations."Jackies-MacBook-Pro" = nix-darwin.lib.darwinSystem {
         specialArgs = args;
         modules = [
+          ./personal/configuration.nix
           ./configuration
 
           nix-homebrew.darwinModules.nix-homebrew
@@ -67,7 +70,10 @@
       homeConfigurations.jackie = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.aarch64-darwin;
         extraSpecialArgs = args;
-        modules = [ ./home ];
+        modules = [
+          ./personal/home.nix
+          ./home
+        ];
       };
     };
 }

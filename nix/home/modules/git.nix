@@ -1,7 +1,4 @@
-{ ... }:
-let
-  emailBase = "askinsjacqueline";
-in
+{ emailBase, emailSuffix, ... }:
 {
   programs.git = {
     enable = true;
@@ -20,7 +17,7 @@ in
       rerere.enabled = true;
       rebase.autoStash = true;
       user = {
-        email = "${emailBase}@gmail.com";
+        email = "${emailBase}@${emailSuffix}";
         name = "Jacqueline Askins";
       };
     };
