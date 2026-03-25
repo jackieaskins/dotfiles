@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, lib, ... }:
 let
   homeDirectory = config.users.users.${config.system.primaryUser}.home;
 in
@@ -40,9 +40,16 @@ in
     dock = {
       appswitcher-all-displays = false;
       autohide = true;
+      expose-group-apps = true;
       magnification = true;
-      persistent-others = [
-        "${homeDirectory}/Downloads"
+      persistent-others = lib.mkForce [
+        {
+          folder = {
+            path = "${homeDirectory}/Downloads";
+            arrangement = "date-added";
+            showas = "fan";
+          };
+        }
       ];
       show-recents = false;
     };
