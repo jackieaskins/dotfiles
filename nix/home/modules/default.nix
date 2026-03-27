@@ -13,6 +13,7 @@
     ./hammerspoon.nix
     ./jankyborders.nix
     ./karabiner.nix
+    ./librewolf.nix
     ./neovim
     ./starship.nix
     ./tmux.nix
