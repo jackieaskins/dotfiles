@@ -68,7 +68,12 @@ in
     };
 
     settings = {
+      "sidebar.revamped" = true;
       "sidebar.verticalTabs" = true;
+
+      "privacy.resistFingerprinting" = false;
+      "privacy.fingerprintingProtection" = true;
+      "privacy.fingerprintingProtection.overrides" = "+AllTargets,-CSSPrefersColorScheme";
     };
   };
 }
