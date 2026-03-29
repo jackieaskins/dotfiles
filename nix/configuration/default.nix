@@ -21,6 +21,8 @@
 
     nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
     gc.automatic = true;
+
+    package = pkgs.nixVersions.latest;
   };
 
   nixpkgs = {
