@@ -34,7 +34,8 @@
   environment.enableAllTerminfo = true;
 
   environment.systemPackages = [
-    pkgs.vscodium
+    # VSCode & related packages are currently broken on aarch64-darwin
+    # pkgs.vscodium
     pkgs.slack
   ];
 
