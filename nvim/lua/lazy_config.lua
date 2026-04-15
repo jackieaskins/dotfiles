@@ -29,7 +29,6 @@ require('lazy').setup('plugins', {
 
 vim.diagnostic.config({
   signs = false,
-  jump = { float = false },
   underline = false,
   virtual_lines = false,
   virtual_text = { spacing = 1 },

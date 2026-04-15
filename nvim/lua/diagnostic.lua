@@ -8,7 +8,6 @@ vim.diagnostic.config({
   },
   severity_sort = true,
   update_in_insert = false,
-  jump = { float = false },
   virtual_lines = false,
   virtual_text = false,
 })
