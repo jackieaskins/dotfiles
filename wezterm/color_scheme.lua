@@ -1,49 +1,79 @@
 local wezterm = require('wezterm')
 
-local appearance = wezterm.gui and wezterm.gui.get_appearance() or 'Dark'
-local color_scheme_name = appearance:find('Light') and 'Catppuccin Latte' or 'Catppuccin Mocha'
+local function get_default_color_scheme(appearance)
+  appearance = appearance or 'Dark'
+  local name = appearance:find('Light') and 'Catppuccin Latte' or 'Catppuccin Mocha'
+  return wezterm.color.get_builtin_schemes()[name]
+end
 
-local color_scheme = wezterm.color.get_builtin_schemes()[color_scheme_name]
+local M = {}
 
--- Use mauve instead of pink for purple terminal color
-local ansi = color_scheme.ansi
-ansi[6] = color_scheme.tab_bar.active_tab.bg_color
+function M.get_colors(appearance)
+  local color_scheme = get_default_color_scheme(appearance)
 
-local brights = color_scheme.brights
-brights[6] = ansi[6]
+  local ansi = color_scheme.ansi
+  local brights = color_scheme.brights
 
-local accent = ansi[5]
+  local colors = {
+    fg = color_scheme.foreground,
+    bg = color_scheme.background,
 
-local colors = {
-  ansi = ansi,
-  background = color_scheme.background,
-  brights = brights,
-  tab_bar = {
-    active_tab = {
-      fg_color = accent,
-      bg_color = color_scheme.visual_bell,
-    },
-    inactive_tab = {
-      fg_color = color_scheme.scrollbar_thumb,
-      bg_color = color_scheme.background,
-    },
-    inactive_tab_hover = {
-      fg_color = accent,
-      bg_color = color_scheme.background,
-    },
-    inactive_tab_edge = color_scheme.background,
-    new_tab = {
-      bg_color = color_scheme.background,
-      fg_color = accent,
-    },
-    new_tab_hover = {
-      fg_color = color_scheme.visual_bell,
-      bg_color = accent,
-    },
-  },
-}
+    red = ansi[2],
+    green = ansi[3],
+    yellow = ansi[4],
+    blue = ansi[5],
+    pink = ansi[6],
+    teal = ansi[7],
+    peach = color_scheme.indexed[16],
+    rosewater = color_scheme.indexed[17],
+    mauve = color_scheme.tab_bar.active_tab.bg_color,
 
-return {
-  name = color_scheme_name,
-  colors = colors,
-}
+    subtext0 = brights[8],
+    subtext1 = ansi[8],
+
+    surface0 = color_scheme.visual_bell,
+    surface1 = ansi[1],
+    surface2 = brights[1],
+  }
+
+  return colors
+end
+
+function M.get_color_scheme(appearance)
+  local color_scheme = get_default_color_scheme(appearance)
+  local colors = M.get_colors(appearance)
+
+  -- Overrides
+  local accent = colors.blue
+
+  -- Use mauve instead of pink for purple terminal color
+  color_scheme.ansi[6] = colors.mauve
+  color_scheme.brights[6] = colors.mauve
+
+  -- Tab Bar
+  color_scheme.tab_bar.background = colors.bg
+
+  -- Active Tab
+  color_scheme.tab_bar.active_tab.fg_color = accent
+  color_scheme.tab_bar.active_tab.bg_color = colors.surface0
+
+  -- Inactive Tab
+  color_scheme.tab_bar.inactive_tab.fg_color = colors.surface1
+  color_scheme.tab_bar.inactive_tab.bg_color = colors.bg
+
+  color_scheme.tab_bar.inactive_tab_hover.fg_color = accent
+  color_scheme.tab_bar.inactive_tab_hover.bg_color = colors.bg
+
+  color_scheme.tab_bar.inactive_tab_edge = colors.bg
+
+  -- New Tab
+  color_scheme.tab_bar.new_tab.bg_color = colors.bg
+  color_scheme.tab_bar.new_tab.fg_color = accent
+
+  color_scheme.tab_bar.new_tab_hover.fg_color = colors.surface0
+  color_scheme.tab_bar.new_tab_hover.bg_color = accent
+
+  return color_scheme
+end
+
+return M

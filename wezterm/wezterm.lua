@@ -12,16 +12,7 @@ config.term = 'wezterm'
 config.force_reverse_video_cursor = true
 config.swallow_mouse_click_on_pane_focus = true
 
-----------------------------------------------------------------------
---                               Keys                               --
-----------------------------------------------------------------------
-config.keys = {
-  {
-    key = 'Enter',
-    mods = 'ALT',
-    action = wezterm.action.DisableDefaultAssignment,
-  },
-}
+config.keys = require('keys')
 
 ----------------------------------------------------------------------
 --                               Font                               --
@@ -37,34 +28,38 @@ config.freetype_render_target = 'HorizontalLcd'
 --                           Color Scheme                           --
 ----------------------------------------------------------------------
 
+local appearance = wezterm.gui and wezterm.gui.get_appearance()
 local cs = require('color_scheme')
-local colors = cs.colors
 
-config.color_scheme = cs.name
-config.colors = colors
+local colors = cs.get_colors(appearance)
+config.colors = cs.get_color_scheme(appearance)
 
 ----------------------------------------------------------------------
 --                             Tab Bar                              --
 ----------------------------------------------------------------------
 
+config.use_fancy_tab_bar = false
+config.tab_bar_at_bottom = true
 config.show_close_tab_button_in_tabs = false
-config.show_tab_index_in_tab_bar = false
+config.show_new_tab_button_in_tab_bar = false
 config.window_frame = {
   font = config.font,
   font_size = config.font_size,
-  active_titlebar_bg = colors.background,
-  inactive_titlebar_bg = colors.background,
+  active_titlebar_bg = colors.bg,
+  inactive_titlebar_bg = colors.bg,
 }
-config.hide_tab_bar_if_only_one_tab = true
 
-wezterm.on('format-tab-title', function(tab, tabs)
+config.show_tab_index_in_tab_bar = false
+wezterm.on('format-tab-title', function(tab)
   return {
     { Text = ' ' },
-    { Text = #tabs > 1 and (tab.tab_index + 1) .. ' ' or '' },
+    { Text = (tab.tab_index + 1) .. ' ' },
     { Text = tab.active_pane.title },
     { Text = ' ' },
   }
 end)
+
+require('status')
 
 ----------------------------------------------------------------------
 --                              Window                              --
@@ -72,10 +67,7 @@ end)
 
 config.window_decorations = 'RESIZE'
 config.adjust_window_size_when_changing_font_size = false
-config.window_padding = { left = 0, right = 0, top = '0.5cell', bottom = '0.5cell' }
-config.window_content_alignment = {
-  horizontal = 'Center',
-  vertical = 'Center',
-}
+config.window_padding = { left = 0, right = 0, top = '0.5cell', bottom = 0 }
+config.window_content_alignment = { horizontal = 'Center', vertical = 'Center' }
 
 return config
