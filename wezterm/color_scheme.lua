@@ -11,8 +11,8 @@ local M = {}
 function M.get_colors(appearance)
   local color_scheme = get_default_color_scheme(appearance)
 
-  local ansi = color_scheme.ansi
-  local brights = color_scheme.brights
+  local ansi = color_scheme.ansi or {}
+  local brights = color_scheme.brights or {}
 
   local colors = {
     fg = color_scheme.foreground,

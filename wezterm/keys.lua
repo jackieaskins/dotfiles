@@ -7,8 +7,8 @@ local function focus_window(mod_key, vim_direction, pane_direction)
   return wezterm.action_callback(function(window, pane)
     local process = pane:get_foreground_process_name()
 
-    local is_vi_process = process:find('n?vim') ~= nil
-    local is_tmux = process:find('tmux') ~= nil
+    local is_vi_process = process and process:find('n?vim') ~= nil
+    local is_tmux = process and process:find('tmux') ~= nil
 
     if is_vi_process or is_tmux then
       window:perform_action(act.SendKey({ key = vim_direction, mods = mod_key }), pane)
