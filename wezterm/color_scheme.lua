@@ -46,6 +46,8 @@ function M.get_color_scheme(appearance)
   -- Overrides
   local accent = colors.blue
 
+  color_scheme.split = accent
+
   -- Use mauve instead of pink for purple terminal color
   color_scheme.ansi[6] = colors.mauve
   color_scheme.brights[6] = colors.mauve

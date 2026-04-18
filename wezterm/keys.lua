@@ -3,8 +3,6 @@ local workspaces = require('workspaces')
 
 local act = wezterm.action
 
-local navigate_mod = 'CTRL'
-
 local function focus_window(mod_key, vim_direction, pane_direction)
   return wezterm.action_callback(function(window, pane)
     local process = pane:get_foreground_process_name()
@@ -25,7 +23,7 @@ return {
   {
     key = 'Enter',
     mods = 'ALT',
-    action = wezterm.action.DisableDefaultAssignment,
+    action = act.DisableDefaultAssignment,
   },
 
   -- General
@@ -44,26 +42,62 @@ return {
     mods = 'CMD',
     action = workspaces.open_switcher(),
   },
+  {
+    key = 'n',
+    mods = 'CMD|SHIFT',
+    action = act.PromptInputLine({
+      description = 'Enter workspace name',
+      action = wezterm.action_callback(function(window, pane, line)
+        if line then
+          window:perform_action(act.SwitchToWorkspace({ name = line }), pane)
+        end
+      end),
+    }),
+  },
 
   -- Navigator
   {
     key = 'h',
-    mods = navigate_mod,
-    action = focus_window(navigate_mod, 'h', 'Left'),
+    mods = 'CTRL',
+    action = focus_window('CTRL', 'h', 'Left'),
   },
   {
     key = 'j',
-    mods = navigate_mod,
-    action = focus_window(navigate_mod, 'j', 'Down'),
+    mods = 'CTRL',
+    action = focus_window('CTRL', 'j', 'Down'),
   },
   {
     key = 'k',
-    mods = navigate_mod,
-    action = focus_window(navigate_mod, 'k', 'Up'),
+    mods = 'CTRL',
+    action = focus_window('CTRL', 'k', 'Up'),
   },
   {
     key = 'l',
-    mods = navigate_mod,
-    action = focus_window(navigate_mod, 'l', 'Right'),
+    mods = 'CTRL',
+    action = focus_window('CTRL', 'l', 'Right'),
+  },
+
+  {
+    key = '_',
+    mods = 'CMD',
+    action = act.SplitVertical,
+  },
+  {
+    key = '|',
+    mods = 'CMD',
+    action = act.SplitHorizontal,
+  },
+
+  {
+    key = ',',
+    mods = 'CMD',
+    action = act.PromptInputLine({
+      description = 'Enter tab title',
+      action = wezterm.action_callback(function(window, _, line)
+        if line then
+          window:active_tab():set_title(line)
+        end
+      end),
+    }),
   },
 }
