@@ -22,42 +22,7 @@ local hl_groups = {
 ---@alias FileStatuses table<string, { index: string, working_tree: string }>
 
 ---@class (private) vim.var_accessor
----@field oil_git { file_statuses: FileStatuses, files: string[] }
----@field oil_file_statuses? FileStatuses
-
----@param items string[]
----@return FileStatuses
-local function get_file_statuses(items)
-  local file_statuses = {}
-
-  for _, item in ipairs(items) do
-    local index_status, working_tree_status, file = item:match('^(.)(.)%s(.+)$')
-    local statuses = { index = index_status, working_tree = working_tree_status }
-
-    local is_dir = file:match('.+/.*') ~= nil
-
-    if is_dir then
-      local dir = vim.split(file, '/', { plain = true })[1]
-      local curr_statuses = file_statuses[dir]
-
-      if curr_statuses then
-        if curr_statuses.index ~= index_status then
-          file_statuses[dir].index = 'M'
-        end
-
-        if curr_statuses.working_tree ~= working_tree_status then
-          file_statuses[dir].working_tree = 'M'
-        end
-      else
-        file_statuses[dir] = statuses
-      end
-    else
-      file_statuses[file] = statuses
-    end
-  end
-
-  return file_statuses
-end
+---@field oil_git { file_statuses: FileStatuses }
 
 local M = {}
 
@@ -71,7 +36,6 @@ function M.set_signs(buf)
   end
 
   local file_statuses = oil_git.file_statuses
-  local git_files = oil_git.files
 
   vim.api.nvim_buf_clear_namespace(buf, oil_gitsigns_ns, 0, -1)
 
@@ -91,15 +55,40 @@ function M.set_signs(buf)
 
     -- entry.id will only be set for changes that have been committed
     if entry and entry.id and entry.name ~= '..' then
-      local statuses = file_statuses[entry.name]
+      local statuses = file_statuses[entry.name] or file_statuses['*']
 
       if statuses then
         set_signs({ statuses.working_tree, statuses.index })
-      elseif not vim.tbl_contains(git_files, entry.name) then
-        set_signs({ '!', '!' })
       end
     end
   end
+end
+
+local function get_dir_statuses(dir, new_statuses, all_file_statuses)
+  local curr_statuses = all_file_statuses[dir]
+
+  if not curr_statuses then
+    return new_statuses
+  end
+
+  local function get_new_status(type)
+    local curr, new = curr_statuses[type], new_statuses[type]
+
+    if new == '!' or new == curr then
+      return curr
+    end
+
+    if curr == ' ' then
+      return new
+    end
+
+    return 'M'
+  end
+
+  return {
+    index = get_new_status('index'),
+    working_tree = get_new_status('working_tree'),
+  }
 end
 
 ---Load git info and add git signs to oil buffer
@@ -111,6 +100,7 @@ function M.load_git_signs(buf)
   }
 
   ---@param cmd string
+  ---@param cb fun(output_lines: string[])
   local function run(cmd, cb)
     vim.system(vim.split(cmd, ' '), run_opts, function(out)
       if out.code ~= 0 then
@@ -121,13 +111,42 @@ function M.load_git_signs(buf)
     end)
   end
 
-  run('git -c status.relativePaths=true status --short .', function(status_output)
+  run('git -c status.relativePaths=true status --short --ignored=matching .', function(status_output)
     run('git ls-tree HEAD --name-only .', function(file_output)
       vim.schedule(function()
-        vim.b[buf].oil_git = {
-          file_statuses = get_file_statuses(status_output),
-          files = file_output,
-        }
+        ---@type FileStatuses
+        local all_file_statuses = {}
+
+        for _, file in ipairs(file_output) do
+          local is_dir = file:match('.+/.*') ~= nil
+          local dir = vim.split(file, '/', { plain = true })[1]
+          local key = is_dir and dir or file
+
+          all_file_statuses[key] = { index = ' ', working_tree = ' ' }
+        end
+
+        for _, status in ipairs(status_output) do
+          ---@type string, string, string
+          local index_status, working_tree_status, file = status:match('^(.)(.)%s(.+)$')
+          file = file:match('.+ -> (.+)') or file -- Parse out renamed files
+
+          local statuses = { index = index_status, working_tree = working_tree_status }
+
+          local is_dir = file:match('.+/.*') ~= nil
+
+          -- Handle files in gitignored directories or parent directories
+          if file == './' or file:match('(%.%./)$') then
+            all_file_statuses['*'] = statuses
+          elseif is_dir then
+            local dir = vim.split(file, '/', { plain = true })[1]
+
+            all_file_statuses[dir] = get_dir_statuses(dir, statuses, all_file_statuses)
+          else
+            all_file_statuses[file] = statuses
+          end
+        end
+
+        vim.b[buf].oil_git = { file_statuses = all_file_statuses }
 
         M.set_signs(buf)
       end)
