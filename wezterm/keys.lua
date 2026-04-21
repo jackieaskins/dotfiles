@@ -100,4 +100,9 @@ return {
       end),
     }),
   },
+  {
+    key = 'C',
+    mods = 'CMD|SHIFT',
+    action = act.ActivateCopyMode,
+  },
 }

@@ -69,6 +69,8 @@ function M.open_switcher()
               }),
               p
             )
+
+            wezterm.run_child_process({ os.getenv('SHELL'), '-c', 'zoxide add' .. path })
           end
         end),
       }),

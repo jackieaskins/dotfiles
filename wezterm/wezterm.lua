@@ -54,7 +54,7 @@ wezterm.on('format-tab-title', function(tab)
   return {
     { Text = ' ' },
     { Text = (tab.tab_index + 1) .. ' ' },
-    { Text = tab.active_pane.title },
+    { Text = tab.tab_title == '' and tab.active_pane.title or tab.tab_title },
     { Text = ' ' },
   }
 end)
