@@ -2,11 +2,12 @@
 {
   programs.bat = {
     enable = true;
-    extraPackages = [
-      pkgs.bat-extras.batdiff
-      pkgs.bat-extras.batgrep
-      pkgs.bat-extras.batman
-    ];
+    # TODO: Update when bat-extras are not broken
+    # extraPackages = [
+    #   pkgs.bat-extras.batdiff
+    #   pkgs.bat-extras.batgrep
+    #   pkgs.bat-extras.batman
+    # ];
     syntaxes = {
       tmux = {
         src = pkgs.fetchFromGitHub {
