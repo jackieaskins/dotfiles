@@ -4,6 +4,7 @@ local snippet_engine = require('utils').get_snippet_engine()
 return {
   'saghen/blink.cmp',
   build = 'nix --accept-flake-config run .#build-plugin',
+  branch = 'v1',
   config = function()
     require('blink.cmp').setup({
       appearance = {
