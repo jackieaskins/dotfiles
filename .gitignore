@@ -1,27 +1,31 @@
-/vim/custom.vim
-/vim/autoload/plug.vim*
-/vim/plugged
-
-/nvim/lazy-lock.json
-/nvim/lua/custom/
-/nvim/lua/custom.lua
-/nvim/lua/plugins/custom/
-/nvim/spell/
-
-/zsh/custom.zsh
-Brewfile.lock.json
-
+# MacOS
 .DS_Store
 
-/kitty/dark-theme.auto.conf
-/kitty/light-theme.auto.conf
-/kitty/no-preference-theme.auto.conf
+# Hammerspoon
+hammerspoon/annotations/generated/
+hammerspoon/custom.lua
 
-/tmux/custom.conf
+# Karabiner
+karabiner/automatic_backups
 
-/hammerspoon/annotations/generated/
-/hammerspoon/custom.lua
-/karabiner/automatic_backups
+# Kitty
+kitty/dark-theme.auto.conf
+kitty/light-theme.auto.conf
+kitty/no-preference-theme.auto.conf
+kitty/sessions/*
+!kitty/sessions/dotfiles.kitty-session
+
+# Neovim
+nvim/lazy-lock.json
+nvim/lua/custom/
+nvim/lua/custom.lua
+nvim/spell/
+
+# Tmux
+tmux/custom.conf
+
+# Zsh
+zsh/custom.zsh
 
 # Devenv
 .devenv*

@@ -1,0 +1,14 @@
+new_tab dots
+cd ~/dotfiles
+launch
+
+new_tab custom
+cd ~/dotfiles_custom
+launch
+
+new_tab plugins
+cd ~/.local/share/nvim/lazy
+launch
+
+focus_tab 0
+focus_os_window
