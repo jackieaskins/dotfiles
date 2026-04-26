@@ -1,6 +1,7 @@
 ---@type LazySpec
 return {
   'numToStr/Navigator.nvim',
+  cond = vim.env.TMUX or vim.env.TERM ~= 'xterm-kitty',
   config = function()
     ---@diagnostic disable-next-line: missing-fields
     require('Navigator').setup({})
@@ -10,6 +11,5 @@ return {
     { '<C-l>', '<cmd>NavigatorRight<CR>', mode = { 'n', 't' } },
     { '<C-k>', '<cmd>NavigatorUp<CR>', mode = { 'n', 't' } },
     { '<C-j>', '<cmd>NavigatorDown<CR>', mode = { 'n', 't' } },
-    { '<C-\\>', '<cmd>NavigatorPrevious<CR>', mode = { 'n', 't' } },
   },
 }
