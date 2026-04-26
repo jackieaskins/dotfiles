@@ -38,6 +38,7 @@ return {
         'json',
         'json5',
         'jsx',
+        'kitty',
         'lua',
         'luadoc',
         'luap',

@@ -17,6 +17,10 @@
       "typescriptreact"
     ]
   },
+  "black": {
+    "pkgs": ["black"],
+    "filetypes": ["python"]
+  },
   "format-queries": {
     "filetypes": ["query"]
   },

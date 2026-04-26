@@ -22,9 +22,9 @@ in
     mkCustomSymlink =
       symlink: config.lib.file.mkOutOfStoreSymlink "${homeDirectory}/dotfiles_custom/${symlink}";
 
-    palette =
-      (lib.importJSON "${config.catppuccin.sources.palette}/palette.json")
-      .${config.catppuccin.flavor}.colors;
+    getPalette =
+      flavor: (lib.importJSON "${config.catppuccin.sources.palette}/palette.json").${flavor}.colors;
+    palette = config.lib.custom.getPalette config.catppuccin.flavor;
   };
 
   imports = [

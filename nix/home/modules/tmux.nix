@@ -1,9 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ config, pkgs, ... }:
 let
   tmux-suspend = pkgs.tmuxPlugins.mkTmuxPlugin {
     pluginName = "tmux-suspend";
@@ -17,9 +12,8 @@ let
     };
   };
 
-  palette = lib.importJSON "${config.catppuccin.sources.palette}/palette.json";
-  lightColor = color: palette.latte.colors.${color}.hex;
-  darkColor = color: palette.${config.catppuccin.flavor}.colors.${color}.hex;
+  lightColor = color: (config.lib.custom.getPalette "latte").${color}.hex;
+  darkColor = color: config.lib.custom.palette.${color}.hex;
 
   getColor = color: "#{?#{==:#(cat ~/.appearance),light},${lightColor color},${darkColor color}}";
 
