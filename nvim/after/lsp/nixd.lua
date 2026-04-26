@@ -4,6 +4,7 @@ local flake_base = flake .. '.darwinConfigurations."Jackies-MacBook-Pro".options
 
 ---@type vim.lsp.Config
 return {
+  ---@type lspconfig.settings.nixd
   settings = {
     nixd = {
       nixpkgs = { expr = 'import <nixpkgs> { }' },
