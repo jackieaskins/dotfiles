@@ -3,7 +3,7 @@ appLauncher = require('hotkeyStore').registerMode('Application Launcher', MEH, '
 local appKeys = fnutils.mergeTables({
   m = 'com.apple.Music',
   n = 'com.apple.Notes',
-  t = 'com.github.wez.wezterm',
+  t = 'net.kovidgoyal.kitty',
 }, CUSTOM.appKeys or {})
 
 for key, bundleID in pairs(appKeys) do

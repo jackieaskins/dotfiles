@@ -1,6 +1,6 @@
 # My Dotfiles
 
-My dotfiles for Hammerspoon, Karabiner, Neovim, Nix, QMK, Tmux, WezTerm, and Zsh.
+My dotfiles for Hammerspoon, Karabiner, Kitty, Neovim, Nix, QMK, Tmux, and Zsh.
 
 ## Installation
 

@@ -5,6 +5,9 @@
   lib,
   ...
 }:
+let
+  homeDirectory = config.users.users.${config.system.primaryUser}.home;
+in
 {
   system = {
     # Used for backwards compatibility, please read the changelog before changing.
@@ -52,7 +55,7 @@
         "/Applications/Raycast.app"
         "/Applications/Rocket.app"
         "/Applications/Thaw.app"
-        "/Applications/WezTerm.app"
+        "${homeDirectory}/Applications/Home Manager Apps/kitty.app"
       ];
     in
     lib.strings.concatMapStringsSep "\n" (path: ''

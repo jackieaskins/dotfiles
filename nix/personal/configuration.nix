@@ -1,4 +1,7 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
+let
+  homeDirectory = config.users.users.${config.system.primaryUser}.home;
+in
 {
   environment.systemPackages = [
     pkgs.discord
@@ -21,7 +24,7 @@
     "/Applications/WhatsApp.app"
     "/System/Applications/Messages.app"
     "/System/Applications/Music.app"
-    "/Applications/WezTerm.app"
+    "${homeDirectory}/Applications/Home Manager Apps/kitty.app"
     "/Applications/Firefox.app"
   ];
 }
