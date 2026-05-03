@@ -13,6 +13,7 @@
 
     sessionVariables = {
       LS_COLORS = "$(vivid generate catppuccin-${config.catppuccin.flavor})";
+      BORDER_STYLE = "double";
     };
 
     shellAliases = {

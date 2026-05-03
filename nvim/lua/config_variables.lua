@@ -8,7 +8,7 @@
 MY_CONFIG = {
   is_personal_machine = false,
 
-  border_style = 'double',
+  border_style = vim.env.BORDER_STYLE,
   experimental_ui = false,
 
   custom_gx_handlers = {},

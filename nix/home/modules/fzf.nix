@@ -1,4 +1,7 @@
 { config, ... }:
+let
+  BORDER_STYLE = config.programs.zsh.sessionVariables.BORDER_STYLE;
+in
 {
   programs.fzf = {
     enable = true;
@@ -16,10 +19,10 @@
       "--layout reverse"
 
       "--border none"
-      "--header-border double"
-      "--input-border double"
-      "--list-border double"
-      "--preview-border double"
+      "--header-border ${BORDER_STYLE}"
+      "--input-border ${BORDER_STYLE}"
+      "--list-border ${BORDER_STYLE}"
+      "--preview-border ${BORDER_STYLE}"
 
       "--preview 'bat --style=numbers --color=always {}'"
 
