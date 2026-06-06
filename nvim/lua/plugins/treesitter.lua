@@ -4,10 +4,6 @@ return {
   lazy = false,
   branch = 'main',
   build = ':silent! TSUpdate',
-  init = function()
-    -- Use bash parser for ZSH files
-    vim.treesitter.language.register('bash', 'zsh')
-  end,
   config = function()
     local ok, treesitter = pcall(require, 'nvim-treesitter')
 
@@ -66,6 +62,7 @@ return {
         'vimdoc',
         'xml',
         'yaml',
+        'zsh',
       })
     end
   end,
