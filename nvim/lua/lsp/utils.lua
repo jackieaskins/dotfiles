@@ -1,3 +1,5 @@
+local utils = require('utils')
+
 local M = {}
 
 ---@class LspServer
@@ -31,8 +33,6 @@ end
 ---@param bufnr number
 ---@param method string
 function M.setup_auto_close_tag(client, bufnr, method)
-  local bsk = require('utils').buffer_map(bufnr)
-
   local function auto_insert(key)
     return function()
       vim.schedule(function()
@@ -41,7 +41,7 @@ function M.setup_auto_close_tag(client, bufnr, method)
           vim.tbl_extend('force', vim.lsp.util.make_position_params(0, client.offset_encoding), { kind = 'autoClose' }),
           function(_, result)
             if result then
-              require('utils').snippet_expand(result)
+              utils.snippet_expand(result)
             end
           end,
           bufnr
@@ -52,8 +52,49 @@ function M.setup_auto_close_tag(client, bufnr, method)
     end
   end
 
+  local bsk = utils.buffer_map(bufnr)
   bsk('i', '>', auto_insert('>'), { expr = true })
   bsk('i', '/', auto_insert('/'), { expr = true })
+end
+
+---Send auto-insert command, for example for autotag in tsgo
+---@param client vim.lsp.Client
+---@param bufnr number
+---@param key string
+function M.setup_vs_code_auto_insert(client, bufnr, key)
+  local bsk = utils.buffer_map(bufnr)
+
+  bsk('i', key, function()
+    local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+
+    local params = {
+      _vs_textDocument = { uri = vim.uri_from_bufnr(bufnr) },
+      _vs_position = { line = row - 1, character = col + 1 },
+      _vs_ch = key,
+      _vs_options = {
+        tabSize = vim.bo[bufnr].tabstop,
+        insertSpaces = vim.bo[bufnr].expandtab,
+      },
+    }
+
+    vim.schedule(function()
+      client:request(
+        ---@diagnostic disable-next-line: param-type-mismatch
+        'textDocument/_vs_onAutoInsert',
+        params,
+        function(err, result, _)
+          if err or not result then
+            return
+          end
+
+          utils.snippet_expand(result._vs_textEdit.newText)
+        end,
+        bufnr
+      )
+    end)
+
+    return key
+  end, { expr = true })
 end
 
 return M
