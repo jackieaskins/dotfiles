@@ -13,7 +13,7 @@ if require('utils').file_exists('~/dotfiles/nvim/lua/custom.lua') then
 end
 
 if MY_CONFIG.experimental_ui then
-  require('vim._extui').enable({
+  require('vim._core.ui2').enable({
     msg = { target = 'msg' },
   })
 end
