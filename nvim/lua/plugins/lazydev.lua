@@ -12,10 +12,7 @@ return {
         return not vim.tbl_contains(
           vim.tbl_map(function(path)
             return vim.fn.expand(path)
-          end, {
-            '~/dotfiles/hammerspoon',
-            '~/dotfiles/wezterm',
-          }),
+          end, { '~/dotfiles/hammerspoon' }),
           root_dir
         )
       end,

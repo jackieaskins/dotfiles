@@ -19,7 +19,6 @@
     ./starship.nix
     ./tmux.nix
     ./tmuxinator.nix
-    ./wezterm.nix
     ./zoxide.nix
     ./zsh.nix
   ];

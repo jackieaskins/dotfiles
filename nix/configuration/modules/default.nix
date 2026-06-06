@@ -10,6 +10,5 @@
     ./rocket.nix
     ./sf-symbols.nix
     ./thaw.nix
-    ./wezterm.nix
   ];
 }
