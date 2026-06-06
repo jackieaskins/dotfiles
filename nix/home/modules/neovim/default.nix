@@ -21,6 +21,7 @@ in
 {
   home.packages = [
     inputs.neovim-nightly-overlay.packages.${pkgs.stdenv.hostPlatform.system}.default
+    pkgs.cargo # Needed for blink.cmp
     pkgs.tree-sitter
   ]
   ++ (getPkgsFromJsonFile ./lsp-servers.json)
