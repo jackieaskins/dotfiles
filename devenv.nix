@@ -8,7 +8,7 @@
 
   git-hooks.hooks = {
     commitizen.enable = true;
-    nixfmt-rfc-style.enable = true;
+    nixfmt.enable = true;
     stylua.enable = true;
   };
 }

@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, lib, ... }:
 let
   BORDER_STYLE = config.programs.zsh.sessionVariables.BORDER_STYLE;
 in
@@ -8,7 +8,7 @@ in
     enableZshIntegration = true;
     defaultCommand = "rg --files --hidden --follow --glob '!.git/*' --glob '!*.class'";
     colors = {
-      border = "blue";
+      border = lib.mkForce "blue";
       gutter = config.lib.custom.palette.base.hex;
     };
     defaultOptions = [

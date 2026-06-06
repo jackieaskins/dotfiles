@@ -34,7 +34,6 @@ in
   };
 
   programs.zsh.enable = true;
-  environment.enableAllTerminfo = true;
 
   environment.systemPackages = [
     pkgs.vscodium
