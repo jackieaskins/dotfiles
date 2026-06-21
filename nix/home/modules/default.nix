@@ -14,7 +14,6 @@
     ./jankyborders.nix
     ./karabiner.nix
     ./kitty.nix
-    ./librewolf.nix
     ./neovim
     ./starship.nix
     ./tmux.nix
