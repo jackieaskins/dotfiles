@@ -1,10 +1,8 @@
-# pyright: reportMissingImports=false
-
 import socket
 import subprocess
 
-from kitty.boss import get_boss
-from kitty.fast_data_types import Screen, get_options
+from kitty.boss import get_boss  # type: ignore
+from kitty.fast_data_types import Screen, get_options  # type: ignore
 from kitty.tab_bar import (
     DrawData,
     ExtraData,
@@ -13,7 +11,7 @@ from kitty.tab_bar import (
     as_rgb,
     draw_attributed_string,
 )
-from kitty.utils import color_as_int
+from kitty.utils import color_as_int  # type: ignore
 
 
 opts = get_options()

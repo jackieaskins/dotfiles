@@ -1,8 +1,10 @@
+import json
 import os
 import subprocess
 
 from functools import reduce
 from kitty.boss import Boss  # type: ignore
+from kittens.tui.handler import kitten_ui  # type: ignore
 
 HOME_DIR = os.environ["HOME"]
 SESSION_DIR = f"{HOME_DIR}/.config/kitty/sessions/"
@@ -13,9 +15,10 @@ ICONS = {
 }
 
 
-def get_sessions():
+def get_sessions(active_session_names):
     session_keys = []
-    sessions = []
+    active_sessions = []
+    inactive_sessions = []
 
     directories = (
         subprocess.run(["zoxide", "query", "--list"], text=True, capture_output=True)
@@ -26,20 +29,25 @@ def get_sessions():
     for file in os.listdir(SESSION_DIR):
         workspace = file.replace(SESSION_EXT, "")
         session_keys.append(workspace)
-        sessions.append(
-            {
-                "type": "saved",
-                "workspace": workspace,
-                "display": workspace,
-                "session_file": f"{SESSION_DIR}{file}",
-            }
-        )
+
+        is_active = workspace in active_session_names
+        session = {
+            "type": "saved",
+            "workspace": workspace,
+            "display": f"Active: {workspace}" if is_active else workspace,
+            "session_file": f"{SESSION_DIR}{file}",
+        }
+
+        if is_active:
+            active_sessions.append(session)
+        else:
+            inactive_sessions.append(session)
 
     for directory in directories:
         replaced_directory = directory.replace(HOME_DIR, "~")
         workspace = os.path.basename(directory)
         if workspace not in session_keys:
-            sessions.append(
+            inactive_sessions.append(
                 {
                     "type": "zoxide",
                     "workspace": workspace,
@@ -48,7 +56,7 @@ def get_sessions():
                 }
             )
 
-    return sessions
+    return active_sessions + inactive_sessions
 
 
 def render_icon(icon):
@@ -106,9 +114,25 @@ def create_session_file(session, session_file):
             )
 
 
+def get_active_session_names(ls_output):
+    active_session_names = set()
+
+    for os_window in ls_output:
+        for tab in os_window["tabs"]:
+            for window in tab["windows"]:
+                active_session_names.add(window["session_name"])
+
+    return active_session_names
+
+
+@kitten_ui(allow_remote_control=True)
 def main(_: list[str]) -> str:
     try:
-        sessions = get_sessions()
+        cp = main.remote_control(["ls"], capture_output=True)  # type: ignore
+        output = json.loads(cp.stdout.decode())
+
+        active_session_names = get_active_session_names(output)
+        sessions = get_sessions(active_session_names)
         choice = get_fzf_choice(sessions)
 
         session = next(filter(lambda session: session["workspace"] == choice, sessions))
