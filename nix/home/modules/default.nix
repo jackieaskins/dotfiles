@@ -6,6 +6,7 @@
     ./bat.nix
     ./catppuccin.nix
     ./delta.nix
+    ./devenv.nix
     ./direnv.nix
     ./eza.nix
     ./fzf.nix

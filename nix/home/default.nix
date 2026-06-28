@@ -38,7 +38,6 @@ in
     sessionPath = [ "${homeDirectory}/dotfiles/bin" ];
     packages = [
       pkgs.awscli2
-      pkgs.devenv
       pkgs.fd
       pkgs.gnumake
       pkgs.imagemagick
