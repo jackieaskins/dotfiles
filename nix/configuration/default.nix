@@ -35,9 +35,8 @@ in
 
   programs.zsh.enable = true;
 
-  environment.systemPackages = [
-    pkgs.vscodium
-    pkgs.slack
+  homebrew.casks = [
+    "vscodium"
   ];
 
   security.pam.services.sudo_local = {

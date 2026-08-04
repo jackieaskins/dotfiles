@@ -4,17 +4,18 @@ let
 in
 {
   environment.systemPackages = [
-    pkgs.discord
-    pkgs.iina
-    pkgs.keycastr
     pkgs.mas
     pkgs.qmk
   ];
 
   homebrew.casks = [
+    "discord"
+    "iina"
+    "keycastr"
     "logitune"
     "logitech-g-hub"
     "virtualbuddy"
+    "whatsapp"
   ];
 
   system.defaults.dock.persistent-apps = [
