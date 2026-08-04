@@ -93,7 +93,9 @@ def get_fzf_choice(sessions):
             (lambda accum, icon: accum.replace(render_icon(icon), "")),
             ICONS.values(),
             choice,
-        ).strip()
+        )
+        .replace("Active:", "")
+        .strip()
     )
 
 
@@ -103,7 +105,7 @@ def create_session_file(session, session_file):
             f.write(
                 "\n".join(
                     [
-                        "new_tab",
+                        "new_tab editor",
                         f"cd {session["directory"]}",
                         "launch",
                         "",
