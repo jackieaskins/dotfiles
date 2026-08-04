@@ -5,7 +5,11 @@ return {
   'saghen/blink.cmp',
   dependencies = 'saghen/blink.lib',
   build = function()
-    require('blink.cmp').build():pwait()
+    ---@diagnostic disable-next-line: undefined-field
+    local ok, err = require('blink.cmp').build():pwait()
+    if not ok then
+      error('Unable to update blink.cmp: ' .. tostring(err))
+    end
   end,
   config = function()
     require('blink.cmp').setup({
