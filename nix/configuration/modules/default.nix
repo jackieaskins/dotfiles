@@ -6,6 +6,7 @@
     ./hammerspoon.nix
     ./homebrew.nix
     ./karabiner-elements.nix
+    ./kitty.nix
     ./raycast.nix
     ./rocket.nix
     ./sf-symbols.nix

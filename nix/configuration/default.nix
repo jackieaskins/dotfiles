@@ -53,7 +53,7 @@ in
         "/Applications/Raycast.app"
         "/Applications/Rocket.app"
         "/Applications/Thaw.app"
-        "${homeDirectory}/Applications/Home Manager Apps/kitty.app"
+        "/Applications/kitty.app"
       ];
     in
     lib.strings.concatMapStringsSep "\n" (path: ''

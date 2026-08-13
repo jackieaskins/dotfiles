@@ -44,7 +44,6 @@ let
 in
 {
   catppuccin.kitty.enable = false;
-  home.packages = [ pkgs.kitty ];
   home.file = {
     ".config/kitty".source = config.lib.custom.mkDotfilesSymlink "kitty";
 
