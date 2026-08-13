@@ -25,7 +25,7 @@
   "tailwindcss": { "pkgs": ["tailwindcss-language-server"] },
   "taplo": { "pkgs": ["taplo"] },
   "ts_query_ls": { "pkgs": ["ts_query_ls"] },
-  "tsgo": { "pkgs": ["typescript-go"] },
+  "tsc": { "pkgs": ["typescript-go"] },
   "vimls": { "pkgs": ["vim-language-server"] },
   "yamlls": { "pkgs": ["yaml-language-server"] }
 }
