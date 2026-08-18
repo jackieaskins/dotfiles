@@ -18,19 +18,24 @@ function M.loadOrCreate()
     return display['Display Identifier']
   end)
 
-  local foundPreferences = hs.fnutils.find(savedPreferences, function(preferences)
-    if #preferences ~= #screenUUIDs then
-      return false
-    end
-
-    for index, screenUUID in ipairs(screenUUIDs) do
-      if screenUUID ~= preferences[index].screenUUID then
+  local foundPreferences = hs.fnutils.find(
+    savedPreferences,
+    ---@param preferences DisplayPreference[]
+    ---@return boolean
+    function(preferences)
+      if #preferences ~= #screenUUIDs then
         return false
       end
-    end
 
-    return true
-  end)
+      for _, preference in ipairs(preferences) do
+        if not hs.fnutils.contains(screenUUIDs, preference.screenUUID) then
+          return false
+        end
+      end
+
+      return true
+    end
+  )
 
   if foundPreferences then
     return foundPreferences

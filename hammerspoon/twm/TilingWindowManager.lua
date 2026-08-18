@@ -24,11 +24,10 @@ end
 ---@field windows hs.window[]
 ---@field focused boolean
 
+---@param displayPreferences DisplayPreference[]
 ---@param windowsByBundleID table<string, hs.window[]>
 ---@return InitialSpace[]
-local function getInitialSpaces(windowsByBundleID)
-  local displayPreferences = require('twm.displayPreferences').loadOrCreate()
-
+local function getInitialSpaces(displayPreferences, windowsByBundleID)
   local spaces = hs.fnutils.mapCat(displayPreferences, function(display)
     return fnutils.imap(display.spaces, function(space)
       local spaceWindows = hs.fnutils.mapCat(space.bundleIDs, function(bundleID)
@@ -81,14 +80,19 @@ function TilingWindowManager.new()
 
   self.wfSubscriptions = self:getWFSubscriptions()
 
-  self.screenUUIDs = fnutils.imap(hs.spaces.data_managedDisplaySpaces(), function(display)
-    return display['Display Identifier']
-  end)
-
   deleteNonFocusedSpaces()
-  local initialSpaces = getInitialSpaces(fnutils.igroupBy(windowFilter:getWindows(), function(window)
-    return window:application():bundleID()
-  end))
+
+  local displayPreferences = require('twm.displayPreferences').loadOrCreate()
+  local initialSpaces = getInitialSpaces(
+    displayPreferences,
+    fnutils.igroupBy(windowFilter:getWindows(), function(window)
+      return window:application():bundleID()
+    end)
+  )
+
+  self.screenUUIDs = fnutils.imap(displayPreferences, function(preference)
+    return preference.screenUUID
+  end)
 
   self.virtualWorkspaces = fnutils.imap(initialSpaces, function(space, index)
     return VirtualWorkspace.new(index, space.screenUUID, space.windows, space.layout, space.focused)
