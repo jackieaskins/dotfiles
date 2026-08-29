@@ -11,7 +11,8 @@ SESSION_DIR = f"{HOME_DIR}/.config/kitty/sessions/"
 SESSION_EXT = ".kitty-session"
 ICONS = {
     "zoxide": {"text": "", "color": "36"},
-    "saved": {"text": "", "color": "33"},
+    "active": {"text": "", "color": "32"},
+    "saved": {"text": "", "color": "33"},
 }
 
 
@@ -34,8 +35,9 @@ def get_sessions(active_session_names):
         session = {
             "type": "saved",
             "workspace": workspace,
-            "display": f"Active: {workspace}" if is_active else workspace,
+            "display": workspace,
             "session_file": f"{SESSION_DIR}{file}",
+            "icon": ICONS["active"] if is_active else ICONS["saved"],
         }
 
         if is_active:
@@ -53,6 +55,7 @@ def get_sessions(active_session_names):
                     "workspace": workspace,
                     "display": replaced_directory,
                     "directory": replaced_directory,
+                    "icon": ICONS["zoxide"],
                 }
             )
 
@@ -60,15 +63,14 @@ def get_sessions(active_session_names):
 
 
 def render_icon(icon):
-    return icon["text"]
+    return f"\x1b[{icon["color"]}m{icon["text"]}\x1b[0m"
 
 
 def get_fzf_input(sessions):
     choices = []
 
     for session in sessions:
-        icon = ICONS[session["type"]]
-        choices.append(f"{render_icon(icon)} {session["display"]}")
+        choices.append(f"{render_icon(session["icon"])}  {session["display"]}")
 
     return "\n".join(choices)
 
@@ -88,15 +90,8 @@ def get_fzf_choice(sessions):
         capture_output=True,
     ).stdout
 
-    return os.path.basename(
-        reduce(
-            (lambda accum, icon: accum.replace(render_icon(icon), "")),
-            ICONS.values(),
-            choice,
-        )
-        .replace("Active:", "")
-        .strip()
-    )
+    path = choice.split(" ", 1)[1].strip()
+    return os.path.basename(path)
 
 
 def create_session_file(session, session_file):
