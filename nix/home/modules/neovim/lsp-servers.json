@@ -2,6 +2,10 @@
   "bashls": { "pkgs": ["bash-language-server"] },
   "biome": {},
   "clangd": { "pkgs": ["libclang"] },
+  "css_variables": {
+    "display": "css-vars",
+    "pkgs": ["css-variables-language-server"]
+  },
   "cssls": { "pkgs": ["vscode-langservers-extracted"] },
   "emmet_language_server": {
     "display": "emmet-ls",
@@ -25,7 +29,7 @@
   "tailwindcss": { "pkgs": ["tailwindcss-language-server"] },
   "taplo": { "pkgs": ["taplo"] },
   "ts_query_ls": { "pkgs": ["ts_query_ls"] },
-  "tsc": { "pkgs": ["typescript-go"] },
+  "tsc": { "pkgs": ["typescript"] },
   "vimls": { "pkgs": ["vim-language-server"] },
   "yamlls": { "pkgs": ["yaml-language-server"] }
 }
