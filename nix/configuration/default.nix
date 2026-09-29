@@ -5,9 +5,6 @@
   lib,
   ...
 }:
-let
-  homeDirectory = config.users.users.${config.system.primaryUser}.home;
-in
 {
   system = {
     # Used for backwards compatibility, please read the changelog before changing.
@@ -35,9 +32,26 @@ in
 
   programs.zsh.enable = true;
 
-  homebrew.casks = [
-    "vscodium"
-  ];
+  homebrew = {
+    enable = true;
+
+    onActivation = {
+      cleanup = "zap";
+      autoUpdate = true;
+      upgrade = true;
+    };
+
+    casks = [
+      "firefox"
+      "hammerspoon"
+      "helium-browser"
+      "karabiner-elements"
+      "kitty"
+      "sf-symbols"
+      "vorssaint"
+      "vscodium"
+    ];
+  };
 
   security.pam.services.sudo_local = {
     touchIdAuth = true;
@@ -47,13 +61,11 @@ in
   system.activationScripts.postActivation.text =
     let
       loginItems = [
-        "/Applications/BetterDisplay.app"
         "/Applications/Firefox.app"
         "/Applications/Hammerspoon.app"
-        "/Applications/Raycast.app"
         "/Applications/Rocket.app"
-        "/Applications/Thaw.app"
         "/Applications/kitty.app"
+        "/Applications/Vorssaint.app"
       ];
     in
     lib.strings.concatMapStringsSep "\n" (path: ''
@@ -63,7 +75,7 @@ in
     '') loginItems;
 
   imports = [
-    ./modules
+    ./rocket.nix
     ./system-preferences.nix
   ];
 }

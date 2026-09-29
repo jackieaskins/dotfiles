@@ -1,4 +1,0 @@
-{ ... }:
-{
-  homebrew.casks = [ "sf-symbols" ];
-}
