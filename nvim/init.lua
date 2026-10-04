@@ -12,11 +12,9 @@ if require('utils').file_exists('~/dotfiles/nvim/lua/custom.lua') then
   require('custom')
 end
 
-if MY_CONFIG.experimental_ui then
-  require('vim._core.ui2').enable({
-    msg = { target = 'msg' },
-  })
-end
+require('vim._core.ui2').enable({
+  msg = { target = 'msg' },
+})
 
 require('lazy_config')
 
