@@ -27,10 +27,6 @@ tmux/custom.conf
 # Zsh
 zsh/custom.zsh
 
-# Devenv
-.devenv*
-devenv.local.nix
-
 # direnv
 .direnv
 

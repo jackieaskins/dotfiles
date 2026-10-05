@@ -6,6 +6,11 @@
 
     catppuccin.url = "github:catppuccin/nix";
 
+    git-hooks = {
+      url = "github:cachix/git-hooks.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -30,9 +35,13 @@
       nix-darwin,
       nix-homebrew,
       nixpkgs,
+      self,
       ...
     }:
     let
+      system = "aarch64-darwin";
+      pkgs = nixpkgs.legacyPackages.${system};
+
       mkDarwinConfig =
         {
           username,
@@ -74,7 +83,7 @@
           modules,
         }:
         home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+          inherit pkgs;
           extraSpecialArgs = {
             inherit inputs;
             inherit email;
@@ -116,5 +125,35 @@
         email = personalEmail;
         modules = [ ./personal/home.nix ];
       };
+
+      checks.${system}.pre-commit-check = inputs.git-hooks.lib.${system}.run {
+        src = ./.;
+        hooks = {
+          commitizen.enable = true;
+          nixfmt.enable = true;
+          stylua.enable = true;
+        };
+      };
+
+      formatter.${system} =
+        let
+          config = self.checks.${system}.pre-commit-check.config;
+          script = ''
+            ${pkgs.lib.getExe config.package} run --all-files --config ${config.configFile}
+          '';
+        in
+        pkgs.writeShellScriptBin "pre-commit-run" script;
+
+      devShells.${system}.default =
+        let
+          pre-commit-check = self.checks.${system}.pre-commit-check;
+        in
+        pkgs.mkShell {
+          shellHook = pre-commit-check.shellHook;
+          buildInputs = pre-commit-check.enabledPackages;
+          packages = [
+            pkgs.lua51Packages.lua
+          ];
+        };
     };
 }
