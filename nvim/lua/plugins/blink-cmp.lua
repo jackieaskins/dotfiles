@@ -31,6 +31,7 @@ return {
         documentation = { auto_show = true },
         keyword = { range = 'full' },
         menu = {
+          ---@diagnostic disable-next-line: missing-fields
           draw = {
             columns = {
               { 'kind_icon' },

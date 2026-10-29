@@ -57,7 +57,7 @@ function M.setup_auto_close_tag(client, bufnr, method)
   bsk('i', '/', auto_insert('/'), { expr = true })
 end
 
----Send auto-insert command, for example for autotag in tsgo
+---Send auto-insert command, for example for autotag in tsc
 ---@param client vim.lsp.Client
 ---@param bufnr number
 ---@param key string

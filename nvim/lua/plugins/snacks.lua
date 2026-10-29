@@ -6,7 +6,6 @@ return {
   config = function()
     require('snacks').setup({
       bigfile = { enabled = false },
-      image = { enabled = true },
       indent = {
         enabled = true,
         animate = { enabled = false },

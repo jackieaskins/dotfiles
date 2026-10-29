@@ -5,7 +5,6 @@ local map = utils.map
 --                             General                              --
 ----------------------------------------------------------------------
 map('n', '<leader>so', '<cmd>source %<CR>')
-map('n', '<leader>re', '<cmd>restart<CR>')
 
 ----------------------------------------------------------------------
 --                   Clipboard and Visual Select                    --
@@ -30,10 +29,6 @@ map('n', 'dd', function()
     return 'dd'
   end
 end, { noremap = true, expr = true })
-
--- Don't overwrite clipboard on x
--- https://www.reddit.com/r/neovim/comments/1e1dmpw
-map('n', 'x', '"_x')
 
 -- https://github.com/neovim/neovim/issues/26449
 map({ 'i', 's' }, '<C-e>', function()
