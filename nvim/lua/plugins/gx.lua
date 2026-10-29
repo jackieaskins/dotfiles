@@ -43,6 +43,17 @@ return {
               end
             end,
           },
+          nix = {
+            name = 'nix',
+            filetype = { 'nix' },
+            handle = function(mode, line, _)
+              local plugin = require('gx.helper').find(line, mode, '"github:([^%s~/]*/[^%s~/]*)"')
+
+              if plugin then
+                return 'https://github.com/' .. plugin
+              end
+            end,
+          },
         }, MY_CONFIG.custom_gx_handlers),
       }
     )
