@@ -55,6 +55,7 @@
               displayTheTimeWithSeconds = true;
               showAmPm = true;
               showDate = true;
+              showTheDayOfTheWeek = false;
               style = "Digital";
             };
 
@@ -112,6 +113,7 @@
           trackpad = {
             pointAndClick = {
               click = "Medium";
+              secondaryClick = "Click in Bottom Right Corner";
               forceClickAndHapticFeedback = false;
               tapToClick = true;
             };
@@ -132,16 +134,8 @@
           };
           settings = {
             advanced = {
-              removeItemsFromTheTrashAfter30Days = true;
               showAllFilenameExtensions = true;
               whenPerformingASearch = "Search the Current Folder";
-            };
-            general = {
-              showTheseItemsOnTheDesktop = {
-                cdsDvdsAndiPods = true;
-                externalDisks = true;
-                hardDisks = false;
-              };
             };
           };
         };

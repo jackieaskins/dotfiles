@@ -7,10 +7,42 @@
 }:
 {
   system = {
+
     # Used for backwards compatibility, please read the changelog before changing.
     # darwin-rebuild changelog
     stateVersion = 6;
     configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;
+
+    defaults = {
+      finder = {
+        AppleShowAllFiles = true;
+        # “icnv” = Icon view, “Nlsv” = List view, “clmv” = Column View, “Flwv” = Gallery View
+        FXPreferredViewStyle = "Nlsv";
+      };
+
+      loginwindow.GuestEnabled = false;
+    };
+
+    keyboard = {
+      enableKeyMapping = true;
+      remapCapsLockToControl = true;
+    };
+
+    activationScripts.postActivation.text =
+      let
+        loginItems = [
+          "/Applications/Firefox.app"
+          "/Applications/Hammerspoon.app"
+          "/Applications/Rocket.app"
+          "/Applications/kitty.app"
+          "/Applications/Vorssaint.app"
+        ];
+      in
+      lib.strings.concatMapStringsSep "\n" (path: ''
+        osascript -e '
+          tell application "System Events" to make login item at end with properties { name: "${path}", path: "${path}", hidden: true }
+        '
+      '') loginItems;
   };
 
   nix = {
@@ -57,22 +89,6 @@
     touchIdAuth = true;
     reattach = true;
   };
-
-  system.activationScripts.postActivation.text =
-    let
-      loginItems = [
-        "/Applications/Firefox.app"
-        "/Applications/Hammerspoon.app"
-        "/Applications/Rocket.app"
-        "/Applications/kitty.app"
-        "/Applications/Vorssaint.app"
-      ];
-    in
-    lib.strings.concatMapStringsSep "\n" (path: ''
-      osascript -e '
-        tell application "System Events" to make login item at end with properties { name: "${path}", path: "${path}", hidden: true }
-      '
-    '') loginItems;
 
   imports = [
     ./nix-plist-manager.nix
