@@ -75,7 +75,7 @@
     '') loginItems;
 
   imports = [
+    ./nix-plist-manager.nix
     ./rocket.nix
-    ./system-preferences.nix
   ];
 }

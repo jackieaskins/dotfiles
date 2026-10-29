@@ -15,6 +15,7 @@
     ./jankyborders.nix
     ./karabiner.nix
     ./kitty.nix
+    ./nix-plist-manager.nix
     ./neovim
     ./starship.nix
     ./tmux.nix

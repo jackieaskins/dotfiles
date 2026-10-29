@@ -1,6 +1,8 @@
 local flake_path = vim.fn.expand('~/dotfiles/nix')
 local flake = '(builtins.getFlake "' .. flake_path .. '")'
-local flake_base = flake .. '.darwinConfigurations."Jackies-MacBook-Pro".options'
+
+local home_manager_base = flake .. '.homeConfigurations."' .. vim.env.USER .. '".options'
+local darwin_base = flake .. '.darwinConfigurations."' .. vim.uv.os_gethostname() .. '".options'
 
 ---@type vim.lsp.Config
 return {
@@ -9,13 +11,12 @@ return {
     nixd = {
       nixpkgs = { expr = 'import <nixpkgs> { }' },
       options = {
-        nix_darwin = { expr = flake_base },
-        home_manager = {
-          expr = flake .. '.homeConfigurations.jackie.options',
-        },
+        nix_darwin = { expr = darwin_base },
+        home_manager = { expr = home_manager_base },
         nix_homebrew = {
-          expr = flake_base .. '.nix-homebrew.user.type.getSubOptions []',
+          expr = darwin_base .. '.nix-homebrew.user.type.getSubOptions []',
         },
+        nix_plist_manager = { expr = home_manager_base .. '.programs.nix-plist-manager.options' },
       },
     },
   },

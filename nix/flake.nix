@@ -27,6 +27,11 @@
     };
 
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
+
+    nix-plist-manager = {
+      url = "github:sushydev/nix-plist-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -34,6 +39,7 @@
       home-manager,
       nix-darwin,
       nix-homebrew,
+      nix-plist-manager,
       nixpkgs,
       self,
       ...
@@ -59,6 +65,8 @@
                 users.users.${username}.home = homeDirectory;
               }
             )
+
+            nix-plist-manager.darwinModules.default
 
             nix-homebrew.darwinModules.nix-homebrew
             (
@@ -90,7 +98,6 @@
           };
           modules = [
             ./home
-
             (
               { ... }:
               {
@@ -100,6 +107,8 @@
                 };
               }
             )
+
+            nix-plist-manager.homeManagerModules.default
           ]
           ++ modules;
         };
