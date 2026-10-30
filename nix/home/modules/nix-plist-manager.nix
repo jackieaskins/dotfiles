@@ -94,8 +94,8 @@
           };
 
           keyboard = {
-            keyRepeatRate = 1;
-            delayUntilRepeat = 10;
+            keyRepeatRate = 2;
+            delayUntilRepeat = 15;
             keyboardShortcuts = {
               inputSources = {
                 selectNextSourceInInputMenu = false;
