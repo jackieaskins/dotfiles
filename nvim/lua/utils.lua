@@ -97,10 +97,14 @@ function M.augroup(group_name, autocmds)
 end
 
 ---Determine if a file exists
----@param filename string
+---@param filenames string | string[]
+---@param path? string
 ---@return boolean
-function M.file_exists(filename)
-  return vim.fn.empty(vim.fn.glob(filename)) == 0
+function M.file_exists(filenames, path)
+  return not vim.tbl_isempty(vim.fs.find(filenames, {
+    path = path and vim.fn.expand(path) or vim.fn.expand('%:p:h'),
+    upward = true,
+  }))
 end
 
 ---Determine if a provided path is executable

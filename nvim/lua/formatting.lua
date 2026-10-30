@@ -40,10 +40,7 @@ end
 function M.get_active_formatters(filetype)
   return vim.tbl_filter(function(formatter_name)
     local formatter = formatters[formatter_name]
-    return formatter.required_files == nil
-      or vim.iter(formatter.required_files):any(function(file)
-        return utils.file_exists(file)
-      end)
+    return formatter.required_files == nil or utils.file_exists(formatter.required_files)
   end, M.get_formatters(filetype))
 end
 

@@ -8,7 +8,7 @@ require('folds')
 
 require('dark_mode')
 
-if require('utils').file_exists('~/dotfiles/nvim/lua/custom.lua') then
+if require('utils').file_exists('nvim/lua/custom.lua', '~/dotfiles') then
   require('custom')
 end
 
