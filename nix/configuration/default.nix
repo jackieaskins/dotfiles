@@ -80,7 +80,6 @@
       "karabiner-elements"
       "kitty"
       "sf-symbols"
-      "vorssaint"
       "vscodium"
     ];
   };
@@ -93,5 +92,6 @@
   imports = [
     ./nix-plist-manager.nix
     ./rocket.nix
+    ./vorssaint.nix
   ];
 }
