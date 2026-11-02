@@ -2,7 +2,6 @@
   config,
   pkgs,
   inputs,
-  lib,
   ...
 }:
 {
@@ -27,22 +26,6 @@
       enableKeyMapping = true;
       remapCapsLockToControl = true;
     };
-
-    activationScripts.postActivation.text =
-      let
-        loginItems = [
-          "/Applications/Firefox.app"
-          "/Applications/Hammerspoon.app"
-          "/Applications/Rocket.app"
-          "/Applications/kitty.app"
-          "/Applications/Vorssaint.app"
-        ];
-      in
-      lib.strings.concatMapStringsSep "\n" (path: ''
-        osascript -e '
-          tell application "System Events" to make login item at end with properties { name: "${path}", path: "${path}", hidden: true }
-        '
-      '') loginItems;
   };
 
   nix = {
