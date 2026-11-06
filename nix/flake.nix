@@ -53,9 +53,13 @@
           username,
           homeDirectory,
           modules,
+          customLoginItems,
         }:
         nix-darwin.lib.darwinSystem {
-          specialArgs = { inherit inputs; };
+          specialArgs = {
+            inherit inputs;
+            inherit customLoginItems;
+          };
           modules = [
             ./configuration
             (
@@ -126,6 +130,7 @@
         username = personalUsername;
         homeDirectory = personalHomeDirectory;
         modules = [ ./personal/configuration.nix ];
+        customLoginItems = [ ];
       };
 
       homeConfigurations.jackie = mkHomeConfig {
