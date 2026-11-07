@@ -2,6 +2,10 @@ local utils = require('utils')
 
 ---@type vim.lsp.Config
 return {
+  capabilities = {
+    experimental = { hoverVerbosityLevel = true },
+    settings = { ['js/ts'] = { maximumHoverLength = 5000 } },
+  },
   on_attach = function(client, bufnr)
     local bsk = utils.buffer_map(bufnr)
 
