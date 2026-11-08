@@ -202,7 +202,7 @@
 		<key>featureAvailable.audioPriority</key>
 		<false/>
 		<key>featureAvailable.autoQuit</key>
-		<true/>
+		<false/>
 		<key>featureAvailable.bluetoothSleep</key>
 		<true/>
 		<key>featureAvailable.brightness</key>
@@ -224,7 +224,7 @@
 		<key>featureAvailable.diskImageInstaller</key>
 		<false/>
 		<key>featureAvailable.dockClick</key>
-		<true/>
+		<false/>
 		<key>featureAvailable.dockPreview</key>
 		<false/>
 		<key>featureAvailable.extraBrightness</key>
@@ -1369,7 +1369,7 @@
 		<key>screenshotWatermarkPresets</key>
 		<string>[]</string>
 		<key>screenshotWatermarkStyle</key>
-		<string>{"rotation":0,"anchor":"bottomTrailing","kind":"none","color":"white","text":"","opacity":0.4,"size":0.3}</string>
+		<string>{"kind":"none","anchor":"bottomTrailing","rotation":0,"opacity":0.4,"size":0.3,"text":"","color":"white"}</string>
 		<key>scrollHorizontalEnabled</key>
 		<false/>
 		<key>scrollHorizontalModifier</key>
