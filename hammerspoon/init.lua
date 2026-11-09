@@ -79,10 +79,12 @@ require('twm')
 --                            Dark Mode                             --
 ----------------------------------------------------------------------
 
+local darkMode = require('darkMode')
 darkModeNotification = hs.distributednotifications.new(function()
-  require('darkMode').handleDarkModeChange()
+  darkMode.handleDarkModeChange()
 end, 'AppleInterfaceThemeChangedNotification')
 darkModeNotification:start()
+darkMode.handleDarkModeChange()
 
 ----------------------------------------------------------------------
 --                           Apple Music                            --

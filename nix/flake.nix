@@ -6,6 +6,11 @@
 
     catppuccin.url = "github:catppuccin/nix";
 
+    catppuccin-claude-code = {
+      url = "github:vishwajitsarnobat/catppuccin-claude-code";
+      flake = false;
+    };
+
     git-hooks = {
       url = "github:cachix/git-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";

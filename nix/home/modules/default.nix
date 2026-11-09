@@ -5,6 +5,7 @@
   imports = [
     ./bat.nix
     ./catppuccin.nix
+    ./claude-code.nix
     ./delta.nix
     ./devenv.nix
     ./direnv.nix

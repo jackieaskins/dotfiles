@@ -76,6 +76,7 @@
     };
 
     casks = [
+      "claude-code"
       "firefox"
       "hammerspoon"
       "helium-browser"
